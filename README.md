@@ -48,8 +48,9 @@ Information about OpenBaton can be found on our website. Follow us on Twitter @[
 
 License
 ----
+The OpenBaton Framework is released under version 2.0 of the [Apache License][].
 
 [spring.io]:https://spring.io/
 [NFV MANO]:http://docbox.etsi.org/ISG/NFV/Open/Published/gs_NFV-MAN001v010101p%20-%20Management%20and%20Orchestration.pdf
 [openbaton]:http://twitter.com
-
+[Apache License]: http://www.apache.org/licenses/LICENSE-2.0
