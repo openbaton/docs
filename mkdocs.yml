@@ -1,0 +1,6 @@
+site_name: OpenBaton Documentation
+pages:
+- LinkOne: index.md
+- About: about-openbaton.md
+theme: mkdocs
+theme_dir: 'custom_theme'
