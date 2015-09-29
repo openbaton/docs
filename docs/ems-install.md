@@ -2,5 +2,8 @@ In order to install EMS manually, you need to clone the debian from the git repo
 terminal:
 
 sudo apt-get install git
+
 git clone -b develop https://gitlab.fokus.fraunhofer.de/openbaton/ems-public.git /opt/debian/ems
+
+
 dpkg -i /opt/debian/ems/ems/ems_1.0-1.deb
