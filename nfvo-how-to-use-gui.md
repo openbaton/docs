@@ -19,14 +19,14 @@ In this page you can see the list of Vim Instances registered
 
 ![List of Vim Instances](/img/gui/vimpage.png "Vim List")
 
-For registering a new Vim Instance you should click the button on the top-right side `Register Vim` of this page and choose your json to register a Vim Instance
+For registering a new Vim Instance you should click the button on the top-right side **Register Vim** of this page and choose your json to register a Vim Instance
 
 ![Register a new Vim Instances](/img/gui/registeraNewVim.png "Register Vim")
 
-If you want to delete one Vim Instance you can click the button `Action` and than `Delete` in the menu
+If you want to delete one Vim Instance you can click the button **Action** and than **Delete** in the menu
 
 ## Network Service Descriptors
-In the menu on the left side under the voice Catalogue you can find `NS Decriptors`
+In the menu on the left side under the voice Catalogue you can find **NS Decriptors**
 In this page you can see the list of NS Descriptors stored into OpenBaton
 
 ![List of NS Descriptors](/img/gui/NSDlist.png "NS Descriptors List")
@@ -51,7 +51,34 @@ Create a NSD using Form
 In the list of Network Service Descriptors if you click on the id in the table you can see the information
  into Network Service Descriptor selected by id and will be shown this page
 
+![Network Service Descriptor Information](/img/gui/VNFDlistintoNSD.png "Network Service Descriptor Information")
+
+and the information about the *Dependencies* into Network Service Descriptor
+
+![Network Service Descriptor Dependencies Information](/img/gui/VNFDlistintoNSD1.png.png "Network Service Descriptor Dependencies Information ")
+
+
+### Network Service Descriptor Information
+In the list of Network Service Descriptors if you click on the id in the table you can see the information
+ into Network Service Descriptor selected by id and will be shown this page
 
 ![VNF Descriptor Information](/img/gui/VNFDescriptorInformation.png "VNF Descriptor Information")
+
+In this page you can see the JSON file of the NSD just clicking on the link **Show JSON**
+
+![JSON of Network Service Descriptor](/img/gui/JSONofNSR.png "JSON of Network Service Descriptor")
+
+In the page **Network Service Descriptor Information** you can see the **Graphical view** of Network Service Descriptor 
+just clicking the link *Show Graph*
+
+![NSD Graph](/img/gui/NSDgraph.png "NSD graph.png")
+
+
+#### Virtual Network Function Descriptor Information
+In the list of Virtual Network Function Descriptor into NSD if you click on the id of Virtual Network Function Descriptor will be shown this page
+
+![VNF Descriptor Information](/img/gui/VNFDescriptorInformation.png "VNF Descriptor Information")
+
+
 
 
