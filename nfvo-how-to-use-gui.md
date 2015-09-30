@@ -56,9 +56,9 @@ In the list of Network Service Descriptors if you click on the id in the table y
 In the list of VNFD if you click the *Action* button you can delete the VNFD from NSD
 and the information about the *Dependencies* into Network Service Descriptor
 
-![Network Service Descriptor Dependencies Information](/img/gui/VNFDlistintoNSD1.png.png "Network Service Descriptor Dependencies Information ")
+![Network Service Descriptor Dependencies Information](/img/gui/VNFDlistintoNSD1.png "Network Service Descriptor Dependencies Information ")
 
-In the list of VNFDependencies if you click the *Action* button you can delete the VNFDependencies from NSD
+In the list of VNFDependencies if you click the *Action* button you can delete the VNFDependency from NSD
 
 ### Network Service Descriptor Information
 In the list of Network Service Descriptors if you click on the id in the table you can see the information
@@ -96,4 +96,12 @@ VDU you can see the details of VDU like in this page
 In this page you can see the details of a Network Service Record just click the id and will be show this page
 
 ![Network Service Records Info ](/img/gui/NSRinfo.png "Network Service Records Info ")
+
+In this page you can see the JSON file of the NSR just clicking on the link **Show JSON** and also the **Graphical view** 
+of Network Service Record just clicking the link **Show Graph**
+In the table of VNF Records you can delete one VNFR just clicking **Delete** in the menu **Action**
+For seeing the details of VNFR just click on the **id** of a VNFR and will be shown this page
+
+![VNF Record Information](/img/gui/VNFRecordInformation.png "VNF Record Information")
+
 
