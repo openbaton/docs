@@ -56,6 +56,14 @@ public class VNFManager extends AbstractVnfmSpringJMS{
 }
 ```
 
+
+Then just compile & run. 
+
+```bash
+$ ./gradlew clean build
+$ java -jar build/libs/vnfm-manager.jar
+```
+
 <!---
 References
 -->
