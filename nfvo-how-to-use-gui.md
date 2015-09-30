@@ -53,10 +53,12 @@ In the list of Network Service Descriptors if you click on the id in the table y
 
 ![Network Service Descriptor Information](/img/gui/VNFDlistintoNSD.png "Network Service Descriptor Information")
 
+In the list of VNFD if you click the *Action* button you can delete the VNFD from NSD
 and the information about the *Dependencies* into Network Service Descriptor
 
 ![Network Service Descriptor Dependencies Information](/img/gui/VNFDlistintoNSD1.png.png "Network Service Descriptor Dependencies Information ")
 
+In the list of VNFDependencies if you click the *Action* button you can delete the VNFDependencies from NSD
 
 ### Network Service Descriptor Information
 In the list of Network Service Descriptors if you click on the id in the table you can see the information
@@ -79,6 +81,19 @@ In the list of Virtual Network Function Descriptor into NSD if you click on the 
 
 ![VNF Descriptor Information](/img/gui/VNFDescriptorInformation.png "VNF Descriptor Information")
 
+In the bottom side of the page you can see the Virtual Deployment Unit (VDU) tab and if you click the **id** of the 
+VDU you can see the details of VDU like in this page
 
+![VDU Information](/img/gui/VDUInformation.png "VDU Information")
 
+## Network Service Records 
+
+  In the menu of the left side if you click on the **Orchestrator NS** and than **NS Records** you will see the list of *Network Service Records*
+  Like in this screenshot 
+
+![Network Service Records List ](/img/gui/NetworkServiceRecordsList.png "Network Service Records List ")
+
+In this page you can see the details of a Network Service Record just click the id and will be show this page
+
+![Network Service Records Info ](/img/gui/NSRinfo.png "Network Service Records Info ")
 
