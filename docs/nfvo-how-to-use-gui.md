@@ -51,20 +51,7 @@ Create a NSD using Form
 In the list of Network Service Descriptors if you click on the id in the table you can see the information
  into Network Service Descriptor selected by id and will be shown this page
 
-![Network Service Descriptor Information][VNFDlistintoNSD.png]
-
-In the list of VNFD if you click the *Action* button you can delete the VNFD from NSD
-and the information about the *Dependencies* into Network Service Descriptor
-
-![Network Service Descriptor Dependencies Information][VNFDlistintoNSD1.png ]
-
-In the list of VNFDependencies if you click the *Action* button you can delete the VNFDependency from NSD
-
-### Network Service Descriptor Information
-In the list of Network Service Descriptors if you click on the id in the table you can see the information
- into Network Service Descriptor selected by id and will be shown this page
-
-![VNF Descriptor Information][VNFDescriptorInformation.png ]
+![Network Service Descriptor Information][VNFDescriptorInformation.png]
 
 In this page you can see the JSON file of the NSD just clicking on the link **Show JSON**
 
@@ -73,18 +60,25 @@ In this page you can see the JSON file of the NSD just clicking on the link **Sh
 In the page **Network Service Descriptor Information** you can see the **Graphical view** of Network Service Descriptor 
 just clicking the link *Show Graph*
 
-![NSD Graph][NSDgraph.png ]
+![NSD Graph][NSDgraph.png]
+
+In the list of VNFD if you click the *Action* button you can delete the VNFD from NSD
+and the information about the *Dependencies* into Network Service Descriptor
+
+![Network Service Descriptor Dependencies Information][VNFDlistintoNSD1.png]
+
+In the list of VNFDependencies if you click the *Action* button you can delete the VNFDependency from NSD
 
 
 #### Virtual Network Function Descriptor Information
 In the list of Virtual Network Function Descriptor into NSD if you click on the id of Virtual Network Function Descriptor will be shown this page
 
-![VNF Descriptor Information][VNFDescriptorInformation.png ]
+![VNF Descriptor Information][VNFDescriptorInformation.png]
 
 In the bottom side of the page you can see the Virtual Deployment Unit (VDU) tab and if you click the **id** of the 
 VDU you can see the details of VDU like in this page
 
-![VDU Information][VDUInformation.png ]
+![VDU Information][VDUInformation.png]
 
 ## Network Service Records 
 
