@@ -1,0 +1,410 @@
+VNFPackage
+===============
+
+**Note**: This is the initial version of the VNFPackage and might change most probably in the next releases to improve and simplify the creation, usability and power.
+
+This doc describes essential components of a VNFPackage, how to create them and how to use them after onboarding.
+Therefore, you can find a practical tutorial at the end with all the steps starting from the creation over onboarding and finally referencing it by a NSD.
+
+A VNFPackage is a tar-archive that contains all the information required for creating a VNF for the openbaton NFVO.
+After onboarding the VNFPackage on the NFVO you can use the VNF directly in the NSD by referencing the VNFD by its id.
+A VNFPackage includes the VNFD, the image, scripts and a Metadata file structured as shown in the next part.
+
+# Package structure
+The VNFPackage consists of the following files/folder:
+
+* Metadata.yaml
+* vnfd.json
+* scripts/
+    * 1_script.sh
+    * 2_script.sh
+* image.img
+
+## Metadata.yaml
+The Metadata.yaml defines essential properties for the VNF. This file bases on the YAML syntax where information are stored in simple \<key\> : \<value\> associations.
+
+The example of a Metadata.yaml file below shows a basic definition of a VNFPackage.
+
+```yaml
+name: vnfPackage_name
+scripts-link: scripts_link
+image-link: image_link
+image:
+    name: image_name
+    diskFormat: disk_format
+    containerFormat: container_format
+    minCPU: min_cpu
+    minDisk: min_disk
+    minRam: min_ram
+    isPublic: is_public
+```
+
+Each property is explained more in detail now. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and overrides them therefore.
+
+* ***name***: The name defines the name of the VNFPackage itself used to store it on the database.
+* ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
+    * **Note** Either you can define the scripts-link or put the scripts into the folder scripts/.
+        The scripts-link has a higher priority than the scripts located in the folder scripts/.
+        So if you set the scripts-link, the scripts in folder scripts/ are ignored completely.
+    * **Note** The scripts-link is processed by the Element Management System (EMS) in the meaning of fetching the files from that link.
+        So you need to take care about ensuring that the URL defined is available.
+* ***image-link***: This link points to an image available over this URL used to upload the image to the cloud environment.
+    * **Note** Either you have to define the image-link or put the image directly into the VNFPackage.
+        Otherwise an NotFoundException will be thrown and the VNFPackage will not onboard.
+        The image-link has a higher priority than the image stored in the VNFPackage directly.
+    * **Note** The image-link is a future feature and not implemented in the current version.
+        Therefore, you need to put the image into the VNFPackage directly and remove this line or let the value empty.
+* ***image***: All the properties explained below are required to upload the image to the cloud environment properly.
+    This image will be uploaded to each cloud environment automatically while onboarding the VNFPackage.
+    * ***name***: This defines the name for the image to upload either located directly in the VNFPackage or available via the URL defined in image-link.
+    * ***diskFormat***: The diskFormat defines the format in which disk type the image is stored.
+    * ***containerFormat***: The containerFormat defines the format in which container type the image is stored .
+    * ***minCPU***: The minCPU defines the minimum amount of CPU cores for using this image properly.
+    * ***minDisk***: The minDisk defines the minimum amount of disk space for using this image properly.
+    * ***minRam***: The minRam defines the minimum amount of RAM for using this image properly.
+    * ***isPublic***: The isPublic defines whether the image is available public or not.
+
+## \<VNFD\>.json
+
+The \<vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded on the Orchestrator.
+This VNFD can later be referenced in a NSD by its id to make use of it.
+A more detailed explanation of the VNFD can be found here [].
+
+**Note** The name of the file is not important but the suffix .json since the VNFPackageManagement is looking for this kind file format.
+
+## scripts
+
+The scripts folder contains all the scripts required for starting, configuring or whatever you want to do on the running instance.
+[EXECUTION ORDER]
+
+**Note** These scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.
+    This means that the scripts in that folder have less priority than the scripts located under ***scripts-link***.
+
+## \<image\>.img
+
+This image is used to upload it to all the cloud environments which are addressed inside the VNFD with that image.
+It doesn't matter whether an image already exists on the considered cloud environment or not.
+
+**Note** This image has lower priority than the ***image-links*** defined in ***Metadata.yaml***.
+    This mean that the image will be ignored if the ***image-links*** is defined.
+
+**Note** The name of the image doesn't matter but the suffix .img since the VNFPackageManagement is looking for a file with this suffix.
+    However, the name and all the properties for stroing it on the cloud environment are defined in ***Metadata.yaml*** under the key ***image***.
+
+# Tutorial
+
+This section explains how to create, upload and make use of VNFPackages.
+The chosen scenario is a NetworkService for testing the network connectivity by using iperf.
+Therefore, we need a server and a client installing the iperf server/client and configuring them for communication between.
+
+## Creation of VNFPackages
+For doing so, we need to create two VNFPackages and reference them in the NSD.
+So we need one VNFPackage for the iperf server (called iperf-server) and one for the iperf client (called iperf-client).
+First we will start with the creation of the iperf-server VNFPackage and then we will create the iperf-client VNFPackage.
+
+First of all we should create a directory for each VNFPackage where we put all the files related to the VNFPackage because in the end we need to pack them into an tar archive for onboarding it on the NFVO.
+
+### VNFPackage [iperf-server]
+This iperf-server VNFPackage have to install the iperf server and needs to provide its ip to the iperf client.
+
+#### Metadata [iperf-server]
+In the Metadata we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
+Since the image-link is not implemented in the current release we will put the image directly into the VNFPackage.
+Finally, it looks as shown below.
+```yaml
+name: iperf-server
+scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+image-link:
+image:
+    name: iperf_server_image
+    diskFormat: QCOW2
+    containerFormat: bare
+    minCPU: 2
+    minDisk: 5
+    minRam: 2048
+    isPublic: false
+```
+
+#### VNFD [iperf-server]
+This is how the VNFD looks like for the iperf-server VNFPackage.
+Important to notice here is the vm_image that points to the image we have defined in the Metadata.yaml
+
+```json
+{
+    "vendor":"fokus",
+    "version":"0.2",
+    "name":"iperf-server",
+    "type":"server",
+    "endpoint":"generic",
+    "configurations":{
+        "name":"config_name",
+        "configurationParameters":[
+            {
+                "confKey":"key",
+                "value":"value"
+            }
+        ]
+    },
+    "vdu":[
+        {
+            "vm_image":[
+                "iperf_server_image"
+            ],
+            "computation_requirement":"",
+            "virtual_memory_resource_element":"1024",
+            "virtual_network_bandwidth_resource":"1000000",
+            "lifecycle_event":[
+            ],
+            "vimInstanceName":"vim-instance",
+            "vdu_constraint":"",
+            "high_availability":"ACTIVE_PASSIVE",
+            "scale_in_out":2,
+            "vnfc":[
+                {
+                    "exposed":true,
+                    "connection_point":[
+                        {
+                            "virtual_link_reference":"private"
+                        }
+                    ]
+                }
+            ],
+            "monitoring_parameter":[
+                "cpu_utilization"
+            ]
+        }
+    ],
+    "virtual_link":[
+        {
+            "name":"private"
+        }
+    ],
+    "connection_point":[
+    ],
+    "lifecycle_event":[
+        {
+            "event":"INSTANTIATE",
+            "lifecycle_events":[
+                "install.sh",
+                "install-srv.sh"
+            ]
+        }
+    ],
+    "vdu_dependency":[
+    ],
+    "monitoring_parameter":[
+        "cpu_utilization"
+    ],
+    "deployment_flavour":[
+        {
+            "df_constraint":[
+                "constraint1",
+                "constraint2"
+            ],
+            "costituent_vdu":[
+            ],
+            "flavour_key":"m1.small"
+        }
+    ],
+    "manifest_file":"",
+    "vnfPackage":{
+        "name":"fakeName",
+        "extId":"fakeId",
+        "imageLink":"fakeUrl",
+        "scriptsLink":"https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git"
+    }
+}
+```
+#### Image
+
+The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of image.
+
+### VNFPackage [iperf-client]
+
+This iperf-server VNFPackage have to install the iperf client and needs to configure it to set the iperf servers' IP.
+
+#### Metadata [iperf-client]
+In the Metadata we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
+Since the image-link is not implemented in the current release we will put the image directly into the VNFPackage.
+Finally, it looks as shown below.
+
+```yaml
+name: iperf-client
+scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+image-link:
+image:
+    name: iperf_client_image
+    diskFormat: QCOW2
+    containerFormat: bare
+    minCPU: 2
+    minDisk: 5
+    minRam: 2048
+    isPublic: false
+```
+
+#### VNFD [iperf-client]
+
+This is how the VNFD looks like for the iperf-client VNFPackage.
+Important to notice here is the vm_image that points to the image we have defined in the Metadata.yaml
+
+```json
+{
+    "vendor":"fokus",
+    "version":"0.1",
+    "name":"iperf-client",
+    "type":"client",
+    "endpoint":"generic",
+    "vdu":[
+        {
+            "vm_image":[
+                "iperf_client_image"
+            ],
+            "computation_requirement":"",
+            "virtual_memory_resource_element":"1024",
+            "virtual_network_bandwidth_resource":"1000000",
+            "lifecycle_event":[
+
+            ],
+            "vimInstanceName":"vim-instance",
+            "vdu_constraint":"",
+            "high_availability":"ACTIVE_PASSIVE",
+            "scale_in_out":2,
+            "vnfc":[
+                {
+                    "connection_point":[
+                        {
+                            "virtual_link_reference":"private"
+                        }
+                    ]
+                }
+            ],
+            "monitoring_parameter":[
+                "cpu_utilization"
+            ]
+        }
+    ],
+    "virtual_link":[
+        {
+            "name":"private"
+        }
+    ],
+    "connection_point":[
+    ],
+    "lifecycle_event":[
+        {
+            "event":"INSTANTIATE",
+            "lifecycle_events":[
+                "install.sh"
+            ]
+        },
+        {
+            "event":"CONFIGURE",
+            "lifecycle_events":[
+                "server_configure.sh"
+            ]
+        }
+    ],
+    "vdu_dependency":[
+    ],
+    "monitoring_parameter":[
+        "cpu_utilization"
+    ],
+    "deployment_flavour":[
+        {
+            "df_constraint":[
+                "constraint1",
+                "constraint2"
+            ],
+            "costituent_vdu":[
+            ],
+            "flavour_key":"m1.small"
+        }
+    ],
+    "manifest_file":"",
+    "vnfPackage":{
+        "name":"fakeName",
+        "extId":"fakeId",
+        "imageLink":"fakeUrl",
+        "scriptsLink":"https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git"
+    }
+}
+```
+
+#### Image
+
+The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
+
+## Onboarding VNFPackages
+
+Once we have finalized the VNFPackages and packed them into a tar we can onboard them on the NFVO as shown in the following:
+
+```bash
+$ curl
+
+```
+
+Now where we onboarded the VNFPackages they are available on the NFVO and we can make use of it by referencing them in the NSD by their ids'.
+
+## NSD [iperf]
+In this section we will create s NSD and referencing the previously created VNFPackages by their ids'.
+For doing that we just need to define the **id** for each VNFPackges' VNFD in the list of VNFDs.
+To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can found under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **ip1**.
+
+**Note** The VNFD is fetched by the id defined. Other properties we would set in the VNFD in this NSD will be ignored.
+
+```json
+{
+	"name":"iperf",
+    "vendor":"fokus",
+    "version":"0.1-ALPHA",
+    "vnfd":[
+        {
+            "id":""
+        },
+        {
+            "id":""
+        }
+    ],
+    "vnffgd":[
+    ],
+    "vld":[
+        {
+            "name":"private"
+        }
+    ],
+    "lifecycle_event":[
+
+    ],
+    "vnf_dependency":[
+        {
+            "source" : {
+                "name": "iperf-server"
+            },
+            "target":{
+                "name": "iperf-client"
+            },
+            "parameters":[
+                "ip1"
+            ]
+        }
+    ],
+    "monitoring_parameter":[
+        "cpu_utilization"
+    ],
+    "service_deployment_flavour":[
+        {
+        }
+    ],
+    "auto_scale_policy":[
+    ],
+    "connection_point":[
+    ],
+    "pnfd":[
+    ]
+}
+```
+
+Finally you can onboard this NSD and create a NSR that bases on both VNFPackages created before.
+Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
+
+
