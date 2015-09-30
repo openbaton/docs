@@ -1,6 +1,9 @@
 site_name: OpenBaton Documentation
 pages:
-- LinkOne: index.md
-- About: about-openbaton.md
-theme: mkdocs
+- ['index.md', 'Index', 'Subpoint']
+- ['install.md', 'Installation', 'Subpoint']
+- ['install/nfvo-architecture.md', 'Installation', 'Architecture']
+- ['install/nfvo-how-to-use-cli.md', 'NFVO', 'Use via CLI']
+- ['install/nfvo-how-to-use-cli.md', 'NFVO', 'Use via CLI']
+theme: readthedocs
 theme_dir: 'custom_theme'

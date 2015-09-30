@@ -1,2 +1,0 @@
-# docs
-documentation for OpenBaton
