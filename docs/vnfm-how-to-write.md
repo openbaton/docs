@@ -42,10 +42,14 @@ In this way you will have access to all the model classes and the vnfm-sdk class
 It needs to implement as well a main methods as follows:
 
 ```java
+import org.springframework.beans.factory.annotation.Autowired;
 import org.openbaton.common.vnfm_sdk.jms.AbstractVnfmSpringJMS;
 
 public class VNFManager extends AbstractVnfmSpringJMS{
 	
+	@Autowired
+	private VnfmHelper vnfmHelper;
+
 	/**
 	*	implement all the methods...
 	*/
@@ -63,6 +67,46 @@ Then just compile & run.
 $ ./gradlew clean build
 $ java -jar build/libs/vnfm-manager.jar
 ```
+
+There is the possibility to use the VnfmHelper. The vnfmHelper helps with some methods out of the box:
+
+```java
+package org.openbaton.common.vnfm_sdk;
+
+import org.openbaton.catalogue.nfvo.messages.Interfaces.NFVMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public abstract class VnfmHelper {
+
+    protected Logger log = LoggerFactory.getLogger(this.getClass());
+
+    public abstract void sendToNfvo(NFVMessage nfvMessage);
+
+    public abstract NFVMessage sendAndReceive(NFVMessage nfvMessage) throws Exception;
+}
+```
+
+that send messages to the NFVO and wait for the answer.
+This class need to be implemented in case you want to use only the vnfm-sdk and must be provided to the AbstarctVnfm.
+
+In any case a configuration file is needed to be in the classpath called conf.properties
+```properties
+type=generic
+allocate = true
+concurrency = 15
+transacted = false
+```
+Where the parameters means:
+
+| Params          				| Meaning       																|
+| -------------   				| -------------:																|
+| type  						| The type of VNF you are going to handle 						|
+| allocate 						| true if the NFVO will ALLOCATE_RESOURCES, false if the VNFManager will do      	|
+| concurrency	 						| The number of concurrent Receiver (only for vnfm-sdk-jms)|
+| transacted 						| Whenever the JMS receiver method shoud be transacted, this allows the message to be resent in case of exception VNFManager side (only for vnfm-sdk-jms)     	|
+
+Please do not forget that **_the VNFManager main class needs to be stateless_** since can (will) run each method potentially in parallel.
 
 <!---
 References
