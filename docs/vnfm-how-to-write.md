@@ -106,7 +106,7 @@ Where the parameters means:
 | concurrency	 						| The number of concurrent Receiver (only for vnfm-sdk-jms)|
 | transacted 						| Whenever the JMS receiver method shoud be transacted, this allows the message to be resent in case of exception VNFManager side (only for vnfm-sdk-jms)     	|
 
-Please do not forget that **_the VNFManager main class needs to be stateless_** since can (will) run each method potentially in parallel.
+Please do not forget: if you use vnfm-sdk-jms or vnfm-sdk-rest **_the VNFManager main class needs to be stateless_** since can (will) run each method potentially in parallel. For what concerns vnfm-sdk-jms, even setting concurrency to 1, will not assure to have always the same instance of the class.
 
 <!---
 References
