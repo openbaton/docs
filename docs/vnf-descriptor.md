@@ -101,7 +101,7 @@ A delpoyment flavor corresponds to a flavour name existing in the VimInstance.
 
 ### VNF Package
 
-Please see [VNF Package][vnf-package-link] 
+Please see [VNF Package][vnf-package-link]. If no package is needed than a git url is needed to download the scripts needed for this vnfd and this url is defined into the vnfpackage->scriptsLink.
 
 <!---
 References
