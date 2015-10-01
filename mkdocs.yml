@@ -4,6 +4,7 @@ pages:
 - ['install.md', 'Installation', 'Overview']
 - ['nfvo-installation.md', 'Installation', 'Install NFVO']
 - ['use.md', 'Use it', 'Introduction']
+- ['vnfpackage.md', 'Use it', 'Create your own VNF Package']
 - ['nfvo-how-to-use-gui.md', 'Use it', 'Use via the Dashboard']
 - ['extend.md', 'Extend it', 'Overview']
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']

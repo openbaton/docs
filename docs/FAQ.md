@@ -1,6 +1,6 @@
 # Frequently Asked Questions (FAQ)
 
-# Q1 ActiveMQ:connection refused
+### Q1 ActiveMQ:connection refused
 
 I'm getting this error message: 
 ```
@@ -13,7 +13,7 @@ apache-activemq-5.11.1/bin/activemq status
 if not running, you need to start it. 
 
 
-# Q2 What type of database is the NFVO using?
+### Q2 What type of database is the NFVO using?
 
 The NFVO uses Hibernate for managing transactions with a relational database. By default the NFVO is configured with an in memory database (HSQL). 
 Other types of databases are supported, for instance MySQL. This can be changed directly from the configuration file, outcommenting the : 

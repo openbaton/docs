@@ -1,8 +1,8 @@
 # VNFManager Generic
 
-The Generic VNFManager is a real implementation following the [ETSI MANO][nfv-mano] specifications. For that reason is highly tied to the [EMS][ems-link].
+The Generic VNFManager is an implementation following the [ETSI MANO][nfv-mano] specifications. For that reason is highly tied to the EMS.
 
-The Generic VNFManager handles communication with the [NFVO][nfvo-architecture-link] and with [EMS][ems-link]. The communication between NFVO and the EMS is done through Stomp protocol, in particural JMS.
+The Generic VNFManager handles communication with the NFVO and with EMS. The communication between NFVO and the EMS is done through Stomp protocol, in particural JMS.
 The following slide shows the communication between the Generic VNFManager and EMS.
 
 ![Generic VNFM - EMS communication][vnfm-ems-communication]
@@ -37,7 +37,7 @@ after that point the VMs are created and the VNFRecord is filled with values, su
 
 For each operation of the VNF Lifecycle Management interface, the VNFManager sends scripts to the EMS which executes them locally in the VMs.
 The ordering of this scripts is defined in the NetworkServiceDescriptor from which the NetworkServiceRecord was created,
-in particular into the VirtalNetworkFunctionDescriptor->LifecycleEvents (see [VNFD doc][vnfd-link]). A lifecycle event is composed by an Event and a list of strings that correspond to the script names.
+in particular into the VirtalNetworkFunctionDescriptor->LifecycleEvents (see VNFD). A lifecycle event is composed by an Event and a list of strings that correspond to the script names.
 When an event occurs, the corresponding scripts are executed in the EMS and thus locally in the VMs. In the following table is described the link between VNF lifecycle events and the VNF Lifecycle Management interface.
 
 | VNF Lifecycle event | VNF Lifecycle operation |
@@ -67,8 +67,7 @@ As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can
 References
 -->
 
-[ems-link]: ems-install.md
-[vnfd-link]: vnf-descriptor.md
+[or-vnfm-sequence]:images/or-vnfm-seq-dg.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 [nfv-mano-B.3]: www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf#page=108
 [nfvo-architecture-link]: nfvo-architecture.md
