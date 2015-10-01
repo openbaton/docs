@@ -1,8 +1,8 @@
 # VNFManager Generic
 
-The Generic VNFManager is a real implementation following the [ETSI MANO][nfv-mano] specifications. For that reason is highly tied to the [EMS][ems-link].
+The Generic VNFManager is an implementation following the [ETSI MANO][nfv-mano] specifications. For that reason is highly tied to the EMS.
 
-The Generic VNFManager handles communication with the [NFVO][nfvo-architecture-link] and with [EMS][ems-link]. The communication between NFVO and the EMS is done through Stomp protocol, in particural JMS. The sequece diagram following explains the communication messages.
+The Generic VNFManager handles communication with the NFVO and with EMS. The communication between NFVO and the EMS is done through Stomp protocol, in particural JMS. The sequece diagram following explains the communication messages.
 
 ![Sequence Diagram NFVO - VNFM - EMS][or-vnfm-sequence]
 
@@ -19,7 +19,7 @@ As seen in the previous picture, the allocation of resources (VMs) are requested
 
 ### Script Execution Costraints
 
-During the INSTANTIATE and the MODIFY operations, scripts are executed in the VMs. The ordering of this scripts is defined in the NetworkServiceDescriptor from which the NetworkServiceRecord was created, in particural into the VirtalNetworkFunctionRecord->LifecycleEvents (see [VNFD doc][vnfd-link]). The available parameters are defined into the VirtalNetworkFunctionDescriptor fields:
+During the INSTANTIATE and the MODIFY operations, scripts are executed in the VMs. The ordering of this scripts is defined in the NetworkServiceDescriptor from which the NetworkServiceRecord was created, in particural into the VirtalNetworkFunctionRecord->LifecycleEvents (see VNFD). The available parameters are defined into the VirtalNetworkFunctionDescriptor fields:
 
 * provides
 * configurations
@@ -38,8 +38,5 @@ As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can
 References
 -->
 
-[ems-link]: ems-install.md
-[vnfd-link]: vnf-descriptor.md
+[nor-vnfm-sequence]:images/or-vnfm-seq-dg.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
-[nfvo-architecture-link]: nfvo-architecture.md
-[or-vnfm-sequence]:images/or-vnfm-seq-dg.png
