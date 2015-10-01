@@ -14,6 +14,14 @@ OpenBaton provides the following components:
 * A generic Virtual Network Function Manager (VNFM) able to manage the lifecycle of VNFs based on their descriptors
 * A set of libraries which could be used for building your own VNFM
 
+## Approaches
+
+Describe how OpenBaton can be used:
+* providing a VNFP 
+* using an existing VNFM
+* providing your own VNFM/EMS
+
+
 ## Can I plug in my Network Functions?
 
 Yes, this is possible using two different approaches:
@@ -31,7 +39,6 @@ In order to get started you can follow the [installation guide](getting-started.
 ## Get in contact 
 
 www.open-baton.org
-
 
 
 

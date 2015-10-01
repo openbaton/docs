@@ -2,8 +2,12 @@ site_name: OpenBaton Documentation
 pages:
 - ['index.md', 'Index', 'Subpoint']
 - ['install.md', 'Installation', 'Subpoint']
-- ['install/nfvo-architecture.md', 'Installation', 'Architecture']
-- ['install/nfvo-how-to-use-cli.md', 'NFVO', 'Use via CLI']
-- ['install/nfvo-how-to-use-cli.md', 'NFVO', 'Use via CLI']
+- ['install/nfvo-installation.md', 'Installation', 'Install NFVO']
+- ['install/generic-vnfm-install.md', 'Installation', 'Install VNFM ']
+- ['use.md', 'Use it', 'Subpoint']
+- ['use/nfvo-how-to-use-gui.md', 'NFVO', 'Use via CLI']
+- ['use/nfvo-how-to-use-cli.md', 'NFVO', 'Use via CLI']
+- ['extend.md', 'Extend it', 'Subpoint']
+- ['extend/nfvo-how-to-use-gui.md', 'NFVO', 'Use via CLI']
 theme: readthedocs
 theme_dir: 'custom_theme'
