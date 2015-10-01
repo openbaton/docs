@@ -1,5 +1,4 @@
-VNFPackage
-===============
+# VNFPackage
 
 **Note**: This is the initial version of the VNFPackage and might change most probably in the next releases to improve and simplify the creation, usability and power.
 
@@ -291,7 +290,6 @@ Once we have finalized the creation of VNFPackages and packed them into a tar we
 
 ```bash
 $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/vnf-packages"
-
 ```
 
 This must be done for both VNFPackages expecting that the NFVO is running locally and the tar archive is called vnf-package.tar.
@@ -302,7 +300,6 @@ To get the ids of the newly created VNFDs you need to fetch the VNFDs by invokin
 
 ```bash
 $ curl -X "GET http://localhost:8080/api/v1/vnf-descriptors"
-
 ```
 
 This request will return a list of already existing VNFDs.
@@ -375,15 +372,16 @@ Finally you can onboard this NSD and create a NSR that bases on both VNFPackages
 The following command will onboard the NSD on the NFVO:
 ```bash
 $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-descriptors"
-
 ```
+
 This will return the NSD with the id we need to create NSR.
 Afterwards, we can deploy the NSD.
+
 ### Create NSR (Deployment)
 To deploy the NSD we create a NSR with the following command:
+
 ```bash
 $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-records/<NSD_ID>"
-
 ```
 
 Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.

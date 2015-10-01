@@ -1,13 +1,14 @@
 site_name: OpenBaton Documentation
 pages:
-- ['index.md', 'Index', 'Subpoint']
-- ['install.md', 'Installation', 'Subpoint']
-- ['install/nfvo-installation.md', 'Installation', 'Install NFVO']
-- ['install/generic-vnfm-install.md', 'Installation', 'Install VNFM ']
-- ['use.md', 'Use it', 'Subpoint']
-- ['use/nfvo-how-to-use-gui.md', 'NFVO', 'Use via CLI']
-- ['use/nfvo-how-to-use-cli.md', 'NFVO', 'Use via CLI']
-- ['extend.md', 'Extend it', 'Subpoint']
-- ['extend/nfvo-how-to-use-gui.md', 'NFVO', 'Use via CLI']
+- ['index.md', 'Get Started', 'Get Started']
+- ['install.md', 'Installation', 'Overview']
+- ['nfvo-installation.md', 'Installation', 'Install NFVO']
+- ['use.md', 'Use it', 'Introduction']
+- ['nfvo-how-to-use-gui.md', 'Use it', 'Use via the Dashboard']
+- ['extend.md', 'Extend it', 'Overview']
+- ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
+- ['vnfm-generic.md', 'Extend it', 'Generic VNFM']
+- ['vnfm-how-to-write.md', 'Extend it', 'Write your own VNFM']
+- ['FAQ.md', 'FAQ', 'FAQ']
 theme: readthedocs
 theme_dir: 'custom_theme'

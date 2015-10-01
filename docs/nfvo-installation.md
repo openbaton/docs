@@ -13,10 +13,11 @@ sudo su -
 curl -fsSkL https://gitlab.fokus.fraunhofer.de/openbaton/bootstrap/raw/develop/openbaton.sh |bash
 ```
 
-At the end of the installation procedure, if there are no errors, the dashboard should be reachable at: http://localhost:8080. At this point the NFVO is ready to be used. Please refer to the NFVO user guide for how to start using it. 
+At the end of the installation procedure, if there are no errors, the dashboard should be reachable at: [localhost:8080]. At this point the NFVO is ready to be used. Please refer to the NFVO user guide for how to start using it. 
 
 ## Let's move to the next step
 
 Dependening on the approach used for deploying your VNF, you'll have either to install the generic-VNFM or install and register your own VNFM
  
 [spring.io]:https://spring.io/
+[localhost:8080]:http://localhost:8080/

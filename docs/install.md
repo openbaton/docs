@@ -11,8 +11,8 @@ OpenBaton comprises different components:
 
 # Before you start 
 
-First of all it is important to clarify the different deployment options. Depending on your requirements OpenBaton, using a plugin mechanism, supports different VIM implementations. In particular, foor this relesae, two different vim plugins are available: 
-* test-plugin: its a mockup of the VIM interface which is quite useful for development. It basically does not create any real virtual resources and it can be used for developing new features on the NFVO without having to always deploy new services.
+First of all it is important to clarify the different deployment options. Depending on your requirements OpenBaton, using a plugin mechanism, supports different VIM implementations. In particular, in this relesae, two different vim plugins are available: 
+* test-plugin: it is a mockup of the VIM interface which is quite useful for development. It basically does not create any real virtual resources and it can be used for developing new features on the NFVO without having to always deploy new services.
 * openstack-plugin: it provides an implementation of the VIM interface for requesting resources to OpenStack. 
 
 Depending on which one is your target provider, you will need to configure runtime different Point of Presence (PoP). This is something which will be explained later on in this user guide. 
@@ -21,6 +21,5 @@ Depending on which one is your target provider, you will need to configure runti
 
 Next step is to install the NFVO component
 
-
-[install-architecture]:install-source/install-architecture.png
+[install-architecture]:images/install-architecture.png
 
