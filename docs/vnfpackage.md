@@ -136,28 +136,12 @@ Important to notice here is the vm_image that points to the image we have define
     "name":"iperf-server",
     "type":"server",
     "endpoint":"generic",
-    "configurations":{
-        "name":"config_name",
-        "configurationParameters":[
-            {
-                "confKey":"key",
-                "value":"value"
-            }
-        ]
-    },
     "vdu":[
         {
             "vm_image":[
                 "iperf_server_image"
             ],
-            "computation_requirement":"",
-            "virtual_memory_resource_element":"1024",
-            "virtual_network_bandwidth_resource":"1000000",
-            "lifecycle_event":[
-            ],
             "vimInstanceName":"vim-instance",
-            "vdu_constraint":"",
-            "high_availability":"ACTIVE_PASSIVE",
             "scale_in_out":2,
             "vnfc":[
                 {
@@ -168,9 +152,6 @@ Important to notice here is the vm_image that points to the image we have define
                         }
                     ]
                 }
-            ],
-            "monitoring_parameter":[
-                "cpu_utilization"
             ]
         }
     ],
@@ -178,8 +159,6 @@ Important to notice here is the vm_image that points to the image we have define
         {
             "name":"private"
         }
-    ],
-    "connection_point":[
     ],
     "lifecycle_event":[
         {
@@ -189,11 +168,6 @@ Important to notice here is the vm_image that points to the image we have define
                 "install-srv.sh"
             ]
         }
-    ],
-    "vdu_dependency":[
-    ],
-    "monitoring_parameter":[
-        "cpu_utilization"
     ],
     "deployment_flavour":[
         {
@@ -205,19 +179,13 @@ Important to notice here is the vm_image that points to the image we have define
             ],
             "flavour_key":"m1.small"
         }
-    ],
-    "manifest_file":"",
-    "vnfPackage":{
-        "name":"fakeName",
-        "extId":"fakeId",
-        "imageLink":"fakeUrl",
-        "scriptsLink":"https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git"
-    }
+    ]
 }
 ```
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of image.
+We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image].
 
 ### VNFPackage [iperf-client]
 
@@ -259,12 +227,8 @@ Important to notice here is the vm_image that points to the image we have define
             "vm_image":[
                 "iperf_client_image"
             ],
-            "computation_requirement":"",
             "virtual_memory_resource_element":"1024",
             "virtual_network_bandwidth_resource":"1000000",
-            "lifecycle_event":[
-
-            ],
             "vimInstanceName":"vim-instance",
             "vdu_constraint":"",
             "high_availability":"ACTIVE_PASSIVE",
@@ -277,9 +241,6 @@ Important to notice here is the vm_image that points to the image we have define
                         }
                     ]
                 }
-            ],
-            "monitoring_parameter":[
-                "cpu_utilization"
             ]
         }
     ],
@@ -287,8 +248,6 @@ Important to notice here is the vm_image that points to the image we have define
         {
             "name":"private"
         }
-    ],
-    "connection_point":[
     ],
     "lifecycle_event":[
         {
@@ -304,11 +263,6 @@ Important to notice here is the vm_image that points to the image we have define
             ]
         }
     ],
-    "vdu_dependency":[
-    ],
-    "monitoring_parameter":[
-        "cpu_utilization"
-    ],
     "deployment_flavour":[
         {
             "df_constraint":[
@@ -319,30 +273,25 @@ Important to notice here is the vm_image that points to the image we have define
             ],
             "flavour_key":"m1.small"
         }
-    ],
-    "manifest_file":"",
-    "vnfPackage":{
-        "name":"fakeName",
-        "extId":"fakeId",
-        "imageLink":"fakeUrl",
-        "scriptsLink":"https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git"
-    }
+    ]
 }
 ```
 
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
+We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image].
 
 ## Onboarding VNFPackages
 
 Once we have finalized the VNFPackages and packed them into a tar we can onboard them on the NFVO as shown in the following:
 
 ```bash
-$ curl
+$ curl -X POST -v -F file=@vnf-package.tar http://localhost:8080/api/v1/vnf-packages
 
 ```
-
+This must be done for both VNFPackages expecting that the NFVO is running locally and the tar archive is called vnf-package.tar.
+Otherwise you need to adapt the path to the package or also the URL where the NFVO is located.
 Now where we onboarded the VNFPackages they are available on the NFVO and we can make use of it by referencing them in the NSD by their ids'.
 
 ## NSD [iperf]
@@ -365,15 +314,10 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
             "id":""
         }
     ],
-    "vnffgd":[
-    ],
     "vld":[
         {
             "name":"private"
         }
-    ],
-    "lifecycle_event":[
-
     ],
     "vnf_dependency":[
         {
@@ -387,19 +331,6 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
                 "ip1"
             ]
         }
-    ],
-    "monitoring_parameter":[
-        "cpu_utilization"
-    ],
-    "service_deployment_flavour":[
-        {
-        }
-    ],
-    "auto_scale_policy":[
-    ],
-    "connection_point":[
-    ],
-    "pnfd":[
     ]
 }
 ```
@@ -408,3 +339,4 @@ Finally you can onboard this NSD and create a NSR that bases on both VNFPackages
 Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
 
 
+[image]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz
