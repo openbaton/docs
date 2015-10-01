@@ -307,6 +307,26 @@ $ curl -X "GET http://localhost:8080/api/v1/vnf-descriptors"
 
 This request will return a list of already existing VNFDs.
 Just looking for the VNFDs we created before and use the id to reference them in the NSD.
+The following list of VNFDs is an example of this request.
+To make it better readable it is shown only the interesting parts.
+```json
+[
+  {
+    "id": "29d918b9-6245-4dc4-abc6-b7dd6e84f2c1",
+    "name": "iperf-server",
+    .
+    .
+    .
+  },
+  {
+    "id": "87820607-4048-4fad-b02b-dbcab8bb5c1c",
+    "name": "iperf-client",
+    .
+    .
+    .
+  }
+]
+```
 
 ## NSD [iperf]
 In this section we will create s NSD and referencing the previously created VNFPackages by their ids'.
@@ -322,10 +342,10 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
     "version":"0.1-ALPHA",
     "vnfd":[
         {
-            "id":""
+            "id":"29d918b9-6245-4dc4-abc6-b7dd6e84f2c1"
         },
         {
-            "id":""
+            "id":"87820607-4048-4fad-b02b-dbcab8bb5c1c"
         }
     ],
     "vld":[
@@ -350,6 +370,22 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
 ```
 
 Finally you can onboard this NSD and create a NSR that bases on both VNFPackages created before.
+
+### Onboard NSD
+The following command will onboard the NSD on the NFVO:
+```bash
+$ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-descriptors"
+
+```
+This will return the NSD with the id we need to create NSR.
+Afterwards, we can deploy the NSD.
+### Create NSR (Deployment)
+To deploy the NSD we create a NSR with the following command:
+```bash
+$ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-records/<NSD_ID>"
+
+```
+
 Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
 
 
