@@ -99,19 +99,19 @@ For seeing the details of VNFR just click on the **id** of a VNFR and will be sh
 ![VNF Record Information][VNFRecordInformation.png]
 
 
-[overview.png]:nfvo-how-to-use-gui-images/overview.png
-[vimpage.png]:nfvo-how-to-use-gui-images/vimpage.png
-[registeraNewVim.png]:nfvo-how-to-use-gui-images/registeraNewVim.png
-[NSDlist.png]:nfvo-how-to-use-gui-images/NSDlist.png
-[NSDcreateFile.png]:nfvo-how-to-use-gui-images/NSDcreateFile.png
-[NSDcreateForm.png]:nfvo-how-to-use-gui-images/NSDcreateForm.png
-[VNFDlistintoNSD.png]:nfvo-how-to-use-gui-images/VNFDlistintoNSD.png
-[VNFDlistintoNSD1.png]:nfvo-how-to-use-gui-images/VNFDlistintoNSD1.png
-[VNFDescriptorInformation.png]:nfvo-how-to-use-gui-images/VNFDescriptorInformation.png
-[JSONofNSR.png]:nfvo-how-to-use-gui-images/JSONofNSR.png
-[NSDgraph.png]:nfvo-how-to-use-gui-images/NSDgraph.png
-[VNFDescriptorInformation.png]:nfvo-how-to-use-gui-images/VNFDescriptorInformation.png
-[VDUInformation.png]:nfvo-how-to-use-gui-images/VDUInformation.png
-[NetworkServiceRecordsList.png]:nfvo-how-to-use-gui-images/NetworkServiceRecordsList.png
-[NSRinfo.png]:nfvo-how-to-use-gui-images/NSRinfo.png
-[VNFRecordInformation.png]:nfvo-how-to-use-gui-images/VNFRecordInformation.png
+[overview.png]:images/overview.png
+[vimpage.png]:images/vimpage.png
+[registeraNewVim.png]:images/registeraNewVim.png
+[NSDlist.png]:images/NSDlist.png
+[NSDcreateFile.png]:images/NSDcreateFile.png
+[NSDcreateForm.png]:images/NSDcreateForm.png
+[VNFDlistintoNSD.png]:images/VNFDlistintoNSD.png
+[VNFDlistintoNSD1.png]:images/VNFDlistintoNSD1.png
+[VNFDescriptorInformation.png]:images/VNFDescriptorInformation.png
+[JSONofNSR.png]:images/JSONofNSR.png
+[NSDgraph.png]:images/NSDgraph.png
+[VNFDescriptorInformation.png]:images/VNFDescriptorInformation.png
+[VDUInformation.png]:images/VDUInformation.png
+[NetworkServiceRecordsList.png]:images/NetworkServiceRecordsList.png
+[NSRinfo.png]:images/NSRinfo.png
+[VNFRecordInformation.png]:images/VNFRecordInformation.png

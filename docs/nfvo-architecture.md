@@ -1,33 +1,8 @@
-NFVO Architecture
------------------------
+# NFVO Architecture
 
-*NFVO* is a modular software composed by these modules:
-
-* api
-* cli
-* common
-* dashboard
-* core
-    * core-int
-    * core-impl
-* vnfm
-    * vnfm-int
-    * vnfm-impl
-* repository
-* main
-* openbaton-libs
-    * catalogue
-    * vim-int
-    * vim-impl
-    * plugin
-    * vim-drivers
-    * exception
-    * monitoring
-
-a full picture is following.
+*NFVO* is a modular software composed by the modules illustrated in the following picture:
 
 ![NFVO module architecture][nfvo-architecture-full]
-
 
 ##### API
 
@@ -217,6 +192,6 @@ References
 -->
 
 [api]: linktoapi
-[nfvo-architecture-full]:nfvo-architecture-images/architecture-full.png
-[or-vnfm-sequence]:nfvo-architecture-images/or-vnfm-seq-dg.png
+[nfvo-architecture-full]:images/architecture-full.png
+[or-vnfm-sequence]:images/or-vnfm-seq-dg.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf

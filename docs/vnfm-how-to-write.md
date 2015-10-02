@@ -1,5 +1,4 @@
-How to write a VNFManager
-=========================
+# How to write a VNFManager
 
 How to write a Vnfm for OpenBaton:
 
@@ -17,21 +16,18 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
     }
 }
-
 apply plugin: 'spring-boot'
 bootRepackage {
     mainClass = 'path.to.the.vnfm.class.VNFManager'
 }
 apply plugin: 'java'
 apply plugin: 'maven'
-
 repositories {
     mavenCentral()
     maven {
         url "http://193.175.132.176:8081/nexus/content/groups/public"
     }
 }
-
 dependencies {
     compile 'org.openbaton:vnfm-sdk-jms:0.5-SNAPSHOT' 
 }
@@ -44,16 +40,12 @@ It needs to implement as well a main methods as follows:
 ```java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.openbaton.common.vnfm_sdk.jms.AbstractVnfmSpringJMS;
-
 public class VNFManager extends AbstractVnfmSpringJMS{
-	
 	@Autowired
 	private VnfmHelper vnfmHelper;
-
 	/**
 	*	implement all the methods...
 	*/
-
 	public static void main(String[] args){
 		SpringApplication.run(VNFManager.class);
 	}
@@ -72,17 +64,12 @@ There is the possibility to use the VnfmHelper. The vnfmHelper helps with some m
 
 ```java
 package org.openbaton.common.vnfm_sdk;
-
 import org.openbaton.catalogue.nfvo.messages.Interfaces.NFVMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 public abstract class VnfmHelper {
-
     protected Logger log = LoggerFactory.getLogger(this.getClass());
-
     public abstract void sendToNfvo(NFVMessage nfvMessage);
-
     public abstract NFVMessage sendAndReceive(NFVMessage nfvMessage) throws Exception;
 }
 ```

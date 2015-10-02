@@ -1,5 +1,4 @@
-Virtual Network Function Descriptor
-=================================
+# Virtual Network Function Descriptor
 
 The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD)). It is defined as follows:
 

@@ -1,5 +1,4 @@
-VNFPackage
-===============
+# VNFPackage
 
 **Note**: This is the initial version of the VNFPackage and might change most probably in the next releases to improve and simplify the creation, usability and power.
 
@@ -48,6 +47,7 @@ Each property is explained more in detail now. Please consider also the notes si
         So if you set the scripts-link, the scripts in folder scripts/ are ignored completely.
     * **Note** The scripts-link is processed by the Element Management System (EMS) in the meaning of fetching the files from that link.
         So you need to take care about ensuring that the URL defined is available.
+    * **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
 * ***image-link***: This link points to an image available over this URL used to upload the image to the cloud environment.
     * **Note** Either you have to define the image-link or put the image directly into the VNFPackage.
         Otherwise an NotFoundException will be thrown and the VNFPackage will not onboard.
@@ -79,6 +79,8 @@ The scripts folder contains all the scripts required for starting, configuring o
 
 **Note** These scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.
     This means that the scripts in that folder have less priority than the scripts located under ***scripts-link***.
+
+**Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
 
 ## \<image\>.img
 
@@ -136,28 +138,12 @@ Important to notice here is the vm_image that points to the image we have define
     "name":"iperf-server",
     "type":"server",
     "endpoint":"generic",
-    "configurations":{
-        "name":"config_name",
-        "configurationParameters":[
-            {
-                "confKey":"key",
-                "value":"value"
-            }
-        ]
-    },
     "vdu":[
         {
             "vm_image":[
                 "iperf_server_image"
             ],
-            "computation_requirement":"",
-            "virtual_memory_resource_element":"1024",
-            "virtual_network_bandwidth_resource":"1000000",
-            "lifecycle_event":[
-            ],
             "vimInstanceName":"vim-instance",
-            "vdu_constraint":"",
-            "high_availability":"ACTIVE_PASSIVE",
             "scale_in_out":2,
             "vnfc":[
                 {
@@ -168,9 +154,6 @@ Important to notice here is the vm_image that points to the image we have define
                         }
                     ]
                 }
-            ],
-            "monitoring_parameter":[
-                "cpu_utilization"
             ]
         }
     ],
@@ -178,8 +161,6 @@ Important to notice here is the vm_image that points to the image we have define
         {
             "name":"private"
         }
-    ],
-    "connection_point":[
     ],
     "lifecycle_event":[
         {
@@ -189,11 +170,6 @@ Important to notice here is the vm_image that points to the image we have define
                 "install-srv.sh"
             ]
         }
-    ],
-    "vdu_dependency":[
-    ],
-    "monitoring_parameter":[
-        "cpu_utilization"
     ],
     "deployment_flavour":[
         {
@@ -205,19 +181,13 @@ Important to notice here is the vm_image that points to the image we have define
             ],
             "flavour_key":"m1.small"
         }
-    ],
-    "manifest_file":"",
-    "vnfPackage":{
-        "name":"fakeName",
-        "extId":"fakeId",
-        "imageLink":"fakeUrl",
-        "scriptsLink":"https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git"
-    }
+    ]
 }
 ```
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of image.
+We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image].
 
 ### VNFPackage [iperf-client]
 
@@ -259,12 +229,8 @@ Important to notice here is the vm_image that points to the image we have define
             "vm_image":[
                 "iperf_client_image"
             ],
-            "computation_requirement":"",
             "virtual_memory_resource_element":"1024",
             "virtual_network_bandwidth_resource":"1000000",
-            "lifecycle_event":[
-
-            ],
             "vimInstanceName":"vim-instance",
             "vdu_constraint":"",
             "high_availability":"ACTIVE_PASSIVE",
@@ -277,9 +243,6 @@ Important to notice here is the vm_image that points to the image we have define
                         }
                     ]
                 }
-            ],
-            "monitoring_parameter":[
-                "cpu_utilization"
             ]
         }
     ],
@@ -287,8 +250,6 @@ Important to notice here is the vm_image that points to the image we have define
         {
             "name":"private"
         }
-    ],
-    "connection_point":[
     ],
     "lifecycle_event":[
         {
@@ -304,11 +265,6 @@ Important to notice here is the vm_image that points to the image we have define
             ]
         }
     ],
-    "vdu_dependency":[
-    ],
-    "monitoring_parameter":[
-        "cpu_utilization"
-    ],
     "deployment_flavour":[
         {
             "df_constraint":[
@@ -319,38 +275,62 @@ Important to notice here is the vm_image that points to the image we have define
             ],
             "flavour_key":"m1.small"
         }
-    ],
-    "manifest_file":"",
-    "vnfPackage":{
-        "name":"fakeName",
-        "extId":"fakeId",
-        "imageLink":"fakeUrl",
-        "scriptsLink":"https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git"
-    }
+    ]
 }
 ```
 
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
+We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image].
 
 ## Onboarding VNFPackages
 
-Once we have finalized the VNFPackages and packed them into a tar we can onboard them on the NFVO as shown in the following:
+Once we have finalized the creation of VNFPackages and packed them into a tar we can onboard them on the NFVO as shown in the following:
 
 ```bash
-$ curl
-
+$ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/vnf-packages"
 ```
 
+This must be done for both VNFPackages expecting that the NFVO is running locally and the tar archive is called vnf-package.tar.
+Otherwise you need to adapt the path to the package and also the URL where the NFVO is located.
 Now where we onboarded the VNFPackages they are available on the NFVO and we can make use of it by referencing them in the NSD by their ids'.
+
+To get the ids of the newly created VNFDs you need to fetch the VNFDs by invoking the following command:
+
+```bash
+$ curl -X "GET http://localhost:8080/api/v1/vnf-descriptors"
+```
+
+This request will return a list of already existing VNFDs.
+Just looking for the VNFDs we created before and use the id to reference them in the NSD.
+The following list of VNFDs is an example of this request.
+To make it better readable it is shown only the interesting parts.
+```json
+[
+  {
+    "id": "29d918b9-6245-4dc4-abc6-b7dd6e84f2c1",
+    "name": "iperf-server",
+    .
+    .
+    .
+  },
+  {
+    "id": "87820607-4048-4fad-b02b-dbcab8bb5c1c",
+    "name": "iperf-client",
+    .
+    .
+    .
+  }
+]
+```
 
 ## NSD [iperf]
 In this section we will create s NSD and referencing the previously created VNFPackages by their ids'.
 For doing that we just need to define the **id** for each VNFPackges' VNFD in the list of VNFDs.
 To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can found under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **ip1**.
 
-**Note** The VNFD is fetched by the id defined. Other properties we would set in the VNFD in this NSD will be ignored.
+**Note** When creating the NSD the VNFD is fetched by the id defined. Other properties we would set in the VNFD in this NSD will be ignored.
 
 ```json
 {
@@ -359,21 +339,16 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
     "version":"0.1-ALPHA",
     "vnfd":[
         {
-            "id":""
+            "id":"29d918b9-6245-4dc4-abc6-b7dd6e84f2c1"
         },
         {
-            "id":""
+            "id":"87820607-4048-4fad-b02b-dbcab8bb5c1c"
         }
-    ],
-    "vnffgd":[
     ],
     "vld":[
         {
             "name":"private"
         }
-    ],
-    "lifecycle_event":[
-
     ],
     "vnf_dependency":[
         {
@@ -384,27 +359,32 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
                 "name": "iperf-client"
             },
             "parameters":[
-                "ip1"
+                "private1"
             ]
         }
-    ],
-    "monitoring_parameter":[
-        "cpu_utilization"
-    ],
-    "service_deployment_flavour":[
-        {
-        }
-    ],
-    "auto_scale_policy":[
-    ],
-    "connection_point":[
-    ],
-    "pnfd":[
     ]
 }
 ```
 
 Finally you can onboard this NSD and create a NSR that bases on both VNFPackages created before.
+
+### Onboard NSD
+The following command will onboard the NSD on the NFVO:
+```bash
+$ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-descriptors"
+```
+
+This will return the NSD with the id we need to create NSR.
+Afterwards, we can deploy the NSD.
+
+### Create NSR (Deployment)
+To deploy the NSD we create a NSR with the following command:
+
+```bash
+$ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-records/<NSD_ID>"
+```
+
 Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
 
 
+[image]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz
