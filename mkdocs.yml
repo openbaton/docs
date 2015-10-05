@@ -10,7 +10,6 @@ pages:
 - ['vnfm-vendor-specific.md', 'Use it', 'Use my VNFM']
 - ['vnfpackage.md', 'Use it', 'Create your own VNF Package']
 - ['ns-descriptor.md', 'Use it', 'Create the NSD']
-- ['vnf-descriptor.md']
 - ['nfvo-how-to-use-gui.md', 'Use it', 'Use via the Dashboard']
 - ['extend.md', 'Extend it', 'Overview']
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
