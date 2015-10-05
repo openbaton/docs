@@ -1,5 +1,9 @@
 # How to use OpenBaton
 
-In order to use OpenBaton for launching your first Network Service, you will need to prepare your Network Service Descriptor (NSD). In order to orchestrate your Network Service, the NFVO expects a clear definition of the NSD. Please refer to the are defined as set of VNF descriptors, therefore it is important to have in place the descriptors of the VNF you would like to manage.
+In order to use OpenBaton for launching your first Network Service, you will need to follow these steps:
 
-# 
+1. Decide which VNFM to use.
+2. Create the VNF Package\s.
+3. Prepare the Network Service Descriptor (NSD).
+
+Once these steps are completed you will able to orchestrate your Network Service from the dashboard.
