@@ -44,22 +44,30 @@ All the details base on the usage of [IntelliJIdea][IntelliJIdea].
 Once you have started the IDE, click on File -> New -> Project...
 
 In this dialog click on Gradle on the left and select java in the main properties window in the middle.
+
 ![dialog][intellijidea_new_project_type]
+
 Then click on next to go to the next window.
 
 In the next dialog you need to define the GroupId, ArtifactId and the Version.
 More information on the specific meaning can be found [here][project-guide-naming-conventions].
+
 ![dialog][intellijidea_new_project_group]
+
 Continue with the next dialog.
 
 In this dialog you need to specify which gradle you want to use.
 It is recommend to use the default gradle wrapper.
 Additionally you can enable the auto-import.
+
 ![dialog][intellijidea_new_project_gradle]
+
 Continue with the next dialog by clicking on Next.
 
 In the last dialog, you need to define the project name and the project location.
+
 ![dialog][intellijidea_new_project_name]
+
 Once this is done you can click on Finish and continue with creating the Main Class.
 
 ##### Create the Main Class
@@ -67,7 +75,7 @@ Once this is done you can click on Finish and continue with creating the Main Cl
 Afterwards, you need to create the Main Class of the VNFManager which will be started in the end.
 For doing so, right click on the root folder my-vnfm, then click on New -> Directory and insert what is show below.
 
-<center>![dialog][intellijidea_new_directory]</center>
+![dialog][intellijidea_new_directory]
 
 Click on OK to continue.
 
@@ -76,11 +84,11 @@ This is done by an right-click of the previous created directory java.
 Click on New -> Package.
 Here you can define the package name.
 
-<center>![dialog][intellijidea_new_package]</center>
+![dialog][intellijidea_new_package]
 
 Finally you can create your Main Class by clicking (right click) on the previous created package and click on New -> Java Class.
 
-<center>![dialog][intellijidea_new_class]</center>
+![dialog][intellijidea_new_class]
 
 Once you did all these steps, the initial project structure is created.
 What we miss right now is the configuration of the gradle files to define and fetch dependencies we need for implementing the VNFManager.
@@ -123,17 +131,21 @@ This is only for creating a proper file structure.
 So execute the following commands to create the Main class in a proper folder and package structure.
 
 First, you need to create the folders and package by executing the following command in your root folder of the project.
+
 ```bash
 $ mkdir -p src/main/java/org/openbaton/vnfm
 ```
+
 This creates the java folder src/main/java with the proposed package name org.openbaton.vnfm.
 
 In the next step you create the Main Class called MyVNFM in this case.
+
 ```bash
 $ vim /src/main/java/org/openbaton/vnfm/MyVNFM.java
 ```
 At this point you create only the basic Java Class used later as the Main Class for implementing your VNFManager.
 The newly created Java Class should contain the following lines for now.
+
 ```java
 package org.openbaton.vnfm;
 
@@ -153,10 +165,12 @@ $ gradle wrapper --gradle-version 2.4
 
 Once this is done, you need to create the configuration files.
 First you need to create the build.gradle file by executing the following command from your root project folder.
+
 ```bash
 $ vim build.gradle
 ```
 This gradle configuration file needs to contain initially the following lines.
+
 ```gradle
 group 'org.openbaton'
 version '1.0-SNAPSHOT'
@@ -173,11 +187,14 @@ If you have chosen a different package name you need to replace it at this point
 The second gradle configuration is called settings.gradle.
 This files contains only the project name.
 So create a new file called settings.gradle in your root folder.
+
+
 ```bash
 $ vim settings.gradle
 ```
 Afterwards you need to add the following line containing your project name.
 In our case my-vnfm.
+
 ```gradle
 rootProject.name = 'my-vnfm'
 ```
@@ -190,6 +207,7 @@ This is described in later sections.
 
 The properties files are used to define several parameters you need at runtime.
 So just create the following file structure by executing the following commands.
+
 ```bash
 $ mkdir src/main/resources
 ```
@@ -270,6 +288,7 @@ spring.activemq.broker-url=tcp://localhost:61616
 spring.activemq.user=admin
 spring.activemq.password=admin
 ```
+
 If you want to change log levels or the ActiveMQ access information you need to adapt it here.
 
 The **conf.properties** is also a very important configuration file.
@@ -364,6 +383,7 @@ dependencies {
 **Note** To make use of the vnfm-sdk-rest you need to change 'vnfm-sdk-jms' to 'vnfm-sdk-rest' only.
 
 Once you did this, you need to trigger the gradle build process by running the following command via the command line in your project's root folder.
+
 ```bash
 $ ./gradlew build
 ```
@@ -572,6 +592,7 @@ Therefore, you need to do several things:
 * Connect an according VIM to the plugin
 
 **Note** If you want to use plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
+
 ```gradle
 compile 'org.openbaton:vim-int:0.6'
 compile 'org.openbaton:vim-impl:0.6'
@@ -580,6 +601,7 @@ After that you need rebuild your project for fetching the dependencies automatic
 
 Now you can use the ResourceManagement interface.
 In the end it should look like the following:
+
 ```java
 package org.openbaton.vnfm;
 
@@ -615,12 +637,14 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
     }
 }
 ```
+
 This code expects that the plugins are located in ./plugins.
 So just copy the openstack plugin of your choice to this path.
 Now you are able to use a VIM inside your VNFManager to allocate and release resources whenever you want.
 
 ##### Allocate Resources
 The following code snippet shows how to instantiate (allocate) resources at VNFManager side with the help of the VIM.
+
 ```java
 @Override
 public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object object) {
@@ -661,6 +685,7 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
 
 ##### Release Resources
 The next code snippet shows an implementation of the terminate method used for releasing resources at VNFManager side.
+
 ```java
 @Override
 public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
