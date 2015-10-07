@@ -80,13 +80,13 @@ For doing so, right click on the root folder my-vnfm, then click on New -> Direc
 Click on OK to continue.
 
 Additionally you need to create a new package.
-This is done by an right-click of the previous created directory java.
+This is done by a right-click on the previously created directory java.
 Click on New -> Package.
 Here you can define the package name.
 
 ![dialog][intellijidea_new_package]
 
-Finally you can create your Main Class by clicking (right click) on the previous created package and click on New -> Java Class.
+Finally you can create your Main Class by clicking (right click) on the previously created package and click on New -> Java Class.
 
 ![dialog][intellijidea_new_class]
 
@@ -157,7 +157,7 @@ Once this is done, you need to initialize the gradle wrapper and configuring acc
 
 ##### The Gradle Wrapper
 Afterwards go back to the root folder and run the following command to create automatically the gradle wrapper which is used for code management and compilation.
-For more information on how to use the gradle wrapper have a look on the gradle wrapper documentation [here][gradle-wrapper].
+For more information on how to use the gradle wrapper have a look at the gradle wrapper documentation [here][gradle-wrapper].
 
 ```bash
 $ gradle wrapper --gradle-version 2.4
@@ -185,7 +185,7 @@ sourceCompatibility = 1.7
 If you have chosen a different package name you need to replace it at this point as well.
 
 The second gradle configuration is called settings.gradle.
-This files contains only the project name.
+This file contains only the project name.
 So create a new file called settings.gradle in your root folder.
 
 
@@ -265,7 +265,7 @@ dependencies {
 
 ```
 Take care about the configuration of the mainClass.
-If the name or package of your name class is different, you need to replace it here as well.
+If the name or package of your mainClass is different, you need to replace it here as well.
 
 #### Property files
 The previously created properties files are used to define several things.
@@ -294,7 +294,7 @@ If you want to change log levels or the ActiveMQ access information you need to 
 The **conf.properties** is also a very important configuration file.
 Here you need to define the type and endpoint of your VNFManager that is later used for registering on the NFVO.
 Furthermore, you can define your own parameters which can be used at runtime for whatever you want.
-So this file have to contain at least the type and endpoint.
+So this file has to contain at least the type and endpoint.
 Additionally, it is defined the folder where the vim-plugins are located.
 In this case the file should contain the following lines.
 
@@ -310,7 +310,7 @@ transacted = false
 vim-plugin-dir = ./plugins/vim-drivers
 ```
 
-Where the parameters means:
+Where the parameters mean:
 
 | Params          				| Meaning       																|
 | -------------   				| -------------:																|
@@ -325,11 +325,11 @@ Where the parameters means:
 Before you can start with the implementation you need to select the type of communication you want to use for the communication between the Orchestrator (NFVO) and the VNFManager.
 Either you can use the vnfm-sdk-jms for using the [Java Message Service (JMS)][JMS] or the vnfm-sdk-rest for using the [ReST][ReST] interface.
 However, your choice doesn't effect the upcoming implementation, because the communication itself is done automatically in the background.
-But have in mind that both libraries depends on [SpringBoot][spring-boot].
+But have in mind that both libraries depend on [SpringBoot][spring-boot].
 So, if you want to avoid this dependency, a third option might be: just use the simple vnfm-sdk artifact.
-By using the simple vnfm-sdk you need to take care about all the communication between NFVO and VNFManager by your self.
+By using the simple vnfm-sdk you need to take care about all the communication between NFVO and VNFManager by yourself.
 
-Once you have imported one the vnfm-sdks you will have access to all the model classes and the vnfm-sdk classes needed to implement a VNFManager.
+Once you have imported one of the vnfm-sdks you will have access to all the model classes and the vnfm-sdk classes needed to implement a VNFManager.
 
 The following section shows you how to import the vnfm-sdk-jms, representative for all the other opportunities.
 
@@ -528,7 +528,7 @@ Now you can implement whatever you want. If the VirtualNetworkFunctionRecord is 
 
 An example of allocating and terminating resource by using a plugin can be found [here](#allocate-resources) and [here](#release-resources).
 
-**Note** If you use vnfm-sdk-jms or vnfm-sdk-rest **_the VNFManager main class needs to be stateless_** since can (will) run each method potentially in parallel.
+**Note** If you use vnfm-sdk-jms or vnfm-sdk-rest **_the VNFManager main class needs to be stateless_** since it can (will) run each method potentially in parallel.
 For what concerns vnfm-sdk-jms, even setting concurrency to 1, will not ensure to have always the same instance of the class.
 
 #### Using the VnfmHelper
@@ -594,7 +594,7 @@ Therefore, you need to do several things:
 compile 'org.openbaton:vim-int:0.6'
 compile 'org.openbaton:vim-impl:0.6'
 ```
-After that you need rebuild your project for fetching the dependencies automatically.
+After that you need to rebuild your project for fetching the dependencies automatically.
 
 Now you can use the ResourceManagement interface.
 In the end it should look like the following:
