@@ -301,9 +301,6 @@ Where the parameters means:
 | concurrency	 				| The number of concurrent Receiver (only for vnfm-sdk-jms)|
 | transacted 					| Whenever the JMS receiver method shoud be transacted, this allows the message to be resent in case of exception VNFManager side (only for vnfm-sdk-jms)     	|
 
-
-
-
 ### Choose a vnfm-sdk
 
 Before you can start with the implementation you need to select the type of communication you want to use for the communication between the Orchestrator (NFVO) and the VNFManager.
@@ -658,6 +655,7 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
 }
 ```
 
+**Note** Keep in mind that you need to set *allocate* to false in conf.properties, if you want to allocate resources on the VNFManager side.
 
 ##### Release Resources
 The next code snippet shows an implementation of the terminate method used for releasing resources at VNFManager side.
