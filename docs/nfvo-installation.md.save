@@ -27,9 +27,7 @@ where:
 * `generic-vnfm`contains the source code and scripts required for dealing with the generic-vnfm  
 * `nfvo` contains the source code and scripts of the NFVO 
 
-##NFVO properties overview
-
-The NFVO is configured with default configuration parameters at the beginning. The configuration file is located at: 
+The NFVO is configured with default configuration parameters at the beginning. The configuration file is located on 
 
 ```bash
 /etc/openbaton/openbaton.properties
@@ -80,7 +78,7 @@ multipart.maxFileSize=2046MB
 multipart.maxRequestSize=2046MB
 ```
 
-The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [vim plugin documentation][vim_plugin_doc]). The NFVO will load them at runtime.  
+The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [vim_plugin_doc][]). The NFVO will load them at runtime.  
 ```properties
 # plugin install
 # directory for the vim driver plugins

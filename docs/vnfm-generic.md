@@ -1,9 +1,10 @@
 # VNFManager Generic
 
-The Generic VNFManager is an implementation following the [ETSI MANO][nfv-mano] specifications. For that reason is highly tied to the EMS.
+The Generic VNFManager is an implementation following the [ETSI MANO][nfv-mano] specifications. For that reason it is highly tied to the EMS.
 This VNFM may be assigned the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
 
-The Generic VNFManager handles communication with the NFVO and with EMS. The communication between NFVO and the EMS is done through Stomp protocol, in particular JMS.
+The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO <-> VNFM <-> EMS is done through Stomp protocol, in particular JMS.  
+
 The communication between the NFVO and Generic VNFManager:
 
 ![NFVO - Generic VNFM communication][nfvo-vnfm-communication]
@@ -13,7 +14,7 @@ The communication between the Generic VNFManager and EMS:
 ![Generic VNFM - EMS communication][vnfm-ems-communication]
 
 As you can see, the Generic VNFM sends commands to the EMS, which is running in the VM. Then the EMS executes the commands (scripts) locally in the VNFC.
-The following sequece diagram explains the communication messages.
+The following sequence diagram explains the communication messages.
 
 ![Sequence Diagram NFVO - VNFM - EMS][or-vnfm-sequence]
 
@@ -30,12 +31,12 @@ Accordingly to the [ETSI MANO B.3][nfv-mano-B.3] the VNF instantiation flows can
 1. With resource allocation done by NFVO
 2. With resource allocation done by VNF Manager
 
-The Generic VNFM follow the first approach.
-Before that all the VNFManagers need to request whenever the resources are available on the selected PoP.
-This is done by the GRANT_OPERATION message and it is executed by all the VNFManagers.
-The Generic VNFM sends the ALLOCATE_RESOURCES message as well. If the GRANT_OPERATION message is returned,
-than it means that there are enough resources, if not an ERROR message will be sent. After the GRANT_OPERATION message it is possible to send the ALLOCATE_RESOURCE message.
-This message will create all the resources and than, if no errors occurred, return the ALLOCATE_RESOURCE message to the VNFManager.
+The Generic VNFM follows the first approach. In the first approach two messages will be sent to the NFVO:
+
+* **GRANT_OPERATION message**: check if the resources are available on the selected PoP. If the GRANT_OPERATION message is returned, then there are enough resources, otherwise an ERROR message will be sent. After the GRANT_OPERATION message it is possible to send the ALLOCATE_RESOURCE message.  
+
+* **ALLOCATE_RESOURCE message**: This message ask the NFVO to create all the resources and then, if no errors occurred, the ALLOCATE_RESOURCE message will be returned to the VNFManager. Only the VNFMs which follow the first approach need to send this message.
+
 
 After that point the VMs are created and **the VNF record is filled with values**, such as ips, that can be found directly in the VirtualNetworkFunctionRecord->VirtualDeploymentUnit->VNFCInstance object.
 
@@ -43,10 +44,10 @@ After that point the VMs are created and **the VNF record is filled with values*
 
 For each operation of the VNF Lifecycle Management interface, the VNFManager sends scripts to the EMS which executes them locally in the VMs.
 
-**Note**: The scripts comes from the VNFPackage which you need to create (see [VNFPackage documentation][vnfpackage-doc-link]).
+**Note**: The scripts come from the VNFPackage which you need to create (see [VNFPackage documentation][vnfpackage-doc-link]).
 
 The ordering of this scripts is defined in the NetworkServiceDescriptor from which the NetworkServiceRecord was created, in particular into the NetworkServiceDescriptor->VirtualNetworkFunctionDescriptor->LifecycleEvents.
-Here an example (to make it better readable it is shown only the **VNF lifecycle event** part):
+Here an example (to make it more readable it is shown only the **VNF lifecycle event** part):
 ```json
 {
     ...
@@ -89,22 +90,22 @@ In the following table is described for each **VNF lifecycle event** when the sc
 | TERMINATE           |  During the termination of the corresponding VNF
 
 
-The available parameters are defined into the VirtualNetworkFunctionDescriptor fields:
+The available parameters are defined in the VirtualNetworkFunctionDescriptor fields:
 
-* provides
-* configurations
+* **provides**: it contains the VMs parameters which will be available after the instantiation (e.g. IP) for other VNFs.
+* **configurations**: it contains specific parameters which you want to use in the scripts.
 
-In the INSTANTIATE scripts, the parameters defined into these two fields are then available as environment variables into the script exactly as defined.
+In the INSTANTIATE scripts, the parameters defined in these two fields are then available as environment variables into the script exactly as defined (i.e. you can get by $parameter_name).
 
-In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from a VNFDependency.
-These kind of parameters are defined into the _requires_ and the VNFDependency->parameters fields, and are then available as $*type_of_vnf_source*.*name_of_parameter*.
+In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
+These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency->parameters fields (of the NSD), and are then available as $*type_of_vnf_source*.*name_of_parameter* (in the VNF target).
 
 
 ### VMs termination
 
 As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
 
-## Specify the endpoint in the VNFD and launch the Generic VNFM
+## Specify the endpoint in the VNFD
 
 To use the Generic VNFM for managing a VNF just set "generic" in the endpoint field of the VNFD.
 ```json
@@ -114,12 +115,14 @@ To use the Generic VNFM for managing a VNF just set "generic" in the endpoint fi
     ...
 }
 ```
+##Launch the Generic VNFM
 
 To launch the Generic VNFM, execute the following command:
 ```bash
 $ cd <generic directory>
-$ ./generic.sh
+$ ./generic.sh start
 ```
+The Generic VNFM can handle more than one VNF (in parallel) of the same or different type, so that you need to start only one Generic VNFM.
 
 ### Tutorial
 
