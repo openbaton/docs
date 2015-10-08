@@ -14,5 +14,6 @@ pages:
 - ['extend.md', 'Extend it', 'Overview']
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
 - ['FAQ.md', 'FAQ', 'FAQ']
+google_analytics: ['UA-68429895-1', 'openbaton.github.io']
 theme: readthedocs
 theme_dir: 'custom_theme'

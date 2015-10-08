@@ -263,9 +263,26 @@ References
 
 [or-vnfm-sequence]:images/or-vnfm-seq-dg.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
-[nfv-mano-B.3]: www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf#page=108
+[nfv-mano-B.3]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf#page=108
 [vnfm-ems-communication]:images/GVNFM-EMS.jpg
 [nfvo-vnfm-communication]:images/vnfm-Or_communication.png
-[vnfpackage-tutorial-link]:vnfpackage.md#tutorial
-[vnfpackage-doc-link]:vnfpackage.md
+[vnfpackage-tutorial-link]:vnfpackage#tutorial
+[vnfpackage-doc-link]:vnfpackage
 [ns-with-dependency]:images/ns_with_dependency.png
+
+<!---
+Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>
+
+
