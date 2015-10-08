@@ -3,13 +3,13 @@
 The *Virtualised Infrastructure Manager* (Vim) is the functional block, responsible for controlling and managing the
  NFVI compute, storage and network resources, usually within one operator's Infrastructure Domain.
 
-In OpenBaton a Vim Instance is described by an object Json.
+In OpenBaton a Vim Instance is described by a Json object.
 
-For working with Vim Instance in the folders `plugins` under nfvo should be a jar file that implements the interface to the your Data Center Manager ( i.e. [Openstack] )
-(you can change the folder where the OpenBaton search the plugins just change the variable `vim-plugin-installation-dir` in the `openbaton.properties` 
+For working with Vim Instance, in the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your Data Center Manager ( i.e. [Openstack] )
+(you can change the folder where the OpenBaton searches for the plugins by changing the variable `vim-plugin-installation-dir` in the `openbaton.properties` 
 file under /etc/openbaton)
 
-The file JSON of Vim Instance allows to OpenBaton to call OpenStack and for managing the lifecycle of VMs where the VNF will be deployed and configured by OpenBaton
+The JSON file of Vim Instance allows OpenBaton to call OpenStack and manage the lifecycle of VMs where the VNF will be deployed and configured by OpenBaton
 
 The Json looks like
 
@@ -49,9 +49,9 @@ The Json looks like
 
 
 ## How to register a new Vim Instance?
-You can use the dashboard for sending the Json file just created.
-When the OpenBaton is running for opening the **Dashboard**, please open a browser and surf to [localhost:8080]
-under the menu `Manage PoPs` you can see the `PoP instances` and you can send the JSON of Vim Instance like in the picture below:
+You can use the dashboard for sending the json file.
+When the OpenBaton is running, open your browser and surf to [localhost:8080], this is where you can access **Dashboard**.
+Under the menu `Manage PoPs` you can see the `PoP instances` and you can send the JSON of Vim Instance like in the picture below:
 
 ![registeraNewVim]
 
