@@ -23,7 +23,7 @@ Yes, this is possible using two different approaches:
 Yes! OpenBaton provides a NFVO which can interoperate with VNFMs implemented by third parties. In this project we provide also a set of tools (like the vnfm-sdk) which supports developers in building their own VNFM. 
 
 ## Get started 
-In order to get started you can follow the [installation guide](install.html)
+In order to get started you can follow the [installation guide](install.md)
 
 ## Get in contact 
 www.open-baton.org

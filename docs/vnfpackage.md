@@ -20,7 +20,7 @@ The VNFPackage consists of the following files/folder:
 * image.img
 
 ## Metadata.yaml
-The Metadata.yaml defines essential properties for the VNF. This file bases on the YAML syntax where information are stored in simple \<key\> : \<value\> associations.
+The Metadata.yaml defines essential properties for the VNF. This file bases on the YAML syntax where information are stored in simple <key\> : <value\> associations.
 
 The example of a Metadata.yaml file below shows a basic definition of a VNFPackage.
 
