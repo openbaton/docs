@@ -64,8 +64,8 @@ spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect
 spring.jpa.show-sql=false
 spring.jpa.hibernate.ddl-auto=create-drop
 ```
-By deafault ActiveMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need that ActiveMQ is reachable also from the extern.  
-**Note:** when you want to deploy a VNF (EMS) in a VM which runs on a different host respect to the NFVO, you will need to configure the activemq endpoint (spring.activemq.broker-url) with the real IP of the NFVO host (instead of localhost).
+By deafault ActiveMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need ActiveMQ to be reachable also from the extern.  
+**Note:** when you want to deploy a VNF (EMS) in a VM which runs on a different host in respect to the NFVO, you will need to configure the activemq endpoint (spring.activemq.broker-url) with the real IP of the NFVO host (instead of localhost).
 ```properties
 # activeMQ
 spring.activemq.broker-url=tcp://localhost:61616
@@ -111,7 +111,7 @@ cd /opt/openbaton/nfvo
 ./openbaton.sh restart
 ```
 
-At this point the NFVO is ready to be used. Please refer to the NFVO user guide for how to start using it. 
+At this point the NFVO is ready to be used. Please refer to the NFVO user guide on how to start using it. 
 
 ## Let's move to the next step
 
