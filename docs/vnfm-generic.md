@@ -49,7 +49,9 @@ For each operation of the VNF Lifecycle Management interface, the VNFManager sen
 The ordering of this scripts is defined in the NetworkServiceDescriptor from which the NetworkServiceRecord was created, in particular into the NetworkServiceDescriptor->VirtualNetworkFunctionDescriptor->LifecycleEvents.
 Here an example (to make it more readable it is shown only the **VNF lifecycle event** part):
 ```json
-{
+{// NSD
+  ...
+  {// VNFD
     ...
     "lifecycle_event":[
         {
@@ -78,6 +80,8 @@ Here an example (to make it more readable it is shown only the **VNF lifecycle e
         }
     ],
     ...
+  }
+  ...
 }
 ```
 In the following table is described for each **VNF lifecycle event** when the scripts are executed.
@@ -100,6 +104,130 @@ In the INSTANTIATE scripts, the parameters defined in these two fields are then 
 In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
 These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency->parameters fields (of the NSD), and are then available as $*type_of_vnf_source*.*name_of_parameter* (in the VNF target).
 
+**EXAMPLE WITH DEPENDENCY AND SCRIPTS**
+
+Let's see a simple example with two VNFs: vnf-server and vnf-database.
+The vnf-server needs the ip of the vnf-database to be able to connect properly. The following figure shows the source (vnf-database), the target (vnf-server)
+and the dependency (IP).
+
+![ns with dependency][ns-with-dependency]
+
+**INSTANTIATE scripts**
+
+To start the VNFs we'll have two scripts **instantiate-vnf-server.sh** and **instantiate-vnf-database.sh** (more scripts are possible). Here an example of the instantiate-vnf-server.sh script:
+```bash
+#!/bin/bash
+
+echo "INSTANTIATIATION of the VNF server"
+echo "The following parameters are available:"
+echo "The answer to everything is.. ${ANSWER_TO_EVERYTHING}"
+
+# ... Add the code to start the vnf_server ...
+```
+
+
+**MODIFY script**
+
+After the instantiation of the vnf-server we would configure it with the following **connectToDb.sh** script:
+
+```bash
+#!/bin/bash
+
+echo "This is the ip of the vnf-database: ${database.private1}"
+# ... Add the code to connect to the vnf-database with the ip: ${database.private1} ...
+
+```
+
+**Note**: "database" is the type of the vnf-database, private1 is the name of the network plus the number of the network (in this case "1").
+
+In order to deploy the VNFs we have to create both the VNF descriptor: **vnf-database-descriptor.json** and **vnf-server-descriptor.json**. Below we'll be showed the most relevant part of them:
+
+**vnf-database-descriptor.json**
+```json
+{
+    "name":"vnf-database",
+    "type":"database",
+    "endpoint":"generic",
+    ...
+    "lifecycle_event":[
+        {
+            "event":"INSTANTIATE",
+            "lifecycle_events":[
+                "instantiate-vnf-database.sh"
+            ]
+        }
+    ],
+    ...
+}
+```
+
+**vnf-server-descriptor.json**
+```json
+{
+    "name":"vnf-server",
+    "type":"server",
+    "endpoint":"generic",
+    ...
+    "configurations":{
+            "name":"config_name",
+            "configurationParameters":[
+            {
+                "confKey":"ANSWER_TO_EVERYTHING",
+                "value":"42"
+            }
+            ]
+    },
+    ...
+    "lifecycle_event":[
+        {
+            "event":"INSTANTIATE",
+            "lifecycle_events":[
+                "instantiate-vnf-server.sh"
+            ]
+        },
+        {
+            "event":"CONFIGURE",
+            "lifecycle_events":[
+                "connectToDb.sh"
+            ]
+        }
+    ],
+    ...
+}
+```
+The result network service descriptor shall include both the vnf descriptors above and the dependency:
+```json
+{
+    "name":"simple-nsd",
+    "vnfd":[
+        {
+            "id":"29d918b9-6245-4dc4-abc6-b7dd6e84f2c1"
+        },
+        {
+            "id":"87820607-4048-4fad-b02b-dbcab8bb5c1c"
+        }
+    ],
+    "vld":[
+        {
+            "name":"private"
+        }
+    ],
+    "vnf_dependency":[
+        {
+            "source" : {
+                "name": "vnf-database"
+            },
+            "target":{
+                "name": "vnf-server"
+            },
+            "parameters":[
+                "private1"
+            ]
+        }
+    ]
+}
+```
+
 
 ### VMs termination
 
@@ -115,7 +243,7 @@ To use the Generic VNFM for managing a VNF just set "generic" in the endpoint fi
     ...
 }
 ```
-##Launch the Generic VNFM
+## Launch the Generic VNFM
 
 To launch the Generic VNFM, execute the following command:
 ```bash
@@ -140,3 +268,4 @@ References
 [nfvo-vnfm-communication]:images/vnfm-Or_communication.png
 [vnfpackage-tutorial-link]:vnfpackage.md#tutorial
 [vnfpackage-doc-link]:vnfpackage.md
+[ns-with-dependency]:images/ns_with_dependency.png
