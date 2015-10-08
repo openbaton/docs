@@ -35,7 +35,7 @@ The NFVO is configured with default configuration parameters at the beginning. T
 /etc/openbaton/openbaton.properties
 ```
 
-This file can be modified for specific parameters. For instance, you can decide to change logging levels and mechanisms:
+This file can be modified for specific parameters. For instance, you can decide to change logging levels (TRACE, DEBUG, INFO, WARN, and ERROR) and mechanisms:
 ```properties
 logging.level.org.springframework=INFO
 logging.level.org.hibernate=INFO
