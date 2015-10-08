@@ -1,6 +1,6 @@
 # Install NFVO
 
-The NFVO is implemented in java using the [spring.io] framework. For more details about the NFVO architecture, you can refer to the extend it section.
+The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
 ## install the latest NFVO version from the source code
 
@@ -116,7 +116,7 @@ At this point the NFVO is ready to be used. Please refer to the NFVO user guide 
 ## Let's move to the next step
 
 Dependening on the approach used for deploying your VNF, you'll have either to install the generic-VNFM or install and register your own VNFM
- 
-[spring.io]:https://spring.io/
+
+[spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
-[vim_plugin_doc]:
+[vim_plugin_doc]:vim-plugin

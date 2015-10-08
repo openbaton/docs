@@ -64,11 +64,11 @@ Each property is explained more in detail now. Please consider also the notes si
     * ***minRam***: The minRam defines the minimum amount of RAM for using this image properly.
     * ***isPublic***: The isPublic defines whether the image is available public or not.
 
-## \<VNFD\>.json
+## <VNFD\>.json
 
-The \<vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded on the Orchestrator.
+The <vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded on the Orchestrator.
 This VNFD can later be referenced in a NSD by its id to make use of it.
-A more detailed explanation of the VNFD can be found here [].
+A more detailed explanation of the VNFD can be found [here][vnfd-link].
 
 **Note** The name of the file is not important but the suffix .json since the VNFPackageManagement is looking for this kind of file format.
 
@@ -82,7 +82,7 @@ The scripts folder contains all the scripts required for starting, configuring o
 
 **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
 
-## \<image\>.img
+## <image\>.img
 
 This image is used to upload it to all the cloud environments which are addressed inside the VNFD with that image.
 It doesn't matter whether an image already exists on the considered cloud environment or not.
@@ -282,7 +282,7 @@ Important to notice here is the vm_image that points to the image we have define
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
-We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image].
+We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
 
 ## Onboarding VNFPackages
 
@@ -386,5 +386,5 @@ $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-reco
 
 Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
 
-
-[image]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz
+[vnfd-link]:vnf-descriptor
+[image-link]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz

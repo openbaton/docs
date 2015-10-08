@@ -19,6 +19,7 @@ Depending on which one is your target provider, you will need to configure runti
 
 # Let's move on
 
-Next step is to install the NFVO component
+Next step is to [install the NFVO][nfvo-installation].
 
+[nfvo-installation]:nfvo-installation
 [install-architecture]:images/install-architecture.png

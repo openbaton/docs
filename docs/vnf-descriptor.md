@@ -106,4 +106,4 @@ Please see [VNF Package][vnf-package-link]. If no package is needed, then a git 
 References
 -->
 
-[vnf-package-link]: vnfpackage.md
+[vnf-package-link]: vnfpackage

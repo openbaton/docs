@@ -5,7 +5,7 @@ The *Virtualised Infrastructure Manager* (Vim) is the functional block, responsi
 
 In OpenBaton a Vim Instance is described by a Json object.
 
-For working with Vim Instance, in the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your Data Center Manager ( i.e. [Openstack] )
+For working with Vim Instance, in the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your Data Center Manager ( i.e. [Openstack][openstack-link] )
 (you can change the folder where OpenBaton searches for the plugins by changing the variable `vim-plugin-installation-dir` in the `openbaton.properties` 
 file under /etc/openbaton)
 
@@ -60,7 +60,7 @@ From now on you can use your Vim instance in your Network Service Descriptors.
 For more information about the dashboard see: [OpenBaton Dashboard]
 
 
-[OpenBaton Dashboard]:nfvo-how-to-use-gui.md
+[OpenBaton Dashboard]:nfvo-how-to-use-gui
 [localhost:8080]:localhost:8080
 [registeraNewVim]:images/registeraNewVim.png
-[Openstack]:https://www.openstack.org/
+[openstack-link]:https://www.openstack.org/

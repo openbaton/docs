@@ -2,7 +2,7 @@
 Being an open source implementation, OpenBaton can be easily extended for supporting additional features or capabilities.
 
 # Extend the NFVO
-The NFVO has been implemented as a java modular application using the Spring.io framework. It is pretty easy to add a new module for extending the supported features. Please refer to the [nfvo-documentation] for learning a bit more about the NFVO architecture.
+The NFVO has been implemented as a java modular application using the Spring.io framework. It is pretty easy to add a new module for extending the supported features. Please refer to the [NFVO documentation](nfvo-documentation) for learning a bit more about the NFVO architecture.
 
 ## Implement a new plugin of the VIM interface
 
@@ -44,5 +44,6 @@ In order to facilitate the implementation of a VNFM specific for your VNFs, we p
 
 
 
-[nfvo-documentation](nfvo-architecture.html)
+[nfvo-documentation](nfvo-architecture)
+
 [plugin-sdk-gradle-plugin](https://gitlab.fokus.fraunhofer.de/openbaton/plugin-sdk-gradle-plugin)

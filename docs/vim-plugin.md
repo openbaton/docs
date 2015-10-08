@@ -250,12 +250,9 @@ For registering your Vim Instance you should send to the OpenBaton a json like:
 }
 ```
 
-For more information please see [Vim instance documentation]
+For more information please see [Vim instance documentation][vim-instance-documentation-link].
 
 
-
-
-[Vim instance documentation]:vim-instance-documention.md
 [spring-boot]: http://projects.spring.io/spring-boot/
 [openjdk]: http://openjdk.java.net/install/
 
@@ -265,6 +262,7 @@ For more information please see [Vim instance documentation]
 [project-guide-naming-conventions]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
 
 
+[vim-instance-documentation-link]:vim-instance-documentation
 [vim_plugin_structure]: images/vim_plugin_structure.png
 [new_project_vim]: images/new_project_vim.png
 [new_project_vim_groupId]: images/new_project_vim_groupId.png

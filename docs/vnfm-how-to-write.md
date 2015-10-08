@@ -17,8 +17,8 @@ The openbaton-libs provides the following things:
 
 Before you can start with developing your own VNFManager you need to prepare your programming environment by installing/configuring the following requirements:
 
-* JDK 7 ([installation][openjdk])
-* Gradle ([installation][gradle-installation])
+* JDK 7 ([installation][openjdk-link])
+* Gradle ([installation][gradle-installation-link])
 
 ## Develop your own VNFManager
 
@@ -37,7 +37,7 @@ Once this is done, you can start implementing your VNFManager by using different
 #### Using your favorite IDE
 In the following we will create the project and setup the configuration files by using your favorite IDE.
 So first of all, start your IDE and go to the next step.
-All the details base on the usage of [IntelliJIdea][IntelliJIdea].
+All the details base on the usage of [IntelliJIdea][IntelliJIdea-link].
 
 ##### Create a new project
 
@@ -50,7 +50,7 @@ In this dialog click on Gradle on the left and select java in the main propertie
 Then click on next to go to the next window.
 
 In the next dialog you need to define the GroupId, ArtifactId and the Version.
-More information on the specific meaning can be found [here][project-guide-naming-conventions].
+More information on the specific meaning can be found [here][project-guide-naming-conventions-link].
 
 ![dialog][intellijidea_new_project_group]
 
@@ -157,7 +157,7 @@ Once this is done, you need to initialize the gradle wrapper and configuring acc
 
 ##### The Gradle Wrapper
 Afterwards go back to the root folder and run the following command to create automatically the gradle wrapper which is used for code management and compilation.
-For more information on how to use the gradle wrapper have a look at the gradle wrapper documentation [here][gradle-wrapper].
+For more information on how to use the gradle wrapper have a look at the gradle wrapper documentation [here][gradle-wrapper-link].
 
 ```bash
 $ gradle wrapper --gradle-version 2.4
@@ -323,9 +323,9 @@ Where the parameters mean:
 ### Choose a vnfm-sdk
 
 Before you can start with the implementation you need to select the type of communication you want to use for the communication between the Orchestrator (NFVO) and the VNFManager.
-Either you can use the vnfm-sdk-jms for using the [Java Message Service (JMS)][JMS] or the vnfm-sdk-rest for using the [ReST][ReST] interface.
+Either you can use the vnfm-sdk-jms for using the [Java Message Service (JMS)][JMS-link] or the vnfm-sdk-rest for using the [ReST][ReST-link] interface.
 However, your choice doesn't effect the upcoming implementation, because the communication itself is done automatically in the background.
-But have in mind that both libraries depend on [SpringBoot][spring-boot].
+But have in mind that both libraries depend on [SpringBoot][spring-boot-link].
 So, if you want to avoid this dependency, a third option might be: just use the simple vnfm-sdk artifact.
 By using the simple vnfm-sdk you need to take care about all the communication between NFVO and VNFManager by yourself.
 
@@ -722,17 +722,17 @@ If everything is fine, your VNFManager will register to NFVO and is able now to 
 References
 -->
 
-[spring-boot]: http://projects.spring.io/spring-boot/
-[openjdk]: http://openjdk.java.net/install/
-[JMS]: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
-[ReST]: https://en.wikipedia.org/wiki/Representational_state_transfer
+[spring-boot-link]:http://projects.spring.io/spring-boot/
+[openjdk-link]: http://openjdk.java.net/install/
+[JMS-link]: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
+[ReST-link]: https://en.wikipedia.org/wiki/Representational_state_transfer
 
-[gradle-installation]:https://docs.gradle.org/current/userguide/installation.html
-[gradle-wrapper]:https://docs.gradle.org/current/userguide/gradle_wrapper.html
+[gradle-installation-link]:https://docs.gradle.org/current/userguide/installation.html
+[gradle-wrapper-link]:https://docs.gradle.org/current/userguide/gradle_wrapper.html
 
-[project-guide-naming-conventions]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
+[project-guide-naming-conventions-link]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
 
-[IntelliJIdea]:https://www.jetbrains.com/idea/?fromMenu
+[IntelliJIdea-link]:https://www.jetbrains.com/idea/?fromMenu
 
 
 [intellijidea_new_project_type]: images/intellijidea_new_project_type.png
