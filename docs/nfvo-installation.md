@@ -6,7 +6,7 @@ The NFVO is implemented in java using the [spring.io] framework. For more detail
 
 The NFVO can be installed using different mechanisms. In this how to we will show you how to instantiate it using directly from the git repo. 
 
-The NFVO uses the Java Messaging System for communicating with the VNFMs. Therefore it is a prerequisites to have ActiveMQ up and running. To facilitate the installation procedures we provide an installation script which can be used for installing the NFVO and the prerequired libraries. Considering that this script needs to install some system libraries, it is required to execute it as super user. To execute the following command you need to have curl installed (see http://curl.haxx.se/). 
+The NFVO uses the Java Messaging System for communicating with the VNFMs. Therefore it is a prerequisite to have ActiveMQ up and running. To facilitate the installation procedures we provide an installation script which can be used for installing the NFVO and the prerequired libraries. Considering that this script needs to install some system libraries, it is required to execute it as super user. To execute the following command you need to have curl installed (see http://curl.haxx.se/). 
 
 ```bash
 sudo su -
