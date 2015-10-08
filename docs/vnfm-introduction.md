@@ -23,6 +23,7 @@ Regarding the type of the communication between the NFVO and the VNFM (Or-Vnfm),
 
 This approach allows you to integrate your VNFM and VNF within Openbaton. In this case, the Or-Vnfm communication will be via REST interfaces.
 
+**NOTE:** the VNF manager/s needs to run on the same machine where activemq is running.
 <!---
 Script for open external links in a new tab
 -->
