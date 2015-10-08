@@ -97,6 +97,7 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 ### Deployment Flavour
 
 A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
+It defines a set of constraints (e.q. calls per second) and provides the VDU(s) which meet those constraint.
 
 ### VNF Package
 
