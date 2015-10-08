@@ -187,7 +187,7 @@ Important to notice here is the vm_image that points to the image we have define
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of image.
-We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image].
+We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
 
 ### VNFPackage [iperf-client]
 
