@@ -1,6 +1,6 @@
 # Virtual Network Function Descriptor
 
-The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD)). It is defined as follows:
+The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD). It is defined as follows:
 
 ```
 {  
@@ -96,11 +96,11 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 
 ### Deployment Flavour
 
-A delpoyment flavor corresponds to a flavour name existing in the VimInstance.
+A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
 
 ### VNF Package
 
-Please see [VNF Package][vnf-package-link]. If no package is needed than a git url is needed to download the scripts needed for this vnfd and this url is defined into the vnfpackage->scriptsLink.
+Please see [VNF Package][vnf-package-link]. If no package is needed, then a git url is needed to download the scripts needed for this vnfd and this url is defined in the vnfpackage->scriptsLink.
 
 <!---
 References

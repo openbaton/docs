@@ -26,8 +26,8 @@ For registering a new Vim Instance you should click the button on the top-right 
 If you want to delete one Vim Instance you can click the button **Action** and than **Delete** in the menu
 
 ## Network Service Descriptors
-In the menu on the left side under the voice Catalogue you can find **NS Decriptors**
-In this page you can see the list of NS Descriptors stored into OpenBaton
+In the menu on the left side under the template Catalogue you can find **NS Decriptors** button.
+On this page you can see the list of NS Descriptors stored into OpenBaton
 
 ![List of NS Descriptors][NSDlist.png]
 
@@ -49,21 +49,21 @@ Create a NSD using Form
 
 ### Network Service Descriptor Information
 In the list of Network Service Descriptors if you click on the id in the table you can see the information
- into Network Service Descriptor selected by id and will be shown this page
+stored in the Network Service Descriptor which you selected.
 
 ![Network Service Descriptor Information][VNFDescriptorInformation.png]
 
-In this page you can see the JSON file of the NSD just clicking on the link **Show JSON**
+You can observe the the NSD as is (in json format) by clicking on the **Show JSON**
 
 ![JSON of Network Service Descriptor][JSONofNSR.png]
 
-In the page **Network Service Descriptor Information** you can see the **Graphical view** of Network Service Descriptor 
-just clicking the link *Show Graph*
+On the page **Network Service Descriptor Information** you can also look at the **Graphical view** of the Network Service Descriptor 
+by clicking on *Show Graph*
 
 ![NSD Graph][NSDgraph.png]
 
-In the list of VNFD if you click the *Action* button you can delete the VNFD from NSD
-and the information about the *Dependencies* into Network Service Descriptor
+In the list of VNFDs if you click the *Action* button you can delete the VNFD from NSD
+and the information about the *Dependencies* stored in the Network Service Descriptor
 
 ![Network Service Descriptor Dependencies Information][VNFDlistintoNSD1.png]
 
@@ -71,30 +71,30 @@ In the list of VNFDependencies if you click the *Action* button you can delete t
 
 
 #### Virtual Network Function Descriptor Information
-In the list of Virtual Network Function Descriptor into NSD if you click on the id of Virtual Network Function Descriptor will be shown this page
+In the list of Virtual Network Function Descriptor in NSD template if you click on the id of Virtual Network Function Descriptor will be shown this page
 
 ![VNF Descriptor Information][VNFDescriptorInformation.png]
 
 In the bottom side of the page you can see the Virtual Deployment Unit (VDU) tab and if you click the **id** of the 
-VDU you can see the details of VDU like in this page
+VDU you can see the details of VDU
 
 ![VDU Information][VDUInformation.png]
 
 ## Network Service Records 
 
-  In the menu of the left side if you click on the **Orchestrator NS** and than **NS Records** you will see the list of *Network Service Records*
-  Like in this screenshot 
+In the menu of the left side if you click on the **Orchestrator NS** and than **NS Records** you will see the list of *Network Service Records*
+Like in this screenshot 
 
 ![Network Service Records List ][NetworkServiceRecordsList.png]
 
-In this page you can see the details of a Network Service Record just click the id and will be show this page
+On this page you can see the details of a Network Service Record by clicking on the id
 
 ![Network Service Records Info ][NSRinfo.png]
 
-In this page you can see the JSON file of the NSR just clicking on the link **Show JSON** and also the **Graphical view** 
-of Network Service Record just clicking the link **Show Graph**
-In the table of VNF Records you can delete one VNFR just clicking **Delete** in the menu **Action**
-For seeing the details of VNFR just click on the **id** of a VNFR and will be shown this page
+On this page you can look at the JSON file of the NSR by clicking on the link **Show JSON** and also the **Graphical view** 
+of Network Service Record by clicking the link **Show Graph**
+In the table of VNF Records you can delete one VNFR by clicking **Delete** in the menu **Action**
+To look at the details of VNFR just click on the **id** of a VNFR.
 
 ![VNF Record Information][VNFRecordInformation.png]
 

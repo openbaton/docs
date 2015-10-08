@@ -1,9 +1,9 @@
 # Create Vim Plugin
 
-OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
+OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, it is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this works?
-An OpenBaton Plugin is a RMI Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by NFVO. by default NFVO starts a rmiregistry at localhost:1099.
+An OpenBaton Plugin is a RMI Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by the NFVO. By default the NFVO starts a rmiregistry at localhost:1099.
 
 ## Requirements
 
@@ -55,13 +55,13 @@ For doing so, right click on the root folder my-vim, then click on New -> Direct
 Click on OK to continue.
 
 Additionally you need to create a new package.
-This is done by an right-click of the previous created directory java.
+This is done by a right-click on the previously created directory java.
 Click on New -> Package.
 Here you can define the package name.
 
 ![dialog][new_project_vim_new_package]
 
-Finally you can create your MyVim Class by clicking (right click) on the previous created package and click on New -> Java Class.
+Finally you can create your MyVim Class by clicking (right click) on the previously created package and click on New -> Java Class.
 
 ![dialog][new_project_vim_new_class]
 
@@ -107,23 +107,23 @@ dependencies {
 
 ## Write your Vim plugin
 
-The Vim plugin is spited in two class 
+The Vim plugin is splitted into two classes 
 
 1. Implementation of **ClientInterfaces**
 2. The **Starter Class** that contain the main function for bootstrapping the Vim plugin
 
 #### Type of Vim Instance
-The OpenBaton expects only these three **type** of Vim Instance:
+OpenBaton expects only these three **type** of Vim Instance:
 
 1.  Test
 2.  OpenStack
 3.  Amazon
 
-**NOTE:** Your Vim plugin implementation ***type*** should be one of these to be lunched and used by OpenBaton
+**NOTE:** Your Vim plugin implementation ***type*** should be one of these to be launched and used by OpenBaton
 
 ### 1. Implement ClientInterfaces
 
-Than create a class that implement ClientInterfaces and the inherited methods. 
+Than create a class that implements ClientInterfaces and the inherited methods. 
 
 
 ```JAVA
@@ -182,7 +182,7 @@ public class MyVim implements ClientInterfaces {
 
 ### 2. Starter Class
 
-Create another class and set the path to it in a variable *mainClassName* into *build.gradle*.
+Create another class and set the path to it in a variable *mainClassName* in *build.gradle*.
 The starter class should be like the following:
 
 ```java
@@ -211,17 +211,17 @@ public class Starter {
 
 
 
-## Run your Vim plugin into OpenBaton environment
+## Run your Vim plugin in OpenBaton environment
 Under the folder of your project *src/main/resources* you should create a file **plugin.conf.properties** and write the variable *type = test*
 The structure of your project should be like:
 
 ![Vim plugin structure][vim_plugin_structure]
 
-Now you can run **./gradlew build** and Gradle will create the jar that you can find it under the folder *build/libs/myPlugin-1.0-SNAPSHOT.jar*.
+Now you can run **./gradlew build** and Gradle will create the jar that you can find in the folder *build/libs/myPlugin-1.0-SNAPSHOT.jar*.
 
-Once all this steps are done, you can copy and paste the *myPlugin-1.0-SNAPSHOT.jar* under the folder of the **OpenBaton -> plugins/vim-instances**. 
+Once all these steps are done, you can copy and paste the *myPlugin-1.0-SNAPSHOT.jar* under the folder of the **OpenBaton -> plugins/vim-instances**. 
 
-Congratulations you have your version of the interface for your Vim Instance that will be used from OpenBaton
+Congratulations you have your version of the interface for your Vim Instance that will be used by OpenBaton
 
 ## Register your Vim plugin
 

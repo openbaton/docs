@@ -10,7 +10,7 @@ This module contains the necessary classes exposing APIs as ReST server. The mos
 
 ##### MAIN
 
-This module contains the classes charged of the startup of the whole system, gathering configuratons for instance.
+This module contains the classes in charge of the startup of the whole system and gathering configuratons for instance.
 
 ##### COMMON
 
@@ -42,7 +42,7 @@ This module contains the beans implementing the vnfm-int interfaces.
 
 ##### REPOSITORY
 
-This module contains specific repositories interfacing the database, in a generic way.
+This module contains specific repositories interfacing the database in a generic way.
 
 ##### CATALOGUE
 
@@ -70,7 +70,7 @@ This module contains all the exception classes common to every project containin
 
 ##### MONITORING
 
-This module contains the interface for the Monitoring openbaton plugins.
+This module contains the interface for the monitoring of the openbaton plugins.
 
 <!---
 References

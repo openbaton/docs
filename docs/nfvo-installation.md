@@ -6,7 +6,7 @@ The NFVO is implemented in java using the [spring.io] framework. For more detail
 
 The NFVO can be installed using different mechanisms. In this how to we will show you how to instantiate it using directly from the git repo. 
 
-The NFVO uses the Java Messaging System for communicating with the VNFMs. Therefore it is a prerequisites to have ActiveMQ up and running. To facilitate the installation procedures we provide an installation script which can be used for installing the NFVO and the prerequired libraries. Considering that this script needs to install some system libraries, it is required to execute it as super user. To execute the following command you need to have curl installed (see http://curl.haxx.se/). 
+The NFVO uses the Java Messaging System for communicating with the VNFMs. Therefore it is a prerequisite to have ActiveMQ up and running. To facilitate the installation procedures we provide an installation script which can be used for installing the NFVO and the prerequired libraries. Considering that this script needs to install some system libraries, it is required to execute it as super user. To execute the following command you need to have curl installed (see http://curl.haxx.se/). 
 
 ```bash
 sudo su -
@@ -64,8 +64,8 @@ spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect
 spring.jpa.show-sql=false
 spring.jpa.hibernate.ddl-auto=create-drop
 ```
-By deafault ActiveMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need that ActiveMQ is reachable also from the extern.  
-**Note:** when you want to deploy a VNF (EMS) in a VM which runs on a different host respect to the NFVO, you will need to configure the activemq endpoint (spring.activemq.broker-url) with the real IP of the NFVO host (instead of localhost).
+By deafault ActiveMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need ActiveMQ to be reachable also from the extern.  
+**Note:** when you want to deploy a VNF (EMS) in a VM which runs on a different host in respect to the NFVO, you will need to configure the activemq endpoint (spring.activemq.broker-url) with the real IP of the NFVO host (instead of localhost).
 ```properties
 # activeMQ
 spring.activemq.broker-url=tcp://localhost:61616
@@ -111,7 +111,7 @@ cd /opt/openbaton/nfvo
 ./openbaton.sh restart
 ```
 
-At this point the NFVO is ready to be used. Please refer to the NFVO user guide for how to start using it. 
+At this point the NFVO is ready to be used. Please refer to the NFVO user guide on how to start using it. 
 
 ## Let's move to the next step
 

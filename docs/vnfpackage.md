@@ -38,7 +38,7 @@ image:
     isPublic: is_public
 ```
 
-Each property is explained more in detail now. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and overrides them therefore.
+Each property is explained more in detail now. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
 
 * ***name***: The name defines the name of the VNFPackage itself used to store it on the database.
 * ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
@@ -50,7 +50,7 @@ Each property is explained more in detail now. Please consider also the notes si
     * **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
 * ***image-link***: This link points to an image available over this URL used to upload the image to the cloud environment.
     * **Note** Either you have to define the image-link or put the image directly into the VNFPackage.
-        Otherwise an NotFoundException will be thrown and the VNFPackage will not onboard.
+        Otherwise a NotFoundException will be thrown and the VNFPackage will not onboard.
         The image-link has a higher priority than the image stored in the VNFPackage directly.
     * **Note** The image-link is a future feature and not implemented in the current version.
         Therefore, you need to put the image into the VNFPackage directly and remove this line or let the value empty.
@@ -70,14 +70,14 @@ The \<vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded
 This VNFD can later be referenced in a NSD by its id to make use of it.
 A more detailed explanation of the VNFD can be found here [].
 
-**Note** The name of the file is not important but the suffix .json since the VNFPackageManagement is looking for this kind file format.
+**Note** The name of the file is not important but the suffix .json since the VNFPackageManagement is looking for this kind of file format.
 
 ## scripts
 
 The scripts folder contains all the scripts required for starting, configuring or whatever you want to do on the running instance.
 [EXECUTION ORDER]
 
-**Note** These scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.
+**Note** The scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.
     This means that the scripts in that folder have less priority than the scripts located under ***scripts-link***.
 
 **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
@@ -88,7 +88,7 @@ This image is used to upload it to all the cloud environments which are addresse
 It doesn't matter whether an image already exists on the considered cloud environment or not.
 
 **Note** This image has lower priority than the ***image-links*** defined in ***Metadata.yaml***.
-    This mean that the image will be ignored if the ***image-links*** is defined.
+    This means that the image will be ignored if the ***image-links*** is defined.
 
 **Note** The name of the image doesn't matter but the suffix .img since the VNFPackageManagement is looking for a file with this suffix.
     However, the name and all the properties for stroing it on the cloud environment are defined in ***Metadata.yaml*** under the key ***image***.
@@ -104,10 +104,10 @@ For doing so, we need to create two VNFPackages and reference them in the NSD.
 So we need one VNFPackage for the iperf server (called iperf-server) and one for the iperf client (called iperf-client).
 First we will start with the creation of the iperf-server VNFPackage and then we will create the iperf-client VNFPackage.
 
-First of all we should create a directory for each VNFPackage where we put all the files related to the VNFPackage because in the end we need to pack them into an tar archive for onboarding it on the NFVO.
+First of all we should create a directory for each VNFPackage where we put all the files related to the VNFPackage because in the end we need to pack them into a tar archive for onboarding it on the NFVO.
 
 ### VNFPackage [iperf-server]
-This iperf-server VNFPackage have to install the iperf server and needs to provide its ip to the iperf client.
+This iperf-server VNFPackage has to install the iperf server and needs to provide its ip to the iperf client.
 
 #### Metadata [iperf-server]
 In the Metadata we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
@@ -191,7 +191,7 @@ We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image].
 
 ### VNFPackage [iperf-client]
 
-This iperf-server VNFPackage have to install the iperf client and needs to configure it to set the iperf servers' IP.
+This iperf-server VNFPackage has to install the iperf client and needs to configure it to set the iperf servers' IP.
 
 #### Metadata [iperf-client]
 In the Metadata we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
@@ -305,7 +305,7 @@ $ curl -X "GET http://localhost:8080/api/v1/vnf-descriptors"
 This request will return a list of already existing VNFDs.
 Just looking for the VNFDs we created before and use the id to reference them in the NSD.
 The following list of VNFDs is an example of this request.
-To make it better readable it is shown only the interesting parts.
+To make it more readable only the interesting parts are shown.
 ```json
 [
   {
@@ -326,9 +326,9 @@ To make it better readable it is shown only the interesting parts.
 ```
 
 ## NSD [iperf]
-In this section we will create s NSD and referencing the previously created VNFPackages by their ids'.
+In this section we will create a NSD and reference the previously created VNFPackages by their ids'.
 For doing that we just need to define the **id** for each VNFPackges' VNFD in the list of VNFDs.
-To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can found under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **ip1**.
+To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can find under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **ip1**.
 
 **Note** When creating the NSD the VNFD is fetched by the id defined. Other properties we would set in the VNFD in this NSD will be ignored.
 
