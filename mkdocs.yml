@@ -3,6 +3,7 @@ pages:
 - ['index.md', 'Get Started', 'Get Started']
 - ['install.md', 'Installation', 'Overview']
 - ['nfvo-installation.md', 'Installation', 'Install NFVO']
+- ['vim-instance-documentation.md', 'Installation', 'Register a VIM']
 - ['use.md', 'Use it', 'Introduction']
 - ['vnfm-introduction.md', 'Use it', 'VNFM approaches']
 - ['vnfm-generic.md', 'Use it', 'Generic VNFM']
@@ -15,7 +16,6 @@ pages:
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
 - ['FAQ.md', 'FAQ', 'FAQ']
 - ['**HIDDEN**': 'vnf-descriptor.md']
-- ['**HIDDEN**': 'vim-instance-documentation.md']
 - ['**HIDDEN**': 'vim-plugin.md']
 google_analytics: ['UA-68429895-1', 'openbaton.github.io']
 theme: readthedocs

@@ -28,10 +28,15 @@ Yes! OpenBaton provides a NFVO which can interoperate with VNFMs implemented by 
 In order to get started you can follow the [installation guide][install-guide]
 
 ## Get in contact 
-[Openbaton][openbaton]
+
+* Via twitter: [twitter][openbaton]
+* Subscribing to our mailing list: [users-at-openbaton-dot-org]
+* Sending us an email to: [info-at-openbaton-dot-org]
 
 [install-guide]:install
-[openbaton]:http://www.open-baton.org
+[openbaton]:https://twitter.com/openbaton
+[users-at-openbaton-dot-org]: http://listen.openbaton.org/sympa/info/users
+[info-at-openbaton-dot-org]: mailto:info@openbaton.org
 
 <!---
  Script for open external links in a new tab

@@ -1,8 +1,8 @@
-# Install NFVO
+## Install NFVO
 
 The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
-## install the latest NFVO version from the source code
+### install the latest NFVO version from the source code
 
 The NFVO can be installed using different mechanisms. In this how to we will show you how to instantiate it using directly from the git repo. 
 
@@ -27,7 +27,7 @@ where:
 * `generic-vnfm`contains the source code and scripts required for dealing with the generic-vnfm  
 * `nfvo` contains the source code and scripts of the NFVO 
 
-##NFVO properties overview
+### NFVO properties overview
 
 The NFVO is configured with default configuration parameters at the beginning. The configuration file is located at: 
 
@@ -113,7 +113,7 @@ cd /opt/openbaton/nfvo
 
 At this point the NFVO is ready to be used. Please refer to the NFVO user guide on how to start using it. 
 
-## Let's move to the next step
+### Let's move to the next step
 
 Dependening on the approach used for deploying your VNF, you'll have either to install the generic-VNFM or install and register your own VNFM
 

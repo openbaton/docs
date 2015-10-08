@@ -3,11 +3,7 @@
 The *Virtualised Infrastructure Manager* (Vim) is the functional block, responsible for controlling and managing the
  NFVI compute, storage and network resources, usually within one operator's Infrastructure Domain.
 
-In OpenBaton a Vim Instance is described by a Json object.
-
-For working with Vim Instance, in the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your Data Center Manager ( i.e. [Openstack][openstack-link] )
-(you can change the folder where OpenBaton searches for the plugins by changing the variable `vim-plugin-installation-dir` in the `openbaton.properties` 
-file under /etc/openbaton)
+In order to interoperate with a NFVI it is required to register the VIM instance inside the NFVO. 
 
 The JSON file of a Vim Instance allows OpenBaton to call OpenStack, to manage the lifecycle of VMs and tells where the VNF will be deployed and configured by OpenBaton
 
@@ -49,15 +45,27 @@ The Json looks like
 
 
 ## How to register a new Vim Instance?
-You can use the dashboard for sending the json file.
-When the OpenBaton is running, open your browser and surf to [localhost:8080], this is where you can access **Dashboard**.
-Under the menu `Manage PoPs` you can see the `PoP instances` and you can send the JSON of a Vim Instance like in the picture below:
+In order to make use of your VIM described within your JSON descriptor, you need to request the NFVO to register it. 
+You can use the dashboard available at [localhost:8080] for this purpose. 
+Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your VIM descriptor. Following picture shows the dashboard: 
 
-![registeraNewVim]
+![dialog][registeraNewVim]
 
-From now on you can use your Vim instance in your Network Service Descriptors.
+Once the VIM instance is registered, it will appear on the list of available PoPs. At this point the VIM/PoP can be included in your Network Service Descriptors.
 
 For more information about the dashboard see: [OpenBaton Dashboard]
+
+
+## How to register a new Vim Instance?
+
+By default the NFVO supports two different VIM types: 
+
+* OpenStack: for interoperating with an OpenStack instance
+* Test: for testing purposes implementing a VIM mockup
+
+In particular, this is due to the fact that for working with VIMs the NFVO uses a plugin mechanism. In the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your VIM ( i.e. [Openstack][openstack-link] )
+(you can change the folder where OpenBaton searches for the plugins by changing the variable `vim-plugin-installation-dir` in the `openbaton.properties` 
+file under /etc/openbaton)
 
 
 [OpenBaton Dashboard]:nfvo-how-to-use-gui

@@ -12,13 +12,14 @@ A VNFPackage includes the VNFD, the image, scripts and a Metadata file structure
 # Package structure
 The VNFPackage consists of the following files/folder:
 
-* Metadata.yaml
-* vnfd.json
-* scripts/
-    * 1_script.sh
-    * 2_script.sh
-* image.img
-
+```bash
+- Metadata.yaml
+- vnfd.json
+- scripts/
+    - 1_script.sh
+    - 2_script.sh
+- image.img
+```
 ## Metadata.yaml
 The Metadata.yaml defines essential properties for the VNF. This file bases on the YAML syntax where information are stored in simple <key\> : <value\> associations.
 
