@@ -120,3 +120,18 @@ Dependening on the approach used for deploying your VNF, you'll have either to i
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
 [vim_plugin_doc]:vim-plugin
+
+<!---
+Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>

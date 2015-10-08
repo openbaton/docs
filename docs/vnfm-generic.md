@@ -140,3 +140,18 @@ References
 [nfvo-vnfm-communication]:images/vnfm-Or_communication.png
 [vnfpackage-tutorial-link]:vnfpackage#tutorial
 [vnfpackage-doc-link]:vnfpackage
+
+<!---
+Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>

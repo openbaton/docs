@@ -271,3 +271,18 @@ For more information please see [Vim instance documentation][vim-instance-docume
 [new_project_vim_new_directory]: images/new_project_vim_new_directory.png
 [new_project_vim_new_package]: images/new_project_vim_new_package.png
 [new_project_vim_new_class]: images/new_project_vim_new_class.png
+
+<!---
+Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>
