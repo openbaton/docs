@@ -1,6 +1,6 @@
 # Network Serice Descriptor
 
-The Network Serice Descriptor contains some values that are defined in [ETSI MANO specification][nfv-mano]. The NFVO is able to handle JSON file describing a NetworkServiceDescriptor. An example of the most important fields follows:
+The Network Service Descriptor contains the values that are defined in [ETSI MANO specification][nfv-mano]. The NFVO is able to handle JSON file describing a Network Service Descriptor. An example of the most important fields follows:
 
 ```
 {  
