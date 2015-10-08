@@ -104,7 +104,20 @@ In the INSTANTIATE scripts, the parameters defined in these two fields are then 
 In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
 These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency->parameters fields (of the NSD), and are then available as $*type_of_vnf_source*.*name_of_parameter* (in the VNF target).
 
-**EXAMPLE WITH DEPENDENCY AND SCRIPTS**
+### VMs termination
+
+As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
+
+## Launch the Generic VNFM
+
+To launch the Generic VNFM, execute the following command:
+```bash
+$ cd <generic directory>
+$ ./generic.sh start
+```
+The Generic VNFM can handle more than one VNF (in parallel) of the same or different type, so that you need to start only one Generic VNFM.
+
+# EXAMPLE WITH DEPENDENCY AND SCRIPTS
 
 Let's see a simple example with two VNFs: vnf-server and vnf-database.
 The vnf-server needs the ip of the vnf-database to be able to connect properly. The following figure shows the source (vnf-database), the target (vnf-server)
@@ -138,7 +151,9 @@ echo "This is the ip of the vnf-database: ${database.private1}"
 
 ```
 
-**Note**: "database" is the type of the vnf-database, private1 is the name of the network plus the number of the network (in this case "1").
+**Note1**: "database" is the type of the vnf-database, private1 is the name of the network plus the number of the network (in this case "1").
+
+**Note2**: All the scripts need to be in a repository or in the vnf package (see the vnf package structure [here][vnfpackage-doc-link]).
 
 In order to deploy the VNFs we have to create both the VNF descriptor: **vnf-database-descriptor.json** and **vnf-server-descriptor.json**. Below we'll be showed the most relevant part of them:
 
@@ -160,6 +175,8 @@ In order to deploy the VNFs we have to create both the VNF descriptor: **vnf-dat
     ...
 }
 ```
+
+**Note:** to use the Generic VNFM for managing a VNF just set "generic" in the endpoint field.
 
 **vnf-server-descriptor.json**
 ```json
@@ -195,6 +212,7 @@ In order to deploy the VNFs we have to create both the VNF descriptor: **vnf-dat
     ...
 }
 ```
+
 The result network service descriptor shall include both the vnf descriptors above and the dependency:
 ```json
 {
@@ -227,35 +245,7 @@ The result network service descriptor shall include both the vnf descriptors abo
     ]
 }
 ```
-
-
-### VMs termination
-
-As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
-
-## Specify the endpoint in the VNFD
-
-To use the Generic VNFM for managing a VNF just set "generic" in the endpoint field of the VNFD.
-```json
-{
-    ...
-    "endpoint":"generic",
-    ...
-}
-```
-## Launch the Generic VNFM
-
-To launch the Generic VNFM, execute the following command:
-```bash
-$ cd <generic directory>
-$ ./generic.sh start
-```
-The Generic VNFM can handle more than one VNF (in parallel) of the same or different type, so that you need to start only one Generic VNFM.
-
-### Tutorial
-
-See the [VNFPackage tutorial][vnfpackage-tutorial-link].
-
+See the complete tutorial -> [VNFPackage tutorial][vnfpackage-tutorial-link].
 
 <!---
 References
