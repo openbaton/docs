@@ -1,6 +1,6 @@
 # Create Vim Plugin
 
-OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
+OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, it is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this works?
 An OpenBaton Plugin is a RMI Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by NFVO. by default NFVO starts a rmiregistry at localhost:1099.
