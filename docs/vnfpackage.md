@@ -76,7 +76,8 @@ A more detailed explanation of the VNFD can be found [here][vnfd-link].
 ## scripts
 
 The scripts folder contains all the scripts required for starting, configuring or whatever you want to do on the running instance.
-[EXECUTION ORDER]
+The execution order is defined by the lifecycle_events inside the VNFD.
+This lifecycle_events are triggered by the NFVO in the meaning of: if the event "INSTANTIATE" contains a script in the lifecycle_events, this script is executed when the NFVO calls the instantiate method for the specific VNFR.
 
 **Note** The scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.
     This means that the scripts in that folder have less priority than the scripts located under ***scripts-link***.
@@ -92,13 +93,14 @@ It doesn't matter whether an image already exists on the considered cloud enviro
     This means that the image will be ignored if the ***image-links*** is defined.
 
 **Note** The name of the image doesn't matter but the suffix .img since the VNFPackageManagement is looking for a file with this suffix.
-    However, the name and all the properties for stroing it on the cloud environment are defined in ***Metadata.yaml*** under the key ***image***.
+    However, the name and all the properties for storing it on the cloud environment are defined in ***Metadata.yaml*** under the key ***image***.
 
 # Tutorial
 
 This section explains how to create, upload and make use of VNFPackages.
-The chosen scenario is a NetworkService for testing the network connectivity by using iperf.
-Therefore, we need a server and a client installing the iperf server/client and configuring them for communication between.
+The chosen scenario is a NetworkService for testing the network connectivity by using [iPerf][iperf-link].
+iPerf is a tool for active measurements of the maximum achievable bandwidth on IP networks.
+Therefore, we need a server and a client installing the iPerf server/client and configuring them for communication between.
 
 ## Creation of VNFPackages
 For doing so, we need to create two VNFPackages and reference them in the NSD.
@@ -111,7 +113,7 @@ First of all we should create a directory for each VNFPackage where we put all t
 This iperf-server VNFPackage has to install the iperf server and needs to provide its ip to the iperf client.
 
 #### Metadata [iperf-server]
-In the Metadata we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
+In the Metadata.yaml we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
 Since the image-link is not implemented in the current release we will put the image directly into the VNFPackage.
 Finally, it looks as shown below.
 ```yaml
@@ -195,7 +197,7 @@ We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
 This iperf-server VNFPackage has to install the iperf client and needs to configure it to set the iperf servers' IP.
 
 #### Metadata [iperf-client]
-In the Metadata we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
+In the Metadata.yaml we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
 Since the image-link is not implemented in the current release we will put the image directly into the VNFPackage.
 Finally, it looks as shown below.
 
@@ -297,6 +299,8 @@ This must be done for both VNFPackages expecting that the NFVO is running locall
 Otherwise you need to adapt the path to the package and also the URL where the NFVO is located.
 Now where we onboarded the VNFPackages they are available on the NFVO and we can make use of it by referencing them in the NSD by their ids'.
 
+**Note** You could use the [Dashboard][dashboard-link] as well for onboarding the VNFPackages.
+
 To get the ids of the newly created VNFDs you need to fetch the VNFDs by invoking the following command:
 
 ```bash
@@ -309,20 +313,20 @@ The following list of VNFDs is an example of this request.
 To make it more readable only the interesting parts are shown.
 ```json
 [
+  [...]
   {
+    [...]
     "id": "29d918b9-6245-4dc4-abc6-b7dd6e84f2c1",
     "name": "iperf-server",
-    .
-    .
-    .
+    [...]
   },
   {
+    [...]
     "id": "87820607-4048-4fad-b02b-dbcab8bb5c1c",
     "name": "iperf-client",
-    .
-    .
-    .
+    [...]
   }
+  [...]
 ]
 ```
 
@@ -372,11 +376,13 @@ Finally you can onboard this NSD and create a NSR that bases on both VNFPackages
 ### Onboard NSD
 The following command will onboard the NSD on the NFVO:
 ```bash
-$ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-descriptors"
+$ curl -X POST -v -F file=@nsd.json "http://localhost:8080/api/v1/ns-descriptors"
 ```
 
 This will return the NSD with the id we need to create NSR.
 Afterwards, we can deploy the NSD.
+
+You could use the [Dashboard][dashboard-link] as well for onboarding the NSD.
 
 ### Create NSR (Deployment)
 To deploy the NSD we create a NSR with the following command:
@@ -387,6 +393,8 @@ $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-reco
 
 Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
 
+[iperf-link]:https://iperf.fr/
+[dashboard-link]:nfvo-how-to-use-gui
 [vnfd-link]:vnf-descriptor
 [image-link]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz
 

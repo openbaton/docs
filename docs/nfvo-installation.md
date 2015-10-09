@@ -2,7 +2,7 @@
 
 The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
-### install the latest NFVO version from the source code
+### Install the latest NFVO version from the source code
 
 The NFVO can be installed using different mechanisms. In this how to we will show you how to instantiate it using directly from the git repo. 
 
@@ -13,7 +13,7 @@ sudo su -
 curl -fsSkL https://raw.githubusercontent.com/openbaton/bootstrap/master/openbaton.sh |bash
 ```
 
-At the end of the installation procedure, if there are no errors, the screen session of the nfvo will show up. Moreover the dashboard is reachable at: [localhost:8080]. At the end of the installation, you should have the following structure: 
+At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
 ```bash
 /opt/openbaton/
 ├── apache-activemq-5.11.1
@@ -21,11 +21,39 @@ At the end of the installation procedure, if there are no errors, the screen ses
 └── nfvo
 ```
 
-where:
+Where:
   
 * `apache-activemq-5.11.1` contains the activeMQ software (it is basically downloaded, extracted and executed)  
 * `generic-vnfm`contains the source code and scripts required for dealing with the generic-vnfm  
-* `nfvo` contains the source code and scripts of the NFVO 
+* `nfvo` contains the source code and scripts of the NFVO
+
+At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
+
+**Note:** now only the **"root"** user can use Openbaton! So you'd better give the right permissions at your user (here an example):
+```bash
+sudo chown -R username: /opt/openbaton
+sudo chown -R username: /etc/openbaton
+```
+
+### Starting and stopping NFVO
+
+After the installation procedure the nfvo is running. If you want to stop it, enter this command:
+```bash
+cd /opt/openbaton/nfvo
+./openbaton.sh stop
+```
+
+**Note:** remember to stop also the Generic VNFM with the following command:
+```bash
+cd /opt/openbaton/generic-vnfm
+./generic-vnfm.sh stop
+```
+To start the nfvo, enter the command:
+
+```bash
+cd /opt/openbaton/nfvo
+./openbaton.sh start
+```
 
 ### NFVO properties overview
 
@@ -103,13 +131,7 @@ vmanager-executor-queue-capacity = 500
 vmanager-keep-alive = 30
 ```
 
-Whenever some of those parameters are changed, you will need to restart the orchestrator. This can be done with the following command: 
-```bash 
-cd /opt/openbaton/nfvo
-./openbaton.sh restart
-```
-
-At this point the NFVO is ready to be used. Please refer to the NFVO user guide on how to start using it. 
+Whenever some of those parameters are changed, you will need to restart the orchestrator.
 
 ### Let's move to the next step
 
@@ -118,6 +140,7 @@ Dependening on the approach used for deploying your VNF, you'll have either to i
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
 [vim_plugin_doc]:vim-plugin
+[use-openbaton]:use.md
 
 <!---
 Script for open external links in a new tab
