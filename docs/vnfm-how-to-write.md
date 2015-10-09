@@ -1,17 +1,13 @@
 # How to write a VNFManager
 
-This section is going to describe how to write your own VNFManager by using the vnfm-sdk which is part of the openbaton-libs repository.
-Moreover, the openbaton-libs repository contains all the things you may need for the development of the VNFManager of your choice as well.
+This section is going to describe how to write your own VNFManager by using any vnfm-sdk.
+Moreover, the vnfm-sdk contains all the things you may need for the development of the VNFManager of your choice as well.
 
-The openbaton-libs provides the following things:
+The vnfm-sdk provides the following things:
 
-* vnfm-sdk to simply write your own VNFManager
+* multiple [vnfm-sdks](#choose-a-vnfm-sdk) where you can choose your preferred type of communication
 * Catalogue, shared with the NFVO containing all entities
-* Plugin Management for using plugins at VNFManager side
-* Plugin Interfaces for creating your own vim-drivers
-* VIM Mangement, interfaces and specific implementations (e.g. Openstack)
-* Monitoring interfaces
-* Predefined Exceptions
+* [VNFMHelper](#using-the-vnfmhelper) for providing some methods out of the box
 
 ## Requirements
 
@@ -407,7 +403,13 @@ public class MyVNFM {
 ```
 
 Afterwards you need to extend your Main Class (in this case MyVNFM) with the *AbstractVnfmSpringJMS*.
-Once this is done, you need to implement all the methods coming from the extension of *AbstractVnfmSpringJMS* as shown below:
+
+The *AbstractVnfmSpringJMS* takes care of all the configuration you need to register/unregister the VNFManager to the NFVO and handles incoming messages.
+Whereas the *AbstractVnfm*, extended by the *AbstractVnfmSpringJMS*, is independent of the type of communication.
+This means more in detail that the *AbstractVnfm* processes the incoming messages and executes the right method depending on the defined Action inside the message.
+Moreover, it is responsible for loading predefined configuration files, setting up the VNFManager itself, creating the VNFR (based on the VNFD received in the first step) and doing essential parts like requesting the NFVO for granting operations or deciding who is responsible for allocate resources.
+
+Once you extended your VNFMManger, you need to implement all the methods coming from the extension of *AbstractVnfmSpringJMS* as shown below:
 
 ```java
 package org.openbaton.vnfm;
@@ -431,7 +433,7 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      */
     @Override
     public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts) throws Exception {
-        return null;
+        return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -488,7 +490,7 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      */
     @Override
     public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFRecordDependency dependency) throws Exception {
-        return null;
+        return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -507,7 +509,22 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      */
     @Override
     public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception{
-        return null;
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
+    protected void checkEmsStarted(String hostname) throws RuntimeException {
+
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord configure(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return virtualNetworkFunctionRecord;
     }
 
     /**
