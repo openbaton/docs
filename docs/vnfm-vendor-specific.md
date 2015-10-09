@@ -31,7 +31,7 @@ _*OrEndpoint*_ /admin/v1/vnfm-register
 }
 ```
 where:
-* _type_ is the vnfm type you are going to handle (specified in VirtualNetowrkFunctionDescriptor -> endpoint).
+* _type_ is the vnfm type you are going to handle (specified in VirtualNetowrkFunctionDescriptor → endpoint).
 * _endpointType_ is the vnfm type you are going to implement (REST or JMS).
 * _endpoint_ is the vnfm endpoint you have chosen (basically http://<IP>:<PORT>).
 
@@ -82,7 +82,7 @@ _*VnfmEnpoint*_
 ### Modify (aka AddRelations) (Vnfm-Or)
 
 ###### path
-_*VnfmEnpoint*_
+_*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ###### body
 
 ```

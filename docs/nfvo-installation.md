@@ -73,7 +73,7 @@ spring.activemq.user=admin
 spring.activemq.password=admin
 ```
 
-These parameters rapresent the file size of the VNF Package which can be uploaded to the NFVO
+These parameters rapresent the maximum file size of the VNF Package which can be uploaded to the NFVO and the total maximum request size
 ```properties
 # filesUpload
 multipart.maxFileSize=2046MB
@@ -83,19 +83,17 @@ multipart.maxRequestSize=2046MB
 The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [vim plugin documentation][vim_plugin_doc]). The NFVO will load them at runtime.  
 ```properties
 # plugin install
-# directory for the vim driver plugins
-vim-plugin-installation-dir = ./plugins/vim-drivers
-# classes contained in the jar files to be loaded
-vim-classes=org.project.openbaton.clients.interfaces.client.test.TestClient;org.project.openbaton.clients.interfaces.client.openstack.OpenstackClient
-# directory for the monitoring plugin
-monitoring-plugin-installation-dir = ./plugins/monitoring
-# classes contained in the jar files to be loaded
-monitoring-classes=org.project.openbaton.monitoring.agent.SmartDummyMonitoringAgent
+# the plugins inside that directory will be executed at startup
+plugin-installation-dir = ./plugins
+```
+
+This properties allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
+```properties
 # nfvo behaviour
 delete-on-all-status = false
 ```
 
-Those properties are needed in case you want to tune a bit the performances of the NFVO
+Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html) 
 ```properties
 # Thread pool executor configuration
 # for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html

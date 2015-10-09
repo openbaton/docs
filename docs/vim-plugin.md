@@ -126,7 +126,7 @@ OpenBaton expects only these three **type** of Vim Instance:
 Than create a class that implements ClientInterfaces and the inherited methods. 
 
 
-```JAVA
+```java
 package org.myplugin.example;
 
 import org.openbaton.catalogue.mano.common.DeploymentFlavour;
@@ -143,8 +143,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Service
-@Scope("prototype")
 public class MyVim implements ClientInterfaces {
 
 
@@ -152,32 +150,22 @@ public class MyVim implements ClientInterfaces {
 
     @Override
     public Server launchInstance(VimInstance vimInstance, String name, String image, String flavor, String keypair, Set<String> network, Set<String> secGroup, String userData) throws RemoteException {
-        throw new UnsupportedOperationException();
+        // ...
     }
 
     @Override
     public String getType(VimInstance vimInstance) {
-        return "test";
+        // ...
     }
     
     @Override
     public List<NFVImage> listImages(VimInstance vimInstance) {
-        ArrayList<NFVImage> nfvImages = new ArrayList<>();
-        NFVImage image = new NFVImage();
-        image.setExtId("ext_id_1");
-        image.setName("ubuntu-14.04-server-cloudimg-amd64-disk1");
-        nfvImages.add(image);
-
-        image = new NFVImage();
-        image.setExtId("ext_id_2");
-        image.setName("image_name_1");
-        nfvImages.add(image);
-        return nfvImages;
+        // ...
     }
 
 
-.....
-
+    // ...
+}
 ```
 
 ### 2. Starter Class
@@ -205,14 +193,13 @@ public class Starter {
             PluginStarter.run(MyVim.class, "test", "localhost", 1099);
     }
 }
-
-
 ```
 
 
 
 ## Run your Vim plugin in OpenBaton environment
-Under the folder of your project *src/main/resources* you should create a file **plugin.conf.properties** and write the variable *type = test*
+
+Under the folder of your project *src/main/resources* you should create a file **plugin.conf.properties** and write the variable **type = _the-vim-type_**.
 The structure of your project should be like:
 
 ![Vim plugin structure][vim_plugin_structure]
@@ -227,26 +214,25 @@ Congratulations you have your version of the interface for your Vim Instance tha
 
 For registering your Vim Instance you should send to the OpenBaton a json like:
 
-```javascript
-
-{
-  "name":"vim-instance",
-  "authUrl":"http://the.ip.address.here/v2",
-  "tenant":"test_tenant",
-  "username":"test_username",
-  "password":"test_password",
-  "keyPair":"test_keyPair",
-  "securityGroup": [
-    "test_security_group1",
-    "test_security_group2",
-    "test_security_group3"
-  ],
-  "type":"test",
-  "location":{
-	"name":"Berlin",
-	"latitude":"52.525876",
-	"longitude":"13.314400"
-  }
+```json
+{  
+    "name":"vim-instance",
+    "authUrl":"http://the.ip.address.here/v2",
+    "tenant":"test_tenant",
+    "username":"test_username",
+    "password":"test_password",
+    "keyPair":"test_keyPair",
+    "securityGroup":[  
+        "test_security_group1",
+        "test_security_group2",
+        "test_security_group3"
+    ],
+    "type":"test",
+    "location":{  
+        "name":"Berlin",
+        "latitude":"52.525876",
+        "longitude":"13.314400"
+    }
 }
 ```
 
