@@ -29,6 +29,12 @@ Where:
 
 At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
 
+**Note:** now only the **"root"** user can use Openbaton! So you'd better give the right permissions at your user (here an example):
+```bash
+sudo chown -R username: /opt/openbaton
+sudo chown -R username: /etc/openbaton
+```
+
 ### Starting and stopping NFVO
 
 After the installation procedure the nfvo is running. If you want to stop it, enter this command:
