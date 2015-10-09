@@ -21,7 +21,7 @@ As shown in the picture, NFVO calls some ReST methods on the vnfm in a particula
 #### Registration (Vnfm-Or):
 
 ###### path:
-_*OrEndpoint*_ /admin/v1/vnfm-register
+POST _*OrEndpoint*_ /admin/v1/vnfm-register
 ###### body:
 ```
 {
@@ -38,7 +38,7 @@ where:
 ### Instantiate (Or-Vnfm)
 
 ###### path
-_*VnfmEnpoint*_
+POST _*VnfmEnpoint*_
 ###### body
 ```
 {
@@ -57,7 +57,7 @@ In this action either the _scriptsLink_ or the _scripts_ fields are set. The vnf
 ### Instantiate (Vnfm-Or)
 
 ###### path
-_*OrEndpoint*_ /admin/v1/vnfm-core-actions
+POST _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ###### body
 ```
 {
@@ -69,7 +69,7 @@ _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ### Modify (aka AddRelations) (Or-Vnfm)
 
 ###### path
-_*VnfmEnpoint*_
+POST _*VnfmEnpoint*_
 ###### body
 ```
 {
@@ -82,7 +82,7 @@ _*VnfmEnpoint*_
 ### Modify (aka AddRelations) (Vnfm-Or)
 
 ###### path
-_*OrEndpoint*_ /admin/v1/vnfm-core-actions
+POST _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ###### body
 
 ```
@@ -95,7 +95,7 @@ _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ### Start (Or-Vnfm)
 
 ###### path
-_*VnfmEnpoint*_
+POST _*VnfmEnpoint*_
 ###### body
 ```
 {
@@ -107,7 +107,7 @@ _*VnfmEnpoint*_
 ### Start (Vnfm-Or)
 
 ###### path
-_*OrEndpoint*_ /admin/v1/vnfm-core-actions
+POST _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ###### body
 
 ```
