@@ -401,7 +401,7 @@ package org.openbaton.vnfm;
 public class MyVNFM {
 
 	public static void main(String[] args){
-		SpringApplication.run(VNFManager.class);
+		SpringApplication.run(MyVNFM.class);
 	}
 }
 ```
@@ -645,7 +645,7 @@ The following code snippet shows how to instantiate (allocate) resources at VNFM
 ```java
 @Override
 public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object object) {
-    log.debug("Processing allocation of Recourses for vnfr: " + virtualNetworkFunctionRecord);
+    log.debug("Processing allocation of Resources for vnfr: " + virtualNetworkFunctionRecord);
     List<Future<VNFCInstance>> vnfcInstances = new ArrayList<>();
     try {
         for (VirtualDeploymentUnit vdu : virtualNetworkFunctionRecord.getVdu()) {
@@ -674,7 +674,7 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
             throw new RuntimeException(e.getMessage(), e);
         }
     }
-    log.debug("Allocated all Recourses for vnfr: " + virtualNetworkFunctionRecord);
+    log.debug("Allocated all Resources for vnfr: " + virtualNetworkFunctionRecord);
     return virtualNetworkFunctionRecord;
 }
 ```
