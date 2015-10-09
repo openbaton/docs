@@ -131,7 +131,7 @@ image:
 ```
 
 #### VNFD [iperf-server]
-This is how the VNFD looks like for the iperf-server VNFPackage.
+This is how the [VNFD](vnf-descriptor) looks like for the iperf-server VNFPackage.
 Important to notice here is the vm_image that points to the image we have defined in the Metadata.yaml
 
 ```json
@@ -217,7 +217,7 @@ image:
 
 #### VNFD [iperf-client]
 
-This is how the VNFD looks like for the iperf-client VNFPackage.
+This is how the [VNFD](vnf-descriptor) looks like for the iperf-client VNFPackage.
 Important to notice here is the vm_image that points to the image we have defined in the Metadata.yaml
 
 ```json
@@ -331,7 +331,7 @@ To make it more readable only the interesting parts are shown.
 ```
 
 ## NSD [iperf]
-In this section we will create a NSD and reference the previously created VNFPackages by their ids'.
+In this section we will create a [NSD](ns-descriptor) and reference the previously created VNFPackages by their ids'.
 For doing that we just need to define the **id** for each VNFPackges' VNFD in the list of VNFDs.
 To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can find under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **ip1**.
 
@@ -382,7 +382,7 @@ $ curl -X POST -v -F file=@nsd.json "http://localhost:8080/api/v1/ns-descriptors
 This will return the NSD with the id we need to create NSR.
 Afterwards, we can deploy the NSD.
 
-You could use the [Dashboard][dashboard-link] as well for onboarding the NSD.
+**Note** You could use the [Dashboard][dashboard-link] as well for onboarding the NSD.
 
 ### Create NSR (Deployment)
 To deploy the NSD we create a NSR with the following command:
@@ -392,6 +392,8 @@ $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-reco
 ```
 
 Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
+
+**Note** You could use the [Dashboard][dashboard-link] as well for creating the NSR of this NSD.
 
 [iperf-link]:https://iperf.fr/
 [dashboard-link]:nfvo-how-to-use-gui
