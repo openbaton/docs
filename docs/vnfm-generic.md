@@ -3,7 +3,7 @@
 The Generic VNFManager is an implementation following the [ETSI MANO][nfv-mano] specifications. For that reason it is highly tied to the EMS.
 This VNFM may be assigned the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
 
-The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO <-> VNFM <-> EMS is done using the [Stomp][stomp] protocol over ActiveMQ.  
+The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the [Stomp][stomp] protocol over ActiveMQ.  
 
 The communication between the NFVO and Generic VNFManager:
 
@@ -38,7 +38,7 @@ The Generic VNFM follows the first approach. In the first approach two messages 
 * **ALLOCATE_RESOURCE message**: This message ask the NFVO to create all the resources and then, if no errors occurred, the ALLOCATE_RESOURCE message will be returned to the VNFManager. Only the VNFMs which follow the first approach need to send this message.
 
 
-After that point the VMs are created and **the VNF record is filled with values**, such as ips, that can be found directly in the VirtualNetworkFunctionRecord->VirtualDeploymentUnit->VNFCInstance object.
+After that point the VMs are created and **the VNF record is filled with values**, such as ips, that can be found directly in the VirtualNetworkFunctionRecord→VirtualDeploymentUnit→VNFCInstance object.
 
 ### Script Execution Costraints
 
@@ -46,7 +46,7 @@ For each operation of the VNF Lifecycle Management interface, the VNFManager sen
 
 **Note**: The scripts come from the VNFPackage which you need to create (see [VNFPackage documentation][vnfpackage-doc-link]).
 
-The ordering of this scripts is defined in the NetworkServiceDescriptor from which the NetworkServiceRecord was created, in particular into the NetworkServiceDescriptor->VirtualNetworkFunctionDescriptor->LifecycleEvents.
+The ordering of this scripts is defined in the NetworkServiceDescriptor from which the NetworkServiceRecord was created, in particular into the NetworkServiceDescriptor→VirtualNetworkFunctionDescriptor→LifecycleEvents.
 Here an example (to make it more readable it is shown only the **VNF lifecycle event** part):
 ```json
 {// NSD
@@ -102,7 +102,7 @@ The available parameters are defined in the VirtualNetworkFunctionDescriptor fie
 In the INSTANTIATE scripts, the parameters defined in these two fields are then available as environment variables into the script exactly as defined (i.e. you can get by $parameter_name).
 
 In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
-These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency->parameters fields (of the NSD), and are then available as $*type_of_vnf_source*.*name_of_parameter* (in the VNF target).
+These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency→parameters fields (of the NSD), and are then available as $*type_of_vnf_source*_*name_of_parameter* (in the VNF target).
 
 ### VMs termination
 
@@ -146,8 +146,8 @@ After the instantiation of the vnf-server we would configure it with the followi
 ```bash
 #!/bin/bash
 
-echo "This is the ip of the vnf-database: ${database.private1}"
-# ... Add the code to connect to the vnf-database with the ip: ${database.private1} ...
+echo "This is the ip of the vnf-database: ${database_private1}"
+# ... Add the code to connect to the vnf-database with the ip: ${database_private1} ...
 
 ```
 
@@ -245,7 +245,7 @@ The result network service descriptor shall include both the vnf descriptors abo
     ]
 }
 ```
-See the complete tutorial -> [VNFPackage tutorial][vnfpackage-tutorial-link].
+See the complete tutorial → [VNFPackage tutorial][vnfpackage-tutorial-link].
 
 <!---
 References
