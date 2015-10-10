@@ -3,7 +3,7 @@
 
 In this page there is a full real use case example explaining how the deployment process works, step by step. We assume that the NFVO and the Generic VNFM are running ready to receive invocations.
 
-What is going to be deployed is shown in the following picture, an [Iper][iperf] client and an Iperf server.
+What is going to be deployed is shown in the following picture, an [Iperf][iperf] client and an Iperf server.
 
 ![iperf-deployment](images/iperf-client-server.png)
 
