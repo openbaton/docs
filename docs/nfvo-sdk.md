@@ -10,7 +10,7 @@ The build.gradle file must contain:
 repositories {
     mavenCentral()
     maven {
-        url "http://193.175.132.176:8081/nexus/content/groups/public"
+        url "http://get.openbaton.org:8081/nexus/content/groups/public"
     }
 }
 

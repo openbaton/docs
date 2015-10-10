@@ -214,7 +214,7 @@ a:hover#menu-icon {
 
 
 .holder{
-  width: 60%;
+  width: 90%;
   margin: 0 auto;
   text-left: center;
   display: block;
@@ -435,7 +435,7 @@ code, .rst-content tt {
     padding: 2px 5px;
     color: #ea8e0c;
     background-color: #fcf3e0;
-    font-size: 75%;
+    font-size: 100%;
     border:none;
 }
 /*
