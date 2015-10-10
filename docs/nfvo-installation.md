@@ -10,7 +10,7 @@ The NFVO uses the Java Messaging System for communicating with the VNFMs. Theref
 
 ```bash
 sudo su -
-curl -fsSkL https://raw.githubusercontent.com/openbaton/bootstrap/master/openbaton.sh |bash
+curl -fsSkL http://get.openbaton.org/bootstrap |bash
 ```
 
 At the end of the installation procedure, if there are no errors, the screen session of the nfvo will show up. Moreover the dashboard is reachable at: [localhost:8080]. At the end of the installation, you should have the following structure: 
