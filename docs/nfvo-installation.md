@@ -2,7 +2,7 @@
 
 The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
-### install the latest NFVO version from the source code
+### Install the latest NFVO version from the source code
 
 The NFVO can be installed using different mechanisms. In this how to we will show you how to instantiate it using directly from the git repo. 
 
@@ -13,7 +13,7 @@ sudo su -
 curl -fsSkL http://get.openbaton.org/bootstrap |bash
 ```
 
-At the end of the installation procedure, if there are no errors, the screen session of the nfvo will show up. Moreover the dashboard is reachable at: [localhost:8080]. At the end of the installation, you should have the following structure: 
+At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
 ```bash
 /opt/openbaton/
 ├── apache-activemq-5.11.1
@@ -21,11 +21,39 @@ At the end of the installation procedure, if there are no errors, the screen ses
 └── nfvo
 ```
 
-where:
+Where:
   
 * `apache-activemq-5.11.1` contains the activeMQ software (it is basically downloaded, extracted and executed)  
 * `generic-vnfm`contains the source code and scripts required for dealing with the generic-vnfm  
-* `nfvo` contains the source code and scripts of the NFVO 
+* `nfvo` contains the source code and scripts of the NFVO
+
+At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
+
+**Note:** now only the **"root"** user can use Openbaton! So you'd better give the right permissions at your user (here an example):
+```bash
+sudo chown -R username: /opt/openbaton
+sudo chown -R username: /etc/openbaton
+```
+
+### Starting and stopping NFVO
+
+After the installation procedure the nfvo is running. If you want to stop it, enter this command:
+```bash
+cd /opt/openbaton/nfvo
+./openbaton.sh stop
+```
+
+**Note:** remember to stop also the Generic VNFM with the following command:
+```bash
+cd /opt/openbaton/generic-vnfm
+./generic-vnfm.sh stop
+```
+To start the nfvo, enter the command:
+
+```bash
+cd /opt/openbaton/nfvo
+./openbaton.sh start
+```
 
 ### NFVO properties overview
 
@@ -73,7 +101,7 @@ spring.activemq.user=admin
 spring.activemq.password=admin
 ```
 
-These parameters rapresent the file size of the VNF Package which can be uploaded to the NFVO
+These parameters rapresent the maximum file size of the VNF Package which can be uploaded to the NFVO and the total maximum request size
 ```properties
 # filesUpload
 multipart.maxFileSize=2046MB
@@ -83,19 +111,17 @@ multipart.maxRequestSize=2046MB
 The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [vim plugin documentation][vim_plugin_doc]). The NFVO will load them at runtime.  
 ```properties
 # plugin install
-# directory for the vim driver plugins
-vim-plugin-installation-dir = ./plugins/vim-drivers
-# classes contained in the jar files to be loaded
-vim-classes=org.project.openbaton.clients.interfaces.client.test.TestClient;org.project.openbaton.clients.interfaces.client.openstack.OpenstackClient
-# directory for the monitoring plugin
-monitoring-plugin-installation-dir = ./plugins/monitoring
-# classes contained in the jar files to be loaded
-monitoring-classes=org.project.openbaton.monitoring.agent.SmartDummyMonitoringAgent
+# the plugins inside that directory will be executed at startup
+plugin-installation-dir = ./plugins
+```
+
+This properties allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
+```properties
 # nfvo behaviour
 delete-on-all-status = false
 ```
 
-Those properties are needed in case you want to tune a bit the performances of the NFVO
+Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html) 
 ```properties
 # Thread pool executor configuration
 # for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
@@ -105,13 +131,7 @@ vmanager-executor-queue-capacity = 500
 vmanager-keep-alive = 30
 ```
 
-Whenever some of those parameters are changed, you will need to restart the orchestrator. This can be done with the following command: 
-```bash 
-cd /opt/openbaton/nfvo
-./openbaton.sh restart
-```
-
-At this point the NFVO is ready to be used. Please refer to the NFVO user guide on how to start using it. 
+Whenever some of those parameters are changed, you will need to restart the orchestrator.
 
 ### Let's move to the next step
 
@@ -120,6 +140,7 @@ Dependening on the approach used for deploying your VNF, you'll have either to i
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
 [vim_plugin_doc]:vim-plugin
+[use-openbaton]:use.md
 
 <!---
 Script for open external links in a new tab

@@ -2,7 +2,7 @@
 
 The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD). It is defined as follows:
 
-```
+```json
 {  
     "vendor":"fokus",
     "version":"0.2",

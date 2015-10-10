@@ -3,7 +3,7 @@
 OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, it is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this works?
-An OpenBaton Plugin is a RMI Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by the NFVO. By default the NFVO starts a rmiregistry at localhost:1099.
+An OpenBaton Plugin is a [RMI][rmi] Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by the NFVO. By default the NFVO starts a rmiregistry at localhost:1099.
 
 ## Requirements
 
@@ -126,7 +126,7 @@ OpenBaton expects only these three **type** of Vim Instance:
 Than create a class that implements ClientInterfaces and the inherited methods. 
 
 
-```JAVA
+```java
 package org.myplugin.example;
 
 import org.openbaton.catalogue.mano.common.DeploymentFlavour;
@@ -143,8 +143,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Service
-@Scope("prototype")
 public class MyVim implements ClientInterfaces {
 
 
@@ -152,32 +150,22 @@ public class MyVim implements ClientInterfaces {
 
     @Override
     public Server launchInstance(VimInstance vimInstance, String name, String image, String flavor, String keypair, Set<String> network, Set<String> secGroup, String userData) throws RemoteException {
-        throw new UnsupportedOperationException();
+        // ...
     }
 
     @Override
     public String getType(VimInstance vimInstance) {
-        return "test";
+        // ...
     }
     
     @Override
     public List<NFVImage> listImages(VimInstance vimInstance) {
-        ArrayList<NFVImage> nfvImages = new ArrayList<>();
-        NFVImage image = new NFVImage();
-        image.setExtId("ext_id_1");
-        image.setName("ubuntu-14.04-server-cloudimg-amd64-disk1");
-        nfvImages.add(image);
-
-        image = new NFVImage();
-        image.setExtId("ext_id_2");
-        image.setName("image_name_1");
-        nfvImages.add(image);
-        return nfvImages;
+        // ...
     }
 
 
-.....
-
+    // ...
+}
 ```
 
 ### 2. Starter Class
@@ -205,63 +193,32 @@ public class Starter {
             PluginStarter.run(MyVim.class, "test", "localhost", 1099);
     }
 }
-
-
 ```
 
 
 
 ## Run your Vim plugin in OpenBaton environment
-Under the folder of your project *src/main/resources* you should create a file **plugin.conf.properties** and write the variable *type = test*
+
+Under the folder of your project *src/main/resources* you should create a file **plugin.conf.properties** and write the variable **type = _the-vim-type_**.
 The structure of your project should be like:
 
 ![Vim plugin structure][vim_plugin_structure]
 
 Now you can run **./gradlew build** and Gradle will create the jar that you can find in the folder *build/libs/myPlugin-1.0-SNAPSHOT.jar*.
 
-Once all these steps are done, you can copy and paste the *myPlugin-1.0-SNAPSHOT.jar* under the folder of the **OpenBaton -> plugins/vim-instances**. 
+Once all these steps are done, you can copy and paste the *myPlugin-1.0-SNAPSHOT.jar* under the folder specified in the _openbaton.properties_ (under _/etc/openbaton_ folder) **plugin-installation-dir** property, as default NFVO/plugins.
 
-Congratulations you have your version of the interface for your Vim Instance that will be used by OpenBaton
+Congratulations you have your version of the interface for your Vim Instance that will be used by NFVO
 
-## Register your Vim plugin
+## Use my plugin
 
-For registering your Vim Instance you should send to the OpenBaton a json like:
-
-```javascript
-
-{
-  "name":"vim-instance",
-  "authUrl":"http://the.ip.address.here/v2",
-  "tenant":"test_tenant",
-  "username":"test_username",
-  "password":"test_password",
-  "keyPair":"test_keyPair",
-  "securityGroup": [
-    "test_security_group1",
-    "test_security_group2",
-    "test_security_group3"
-  ],
-  "type":"test",
-  "location":{
-	"name":"Berlin",
-	"latitude":"52.525876",
-	"longitude":"13.314400"
-  }
-}
-```
-
-For more information please see [Vim instance documentation][vim-instance-documentation-link].
-
+Once you copied the jar file into the right folder, you need to (re)start the NFVO. The plugin will automatically register and you can see that there will be a log file in the NFVO folder called _plugin-myPlugin.log_ containing the logs of the plugin. The myPlugin now acts as a normal plugin so for using it check out the [Vim instance documentation][vim-instance-documentation-link] in order to point out to the new plugin.
 
 [spring-boot]: http://projects.spring.io/spring-boot/
 [openjdk]: http://openjdk.java.net/install/
-
 [gradle-installation]:https://docs.gradle.org/current/userguide/installation.html
 [gradle-wrapper]:https://docs.gradle.org/current/userguide/gradle_wrapper.html
-
 [project-guide-naming-conventions]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
-
-
 [vim-instance-documentation-link]:vim-instance-documentation
 [vim_plugin_structure]: images/vim_plugin_structure.png
 [new_project_vim]: images/new_project_vim.png
@@ -271,6 +228,7 @@ For more information please see [Vim instance documentation][vim-instance-docume
 [new_project_vim_new_directory]: images/new_project_vim_new_directory.png
 [new_project_vim_new_package]: images/new_project_vim_new_package.png
 [new_project_vim_new_class]: images/new_project_vim_new_class.png
+[rmi]: https://docs.oracle.com/javase/tutorial/rmi/overview.html
 
 <!---
 Script for open external links in a new tab
