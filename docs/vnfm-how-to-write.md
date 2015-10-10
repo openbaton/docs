@@ -279,7 +279,7 @@ logging.level.org.apache.activemq = WARN
 logging.level.org.openbaton.nfvo = DEBUG
 logging.level.org.openbaton.vnfm = DEBUG
 
-# activeMQ
+#### activeMQ
 spring.activemq.broker-url=tcp://localhost:61616
 spring.activemq.user=admin
 spring.activemq.password=admin
@@ -302,7 +302,7 @@ allocate = true
 concurrency = 15
 transacted = false
 
-#Additionally
+#### Additionally
 vim-plugin-dir = ./plugins/vim-drivers
 ```
 
@@ -316,7 +316,7 @@ Where the parameters mean:
 | concurrency	 				| The number of concurrent Receiver (only for vnfm-sdk-jms)|
 | transacted 					| Whenever the JMS receiver method shoud be transacted, this allows the message to be resent in case of exception VNFManager side (only for vnfm-sdk-jms)     	|
 
-### Choose a vnfm-sdk
+## Choose a vnfm-sdk
 
 Before you can start with the implementation you need to select the type of communication you want to use for the communication between the Orchestrator (NFVO) and the VNFManager.
 Either you can use the vnfm-sdk-jms for using the [Java Message Service (JMS)][JMS-link] or the vnfm-sdk-rest for using the [ReST][ReST-link] interface.
@@ -383,7 +383,7 @@ $ ./gradlew build
 This will fetch all the dependencies defined in the build.gradle and gives you access to all the Classes you need.
 You can also do this by using the IDE by running the corresponding gradle task.
 
-### Implementation of the VNFManager
+## Implementation of the VNFManager
 
 This section is going to describe the implementation of a basic VNFManager by using the vnfm-sdk-jms.
 In the end, the VNFManager will be able to allocate and terminate resources by using its own openstack-plugin.

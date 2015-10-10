@@ -16,7 +16,7 @@ The communication between the Generic VNFManager and EMS:
 As you can see, the Generic VNFM sends commands to the EMS, which is running in the VM. Then the EMS executes the commands (scripts) locally in the VNFC.
 The following sequence diagram explains the communication messages.
 
-![Sequence Diagram NFVO - VNFM - EMS][or-vnfm-sequence]
+![Sequence Diagram NFVO - VNFM - EMS](/images/sequence-diagram-v2.png)
 
 The Generic VNFManager is supposed to be used for any type of VNF that follows some conventions regarding:
 
@@ -103,6 +103,8 @@ In the INSTANTIATE scripts, the parameters defined in these two fields are then 
 
 In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
 These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency→parameters fields (of the NSD), and are then available as $*type_of_vnf_source*_*name_of_parameter* (in the VNF target).
+
+_**NOTE**_: _the scripts in the CONFIGURE lifecycle event need to start with the type of the source VNF followed by \_ and the name of the script (i.e. server_configure.sh)_
 
 ### VMs termination
 
