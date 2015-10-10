@@ -1,4 +1,4 @@
-# Use case example: Iperf clent - server
+# Use case example: Iperf client - server
 -----------------------------------------
 
 In this page there is a full real use case example explaining how the deployment process works, step by step. We assume that the NFVO and the Generic VNFM are running ready to receive invocations.
@@ -129,12 +129,13 @@ Here exactly as before, the NFVO sends the START message to the Generic VNFManag
 
 ## Conclusions
 
-When all the VNF Record are done with all the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service was correctly run.
+When all the VNF Record are done with all the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service was correctly run. For knowing more about the states of a VNF Record please see the [VNF Record state documentation][vnfr-states]
 
 <!---
 References
 -->
 
+[vnfr-states]:vnfr-states
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
 [vnf-package]:vnfpackage

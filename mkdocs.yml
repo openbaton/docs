@@ -18,6 +18,7 @@ pages:
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
 - ['FAQ.md', 'FAQ', 'FAQ']
 - ['**HIDDEN**': 'vnf-descriptor.md']
+- ['**HIDDEN**': 'vnfr-states.md']
 - ['**HIDDEN**': 'vim-plugin.md']
 google_analytics: ['UA-68429895-1', 'openbaton.github.io']
 theme: readthedocs
