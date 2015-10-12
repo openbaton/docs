@@ -143,7 +143,7 @@ echo "The answer to everything is.. ${ANSWER_TO_EVERYTHING}"
 
 **MODIFY script**
 
-After the instantiation of the vnf-server we would configure it with the following **connectToDb.sh** script:
+After the instantiation of the vnf-server we would configure it with the following **database_connectToDb.sh** script:
 
 ```bash
 #!/bin/bash
@@ -207,7 +207,7 @@ In order to deploy the VNFs we have to create both the VNF descriptor: **vnf-dat
         {
             "event":"CONFIGURE",
             "lifecycle_events":[
-                "connectToDb.sh"
+                "database_connectToDb.sh"
             ]
         }
     ],
