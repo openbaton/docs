@@ -3,7 +3,7 @@
 OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this works?
-An OpenBaton Plugin is a RMI Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by NFVO. by default NFVO starts a rmiregistry at localhost:1099.
+An OpenBaton Plugin is a [RMI] Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by NFVO. by default NFVO starts a rmiregistry at localhost:1099.
 
 ## Requirements
 
@@ -123,8 +123,35 @@ The OpenBaton expects only these three **type** of Vim Instance:
 
 ### 1. Implement ClientInterfaces
 
-Than create a class that implement ClientInterfaces and the inherited methods. 
-
+The *ClientInterfaces* is an interface that contains tha basic functionality that a Vim Instance should be provide, 
+and extends the [Remote Class].
+Your **MyVim** class will implement the methods inherited from *ClientInterfaces* that manages your Vim Instance:
+ 
+| Function          				    | Description       										|
+| -------------   				        | -------------:											|
+| List\<NFVImage\> listImages			| Returns the list of Images                                |
+| List\<Server\> listServer 			| Returns the list of Servers                               |
+| List\<Network\> listNetworks  		| Returns the list of Network                               |
+| List\<DeploymentFlavour\> listFlavors	| Returns the list of DeploymentFlavour                     |
+| Server launchInstanceAndWait          | Creates a new Server                                      |
+| void deleteServerByIdAndWait			| Removes the Server with id 	                            |
+| Network createNetwork					| Creates a new Network 	                                |
+| Network getNetworkById				| Returns the Network with id 	                            |
+| Network updateNetwork					| Updates a new Network 	                                |
+| boolean deleteNetwork					| Deletes the Network 	                                    |
+| Subnet createSubnet					| Creates a new Subnet 	                                    |
+| Subnet updateSubnet					| Updates the Subnet 	                                    |
+| boolean deleteSubnet					| Deletes the Subnet 	                                    |
+| List\<String\> getSubnetsExtIds		| Returns the list of SubnetsExtId 	                        |
+| DeploymentFlavour addFlavor			| Adds a new DeploymentFlavour 	                            |
+| DeploymentFlavour updateFlavor		| Updates the DeploymentFlavour 	                        |
+| boolean deleteFlavor					| Deletes the DeploymentFlavour 	                        |
+| NFVImage addImage                     | Adds a new NFVImage 	                                    |
+| NFVImage updateImage					| Updates the NFVImage 	                                    |
+| NFVImage copyImage					| Copies the NFVImage 	                                    |
+| boolean deleteImage				    | Deletes the NFVImage 	                                    |
+| Quota getQuota				        | Returns the Quota 	                                    |
+| String getType					    | Returns the type 	                                        |
 
 ```JAVA
 package org.myplugin.example;
@@ -264,7 +291,8 @@ For more information please see [Vim instance documentation]
 
 [project-guide-naming-conventions]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
 
-
+[Remote Class]: http://docs.oracle.com/javase/7/docs/api/java/rmi/Remote.html
+[RMI]: https://en.wikipedia.org/wiki/Java_remote_method_invocation
 [vim_plugin_structure]: images/vim_plugin_structure.png
 [new_project_vim]: images/new_project_vim.png
 [new_project_vim_groupId]: images/new_project_vim_groupId.png
