@@ -7,9 +7,9 @@ What is going to be deployed is shown in the following picture, an [Iperf][iperf
 
 ![iperf-deployment](images/iperf-client-server.png)
 
-As shown in the picture, the iperf server is the source of the dependency and the client is the target. In this case the client need IP of the server. The semantics of the vnf dependency is: the source provides some parameters to the target.
+As shown in the picture, the iperf server is the source of the dependency and the client is the target. In this case the client needs the IP of the server. The semantics of the vnf dependency is: the source provides some parameters to the target.
 
-Before starting we need to send the VimInstance to the NFVO and the Network Service Descriptor. For doing this please have a look into the [Vim instance documentation][vim-doc], [VNF Package documentation][vnf-package] and [Network Service Descriptor documentation][nsd-doc]. In fact, for creating a Network Service Record, we need to have a Network Service Descriptor loaded into the catalogue with two Virtual Network Functions (iperf client and server) created from a VNF Package. A Virtual Network Descriptor Json-File for Iperf client looks like this:
+Before starting we need to send the VimInstance to the NFVO and the Network Service Descriptor. For doing this please have a look into the [Vim instance documentation][vim-doc], [VNF Package documentation][vnf-package] and [Network Service Descriptor documentation][nsd-doc]. In fact, for creating a Network Service Record, we need to have a Network Service Descriptor loaded into the catalogue with two Virtual Network Functions (iperf client and server) created from a VNF Package. A Virtual Network Function Descriptor Json-File for Iperf client looks like this:
 
 ```json
 {
@@ -107,9 +107,9 @@ As said before in the documentation [VNFManager Generic][vnfm-generic], _the scr
 screen -d -m -S client iperf -c $server_private1 -t 300
 ```
 
-These scripts showed above, are contained into the VNF Package or into a git repository accessible from the VM. Once all these steps are done we are ready to create a Network Service Record from the id of the Network Service Descriptor. 
+These scripts showed above, are contained in the VNF Package or in a git repository accessible from the VM. Once all these steps are done we are ready to create a Network Service Record from the id of the Network Service Descriptor. 
 
-Let's again have a look into the sequence diagram of a create Network Service Record operation.
+Let's again have a look at the sequence diagram of a create Network Service Record operation.
 
 ![CreateNSR Sequence Diagram](/images/sequence-diagram-number-v2.png)
 
@@ -117,11 +117,11 @@ When the Network Service Record create is called with the Iperf Network Service 
 
 ##### INSTANTIATE Method
 
-The first message sent to the Generic VNFM is the INSTANTIATE message **(1)**. This message contains the VNF Descriptor and some other parameters needed to create the VNF Record, for instance the list of Virtual Link Records. The Generic VNFM  is called and then the create Virtual Network Function Record and the Virtual Network Function Record is created **(2)** and sent back to the NFVO into a GrantOperation message **(3)**. This message will trigger the NFVO to check if there are enough resources to create that VNF Record. If so, then a GrantOperation message with the updated VNF Record is sent back to the Generic VNFManager. Then the Generic VNFManager creates an AllocateResources message with the received VNF Record and sends it to the NFVO **(4)**. The NFVO after creating the Resources (VMs) sends back the AllocateResources message to the VNFManager. here the instantiate method is called **(5)**. Inside this method, the scripts (or the link to the git repository containing the scripts) contained into the VNF Package is sent to the EMS, the scripts are saved locally to the VM and then the Generic VNFManager will call the execution of each script defined in the VNF Descriptor **(6)**. Once all of the scripts are executed and there was any errors, the VNFManager sends back to the NFVO the Instantiate message **(7)**. 
+The first message sent to the Generic VNFM is the INSTANTIATE message **(1)**. This message contains the VNF Descriptor and some other parameters needed to create the VNF Record, for instance the list of Virtual Link Records. The Generic VNFM  is called and then the create Virtual Network Function Record and the Virtual Network Function Record is created **(2)** and sent back to the NFVO into a GrantOperation message **(3)**. This message will trigger the NFVO to check if there are enough resources to create that VNF Record. If so, then a GrantOperation message with the updated VNF Record is sent back to the Generic VNFManager. Then the Generic VNFManager creates an AllocateResources message with the received VNF Record and sends it to the NFVO **(4)**. The NFVO after creating the Resources (VMs) sends back the AllocateResources message to the VNFManager. Here the instantiate method is called **(5)**. Inside this method, the scripts (or the link to the git repository containing the scripts) contained in the VNF Package is sent to the EMS, the scripts are saved locally to the VM and then the Generic VNFManager will call the execution of each script defined in the VNF Descriptor **(6)**. Once all of the scripts are executed and there wasn't any error, the VNFManager sends the Instantiate message back to the NFVO **(7)**. 
 
 ##### MODIFY Method
 
-If the VNF is target for some dependencies, like the iperf client, the MODIFY message is sent to the VNFManager by the NFVO **(8)**. Then the VNFManager executes the scripts contained into the CONFIGURE lifecycle event defined into the VNF Descriptor **(9)**, and sends back to the NFVO the modify message **(10)**, if no errors occurred. In this case, the scripts environment will contain the variables defined into the related VNF dependency.
+If the VNF is target for some dependencies, like the iperf client, the MODIFY message is sent to the VNFManager by the NFVO **(8)**. Then the VNFManager executes the scripts contained in the CONFIGURE lifecycle event defined in the VNF Descriptor **(9)**, and sends back the modify message to the NFVO **(10)**, if no errors occurred. In this case, the scripts environment will contain the variables defined in the related VNF dependency.
 
 ##### START Method
 
@@ -129,7 +129,7 @@ Here exactly as before, the NFVO sends the START message to the Generic VNFManag
 
 ## Conclusions
 
-When all the VNF Record are done with all the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service was correctly run. For knowing more about the states of a VNF Record please refer to [VNF Record state documentation][vnfr-states]
+When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service was correctly run. For knowing more about the states of a VNF Record please refer to [VNF Record state documentation][vnfr-states]
 
 <!---
 References
