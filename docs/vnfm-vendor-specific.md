@@ -7,9 +7,9 @@ NFVO - VNFM ReST interface
 
 Nfvo exposes a ReST interface for the communication with the VnfManagers. The sequence diagram regarding the instantiation of a NetworkServiceRecord is shown in the following picture.
 
-![NFVO - VNFM ReST interface][or-vnfm-sequence]
+![NFVO - VNFM ReST interface](images/sequence-diagram-v2.png)
 
-As shown in the picture, NFVO calls some ReST methods on the vnfm in a particular order. Than it expects some kind of back call. The list of these call exchange is described in the following sections. The ALLOCATE_RESOURCES call is not needed if the vnfm will take care of creating VMs. The communication with the EMS is particular to each VnfManagers. In order to be able to be found, the Vnfm needs to register to the NFVO. This can be done through a particular call.
+As shown in the picture, NFVO calls some ReST methods on the vnfm in a particular order. Then it expects some kind of back call. The list of these call exchange is described in the following sections. The ALLOCATE_RESOURCES call is not needed if the vnfm will take care of creating VMs. The communication with the EMS is particular to each VnfManagers. In order to be able to be found, the Vnfm needs to register to the NFVO. This can be done through a particular call.
 
 | Params          | Meaning       |
 | -------------   | -------------:|
@@ -21,7 +21,7 @@ As shown in the picture, NFVO calls some ReST methods on the vnfm in a particula
 #### Registration (Vnfm-Or):
 
 ###### path:
-_*OrEndpoint*_ /admin/v1/vnfm-register
+POST _*OrEndpoint*_ /admin/v1/vnfm-register
 ###### body:
 ```
 {
@@ -31,14 +31,14 @@ _*OrEndpoint*_ /admin/v1/vnfm-register
 }
 ```
 where:
-* _type_ is the vnfm type you are going to handle (specified in VirtualNetowrkFunctionDescriptor -> endpoint).
+* _type_ is the vnfm type you are going to handle (specified in VirtualNetowrkFunctionDescriptor → endpoint).
 * _endpointType_ is the vnfm type you are going to implement (REST or JMS).
 * _endpoint_ is the vnfm endpoint you have chosen (basically http://<IP>:<PORT>).
 
 ### Instantiate (Or-Vnfm)
 
 ###### path
-_*VnfmEnpoint*_
+POST _*VnfmEnpoint*_
 ###### body
 ```
 {
@@ -57,7 +57,7 @@ In this action either the _scriptsLink_ or the _scripts_ fields are set. The vnf
 ### Instantiate (Vnfm-Or)
 
 ###### path
-_*OrEndpoint*_ /admin/v1/vnfm-core-actions
+POST _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ###### body
 ```
 {
@@ -69,7 +69,7 @@ _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ### Modify (aka AddRelations) (Or-Vnfm)
 
 ###### path
-_*VnfmEnpoint*_
+POST _*VnfmEnpoint*_
 ###### body
 ```
 {
@@ -82,7 +82,7 @@ _*VnfmEnpoint*_
 ### Modify (aka AddRelations) (Vnfm-Or)
 
 ###### path
-_*VnfmEnpoint*_
+POST _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ###### body
 
 ```
@@ -95,7 +95,7 @@ _*VnfmEnpoint*_
 ### Start (Or-Vnfm)
 
 ###### path
-_*VnfmEnpoint*_
+POST _*VnfmEnpoint*_
 ###### body
 ```
 {
@@ -107,7 +107,7 @@ _*VnfmEnpoint*_
 ### Start (Vnfm-Or)
 
 ###### path
-_*OrEndpoint*_ /admin/v1/vnfm-core-actions
+POST _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 ###### body
 
 ```
@@ -122,3 +122,18 @@ References
 -->
 
 [or-vnfm-sequence]:images/or-vnfm-seq-dg.png
+
+<!---
+Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>

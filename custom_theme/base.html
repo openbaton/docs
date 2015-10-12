@@ -7,7 +7,7 @@
   {% if page_description %}<meta name="description" content="{{ page_description }}">{% endif %}
   {% if site_author %}<meta name="author" content="{{ site_author }}">{% endif %}
   {% block htmltitle %}
-  <title>{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}</title>
+  <title>{{ site_name }}</title>
   {% endblock %}
 
   {% if favicon %}<link rel="shortcut icon" href="{{ favicon }}">
@@ -56,54 +56,67 @@
 
 <body role="document">
 
-<ul class="navigation">
-  <li class="first"><a href="../../index.html"><img src="img/openbaton.png" alt="OpenBaton"></a></li>
-  <li><a href="../../index.html#about">About</a></li>
-  <li><a href="../../index.html#features">Features</a></li>
-  <li><a href="#">Documentation</a></li>
-  <li><a href="../../index.html#contact">Contact</a></li>
-</ul>
-<div style="width:100%;">
-  <div class="wy-grid-for-nav">
+<div class="navcontainer" style="margin:0px; background:#000;">
+    <div class="navholder">
+      <nav>
+        <a href="../../index.html" class="logo"></a>
+        <a href="#" id="menu-icon"></a>
+        <ul class="navigation">
+          
+                  <li><a href="../../index.html#about">About</a></li>
+                <li><a href="../../cases.html">Use Cases</a></li>
+                <li><a href="../../features.html">Features</a></li>
+                <li><a href="#">Documentation</a></li>
+                <li><a href="../../index.html#contact">Contact</a></li>
+                <li><a href="https://github.com/openbaton">GitHub</a></li>
+          </ul>
+      </nav>
+     </div>
+</div>
+<div  class="container">
+  <div class="holder"> 
+        <div class="wy-grid-for-nav">
 
-    {# SIDE NAV, TOGGLES ON MOBILE #}
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          {% for nav_item in nav %}
-            <li>{% include "toc.html" %}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      &nbsp;
-    </nav>
-
-<div class="content_container">
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-     
-
-      {# PAGE CONTENT #}
-      <div class="wy-nav-content">
-        <div class="rst-content">
-         
-          <div role="main">
-            <div class="section">
-              {% block content %}
-                {{ content }}
-              {% endblock %}
+          {# SIDE NAV, TOGGLES ON MOBILE #}
+          <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+              <ul class="current">
+                {% for nav_item in nav %}
+		{% if nav_item.title != "**HIDDEN**" %}
+                  <li>{% include "toc.html" %}</li>
+                 {% endif %}
+		{% endfor %}
+              </ul>
             </div>
-          </div>
-	  {%- block footer %}
-          {% include "footer.html" %}
-	  {% endblock %}
+            &nbsp;
+          </nav>
         </div>
-      </div>
+    <div class="content_container">
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-    </section>
-</div>
-</div>
+         
+
+          {# PAGE CONTENT #}
+                <div class="wy-nav-content">
+                  <div class="rst-content">
+                   
+                    <div role="main">
+                      <div class="section">
+                        {% block content %}
+                          {{ content }}
+                        {% endblock %}
+                      </div>
+                    </div>
+          	  {%- block footer %}
+                    {% include "footer.html" %}
+          	  {% endblock %}
+                  </div>
+                </div>
+
+        </section>
+    </div>
   </div>
+</div>
 
 
 

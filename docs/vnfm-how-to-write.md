@@ -1,24 +1,20 @@
 # How to write a VNFManager
 
-This section is going to describe how to write your own VNFManager by using the vnfm-sdk which is part of the openbaton-libs repository.
-Moreover, the openbaton-libs repository contains all the things you may need for the development of the VNFManager of your choice as well.
+This section is going to describe how to write your own VNFManager by using any vnfm-sdk.
+Moreover, the vnfm-sdk contains all the things you may need for the development of the VNFManager of your choice as well.
 
-The openbaton-libs provides the following things:
+The vnfm-sdk provides the following things:
 
-* vnfm-sdk to simply write your own VNFManager
+* multiple [vnfm-sdks](#choose-a-vnfm-sdk) where you can choose your preferred type of communication
 * Catalogue, shared with the NFVO containing all entities
-* Plugin Management for using plugins at VNFManager side
-* Plugin Interfaces for creating your own vim-drivers
-* VIM Mangement, interfaces and specific implementations (e.g. Openstack)
-* Monitoring interfaces
-* Predefined Exceptions
+* [VNFMHelper](#using-the-vnfmhelper) for providing some methods out of the box
 
 ## Requirements
 
 Before you can start with developing your own VNFManager you need to prepare your programming environment by installing/configuring the following requirements:
 
-* JDK 7 ([installation][openjdk])
-* Gradle ([installation][gradle-installation])
+* JDK 7 ([installation][openjdk-link])
+* Gradle ([installation][gradle-installation-link])
 
 ## Develop your own VNFManager
 
@@ -37,7 +33,7 @@ Once this is done, you can start implementing your VNFManager by using different
 #### Using your favorite IDE
 In the following we will create the project and setup the configuration files by using your favorite IDE.
 So first of all, start your IDE and go to the next step.
-All the details base on the usage of [IntelliJIdea][IntelliJIdea].
+All the details base on the usage of [IntelliJIdea][IntelliJIdea-link].
 
 ##### Create a new project
 
@@ -50,7 +46,7 @@ In this dialog click on Gradle on the left and select java in the main propertie
 Then click on next to go to the next window.
 
 In the next dialog you need to define the GroupId, ArtifactId and the Version.
-More information on the specific meaning can be found [here][project-guide-naming-conventions].
+More information on the specific meaning can be found [here][project-guide-naming-conventions-link].
 
 ![dialog][intellijidea_new_project_group]
 
@@ -80,13 +76,13 @@ For doing so, right click on the root folder my-vnfm, then click on New -> Direc
 Click on OK to continue.
 
 Additionally you need to create a new package.
-This is done by an right-click of the previous created directory java.
+This is done by a right-click on the previously created directory java.
 Click on New -> Package.
 Here you can define the package name.
 
 ![dialog][intellijidea_new_package]
 
-Finally you can create your Main Class by clicking (right click) on the previous created package and click on New -> Java Class.
+Finally you can create your Main Class by clicking (right click) on the previously created package and click on New -> Java Class.
 
 ![dialog][intellijidea_new_class]
 
@@ -157,7 +153,7 @@ Once this is done, you need to initialize the gradle wrapper and configuring acc
 
 ##### The Gradle Wrapper
 Afterwards go back to the root folder and run the following command to create automatically the gradle wrapper which is used for code management and compilation.
-For more information on how to use the gradle wrapper have a look on the gradle wrapper documentation [here][gradle-wrapper].
+For more information on how to use the gradle wrapper have a look at the gradle wrapper documentation [here][gradle-wrapper-link].
 
 ```bash
 $ gradle wrapper --gradle-version 2.4
@@ -185,7 +181,7 @@ sourceCompatibility = 1.7
 If you have chosen a different package name you need to replace it at this point as well.
 
 The second gradle configuration is called settings.gradle.
-This files contains only the project name.
+This file contains only the project name.
 So create a new file called settings.gradle in your root folder.
 
 
@@ -265,7 +261,7 @@ dependencies {
 
 ```
 Take care about the configuration of the mainClass.
-If the name or package of your name class is different, you need to replace it here as well.
+If the name or package of your mainClass is different, you need to replace it here as well.
 
 #### Property files
 The previously created properties files are used to define several things.
@@ -283,7 +279,7 @@ logging.level.org.apache.activemq = WARN
 logging.level.org.openbaton.nfvo = DEBUG
 logging.level.org.openbaton.vnfm = DEBUG
 
-# activeMQ
+#### activeMQ
 spring.activemq.broker-url=tcp://localhost:61616
 spring.activemq.user=admin
 spring.activemq.password=admin
@@ -294,7 +290,7 @@ If you want to change log levels or the ActiveMQ access information you need to 
 The **conf.properties** is also a very important configuration file.
 Here you need to define the type and endpoint of your VNFManager that is later used for registering on the NFVO.
 Furthermore, you can define your own parameters which can be used at runtime for whatever you want.
-So this file have to contain at least the type and endpoint.
+So this file has to contain at least the type and endpoint.
 Additionally, it is defined the folder where the vim-plugins are located.
 In this case the file should contain the following lines.
 
@@ -306,11 +302,11 @@ allocate = true
 concurrency = 15
 transacted = false
 
-#Additionally
+#### Additionally
 vim-plugin-dir = ./plugins/vim-drivers
 ```
 
-Where the parameters means:
+Where the parameters mean:
 
 | Params          				| Meaning       																|
 | -------------   				| -------------:																|
@@ -320,19 +316,16 @@ Where the parameters means:
 | concurrency	 				| The number of concurrent Receiver (only for vnfm-sdk-jms)|
 | transacted 					| Whenever the JMS receiver method shoud be transacted, this allows the message to be resent in case of exception VNFManager side (only for vnfm-sdk-jms)     	|
 
-
-
-
-### Choose a vnfm-sdk
+## Choose a vnfm-sdk
 
 Before you can start with the implementation you need to select the type of communication you want to use for the communication between the Orchestrator (NFVO) and the VNFManager.
-Either you can use the vnfm-sdk-jms for using the [Java Message Service (JMS)][JMS] or the vnfm-sdk-rest for using the [ReST][ReST] interface.
+Either you can use the vnfm-sdk-jms for using the [Java Message Service (JMS)][JMS-link] or the vnfm-sdk-rest for using the [ReST][ReST-link] interface.
 However, your choice doesn't effect the upcoming implementation, because the communication itself is done automatically in the background.
-But have in mind that both libraries depends on [SpringBoot][spring-boot].
+But have in mind that both libraries depend on [SpringBoot][spring-boot-link].
 So, if you want to avoid this dependency, a third option might be: just use the simple vnfm-sdk artifact.
-By using the simple vnfm-sdk you need to take care about all the communication between NFVO and VNFManager by your self.
+By using the simple vnfm-sdk you need to take care about all the communication between NFVO and VNFManager by yourself.
 
-Once you have imported one the vnfm-sdks you will have access to all the model classes and the vnfm-sdk classes needed to implement a VNFManager.
+Once you have imported one of the vnfm-sdks you will have access to all the model classes and the vnfm-sdk classes needed to implement a VNFManager.
 
 The following section shows you how to import the vnfm-sdk-jms, representative for all the other opportunities.
 
@@ -390,7 +383,7 @@ $ ./gradlew build
 This will fetch all the dependencies defined in the build.gradle and gives you access to all the Classes you need.
 You can also do this by using the IDE by running the corresponding gradle task.
 
-### Implementation of the VNFManager
+## Implementation of the VNFManager
 
 This section is going to describe the implementation of a basic VNFManager by using the vnfm-sdk-jms.
 In the end, the VNFManager will be able to allocate and terminate resources by using its own openstack-plugin.
@@ -404,13 +397,19 @@ package org.openbaton.vnfm;
 public class MyVNFM {
 
 	public static void main(String[] args){
-		SpringApplication.run(VNFManager.class);
+		SpringApplication.run(MyVNFM.class);
 	}
 }
 ```
 
 Afterwards you need to extend your Main Class (in this case MyVNFM) with the *AbstractVnfmSpringJMS*.
-Once this is done, you need to implement all the methods coming from the extension of *AbstractVnfmSpringJMS* as shown below:
+
+The *AbstractVnfmSpringJMS* takes care of all the configuration you need to register/unregister the VNFManager to the NFVO and handles incoming messages.
+Whereas the *AbstractVnfm*, extended by the *AbstractVnfmSpringJMS*, is independent of the type of communication.
+This means more in detail that the *AbstractVnfm* processes the incoming messages and executes the right method depending on the defined Action inside the message.
+Moreover, it is responsible for loading predefined configuration files, setting up the VNFManager itself, creating the VNFR (based on the VNFD received in the first step) and doing essential parts like requesting the NFVO for granting operations or deciding who is responsible for allocate resources.
+
+Once you extended your VNFMManger, you need to implement all the methods coming from the extension of *AbstractVnfmSpringJMS* as shown below:
 
 ```java
 package org.openbaton.vnfm;
@@ -434,7 +433,7 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      */
     @Override
     public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts) throws Exception {
-        return null;
+        return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -491,7 +490,7 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      */
     @Override
     public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFRecordDependency dependency) throws Exception {
-        return null;
+        return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -510,7 +509,22 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      */
     @Override
     public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception{
-        return null;
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
+    protected void checkEmsStarted(String hostname) throws RuntimeException {
+
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord configure(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -531,7 +545,7 @@ Now you can implement whatever you want. If the VirtualNetworkFunctionRecord is 
 
 An example of allocating and terminating resource by using a plugin can be found [here](#allocate-resources) and [here](#release-resources).
 
-**Note** If you use vnfm-sdk-jms or vnfm-sdk-rest **_the VNFManager main class needs to be stateless_** since can (will) run each method potentially in parallel.
+**Note** If you use vnfm-sdk-jms or vnfm-sdk-rest **_the VNFManager main class needs to be stateless_** since it can (will) run each method potentially in parallel.
 For what concerns vnfm-sdk-jms, even setting concurrency to 1, will not ensure to have always the same instance of the class.
 
 #### Using the VnfmHelper
@@ -597,7 +611,7 @@ Therefore, you need to do several things:
 compile 'org.openbaton:vim-int:0.6'
 compile 'org.openbaton:vim-impl:0.6'
 ```
-After that you need rebuild your project for fetching the dependencies automatically.
+After that you need to rebuild your project for fetching the dependencies automatically.
 
 Now you can use the ResourceManagement interface.
 In the end it should look like the following:
@@ -648,7 +662,7 @@ The following code snippet shows how to instantiate (allocate) resources at VNFM
 ```java
 @Override
 public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object object) {
-    log.debug("Processing allocation of Recourses for vnfr: " + virtualNetworkFunctionRecord);
+    log.debug("Processing allocation of Resources for vnfr: " + virtualNetworkFunctionRecord);
     List<Future<VNFCInstance>> vnfcInstances = new ArrayList<>();
     try {
         for (VirtualDeploymentUnit vdu : virtualNetworkFunctionRecord.getVdu()) {
@@ -677,11 +691,12 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
             throw new RuntimeException(e.getMessage(), e);
         }
     }
-    log.debug("Allocated all Recourses for vnfr: " + virtualNetworkFunctionRecord);
+    log.debug("Allocated all Resources for vnfr: " + virtualNetworkFunctionRecord);
     return virtualNetworkFunctionRecord;
 }
 ```
 
+**Note** Keep in mind that you need to set *allocate* to false in conf.properties, if you want to allocate resources on the VNFManager side.
 
 ##### Release Resources
 The next code snippet shows an implementation of the terminate method used for releasing resources at VNFManager side.
@@ -724,17 +739,17 @@ If everything is fine, your VNFManager will register to NFVO and is able now to 
 References
 -->
 
-[spring-boot]: http://projects.spring.io/spring-boot/
-[openjdk]: http://openjdk.java.net/install/
-[JMS]: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
-[ReST]: https://en.wikipedia.org/wiki/Representational_state_transfer
+[spring-boot-link]:http://projects.spring.io/spring-boot/
+[openjdk-link]: http://openjdk.java.net/install/
+[JMS-link]: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
+[ReST-link]: https://en.wikipedia.org/wiki/Representational_state_transfer
 
-[gradle-installation]:https://docs.gradle.org/current/userguide/installation.html
-[gradle-wrapper]:https://docs.gradle.org/current/userguide/gradle_wrapper.html
+[gradle-installation-link]:https://docs.gradle.org/current/userguide/installation.html
+[gradle-wrapper-link]:https://docs.gradle.org/current/userguide/gradle_wrapper.html
 
-[project-guide-naming-conventions]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
+[project-guide-naming-conventions-link]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
 
-[IntelliJIdea]:https://www.jetbrains.com/idea/?fromMenu
+[IntelliJIdea-link]:https://www.jetbrains.com/idea/?fromMenu
 
 
 [intellijidea_new_project_type]: images/intellijidea_new_project_type.png
@@ -744,3 +759,18 @@ References
 [intellijidea_new_directory]: images/intellijidea_new_directory.png
 [intellijidea_new_package]: images/intellijidea_new_package.png
 [intellijidea_new_class]: images/intellijidea_new_class.png
+
+<!---
+Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>

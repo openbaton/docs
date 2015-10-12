@@ -10,6 +10,111 @@ body {
     margin: 0px;
     color: #282828;
 }
+.wy-grid-for-nav{
+  position: relative !important; 
+}
+
+
+@media only screen and (max-width : 800px){
+
+.content_container{
+  width:70%;
+  }
+.wy-grid-for-nav{
+  position: relative !important;
+}
+
+.wy-nav-side {
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    float: left;
+    left: 10px !important;
+    background: none;
+    width:300px;
+}
+
+#menu-icon {
+    display:inline-block;
+    width: 30px !important;;
+    height:30px !important;;
+  }
+
+  .wy-grid-for-nav{
+    position:relative !important;
+  }
+
+.holder{
+    width: 100% !important;
+
+  }
+
+.wy-nav-side {
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    float: left;
+    background: none;
+    width:300px !important;
+}
+
+ .navholder{
+    width: 100% !important;
+
+  }
+.navholder nav ul, .navholder nav:active ul { 
+    list-style: none;
+    text-align: left;
+    display: none;
+    position: absolute;
+    padding: 30px;
+    background: #000;
+    right: 0px;
+    top: 10px;
+    width: 50%;
+    z-index: 300;
+  }
+
+  .navholder nav{
+    width:100%;
+  }
+
+  .navholder nav li {
+
+    text-align: left !important;
+    width: 100%;
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+  }
+
+  .navholder nav:hover ul {
+
+    display: block;
+
+  }
+  .content_container {
+    max-width: 100% !important;
+  }
+  .container{
+    padding: 0px !important;
+  }
+}
+
+@media only screen and (max-width : 1025px){
+
+  .navholder{
+  width: 100% !important;
+}
+}
+
+@media only screen and (max-width: 1900px){
+.navholder {
+    width: 100% !important;
+}
+}
+
 
 h3, h4, h5, h6 {
     color: #2980b9;
@@ -17,68 +122,104 @@ h3, h4, h5, h6 {
     font-family: 'Open Sans', sans-serif;
 }
 
-.navigation {
-  list-style: none;
-  margin: 0; 
-  background: black;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-   -webkit-flex-flow: row wrap;
-  justify-content: center;
-}
-
-.first{
-    width: 32%;
-    float: left;
+.logo{
+  float: left;
+  margin-top: 2px;
+  background: url(../img/openbaton.png) center;
+  width: 120px;
+  height:30px;
+  margin-left: 10px;
 
 }
 
-.wy-nav-content{
-    padding: 1.618em 0em 0em 2em;
-    height: 100%;
-    max-width: 100%;
+.navcontainer {
+  width: 100%;
+  background:#000;
+  height: 55px;
+
 }
 
-.navigation a {
-  text-decoration: none;
-  display: block;
-  padding: 1em;
-  color: white;
+.navigation li{
+  border:none;
+  float: left;
+  display: inline-block;
+  font-size: 15px;
+
+}
+.navigation{
+    float: right;
+    border:none;
+    list-style: none;
+    float:right;
+    margin-top: 0px;
+
 }
 
-.navigation a:hover {
-  background: darken(black, 2%);
-}
 
-@media all and (max-width: 800px) {
-  .navigation {
-     justify-content: center;
-  }
-}
-
-@media all and (max-width: 600px) {
-  .navigation {
-    -webkit-flex-flow: column wrap;
-    flex-flow: column wrap;
-    padding: 0;
-  }
   
   .navigation a { 
     text-align: center; 
-    padding: 10px;
-    border-top: 1px solid rgba(255,255,255,0.3); 
-    border-bottom: 1px solid rgba(0,0,0,0.1); 
+    display:block;
+    padding: 0px 30px 0px 0px;
+    color: #fff;
+    text-decoration: none;
+
   }
 
   
-  .navigation li:last-of-type a {
+.navigation li:last-of-type a {
     border-bottom: none;
+
   }
+
+.navholder{
+width: 60%;
+margin: 0px auto;
+text-align: center;
+padding-top: 10px;
+
+
 }
 
+#menu-icon {
+  display: hidden;
+  width: 0px;
+  height:0px;
+  margin-right: 20px;
+  background: #ea8e0c url(../img/menu-icon.png);
+  float: right;
+
+}
+
+a:hover#menu-icon {
+
+  background-color: #444;
+
+
+}
+
+.container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;font-size;
+  padding:1em 4em 3em 0em;
+  overflow:auto;
+
+
+}
+
+  .wy-nav-content{
+    width: 100%
+  }
+
+
+.holder{
+  width: 90%;
+  margin: 0 auto;
+  text-left: center;
+  display: block;
+
+}
 
 .wy-nav-content-wrap {
     background:none;
@@ -206,21 +347,15 @@ nav.stickynav {
 .wy-grid-for-nav {
     position: relative;
     margin: 0 auto;
-    max-width: 1300px;
-    padding-left:12px;
 
     }
 }
-
-@media screen and (max-width: 800px){
-    .wy-grid-for-nav {
-        max-width: 800px;
-        padding-left: 0px;
-    }
-    nav.stickynav {
-        width: 100px;
-    }
+.wy-nav-content{
+  padding:2.7em 0em 0em 3em;
+  width: 100%;
+  max-width: 100%;
 }
+
 
 .wy-menu-vertical li.current {
     background: none;
@@ -244,11 +379,11 @@ nav.stickynav {
     position: relative;
     float: left;
     background: none;
-    width:200px;
+    width:28%;
 }
 
 .content_container{
-    max-width: 800px;
+    max-width: 68%;
     float: left;
 }
 
@@ -300,7 +435,7 @@ code, .rst-content tt {
     padding: 2px 5px;
     color: #ea8e0c;
     background-color: #fcf3e0;
-    font-size: 75%;
+    font-size: 100%;
     border:none;
 }
 /*

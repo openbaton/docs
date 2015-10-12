@@ -10,7 +10,7 @@ This module contains the necessary classes exposing APIs as ReST server. The mos
 
 ##### MAIN
 
-This module contains the classes charged of the startup of the whole system, gathering configuratons for instance.
+This module contains the classes in charge of the startup of the whole system and gathering configuratons for instance.
 
 ##### COMMON
 
@@ -42,7 +42,7 @@ This module contains the beans implementing the vnfm-int interfaces.
 
 ##### REPOSITORY
 
-This module contains specific repositories interfacing the database, in a generic way.
+This module contains specific repositories interfacing the database in a generic way.
 
 ##### CATALOGUE
 
@@ -70,7 +70,7 @@ This module contains all the exception classes common to every project containin
 
 ##### MONITORING
 
-This module contains the interface for the Monitoring openbaton plugins.
+This module contains the interface for the monitoring of the openbaton plugins.
 
 <!---
 References
@@ -79,3 +79,18 @@ References
 [api]: linktoapi
 [nfvo-architecture-full]:images/architecture-full.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
+
+<!---
+ Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>

@@ -1,8 +1,8 @@
 # Virtual Network Function Descriptor
 
-The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD)). It is defined as follows:
+The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD). It is defined as follows:
 
-```
+```json
 {  
     "vendor":"fokus",
     "version":"0.2",
@@ -96,14 +96,30 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 
 ### Deployment Flavour
 
-A delpoyment flavor corresponds to a flavour name existing in the VimInstance.
+A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
+It defines a set of constraints (e.q. calls per second) and provides the VDU(s) which meet those constraint.
 
 ### VNF Package
 
-Please see [VNF Package][vnf-package-link]. If no package is needed than a git url is needed to download the scripts needed for this vnfd and this url is defined into the vnfpackage->scriptsLink.
+Please see [VNF Package][vnf-package-link]. If no package is needed, then a git url is needed to download the scripts needed for this vnfd and this url is defined in the vnfpackage->scriptsLink.
 
 <!---
 References
 -->
 
-[vnf-package-link]: vnfpackage.md
+[vnf-package-link]: vnfpackage
+
+<!---
+Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>

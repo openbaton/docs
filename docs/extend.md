@@ -2,11 +2,11 @@
 Being an open source implementation, OpenBaton can be easily extended for supporting additional features or capabilities.
 
 # Extend the NFVO
-The NFVO has been implemented as a java modular application using the Spring.io framework. It is pretty easy to add a new module for extending the supported features. Please refer to the [nfvo-documentation] for learning a bit more about the NFVO architecture.
+The NFVO has been implemented as a java modular application using the Spring.io framework. It is pretty easy to add a new module for extending the supported features. Please refer to the [NFVO documentation][nfvo-documentation] for learning a bit more about the NFVO architecture.
 
 ## Implement a new plugin of the VIM interface
 
-First of all you need to install the plugin sdk to your local repository. The second step is to install the gradle plugin [plugin-sdk-gradle-plugin]. 
+First of all you need to install the plugin sdk to your local repository. The second step is to install the gradle [plugin][plugin-sdk-gradle-plugin].
 Create a new project with build.gradle starting with:
 
 ```
@@ -44,5 +44,20 @@ In order to facilitate the implementation of a VNFM specific for your VNFs, we p
 
 
 
-[nfvo-documentation](nfvo-architecture.html)
-[plugin-sdk-gradle-plugin](https://gitlab.fokus.fraunhofer.de/openbaton/plugin-sdk-gradle-plugin)
+[nfvo-documentation]:nfvo-architecture
+[plugin-sdk-gradle-plugin]:https://gitlab.fokus.fraunhofer.de/openbaton/plugin-sdk-gradle-plugin
+
+<!---
+ Script for open external links in a new tab
+-->
+<script type="text/javascript" charset="utf-8">
+      // Creating custom :external selector
+      $.expr[':'].external = function(obj){
+          return !obj.href.match(/^mailto\:/)
+                  && (obj.hostname != location.hostname);
+      };
+      $(function(){
+        $('a:external').addClass('external');
+        $(".external").attr('target','_blank');
+      })
+</script>
