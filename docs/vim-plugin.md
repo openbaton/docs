@@ -123,8 +123,10 @@ OpenBaton expects only these three **type** of Vim Instance:
 
 ### 1. Implement ClientInterfaces
 
-The *ClientInterfaces* is an interface that contains tha basic functionality that a Vim Instance should be provide, 
-and extends the [Remote Class].
+The *ClientInterfaces* is an interface that contains tha basic functionality that a Vim Instance should be provide, and extends the [Remote Class]. 
+
+_**NOTE**_: If you want to implement a Monitoring plugin, then you need to implement the Interface _ResourcePerformanceManagement_
+
 Your **MyVim** class will implement the methods inherited from *ClientInterfaces* that manages your Vim Instance:
  
 | Function          				    | Description       										|
@@ -198,6 +200,8 @@ public class MyVim implements ClientInterfaces {
     // ...
 }
 ```
+
+
 
 ### 2. Starter Class
 

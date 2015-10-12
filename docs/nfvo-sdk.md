@@ -2,7 +2,7 @@
 
 ### Import it
 
-A SDK is available if xou want to use NFVO from a java application.
+A SDK is available if you want to use the NFVO from a java application.
 
 The build.gradle file must contain:
 
@@ -14,7 +14,7 @@ repositories {
     }
 }
 
-dependencie{
+dependencies {
     compile 'org.openbaton:sdk:0.5'
 }
 ```
@@ -31,8 +31,8 @@ The NFVORequestor is the main and only class you need to use. From this class it
 
 | Params          	| Meaning       |
 | -------------   	| -------------:|
-| username  		| the username if the security is enable in the NFVO |
-| password 			| the password if the security is enable in the NFVO      |
+| username  		| the username if the security is enabled in the NFVO |
+| password 			| the password if the security is enabled in the NFVO      |
 | nfvo_ip 			| the ip of the NFVO      |
 | nfvo_port 		| the port of the orchestrator      |
 | version 			| the API version. Now only "1" is available      |
@@ -48,7 +48,7 @@ Once you have the NFVORequestor object, you can get the Agents. Available agents
 * VirtualLinkRestAgent
 * VNFFGRestAgent
 
-each of them exposes this methods:
+each of them exposes these methods:
 
 * create
 * findById
