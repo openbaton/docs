@@ -270,7 +270,7 @@ They are located in src/main/resources and are called application.properties and
 The **application.properties** contains parameters for setting up all log levels and the configuration for ActiveMQ.
 This file should contain the following lines.
 
-```gradle
+```properties
 logging.level.org.springframework=INFO
 logging.level.org.hibernate=INFO
 logging.level.org.jclouds=INFO
@@ -286,6 +286,7 @@ spring.activemq.password=admin
 ```
 
 If you want to change log levels or the ActiveMQ access information you need to adapt it here.
+Moreover, if your VNFManager is running on a different machine than the activemq broker, you need to change the `spring.activemq.broker-url` accordingly with the ip:port of the activemq broker.
 
 The **conf.properties** is also a very important configuration file.
 Here you need to define the type and endpoint of your VNFManager that is later used for registering on the NFVO.
@@ -303,7 +304,7 @@ concurrency = 15
 transacted = false
 
 #### Additionally
-vim-plugin-dir = ./plugins/vim-drivers
+vim-plugin-dir = ./plugins
 ```
 
 Where the parameters mean:

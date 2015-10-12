@@ -16,10 +16,10 @@ pages:
 - ['use-case-example.md', 'Use it', 'A full example ;-)']
 - ['extend.md', 'Extend it', 'Overview']
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
+- ['vim-plugin.md', 'Extend it', 'Write your own Plugin']
 - ['FAQ.md', 'FAQ', 'FAQ']
 - ['**HIDDEN**': 'vnf-descriptor.md']
 - ['**HIDDEN**': 'vnfr-states.md']
-- ['**HIDDEN**': 'vim-plugin.md']
 google_analytics: ['UA-68429895-1', 'openbaton.github.io']
 theme: readthedocs
 theme_dir: 'custom_theme'
