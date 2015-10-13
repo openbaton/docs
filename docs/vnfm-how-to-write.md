@@ -148,37 +148,33 @@ package org.openbaton.vnfm;
 public class MyVNFM {
 }
 ```
+
 If you have chosen a different package name you need to replace it as well at this point.
 Once this is done, you need to initialize the gradle wrapper and configuring according files.
 
-##### The Gradle Wrapper
-Afterwards go back to the root folder and run the following command to create automatically the gradle wrapper which is used for code management and compilation.
-For more information on how to use the gradle wrapper have a look at the gradle wrapper documentation [here][gradle-wrapper-link].
+##### The Build.Gradle file
 
-```bash
-$ gradle wrapper --gradle-version 2.4
-```
-
-Once this is done, you need to create the configuration files.
 First you need to create the build.gradle file by executing the following command from your root project folder.
 
 ```bash
 $ vim build.gradle
 ```
+
 This gradle configuration file needs to contain initially the following lines.
 
 ```gradle
-group 'org.openbaton'
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
+    }
+}
+group 'your.group'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
 apply plugin: 'maven'
-
-sourceCompatibility = 1.7
-
 ```
-If you have chosen a different package name you need to replace it at this point as well.
 
 The second gradle configuration is called settings.gradle.
 This file contains only the project name.
@@ -193,6 +189,13 @@ In our case my-vnfm.
 
 ```gradle
 rootProject.name = 'my-vnfm'
+```
+
+Afterwards go back to the root folder and run the following command to create automatically the gradle wrapper which is used for code management and compilation.
+For more information on how to use the gradle wrapper have a look at the gradle wrapper documentation [here][gradle-wrapper-link].
+
+```bash
+$ gradle wrapper --gradle-version 2.4
 ```
 
 Once you did all these steps, the initial project structure is created.
@@ -223,43 +226,15 @@ Finally you need to extend your build.gradle for announcing the Main Class, plug
 So open the build.gradle an add missing line so that the file contains the following line.
 
 ```gradle
-group 'org.openbaton'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-apply plugin: 'spring-boot'
-apply plugin: 'maven'
-
-buildscript {
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
-    }
-    repositories {
-        mavenCentral()
-        maven {
-            url "http://193.175.132.176:8081/nexus/content/groups/public"
-        }
-    }
-}
-
-sourceCompatibility = 1.7
+//...
 
 bootRepackage {
     mainClass = 'org.openbaton.vnfm.MyVNFM'
 }
 
-repositories {
-    mavenCentral()
-    maven {
-        url "http://193.175.132.176:8081/nexus/content/groups/public"
-    }
-}
-
-dependencies {
-    compile 'org.hibernate:hibernate-core:4.3.10.Final'
-}
-
+//...
 ```
+
 Take care about the configuration of the mainClass.
 If the name or package of your mainClass is different, you need to replace it here as well.
 
@@ -267,8 +242,7 @@ If the name or package of your mainClass is different, you need to replace it he
 The previously created properties files are used to define several things.
 They are located in src/main/resources and are called application.properties and conf.properties.
 
-The **application.properties** contains parameters for setting up all log levels and the configuration for ActiveMQ.
-This file should contain the following lines.
+The **application.properties** contains parameters for setting up all log levels and the configuration for ActiveMQ. This file is useful for configuring the springframework (see [Spring Boot configuration file](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)). This file can contain the following lines.
 
 ```properties
 logging.level.org.springframework=INFO
@@ -276,8 +250,7 @@ logging.level.org.hibernate=INFO
 logging.level.org.jclouds=INFO
 
 logging.level.org.apache.activemq = WARN
-logging.level.org.openbaton.nfvo = DEBUG
-logging.level.org.openbaton.vnfm = DEBUG
+logging.level.org.openbaton = DEBUG
 
 #### activeMQ
 spring.activemq.broker-url=tcp://localhost:61616
@@ -285,8 +258,9 @@ spring.activemq.user=admin
 spring.activemq.password=admin
 ```
 
-If you want to change log levels or the ActiveMQ access information you need to adapt it here.
-Moreover, if your VNFManager is running on a different machine than the activemq broker, you need to change the `spring.activemq.broker-url` accordingly with the ip:port of the activemq broker.
+If you want to change log levels or the ActiveMQ access information you need to adapt it here. Please note that if the VNFManager is running in the same machine of the activeMQ broker, this file is not needed.
+
+_**NOTE**_: _If your VNFManager is running on a different machine than the activemq broker, you need to change the `spring.activemq.broker-url` accordingly with the ip:port of the activemq broker._
 
 The **conf.properties** is also a very important configuration file.
 Here you need to define the type and endpoint of your VNFManager that is later used for registering on the NFVO.
@@ -337,30 +311,30 @@ This section shows how to import and configure your VNFManager to make use of th
 For gathering the vnfm-sdk-jms library you need to import the libraries by adding the missing lines to your build.gradle:
 
 ```gradle
-group 'org.openbaton'
-version '1.0-SNAPSHOT'
+//...
 
-apply plugin: 'java'
-apply plugin: 'spring-boot'
-apply plugin: 'maven'
+dependencies {
+    compile 'org.hibernate:hibernate-core:4.3.10.Final'
+    compile 'org.openbaton:vnfm-sdk-jms:0.6'
+}
 
+//...
+```
+
+**Note** To make use of the vnfm-sdk-rest you need to change 'vnfm-sdk-jms' to 'vnfm-sdk-rest' only.
+
+So the final build.gradle file results like:
+
+```gradle
 buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
     }
-    repositories {
-        mavenCentral()
-        maven {
-            url "http://193.175.132.176:8081/nexus/content/groups/public"
-        }
-    }
 }
 
-sourceCompatibility = 1.7
-
-bootRepackage {
-    mainClass = 'org.openbaton.vnfm.MyVNFM'
-}
+apply plugin: 'spring-boot'
+apply plugin: 'java'
+apply plugin: 'maven'
 
 repositories {
     mavenCentral()
@@ -368,13 +342,15 @@ repositories {
         url "http://193.175.132.176:8081/nexus/content/groups/public"
     }
 }
-dependencies {
-    compile 'org.hibernate:hibernate-core:4.3.10.Final'
-    compile 'org.openbaton:vnfm-sdk-jms:0.6'
-}
-```
 
-**Note** To make use of the vnfm-sdk-rest you need to change 'vnfm-sdk-jms' to 'vnfm-sdk-rest' only.
+dependencies {
+    compile 'org.openbaton:vnfm-sdk-jms:0.6'
+    compile 'org.hibernate:hibernate-core:4.3.10.Final'
+}
+
+group = 'your.group'
+version = 1.0-SNAPSHOT
+```
 
 Once you did this, you need to trigger the gradle build process by running the following command via the command line in your project's root folder.
 
