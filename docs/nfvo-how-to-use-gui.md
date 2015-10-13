@@ -89,11 +89,11 @@ VDU you can see the details of VDU
 ### VNF Packages
 In this page you can upload the **VNF Package**. For more information about the VNF Package please read the [VNF Package documentation] 
 For uploading a _.tar_ you can click on the button **Upload VNFPackage**
-Will be shown this window where you can Drag & Drop the file or just click and choose using your file manager the file will be uploaded
+Will be shown this window where you can Drag & Drop the file or just click on white area and choose your file using your file manager
 
 ![Drag&Drop modal][drag_drop]
 
-After you click the button **START** will be sent to the _NFVO_ once the process is finished you will see the package in the list
+After you click the button **Start** will be sent to the _NFVO_ once the process is finished you will see the package in the list
 
 ![Drag&Drop modal start][drag_drop1]
 
