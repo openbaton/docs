@@ -249,6 +249,11 @@ Congratulations you have your version of the interface for your Vim Instance tha
 
 Once you copied the jar file into the right folder, you need to (re)start the NFVO. The plugin will automatically register and you can see that there will be a log file in the NFVO folder called _plugin-myPlugin.log_ containing the logs of the plugin. The myPlugin now acts as a normal plugin so for using it check out the [Vim instance documentation][vim-instance-documentation] in order to point out to the new plugin.
 
+**NOTE**: Since you are using an implementation of [RMI][rmi] you can also launch your plugin from your command line just typing
+
+```bash
+$ java -jar myPlugin-1.0-SNAPSHOT.jar [the-vim-type] [ip_NFVO] 1099
+```
 [spring-boot]: http://projects.spring.io/spring-boot/
 [openjdk]: http://openjdk.java.net/install/
 [Remote Class]: http://docs.oracle.com/javase/7/docs/api/java/rmi/Remote.html

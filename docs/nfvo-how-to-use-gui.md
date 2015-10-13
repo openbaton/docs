@@ -25,7 +25,13 @@ For registering a new Vim Instance you should click the button on the top-right 
 
 If you want to delete one Vim Instance you can click the button **Action** and than **Delete** in the menu
 
-## Network Service Descriptors
+## Catalogue
+In the menu on the left side under the voice _Catalogue_ you can manage 
+
+1. NS Descriptors
+2. VNF Packages
+
+### Network Service Descriptors
 In the menu on the left side under the template Catalogue you can find **NS Decriptors** button.
 On this page you can see the list of NS Descriptors stored into OpenBaton
 
@@ -80,6 +86,19 @@ VDU you can see the details of VDU
 
 ![VDU Information][VDUInformation]
 
+### VNF Packages
+In this page you can upload the **VNF Package**. For more information about the VNF Package please read the [VNF Package documentation] 
+For uploading a _.tar_ you can click on the button **Upload VNFPackage**
+Will be shown this window where you can Drag & Drop the file or just click and choose using your file manager the file will be uploaded
+
+![Drag&Drop modal][drag_drop]
+
+After you click the button **START** will be sent to the _NFVO_ once the process is finished you will see the package in the list
+
+![Drag&Drop modal start][drag_drop1]
+
+![Drag&Drop list][drag_drop2]
+
 ## Network Service Records 
 
 In the menu of the left side if you click on the **Orchestrator NS** and than **NS Records** you will see the list of *Network Service Records*
@@ -103,6 +122,9 @@ To look at the details of VNFR just click on the **id** of a VNFR.
 [vimpage]:images/vimpage.png
 [registeraNewVim]:images/registeraNewVim.png
 [NSDlist]:images/NSDlist.png
+[drag_drop]:images/drag_drop.png
+[drag_drop1]:images/drag_drop1.png
+[drag_drop2]:images/drag_drop2.png
 [NSDcreateFile]:images/NSDcreateFile.png
 [NSDcreateForm]:images/NSDcreateForm.png
 [VNFDlistintoNSD]:images/VNFDlistintoNSD.png
@@ -115,7 +137,7 @@ To look at the details of VNFR just click on the **id** of a VNFR.
 [NetworkServiceRecordsList]:images/NetworkServiceRecordsList.png
 [NSRinfo]:images/NSRinfo.png
 [VNFRecordInformation]:images/VNFRecordInformation.png
-
+[VNF Package documentation]: vnfpackage.md
 <!---
 Script for open external links in a new tab
 -->
