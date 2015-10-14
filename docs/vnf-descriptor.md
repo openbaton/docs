@@ -77,10 +77,10 @@ The other most important parameters are described in the following sections.
 
 | Params          				| Meaning       																|
 | -------------   				| -------------:																|
-| vm_image  					| The list of image names or ids existing in the VimInstance or in the VNF Package						|
+| vm_image  					| The image name or id existing in the VimInstance or in the VNF Package						|
 | vimInstanceName				| The VimInstance name chosen      				|
-| scale_in_out					| The maximum number of VMs that this VNFD can reach if scaling is enabled      	|
-| vnfc	 						| the minimum number of VMs that will be deployed for this VNFD. It contains the _exposed_ field, in case the machine needs to be reachable, and the list of _connection_point_ pointing to a Internal Virtual Link     	|
+| scale_in_out					| The maximum number of instances (VMs) which can be created to support scale out/in.      	|
+| vnfc	 						| Contains information that is distinct for each VNFC created based on this VDU. Basically is a list and for each element will be launched a VM. Each element (VNFC) contains the _exposed_ field (in case the machine needs to be reachable) and the list of _connection_point_ pointing to a Internal Virtual Link     	|
 
 ### Configurations
 
@@ -90,6 +90,9 @@ The configuration object contains a list of parameters defined by key, value tha
 
 The Internal Virtual Link points to a Virtual Link Descriptor defined in the Network Service Descriptor.
 
+**Note:** at the moment there are no difference between internal and external VL. All the available networks should be specified in the NSD->VLD, than in the VNFD->VL you specify which networks you want to use.
+Finally in the VNFD->VDU->VNFC->connection_point you can specify which network to attach among those available in VNFD->VL.
+
 ### Lifecycle Events
 
 A lifecycle event is composed by an Event and a list of strings that correspond to the script names needed to be run in that particular Event.
@@ -97,7 +100,7 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 ### Deployment Flavour
 
 A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
-It defines a set of constraints (e.q. calls per second) and provides the VDU(s) which meet those constraint.
+For example if you are using Openstack as Vim, the flavour_key parameter shall correspond to a [flavour name of Openstack][openstack-flavours] (e.q. m1.small).
 
 ### VNF Package
 
@@ -108,6 +111,7 @@ References
 -->
 
 [vnf-package-link]: vnfpackage
+[openstack-flavours]: http://docs.openstack.org/openstack-ops/content/flavors.html
 
 <!---
 Script for open external links in a new tab

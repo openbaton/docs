@@ -41,7 +41,9 @@ The Network Service Descriptor contains the values that are defined in [ETSI MAN
 
 ### VirtualLinkDescriptor
 
-The VirtualLinkDescriptor must contain a parameter _name_ with the value of a network that will be used by the VirtualNetworkFunctionDescriptors. If the network exists, than this network will be used, if not a new one will be created.
+The Virtual Link Descriptor (VLD) describes the basic topology of the connectivity between one or more VNFs connected to this VL.
+The VLD must contain a parameter _name_ with the value of a network that will be used by the VirtualNetworkFunctionDescriptors.
+If the network exists, than this network will be used, if not a new one will be created.
 
 ### VNF Dependencies
 
