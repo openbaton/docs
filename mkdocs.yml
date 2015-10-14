@@ -5,7 +5,6 @@ pages:
 - ['nfvo-installation.md', 'Installation', 'Install NFVO']
 - ['vim-instance-documentation.md', 'Installation', 'Register a VIM']
 - ['use.md', 'Use it', 'Introduction']
-- ['vnfm-introduction.md', 'Use it', 'VNFM approaches']
 - ['vnfm-generic.md', 'Use it', 'Generic VNFM']
 - ['vnfm-how-to-write.md', 'Use it', 'Write your own VNFM']
 - ['vnfm-vendor-specific.md', 'Use it', 'Use my VNFM']

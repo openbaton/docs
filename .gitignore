@@ -49,3 +49,7 @@ crashlytics-build.properties
 
 
 site
+
+# SublimeText
+
+*.save
