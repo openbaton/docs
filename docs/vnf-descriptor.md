@@ -56,9 +56,12 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
             "flavour_key":"m1.small"
         }
     ],
-    "vnfPackage":{
-        "scriptsLink":"https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git"
-    }
+    "provides":[
+        "ip",
+        "source",
+        "param1",
+        "param2"
+      ]
 }
 ```
 
@@ -99,14 +102,16 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
 It defines a set of constraints (e.q. calls per second) and provides the VDU(s) which meet those constraint.
 
-### VNF Package
+### provides
 
-Please see [VNF Package][vnf-package-link]. If no package is needed, then a git url is needed to download the scripts needed for this vnfd and this url is defined in the vnfpackage->scriptsLink.
+This list of parameter names defines the parameters that the VnfManager will fill at runtime. For that reason they have a meaning only if you [write your own VnfManager][vnfm-how-to]. This parameters are then available in any scripts. For the usage of the parameters please see [How to use the parameters][param-how-to] page.
 
 <!---
 References
 -->
 
+[param-how-to]: vnf-parameters
+[vnfm-how-to]: vnfm-how-to-write
 [vnf-package-link]: vnfpackage
 
 <!---

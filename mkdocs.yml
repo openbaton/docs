@@ -19,6 +19,7 @@ pages:
 - ['FAQ.md', 'FAQ', 'FAQ']
 - ['**HIDDEN**': 'vnf-descriptor.md']
 - ['**HIDDEN**': 'vnfr-states.md']
+- ['**HIDDEN**': 'vnf-parameters.md']
 google_analytics: ['UA-68429895-1', 'openbaton.github.io']
 theme: readthedocs
 theme_dir: 'custom_theme'
