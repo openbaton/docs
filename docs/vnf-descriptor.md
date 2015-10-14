@@ -1,6 +1,6 @@
 # Virtual Network Function Descriptor
 
-The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD). It is defined as follows:
+The VirtualNetworkFunctionDescriptor is contained inside the Network Service Descriptor (NSD). It is a json file and is defined as follows:
 
 ```json
 {  
