@@ -50,8 +50,8 @@ A VNF Dependency is composed by
 
 | Params          				| Meaning       													|
 | -------------   				| -------------:													|
-| source  						| The name of the VirtualNetworkFunctionDescriptor that provides one or more parameters (see [VirtualNetworkFunctionDescriptor][vnf-descriptor] provides section)|
-| target 						| The name of the VirtualNetworkFunctionDescriptor that requires one or more parameters	(see [VirtualNetworkFunctionDescriptor][vnf-descriptor] requires section)|
+| source  						| The name of the VirtualNetworkFunctionDescriptor that provides one or more parameters (see [VNFManager Generic][vnfm-generic])|
+| target 						| The name of the VirtualNetworkFunctionDescriptor that requires one or more parameters	(see [VNFManager Generic][vnfm-generic])|
 | parameters					| The name of the parameters that the *target* requires     	|
 
 
@@ -60,6 +60,7 @@ References
 -->
 
 [vnf-descriptor]:vnf-descriptor
+[vnfm-generic]:vnfm-generic
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 
 <!---
