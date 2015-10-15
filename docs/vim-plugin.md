@@ -109,7 +109,7 @@ dependencies {
 
 The Vim plugin is splitted into two classes 
 
-1. Implementation of **ClientInterfaces**
+1. Implementation of **VimDriver**
 2. The **Starter Class** that contain the main function for bootstrapping the Vim plugin
 
 #### Type of Vim Instance
@@ -121,13 +121,13 @@ OpenBaton expects only these three **type** of Vim Instance:
 
 **NOTE:** Your Vim plugin implementation ***type*** should be one of these to be launched and used by OpenBaton
 
-### 1. Implement ClientInterfaces
+### 1. Implement VimDriver
 
-The *ClientInterfaces* is an interface that contains tha basic functionality that a Vim Instance should be provide, and extends the [Remote Class]. 
+The *VimDriver* is an bastract class that contains tha basic functionality that a Vim Instance should be provide, and extends the [Remote Class]. 
 
 _**NOTE**_: If you want to implement a Monitoring plugin, then you need to implement the Interface _ResourcePerformanceManagement_
 
-Your **MyVim** class will implement the methods inherited from *ClientInterfaces* that manages your Vim Instance:
+Your **MyVim** class will implement the methods inherited from *VimDriver* that manages your Vim Instance:
  
 | Function          				    | Description       										|
 | -------------   				        | -------------:											|
@@ -163,7 +163,7 @@ package org.myplugin.example;
 import org.openbaton.catalogue.mano.common.DeploymentFlavour;
 import org.openbaton.catalogue.nfvo.*;
 import org.openbaton.vim.drivers.exceptions.VimDriverException;
-import org.openbaton.vim.drivers.interfaces.ClientInterfaces;
+import org.openbaton.vim.drivers.interfaces.VimDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -176,7 +176,7 @@ import java.util.Set;
 
 @Service
 @Scope("prototype")
-public class MyVim implements ClientInterfaces {
+public class MyVim implements VimDriver{
 
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
