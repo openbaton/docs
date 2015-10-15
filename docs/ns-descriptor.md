@@ -42,7 +42,7 @@ The Network Service Descriptor contains the values that are defined in [ETSI MAN
 
 The Virtual Link Descriptor (VLD) describes the basic topology of the connectivity between one or more VNFs connected to this VL.
 The VLD must contain a parameter _name_ with the value of a network that will be used by the VirtualNetworkFunctionDescriptors.
-If the network exists, than this network will be used, if not a new one will be created.
+If the network exists, then this network will be used, if not a new one will be created.
 
 ### VNF Dependencies
 
@@ -50,8 +50,8 @@ A VNF Dependency is composed by
 
 | Params          				| Meaning       													|
 | -------------   				| -------------:													|
-| source  						| The name of the VirtualNetworkFunctionDescriptor that provides one or more parameters (see [VNFManager Generic][vnfm-generic])|
-| target 						| The name of the VirtualNetworkFunctionDescriptor that requires one or more parameters	(see [VNFManager Generic][vnfm-generic])|
+| source  						| The name of the VirtualNetworkFunctionDescriptor that provides one or more parameters (see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
+| target 						| The name of the VirtualNetworkFunctionDescriptor that requires one or more parameters	(see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
 | parameters					| The name of the parameters that the *target* requires     	|
 
 
@@ -61,6 +61,7 @@ References
 
 [vnf-descriptor]:vnf-descriptor
 [vnfm-generic]:vnfm-generic
+[vnf-parameters]:vnf-parameters
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 
 <!---
