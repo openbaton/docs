@@ -76,7 +76,7 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
 
 The other most important parameters are described in the following sections.
 
-### Virtual Deploymen Unit (VDU)
+### Virtual Deployment Unit (VDU)
 
 | Params          				| Meaning       																|
 | -------------   				| -------------:																|
@@ -95,13 +95,13 @@ VNFComponents represent the minimum number of VMs that will be deployed for this
 
 ### Configurations
 
-The configuration object contains a list of parameters defined by key, value that can be used in the scripts.
+The configuration object contains a list of parameters defined by key, value that can be used in the scripts (see [VNF Parameters][vnf-parameters]).
 
 ### Virtual Link (aka Internal Virtual Link)
 
 The Internal Virtual Link points to a Virtual Link Descriptor defined in the Network Service Descriptor.
 
-**Note:** at the moment there are no difference between internal and external VL. All the available networks should be specified in the NSD->VLD, than in the VNFD->VL you specify which networks you want to use.
+**Note:** at the moment there are no difference between internal and external VL. All the available networks should be specified in the NSD->VLD, then in the VNFD->VL you specify which networks you want to use.
 Finally in the VNFD->VDU->VNFC->connection_point you can specify which network to attach among those available in VNFD->VL. The virtual_link_reference parameter also must be filled with the exact same links.
 
 ### Lifecycle Events
@@ -123,6 +123,7 @@ References
 
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 [param-how-to]: vnf-parameters
+[vnf-parameters]:vnf-parameters
 [vnfm-how-to]: vnfm-how-to-write
 [vnf-package-link]: vnfpackage
 [openstack-flavours]: http://docs.openstack.org/openstack-ops/content/flavors.html

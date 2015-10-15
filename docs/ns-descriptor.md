@@ -1,4 +1,4 @@
-# Network Serice Descriptor
+# Network Service Descriptor
 
 The Network Service Descriptor contains the values that are defined in [ETSI MANO specification][nfv-mano]. The NFVO is able to handle JSON file describing a Network Service Descriptor. An example of the most important fields follows:
 
@@ -50,7 +50,7 @@ A VNF Dependency is composed by
 
 | Params          				| Meaning       													|
 | -------------   				| -------------:													|
-| source  						| The name of the VirtualNetworkFunctionDescriptor that provides one or more parameters (see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
+| source  						| The name of the VirtualNetworkFunctionDescriptor that [provides] one or more parameters (see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
 | target 						| The name of the VirtualNetworkFunctionDescriptor that requires one or more parameters	(see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
 | parameters					| The name of the parameters that the *target* requires     	|
 
@@ -60,6 +60,7 @@ References
 -->
 
 [vnf-descriptor]:vnf-descriptor
+[provides]:vnf-descriptor#provides
 [vnfm-generic]:vnfm-generic
 [vnf-parameters]:vnf-parameters
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf

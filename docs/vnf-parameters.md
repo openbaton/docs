@@ -27,15 +27,15 @@ The useful parameters that you can use in your scripts are defined in two differ
 
 ### Configurations
 
-This field describe an Entity that has a list of ConfigurationParameters inside. This is a list of Entity containing key:value. This parameters are always available in your scripts. See the section below, [how to use the parameters](#How to use the parameters), in order to see how to use them.
+This field describes an Entity that has a list of ConfigurationParameters inside. This is a list of Entities containing key:value. These parameters are always available in your scripts. See the section below, [how to use the parameters](#How to use the parameters), in order to see how to use them.
 
 
 ### Provides
 
 
-This field is a list of parameter keys that will be available in all your scripts. The difference is that these parameters are parameters the actual value will be known only at runtime. For that reason these parameters can only be filled by a specific VNFM. So you need to implement a VNFM able to handle these specific parameters in the fillSpecificParameters method (see [How to write a VNFM][vnfm-how-to]).
+This field is a list of parameter keys that will be available in all your scripts. The difference is that these parameters are parameters whose actual value will be known only at runtime. For that reason these parameters can only be filled by a specific VNFM. So you need to implement a VNFM able to handle these specific parameters in the fillSpecificParameters method (see [How to write a VNFM][vnfm-how-to]).
 
-**NOTE**: _there are some out-of-the-box parameters that will be added automatically to the VNFRecord. One of this parameters is key = < network_name >, value = < actual-IP >_
+**NOTE**: _there are some out-of-the-box parameters that will be added automatically to the VNFRecord. One of these parameters is key = < network_name >, value = < actual-IP >_
 
 
 ### How to use the parameters
@@ -48,7 +48,7 @@ All the above parameters are available in all the scripts of the VNF that define
 echo "the value of the configuration parameter key1 is $key1"
 ```
 
-As described in the [Generic VNFM][vnfm-generic] page, you can set up dependency in order to use parameters from another VNF in the MODIFY lifecycle event. For doing that you need to specify in the Network Service Descriptor the VNF Dependency, for instance if a VNF vnf-1 is connected to network net1 and vnf-2 needs the ip of vnf-1 on that network the VNF Dependency will be:
+As described in the [Generic VNFM][vnfm-generic] page, you can set up dependencies in order to use parameters from another VNF in the MODIFY lifecycle event. For doing that you need to specify in the Network Service Descriptor the VNF Dependency, for instance if a VNF vnf-1 is connected to network net1 and vnf-2 needs the ip of vnf-1 on that network the VNF Dependency will be:
 
 ```json
 
