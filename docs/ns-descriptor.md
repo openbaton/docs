@@ -8,7 +8,6 @@ The Network Service Descriptor contains the values that are defined in [ETSI MAN
     "vendor":"fokus",
     "version":"0.1-ALPHA",
     "vnfd":[  ...  ],
-    "vnffgd":[    ],
     "vld":[  
         {  
             "name":"private"

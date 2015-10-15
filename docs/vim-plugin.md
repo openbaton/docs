@@ -87,7 +87,7 @@ buildscript {
 }
 
 repositories {
-    maven { url "http://193.175.132.176:8081/nexus/content/groups/public/" }
+    maven { url "http://get.openbaton.org:8081/nexus/content/groups/public/" }
 }
 
 apply plugin: 'java'
@@ -99,7 +99,7 @@ mainClassName = 'org.myplugin.example.Starter'
 
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:0.7'
+    compile 'org.openbaton:plugin-sdk:0.8'
     compile'org.springframework:spring-context:4.2.1.RELEASE'
 }
 

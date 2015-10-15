@@ -83,7 +83,15 @@ The other most important parameters are described in the following sections.
 | vm_image  					| The list of image names or ids existing in the VimInstance or in the VNF Package						|
 | vimInstanceName				| The VimInstance name chosen      				|
 | scale_in_out					| The maximum number of VMs that this VNFD can reach if scaling is enabled      	|
-| vnfc	 						| the minimum number of VMs that will be deployed for this VNFD. It contains the _exposed_ field, in case the machine needs to be reachable, and the list of _connection_point_ pointing to a Internal Virtual Link     	|
+
+##### VNFC
+
+VNFComponents represent the minimum number of VMs that will be deployed for this VNFD. Each of them can contain:
+
+| Params                        | Meaning                                                                       |
+| -------------                 | -------------:                                                                |
+| exposed	 					| in case the machine needs to be reachable                                     |
+|connection_point               | each connection point is a reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano])    	        |
 
 ### Configurations
 
@@ -110,6 +118,7 @@ This list of parameter names defines the parameters that the VnfManager will fil
 References
 -->
 
+[nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 [param-how-to]: vnf-parameters
 [vnfm-how-to]: vnfm-how-to-write
 [vnf-package-link]: vnfpackage
