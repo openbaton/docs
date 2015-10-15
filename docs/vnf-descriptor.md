@@ -102,7 +102,7 @@ The configuration object contains a list of parameters defined by key, value tha
 The Internal Virtual Link points to a Virtual Link Descriptor defined in the Network Service Descriptor.
 
 **Note:** at the moment there are no difference between internal and external VL. All the available networks should be specified in the NSD->VLD, than in the VNFD->VL you specify which networks you want to use.
-Finally in the VNFD->VDU->VNFC->connection_point you can specify which network to attach among those available in VNFD->VL.
+Finally in the VNFD->VDU->VNFC->connection_point you can specify which network to attach among those available in VNFD->VL. The virtual_link_reference parameter also must be filled with the exact same links.
 
 ### Lifecycle Events
 
@@ -113,9 +113,9 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
 For example if you are using Openstack as Vim, the flavour_key parameter shall correspond to a [flavour name of Openstack][openstack-flavours] (e.q. m1.small).
 
-### provides
+### Provides
 
-This list of parameter names defines the parameters that the VnfManager will fill at runtime. For that reason they have a meaning only if you [write your own VnfManager][vnfm-how-to]. This parameters are then available in any scripts. For the usage of the parameters please see [How to use the parameters][param-how-to] page.
+This list of parameter names defines the parameters that the VnfManager will fill at runtime. For that reason they have a meaning only if you [write your own VnfManager][vnfm-how-to]. This parameters are then available in any scripts. For the usage of the parameters, please, refer to [How to use the parameters][param-how-to] page.
 
 <!---
 References
