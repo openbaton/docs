@@ -28,8 +28,12 @@ The example of a Metadata.yaml file below shows a basic definition of a VNFPacka
 ```yaml
 name: vnfPackage_name
 scripts-link: scripts_link
-image-link: image_link
 image:
+    upload: option
+    ids: list_of_ids
+    names: list_of_names
+    link: image_link
+image-config:
     name: image_name
     diskFormat: disk_format
     containerFormat: container_format
@@ -39,7 +43,7 @@ image:
     isPublic: is_public
 ```
 
-Each property is explained more in detail now. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
+In the following each property is explained more in detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
 
 * ***name***: The name defines the name of the VNFPackage itself used to store it on the database.
 * ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
@@ -49,14 +53,35 @@ Each property is explained more in detail now. Please consider also the notes si
     * **Note** The scripts-link is processed by the Element Management System (EMS) in the meaning of fetching the files from that link.
         So you need to take care about ensuring that the URL defined is available.
     * **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
-* ***image-link***: This link points to an image available over this URL used to upload the image to the cloud environment.
-    * **Note** Either you have to define the image-link or put the image directly into the VNFPackage.
-        Otherwise a NotFoundException will be thrown and the VNFPackage will not onboard.
-        The image-link has a higher priority than the image stored in the VNFPackage directly.
-    * **Note** The image-link is a future feature and not implemented in the current version.
-        Therefore, you need to put the image into the VNFPackage directly and remove this line or let the value empty.
-* ***image***: All the properties explained below are required to upload the image to the cloud environment properly.
-    This image will be uploaded to each cloud environment automatically while onboarding the VNFPackage.
+* ***image***:
+    * ***upload***: Here you can choose between different options (true, false, check) explained below.
+        * true: choosing this option means to upload the defined image on all the VimInstances does not matter if an image with the defined name exist or not.
+        * false: chossing this option means that you assume that the image (defined in the ids or names) is already present.
+        If the image does not exist, the VNFPackage onboarding will throw an exception.
+        In this case the image (if defined) will be ignored.
+        * check: this option means that the VNFPackageManagement checks first whether the image is available (defined in ids or names).
+        If the image does not exist, it will be created a new one with the image defined in the VNFPackage.
+    * ***ids***: The list of image ids is used to fetch the image from the corresponding VimInstance.
+        For doing that it iterates over all ids and checks if an image with that id exists on the VimInstance.
+        The defined ids have an higher priority than the the list of names.
+        We distinguish between the following cases:
+        * If it finds no image with these ids, it continues with the list of image names.
+        * If it finds one image with these ids, this image will be used.
+        * If it finds multiple images with the same id (should never happen) or multiple ids matches to multiple images, it will be thrown an exception because it is not clear which image to use.
+    * ***names***: The list of image names is used to fetch the image from the corresponding VimInstance.
+        For doing that it iterates over all names and checks if an image with that name exists on the VimInstance.
+        The list of names have a lower priority than the the list of ids.
+        We distinguish between the following cases:
+        * If it finds no image with that name, it will be thrown an exception except you defined the upload option check.
+        Then it will create a new image defined in the VNFPackage.
+        * If it finds one image, this image will be used.
+        * If it finds multiple images with the same name or multiple names matches to multiple images, it will be thrown an exception because it is not clear which image to use.
+    * ***link***: This link points to an image available over this URL used to upload the image to the cloud environment.
+        * **Note** Either you have to define the image-link or put the image directly into the VNFPackage.
+            Otherwise a NotFoundException will be thrown and the VNFPackage will not onboard.
+            The image-link has a higher priority than the image stored in the VNFPackage directly.
+* ***image-config***: All the properties explained below are required to upload the image to the cloud environment properly.
+    In case of creating a new image this configuration will be used.
     * ***name***: This defines the name for the image to upload either located directly in the VNFPackage or available via the URL defined in image-link.
     * ***diskFormat***: The diskFormat defines the format in which disk type the image is stored.
     * ***containerFormat***: The containerFormat defines the format in which container type the image is stored .
@@ -119,8 +144,11 @@ Finally, it looks as shown below.
 ```yaml
 name: iperf-server
 scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
-image-link:
 image:
+    upload: check
+    names:
+        - iperf_server_image
+image-config:
     name: iperf_server_image
     diskFormat: QCOW2
     containerFormat: bare
@@ -204,8 +232,11 @@ Finally, it looks as shown below.
 ```yaml
 name: iperf-client
 scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
-image-link:
 image:
+    upload: check
+    names:
+        - iperf_client_image
+image-config:
     name: iperf_client_image
     diskFormat: QCOW2
     containerFormat: bare
