@@ -1,4 +1,6 @@
 This network service is composed by two VNF (iperf-server and iperf-client), which the iperf-client is composed by two VNFC.
+
+**Note:** no vnf package is used in this example. Only a link to reach the scripts. Basically could be a link to a git repository in which there are all the scripts.
 ```json
 {
    "name":"iperf-NS",
@@ -54,7 +56,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
             }
          ],
          "vnfPackage":{
-            "scriptsLink":"https://gitlab.fokus.fraunhofer.de/ogo/scipts_to_test.git"
+            "scriptsLink":"https://ENTER A VALID LINK TO REACH THE SCRIPTS"
          }
       },
       {
@@ -121,7 +123,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
             }
          ],
          "vnfPackage":{
-            "scriptsLink":"https://gitlab.fokus.fraunhofer.de/ogo/scipts_to_test.git"
+            "scriptsLink":"https://ENTER A VALID LINK TO REACH THE SCRIPTS"
          }
       }
    ],
