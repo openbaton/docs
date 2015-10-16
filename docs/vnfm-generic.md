@@ -148,12 +148,12 @@ After the instantiation of the vnf-server we would configure it with the followi
 ```bash
 #!/bin/bash
 
-echo "This is the ip of the vnf-database: ${database_private1}"
+echo "This is the ip of the vnf-database: ${database_private}"
 # ... Add the code to connect to the vnf-database with the ip: ${database_private1} ...
 
 ```
 
-**Note1**: "database" is the type of the vnf-database, private1 is the name of the network plus the number of the network (in this case "1").
+**Note1**: "database" is the type of the vnf-database, private is the name of the network.
 
 **Note2**: All the scripts need to be in a repository or in the vnf package (see the vnf package structure [here][vnfpackage-doc-link]).
 
@@ -241,7 +241,7 @@ The result network service descriptor shall include both the vnf descriptors abo
                 "name": "vnf-server"
             },
             "parameters":[
-                "private1"
+                "private"
             ]
         }
     ]
