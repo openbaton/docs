@@ -115,7 +115,7 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
 For example if you are using Openstack as Vim, the flavour_key parameter shall correspond to a [flavour name of Openstack][openstack-flavours] (e.q. m1.small).
 
-### Provides
+### Provides, Requires
 
 This list of parameter names defines the parameters that the VnfManager will fill at runtime. For that reason they have a meaning only if you [write your own VnfManager][vnfm-how-to]. This parameters are then available in any scripts. For the usage of the parameters, please, refer to [How to use the parameters][param-how-to] page.
 
