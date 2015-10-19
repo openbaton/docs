@@ -43,7 +43,7 @@ image-config:
     isPublic: is_public
 ```
 
-In the following each property is explained more in detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
+In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
 
 * ***name***: The name defines the name of the VNFPackage itself used to store it on the database.
 * ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
@@ -55,28 +55,28 @@ In the following each property is explained more in detail. Please consider also
     * **Note** Scripts are executed during different lifecycle-events.
 * ***image***:
     * ***upload***: Here you can choose between different options (true, false, check).
-        * true: choosing this option means to upload the defined image on all the VimInstances. It does not matter if an image with the defined name exist or not.
-        * false: chossing this option means that you assume that the image (defined in the ids or names) is already present.
+        * true: choosing this option means to upload the defined image on all the VimInstances. It does not matter if an image with the defined name exists or not.
+        * false: choosing this option means that you assume that the image (defined in the ids or names) is already present.
         If the image does not exist, the VNFPackage onboarding will throw an exception.
         In this case the image (if defined) will be ignored.
         * check: this option means that the VNFPackageManagement checks first if the image is available (defined in ids or names).
         If the image does not exist, a new one with the image defined in the VNFPackage will be created.
     * ***ids***: The list of image ids is used to fetch the image from the corresponding VimInstance.
-        To do it, manager iterates over all ids and checks if an image with that id exists on the VimInstance.
-        The defined ids have an higher priority than the the list of names.
+        To do it, the manager iterates over all ids and checks if an image with that id exists on the VimInstance.
+        The defined ids have a higher priority than the list of names.
         We distinguish between the following cases:
         * If it finds no image with these ids, it continues with the list of image names.
         * If it finds one image with these ids, this image will be used.
-        * If it finds multiple images with the same id (should never happen) or multiple ids matches to multiple images, it will be thrown an exception because it is not clear which image to use.
+        * If it finds multiple images with the same id (should never happen) or multiple ids matching to multiple images, an exception will be thrown because it is not clear which image to use.
     * ***names***: The list of image names is used to fetch the image from the corresponding VimInstance.
         To do it, manager iterates over all names and checks if an image with that name exists on the VimInstance.
         The list of names have a lower priority than the the list of ids.
         We distinguish between the following cases:
-        * If it finds no image with that name, it will be thrown an exception except you defined the upload option check.
+        * If it finds no image with that name, an exception will be thrown except you defined the upload option check.
         Then it will create a new image defined in the VNFPackage.
         * If it finds one image, this image will be used.
-        * If it finds multiple images with the same name or multiple names matches to multiple images, it will be thrown an exception because it is not clear which image to use.
-    * ***link***: This link points to an image available over this URL used to upload the image to the cloud environment.
+        * If it finds multiple images with the same name or multiple names matching to multiple images, an exception will be thrown because it is not clear which image to use.
+    * ***link***: This link points to an image available at this URL used to upload the image to the cloud environment.
         * **Note** Either you have to define the image-link or put the image directly into the VNFPackage.
             Otherwise a NotFoundException will be thrown and the VNFPackage will not onboard.
             The image-link has a higher priority than the image stored in the VNFPackage directly.
@@ -151,7 +151,7 @@ image:
 image-config:
     name: iperf_server_image
     diskFormat: QCOW2
-    containerFormat: bare
+    containerFormat: BARE
     minCPU: 2
     minDisk: 5
     minRam: 2048
@@ -239,7 +239,7 @@ image:
 image-config:
     name: iperf_client_image
     diskFormat: QCOW2
-    containerFormat: bare
+    containerFormat: BARE
     minCPU: 2
     minDisk: 5
     minRam: 2048
