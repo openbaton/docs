@@ -10,7 +10,7 @@ After onboarding the VNFPackage on the NFVO you can use the VNF directly in the 
 A VNFPackage includes the VNFD, the image, scripts and a Metadata file structured as shown in the next part.
 
 # Package structure
-The VNFPackage consists of the following files/folder:
+The VNFPackage has the following structure:
 
 ```bash
 - Metadata.yaml
@@ -52,24 +52,24 @@ In the following each property is explained more in detail. Please consider also
         So if you set the scripts-link, the scripts in folder scripts/ are ignored completely.
     * **Note** The scripts-link is processed by the Element Management System (EMS) in the meaning of fetching the files from that link.
         So you need to take care about ensuring that the URL defined is available.
-    * **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
+    * **Note** Scripts are executed during different lifecycle-events.
 * ***image***:
-    * ***upload***: Here you can choose between different options (true, false, check) explained below.
-        * true: choosing this option means to upload the defined image on all the VimInstances does not matter if an image with the defined name exist or not.
+    * ***upload***: Here you can choose between different options (true, false, check).
+        * true: choosing this option means to upload the defined image on all the VimInstances. It does not matter if an image with the defined name exist or not.
         * false: chossing this option means that you assume that the image (defined in the ids or names) is already present.
         If the image does not exist, the VNFPackage onboarding will throw an exception.
         In this case the image (if defined) will be ignored.
-        * check: this option means that the VNFPackageManagement checks first whether the image is available (defined in ids or names).
-        If the image does not exist, it will be created a new one with the image defined in the VNFPackage.
+        * check: this option means that the VNFPackageManagement checks first if the image is available (defined in ids or names).
+        If the image does not exist, a new one with the image defined in the VNFPackage will be created.
     * ***ids***: The list of image ids is used to fetch the image from the corresponding VimInstance.
-        For doing that it iterates over all ids and checks if an image with that id exists on the VimInstance.
+        To do it, manager iterates over all ids and checks if an image with that id exists on the VimInstance.
         The defined ids have an higher priority than the the list of names.
         We distinguish between the following cases:
         * If it finds no image with these ids, it continues with the list of image names.
         * If it finds one image with these ids, this image will be used.
         * If it finds multiple images with the same id (should never happen) or multiple ids matches to multiple images, it will be thrown an exception because it is not clear which image to use.
     * ***names***: The list of image names is used to fetch the image from the corresponding VimInstance.
-        For doing that it iterates over all names and checks if an image with that name exists on the VimInstance.
+        To do it, manager iterates over all names and checks if an image with that name exists on the VimInstance.
         The list of names have a lower priority than the the list of ids.
         We distinguish between the following cases:
         * If it finds no image with that name, it will be thrown an exception except you defined the upload option check.
@@ -96,7 +96,7 @@ The <vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded 
 This VNFD can later be referenced in a NSD by its id to make use of it.
 A more detailed explanation of the VNFD can be found [here][vnfd-link].
 
-**Note** The name of the file is not important but the suffix .json since the VNFPackageManagement is looking for this kind of file format.
+**Note** The name of the file is not important but the file extension .json is, since the VNFPackageManagement is looking for this kind of file format.
 
 ## scripts
 
@@ -143,7 +143,7 @@ Since the image-link is not implemented in the current release we will put the i
 Finally, it looks as shown below.
 ```yaml
 name: iperf-server
-scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+scripts-link: https://script-link-to-git.git
 image:
     upload: check
     names:
