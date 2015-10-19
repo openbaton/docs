@@ -13,7 +13,7 @@ The communication between the Generic VNFManager and EMS:
 
 ![Generic VNFM - EMS communication][vnfm-ems-communication]
 
-As you can see, the Generic VNFM sends commands to the EMS, which is running in the VM. Then the EMS executes the commands (scripts) locally in the VNFC.
+As you can see, the Generic VNFM sends commands to the EMS, which is running in the VM. Then the EMS executes the commands (scripts) locally in the VNFC. The EMS executes those scripts as root user.
 The following sequence diagram explains the communication messages.
 
 ![Sequence Diagram NFVO - VNFM - EMS](/images/sequence-diagram-v2.png)

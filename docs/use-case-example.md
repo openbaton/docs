@@ -107,7 +107,7 @@ As said before in the documentation [VNFManager Generic][vnfm-generic], _the scr
 screen -d -m -S client iperf -c $server_private1 -t 300
 ```
 
-These scripts showed above, are contained in the VNF Package or in a git repository accessible from the VM. Once all these steps are done we are ready to create a Network Service Record from the id of the Network Service Descriptor. 
+These scripts shown above, are contained in the VNF Package or in a git repository accessible from the VM. Be aware that all the scripts will be executed with root permissions. Once all these steps are done we are ready to create a Network Service Record from the id of the Network Service Descriptor. 
 
 Let's again have a look at the sequence diagram of a create Network Service Record operation.
 
