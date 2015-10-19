@@ -70,7 +70,7 @@ In the following each property is explained in more detail. Please consider also
         * If it finds multiple images with the same id (should never happen) or multiple ids matching to multiple images, an exception will be thrown because it is not clear which image to use.
     * ***names***: The list of image names is used to fetch the image from the corresponding VimInstance.
         To do it, manager iterates over all names and checks if an image with that name exists on the VimInstance.
-        The list of names have a lower priority than the the list of ids.
+        The list of names have a lower priority than the list of ids.
         We distinguish between the following cases:
         * If it finds no image with that name, an exception will be thrown except you defined the upload option check.
         Then it will create a new image defined in the VNFPackage.
@@ -320,7 +320,7 @@ We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
 
 ## Onboarding VNFPackages
 
-Once we have finalized the creation of VNFPackages and packed them into a tar we can onboard them on the NFVO as shown in the following:
+Once we have finalized the creation of VNFPackages and packed them into a tar we can onboard them on the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done as shown in the following:
 
 ```bash
 $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/vnf-packages"
@@ -364,7 +364,7 @@ To make it more readable only the interesting parts are shown.
 ## NSD [iperf]
 In this section we will create a [NSD](ns-descriptor) and reference the previously created VNFPackages by their ids'.
 For doing that we just need to define the **id** for each VNFPackges' VNFD in the list of VNFDs.
-To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can find under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **ip1**.
+To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can find under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **private1**.
 
 **Note** When creating the NSD the VNFD is fetched by the id defined. Other properties we would set in the VNFD in this NSD will be ignored.
 
@@ -429,7 +429,7 @@ Installation and configuration is done automatically and provides you with a con
 [iperf-link]:https://iperf.fr/
 [dashboard-link]:nfvo-how-to-use-gui
 [vnfd-link]:vnf-descriptor
-[image-link]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz
+[image-link]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img
 
 <!---
 Script for open external links in a new tab
