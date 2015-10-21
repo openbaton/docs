@@ -35,7 +35,7 @@ In order to get started you can follow the [installation guide][install-guide]
 
 [install-guide]:install
 [openbaton]:https://twitter.com/openbaton
-[users-at-openbaton-dot-org]: http://listen.openbaton.org/sympa/info/users
+[users-at-openbaton-dot-org]: mailto:listen@openbaton.org?subject=subscribe%20users
 [info-at-openbaton-dot-org]: mailto:info@openbaton.org
 
 <!---

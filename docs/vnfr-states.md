@@ -11,7 +11,7 @@ When the create NSR is called the VNF and the NSR are in state NULL. After the i
 References
 -->
 
-[vnfr-states-diagram]: /images/state-diagram.png
+[vnfr-states-diagram]: images/vnfr-states-state-diagram.png
 [etsi-state]:http://www.etsi.org/deliver/etsi_gs/NFV-SWA/001_099/001/01.01.01_60/gs_NFV-SWA001v010101p.pdf
 
 <!---

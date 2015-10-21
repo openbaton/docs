@@ -731,13 +731,13 @@ References
 [IntelliJIdea-link]:https://www.jetbrains.com/idea/?fromMenu
 
 
-[intellijidea_new_project_type]: images/intellijidea_new_project_type.png
-[intellijidea_new_project_group]: images/intellijidea_new_project_group.png
-[intellijidea_new_project_gradle]: images/intellijidea_new_project_gradle.png
-[intellijidea_new_project_name]: images/intellijidea_new_project_name.png
-[intellijidea_new_directory]: images/intellijidea_new_directory.png
-[intellijidea_new_package]: images/intellijidea_new_package.png
-[intellijidea_new_class]: images/intellijidea_new_class.png
+[intellijidea_new_project_type]: images/vnfm-how-to-write-intellijidea-new_project-type.png
+[intellijidea_new_project_group]: images/vnfm-how-to-write-intellijidea-new-project-group.png
+[intellijidea_new_project_gradle]: images/vnfm-how-to-write-intellijidea-new-project-gradle.png
+[intellijidea_new_project_name]: images/vnfm-how-to-write-intellijidea-new-project-name.png
+[intellijidea_new_directory]: images/vnfm-how-to-write-intellijidea-new-directory.png
+[intellijidea_new_package]: images/vnfm-how-to-write-intellijidea-new-package.png
+[intellijidea_new_class]: images/vnfm-how-to-write-intellijidea-new-class.png
 
 [param-how-to]: vnf-parameters
 <!---

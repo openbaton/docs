@@ -7,7 +7,7 @@ NFVO - VNFM ReST interface
 
 Nfvo exposes a ReST interface for the communication with the VnfManagers. The sequence diagram regarding the instantiation of a NetworkServiceRecord is shown in the following picture.
 
-![NFVO - VNFM ReST interface](images/sequence-diagram-v2.png)
+![NFVO - VNFM ReST interface][or-vnfm-seq]
 
 As shown in the picture, NFVO calls some ReST methods on the vnfm in a particular order. Then it expects some kind of back call. The list of these call exchange is described in the following sections. The ALLOCATE_RESOURCES call is not needed if the vnfm will take care of creating VMs. The communication with the EMS is particular to each VnfManagers. In order to be able to be found, the Vnfm needs to register to the NFVO. This can be done through a particular call.
 
@@ -121,7 +121,7 @@ POST _*OrEndpoint*_ /admin/v1/vnfm-core-actions
 References
 -->
 
-[or-vnfm-sequence]:images/or-vnfm-seq-dg.png
+[or-vnfm-seq]:images/generic-vnfm-or-vnfm-seq-dg.png
 
 <!---
 Script for open external links in a new tab

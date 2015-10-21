@@ -225,7 +225,13 @@ a:hover#menu-icon {
     background:none;
 }
 
-.current a:hover, a:active,.subnav a:hover, a:active, .subnav li a:active, .subnav li a:hover  {
+li.current{
+    background:none;
+    border-left:4px solid #f9c308;
+}
+
+
+li.subnav_drop a:hover, .subnav a:hover, a:active, .subnav li a:hover  {
     background:none;
     border-left:4px solid #f9c308;
 }
@@ -265,7 +271,9 @@ a:hover#menu-icon {
 .toctree-l1  a{
     padding-top: 10px;
     padding-bottom: 10px;
+
 }
+
 
 h1, h2{
     font-variant: small-caps;
@@ -304,7 +312,13 @@ a:hover{
     position: relative;
     font-weight: bold;
     color: #282828;
+    border-bottom:1px solid #e1e1e5;
 }
+
+.wy-menu-vertical span:last-child{
+    border:none;
+} 
+
 .wy-menu-vertical li ul li a{
     color: #282828;
 }

@@ -29,7 +29,7 @@ Where:
 
 At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
 
-**Note:** now only the **"root"** user can use Openbaton! So you'd better give the right permissions at your user (here an example):
+**Note:** considering that OpenBaton is installed as **"root"** user, would be good to change permissions of the installations folders for executing the differnet components as standard user. Here an example:
 ```bash
 sudo chown -R username: /opt/openbaton
 sudo chown -R username: /etc/openbaton
@@ -43,22 +43,25 @@ cd /opt/openbaton/nfvo
 ./openbaton.sh stop
 ```
 
-**Note:** remember to stop also the Generic VNFM with the following command:
+**Note (in case you are also using the generic-vnfm):** remember to stop also the Generic VNFM with the following command:
 ```bash
 cd /opt/openbaton/generic-vnfm
 ./generic-vnfm.sh stop
 ```
 To start the nfvo, enter the command:
-
 ```bash
 cd /opt/openbaton/nfvo
 ./openbaton.sh start
+```
+**Note (in case you are also using the generic-vnfm):** remember to start also the Generic VNFM with the following command:
+```bash
+cd /opt/openbaton/generic-vnfm
+./generic-vnfm.sh start
 ```
 
 ### NFVO properties overview
 
 The NFVO is configured with default configuration parameters at the beginning. The configuration file is located at: 
-
 ```bash
 /etc/openbaton/openbaton.properties
 ```

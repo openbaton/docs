@@ -77,7 +77,7 @@ References
 -->
 
 [api]: linktoapi
-[nfvo-architecture-full]:images/architecture-full.png
+[nfvo-architecture-full]:images/nfvo-architecture-full.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 
 <!---

@@ -117,25 +117,25 @@ To look at the details of a VNFR just click on the **id** of it.
 ![VNF Record Information][VNFRecordInformation]
 
 
-[overview]:images/overview.png
-[vimpage]:images/vimpage.png
-[registeraNewVim]:images/registeraNewVim.png
-[NSDlist]:images/NSDlist.png
-[drag_drop]:images/drag_drop.png
-[drag_drop1]:images/drag_drop1.png
-[drag_drop2]:images/drag_drop2.png
-[NSDcreateFile]:images/NSDcreateFile.png
-[NSDcreateForm]:images/NSDcreateForm.png
-[VNFDlistintoNSD]:images/VNFDlistintoNSD.png
-[VNFDlistintoNSD1]:images/VNFDlistintoNSD1.png
-[VNFDescriptorInformation]:images/VNFDescriptorInformation.png
-[JSONofNSR]:images/JSONofNSR.png
-[NSDgraph]:images/NSDgraph.png
-[VNFDescriptorInformation]:images/VNFDescriptorInformation.png
-[VDUInformation]:images/VDUInformation.png
-[NetworkServiceRecordsList]:images/NetworkServiceRecordsList.png
-[NSRinfo]:images/NSRinfo.png
-[VNFRecordInformation]:images/VNFRecordInformation.png
+[overview]:images/nfvo-how-to-use-gui-overview.png
+[vimpage]:images/nfvo-how-to-use-gui-vim-page.png
+[registeraNewVim]:images/vim-instance-register-new-pop.png
+[NSDlist]:images/nfvo-how-to-use-gui-NSDlist.png
+[drag_drop]:images/nfvo-how-to-use-gui-drag-drop.png
+[drag_drop1]:images/nfvo-how-to-use-gui-drag-drop1.png
+[drag_drop2]:images/nfvo-how-to-use-gui-drag-drop2.png
+[NSDcreateFile]:images/nfvo-how-to-use-gui-NSD-create-file.png
+[NSDcreateForm]:images/nfvo-how-to-use-gui-NSD-create-form.png
+[VNFDlistintoNSD]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
+[VNFDlistintoNSD1]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD1.png
+[VNFDescriptorInformation]:images/nfvo-how-to-use-gui-VNFD-information.png
+[JSONofNSR]:images/nfvo-how-to-use-gui-JSON-of-NSR.png
+[NSDgraph]:images/nfvo-how-to-use-gui-NSD-graph.png
+[VNFDescriptorInformation]:images/nfvo-how-to-use-gui-VNFD-information.png
+[VDUInformation]:images/nfvo-how-to-use-gui-VDU-information.png
+[NetworkServiceRecordsList]:images/nfvo-how-to-use-gui-NSR-list.png
+[NSRinfo]:images/nfvo-how-to-use-gui-NSR-info.png
+[VNFRecordInformation]:images/nfvo-how-to-use-gui-VNFR-information.png
 [VNF Package documentation]: vnfpackage.md
 <!---
 Script for open external links in a new tab

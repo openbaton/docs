@@ -1,8 +1,8 @@
 # NFVO SDK
 
-### Import it
-
 A SDK is available if you want to use the NFVO from a java application.
+
+### Import it
 
 The build.gradle file must contain:
 
@@ -110,4 +110,4 @@ public class Main {
 References
 -->
 
-[sdk-uml]:images/sdk-uml.png
+[sdk-uml]:images/nfvo-sdk-uml.png

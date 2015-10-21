@@ -13,10 +13,10 @@ The communication between the Generic VNFManager and EMS:
 
 ![Generic VNFM - EMS communication][vnfm-ems-communication]
 
-As you can see, the Generic VNFM sends commands to the EMS, which is running in the VM. Then the EMS executes the commands (scripts) locally in the VNFC. The EMS executes those scripts as root user.
+As you can see, the Generic VNFM sends commands to the EMS, which is running in the VM. Then the EMS executes the commands (scripts) locally in the VNFC. **Please note that the EMS executes those scripts as root user**.
 The following sequence diagram explains the communication messages.
 
-![Sequence Diagram NFVO - VNFM - EMS](/images/sequence-diagram-v2.png)
+![Sequence Diagram NFVO - VNFM - EMS][generic-vnfm-or-vnfm-seq-dg]
 
 The Generic VNFManager is supposed to be used for any type of VNF that follows some conventions regarding:
 
@@ -253,15 +253,15 @@ See the complete tutorial → [VNFPackage tutorial][vnfpackage-tutorial-link].
 References
 -->
 
-[or-vnfm-sequence]:images/or-vnfm-seq-dg.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 [stomp]: https://stomp.github.io/
 [nfv-mano-B.3]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf#page=108
-[vnfm-ems-communication]:images/GVNFM-EMS.jpg
-[nfvo-vnfm-communication]:images/vnfm-Or_communication.png
+[vnfm-ems-communication]:images/generic-vnfm-vnfm-ems-communication.png
+[nfvo-vnfm-communication]:images/generic-vnfm-vnfm-or-communication.png
+[generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg.png
+[ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
 [vnfpackage-tutorial-link]:vnfpackage#tutorial
 [vnfpackage-doc-link]:vnfpackage
-[ns-with-dependency]:images/ns_with_dependency.png
 
 <!---
 Script for open external links in a new tab

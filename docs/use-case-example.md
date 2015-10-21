@@ -1,11 +1,11 @@
 # Use case example: Iperf client - server
 -----------------------------------------
 
-In this page there is a full use case example explaining how the deployment process works, step-by-step. We assume that the NFVO and the Generic VNFM are running ready to receive invocations.
+In this page there is a full use case example explaining how the deployment process works, step-by-step. We assume that the NFVO and the Generic VNFM are ready to receive invocations.
 
-What is going to be deployed is shown in the following picture, an [Iperf][iperf] client and an Iperf server.
+The following pictures shows what is going to be deployed, an [Iperf][iperf] client and an Iperf server.
 
-![iperf-deployment](images/iperf-client-server.png)
+![iperf-deployment][iperf-client-server]
 
 As shown in the picture, the iperf server is the source of the dependency and the client is the target. In this case the client needs the IP of the server. The semantics of the vnf dependency is: the source provides some parameters to the target.
 
@@ -111,7 +111,7 @@ These scripts shown above, are contained in the VNF Package or in a git reposito
 
 Let's again have a look at the sequence diagram of a create Network Service Record operation.
 
-![CreateNSR Sequence Diagram](/images/sequence-diagram-number-v2.png)
+![CreateNSR Sequence Diagram][sequence-diagram-os-vnfm-ems]
 
 When the Network Service Record create is called with the Iperf Network Service Descriptor's id, the steps defined in the sequence diagram above happen.
 
@@ -134,7 +134,8 @@ When all the VNF Records are done with all of the scripts defined in the lifecyc
 <!---
 References
 -->
-
+[iperf-client-server]:images/use-case-example-iperf-client-server.png
+[sequence-diagram-os-vnfm-ems]:images/use-case-example-sequence-diagram-os-vnfm-ems.png
 [vnfr-states]:vnfr-states
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
