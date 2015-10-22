@@ -315,7 +315,7 @@ For gathering the vnfm-sdk-jms library you need to import the libraries by addin
 
 dependencies {
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
-    compile 'org.openbaton:vnfm-sdk-jms:0.9'
+    compile 'org.openbaton:vnfm-sdk-jms:0.12'
 }
 
 //...
@@ -344,7 +344,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-jms:0.9'
+    compile 'org.openbaton:vnfm-sdk-jms:0.12'
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
 }
 
@@ -587,8 +587,8 @@ Therefore, you need to do several things:
 **Note** If you want to use plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:0.9'
-compile 'org.openbaton:vim-impl:0.9'
+compile 'org.openbaton:vim-int:0.12'
+compile 'org.openbaton:vim-impl:0.12'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 
