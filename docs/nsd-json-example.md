@@ -26,7 +26,6 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "scale_in_out":1,
                "vnfc":[
                   {
-                     "exposed":true,
                      "connection_point":[
                         {
                            "virtual_link_reference":"private"
@@ -80,17 +79,17 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "scale_in_out":2,
                "vnfc":[
                   {
-                     "exposed":true,
                      "connection_point":[
                         {
+                           "floatingIp":"random",
                            "virtual_link_reference":"private"
                         }
                      ]
                   },
                   {
-                     "exposed":true,
                      "connection_point":[
                         {
+                           "floatingIp":"random",
                            "virtual_link_reference":"private"
                         }
                      ]

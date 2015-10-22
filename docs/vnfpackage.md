@@ -178,9 +178,9 @@ Important to notice here is the vm_image that points to the image we have define
             "scale_in_out":2,
             "vnfc":[
                 {
-                    "exposed":true,
                     "connection_point":[
                         {
+                            "floatingIp":"random",
                             "virtual_link_reference":"private"
                         }
                     ]

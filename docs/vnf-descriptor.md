@@ -27,9 +27,9 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
             "scale_in_out":2,
             "vnfc":[  
                 {  
-                    "exposed":true,
                     "connection_point":[  
                         {  
+                            "floatingIp":"random",
                             "virtual_link_reference":"private"
                         }
                     ]
@@ -92,8 +92,7 @@ VNFCs contain the following fields:
 
 | Params                        | Meaning                                                                       |
 | -------------                 | -------------:                                                                |
-| exposed	 					| in case the machine needs to be reachable                                     |
-|connection_point               | each connection point is a reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano])    	        |
+|connection_point               | each connection point is a reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano]). Moreover you can specify a floatingIp to be assigned to this connection point. The possible values are the actual floatingip ip or "random" if no preference is specified. If omitted no floatingip will be assigned.    	        |
 
 ### Configurations
 
