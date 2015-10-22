@@ -35,7 +35,11 @@ This field describes an Entity that has a list of ConfigurationParameters inside
 
 This field is a list of parameter keys that will be available in all your scripts. The difference is that these parameters are parameters whose actual value will be known only at runtime. For that reason these parameters can only be filled by a specific VNFM. So you need to implement a VNFM able to handle these specific parameters in the fillSpecificParameters method (see [How to write a VNFM][vnfm-how-to]).
 
-**NOTE**: _there are some out-of-the-box parameters that will be added automatically to the VNFRecord. One of these parameters is key = < network_name >, value = < actual-IP >_
+**NOTE**: 
+  there are some out-of-the-box parameters that will be added automatically to the VNFRecord. These parameters are:
+* the networkName=IP,  key = < network_name >, value = < actual-IP >
+* the hostname, key = < hostname >, value = the actual hostname
+* the floatingIp, key = < network_name >\_floatingIp , value = the actual floatingIp
 
 
 ### How to use the parameters
