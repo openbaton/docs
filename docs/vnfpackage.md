@@ -61,6 +61,8 @@ In the following each property is explained in more detail. Please consider also
         In this case the image (if defined) will be ignored.
         * check: this option means that the VNFPackageManagement checks first if the image is available (defined in ids or names).
         If the image does not exist, a new one with the image defined in the VNFPackage will be created.
+        * **Note** Please use quotation marks for this option since the values are handled as strings internally.
+        Otherwise true and false will be handled as a boolean that would lead to a faulty behavior when onboarding a new VNFPackage.
     * ***ids***: The list of image ids is used to fetch the image from the corresponding VimInstance.
         To do it, the manager iterates over all ids and checks if an image with that id exists on the VimInstance.
         The defined ids have a higher priority than the list of names.
@@ -145,7 +147,7 @@ Finally, it looks as shown below.
 name: iperf-server
 scripts-link: https://script-link-to-git.git
 image:
-    upload: check
+    upload: "check"
     names:
         - iperf_server_image
 image-config:
@@ -233,7 +235,7 @@ Finally, it looks as shown below.
 name: iperf-client
 scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
 image:
-    upload: check
+    upload: "check"
     names:
         - iperf_client_image
 image-config:
