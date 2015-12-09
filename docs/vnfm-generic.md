@@ -3,7 +3,7 @@
 The Generic VNFManager is an implementation following the [ETSI MANO][nfv-mano] specifications. For that reason it is highly tied to the EMS.
 This VNFM may be assigned the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
 
-The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the [Stomp][stomp] protocol over ActiveMQ.  
+The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the AMQP protocol over RabbitMQ.  
 
 The communication between the NFVO and Generic VNFManager:
 

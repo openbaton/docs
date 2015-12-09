@@ -242,25 +242,27 @@ If the name or package of your mainClass is different, you need to replace it he
 The previously created properties files are used to define several things.
 They are located in src/main/resources and are called application.properties and conf.properties.
 
-The **application.properties** contains parameters for setting up all log levels and the configuration for ActiveMQ. This file is useful for configuring the springframework (see [Spring Boot configuration file](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)). This file can contain the following lines.
+The **application.properties** contains parameters for setting up all log levels. This file is useful for configuring the springframework (see [Spring Boot configuration file](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)). This file can contain the following lines.
 
 ```properties
 logging.level.org.springframework=INFO
 logging.level.org.hibernate=INFO
-logging.level.org.jclouds=INFO
+logging.level.org.apache=INFO
+logging.level.org.jclouds=WARN
+# logging.level.org.springframework.security=WARN
+logging.level.org.springframework.web = WARN
 
-logging.level.org.apache.activemq = WARN
-logging.level.org.openbaton = DEBUG
+# Level for loggers on classes inside the root package "org.project.openbaton" (and its
+# sub-packages)
+logging.level.org.openbaton=INFO
 
-#### activeMQ
-spring.activemq.broker-url=tcp://localhost:61616
-spring.activemq.user=admin
-spring.activemq.password=admin
+# Direct log to a log file
+logging.file=/var/log/openbaton.log
 ```
 
-If you want to change log levels or the ActiveMQ access information you need to adapt it here. Please note that if the VNFManager is running in the same machine of the activeMQ broker, this file is not needed.
+If you want to change log levels you need to adapt it here. Please note that if the VNFManager is running in the same machine of the rabbitMQ broker, this file is not needed.
 
-_**NOTE**_: _If your VNFManager is running on a different machine than the activemq broker, you need to change the `spring.activemq.broker-url` accordingly with the ip:port of the activemq broker._
+_**NOTE**_: _If your VNFManager is running on a different machine than the rabbitmq broker, you need to change the `nfvo.rabbit.brokerIp` accordingly with the ip:port of the rabbitmq broker._
 
 The **conf.properties** is also a very important configuration file.
 Here you need to define the type and endpoint of your VNFManager that is later used for registering on the NFVO.
@@ -573,7 +575,7 @@ public abstract class VnfmHelper {
 
 At the moment, the main purpose of the VnfmHelper is to send messages to the NFVO and wait for the answer if needed.
 
-**Note** This class needs to be implemented in case you want to use only the vnfm-sdk and must be provided to the AbstarctVnfm.
+**Note** This class needs to be implemented in case you want to use only the vnfm-sdk and must be provided to the AbstractVnfm.
 
 #### Using plugins
 
