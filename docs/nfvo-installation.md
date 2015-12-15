@@ -21,6 +21,8 @@ At the end of the installation procedure, if there are no errors, the dashboard 
 └── nfvo
 ```
 
+**Note** by default security is enabled, therefore the dashboard will ask you to insert username ('admin') and password ('openbaton').
+
 Where:
   
 * `apache-activemq-5.11.1` contains the activeMQ software (it is basically downloaded, extracted and executed)  
