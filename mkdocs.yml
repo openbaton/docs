@@ -19,6 +19,7 @@ pages:
 - ['vim-plugin.md', 'Extend it', 'Write your own Plugin']
 - ['FAQ.md', 'FAQ', 'FAQ']
 - ['**HIDDEN**': 'vnf-descriptor.md']
+- ['**HIDDEN**': 'zabbix-server-configuration.md']
 - ['**HIDDEN**': 'vnfr-states.md']
 - ['**HIDDEN**': 'vnf-parameters.md']
 - ['**HIDDEN**': 'nsd-json-example.md']

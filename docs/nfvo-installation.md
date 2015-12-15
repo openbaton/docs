@@ -176,15 +176,23 @@ The following properties are related to the plugin mechanism used for loading VI
 plugin-installation-dir = ./plugins
 ```
 
-This properties allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
+This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 ```properties
 # nfvo behaviour
-delete-on-all-status = false
+nfvo.delete.all-status = true 
 ```
+**MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
+Once the Zabbix server is correctly configured and running, you need only to set up the ip in the following property. 
+Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to Zabbix server.
+
+```properties 
+nfvo.monitoring.ip = the Zabbix server ip
+```
+
 These are other parameters about the configuration of the nfvo behaviour:
 ```properties 
 nfvo.delete.wait = false 
-nfvo.delete.all-status = true 
+
 nfvo.rabbit.brokerIp = the broker ip here 
 nfvo.rabbit.autodelete = true 
 nfvo.plugin.active.consumers = 5 
@@ -215,6 +223,7 @@ Dependening on the approach used for deploying your VNF, you'll have either to i
 [vim_plugin_doc]:vim-plugin
 [use-openbaton]:use.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
+[zabbix-server-configuration]:zabbix-server-configuration.md
 
 <!---
 Script for open external links in a new tab
