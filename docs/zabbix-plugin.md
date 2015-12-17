@@ -123,10 +123,12 @@ Then in your main, obtain the MonitoringPluginCaller as follow:
 ```java
 MonitoringPluginCaller monitoringPluginCaller=null;
 try {
-      monitoringPluginCaller = new MonitoringPluginCaller("zabbix");
+    monitoringPluginCaller = new MonitoringPluginCaller("zabbix","15672");
 } catch (TimeoutException e) {
     e.printStackTrace();
 } catch (NotFoundException e) {
+    e.printStackTrace();
+} catch (IOException e) {
     e.printStackTrace();
 }
 ```
@@ -176,7 +178,27 @@ In the following example we create two items ('net.tcp.listen[8080]' and 'agent.
 ```java
 ObjectSelection objectSelection = getObjectSelector("host-1","host-2");
 List<String> performanceMetrics = getPerformanceMetrics("net.tcp.listen[8080]","agent.ping");
-String pmJobId = zabbixMonitoringAgent.createPMJob(objectSelection, performanceMetrics, new ArrayList<String>(),60, 0);
+String pmJobId = monitoringPluginCaller.createPMJob(objectSelection, performanceMetrics, new ArrayList<String>(),60, 0);
+System.out.println("PmJobId is: "+pmJobId);
+```
+Here the methods getObjectSelector and getPerformanceMetrics:
+
+```java
+private List<String> getPerformanceMetrics(String ... performanceMetrics) {
+    List<String> result = new ArrayList<String>();
+    for(String performanceMetric : performanceMetrics){
+        result.add(performanceMetric);
+    }
+    return result;
+}
+
+private ObjectSelection getObjectSelector(String ... hosts) {
+    ObjectSelection objectSelection = new ObjectSelection();
+    for(String host : hosts){
+        objectSelection.addObjectInstanceId(host);
+    }
+    return objectSelection;
+}
 ```
 
 #### Delete Pm Job
@@ -230,23 +252,21 @@ This method create a trigger on a specific item for one or more hosts. As a retu
 **thresholdDetails**: details of the threshold. It contains:
 
 - function: refer to [Zabbix trigger function 2.2][zabbix-trigger-function-2.2]  
-- value: threshold value to compare with the actual value of the *performanceMetric*.
 - triggerOperator: operator
 - perceiverSeverity: severity of the trigger.
+- value: threshold value to compare with the actual value of the *performanceMetric*.
+- hostOperator: can be "|" or "&", meaning that the threshold will trigger when at least one host or all the hosts cross the threshold value.
 
-In the following example we create a trigger for two hosts ('host-1' and 'host-2').
+In the following example we create a treshold for two hosts ('host-1' and 'host-2').
 
 ```java
 ObjectSelection objectSelector = getObjectSelector("host-1","host-2");
-ThresholdDetails thresholdDetails= new ThresholdDetails("last(0)","0","=");
-thresholdDetails.setPerceivedSeverity(PerceivedSeverity.CRITICAL);
-String thresholdId = zabbixMonitoringAgent.createThreshold(objectSelector,"net.tcp.listen[5001]",null,thresholdDetails);
+ThresholdDetails thresholdDetails= new ThresholdDetails("last(0)","=",PerceivedSeverity.CRITICAL,"0","|");
+String thresholdId = zabbixMonitoringAgent.createThreshold(objectSelector,"net.tcp.listen[5001]",ThresholdType.SINGLE_VALUE,thresholdDetails);
 ```
 The trigger that will be created has this expression: {host-1:net.tcp.listen[5001].last(0)}=0|{host-2:net.tcp.listen[5001].last(0)}=0.
 It means that if host-1 OR host-2 have no more process listening on the port 5001 then create an alarm with severity critical.
 Refer to [Zabbix expression 2.2][zabbix-trigger-expression-2.2] to understand better the expression.
-
-**Note**: Actually is available only the OR operator. The AND will be introduced later.
 
 #### Delete Threshold
 ```java
