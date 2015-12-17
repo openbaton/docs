@@ -13,7 +13,7 @@ To execute the following command you need to have curl installed (see http://cur
 
 ```bash
 sudo su -
-curl -fsSkL http://get.openbaton.org/bootstrap |bash
+bash <(curl -fsSkL http://get.openbaton.org/bootstrap)
 ```
 
 At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
@@ -29,12 +29,6 @@ Where:
 * `nfvo` contains the source code and scripts of the NFVO
 
 At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
-
-**Note:** considering that OpenBaton is installed as **"root"** user, would be good to change permissions of the installations folders for executing the different components as standard user. Here an example:
-```bash
-sudo chown -R username: /opt/openbaton
-sudo chown -R username: /etc/openbaton
-```
 
 ### Starting and stopping NFVO
 
