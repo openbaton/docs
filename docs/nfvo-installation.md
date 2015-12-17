@@ -182,7 +182,7 @@ This property allows the user to delete the Network Service Records no matter in
 nfvo.delete.all-status = true 
 ```
 **MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
-Once the Zabbix server is correctly configured and running, you need only to set up the ip in the following property. 
+Once the Zabbix server is correctly configured and running, you need only to add following property. 
 Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to Zabbix server.
 
 ```properties 
