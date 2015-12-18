@@ -12,7 +12,6 @@ Considering that this script needs to install some system libraries, it is requi
 To execute the following command you need to have curl installed (see http://curl.haxx.se/). 
 
 ```bash
-sudo su -
 bash <(curl -fsSkL http://get.openbaton.org/bootstrap)
 ```
 
