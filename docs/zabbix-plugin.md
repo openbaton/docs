@@ -62,10 +62,9 @@ This configuration will be automatized in later releases.
 Once the prerequisites are met, you can clone the following project from git, compile it using gradle and launch it:  
 
 ```bash  
-git clone link_of_zabbix-plugin
+git clone https://github.com/openbaton/zabbix-plugin.git
 cd zabbix-plugin
-git checkout develop
-./gradlew build -x test
+./gradlew build
 java -jar build/lib/zabbix-agent-<version>.jar
 ```
 
@@ -74,8 +73,8 @@ Create a configuration file called zabbix-plugin.conf in the path /etc/openbaton
 
 | Parameter           | Description     | Default
 | ------------------- | --------------  | ----------
-| zabbix-ip                             |  IP of the Zabbix Server      | 
-| zabbix-port                           |  Port of the Zabbix Server    |
+| zabbix-ip                             |  IP of the Zabbix Server      | not null
+| zabbix-port                           |  Port of the Zabbix Server    | can be empty
 | type                                  |  The type of the plugin       | zabbix-plugin
 | user-zbx                              |  User of the Zabbix Server    | 
 | password-zbx                          |  Password of Zabbix Server    |
@@ -89,7 +88,7 @@ The configuration file should look like the one below:
 
 ```bash  
 zabbix-ip = xxx.xxx.xxx.xxx
-zabbix-ip = xxxxx
+zabbix-port = xxxxx
 type = zabbix-plugin
 user-zbx = zabbixUSer
 password-zbx = zabbixPassword
