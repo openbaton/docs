@@ -4,7 +4,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
 ```json
 {
    "name":"iperf-NS",
-   "vendor":"tbr",
+   "vendor":"Fokus",
    "version":"0.1",
    "vnfd":[
       {
