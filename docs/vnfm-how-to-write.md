@@ -164,16 +164,30 @@ This gradle configuration file needs to contain initially the following lines.
 
 ```gradle
 buildscript {
+    repositories {
+        jcenter()
+        maven { url " http://repo.spring.io/snapshot " }
+        maven { url " http://repo.spring.io/milestone " }
+    }
+
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
     }
 }
-group 'your.group'
-version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
 apply plugin: 'maven'
+
+jar {
+    baseName = 'simple-vnfm'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
 ```
 
 The second gradle configuration is called settings.gradle.
