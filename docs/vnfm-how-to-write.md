@@ -14,7 +14,7 @@ The vnfm-sdk provides the following things:
 Before you can start with developing your own VNFManager you need to prepare your programming environment by installing/configuring the following requirements:
 
 * JDK 7 ([installation][openjdk-link])
-* Gradle ([installation][gradle-installation-link])
+* Gradle 1.12 or above ([installation][gradle-installation-link])
 
 ## Develop your own VNFManager
 
