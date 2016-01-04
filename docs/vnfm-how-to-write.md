@@ -137,7 +137,7 @@ This creates the java folder src/main/java with the proposed package name org.op
 In the next step you create the Main Class called MyVNFM in this case.
 
 ```bash
-$ vim /src/main/java/org/openbaton/vnfm/MyVNFM.java
+$ vim src/main/java/org/openbaton/vnfm/MyVNFM.java
 ```
 At this point you create only the basic Java Class used later as the Main Class for implementing your VNFManager.
 The newly created Java Class should contain the following lines for now.
