@@ -358,7 +358,7 @@ group 'your.group'
 version '1.0-SNAPSHOT'
  
 bootRepackage {
-    mainClass = 'org.openbaton.vnfm.SimpleVNFM'
+    mainClass = 'org.openbaton.vnfm.MyVNFM'
 }
 ```
 
