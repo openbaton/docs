@@ -330,29 +330,36 @@ So the final build.gradle file results like:
 
 ```gradle
 buildscript {
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
+    repositories {
+        mavenCentral()
     }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.1.RELEASE")
+    }	
+
 }
 
-apply plugin: 'spring-boot'
 apply plugin: 'java'
-apply plugin: 'maven'
-
+apply plugin: 'spring-boot'
+ 
 repositories {
     mavenCentral()
     maven {
-        url "http://193.175.132.176:8081/nexus/content/groups/public"
+            url "http://193.175.132.176:8081/nexus/content/groups/public"
     }
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-jms:0.15'
-    compile 'org.hibernate:hibernate-core:4.3.10.Final'
+    compile ("org.openbaton:vnfm-sdk-jms:0.15")
+    compile ("org.hibernate:hibernate-core:4.3.10.Final")
 }
 
-group = 'your.group'
-version = 1.0-SNAPSHOT
+group 'your.group'
+version '1.0-SNAPSHOT'
+ 
+bootRepackage {
+    mainClass = 'org.openbaton.vnfm.SimpleVNFM'
+}
 ```
 
 Once you did this, you need to trigger the gradle build process by running the following command via the command line in your project's root folder.
