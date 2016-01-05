@@ -654,14 +654,13 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
             Registry registry = LocateRegistry.createRegistry(registryport);
 			int managementPort = 55672; // rabbitmq managment port
             PluginStartup.startPluginRecursive("./plugins",  		// plugins folder
-											   true, 				// wait for plugin to start 
-											   "localhost", 		// rabbitmq broker ip
-											   "" + registryport,	
-											   2,					// no. of consumers
-                                               "admin",				// rabbitmq broker username
-                                               "openbaton",			// rabbitmq broker passwd
-                                               "" + managementPort  // rabbitmq broker mng. port 
-											   );
+                                               true, 				// wait for plugin to start 
+                                               "localhost", 		// rabbitmq broker ip 
+                                               "" + registryport, 
+                                               2,					// no. of consumers 
+                                               "admin",				// rabbitmq broker username 
+                                               "openbaton",			// rabbitmq broker passwd 
+                                               "" + managementPort  // rabbitmq broker mng. port );
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
