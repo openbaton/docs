@@ -419,7 +419,9 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * @param scripts
      */
     @Override
-    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts) throws Exception {
+    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
+	                                                Object scripts) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -437,8 +439,13 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * (out/in, up/down) a VNF instance.
      */
     @Override
-    public void scale() {
-
+    public VirtualNetworkFunctionRecord scale(Action scaleInOrOut, 
+                                              VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
+                                              VNFCInstance component, 
+                                              Object scripts, 
+                                              VNFRecordDependency dependency) throws Exception 
+	{
+		return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -455,8 +462,11 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * the VNF instantiation is possible.
      */
     @Override
-    public void heal() {
-
+    public VirtualNetworkFunctionRecord heal(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord,
+                                             VNFCInstance component,
+                                             String cause) throws Exception
+    {
+        return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -476,7 +486,9 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * @param dependency
      */
     @Override
-    public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFRecordDependency dependency) throws Exception {
+    public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
+											   VNFRecordDependency dependency) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -495,7 +507,8 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * @param virtualNetworkFunctionRecord
      */
     @Override
-    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception{
+    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -505,7 +518,8 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
     }
 
     @Override
-    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -522,6 +536,12 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
 	public void NotifyChange() {
 
     }
+
+    @Override
+    public void handleError(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
+
+    }
+
 
 	public static void main(String[] args){
         SpringApplication.run(MyVNFM.class);
@@ -629,14 +649,23 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
     @Override
     protected void setup() {
         super.setup();
+		int registryport = 19345;
         try {
-            int registryport = 19345;
             Registry registry = LocateRegistry.createRegistry(registryport);
-            PluginStartup.startPluginRecursive("./plugins", true, "localhost", "" + registryport);
+			int managementPort = 55672; // rabbitmq managment port
+            PluginStartup.startPluginRecursive("./plugins",  		// plugins folder
+											   true, 				// wait for plugin to start 
+											   "localhost", 		// rabbitmq broker ip
+											   "" + registryport,	
+											   2,					// no. of consumers
+                                               "admin",				// rabbitmq broker username
+                                               "openbaton",			// rabbitmq broker passwd
+                                               "" + managementPort  // rabbitmq broker mng. port 
+											   );
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
-        resourceManagement = (ResourceManagement) context.getBean("openstackVIM", "openstack", 19345);
+        resourceManagement = (ResourceManagement) context.getBean("openstackVIM", "openstack", registryport);
     }
 }
 ```
