@@ -14,7 +14,7 @@ The vnfm-sdk provides the following things:
 Before you can start with developing your own VNFManager you need to prepare your programming environment by installing/configuring the following requirements:
 
 * JDK 7 ([installation][openjdk-link])
-* Gradle ([installation][gradle-installation-link])
+* Gradle 1.12 or above ([installation][gradle-installation-link])
 
 ## Develop your own VNFManager
 
@@ -137,7 +137,7 @@ This creates the java folder src/main/java with the proposed package name org.op
 In the next step you create the Main Class called MyVNFM in this case.
 
 ```bash
-$ vim /src/main/java/org/openbaton/vnfm/MyVNFM.java
+$ vim src/main/java/org/openbaton/vnfm/MyVNFM.java
 ```
 At this point you create only the basic Java Class used later as the Main Class for implementing your VNFManager.
 The newly created Java Class should contain the following lines for now.
@@ -164,16 +164,17 @@ This gradle configuration file needs to contain initially the following lines.
 
 ```gradle
 buildscript {
+    repositories {
+        mavenCentral()
+    }
+
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.1.RELEASE")
     }
 }
-group 'your.group'
-version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
-apply plugin: 'maven'
 ```
 
 The second gradle configuration is called settings.gradle.
@@ -329,29 +330,36 @@ So the final build.gradle file results like:
 
 ```gradle
 buildscript {
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
+    repositories {
+        mavenCentral()
     }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.1.RELEASE")
+    }	
+
 }
 
-apply plugin: 'spring-boot'
 apply plugin: 'java'
-apply plugin: 'maven'
-
+apply plugin: 'spring-boot'
+ 
 repositories {
     mavenCentral()
     maven {
-        url "http://193.175.132.176:8081/nexus/content/groups/public"
+            url "http://193.175.132.176:8081/nexus/content/groups/public"
     }
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-jms:0.15'
-    compile 'org.hibernate:hibernate-core:4.3.10.Final'
+    compile ("org.openbaton:vnfm-sdk-jms:0.15")
+    compile ("org.hibernate:hibernate-core:4.3.10.Final")
 }
 
-group = 'your.group'
-version = 1.0-SNAPSHOT
+group 'your.group'
+version '1.0-SNAPSHOT'
+ 
+bootRepackage {
+    mainClass = 'org.openbaton.vnfm.MyVNFM'
+}
 ```
 
 Once you did this, you need to trigger the gradle build process by running the following command via the command line in your project's root folder.
@@ -411,7 +419,9 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * @param scripts
      */
     @Override
-    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts) throws Exception {
+    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
+	                                                Object scripts) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -429,8 +439,13 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * (out/in, up/down) a VNF instance.
      */
     @Override
-    public void scale() {
-
+    public VirtualNetworkFunctionRecord scale(Action scaleInOrOut, 
+                                              VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
+                                              VNFCInstance component, 
+                                              Object scripts, 
+                                              VNFRecordDependency dependency) throws Exception 
+	{
+		return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -447,8 +462,11 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * the VNF instantiation is possible.
      */
     @Override
-    public void heal() {
-
+    public VirtualNetworkFunctionRecord heal(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord,
+                                             VNFCInstance component,
+                                             String cause) throws Exception
+    {
+        return virtualNetworkFunctionRecord;
     }
 
     /**
@@ -468,7 +486,9 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * @param dependency
      */
     @Override
-    public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFRecordDependency dependency) throws Exception {
+    public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
+											   VNFRecordDependency dependency) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -487,7 +507,8 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * @param virtualNetworkFunctionRecord
      */
     @Override
-    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception{
+    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -497,7 +518,8 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
     }
 
     @Override
-    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception 
+	{
         return virtualNetworkFunctionRecord;
     }
 
@@ -514,6 +536,12 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
 	public void NotifyChange() {
 
     }
+
+    @Override
+    public void handleError(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
+
+    }
+
 
 	public static void main(String[] args){
         SpringApplication.run(MyVNFM.class);
@@ -621,14 +649,22 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
     @Override
     protected void setup() {
         super.setup();
+		int registryport = 19345;
         try {
-            int registryport = 19345;
             Registry registry = LocateRegistry.createRegistry(registryport);
-            PluginStartup.startPluginRecursive("./plugins", true, "localhost", "" + registryport);
+			int managementPort = 55672; // rabbitmq managment port
+            PluginStartup.startPluginRecursive("./plugins",  		// plugins folder
+                                               true, 				// wait for plugin to start 
+                                               "localhost", 		// rabbitmq broker ip 
+                                               "" + registryport, 
+                                               2,					// no. of consumers 
+                                               "admin",				// rabbitmq broker username 
+                                               "openbaton",			// rabbitmq broker passwd 
+                                               "" + managementPort  // rabbitmq broker mng. port );
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
-        resourceManagement = (ResourceManagement) context.getBean("openstackVIM", "openstack", 19345);
+        resourceManagement = (ResourceManagement) context.getBean("openstackVIM", "openstack", registryport);
     }
 }
 ```
