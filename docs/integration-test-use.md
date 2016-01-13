@@ -8,24 +8,34 @@ Three tests are run.
 1. scenario-dummy-iperf
 2. scenario-many-dependencies
 3. scenario-real-iperf
+4. scenario-complex-iperf
 
 scenario-dummy-iperf uses the Dummy VNFM to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
 It does not actually deploy a network service. The fake network service is a simple iperf scenario with one server and one client. 
 
-scenario-many-dependencies also uses the Dummy VNFM but its fake network service is a little bit more complex in the sense that it has many [VNFD][vnf-descriptor] with many dependencies between them. 
+scenario-many-dependencies also uses the Dummy VNFM but its fake network service is a little bit more complex in the sense that it has many VNFD with many dependencies between them. 
 
-The last test scenario-real-iperf is the only one which actually deploys a network service on openstack. 
-It consists of two [VNFD][vnf-descriptor] and deploys one iperf server and two iperf clients. The clients contact the server. 
+The test scenario-real-iperf actually deploys a network service on openstack. 
+It consists of two VNFD and deploys one iperf server and two iperf clients. The clients contact the server. 
 
-In every test a vim instance and a network service descriptor is stored on the orchestrator and the network service launched. 
+The test scenario-complex-iperf deploys a more complex network service on openstack. 
+Five virtual machines will be running and acting as peers. 
+The following picture shows the architecture in which the peers connect to each other using iperf. 
+A peer at the beginning of an arrow acts as an iperf client and connects to the peer at the end of the arrow. 
+The two colours represent the two different networks on which the peers are running and connecting. 
+Blue is the network *private* and black *private2*.
+
+![Complex scenario][complex-iperf]
+
+In every test a vim instance and a network service descriptor are stored on the orchestrator and the network service launched. 
 If that is successful, the network service is stoped and the network service record, network service descriptor and the vim instance are removed. 
-In the case of the scenario-real-iperf test also the service itself is tested, i.e. if iperf is running and the clients can connect to the server. 
+In the cases of the scenario-real-iperf and scenario-complex-iperf test also the service itself is tested, i.e. if iperf is running and the clients can connect to the server. 
 
 ## Requirements
 
-1. A running [NFVO][nfvo-installation]
-2. A running [Generic VNFM][vnfm-generic]
-3. A running [Dummy VNFM][vnfm-dummy]
+1. A running NFVO
+2. A running Generic VNFM
+3. A running Dummy VNFM
 
 ## Installation and configuration
 
@@ -67,10 +77,14 @@ Here is an example where you just have to change some fields.
 ```
 
 Name the vim file *real-vim.json* and add it to the folder *integration-tests/src/main/resources/etc/json_file/vim_instances/* in the project.
-In the folder *integration-tests/src/main/resources/etc/json_file/network_service_descriptors* of the project you will find a file named NetworkServiceDescriptor-iperf-real.json. 
-Open it and replace the floating ip values at lines 42, 107 and 114 with floating ips which are provided to you by openstack. 
-If you want to you can also change the virtual link which is at the moment "private" to one you want to use. 
-Make sure that you have the image ubuntu-14.04-server-cloudimg-amd64-disk1 available on openstack. 
+In the folder *integration-tests/src/main/resources/etc/json_file/network_service_descriptors* of the project you will find a file named NetworkServiceDescriptor-iperf-real.json and one named NetworkServiceDescriptor-complex-iperf.json. 
+We used the image ubuntu-14.04-server-cloudimg-amd64-disk1 for the virtual machines in openstack. 
+If you want to use another image, change every occurence of the above mentioned image in those two files to the name of the one you want to use and of course make sure it is available on openstack. 
+
+If you want to use another image, change every occurence of the above mentioned image to the name of the one you want to use and of course make sure it is available on openstack. 
+If you are using another image, you also have to configure the .ini files of the scenario-complex-iperf and scenario-real-iperf. 
+That is you have to look for the tasks of *GenericServiceTester* and change the value of vm-scripts-path to the path where you want to have the test scripts stored on your virtual machine and the value of user-name according to the user name used on the virtual machines deployed by the image. These were the steps to use another image. 
+
 Then use a shell to navigate into the project's root directory. 
 Execute the command *./gradlew clean build*.
 After that you will find the folder *build/libs/* in the project. Inside of this folder is the project's executable jar file. 
@@ -86,6 +100,7 @@ While the tests are running they will produce output to the console. This output
 If a test finished it will either tell you that it passed successfully or not. 
 If it did not pass correctly you will find the reason in the log file. 
 
+
 ## Write your own integration tests
 Please refer to [this page][integration-test-write].
 
@@ -93,6 +108,7 @@ Please refer to [this page][integration-test-write].
 References
 -->
 
+[complex-iperf]:images/complex-iperf.png
 [nfvo-installation]:nfvo-installation
 [vnfm-generic]:vnfm-generic
 [vnfm-dummy]:vnfm-dummy
