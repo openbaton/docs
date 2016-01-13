@@ -196,6 +196,7 @@ action = INSTANTIATE_FINISH
 class-name = GenericServiceTester
 vnf-type = client
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-clt-connection.sh
 ```
@@ -204,6 +205,7 @@ The class name specifies, that we want to use the GenericServiceTester to test o
 The vnf-type is used to say on which virtual network functions the scripts should be executed and is equal to the one you wrote into the network service descriptor.
 In our example the integration test would execute them on a virtual machine, which runs the iperfserver VNF which has the type 'server'. 
 In user-name you have to specify the user name of the virtual machine, so that the integration test can ssh into the machine. 
+And vm-scripts-path declares the directory in which the testing scripts should be stored on the virtual machine. Keep in mind that this directory has to already exist, it will not be created by the integration test. 
 And finally you have to specify the script name. script-1 will be the first script executed in that task.
 If you want to execute more than that, just add script-2, script-3 and so on.
 
@@ -290,6 +292,7 @@ action = INSTANTIATE_FINISH
 class-name = GenericServiceTester
 vnf-type = client
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-clt-connection.sh
 
@@ -299,6 +302,7 @@ class-name = GenericServiceTester
 vnf-type = server
 net-name = private
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-srv-connection.sh
 ```
@@ -374,6 +378,7 @@ action = INSTANTIATE_FINISH
 class-name = GenericServiceTester
 vnf-type = client
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-clt-connection.sh
 
@@ -383,6 +388,7 @@ class-name = GenericServiceTester
 vnf-type = server
 net-name = private
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-srv-connection.sh
 
