@@ -404,7 +404,7 @@ package org.openbaton.vnfm;
 import org.openbaton.catalogue.mano.record.VNFRecordDependency;
 import org.openbaton.catalogue.mano.record.VirtualNetworkFunctionRecord;
 import org.openbaton.common.vnfm_sdk.VnfmHelper;
-import org.openbaton.common.vnfm_sdk.jms.AbstractVnfmSpringJMS;
+import org.openbaton.common.vnfm_sdk.amqp.AbstractVnfmSpringJMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
