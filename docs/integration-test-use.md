@@ -10,7 +10,7 @@ Three tests are run.
 3. scenario-real-iperf
 4. scenario-complex-iperf
 
-scenario-dummy-iperf uses the Dummy VNFM to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
+scenario-dummy-iperf uses the [Dummy VNFM][vnfm-dummy] to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
 It does not actually deploy a network service. The fake network service is a simple iperf scenario with one server and one client. 
 
 scenario-many-dependencies also uses the Dummy VNFM but its fake network service is a little bit more complex in the sense that it has many VNFD with many dependencies between them. 
@@ -33,13 +33,15 @@ In the cases of the scenario-real-iperf and scenario-complex-iperf test also the
 
 ## Requirements
 
-1. A running NFVO
+1. A running NFVO with the test-plugin
 2. A running Generic VNFM
-3. A running Dummy VNFM
+3. A running Dummy VNFM AMQP
 
 ## Installation and configuration
 
-Clone the project to your machine. 
+If your NFVO does not yet contain the test-plugin (look for a jar named *test-plugin* in the directory *nfvo/plugins/vim-drivers*) you will have to get this first. Therefor clone the test-plugin project from https://github.com/openbaton/test-plugin to your machine, use a shell to navigate to the project's root directory and execute *./gradlew build*. You will find the test-plugin jar in the folder *build/libs/*. Copy it into the directory *nfvo/plugins/vim-drivers* of the NFVO. 
+
+Use git to clone the integration-test project to your machine. 
 In *integration-tests/src/main/resources* is a file named integration-test.properties. 
 Open it and set the property values according to your needs. 
 
@@ -111,7 +113,7 @@ References
 [complex-iperf]:images/complex-iperf.png
 [nfvo-installation]:nfvo-installation
 [vnfm-generic]:vnfm-generic
-[vnfm-dummy]:vnfm-dummy
+[vnfm-dummy]:https://github.com/openbaton/dummy-vnfm-amqp
 [vnf-descriptor]:vnf-descriptor
 [integration-test-write]:integration-test-write
 
