@@ -108,6 +108,17 @@ Finally in the VNFD->VDU->VNFC->connection_point you can specify which network t
 ### Lifecycle Events
 
 A lifecycle event is composed by an Event and a list of strings that correspond to the script names needed to be run in that particular Event.
+Currently supported events are:
+
+| Event name    | Description |
+| ---------     | ---------:  |
+| INSTANTIATE   | ...         |
+| CONFIGURE     | ...         |
+| START         | ...         |
+| TERMINATE     | ...         |
+| SCALE_IN      | ...         |
+
+The VNF events state machine follows the  state diagram for the VNFR (and NSR) displayed in [this slide][vnf-state-slide] 
 
 ### Deployment Flavour
 
@@ -128,6 +139,8 @@ References
 [vnfm-how-to]: vnfm-how-to-write
 [vnf-package-link]: vnfpackage
 [openstack-flavours]: http://docs.openstack.org/openstack-ops/content/flavors.html
+[vnf-state-slide]: http://image.slidesharecdn.com/nfvvnfarchitecturepresentation-141006041349-conversion-gate01/95/nfv-virtual-network-function-architecture-22-638.jpg?cb=1436628676
+
 
 <!---
 Script for open external links in a new tab
