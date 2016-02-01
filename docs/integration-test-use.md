@@ -3,12 +3,13 @@
 ## Overview
 
 This project provides integration tests. 
-Three tests are run.
+Five tests are run.
 
 1. scenario-dummy-iperf
 2. scenario-many-dependencies
 3. scenario-real-iperf
 4. scenario-complex-iperf
+5. scenario-scaling
 
 scenario-dummy-iperf uses the [Dummy VNFM][vnfm-dummy] to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
 It does not actually deploy a network service. The fake network service is a simple iperf scenario with one server and one client. 
@@ -27,9 +28,14 @@ Blue is the network *private* and black *private2*.
 
 ![Complex scenario][complex-iperf]
 
+The test scenario-scaling tests the scaling function of Openbaton. 
+It starts by deploying an iperf server and an iperf client which connects to the server. 
+Then it executes some scaling functions like scale out and scale in and checks if new instances of the server and the client are deployed. Cases like scale in on just one instance and scale out on the maximum number of instances are included. 
+It also examines if the client instances are provided with the ip addresses of the new server instances, so that they are able to connect to them. 
+
 In every test a vim instance and a network service descriptor are stored on the orchestrator and the network service launched. 
-If that is successful, the network service is stoped and the network service record, network service descriptor and the vim instance are removed. 
-In the cases of the scenario-real-iperf and scenario-complex-iperf test also the service itself is tested, i.e. if iperf is running and the clients can connect to the server. 
+If that is successful, the network service is stopped and the network service record, network service descriptor and the vim instance are removed. 
+In the cases of the scenario-real-iperf, scenario-complex-iperf and scenario-scaling test also the service itself is tested, i.e. if iperf is running and the clients can connect to the server. 
 
 ## Requirements
 
