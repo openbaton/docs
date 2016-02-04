@@ -296,7 +296,7 @@ Where the parameters mean:
 ## Choose a vnfm-sdk
 
 Before you can start with the implementation you need to select the type of communication you want to use for the communication between the Orchestrator (NFVO) and the VNFManager.
-Either you can use the vnfm-sdk-jms for using the [Java Message Service (JMS)][JMS-link] or the vnfm-sdk-rest for using the [ReST][ReST-link] interface.
+Either you can use the vnfm-sdk-amqp for using the [RabbitMQ][RabbitMQ-link] or the vnfm-sdk-rest for using the [ReST][ReST-link] interface.
 However, your choice doesn't effect the upcoming implementation, because the communication itself is done automatically in the background.
 But have in mind that both libraries depend on [SpringBoot][spring-boot-link].
 So, if you want to avoid this dependency, a third option might be: just use the simple vnfm-sdk artifact.
@@ -308,22 +308,22 @@ The following section shows you how to import the vnfm-sdk-jms, representative f
 
 ### Import a vnfm-sdk
 
-This section shows how to import and configure your VNFManager to make use of the vnfm-sdk-jms.
+This section shows how to import and configure your VNFManager to make use of the vnfm-sdk-amqp.
 
-For gathering the vnfm-sdk-jms library you need to import the libraries by adding the missing lines to your build.gradle:
+For gathering the vnfm-sdk-amqp library you need to import the libraries by adding the missing lines to your build.gradle:
 
 ```gradle
 //...
 
 dependencies {
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
-    compile 'org.openbaton:vnfm-sdk-jms:0.15'
+    compile 'org.openbaton:vnfm-sdk-amqp:0.16'
 }
 
 //...
 ```
 
-**Note** To make use of the vnfm-sdk-rest you need to change 'vnfm-sdk-jms' to 'vnfm-sdk-rest' only.
+**Note** To make use of the vnfm-sdk-rest you need to change 'vnfm-sdk-amqp' to 'vnfm-sdk-rest' only.
 
 So the final build.gradle file results like:
 
@@ -341,12 +341,12 @@ apply plugin: 'maven'
 repositories {
     mavenCentral()
     maven {
-        url "http://193.175.132.176:8081/nexus/content/groups/public"
+            url "http://get.openbaton.org:8081/nexus/content/groups/public"
     }
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-jms:0.15'
+    compile 'org.openbaton:vnfm-sdk-amqp:0.16'
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
 }
 
@@ -381,63 +381,75 @@ public class MyVNFM {
 }
 ```
 
-Afterwards you need to extend your Main Class (in this case MyVNFM) with the *AbstractVnfmSpringJMS*.
+Afterwards you need to extend your Main Class (in this case MyVNFM) with the *AbstractVnfmSpringAmqp*.
 
-The *AbstractVnfmSpringJMS* takes care of all the configuration you need to register/unregister the VNFManager to the NFVO and handles incoming messages.
-Whereas the *AbstractVnfm*, extended by the *AbstractVnfmSpringJMS*, is independent of the type of communication.
+The *AbstractVnfmSpringAmqp* takes care of all the configuration you need to register/unregister the VNFManager to the NFVO and handles incoming messages.
+Whereas the *AbstractVnfm*, extended by the *AbstractVnfmSpringAmqp*, is independent of the type of communication.
 This means more in detail that the *AbstractVnfm* processes the incoming messages and executes the right method depending on the defined Action inside the message.
 Moreover, it is responsible for loading predefined configuration files, setting up the VNFManager itself, creating the VNFR (based on the VNFD received in the first step) and doing essential parts like requesting the NFVO for granting operations or deciding who is responsible for allocate resources.
 
-Once you extended your VNFMManger, you need to implement all the methods coming from the extension of *AbstractVnfmSpringJMS* as shown below:
+Once you extended your VNFMManger, you need to implement all the methods coming from the extension of *AbstractVnfmSpringAmqp* as shown below:
 
 ```java
 package org.openbaton.vnfm;
 
+import org.openbaton.autoscaling.catalogue.Action;
+import org.openbaton.catalogue.mano.record.VNFCInstance;
 import org.openbaton.catalogue.mano.record.VNFRecordDependency;
 import org.openbaton.catalogue.mano.record.VirtualNetworkFunctionRecord;
-import org.openbaton.common.vnfm_sdk.VnfmHelper;
-import org.openbaton.common.vnfm_sdk.jms.AbstractVnfmSpringJMS;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.openbaton.catalogue.nfvo.VimInstance;
+import org.openbaton.common.vnfm_sdk.amqp.AbstractVnfmSpringAmqp;
 import org.springframework.boot.SpringApplication;
 
-public class MyVNFM extends AbstractVnfmSpringJMS {
+import java.util.List;
 
-	@Autowired
-	private VnfmHelper vnfmHelper;
+@SpringBootApplication
+class MyVNFM extends AbstractVnfmSpringAmqp {
 
     /**
      * This operation allows creating a VNF instance.
+     *
+     * @param scripts
      * @param virtualNetworkFunctionRecord
      * @param scripts
+     * @param vimInstances
      */
-    @Override
-    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts) throws Exception {
-        return virtualNetworkFunctionRecord;
+
+    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts, List<VimInstance> vimInstances) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows retrieving
      * VNF instance state and attributes.
      */
-    @Override
     public void query() {
 
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord scale(org.openbaton.catalogue.nfvo.Action scaleInOrOut, VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance component, Object scripts, VNFRecordDependency dependency) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows scaling
      * (out/in, up/down) a VNF instance.
+     *
+     * @param scaleOut
+     * @param virtualNetworkFunctionRecord
+     * @param component
+     * @param scripts
+     * @param dependency
      */
-    @Override
-    public void scale() {
-
+    VirtualNetworkFunctionRecord scale(Action scaleOut, VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance component, Object scripts, VNFRecordDependency dependency) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows verifying if
      * the VNF instantiation is possible.
      */
-    @Override
     public void checkInstantiationFeasibility() {
 
     }
@@ -446,16 +458,14 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * This operation allows verifying if
      * the VNF instantiation is possible.
      */
-    @Override
-    public void heal() {
-
+    public VirtualNetworkFunctionRecord heal(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance component, String cause) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows applying a minor/limited
      * software update (e.g. patch) to a VNF instance.
      */
-    @Override
     public void updateSoftware() {
 
     }
@@ -464,19 +474,19 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
      * This operation allows making structural changes
      * (e.g. configuration, topology, behavior,
      * redundancy model) to a VNF instance.
+     *
      * @param virtualNetworkFunctionRecord
      * @param dependency
      */
-    @Override
+
     public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFRecordDependency dependency) throws Exception {
-        return virtualNetworkFunctionRecord;
+        return null;
     }
 
     /**
      * This operation allows deploying a new
      * software release to a VNF instance.
      */
-    @Override
     public void upgradeSoftware() {
 
     }
@@ -484,11 +494,25 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
     /**
      * This operation allows terminating gracefully
      * or forcefully a previously created VNF instance.
+     *
      * @param virtualNetworkFunctionRecord
      */
+    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return null;
+    }
+
     @Override
-    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception{
-        return virtualNetworkFunctionRecord;
+    public void handleError(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
+
+    }
+
+    /**
+     * This operation allows providing notifications on state changes
+     * of a VNF instance, related to the VNF Lifecycle.
+     */
+    @Override
+    public void NotifyChange() {
+
     }
 
     @Override
@@ -498,24 +522,15 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
 
     @Override
     public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
-        return virtualNetworkFunctionRecord;
+        return null;
     }
 
     @Override
     public VirtualNetworkFunctionRecord configure(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
-        return virtualNetworkFunctionRecord;
+        return null;
     }
 
-    /**
-	 * This operation allows providing notifications on state changes
-	 * of a VNF instance, related to the VNF Lifecycle.
-	 */
-	@Override
-	public void NotifyChange() {
-
-    }
-
-	public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(MyVNFM.class);
     }
 }
@@ -526,8 +541,8 @@ One of the methods that can be overwritten is the _fillSpecificParameters_. This
 
 An example of allocating and terminating resource by using a plugin can be found [here](#allocate-resources) and [here](#release-resources).
 
-**Note** If you use vnfm-sdk-jms or vnfm-sdk-rest **_the VNFManager main class needs to be stateless_** since it can (will) run each method potentially in parallel.
-For what concerns vnfm-sdk-jms, even setting concurrency to 1, will not ensure to have always the same instance of the class.
+**Note** If you use vnfm-sdk-amqp or vnfm-sdk-rest **_the VNFManager main class needs to be stateless_** since it can (will) run each method potentially in parallel.
+For what concerns vnfm-sdk-amqp, even setting concurrency to 1, will not ensure to have always the same instance of the class.
 
 #### Using the VnfmHelper
 
@@ -539,7 +554,7 @@ package org.openbaton.vnfm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MyVNFM extends AbstractVnfmSpringJMS {
+public class MyVNFM extends AbstractVnfmSpringAmqp {
 
 	@Autowired
 	private VnfmHelper vnfmHelper;
@@ -582,15 +597,14 @@ At the moment, the main purpose of the VnfmHelper is to send messages to the NFV
 This section describes the initialization and usage of plugins.
 Therefore, you need to do several things:
 
-* Create a Registry
 * Start the plugins
-* Connect an according VIM to the plugin
+* Connect an according VIM to the plugin or use the plugin directly
 
-**Note** If you want to use plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
+**Note** If you want to use the Vim with plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:0.15'
-compile 'org.openbaton:vim-impl:0.15'
+compile 'org.openbaton:vim-int:0.16'
+compile 'org.openbaton:vim-impl:0.16'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 
@@ -606,8 +620,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.openbaton.plugin.utils.PluginStartup;
 import java.io.IOException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 
 public class MyVNFM extends AbstractVnfmSpringJMS {
 
@@ -616,68 +628,93 @@ public class MyVNFM extends AbstractVnfmSpringJMS {
 
     private ResourceManagement resourceManagement;
 
+    private VimDriverCaller client;
+
     [...]
 
     @Override
     protected void setup() {
         super.setup();
         try {
-            int registryport = 19345;
-            Registry registry = LocateRegistry.createRegistry(registryport);
-            PluginStartup.startPluginRecursive("./plugins", true, "localhost", "" + registryport);
+            //Start all the plugins that are located in ./plugins
+            PluginStartup.startPluginRecursive("./plugins", true, BrokerIp, BrokerPort, Concurrency, RabbitMQUsername, RabbitMQPassword, RabbitMQManagementPort);
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            e.printStackTrace();
         }
+        //Fetching the OpenstackVim using the openstack-plugin
         resourceManagement = (ResourceManagement) context.getBean("openstackVIM", "openstack", 19345);
+        //Using the openstack-plugin directly
+        client = (VimDriverCaller) ((RabbitPluginBroker) context.getBean("rabbitPluginBroker")).getVimDriverCaller(BrokerIp, RabbitMQUsername, RabbitMQPassword, "openstack", "openstack", RabbitMQManagementPort);
     }
 }
 ```
 
 This code expects that the plugins are located in ./plugins.
 So just copy the openstack plugin of your choice to this path.
-Now you are able to use a VIM inside your VNFManager to allocate and release resources whenever you want.
+Now you are able to use a VIM inside or the directly the plugin in your VNFManager to allocate and release resources whenever you want.
 
 ##### Allocate Resources
 The following code snippet shows how to instantiate (allocate) resources at VNFManager side with the help of the VIM.
 
 ```java
 @Override
-public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object object) {
+public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object object, List<VimInstance> vimInstances) {
     log.debug("Processing allocation of Resources for vnfr: " + virtualNetworkFunctionRecord);
-    List<Future<VNFCInstance>> vnfcInstances = new ArrayList<>();
-    try {
+        /**
+         * Allocation of Resources
+         *  the grant operation is already done before this method
+         */
+        log.debug("Processing allocation of Recources for vnfr: " + virtualNetworkFunctionRecord);
         for (VirtualDeploymentUnit vdu : virtualNetworkFunctionRecord.getVdu()) {
+            VimInstance vimInstance = null;
+            try {
+                vimInstance = Utils.getVimInstance(vdu.getVimInstanceName(), vimInstances);
+            } catch (NotFoundException e) {
+                log.error(e.getMessage(), e);
+            }
+            List<Future<VNFCInstance>> vnfcInstancesFuturePerVDU = new ArrayList<>();
             log.debug("Creating " + vdu.getVnfc().size() + " VMs");
             for (VNFComponent vnfComponent : vdu.getVnfc()) {
-                Future<VNFCInstance> allocate = resourceManagement.allocate(vdu, virtualNetworkFunctionRecord, vnfComponent, "#userdata", vnfComponent.isExposed());
-                vnfcInstances.add(allocate);
+                Map<String, String> floatingIps = new HashMap<>();
+                for (VNFDConnectionPoint connectionPoint : vnfComponent.getConnection_point()) {
+                    if (connectionPoint.getFloatingIp() != null && !connectionPoint.getFloatingIp().equals("")) {
+                        floatingIps.put(connectionPoint.getVirtual_link_reference(), connectionPoint.getFloatingIp());
+                    }
+                }
+                Future<VNFCInstance> allocate = null;
+                try {
+                    allocate = resourceManagement.allocate(vimInstance, vdu, virtualNetworkFunctionRecord, vnfComponent, "", floatingIps);
+                    vnfcInstancesFuturePerVDU.add(allocate);
+                } catch (VimException e) {
+                    log.error(e.getMessage());
+                    if (log.isDebugEnabled())
+                        log.error(e.getMessage(), e);
+                }
             }
-        }
-    } catch (VimDriverException e) {
-        log.error(e.getMessage(), e);
-        throw new RuntimeException(e.getMessage(), e);
-    } catch (VimException e) {
-        log.error(e.getMessage(), e);
-        throw new RuntimeException(e.getMessage(), e);
-    }
-    //Print ids of deployed VDUs
-    for (Future<VNFCInstance> vnfcInstance : vnfcInstances) {
-        try {
-            log.debug("Created VNFCInstance with id: " + vnfcInstance.get());
-        } catch (InterruptedException e) {
-            log.error(e.getMessage(), e);
-            throw new RuntimeException(e.getMessage(), e);
-        } catch (ExecutionException e) {
-            log.error(e.getMessage(), e);
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
+            //Print ids of deployed VNFCInstances
+            for (Future<VNFCInstance> vnfcInstanceFuture : vnfcInstancesFuturePerVDU) {
+                try {
+                    VNFCInstance vnfcInstance = vnfcInstanceFuture.get();
+                    vdu.getVnfc_instance().add(vnfcInstance);
+                    log.debug("Created VNFCInstance with id: " + vnfcInstance);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage());
+                    if (log.isDebugEnabled())
+                        log.error(e.getMessage(), e);
+                    //throw new RuntimeException(e.getMessage(), e);
+                } catch (ExecutionException e) {
+                    log.error(e.getMessage());
+                    if (log.isDebugEnabled())
+                        log.error(e.getMessage(), e);
+                    //throw new RuntimeException(e.getMessage(), e);
+                }
+            }
     log.debug("Allocated all Resources for vnfr: " + virtualNetworkFunctionRecord);
     return virtualNetworkFunctionRecord;
 }
 ```
 
-**Note** Keep in mind that you need to set *allocate* to false in conf.properties, if you want to allocate resources on the VNFManager side.
+**Note** Keep in mind that you need to set *allocate* to false in conf.properties, if you want to allocate resources on the VNFManager side. Otherwise the NFVO will allocate resources as well.
 
 ##### Release Resources
 The next code snippet shows an implementation of the terminate method used for releasing resources at VNFManager side.
@@ -686,12 +723,28 @@ The next code snippet shows an implementation of the terminate method used for r
 @Override
 public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
     log.info("Terminating vnfr with id " + virtualNetworkFunctionRecord.getId());
+    NFVORequestor nfvoRequestor = new NFVORequestor(nfvo_username, nfvo_password, nfvo_ip, nfvo_port, "1");
     for (VirtualDeploymentUnit vdu : virtualNetworkFunctionRecord.getVdu()) {
         Set<VNFCInstance> vnfciToRem = new HashSet<>();
+        List<VimInstance> vimInstances = new ArrayList<>();
+        VimInstance vimInstance = null;
+        try {
+            vimInstances = nfvoRequestor.getVimInstanceAgent().findAll();
+        } catch (SDKException e) {
+            log.error(e.getMessage(), e);
+        } catch (ClassNotFoundException e) {
+            log.error(e.getMessage(), e);
+        }
+        for (VimInstance vimInstanceFind : vimInstances) {
+            if (vimInstanceFind.getName().equals(vdu.getVimInstanceName())) {
+                vimInstance = vimInstanceFind;
+                break;
+            }
+        }
         for (VNFCInstance vnfcInstance : vdu.getVnfc_instance()) {
             log.debug("Releasing resources for vdu with id " + vdu.getId());
             try {
-                resourceManagement.release(vnfcInstance, vdu.getVimInstance());
+                resourceManagement.release(vnfcInstance, vimInstance);
             } catch (VimException e) {
                 log.error(e.getMessage(), e);
                 throw new RuntimeException(e.getMessage(), e);
@@ -722,7 +775,7 @@ References
 
 [spring-boot-link]:http://projects.spring.io/spring-boot/
 [openjdk-link]: http://openjdk.java.net/install/
-[JMS-link]: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
+[RabbitMQ-link]: https://www.rabbitmq.com/
 [ReST-link]: https://en.wikipedia.org/wiki/Representational_state_transfer
 
 [gradle-installation-link]:https://docs.gradle.org/current/userguide/installation.html
