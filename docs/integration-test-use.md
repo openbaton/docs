@@ -59,9 +59,11 @@ Open it and set the property values according to your needs.
 | nfvo-pwd                                      | The password if a login is required for the NFVO |
 | local-ip					| The ip of the machine on which the integration test is running |
 
+Alternatively you can also create a directory */etc/openbaton/integration-test* on your machine and put a file named *integration-test.properties* in it. There you have to write and set the properties mentioned above. 
+
 After that you will also need a keypair for openstack. Create one and download the private key as a .pem file. 
 Rename it to integration-test.pem and provide it with the needed permissions by executing *chmod 400 integration-test.pem*.
-Create the directory */etc/openbaton/integration-test* on your machine and move the pem file into it. 
+If it does not exist already create the directory */etc/openbaton/integration-test* on your machine and move the pem file into it. 
 The next step is to create a vim file. 
 Here is an example where you just have to change some fields. 
 ```json
