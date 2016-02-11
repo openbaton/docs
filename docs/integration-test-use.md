@@ -58,6 +58,7 @@ Open it and set the property values according to your needs.
 | nfvo-usr					| The username if a login is required for the NFVO |
 | nfvo-pwd                                      | The password if a login is required for the NFVO |
 | local-ip					| The ip of the machine on which the integration test is running |
+| clear-after-test          | If set to *true*, the NFVO will be cleared of all the remaining NSRs, NSD, VNFPackages and Vim-Instances left from the previous test. |
 
 Alternatively you can also create a directory */etc/openbaton/integration-test* on your machine and put a file named *integration-test.properties* in it. There you have to write and set the properties mentioned above. 
 
