@@ -341,7 +341,7 @@ Now where we onboarded the VNFPackages they are available on the NFVO and we can
 To get the ids of the newly created VNFDs you need to fetch the VNFDs by invoking the following command:
 
 ```bash
-$ curl -X "GET http://localhost:8080/api/v1/vnf-descriptors"
+$ curl -X GET "http://localhost:8080/api/v1/vnf-descriptors"
 ```
 
 This request will return a list of already existing VNFDs.
