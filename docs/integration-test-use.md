@@ -104,7 +104,7 @@ After that you will find the folder *build/libs/* in the project. Inside of this
 ## Start the integration test
 
 Before starting the integration test be sure that the NFVO, Generic VNFM and Dummy VNFM you want to use are already running. 
-Then start the test by navigating into the folder *integration-tests/build/libs* and execute the command *java -jar integration-tests-0.15-SNAPSHOT.jar*.
+Then start the test by navigating into the folder *integration-tests/build/libs* and execute the command *java -jar integration-tests-0.16.jar*.
 
 ## Test results
 
