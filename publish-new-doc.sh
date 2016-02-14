@@ -17,17 +17,18 @@ mkdocs build --clean
 
 # create a temporary folder for cloning the website repository
 tmp=`mktemp -d`
-git pull git@github.com:openbaton/openbaton.github.io.git $tmp/web
+git clone git@github.com:openbaton/openbaton.github.io.git $tmp/web
 
 # copying the updated documentation on the documentation folder of the website
-cp -r site $tmp/web/documentation
+cp -r site/ $tmp/web/documentation
 
+pushd $tmp/web
 # commit changes with latest commit id
 git commit -am "Updated documentation folder with content from $commit_id of docs master branch"
-
+ 
 # push changes on master branch
 # git push
 
-
+popd
 
 
