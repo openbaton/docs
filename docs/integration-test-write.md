@@ -196,6 +196,7 @@ action = INSTANTIATE_FINISH
 class-name = GenericServiceTester
 vnf-type = client
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-clt-connection.sh
 ```
@@ -204,6 +205,7 @@ The class name specifies, that we want to use the GenericServiceTester to test o
 The vnf-type is used to say on which virtual network functions the scripts should be executed and is equal to the one you wrote into the network service descriptor.
 In our example the integration test would execute them on a virtual machine, which runs the iperfserver VNF which has the type 'server'. 
 In user-name you have to specify the user name of the virtual machine, so that the integration test can ssh into the machine. 
+And vm-scripts-path declares the directory in which the testing scripts should be stored on the virtual machine. Keep in mind that this directory has to already exist, it will not be created by the integration test. 
 And finally you have to specify the script name. script-1 will be the first script executed in that task.
 If you want to execute more than that, just add script-2, script-3 and so on.
 
@@ -290,6 +292,7 @@ action = INSTANTIATE_FINISH
 class-name = GenericServiceTester
 vnf-type = client
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-clt-connection.sh
 
@@ -299,6 +302,7 @@ class-name = GenericServiceTester
 vnf-type = server
 net-name = private
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-srv-connection.sh
 ```
@@ -374,6 +378,7 @@ action = INSTANTIATE_FINISH
 class-name = GenericServiceTester
 vnf-type = client
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-clt-connection.sh
 
@@ -383,6 +388,7 @@ class-name = GenericServiceTester
 vnf-type = server
 net-name = private
 user-name = ubuntu
+vm-scripts-path = /home/ubuntu
 script-1 = iperf-running.sh
 script-2 = iperf-srv-connection.sh
 
@@ -450,6 +456,9 @@ As mentioned earlier here is a summary of all the class-names available at the m
 | NetworkServiceRecordWait			| Wait for an specific action of the NFVO to happen that is related to NSRs |
 | PackageDelete                                 | Delete a VNFPackage |
 | PackageUpload					| Upload a VNFPackage |
+| ScaleIn					| Triggers one scale in operation on a VNFR specified in the ini file |
+| ScaleOut					| Triggers one scale out operation on a VNFR specified in the ini file |
+| ScalingTester					| Verifies if the number of VNFCInstances is equal to a given number and passes an updated NSR to the next task, which can be important after a scaling operation |
 | VimInstanceCreate  				| Store a vim instance on the NFVO from a json file |
 | VimInstanceDelete				| Delete a vim instance |
 | VirtualNetworkFunctionRecordWait		| Wait for an action sent by the NFVO which is related to a VNFR |
@@ -479,27 +488,29 @@ class-name = VimInstanceDelete
 [it/vim-c-1/vnfp-c-1]
 class-name = PackageUpload
 package-name = iperf-server-package.tar
+successor-remover = vnfp-d-1
+
+;package-delete
+[it/vim-c-1/vnfp-c-1/vnfp-d-1]
+class-name = PackageDelete
+package-name = iperfServerPackage
 
 ;nsd-create
 [it/vim-c-1/vnfp-c-1/nsd-c-1]
 class-name = NetworkServiceDescriptorCreateFromPackage
 name-file = NetworkServiceDescriptor.json
+successor-remover = nsd-d-1
 
 ;nsd-delete
 [it/vim-c-1/vnfp-c-1/nsd-c-1/nsd-d-1]
 class-name = NetworkServiceDescriptorDelete
-
-;package-delete
-[it/vim-c-1/vnfp-c-1/nsd-c-1/nsd-d-1/vnfp-d-1]
-class-name = PackageDelete
-package-name = iperf-server-package
 ```
 
-This example begins by storing a vim instance. Then the package iperf-server-package.tar is stored. 
+This example begins by storing a vim instance. Then the package iperf-server-package.tar is stored by specifying the package file name in the package-name attribute. 
 The packages have to be in the directory /etc/openbaton/integration-test/vnf-packages/. 
-Afterwards a NSD is created from the VNFDs in the package and right after that deleted. Be aware that you 
+Afterwards a NSD is created from the VNFDs in the package and right after that deleted (to keep this example short we did not create a NSR from the NSD and so on). Be aware that you 
 have to use the class NetworkServiceDescriptorCreateFromPackage to store a NSD from a package. 
-Then also the package will be deleted. You have to provide the name of the package you want to delete. 
+Then also the package will be deleted. You have to provide the name of the package you want to delete (not the file name this time but the name of the package defined in the Metadata.yaml). 
 At the end the vim instance is deleted. 
 
 If you create a NSD from a VNFPackage, the VNFD field of the NSD file would look something like this: 
@@ -507,16 +518,50 @@ If you create a NSD from a VNFPackage, the VNFD field of the NSD file would look
 ```json
 "vnfd":[
 {
-      "id":""
+      "type":"server"
 },
 {
-      "id":""
+      "type":"client"
 }
 
    ],
 ```
 
-The integration test will automatically insert some IDs of VNFDs that were previously stored by a VNFPackage. 
+The integration test will search for VNFDs with these types that were previously stored by a VNFPackage and use them for creating the NSD. 
+
+## Scaling
+There are three testers for Scaling already implemented. The first one is *ScaleOut*. In the ini file this tester needs some additional attributes. Besides the normal *class-name* you should also specify the VNFR type on which the scale out should be performed in the field *vnf-type*. Then you can also specify the virtual-link to which the new instance should be connected using *virtual-link*. 
+And you can determine a floating ip for the new instance using the field *floating-ip*. 
+Here is an example of a ScaleOut task in the ini file:
+
+```ini
+[it/.../sc-o-1]
+class-name = ScaleOut
+vnf-type = client
+virtual-link = private
+floating-ip = random
+```
+
+The second tester is *ScaleIn*. Here you can just specify on which VNFR type the scale in should be executed. An example: 
+
+```ini
+[it/.../sc-i-1]
+class-name = ScaleIn
+vnf-type = client
+```
+
+And the third tester is used to see if after the scaling operation there is the right number of instances running. 
+Specify the VNFR type you want to test by providing *vnf-type* in the ini file and specify the number of expected VNFC instances by using *vnfc-count*. For example: 
+
+```ini
+[it/.../sc-t-1]
+class-name = ScalingTester
+vnf-type = client
+vnfc-count = 2
+```
+
+Furthermore note that the ScalingTester passes the updated NSR to the next tester. If you trigger a scaling function the NSR will change, but if you do not use ScalingTester the NSR used by the integration test will remain the old one before the scaling operation. 
+So the recommended use of the Scaling testers is to trigger a scaling operation using *ScaleIn* or *ScaleOut*. If you use *ScaleOut* you should wait for the SCALED message using the *VirtualNetworkFunctionRecordWait* class. After that use the *ScalingTester*. 
 
 
 ## Parser

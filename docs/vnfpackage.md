@@ -79,9 +79,10 @@ In the following each property is explained in more detail. Please consider also
         * If it finds one image, this image will be used.
         * If it finds multiple images with the same name or multiple names matching to multiple images, an exception will be thrown because it is not clear which image to use.
     * ***link***: This link points to an image available at this URL used to upload the image to the cloud environment.
-        * **Note** Either you have to define the image-link or put the image directly into the VNFPackage.
+        * **Note** Either you have to define the image-link or put the image directly into the VNFPackage if you want to upload a new Image to the VIM by using image upload option `true` or `check`.
             Otherwise a NotFoundException will be thrown and the VNFPackage will not onboard.
             The image-link has a higher priority than the image stored in the VNFPackage directly.
+        * ****Note**** At the moment it is only supported to upload an image by using the `link`. Image uploading from an image inside the package is disabled.
 * ***image-config***: All the properties explained below are required to upload the image to the cloud environment properly.
     In case of creating a new image this configuration will be used.
     * ***name***: This defines the name for the image to upload either located directly in the VNFPackage or available via the URL defined in image-link.
@@ -112,6 +113,8 @@ This lifecycle_events are triggered by the NFVO in the meaning of: if the event 
 **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
 
 ## <image\>.img
+
+**Note** At the moment it is only supported to upload an image by using the `link` defined in **Metadata.yaml**. Image uploading from an image inside the package is disabled.
 
 This image is used to upload it to all the cloud environments which are addressed inside the VNFD with that image.
 It doesn't matter whether an image already exists on the considered cloud environment or not.
@@ -150,6 +153,7 @@ image:
     upload: "check"
     names:
         - iperf_server_image
+    link: "http://releases.ubuntu.com/14.04/ubuntu-14.04.3-server-amd64.iso"
 image-config:
     name: iperf_server_image
     diskFormat: QCOW2
@@ -238,6 +242,7 @@ image:
     upload: "check"
     names:
         - iperf_client_image
+    link: "http://releases.ubuntu.com/14.04/ubuntu-14.04.3-server-amd64.iso"
 image-config:
     name: iperf_client_image
     diskFormat: QCOW2
@@ -269,7 +274,6 @@ Important to notice here is the vm_image that points to the image we have define
             "virtual_network_bandwidth_resource":"1000000",
             "vimInstanceName":"vim-instance",
             "vdu_constraint":"",
-            "high_availability":"ACTIVE_PASSIVE",
             "scale_in_out":2,
             "vnfc":[
                 {

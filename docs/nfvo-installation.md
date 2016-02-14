@@ -92,11 +92,11 @@ spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect
 # hibernate properties
 spring.jpa.show-sql=false
 spring.jpa.hibernate.ddl-auto=create-drop
-
-
 ```
+
 **IMPORTANT NOTE:**
-By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need RabbitMQ to be reachable also from the outside.  
+
+1) By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need RabbitMQ to be reachable also from the outside.  
 So when you want to deploy a VNF (EMS) in a VM which runs on a different host in respect to the NFVO, you will need to configure the rabbitmq endpoint (**nfvo.rabbit.brokerIp**) with the real IP of the NFVO host (instead of localhost).
 What we suggest is to copy entirely _/opt/openbaton/NFVO/etc/openbaton.properties_ to _/etc/openbaton/openbaton.properties_ and then change: 
 ```properties
@@ -106,6 +106,31 @@ to
 ```properties
 nfvo.rabbit.brokerIp = the rabbitmq broker ip (if you run the openbaton.sh update then will be the ip where the NFVO is running) 
 ``` 
+
+2)In order to start using persistency through mysql database and not just in memory database, you need to change the properties shown above into:
+```properties
+# DB properties
+spring.datasource.username=admin
+spring.datasource.password=changeme
+# hsql jdbc
+# spring.datasource.url=jdbc:hsqldb:file:/tmp/openbaton/openbaton.hsdb
+# spring.datasource.driver-class-name=org.hsqldb.jdbc.JDBCDriver
+# spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect
+
+# mysql jdbc
+spring.datasource.url=jdbc:mysql://localhost:3306/openbaton
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+
+# hibernate properties
+spring.jpa.show-sql=false
+# spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.hibernate.ddl-auto=update
+```
+_spring.datasource.username_ and _spring.datasource.password_ need to be adapted to the mysql username and password. 
+_spring.jpa.hibernate.ddl-auto_ has to be set to **update** if you want the NFVO not to drop all the tables after being shut down and to make it reuse the same tables after restarting.
+
+For more details please see the [Spring Documentation](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html) regarding the configuration parameters.
 
 These are other parameters about the configuration of Rabbit MQ:
 ```properties
@@ -183,17 +208,36 @@ nfvo.monitoring.ip = the Zabbix server ip
 ```
 
 These are other parameters about the configuration of the nfvo behaviour:
-```properties 
+```properties
+# Wait for the NSR to be deleted
 nfvo.delete.wait = false 
-
+# The broker ip that needs to be reachable from all the components
 nfvo.rabbit.brokerIp = the broker ip here 
+# Set the queues to be autodeleted after the shut down
 nfvo.rabbit.autodelete = true 
+# Setting the number of plugin active consumers
 nfvo.plugin.active.consumers = 5 
+# Setting the number of minimum concurrency of the nfvo receivers
 nfvo.rabbit.minConcurrency = 5 
-nfvo.rabbit.maxConcurrency = 15 
+# Setting the number of maximum concurrency of the nfvo receivers
+nfvo.rabbit.maxConcurrency = 15
+# Setting the management port number of rabbitmq
 nfvo.rabbit.management.port = 15672 
-```
 
+# Setting the heartbeat between ems and the broker
+nfvo.ems.queue.heartbeat = 60
+# Set the ems queues to be autodeleted after the shut down
+nfvo.ems.queue.autodelete = true
+# Set the ems version to be installed
+nfvo.ems.version = 0.15
+
+# Allow infinite quotas during the GRANT_OPERATION
+nfvo.vim.drivers.allowInfiniteQuota = false
+# Execute the start event sequentially and in order based on the VNFDependencies. This implies the NSD not to have cycling dependencies
+nfvo.start.ordered = false
+# Avoid doing the GRANT_OPERATION
+nfvo.quota.check = true
+```
 
 Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html) 
 ```properties
