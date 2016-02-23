@@ -157,7 +157,7 @@ $ curl -i -X POST http://localhost:8080/api/v1/tosca -H "Content-Type: text/yaml
 ```
 
 The NFVO will answer with json translation of the NSD. 
-To retrieve or to instantiate this NSD please use the Dashboard of OpenButton in page under the menu Catalogue > NS Descriptors.
+To retrieve or to instantiate this NSD please use the Dashboard of OpenBaton in page under the menu Catalogue > NS Descriptors.
 
 
 <!------------
