@@ -16,6 +16,7 @@ pages:
 - ['integration-test-use.md', 'Use it', 'Integration Tests']
 - ['use-case-example.md', 'Use it', 'A full example']
 - ['use-case-ims-example.md', 'Use it', 'OpenIMSCore example']
+- ['tosca-iperf-scenario.md', 'Use it', 'TOSCA iperf scenario']
 - ['extend.md', 'Extend it', 'Extend it']
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
 - ['vim-plugin.md', 'Extend it', 'Write your own Plugin']
