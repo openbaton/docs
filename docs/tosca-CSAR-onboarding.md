@@ -1,42 +1,41 @@
-# TOSCA definition
+# TOSCA CSAR on-boarding
+The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA.
+It is a compressed file that includes a TOSCA definition template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
+The CSAR is a zip file with this structure:
 
-The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
-Regarding the objects definded from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
+```bash
+├── Definitions
+|   └── toscav1.yaml
+├── Scripts
+|   ├── install.sh
+|   └── ...
+└── TOSCA-Metadata
+    └── TOSCA.meta
+```
+The TOSCA.meta file must contains the reference to the Definition that will be translated in VNFs in this case **Entry-Definitions: Definitions/toscav1.yaml**
 
-Premise: some of the objects are defined by OpenBaton
+```bash
+TOSCA-Meta-File-Version: 1.0
+CSAR-Version: 1.1
+Created-By: OASIS TOSCA TC
+Entry-Definitions: Definitions/toscav1.yaml
+```
 
-##  Mapping between TOSCA and ETSI NFV
+The Scripts folder contains all the files required from the lifecycle interfaces of the VNFs.
 
-
-| TOSCA Type          			| ETSI Entity       													|
-| -------------   				| -------------:													|
-| openbaton.type.VNF.GENERIC  	| Virtual Network Function Descriptor (type: GENERIC) 
-| openbaton.type.VDU 			| Virtual Deployment Unit (vnfd:vdu)     	|
-| tosca.nodes.nfv.VL 			| Virtual Link Descriptor     	|
-| tosca.nodes.nfv.CP 			| Connection Point      	|
-
-
-## Deploy a Iperf server - client TOSCA definition
-Before start we should be sure that we have the NFVO and the Generic VNFM running with a [Vim Instance][vim-doc] in the catalogue.
-
-We are going to create a NSD from TOSCA-definition that create a [iperf][iperf] scenario.
-
-The components in the definition are these in the picture below:
-
-![Iperf overview][iperf-TOSCA]
-
-The yaml definition that describe all the components is this below:
-
+The **toscav1.yaml** is a Definition of Network Service. It contains this descriptor.
 
 ```yaml
-tosca_definitions_version: tosca_iperf_1_0_0
+
+tosca_definitions_version: tosca_iperf_nsd
 tosca_default_namespace:    # Optional. default namespace (schema, types version)
 description: NSD for deploing an iperf scenario
 metadata:
   ID:                 # ID of this Network Service Descriptor
   vendor: Fokus       # Provider or vendor of the Network Service
-  version: 0.1 Alpha  # Version of the Network Service Descriptor
-  
+  version: 0.1 Alpha  # Version of the Network Service Descriptor imports:
+
+
 topology_template:
   node_templates:
     iperf-server: #VNF1
@@ -44,13 +43,13 @@ topology_template:
       properties:
         id:
         vendor: Fokus
-        version: 0.1
+        version:
         configurations:
           name: server-configurations
           configurationParameters:
             - key: value
             - key2: value2
-        vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+        vnfPackageLocation: 
         deployment_flavour:
           - flavour_key: m1.small
       requirements:
@@ -73,7 +72,7 @@ topology_template:
           configurationParameters:
             - key: value
             - key2: value2
-        vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+        vnfPackageLocation: 
         deployment_flavour:
           - flavour_key: m1.small
       requirements:
@@ -122,14 +121,15 @@ topology_template:
         virtual_linkable:
           valid_source_types: tosca.nodes.nfv.CP
 
-    CP1: #endpoint of VDU1
+    CP1: #endpoint of VNF1
       type: tosca.nodes.nfv.CP
       properties:
+        floatingIp: random
       requirements:
         virtualbinding: VDU1
       virtualLink: private
 
-    CP2: #endpoint of VDU2
+    CP2: #endpoint of VNF2
       type: tosca.nodes.nfv.CP
       properties:
         floatingIp: random
@@ -137,43 +137,41 @@ topology_template:
         virtualbinding: VDU2
       virtualLink: private
 
-relationships_templete:
-  connection_server_client:
-    type: tosca.nodes.relationships.ConnectsTo
-    source: iperf-server
-    target: iperf-client
-    parameters:
-        - private
-
 
 ```
 
-**NOTE**: Save the definition in a file called iperf-TOSCA.yaml.
+## TOSCA lifecycle interface to OpenBaton lifecycle event
 
-To store this NSD written in TOSCA in the NFVO catalogue you need to send it to the NFVO with this curl command:
+In [TOSCA simple profile YAML][TOSCA-simple-yaml-lifecycle] is defined the interface *tosca.interfaces.node.lifecycle.Standard* . This interface defines the lifecycle of a service since 
+OpenBaton is using different lifecycle events the mapping between these two definitions follows the rules described in the table below:
+
+| tosca.interfaces.node.lifecycle.Standard  | openbaton.interfaces.lifecycle      |
+| -----------------------------------:      | -------------------------:		|
+| create 	                                | INSTANTIATE |
+| configure 			                    | CONFIGURE     	|
+| start 			                        | START     	|
+| stop 			                            | STOP      	|
+| delete 			                        | TERMINATE      	|
+
+
+## CSAR on-bording
+
+After create the CSAR with all scripts in the folder and the link to the definition, you can store this package and OpenBaton will persist all the Scripts and the VNFs inside of the definition. 
+To retrieve the files you can see the Dashboard in the page of VNFPackages under Catalogue menu, also you can see in the page of VNF Descriptors the VNFs defined into **toscav1.yaml**
+
+For on-boarding the CSAR use this command:
 
 ```bash
-$ curl -i -X POST http://localhost:8080/api/v1/tosca -H "Content-Type: text/yaml" "Accept: application/json" --data-binary @iperf-TOSCA.yaml
+$ curl -X POST -v -F file=@iperf.csar "http://localhost:8080/api/v1/csar"
 ```
-
-The NFVO will answer with json translation of the NSD. 
-To retrieve or to instantiate this NSD please use the Dashboard of OpenBaton in the page under the menu Catalogue > NS Descriptors.
 
 
 <!------------
 References
 -------------->
-[tosca-nfv]: http://docs.oasis-open.org/tosca/tosca-nfv/v1.0/tosca-nfv-v1.0.html
-[ETSI-MANO]: https://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
+[TOSCA-simple-yaml-lifecycle]:http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/csprd01/TOSCA-Simple-Profile-YAML-v1.0-csprd01.html#_Toc430015766
+[csar-tosca]:https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjVyb-Ll5PLAhXCDCwKHTh3AEAQFggdMAA&url=https%3A%2F%2Fwww.oasis-open.org%2Fcommittees%2Fdownload.php%2F46057%2FCSAR%2520V0-1.docx&usg=AFQjCNG-Xqjz_D4ZY8TbJGls58Hp7LdNBg&sig2=w7waCIxRy_-ODL7GyZNFUg
 
-[iperf-TOSCA]:images/iperf-TOSCA.png
-
-[vnfr-states]:vnfr-states
-[vnfm-generic]: vnfm-generic
-[nsd-doc]:ns-descriptor
-[vnf-package]:vnfpackage
-[vim-doc]:vim-instance-documentation
-[iperf]:https://iperf.fr
 
 <!---
 Script for open external links in a new tab
