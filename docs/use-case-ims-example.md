@@ -136,24 +136,25 @@ In the Network Service Descriptor we will define the relations among our Virtual
 For this example the Network Service Descriptor may look like the following.
 ```json
 {
+   {  
    "name":"OpenIMSCore Bind9 FHoSS",
-   "vendor":"fokus",
-   "version":"0.1-ALPHA",
+   "vendor":"Fokus",
+   "version":"2.0",
    "vnfd":[  
-      {  
-         "id":"26b588d5-ecb9-4bf2-a044-720ad1100e58"
+      {
+         "id":"06514517-7cec-4597-afb7-20a19d559ca0"
       },
-      {  
-         "id":"bd422c42-2343-4769-830d-0e92bbe54dc8"
+      {
+         "id":"5cf07ec9-bb8f-4e78-8aea-2065d8d6c979"
       },
-      {  
-         "id":"c1933ff3-4b55-4eb1-97b7-8ca9675b2067"
+      {
+         "id":"8f9b1363-f8d3-473e-9893-4430452740d8"
       },
-      {  
-         "id":"f57bb94d-e307-4048-8bc6-7547f9b40f6a"
+      {
+         "id":"92789c2b-953a-40e1-bc9e-062b74a90771"
       },
-      {  
-         "id":"f8d821ed-f7ee-4ae8-a660-b885780c28df"
+      {
+         "id":"c806c1b9-3e94-4df4-8804-63d7e7474b7c"
       }
    ],
    "vld":[  
@@ -169,8 +170,11 @@ For this example the Network Service Descriptor may look like the following.
          "target":{  
             "name":"fhoss"
          },
-         "parameters":[  
-            "realm"
+         "parameters":[
+            "useFloatingIpsForEntries",  
+            "realm",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -180,8 +184,11 @@ For this example the Network Service Descriptor may look like the following.
          "target":{  
             "name":"icscf"
          },
-         "parameters":[  
-            "realm"
+         "parameters":[
+            "useFloatingIpsForEntries",   
+            "realm",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -191,8 +198,11 @@ For this example the Network Service Descriptor may look like the following.
          "target":{  
             "name":"scscf"
          },
-         "parameters":[  
-            "realm"
+         "parameters":[
+            "useFloatingIpsForEntries",    
+            "realm",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -202,8 +212,11 @@ For this example the Network Service Descriptor may look like the following.
          "target":{  
             "name":"pcscf"
          },
-         "parameters":[  
-            "realm"
+         "parameters":[
+            "useFloatingIpsForEntries",    
+            "realm",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -214,7 +227,9 @@ For this example the Network Service Descriptor may look like the following.
             "name":"bind9"
          },
          "parameters":[  
-            "name"
+            "name",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -226,7 +241,9 @@ For this example the Network Service Descriptor may look like the following.
          },
          "parameters":[  
             "name",
-            "port"
+            "port",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -238,7 +255,9 @@ For this example the Network Service Descriptor may look like the following.
          },
          "parameters":[  
             "name",
-            "port"
+            "port",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -250,7 +269,9 @@ For this example the Network Service Descriptor may look like the following.
          },
          "parameters":[  
             "name",
-            "port"
+            "port",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -262,7 +283,9 @@ For this example the Network Service Descriptor may look like the following.
          },
          "parameters":[  
             "name",
-            "port"
+            "port",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -274,7 +297,9 @@ For this example the Network Service Descriptor may look like the following.
          },
          "parameters":[  
             "name",
-            "port"
+            "port",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -287,7 +312,9 @@ For this example the Network Service Descriptor may look like the following.
          "parameters":[  
             "name",
             "port",
-            "diameter_p"
+            "diameter_p",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -299,7 +326,9 @@ For this example the Network Service Descriptor may look like the following.
          },
          "parameters":[  
             "name",
-            "diameter_p"
+            "diameter_p",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -311,7 +340,9 @@ For this example the Network Service Descriptor may look like the following.
          },
          "parameters":[  
             "name",
-            "port"
+            "port",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       },
       {  
@@ -322,7 +353,9 @@ For this example the Network Service Descriptor may look like the following.
             "name":"scscf"
          },
          "parameters":[  
-            "name"
+            "name",
+            "mgmt",
+            "mgmt_floatingIp"
          ]
       }
    ]
