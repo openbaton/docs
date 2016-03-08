@@ -85,7 +85,7 @@ The **Properties** for the VNF are:
 | id  	                | String     | Identifier of the VNF |
 | vendor  	            | String    | Name of the provider of the VNF |
 | version  	            | String     | Version of the provider of the VNF  |
-| configurations  	    | Object with two values **name**, **configurationParameters**  | **name**: is a String with the name of the Configuration, **configurationParameters**: the list of Parameters defined by a pair of <key, value> |
+| configurations  	    | Object with two values **name**, **configurationParameters**  | **name**: is a String with the name of the Configuration, **configurationParameters**: the list of Parameters defined by a pair of < key, value > |
 | vnfPackageLocation  	| URL    | It is URL where the Orchestrator will fetch the Scripts needed in the lifecycle events defined in the **interfaces** |
 | deployment_flavour  	| List of flavour_key    | It is a list flavors each one refers to Virtual hardware templates called "flavors" in OpenStack  |
 
