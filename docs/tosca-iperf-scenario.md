@@ -241,8 +241,8 @@ relationships_template:
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
 | type  	            | tosca.nodes.relationships.ConnectsTo           | It is the type of the Relationships Template |
-| source 			    | String   	    | It is a String which refers to the Node Template that describes the source VNF that provides some parameters in order to realizes the dependency with the target VNF|
-| target 			    | String   	    | It is a String which refers to the Node Template that describes the target VNF that requires some parameters in order to realizes the dependency with the source VNF |
+| source 			    | String   	    | It is a String which refers to the Node Template that describes the source VNF that provides some parameters in order to realize the dependency with the target VNF|
+| target 			    | String   	    | It is a String which refers to the Node Template that describes the target VNF that requires some parameters in order to realize the dependency with the source VNF |
 | parameters 			| List < String >      	    | List of parameters for this dependency |
 
 
