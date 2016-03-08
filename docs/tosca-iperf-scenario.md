@@ -100,7 +100,8 @@ The **Interfaces** for the VNF cloud be of two types:
 The TOSCA-Parser can handle both configurations.
 
 #### 1. Standard
-    This interface follows the definition of **tosca.interfaces.node.lifecycle.Standard** described in the [TOSCA Simple YAML][TOSCA-simple-YAML] standard.
+
+This interface follows the definition of **tosca.interfaces.node.lifecycle.Standard** described in the [TOSCA Simple YAML][TOSCA-simple-YAML] standard.
     
 | Lifecycle event       | Value   	     | Description       											|
 | -------------   		| -------------: | --------------:												|
