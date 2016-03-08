@@ -1,7 +1,7 @@
 # TOSCA definition
 
 The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
-Regarding the objects definded from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
+Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
 
 Premise: some of the objects are defined by OpenBaton
 
@@ -10,7 +10,7 @@ Premise: some of the objects are defined by OpenBaton
 The prerequisites are:
 
 * OpenBaton running
-* Generic VNFG running
+* Generic VNFM running
 * [Vim Instance][vim-doc] stored in the Catalogue
 
 
