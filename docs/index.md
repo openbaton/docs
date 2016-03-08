@@ -33,10 +33,16 @@ In order to get started you can follow the [installation guide][install-guide]
 * Subscribing to our mailing list: [users-at-openbaton-dot-org]
 * Sending us an email to: [info-at-openbaton-dot-org]
 
+## Supported by
+Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], [CogNet][cognet]
+
 [install-guide]:install
 [openbaton]:https://twitter.com/openbaton
 [users-at-openbaton-dot-org]: mailto:listen@openbaton.org?subject=subscribe%20users
 [info-at-openbaton-dot-org]: mailto:info@openbaton.org
+[nubomedia]: https://www.nubomedia.eu/
+[mcn]: http://mobile-cloud-networking.eu/site/
+[cognet]: http://www.cognet.5g-ppp.eu/cognet-in-5gpp/
 
 <!---
  Script for open external links in a new tab
