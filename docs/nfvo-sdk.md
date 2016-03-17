@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:0.15'
+    compile 'org.openbaton:sdk:1.0.2'
 }
 ```
 
