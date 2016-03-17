@@ -104,7 +104,10 @@ After that you will find the folder *build/libs/* in the project. Inside of this
 ## Start the integration test
 
 Before starting the integration test be sure that the NFVO, Generic VNFM and Dummy VNFM you want to use are already running. 
-Then start the test by navigating into the folder *integration-tests/build/libs* and execute the command *java -jar integration-tests-*.jar*.
+Then start the test by navigating into the folder *integration-tests/build/libs* and execute the command *java -jar integration-tests-*.jar*. 
+It is possible to specify the test scenarios you want to run so that not every test in the */src/main/resources/integration-test-scenarios* folder is executed. 
+Therefore use command line arguments while starting the integration tests. Every scenario occuring as an argument will be executed. For example *java -jar integration-tests-*.jar scenario-real-iperf.ini scenario-scaling.ini* will just execute the tests described in the files *scenario-real-iperf.ini* and *scenario-scaling.ini* located in the folder */src/main/resources/integration-test-scenarios*.
+If you do not pass any command line arguments, every scenario will be executed. 
 
 ## Test results
 
