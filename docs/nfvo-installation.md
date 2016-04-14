@@ -194,13 +194,13 @@ The following properties are related to the plugin mechanism used for loading VI
 plugin-installation-dir = ./plugins
 ```
 
-This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
+This property allows the user to delete the Network Service Records no matter in which status they are. Please note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 ```properties
 # nfvo behaviour
 nfvo.delete.all-status = true 
 ```
 **MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
-Once the Zabbix server is correctly configured and running, you need only to add following property. 
+Once the Zabbix server is correctly configured and running, you only need to add following property. 
 Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to Zabbix server.
 
 ```properties 
@@ -239,7 +239,7 @@ nfvo.start.ordered = false
 nfvo.quota.check = true
 ```
 
-Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html) 
+Those properties are needed in case you want to tune the performances of the NFVO a bit. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html) 
 ```properties
 # Thread pool executor configuration
 # for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
