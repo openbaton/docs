@@ -76,7 +76,7 @@ Take a look at the Scscf Virtual Network Function Descriptor for this example.
                ]
             }
          ],
-         "vimInstanceName":"your_vim"
+         "vimInstanceName":["your_vim"]
       }
    ],
    "virtual_link":[  
