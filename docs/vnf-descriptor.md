@@ -23,7 +23,7 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
             "vm_image":[  
                 "ubuntu-14.04-server-cloudimg-amd64-disk1"
             ],
-            "vimInstanceName":"vim-instance",
+            "vimInstanceName":["vim-instance"],
             "scale_in_out":2,
             "vnfc":[  
                 {  
