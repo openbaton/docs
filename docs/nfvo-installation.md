@@ -209,7 +209,7 @@ nfvo.vmanager.executor.maxpoolsize = 30
 nfvo.vmanager.executor.queuecapacity = 500
 nfvo.vmanager.executor.keepalive = 30
 
-#This is ssl properties are not used yet and are to use in the next realeses
+# These are ssl properties are not used yet and are to use in the next realeses
 # server.port: 8443
 # server.ssl.key-store = /etc/openbaton/keystore.p12
 # server.ssl.key-store-password = password
@@ -220,7 +220,7 @@ nfvo.vmanager.executor.keepalive = 30
 
 ```
 ```properties
-#GSON properties
+# GSON properties
 spring.http.converters.preferred-json-mapper=gson
 spring.jackson.deserialization.fail-on-unknown-properties = true
 spring.jackson.deserialization.wrap-exceptions = false
