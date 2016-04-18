@@ -197,7 +197,36 @@ plugin-installation-dir = ./plugins
 This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 ```properties
 # nfvo behaviour
-nfvo.delete.all-status = true 
+nfvo.delete.all-status = true
+# public ip of the nfvo
+nfvo.publicIp = localhost
+nfvo.vnfd.cascade.delete = false
+vnfd.vnfp.cascade.delete = false
+nfvo.delete.vnfr = false
+nfvo.delete.vnfr.wait = 60
+
+# Thread pool executor configuration
+# for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
+nfvo.vmanager.executor.corepoolsize = 20
+nfvo.vmanager.executor.maxpoolsize = 30
+nfvo.vmanager.executor.queuecapacity = 500
+nfvo.vmanager.executor.keepalive = 30
+
+# server.port: 8443
+# server.ssl.key-store = /etc/openbaton/keystore.p12
+# server.ssl.key-store-password = password
+# server.ssl.keyStoreType = PKCS12
+# server.ssl.keyAlias = tomcat
+# server.https = false
+
+
+```
+```properties
+#GSON properties
+spring.http.converters.preferred-json-mapper=gson
+spring.jackson.deserialization.fail-on-unknown-properties = true
+spring.jackson.deserialization.wrap-exceptions = false
+
 ```
 **MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
 Once the Zabbix server is correctly configured and running, you need only to add following property. 
