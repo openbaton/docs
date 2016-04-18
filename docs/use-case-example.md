@@ -29,7 +29,7 @@ Before starting we need to send the VimInstance to the NFVO and the Network Serv
             "lifecycle_event":[
 
             ],
-            "vimInstanceName":"vim-instance",
+            "vimInstanceName":["vim-instance"],
             "vdu_constraint":"",
             "high_availability":"ACTIVE_PASSIVE",
             "scale_in_out":2,
