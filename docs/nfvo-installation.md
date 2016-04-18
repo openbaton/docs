@@ -107,7 +107,7 @@ to
 nfvo.rabbit.brokerIp = the rabbitmq broker ip (if you run the openbaton.sh update then will be the ip where the NFVO is running) 
 ``` 
 
-2)In order to start using persistency through mysql database and not just in memory database, you need to change the properties shown above into:
+2)In order to start using persistency through mysql database to save the parameters for next start ups, you need to change the properties shown above into:
 ```properties
 # DB properties
 spring.datasource.username=admin
