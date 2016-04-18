@@ -2,7 +2,7 @@
 
 The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
-### Install the latest NFVO version from the debian package
+### Install the latest NFVO version from the source code
 
 The NFVO can be installed using different mechanisms. In this HowTo we will show you how to install it directly from its debian package.
 
@@ -221,7 +221,7 @@ nfvo.plugin.log.path =
 This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 ```properties
 # nfvo behaviour
-nfvo.delete.all-status= true
+nfvo.delete.all-status = true
 ```
 
 **MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
