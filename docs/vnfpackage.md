@@ -180,7 +180,7 @@ Important to notice here is the vm_image that points to the image we have define
             "vm_image":[
                 "iperf_server_image"
             ],
-            "vimInstanceName":"vim-instance",
+            "vimInstanceName":["vim-instance"],
             "scale_in_out":2,
             "vnfc":[
                 {
