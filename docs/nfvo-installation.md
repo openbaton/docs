@@ -198,7 +198,7 @@ This property allows the user to delete the Network Service Records no matter in
 ```properties
 # nfvo behaviour
 nfvo.delete.all-status = true
-#Decides weither the VNFR would be force-deleted after a time in case NSR was deleted
+# Decides weither the VNFR would be force-deleted after a time in case NSR was deleted
 nfvo.delete.vnfr.wait = false
 nfvo.delete.vnfr.wait.timeout = 60
 
