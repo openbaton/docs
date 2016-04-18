@@ -198,44 +198,7 @@ This property allows the user to delete the Network Service Records no matter in
 ```properties
 # nfvo behaviour
 nfvo.delete.all-status = true
-# Decides weither the VNFR would be force-deleted after a time in case NSR was deleted
-nfvo.delete.vnfr.wait = false
-nfvo.delete.vnfr.wait.timeout = 60
-
-# Thread pool executor configuration
-# for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
-nfvo.vmanager.executor.corepoolsize = 20
-nfvo.vmanager.executor.maxpoolsize = 30
-nfvo.vmanager.executor.queuecapacity = 500
-nfvo.vmanager.executor.keepalive = 30
-
-# These are ssl properties are not used yet and are to use in the next realeses
-# server.port: 8443
-# server.ssl.key-store = /etc/openbaton/keystore.p12
-# server.ssl.key-store-password = password
-# server.ssl.keyStoreType = PKCS12
-# server.ssl.keyAlias = tomcat
-# server.https = false
-
-
 ```
-```properties
-# GSON properties
-spring.http.converters.preferred-json-mapper=gson
-spring.jackson.deserialization.fail-on-unknown-properties = true
-spring.jackson.deserialization.wrap-exceptions = false
-
-```
-
-```properties
-nfvo.vnfd.cascade.delete = false
-```
-This property enables the deletion of all dependent VNFDs in case the main NSD was deleted
-
-```properties
-vnfd.vnfp.cascade.delete = false
-```
-This property enables the deletion of all dependent VNFPs in case VNFD was deleted
 
 **MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
 Once the Zabbix server is correctly configured and running, you need only to add following property. 
