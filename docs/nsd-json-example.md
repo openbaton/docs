@@ -54,9 +54,11 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "flavour_key":"m1.small"
             }
          ],
-         "vnfPackage":{
-            "scriptsLink":"https://ENTER A VALID LINK TO REACH THE SCRIPTS"
-         }
+            "type":"server",
+            "endpoint":"generic",
+         
+            "vnfPackageLocation":"https://ENTER A VALID LINK TO REACH THE SCRIPTS",
+         
       },
       {
          "vendor":"tbr",
@@ -121,9 +123,9 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "flavour_key":"m1.small"
             }
          ],
-         "vnfPackage":{
-            "scriptsLink":"https://ENTER A VALID LINK TO REACH THE SCRIPTS"
-         }
+         "type":"server",
+          "endpoint":"generic",
+          "vnfPackageLocation":"https://ENTER A VALID LINK TO REACH THE SCRIPTS",
       }
    ],
    "vnffgd":[
