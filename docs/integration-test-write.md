@@ -1,7 +1,7 @@
 # Write your own integration tests
 
 ## Description
-The integration tests are defined in .ini files which are in the directory *integration-tests/src/main/resources/integration-test-scenarios*. If you want to add a integration test, just add its ini file to this folder. 
+The integration tests are defined in .ini files which are in the directory *integration-tests/src/main/resources/integration-test-scenarios*. If you want to add an integration test, just add its ini file to this folder. 
 
 ### Ini file structure
 In the ini file you can describe a graph or tree like execution plan of different tasks. 
@@ -444,24 +444,27 @@ Do NOT use '-' in types of VNFDs or configuration names as you cannot use them i
 
 As mentioned earlier here is a summary of all the class-names available at the moment to use in a ini file node.
 
-| class-name          				| purpose       																|
-| -------------   				| -------------:																|
-| GenericServiceTester  			| Test the network service itself |
-| NetworkServiceDescriptorCreate		| Store a NSD on the NFVO |
-| NetworkServiceDescriptorCreateFromPackage	| Create a NSD by using a VNFPackage that was uploaded beforehand |
-| NetworkServiceDescriptorDelete                | Delete a NSD from the NFVO |
-| NetworkServiceDescriptorWait			| Used for waiting for the deletion of a NSD from the NFVO |
-| NetworkServiceRecordCreate  			| Deploy a network service from a NSD and create the NSR |
-| NetworkServiceRecordDelete			| Delete the NSR |
-| NetworkServiceRecordWait			| Wait for an specific action of the NFVO to happen that is related to NSRs |
-| PackageDelete                                 | Delete a VNFPackage |
-| PackageUpload					| Upload a VNFPackage |
-| ScaleIn					| Triggers one scale in operation on a VNFR specified in the ini file |
-| ScaleOut					| Triggers one scale out operation on a VNFR specified in the ini file |
-| ScalingTester					| Verifies if the number of VNFCInstances is equal to a given number and passes an updated NSR to the next task, which can be important after a scaling operation |
-| VimInstanceCreate  				| Store a vim instance on the NFVO from a json file |
-| VimInstanceDelete				| Delete a vim instance |
-| VirtualNetworkFunctionRecordWait		| Wait for an action sent by the NFVO which is related to a VNFR |
+| class-name          				| purpose       																| fields |
+| -------------   				| -------------:																| ----: |
+| GenericServiceTester  			| Test the network service itself | script-1</br>...</br>script-n</br>vnf-type</br>user-name</br>vm-scripts-path</br>net-name |
+| NetworkServiceDescriptorCreate		| Store a NSD on the NFVO | expected-to-fail</br>name-file |
+| NetworkServiceDescriptorCreateFromPackage	| Create a NSD by using a VNFPackage that was uploaded beforehand | expected-to-fail</br>name-file |
+| NetworkServiceDescriptorDelete                | Delete a NSD from the NFVO |  |
+| NetworkServiceDescriptorWait			| Used for waiting for the deletion of a NSD from the NFVO |  |
+| NetworkServiceRecordCreate  			| Deploy a network service from a NSD and create the NSR |  |
+| NetworkServiceRecordDelete			| Delete the NSR | |
+| NetworkServiceRecordGetLatest			| Expects to get passed a NSR from its preceding task, retrieves the latest version of this NSR from the NFVO and passes it to the following task | |
+| NetworkServiceRecordWait			| Wait for a specific action of the NFVO to happen that is related to NSRs | action</br>timeout |
+| PackageDelete                                 | Delete a VNFPackage | package-name |
+| PackageUpload					| Upload a VNFPackage | package-upload |
+| Pause					        | Used to elapse time until the next task will start | duration |
+| ScaleIn					| Triggers one scale in operation on a VNFR specified in the ini file | vnf-type |
+| ScaleOut					| Triggers one scale out operation on a VNFR specified in the ini file | vnf-type</br>virtual-link</br>floating-ip |
+| ScalingTester					| Verifies if the number of VNFCInstances is equal to a given number and passes an updated NSR to the next task, which can be important after a scaling operation | vnf-type</br>vnfc-count |
+| VimInstanceCreate  				| Store a vim instance on the NFVO from a json file | name-file |
+| VimInstanceDelete				| Delete a vim instance |  |
+| VirtualNetworkFunctionRecordWait		| Wait for an action sent by the NFVO which is related to a VNFR | action</br>timeout</br>vnf-type |
+| VNFRStatusTester				| Checks if the status of a specified VNFR is as expected | status</br>vnf-type |
 
 
 ## Using VNFPackages
@@ -560,8 +563,8 @@ vnf-type = client
 vnfc-count = 2
 ```
 
-Furthermore note that the ScalingTester passes the updated NSR to the next tester. If you trigger a scaling function the NSR will change, but if you do not use ScalingTester the NSR used by the integration test will remain the old one before the scaling operation. 
-So the recommended use of the Scaling testers is to trigger a scaling operation using *ScaleIn* or *ScaleOut*. If you use *ScaleOut* you should wait for the SCALED message using the *VirtualNetworkFunctionRecordWait* class. After that use the *ScalingTester*. 
+Furthermore note that the ScalingTester passes the updated NSR to the next tester. If you trigger a scaling function the NSR will change, but if you do not use ScalingTester (or NetworkServiceRecordGetLatest) the NSR used by the integration test will remain the old one before the scaling operation. 
+So the recommended proceeding after a scale out or scale in is to wait until the operation finishes and then use the *ScalingTester* or at least the *NetworkServiceRecordGetLatest* to have the updated NSR. 
 
 
 ## Parser
