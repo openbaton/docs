@@ -401,38 +401,46 @@ Once you extended your VNFMManger, you need to implement all the methods coming 
 ```java
 package org.openbaton.vnfm;
 
-import org.openbaton.autoscaling.catalogue.Action;
+import org.openbaton.catalogue.nfvo.Action;
+import org.springframework.boot.SpringApplication;
 import org.openbaton.catalogue.mano.record.VNFCInstance;
 import org.openbaton.catalogue.mano.record.VNFRecordDependency;
 import org.openbaton.catalogue.mano.record.VirtualNetworkFunctionRecord;
 import org.openbaton.catalogue.nfvo.VimInstance;
 import org.openbaton.common.vnfm_sdk.amqp.AbstractVnfmSpringAmqp;
-import org.springframework.boot.SpringApplication;
-
 import java.util.List;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
 
 @SpringBootApplication
 class MyVNFM extends AbstractVnfmSpringAmqp {
 
+
+    /**
+     * This operation allows providing notifications on state changes
+     * of a VNF instance, related to the VNF Lifecycle.
+     */
+    public void NotifyChange() {
+
+    }
+
     /**
      * This operation allows creating a VNF instance.
      *
-     * @param scripts
      * @param virtualNetworkFunctionRecord
      * @param scripts
      * @param vimInstances
      */
-    @Override
-    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
-	                                                Object scripts) throws Exception 
-	{
-        return virtualNetworkFunctionRecord;
+    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts, List<VimInstance> vimInstances) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows retrieving
      * VNF instance state and attributes.
      */
+
     public void query() {
 
     }
@@ -441,21 +449,16 @@ class MyVNFM extends AbstractVnfmSpringAmqp {
      * This operation allows scaling
      * (out/in, up/down) a VNF instance.
      */
-    @Override
-    public VirtualNetworkFunctionRecord scale(Action scaleInOrOut, 
-                                              VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
-                                              VNFCInstance component, 
-                                              Object scripts, 
-                                              VNFRecordDependency dependency) throws Exception 
-	{
-		return virtualNetworkFunctionRecord;
+
+    public VirtualNetworkFunctionRecord scale(Action scaleInOrOut, VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance component, Object scripts, VNFRecordDependency dependency) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows verifying if
      * the VNF instantiation is possible.
      */
-    @Override
+
     public void checkInstantiationFeasibility() {
 
     }
@@ -464,18 +467,16 @@ class MyVNFM extends AbstractVnfmSpringAmqp {
      * This operation allows verifying if
      * the VNF instantiation is possible.
      */
-    @Override
-    public VirtualNetworkFunctionRecord heal(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord,
-                                             VNFCInstance component,
-                                             String cause) throws Exception
-    {
-        return virtualNetworkFunctionRecord;
+
+    public VirtualNetworkFunctionRecord heal(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance component, String cause) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows applying a minor/limited
      * software update (e.g. patch) to a VNF instance.
      */
+
     public void updateSoftware() {
 
     }
@@ -488,18 +489,16 @@ class MyVNFM extends AbstractVnfmSpringAmqp {
      * @param virtualNetworkFunctionRecord
      * @param dependency
      */
-    @Override
-    public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, 
-											   VNFRecordDependency dependency) throws Exception 
-	{
-        return virtualNetworkFunctionRecord;
+
+    public VirtualNetworkFunctionRecord modify(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFRecordDependency dependency) throws Exception {
+        return null;
     }
 
     /**
      * This operation allows deploying a new
      * software release to a VNF instance.
      */
-    @Override
+    
     public void upgradeSoftware() {
 
     }
@@ -509,44 +508,29 @@ class MyVNFM extends AbstractVnfmSpringAmqp {
      * or forcefully a previously created VNF instance.
      * @param virtualNetworkFunctionRecord
      */
-    @Override
-    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception 
-	{
-        return virtualNetworkFunctionRecord;
+
+    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return null;
     }
-
-    @Override
-    protected void checkEmsStarted(String hostname) throws RuntimeException {
-
-    }
-
-    @Override
-    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception 
-	{
-        return virtualNetworkFunctionRecord;
-    }
-
-    @Override
-    public VirtualNetworkFunctionRecord configure(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
-        return virtualNetworkFunctionRecord;
-    }
-
-    /**
-	 * This operation allows providing notifications on state changes
-	 * of a VNF instance, related to the VNF Lifecycle.
-	 */
-	@Override
-	public void NotifyChange() {
-
-    }
-
-    @Override
+    
+    
+    
     public void handleError(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
 
     }
 
+    protected void checkEmsStarted(String hostname) {
 
-	public static void main(String[] args){
+    }
+
+    public VirtualNetworkFunctionRecord start(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return null;
+    }
+
+    public VirtualNetworkFunctionRecord configure(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return null;
+    }
+    public static void main(String[] args){
         SpringApplication.run(MyVNFM.class);
     }
 }
