@@ -444,27 +444,42 @@ Do NOT use '-' in types of VNFDs or configuration names as you cannot use them i
 
 As mentioned earlier here is a summary of all the class-names available at the moment to use in a ini file node.
 
-| class-name          				| purpose       																| fields |
-| -------------   				| -------------:																| ----: |
-| GenericServiceTester  			| Test the network service itself | script-1</br>...</br>script-n</br>vnf-type</br>user-name</br>vm-scripts-path</br>net-name |
-| NetworkServiceDescriptorCreate		| Store a NSD on the NFVO | expected-to-fail</br>name-file |
-| NetworkServiceDescriptorCreateFromPackage	| Create a NSD by using a VNFPackage that was uploaded beforehand | expected-to-fail</br>name-file |
-| NetworkServiceDescriptorDelete                | Delete a NSD from the NFVO |  |
-| NetworkServiceDescriptorWait			| Used for waiting for the deletion of a NSD from the NFVO |  |
-| NetworkServiceRecordCreate  			| Deploy a network service from a NSD and create the NSR |  |
-| NetworkServiceRecordDelete			| Delete the NSR | |
-| NetworkServiceRecordGetLatest			| Expects to get passed a NSR from its preceding task, retrieves the latest version of this NSR from the NFVO and passes it to the following task | |
-| NetworkServiceRecordWait			| Wait for a specific action of the NFVO to happen that is related to NSRs | action</br>timeout |
-| PackageDelete                                 | Delete a VNFPackage | package-name |
-| PackageUpload					| Upload a VNFPackage | package-upload |
-| Pause					        | Used to elapse time until the next task will start | duration |
-| ScaleIn					| Triggers one scale in operation on a VNFR specified in the ini file | vnf-type |
-| ScaleOut					| Triggers one scale out operation on a VNFR specified in the ini file | vnf-type</br>virtual-link</br>floating-ip |
-| ScalingTester					| Verifies if the number of VNFCInstances is equal to a given number and passes an updated NSR to the next task, which can be important after a scaling operation | vnf-type</br>vnfc-count |
-| VimInstanceCreate  				| Store a vim instance on the NFVO from a json file | name-file |
-| VimInstanceDelete				| Delete a vim instance |  |
-| VirtualNetworkFunctionRecordWait		| Wait for an action sent by the NFVO which is related to a VNFR | action</br>timeout</br>vnf-type |
-| VNFRStatusTester				| Checks if the status of a specified VNFR is as expected | status</br>vnf-type |
+| class-name          				| purpose                                                       | fields | field purpose |
+| -------------   				| -------------:			                        | -----: | ------------: |
+| GenericServiceTester  			| Test the network service itself                               | script-1 | The first script to be executed on the VM       |
+|||...||
+|||script-n| The n-th script to be executed on the VM|
+|||vnf-type|The type of the VNFs that shall be tested|
+|||user-name|The user account on the VM on which the scripts will be executed|
+|||vm-scripts-path|The path to the directory of the VM where the scripts will be stored before execution|
+|||net-name|Specifies the network/virtual-link to which the VMs that shall be tested are connected|
+| NetworkServiceDescriptorCreate		| Store a NSD on the NFVO | expected-to-fail | If set to true the task will fail if the onboarding of the NSD is successful                   |
+|||name-file| The name of the json file which contains the NSD|
+| NetworkServiceDescriptorCreateFromPackage	| Create a NSD by using a VNFPackage that was uploaded beforehand | expected-to-fail | If set to true the task will fail if the onboarding of the NSD is successful            |
+|||name-file| The name of the json file which contains the NSD|
+| NetworkServiceDescriptorDelete                | Delete a NSD from the NFVO |  |  |
+| NetworkServiceDescriptorWait			| Used for waiting for the deletion of a NSD from the NFVO |  |  |
+| NetworkServiceRecordCreate  			| Deploy a network service from a NSD and create the NSR |  |  |
+| NetworkServiceRecordDelete			| Delete the NSR | |  |
+| NetworkServiceRecordGetLatest			| Expects to get passed a NSR from its preceding task, retrieves the latest version of this NSR from the NFVO and passes it to the following task | |  |
+| NetworkServiceRecordWait			| Wait for a specific action of the NFVO to happen that is related to NSRs | action | The action which will be waited for to happen |
+|||timeout| After this time (in seconds) the task will fail if the action did not occur yet |
+| PackageDelete                                 | Delete a VNFPackage | package-name | The name of the package that will be deleted |
+| PackageUpload					| Upload a VNFPackage | package-upload | The name of the package that will be uploaded |
+| Pause					        | Used to elapse time until the next task will start | duration | The time (in seconds) that this task shall do nothing and after which it will finish |
+| ScaleIn					| Triggers one scale in operation on a VNFR specified in the ini file | vnf-type | The type of VNFR that shall be scaled in |
+| ScaleOut					| Triggers one scale out operation on a VNFR specified in the ini file | floating-ip | The floating IP which shall be assigned to the new instance |
+|||virtual-link| The network/virtual-link to which the new instance shall be connected |
+|||vnf-type| The type of the VNFR on which the scale out shall be performed |
+| ScalingTester					| Verifies if the number of VNFCInstances is equal to a given number and passes an updated NSR to the next task, which can be important after a scaling operation | vnfc-count | The expected number of instances of this VNF |
+|||vnf-type| The type of the VNFR whose number of VNFCs should be checked |
+| VimInstanceCreate  				| Store a vim instance on the NFVO from a json file | name-file | The name of the json file that contains the VimInstance |
+| VimInstanceDelete				| Delete a vim instance |  |  |
+| VirtualNetworkFunctionRecordWait		| Wait for an action sent by the NFVO which is related to a VNFR | action | The action which will be waited for to happen |
+|||timeout| After this time (in seconds) the task will fail if the action did not occur yet |
+|||vnf-type| The type of the VNFR that should produce the awaited action |
+| VNFRStatusTester				| Checks if the status of a specified VNFR is as expected | status | The expected status in which the VNFR should be |
+|||vnf-type| The type of the VNFR whose status shall be checked |
 
 
 ## Using VNFPackages
