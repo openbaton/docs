@@ -432,7 +432,7 @@ class MyVNFM extends AbstractVnfmSpringAmqp {
      * @param scripts
      * @param vimInstances
      */
-    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts, List<VimInstance> vimInstances) throws Exception {
+    public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts, Map<String, Collection<VimInstance>> vimInstances) throws Exception {
         return null;
     }
 
