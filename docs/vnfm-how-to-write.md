@@ -603,8 +603,9 @@ Therefore, you need to do several things:
 **Note** If you want to use the Vim with plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:1.0.2'
-compile 'org.openbaton:vim-impl:1.0.2'
+compile 'org.openbaton:vim-int:1.1.0-SNAPSHOT'
+compile 'org.openbaton:vim-impl:1.1.0-SNAPSHOT'
+compile 'org.openbaton:sdk:1.0.2'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 
