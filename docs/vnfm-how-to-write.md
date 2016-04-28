@@ -464,8 +464,7 @@ class MyVNFM extends AbstractVnfmSpringAmqp {
     }
 
     /**
-     * This operation allows verifying if
-     * the VNF instantiation is possible.
+     * This operation is called when one the VNFs fails
      */
 
     public VirtualNetworkFunctionRecord heal(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance component, String cause) throws Exception {
