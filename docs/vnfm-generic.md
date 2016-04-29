@@ -57,6 +57,7 @@ Here an example (to make it more readable it is shown only the **VNF lifecycle e
         {
             "event":"INSTANTIATE",
             "lifecycle_events":[
+                "pre-install.sh",
                 "install.sh"
             ]
         },
@@ -92,12 +93,14 @@ In the following table is described for each **VNF lifecycle event** when the sc
 | CONFIGURE           |  After the instantiation. Useful if the VNF depends on other VNFs, because we can get parameters provided by them (e.g. IP). The parameters are available as environment variables (see later).
 | START               |  After the instantiation or configuration (It depends whether the event CONFIGURE specified).
 | TERMINATE           |  During the termination of the corresponding VNF
+| SCALE_IN            |  When the VNF is target of a scaled in vnfcInstance
 
 
 The available parameters are defined in the VirtualNetworkFunctionDescriptor fields:
 
-* **provides**: it contains the VMs parameters which will be available after the instantiation (e.g. IP) for other VNFs.
+<!-- * **provides**: it contains the VMs parameters which will be available after the instantiation (e.g. IP) for other VNFs. -->
 * **configurations**: it contains specific parameters which you want to use in the scripts.
+* **out-of-the-box**: some parameters are automatically available into the scripts. These parameters are the IPs. They can be used in the script just using a variable called with the network name.
 
 In the INSTANTIATE scripts, the parameters defined in these two fields are then available as environment variables into the script exactly as defined (i.e. you can get by $parameter_name).
 
@@ -153,7 +156,7 @@ echo "This is the ip of the vnf-database: ${database_private}"
 
 ```
 
-**Note1**: "database" is the type of the vnf-database, private is the name of the network.
+**Note1**: _database_ is the type of the vnf-database, _private_ is the name of the network.
 
 **Note2**: All the scripts need to be in a repository or in the vnf package (see the vnf package structure [here][vnfpackage-doc-link]).
 

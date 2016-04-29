@@ -55,7 +55,7 @@ Once the VIM instance is registered, it will appear on the list of available PoP
 For more information about the dashboard see: [OpenBaton Dashboard]
 
 
-## What are the supported VIM types? 
+## What are the supported VIM types?
 
 By default the NFVO supports two different VIM types: 
 
@@ -64,8 +64,13 @@ By default the NFVO supports two different VIM types:
 
 For each of those types there is a different implementation of the VIM API. The NFVO uses a plugin mechanism for interacting with VIMs. In the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your VIM ( i.e. [Openstack][openstack-link] )
 (you can change the folder where OpenBaton searches for the plugins by changing the variable `plugin-installation-dir` in the `openbaton.properties` file under /etc/openbaton)
-This jar is the implementation of the interface that communicates with your VIM.  
+This jar is the implementation of the interface that communicates with your VIM.
+
 **Note**: You can implement your own interface just follow the documentation [Vim plugin].
+
+## Where do I find the open source plugins?
+
+OpenBaton platform provides an openstack and a test plugin. They are automatically download by the bootstrap. Anyway you can find them [here](http://get.openbaton.org/plugins)
 
 [OpenBaton Dashboard]:nfvo-how-to-use-gui
 [Vim plugin]:vim-plugin.md

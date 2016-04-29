@@ -196,7 +196,7 @@ Afterwards go back to the root folder and run the following command to create au
 For more information on how to use the gradle wrapper have a look at the gradle wrapper documentation [here][gradle-wrapper-link].
 
 ```bash
-$ gradle wrapper --gradle-version 2.4
+$ gradle wrapper
 ```
 
 Once you did all these steps, the initial project structure is created.
@@ -275,10 +275,14 @@ In this case the file should contain the following lines.
 ```gradle
 type=my-vnfm
 endpoint=my-vnfm-endpoint
-
-allocate = true
+allocate = false
+description=The VNFM able to handle all the VNFs that follow specific conventions, see http://openbaton.github.io/
+enabled = true
+endpoint-type = RABBIT
+script-max-time = 300000
 concurrency = 15
 transacted = false
+
 
 #### Additionally
 vim-plugin-dir = ./plugins
@@ -290,6 +294,9 @@ Where the parameters mean:
 | -------------   				| -------------:																|
 | type  						| The type of VNF you are going to handle 						|
 | endpoint                      | The endpoint used for requesting this VNFManager |
+| description                   | Just a useless description |
+| endpoint-type                 | type of the endpoint, either RABBIT or REST, depending on the sdk chosen. Check out next section |
+| enabled                       | true if you want your vnfm to be enabled |
 | allocate 						| true if the NFVO will ALLOCATE_RESOURCES, false if the VNFManager will do      	|
 | concurrency	 				| The number of concurrent Receiver (only for vnfm-sdk-jms)|
 | transacted 					| Whenever the JMS receiver method shoud be transacted, this allows the message to be resent in case of exception VNFManager side (only for vnfm-sdk-jms)     	|
