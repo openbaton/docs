@@ -1,4 +1,4 @@
-# VNFPackage
+# VNF Package
 
 **Note**: This is the initial version of the VNFPackage and might change most probably in the next releases to improve and simplify the creation, usability and power.
 

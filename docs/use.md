@@ -8,7 +8,7 @@ In order to use OpenBaton for launching your first Network Service, you will nee
     * Create the VNF Package(s).
     * Prepare the Network Service Descriptor (NSD).
 
-Once these steps are completed you will be able to orchestrate your Network Service from the dashboard or via the REST APIs. 
+Once these steps are completed you will be able to orchestrate your Network Service from the dashboard or via the [REST APIs]. 
 
 
 ## Virtual Network Function Manager Approaches
@@ -50,6 +50,7 @@ Please refer to the following doc for more details: [Bring your own VNFM]
 [Build your own VNFM]:vnfm-how-to-write
 [Bring your own VNFM]:vnfm-vendor-specific
 [Register PoP]: vim-instance
+[REST APIs]: http://get.openbaton.org/api/ApiDoc.pdf
 
 <!---
 Script for open external links in a new tab

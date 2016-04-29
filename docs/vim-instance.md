@@ -7,22 +7,22 @@ In order to interoperate with a PoP it is required to register the VIM instance 
 
 
 ```javascript
-{
-  "name":"vim-instance-name",
-  "authUrl":"http://192.168.0.5:5000/v2.0",
-  "tenant":"tenantName",
-  "username":"userName",
-  "password":"password",
-  "keyPair":"keyName",
-  "securityGroups": [
-    "securityName"
-  ],
-  "type":"openstack",
-  "location":{
-        "name":"Berlin",
-        "latitude":"52.525876",
-        "longitude":"13.314400"
-  }
+{  
+   "name":"vim-instance-name",
+   "authUrl":"http://192.168.0.5:5000/v2.0",
+   "tenant":"tenantName",
+   "username":"userName",
+   "password":"password",
+   "keyPair":"keyName",
+   "securityGroups":[  
+      "securityName"
+   ],
+   "type":"openstack",
+   "location":{  
+      "name":"Berlin",
+      "latitude":"52.525876",
+      "longitude":"13.314400"
+   }
 }
 
 ```

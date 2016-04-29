@@ -19,12 +19,29 @@ First of all it is important to clarify the different deployment options. Depend
 
 Depending on which one is your target provider, you will need to configure runtime different Point of Presence (PoP). This is something which will be explained later on in this user guide. 
 
+[Here][plugins] you can find a repository containing all the stable versions of the available plugins. You should download them in a folder named `vim-drivers` under the parent plugin folder you configured in the `/etc/openbaton/openbaton.properties` file as default plugins installation dir:
+
+```bash
+plugin-installation-dir = ./plugins
+```
+
+Once you have downloaded the plugin, you can start the plugin with the following command: 
+
+```bash
+$ java -jar myPlugin-1.0-SNAPSHOT.jar [the-vim-type] [rabbitmq-ip] [rabbitmq-port] [n-of-consumers] [user] [password]
+```
+
+
+
+
 ### Let's move on
 
 Next step is to [install the NFVO][nfvo-installation].
 
 [nfvo-installation]:nfvo-installation
 [install-architecture]:images/install-architecture-rel.2.png
+[plugins]: http://get.openbaton.org/plugins/stable/
+
 
 <!---
  Script for open external links in a new tab
