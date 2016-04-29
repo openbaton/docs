@@ -76,7 +76,7 @@ The other most important parameters are described in the following sections.
 | Params          				| Meaning       																|
 | -------------   				| -------------:																|
 | vm_image  					| The list of image names or ids existing in the VimInstance or in the VNF Package						|
-| vimInstanceName				| The VimInstance name chosen      				|
+| vimInstanceName				| The list of VimInstances. Only one of it will be chosen, randomly      				|
 | scale_in_out					| The maximum number of instances (VMs) which can be created to support scale out/in.      	|
 | vnfc                                          | This field contains a list of VNFComponents which will be deployed for this VNFD.  |
 
