@@ -9,16 +9,23 @@ One of the main concerns of ETSI NFV is to prove the feasibility of the cloud de
 ETSI NFV limits itself to this level of indications, considering that other standardization bodies and de-facto open source standards such as 3GPP and OpenStack should finalize the specific implementation work. 
 
 ## Its main components
-OpenBaton provides the following components: 
+OpenBaton rel.2 provides the many different features and components. 
 
-* A Network Function Virtualisation Orchestrator (NFVO) completely designed and implemented following the ETSI MANO specification
-* A generic Virtual Network Function Manager (VNFM) able to manage the lifecycle of VNFs based on their descriptors
-* A set of libraries which could be used for building your own VNFM
+* A Network Function Virtualisation Orchestrator (NFVO) completely designed and implemented following the ETSI MANO specification. Read more [here][nfvo]
+* A generic Virtual Network Function Manager (VNFM) able to manage the lifecycle of VNFs based on their descriptors. Read more [here][vnfm-generic]
+* A plugin mechanism for adding and removing different type of VIMs without having to re-write anything in your orchestration logic. Read more [here][vim-plugin]
+* A powerful event engine useful based on a pub/sub mechanism for the dispatching of lifecycle events execution
+* An autoscaling engine which can be used for automatic runtime management of the scaling operation operations of your VNFs. Read more [here][autoscaling-system]
+* A fault management system which can be used for automatic runtime management of faults which may occur at any level. Read more [here][fm-system]
+* It integrates with the Zabbix monitoring system. Read more [here][zabbix-plugin]
+* A set of libraries (the openbaton-libs) which could be used for building your own VNFM. Read more [here][openbaton-libs]
+
+![Setup architecture][install-architecture]
 
 ## Can I plug in my Network Functions?
 Yes, this is possible using two different approaches:
 
-* integrating your own VNFM. In this case you can use either the REST interface, or the JMS one for interoperating with the NFVO
+* integrating your own VNFM. In this case you can use either the REST interface, or the AMQP one for interoperating with the NFVO
 * implementing a set of scripts which can be executed as part of the lifecycle event of your Virtual Network Function Descriptor. We provide a generic VNFM and EMS which can be used for executing them
 
 ## Can I use OpenBaton to build my own Network Service?
@@ -43,6 +50,14 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [nubomedia]: https://www.nubomedia.eu/
 [mcn]: http://mobile-cloud-networking.eu/site/
 [cognet]: http://www.cognet.5g-ppp.eu/cognet-in-5gpp/
+[fm-system]: https://github.com/openbaton/fm-system
+[autoscaling-system]: https://github.com/openbaton/autoscaling
+[zabbix-plugin]: zabbix-plugin
+[openbaton-libs]: https://github.com/openbaton/openbaton-libs
+[vim-plugin]: vim-plugin
+[vnfm-generic]: vnfm-generic
+[nfvo]: install
+[install-architecture]:images/install-architecture-rel.2.png
 
 <!---
  Script for open external links in a new tab

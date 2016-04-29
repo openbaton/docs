@@ -57,7 +57,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
             "type":"server",
             "endpoint":"generic",
          
-            "vnfPackageLocation":"https://ENTER A VALID LINK TO REACH THE SCRIPTS",
+            "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git",
          
       },
       {
@@ -125,7 +125,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
          ],
          "type":"server",
           "endpoint":"generic",
-          "vnfPackageLocation":"https://ENTER A VALID LINK TO REACH THE SCRIPTS",
+          "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git",
       }
    ],
    "vnffgd":[

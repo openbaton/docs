@@ -3,7 +3,7 @@
 OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, it is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this works?
-An OpenBaton Plugin is a [RMI][rmi] Server that connects to the NFVO or any other rmiregistry with access to the OpenBaton catalogue as codebase. It offers an implementation of an interface that is used by the NFVO. By default the NFVO starts a rmiregistry at localhost:1099.
+OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plugins. It offers an implementation of an interface that is used by the NFVO. 
 
 ## Requirements
 
@@ -12,8 +12,7 @@ Before you can start with developing your own Vim Plugin you need to prepare you
 * JDK 7 ([installation][openjdk])
 * Gradle ([installation][gradle-installation])
 
-
-##### Create a new project
+### Create a new project
 
 Once you have started the IDE, click on File -> New -> Project...
 
@@ -45,7 +44,7 @@ In the last dialog, you need to define the project name and the project location
 Once this is done you can click on Finish and continue with creating the Main Class.
 
 
-##### Create the Main Class
+### Create the Main Class
 
 Afterwards, you need to create the Main Class of the VIM plugin which will be started in the end.
 For doing so, right click on the root folder my-vim, then click on New -> Directory and insert what is show below.
@@ -249,11 +248,12 @@ Congratulations you have your version of the interface for your Vim Instance tha
 
 Once you copied the jar file into the right folder, you need to (re)start the NFVO. The plugin will automatically register and you can see that there will be a log file in the NFVO folder called _plugin-myPlugin.log_ containing the logs of the plugin. The myPlugin now acts as a normal plugin so for using it check out the [Vim instance documentation][vim-instance-documentation] in order to point out to the new plugin.
 
-**NOTE**: Since you are using an implementation of [RMI][rmi] you can also launch your plugin from your command line just typing
+**NOTE**: you can also launch your plugin from your command line just typing
 
 ```bash
-$ java -jar myPlugin-1.0-SNAPSHOT.jar [the-vim-type] [ip_NFVO] 1099
+$ java -jar myPlugin-1.0-SNAPSHOT.jar [the-vim-type] [rabbitmq-ip] [rabbitmq-port] [n-of-consumers] [user] [password]
 ```
+
 [spring-boot]: http://projects.spring.io/spring-boot/
 [openjdk]: http://openjdk.java.net/install/
 [Remote Class]: http://docs.oracle.com/javase/7/docs/api/java/rmi/Remote.html

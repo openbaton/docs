@@ -1,10 +1,9 @@
 site_name: OpenBaton Documentation
 pages:
 - ['index.md', 'Get Started', 'Get Started']
-- ['install.md', 'Installation', 'Overview']
-- ['nfvo-installation.md', 'Installation', 'Install NFVO']
-- ['vim-instance.md', 'Installation', 'Register a PoP']
+- ['nfvo-installation.md', 'Installation', 'Install Open Baton']
 - ['use.md', 'Use it', 'Introduction']
+- ['vim-instance.md', 'Use it', 'Register a PoP']
 - ['vnfm-generic.md', 'Use it', 'Generic VNFM']
 - ['vnfm-how-to-write.md', 'Use it', 'Write your own VNFM']
 - ['vnfm-vendor-specific.md', 'Use it', 'Integrate your own VNFM']

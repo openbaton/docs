@@ -24,7 +24,7 @@ Depending on which one is your target provider, you will need to configure runti
 Next step is to [install the NFVO][nfvo-installation].
 
 [nfvo-installation]:nfvo-installation
-[install-architecture]:images/install-architecture.png
+[install-architecture]:images/install-architecture-rel.2.png
 
 <!---
  Script for open external links in a new tab
