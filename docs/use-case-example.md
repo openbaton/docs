@@ -23,15 +23,7 @@ Before starting we need to send the VimInstance to the NFVO and the Network Serv
             "vm_image":[
                 "ubuntu-14.04-server-cloudimg-amd64-disk1"
             ],
-            "computation_requirement":"",
-            "virtual_memory_resource_element":"1024",
-            "virtual_network_bandwidth_resource":"1000000",
-            "lifecycle_event":[
-
-            ],
             "vimInstanceName":["vim-instance"],
-            "vdu_constraint":"",
-            "high_availability":"ACTIVE_PASSIVE",
             "scale_in_out":2,
             "vnfc":[
                 {
@@ -41,9 +33,6 @@ Before starting we need to send the VimInstance to the NFVO and the Network Serv
                         }
                     ]
                 }
-            ],
-            "monitoring_parameter":[
-                "cpu_utilization"
             ]
         }
     ],
@@ -51,9 +40,6 @@ Before starting we need to send the VimInstance to the NFVO and the Network Serv
         {
             "name":"private"
         }
-    ],
-    "connection_point":[
-
     ],
     "lifecycle_event":[
         {
@@ -69,25 +55,11 @@ Before starting we need to send the VimInstance to the NFVO and the Network Serv
             ]
         }
     ],
-    "vdu_dependency":[
-
-    ],
-    "monitoring_parameter":[
-        "cpu_utilization"
-    ],
     "deployment_flavour":[
         {
-            "df_constraint":[
-                "constraint1",
-                "constraint2"
-            ],
-            "costituent_vdu":[
-
-            ],
             "flavour_key":"m1.small"
         }
-    ],
-    "manifest_file":""
+    ]
 }
 ```
 

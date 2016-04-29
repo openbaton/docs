@@ -43,10 +43,12 @@ Once you have the NFVORequestor object, you can get the Agents. Available agents
 * EventAgent
 * ImageRestAgent
 * NetworkServiceDescriptorRestAgent
+* VirtualNetworkFunctionDescriptorRestAgent
 * NetworkServiceRecordRestAgent
 * VimInstanceRestAgent
 * VirtualLinkRestAgent
 * VNFFGRestAgent
+* VNFPackageAgent
 
 each of them exposes these methods:
 
