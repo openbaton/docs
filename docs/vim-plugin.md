@@ -98,7 +98,7 @@ mainClassName = 'org.myplugin.example.Starter'
 
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:1.0.2'
+    compile 'org.openbaton:plugin-sdk:2.0.0'
     compile'org.springframework:spring-context:4.2.1.RELEASE'
 }
 
@@ -240,8 +240,8 @@ The structure of your project should be like:
 
 Now you can run **./gradlew build** and Gradle will create the jar that you can find in the folder *build/libs/myPlugin-1.0-SNAPSHOT.jar*.
 
-Once all these steps are done, you can copy and paste the *myPlugin-1.0-SNAPSHOT.jar* under the folder specified in the _openbaton.properties_ (under _/etc/openbaton_ folder) **plugin-installation-dir** property, as default NFVO/plugins.
-
+Once all these steps are done, you can copy and paste the *myPlugin-1.0-SNAPSHOT.jar* under the folder specified in the _openbaton.properties_ (under _/etc/openbaton_ folder) **plugin-installation-dir** property, as default path_to_NFVO/plugins.
+The plugin sends the log messages to NFVO, the NFVO writes them into a log file. The path to this file can be set with nfvo.plugin.log.path properties in the /etc/openbaton/openbaton.properties. 
 Congratulations you have your version of the interface for your Vim Instance that will be used by NFVO
 
 ## Use my plugin

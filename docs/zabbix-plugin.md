@@ -1,6 +1,6 @@
 # Zabbix plugin
 
-Zabbix plugin is an open source project providing a reference implementation of two interfaces of the VIM, based on the ETSI [NFV MANO] specification.
+Zabbix plugin (see it on [GitHub][GitHub]) is an open source project providing a reference implementation of two interfaces of the VIM, based on the ETSI [NFV MANO] specification.
 
 The two interfaces are:
 -   VirtualisedResourceFaultManagement
@@ -113,7 +113,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:0.15-SNAPSHOT'
+    compile 'org.openbaton:plugin-sdk:2.0.0'
 }
 ```
 
@@ -352,6 +352,7 @@ it creates an alarm (mapping zabbix notification into standard Alarm) and notify
 
 
 
+[GitHub]:https://github.com/openbaton/zabbix-plugin
 [IFA005_Or-Vi_ref_point_Spec]:https://docbox.etsi.org/isg/nfv/open/Drafts/IFA005_Or-Vi_ref_point_Spec/
 [NFV MANO]:http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_nfv-man001v010101p.pdf
 [zabbix-plugin-architecture]:images/zabbix-plugin-architecture.png

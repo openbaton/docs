@@ -12,7 +12,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 ```
 
-### Q2: The EMS takes too much time to get registered to the generic VNFM
+### Q2: The EMS does not register to the VNFM and the connection timeouts 
 
 Double check that you configured correctly the `openbaton.properties` with the correct IP of the host where the NFVO is running
 

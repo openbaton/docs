@@ -43,7 +43,7 @@ In order to get started you can follow the [installation guide][install-guide]
 ## Supported by
 Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], [CogNet][cognet]
 
-[install-guide]:install
+[install-guide]:nfvo-installation
 [openbaton]:https://twitter.com/openbaton
 [users-at-openbaton-dot-org]: mailto:listen@openbaton.org?subject=subscribe%20users
 [info-at-openbaton-dot-org]: mailto:info@openbaton.org
@@ -56,7 +56,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [openbaton-libs]: https://github.com/openbaton/openbaton-libs
 [vim-plugin]: vim-plugin
 [vnfm-generic]: vnfm-generic
-[nfvo]: install
+[nfvo]: nfvo-installation
 [install-architecture]:images/install-architecture-rel.2.png
 
 <!---

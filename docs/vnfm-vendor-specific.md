@@ -33,7 +33,9 @@ _*OrEndpoint*_/admin/v1/vnfm-register
 {
     "type":"dummy",
     "endpointType":"REST",
-    "endpoint":"VnfmEndpoint"
+    "endpoint":"VnfmEndpoint",
+    "description":"MyVnfm",
+    "enabled":"true"
 }
 ```
 ###### request structure
@@ -41,7 +43,7 @@ _*OrEndpoint*_/admin/v1/vnfm-register
 | Field      | Meaning    |
 | ---------- | ----------:|
 | _*type*_   | the vnfm type you are going to handle (specified in VirtualNetowrkFunctionDescriptor → endpoint) |
-| _*endpointType*_ | the vnfm type you are going to implement (REST or JMS) |
+| _*endpointType*_ | the vnfm type you are going to implement (REST or AMQP) |
 | _*endpoint*_ | the vnfm endpoint you have chosen (basically http://<IP\>:<PORT\>) |
 
 ### INSTANTIATE (Or-Vnfm)

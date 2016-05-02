@@ -44,7 +44,7 @@ You have two options for storing a NS Descriptor:
 2. Create a NSD by using a json file
 
 
-Create a NSD by using a json file
+Upload a json-file that contains the NSD
 
 ![NSD create by File][NSDcreateFile]
 
@@ -147,8 +147,8 @@ To look at the details of a VNFR just click on the **id** of it.
 ![VNF Record Information][VNFRecordInformation]
 
 ## Event
-The Events are sent by the Orchestrator to the specific **EndPoint** where an external component is listening to be advise when the Orchestrator 
-change the STATE of a particular **virtualNetworkFunctionId** or **networkServiceId**
+The Events are sent by the Orchestrator to the specific **EndPoint** where an external component is listening to be aware when the Orchestrator 
+changes the STATE of a particular **virtualNetworkFunctionId** or **networkServiceId**
 
 To add a new Event just click the button "Create event" and will be shown the form as follow:
 
