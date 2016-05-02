@@ -98,7 +98,7 @@ mainClassName = 'org.myplugin.example.Starter'
 
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:1.0.2'
+    compile 'org.openbaton:plugin-sdk:2.0.0'
     compile'org.springframework:spring-context:4.2.1.RELEASE'
 }
 
