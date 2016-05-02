@@ -54,10 +54,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "flavour_key":"m1.small"
             }
          ],
-            "type":"server",
-            "endpoint":"generic",
-         
-            "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git",
+            "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
          
       },
       {
@@ -123,9 +120,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "flavour_key":"m1.small"
             }
          ],
-         "type":"server",
-          "endpoint":"generic",
-          "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git",
+          "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
       }
    ],
    "vnffgd":[
