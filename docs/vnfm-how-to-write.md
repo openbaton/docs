@@ -735,6 +735,13 @@ Now you are able to use a VIM inside or the directly the plugin in your VNFManag
 The following code snippet shows how to instantiate (allocate) resources at VNFManager side with the help of the VIM.
 
 ```java
+/**
+ * This operation allows creating a VNF instance.
+ *
+ * @param virtualNetworkFunctionRecord
+ * @param scripts
+ * @param vimInstances
+ */
 @Override
 public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, Object scripts, Map<String, Collection<VimInstance>> vimInstances) throws Exception {
     log.debug("Processing allocation of Resources for vnfr: " + virtualNetworkFunctionRecord);
@@ -744,7 +751,7 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
      */
     log.debug("Processing allocation of Recources for vnfr: " + virtualNetworkFunctionRecord);
     for (VirtualDeploymentUnit vdu : virtualNetworkFunctionRecord.getVdu()) {
-        VimInstance vimInstance = vimInstances.get(vdu.getId()).iterator().next();
+        VimInstance vimInstance = vimInstances.get(vdu.getParent_vdu()).iterator().next();
         List<Future<VNFCInstance>> vnfcInstancesFuturePerVDU = new ArrayList<>();
         log.debug("Creating " + vdu.getVnfc().size() + " VMs");
         for (VNFComponent vnfComponent : vdu.getVnfc()) {
@@ -794,6 +801,12 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
 The next code snippet shows an implementation of the terminate method used for releasing resources at VNFManager side.
 
 ```java
+/**
+ * This operation allows terminating gracefully
+ * or forcefully a previously created VNF instance.
+ *
+ * @param virtualNetworkFunctionRecord
+ */
 @Override
 public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
     log.info("Terminating vnfr with id " + virtualNetworkFunctionRecord.getId());
@@ -810,7 +823,7 @@ public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtu
             log.error(e.getMessage(), e);
         }
         for (VimInstance vimInstanceFind : vimInstances) {
-            if (vimInstanceFind.getName().equals(vdu.getVimInstanceName())) {
+            if (vdu.getVimInstanceName().contains(vimInstanceFind.getName())) {
                 vimInstance = vimInstanceFind;
                 break;
             }
