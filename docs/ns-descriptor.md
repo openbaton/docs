@@ -22,7 +22,7 @@ The Network Service Descriptor contains the values that are defined in [ETSI MAN
         		"name": "iperf-client"
       		},
       		"parameters":[
-        		"ip1"
+        		"private"
       		]
     	}
     ]
