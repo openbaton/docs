@@ -56,7 +56,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [openbaton-libs]: https://github.com/openbaton/openbaton-libs
 [vim-plugin]: vim-plugin
 [vnfm-generic]: vnfm-generic
-[nfvo]: install
+[nfvo]: nfvo-installation
 [install-architecture]:images/install-architecture-rel.2.png
 
 <!---
