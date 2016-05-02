@@ -44,7 +44,7 @@ You have two options for storing a NS Descriptor:
 2. Create a NSD by using a json file
 
 
-Create a NSD by using a json file
+Upload a json-file that contains the NSD
 
 ![NSD create by File][NSDcreateFile]
 
