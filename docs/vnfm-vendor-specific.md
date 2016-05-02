@@ -33,7 +33,9 @@ _*OrEndpoint*_/admin/v1/vnfm-register
 {
     "type":"dummy",
     "endpointType":"REST",
-    "endpoint":"VnfmEndpoint"
+    "endpoint":"VnfmEndpoint",
+    "description":"MyVnfm",
+    "enabled":"true"
 }
 ```
 ###### request structure
