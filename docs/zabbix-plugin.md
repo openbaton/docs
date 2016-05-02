@@ -113,7 +113,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:0.15-SNAPSHOT'
+    compile 'org.openbaton:plugin-sdk:2.0.0'
 }
 ```
 
