@@ -239,6 +239,8 @@ nfvo.monitoring.ip = the Zabbix server ip
 
 These are other parameters about the configuration of the nfvo behaviour:
 ```properties
+# True to enable security (username and password to access), default to false
+nfvo.security.enabled = true
 # Wait for the NSR to be deleted
 nfvo.delete.wait = false 
 # The broker ip that needs to be reachable from all the components
@@ -267,16 +269,24 @@ nfvo.vim.drivers.allowInfiniteQuota = false
 nfvo.start.ordered = false
 # Avoid doing the GRANT_OPERATION
 nfvo.quota.check = true
+# if true, deleting the nsd will remove also its vnfd
+nfvo.vnfd.cascade.delete = false
+# if true, deleting the vnfd will remove also its vnfpackage
+vnfd.vnfp.cascade.delete = false
+# if true, after deleting a NSR, the nfvo will wait for "nfvo.delete.vnfr.wait.timeout" after that timeout the VMs and VNFR will be deleted anyway from the NFVO
+nfvo.delete.vnfr.wait = false
+# this timeout is useful only if "nfvo.delete.vnfr.wait" is set to true
+nfvo.delete.vnfr.wait.timeout = 60
 ```
 
 Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html) 
 ```properties
 # Thread pool executor configuration
 # for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
-vmanager-executor-core-pool-size = 20
-vmanager-executor-max-pool-size = 25
-vmanager-executor-queue-capacity = 500
-vmanager-keep-alive = 30
+nfvo.vmanager.executor.corepoolsize = 20
+nfvo.vmanager.executor.maxpoolsize = 30
+nfvo.vmanager.executor.queuecapacity = 500
+nfvo.vmanager.executor.keepalive = 30
 ```
 
 ### Let's move to the next step
