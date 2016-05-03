@@ -2,7 +2,7 @@
 
 The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
-### Install the latest NFVO version from the source code
+### Install the latest NFVO version from the debian package
 
 The NFVO can be installed using different mechanisms. In this HowTo we will show you how to install it directly from its debian package.
 
@@ -13,47 +13,69 @@ To execute the following command you need to have curl installed (see http://cur
 To install the OpenBaton NFVO through its debian package you can type the following command:
 
 ```bash
-bash <(curl -fsSkL http://get.openbaton.org/bootstrap)
+bash <(curl -fsSkL http://get.openbaton.org/bootstrap-deb)
 ```
 During the procedure you will be prompted to insert the public ip of where the messaging broker is running (usually the machine where you are installing Open Baton) and other information such as the admin password. For more details about the identity management please check out [first access page](security.md)
 
 At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
 ```bash
-/opt/openbaton/
-├── generic-vnfm
-└── nfvo
+/usr/lib/openbaton
+├── openbaton-*.jar
+├── gvnfm
+└── plugins
 ```
 
 Where:
 
-* `generic-vnfm`contains the source code and scripts required for dealing with the generic-vnfm  
-* `nfvo` contains the source code and scripts of the NFVO
+* `openbaton-*jar` is the jar file related to the version of OpenBaton NFVO which has been installed
+* `gvnfm` (present only if during the installation procedure you also installed the Generic VNFM) contains the jar file related to the OpenBaton Generic VNFM
+* `plugins` contains the plugins for OpenBaton. So far, if you downloaded the VIM-Driver Plugins during the installation procedure, it will contain only the jar files related to the plugins downloaded
+
+Additionally you should also have the following structure:
+```bash
+/usr/bin
+├── openbaton-nfvo
+└── openbaton-gvnfm
+```
+
+Where:
+
+* `openbaton-nfvo` is the OpenBaton NFVO executable
+* `openbaton-gvnfm` (present only if you also installed the Generic VNFM) is the OpenBaton Generic GVNFM executable
 
 At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
 
-### Starting and stopping NFVO
+### Starting and stopping NFVO (and the Generic VNFM)
 
-After the installation procedure the nfvo is running. If you want to stop it, enter this command:
+After the installation procedure the NFVO is running. If you want to stop it, enter one of the following commands:
 ```bash
-cd /opt/openbaton/nfvo
-./openbaton.sh stop
+sudo service openbaton-nfvo stop
+sudo stop openbaton-nfvo
+sudo openbaton-nfvo stop
+
 ```
 
-**Note (in case you are also using the generic-vnfm):** remember to stop also the Generic VNFM with the following command:
+To start the NFVO, instead, enter one of the following commands:
 ```bash
-cd /opt/openbaton/generic-vnfm
-./generic-vnfm.sh stop
+sudo service openbaton-nfvo start
+sudo start openbaton-nfvo
+sudo openbaton-nfvo start
 ```
-To start the nfvo, enter the command:
+
+**Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running at the end of the installation procedure. You can stop it with one of the following commands:
 ```bash
-cd /opt/openbaton/nfvo
-./openbaton.sh start
+sudo service openbaton-gvnfm stop
+sudo stop openbaton-gvnfm
+sudo openbaton-gvnfm stop
 ```
-**Note (in case you are also using the generic-vnfm):** remember to start also the Generic VNFM with the following command:
+
+**Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM with one of the following commands:
 ```bash
-cd /opt/openbaton/generic-vnfm
-./generic-vnfm.sh start
+sudo service openbaton-gvnfm start
+sudo start openbaton-gvnfm
+sudo openbaton-gvnfm start
 ```
+
 
 ### NFVO properties overview
 
@@ -93,24 +115,6 @@ spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect
 spring.jpa.show-sql=false
 spring.jpa.hibernate.ddl-auto=create-drop
 ```
-
-Other parameters related with access and authorization:
-```properties
-# It will be empty once installed, for security reasons
-nfvo.security.admin.password = openbaton
-```
-
-The NFVO is capable of using SSL to encrypt communication. Just uncomment the following properties to enable it. 
-```properties
-server.port: 8443
-server.ssl.enabled = true
-server.ssl.key-store = /etc/openbaton/keystore.p12
-server.ssl.key-store-password = password
-server.ssl.keyStoreType = PKCS12
-server.ssl.keyAlias = tomcat
-```
-
-The NFVO will then use port 8443 and the dashboard will be accessible by using https.
 
 **IMPORTANT NOTES:**
 
@@ -214,8 +218,6 @@ The following properties are related to the plugin mechanism used for loading VI
 ########## plugin install ###############
 # directory for the vim driver plugins
 plugin-installation-dir = /usr/local/lib/openbaton/plugins
-# this is path to which the plugins(for example openstack-plugin) will write the output log through NFVO
-nfvo.plugin.log.path = 
 ```
 
 This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
