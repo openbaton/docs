@@ -226,7 +226,7 @@ nfvo.plugin.log.path =
 This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 ```properties
 # nfvo behaviour
-delete-on-all-status = true
+nfvo.delete.all-status= true
 ```
 
 **MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
