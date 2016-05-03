@@ -1,6 +1,6 @@
 # Generic VNF Manager
 
-The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. For that reason it is highly tied to the EMS.
+The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. It works as intermediate component between the NFVO and the VNFs, particularly the Virtual Machines on top of which the VNF software is installed. In order to complete the lifecycle of a VNF, it interoperates with the Element Management System (EMS) acting as an agent inside the VMs and executing scripts containeed in the vnf package.
 This VNFM may be assigned the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
 
 The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the AMQP protocol over RabbitMQ.  
@@ -260,7 +260,7 @@ References
 [stomp]: https://stomp.github.io/
 [nfv-mano-B.3]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf#page=108
 [vnfm-ems-communication]:images/generic-vnfm-vnfm-ems-communication.png
-[nfvo-vnfm-communication]:images/generic-vnfm-vnfm-or-communication.png
+[nfvo-vnfm-communication]: images/generic-vnfm-vnfm-or-communication.png
 [generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg.png
 [ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
 [vnfpackage-tutorial-link]:vnfpackage#tutorial

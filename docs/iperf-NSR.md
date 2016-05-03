@@ -23,13 +23,13 @@ Download the following [iPerf NSD using private IPs][iperf-nsd-privateIPs] or [i
 
 ### Using dashboard
 
-If you want to use the Dashboard, open the GUI, go to `Catalogue -> NS Descriptors` and choose the NSD of you choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://your-ip-here:8080, go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
 
 ![Onboarding-NSD][nsd-onboarding]
 
 ### Using CLI
 
-If you want to use the CLI, you need to execute the following command in order to onboard the NSD iof the iPerf scenario by using private IPs:
+If you want to use the CLI (checkout the [openbaton-client documentation][cli] for more information on how to install it), you need to execute the following command in order to onboard the NSD iof the iPerf scenario by using private IPs:
 
 ```bash
 $./openbaton.sh NetworkServiceDescriptor-create tutorial-iperf-NSR-privateIPs.json
@@ -254,6 +254,8 @@ When all the VNF Records are done with all of the scripts defined in the lifecyc
 <!---
 References
 -->
+[cli]: nfvo-how-to-use-cli
+[dashboard]: nfvo-how-to-use-gui
 [iperf-client-server]:images/use-case-example-iperf-client-server.png
 [sequence-diagram-os-vnfm-ems]:images/use-case-example-sequence-diagram-os-vnfm-ems.png
 [vnfr-states]:vnfr-states

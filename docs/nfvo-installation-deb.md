@@ -13,46 +13,68 @@ To execute the following command you need to have curl installed (see http://cur
 To install the OpenBaton NFVO through its debian package you can type the following command:
 
 ```bash
-bash <(curl -fsSkL http://get.openbaton.org/bootstrap)
+bash <(curl -fsSkL http://get.openbaton.org/bootstrap-deb)
 ```
 
 At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
 ```bash
-/opt/openbaton/
-├── generic-vnfm
-└── nfvo
+/usr/lib/openbaton
+├── openbaton-*.jar
+├── gvnfm
+└── plugins
 ```
 
 Where:
 
-* `generic-vnfm`contains the source code and scripts required for dealing with the generic-vnfm  
-* `nfvo` contains the source code and scripts of the NFVO
+* `openbaton-*jar` is the jar file related to the version of OpenBaton NFVO which has been installed
+* `gvnfm` (present only if during the installation procedure you also installed the Generic VNFM) contains the jar file related to the OpenBaton Generic VNFM
+* `plugins` contains the plugins for OpenBaton. So far, if you downloaded the VIM-Driver Plugins during the installation procedure, it will contain only the jar files related to the plugins downloaded
+
+Additionally you should also have the following structure:
+```bash
+/usr/bin
+├── openbaton-nfvo
+└── openbaton-gvnfm
+```
+
+Where:
+
+* `openbaton-nfvo` is the OpenBaton NFVO executable
+* `openbaton-gvnfm` (present only if you also installed the Generic VNFM) is the OpenBaton Generic GVNFM executable
 
 At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
 
-### Starting and stopping NFVO
+### Starting and stopping NFVO (and the Generic VNFM)
 
-After the installation procedure the nfvo is running. If you want to stop it, enter this command:
+After the installation procedure the NFVO is running. If you want to stop it, enter one of the following commands:
 ```bash
-cd /opt/openbaton/nfvo
-./openbaton.sh stop
+sudo service openbaton-nfvo stop
+sudo stop openbaton-nfvo
+sudo openbaton-nfvo stop
+
 ```
 
-**Note (in case you are also using the generic-vnfm):** remember to stop also the Generic VNFM with the following command:
+To start the NFVO, instead, enter one of the following commands:
 ```bash
-cd /opt/openbaton/generic-vnfm
-./generic-vnfm.sh stop
+sudo service openbaton-nfvo start
+sudo start openbaton-nfvo
+sudo openbaton-nfvo start
 ```
-To start the nfvo, enter the command:
+
+**Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running at the end of the installation procedure. You can stop it with one of the following commands:
 ```bash
-cd /opt/openbaton/nfvo
-./openbaton.sh start
+sudo service openbaton-gvnfm stop
+sudo stop openbaton-gvnfm
+sudo openbaton-gvnfm stop
 ```
-**Note (in case you are also using the generic-vnfm):** remember to start also the Generic VNFM with the following command:
+
+**Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM with one of the following commands:
 ```bash
-cd /opt/openbaton/generic-vnfm
-./generic-vnfm.sh start
+sudo service openbaton-gvnfm start
+sudo start openbaton-gvnfm
+sudo openbaton-gvnfm start
 ```
+
 
 ### NFVO properties overview
 
