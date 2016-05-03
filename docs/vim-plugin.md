@@ -221,11 +221,8 @@ public class Starter {
     public static void main(String[] args) {
         log.info("params are: pluginName registryIp registryPort\ndefault is test localhost 1099");
 
-        if (args.length > 1)
-            PluginStarter.run(MyVim.class, args[0], args[1], Integer.parseInt(args[2]));
-        else
-            PluginStarter.run(MyVim.class, "test", "localhost", 1099);
-    }
+    PluginStartup.startPluginRecursive("./path-to-folder", true, "broker-ip", "5672", 15, "admin", "openbaton", "15672");
+    
 }
 ```
 
