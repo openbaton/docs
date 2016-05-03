@@ -219,6 +219,8 @@ The following properties are related to the plugin mechanism used for loading VI
 ########## plugin install ###############
 # directory for the vim driver plugins
 plugin-installation-dir = /usr/local/lib/openbaton/plugins
+# this is path to which the plugins(for example openstack-plugin) will write the output log through NFVO
+nfvo.plugin.log.path = 
 ```
 
 This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
