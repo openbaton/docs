@@ -1,16 +1,16 @@
 # VNF Package
 
-**Note**: This is the initial version of the VNFPackage and might change most probably in the next releases to improve and simplify the creation, usability and power.
+**Note**: This is the initial version of the VNF Package and might change most probably in the next releases to improve and simplify the creation, usability and power.
 
-This doc describes essential components of a VNFPackage, how to create them and how to use them after onboarding.
-Therefore, you can find a practical tutorial at the end with all the steps starting from the creation over onboarding and finally referencing it by a NSD.
+This doc describes essential components of a VNF Package, how to create them and how to use them after onboarding.
+Therefore, you can find a practical tutorial at the end with all the steps starting from the creation over onboarding and finally referencing it by an NSD.
 
-A VNFPackage is a tar-archive that contains all the information required for creating a VNF for the openbaton NFVO.
-After onboarding the VNFPackage on the NFVO you can use the VNF directly in the NSD by referencing the VNFD by its id.
-A VNFPackage includes the VNFD, the image, scripts and a Metadata file structured as shown in the next part.
+A VNF Package is a tar-archive that contains all the information required for creating a VNF for the Open Baton's NFVO.
+After onboarding the VNF Package to the NFVO you can use the VNF directly in the NSD by referencing the VNFD by its ID.
+A VNF Package includes the VNFD, the image, scripts and a Metadata file structured as shown in the next part.
 
 # Package structure
-The VNFPackage has the following structure:
+The VNF Package has the following structure:
 
 ```bash
 - Metadata.yaml
@@ -18,15 +18,15 @@ The VNFPackage has the following structure:
 - scripts/
     - 1_script.sh
     - 2_script.sh
-- image.img
+- image.img (not supported at the moment, use image-link!)
 ```
 ## Metadata.yaml
-The Metadata.yaml defines essential properties for the VNF. This file bases on the YAML syntax where information are stored in simple <key\> : <value\> associations.
+The Metadata.yaml defines essential properties for the VNF. This file is based on the YAML syntax where information are stored in simple <key\> : <value\> associations.
 
-The example of a Metadata.yaml file below shows a basic definition of a VNFPackage.
+The example of the Metadata file below shows a basic definition of a VNF Package.
 
 ```yaml
-name: vnfPackage_name
+name: VNF Package_name
 scripts-link: scripts_link
 image:
     upload: option
@@ -45,7 +45,7 @@ image-config:
 
 In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
 
-* ***name***: The name defines the name of the VNFPackage itself used to store it on the database.
+* ***name***: The name defines the name of the VNF Package itself used to store it in the database.
 * ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
     * **Note** Either you can define the scripts-link or put the scripts into the folder scripts/.
         The scripts-link has a higher priority than the scripts located in the folder scripts/.
@@ -57,35 +57,35 @@ In the following each property is explained in more detail. Please consider also
     * ***upload***: Here you can choose between different options (true, false, check).
         * true: choosing this option means to upload the defined image on all the VimInstances. It does not matter if an image with the defined name exists or not.
         * false: choosing this option means that you assume that the image (defined in the ids or names) is already present.
-        If the image does not exist, the VNFPackage onboarding will throw an exception.
+        If the image does not exist, the VNF Package onboarding will throw an exception.
         In this case the image (if defined) will be ignored.
-        * check: this option means that the VNFPackageManagement checks first if the image is available (defined in ids or names).
-        If the image does not exist, a new one with the image defined in the VNFPackage will be created.
+        * check: this option means that the VNF PackageManagement checks first if the image is available (defined in ids or names).
+        If the image does not exist, a new one with the image defined in the VNF Package will be created.
         * **Note** Please use quotation marks for this option since the values are handled as strings internally.
-        Otherwise true and false will be handled as a boolean that would lead to a faulty behavior when onboarding a new VNFPackage.
-    * ***ids***: The list of image ids is used to fetch the image from the corresponding VimInstance.
-        To do it, the manager iterates over all ids and checks if an image with that id exists on the VimInstance.
-        The defined ids have a higher priority than the list of names.
+        Otherwise true and false will be handled as a boolean that would lead to a faulty behavior when onboarding a new VNF Package.
+    * ***ids***: The list of image IDs is used to fetch the image from the corresponding VimInstance.
+        To do it, the manager iterates over all IDs and checks if an image with that ID exists on the VimInstance.
+        The defined IDs have a higher priority than the list of names.
         We distinguish between the following cases:
-        * If it finds no image with these ids, it continues with the list of image names.
-        * If it finds one image with these ids, this image will be used.
-        * If it finds multiple images with the same id (should never happen) or multiple ids matching to multiple images, an exception will be thrown because it is not clear which image to use.
+        * If it finds no image with these IDs, it continues with the list of image names.
+        * If it finds one image with these IDs, this image will be used.
+        * If it finds multiple images with the same ID (should never happen) or multiple IDs matching to multiple images, an exception will be thrown because it is not clear which image to use.
     * ***names***: The list of image names is used to fetch the image from the corresponding VimInstance.
         To do it, manager iterates over all names and checks if an image with that name exists on the VimInstance.
-        The list of names have a lower priority than the list of ids.
+        The list of names have a lower priority than the list of IDs.
         We distinguish between the following cases:
         * If it finds no image with that name, an exception will be thrown except you defined the upload option check.
-        Then it will create a new image defined in the VNFPackage.
+        Then it will create a new image defined in the VNF Package.
         * If it finds one image, this image will be used.
         * If it finds multiple images with the same name or multiple names matching to multiple images, an exception will be thrown because it is not clear which image to use.
     * ***link***: This link points to an image available at this URL used to upload the image to the cloud environment.
-        * **Note** Either you have to define the image-link or put the image directly into the VNFPackage if you want to upload a new Image to the VIM by using image upload option `true` or `check`.
-            Otherwise a NotFoundException will be thrown and the VNFPackage will not onboard.
-            The image-link has a higher priority than the image stored in the VNFPackage directly.
+        * **Note** Either you have to define the image link or put the image directly into the VNF Package if you want to upload a new Image to the VIM by using image upload option `true` or `check`.
+            Otherwise a NotFoundException will be thrown and the VNF Package will not be onboarded.
+            The image-link has a higher priority than the image stored in the VNF Package directly.
         * ****Note**** At the moment it is only supported to upload an image by using the `link`. Image uploading from an image inside the package is disabled.
 * ***image-config***: All the properties explained below are required to upload the image to the cloud environment properly.
-    In case of creating a new image this configuration will be used.
-    * ***name***: This defines the name for the image to upload either located directly in the VNFPackage or available via the URL defined in image-link.
+    In case of creating a new image this configuration will be used and is obviously mandatory.
+    * ***name***: This defines the name for the image to upload either located directly in the VNF Package or available via the URL defined in image-link.
     * ***diskFormat***: The diskFormat defines the format in which disk type the image is stored.
     * ***containerFormat***: The containerFormat defines the format in which container type the image is stored .
     * ***minCPU***: The minCPU defines the minimum amount of CPU cores for using this image properly.
@@ -95,15 +95,15 @@ In the following each property is explained in more detail. Please consider also
 
 ## <VNFD\>.json
 
-The <vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded on the Orchestrator.
-This VNFD can later be referenced in a NSD by its id to make use of it.
+The <vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded to the Orchestrator.
+This VNFD can later be referenced in a NSD by its ID to make use of it.
 A more detailed explanation of the VNFD can be found [here][vnfd-link].
 
-**Note** The name of the file is not important but the file extension .json is, since the VNFPackageManagement is looking for this kind of file format.
+**Note** The name of the file is not is up to you but the file extension .json is must be present since the VNFPackageManagement is looking for this kind of file.
 
 ## scripts
 
-The scripts folder contains all the scripts required for starting, configuring or whatever you want to do on the running instance.
+The scripts folder contains all the scripts required for starting, configuring or whatever you want to do on the running instance during specific lifecycles.
 The execution order is defined by the lifecycle_events inside the VNFD.
 This lifecycle_events are triggered by the NFVO in the meaning of: if the event "INSTANTIATE" contains a script in the lifecycle_events, this script is executed when the NFVO calls the instantiate method for the specific VNFR.
 
@@ -116,7 +116,7 @@ This lifecycle_events are triggered by the NFVO in the meaning of: if the event 
 
 **Note** At the moment it is only supported to upload an image by using the `link` defined in **Metadata.yaml**. Image uploading from an image inside the package is disabled.
 
-This image is used to upload it to all the cloud environments which are addressed inside the VNFD with that image.
+This image is used for uploading it to all the cloud environments which are addressed inside the VNFD with that image.
 It doesn't matter whether an image already exists on the considered cloud environment or not.
 
 **Note** This image has lower priority than the ***image-links*** defined in ***Metadata.yaml***.
@@ -127,24 +127,24 @@ It doesn't matter whether an image already exists on the considered cloud enviro
 
 # Tutorial
 
-This section explains how to create, upload and make use of VNFPackages.
-The chosen scenario is a NetworkService for testing the network connectivity by using [iPerf][iperf-link].
+This section explains how to create, upload and make use of VNF Packages.
+The chosen scenario is a Network Service for testing the network connectivity by using [iPerf][iperf-link].
 iPerf is a tool for active measurements of the maximum achievable bandwidth on IP networks.
 Therefore, we need a server and a client installing the iPerf server/client and configuring them for communication between.
 
-## Creation of VNFPackages
-For doing so, we need to create two VNFPackages and reference them in the NSD.
-So we need one VNFPackage for the iperf server (called iperf-server) and one for the iperf client (called iperf-client).
-First we will start with the creation of the iperf-server VNFPackage and then we will create the iperf-client VNFPackage.
+## Creation of VNF Packages
+For doing so, we need to create two VNF Packages and reference them in the NSD.
+So we need a VNF Package for the iperf server (called iperf-server) and for the iperf client (called iperf-client).
+First we will start with the creation of the iperf-server VNF Package and then we will create the iperf-client VNF Package.
 
-First of all we should create a directory for each VNFPackage where we put all the files related to the VNFPackage because in the end we need to pack them into a tar archive for onboarding it on the NFVO.
+First of all we should create a directory for each VNF Package where we put all the files related to the VNF Package because in the end we need to pack them into a tar archive for onboarding it on the NFVO.
 
-### VNFPackage [iperf-server]
-This iperf-server VNFPackage has to install the iperf server and needs to provide its ip to the iperf client.
+### VNF Package [iperf-server]
+This iperf-server VNF Package has to install the iperf server and needs to provide its ip to the iperf client.
 
 #### Metadata [iperf-server]
-In the Metadata.yaml we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
-Since the image-link is not implemented in the current release we will put the image directly into the VNFPackage.
+In the Metadata.yaml we define the name of the VNF Package, the scripts location and also the properties for the image to use or upload.
+Since passing an image is not supported in the current release we will use the image link inside the `Metadata.yaml`.
 Finally, it looks as shown below.
 ```yaml
 name: iperf-server
@@ -165,60 +165,53 @@ image-config:
 ```
 
 #### VNFD [iperf-server]
-This is how the [VNFD](vnf-descriptor) looks like for the iperf-server VNFPackage.
-Important to notice here is the vm_image that points to the image we have defined in the Metadata.yaml
+This is how the [VNFD](vnf-descriptor) looks like for the iperf-server VNF Package.
+Important to notice here is that the vm_image defined in the Metadata.yaml is filled automatically during the onboarding process of the VNF Package.
 
 ```json
 {
-    "vendor":"fokus",
-    "version":"0.2",
-    "name":"iperf-server",
-    "type":"server",
-    "endpoint":"generic",
-    "vdu":[
+  "name":"iperf-server",
+  "vendor":"FOKUS",
+  "version":"1.0",
+  "lifecycle_event":[
+    {
+      "event":"INSTANTIATE",
+      "lifecycle_events":[
+        "install.sh",
+        "install-srv.sh"
+      ]
+    }
+  ],
+  "virtual_link":[
+    {
+      "name":"private"
+    }
+  ],
+  "vdu":[
+    {
+      "vm_image":[
+      ],
+      "scale_in_out":1,
+      "vnfc":[
         {
-            "vm_image":[
-                "iperf_server_image"
-            ],
-            "vimInstanceName":["vim-instance"],
-            "scale_in_out":2,
-            "vnfc":[
-                {
-                    "connection_point":[
-                        {
-                            "floatingIp":"random",
-                            "virtual_link_reference":"private"
-                        }
-                    ]
-                }
-            ]
+          "connection_point":[
+            {
+              "virtual_link_reference":"private"
+            }
+          ]
         }
-    ],
-    "virtual_link":[
-        {
-            "name":"private"
-        }
-    ],
-    "lifecycle_event":[
-        {
-            "event":"INSTANTIATE",
-            "lifecycle_events":[
-                "install.sh",
-                "install-srv.sh"
-            ]
-        }
-    ],
-    "deployment_flavour":[
-        {
-            "df_constraint":[
-                "constraint1",
-                "constraint2"
-            ],
-            "costituent_vdu":[
-            ],
-            "flavour_key":"m1.small"
-        }
-    ]
+      ],
+      "vimInstanceName":["vim-instance"]
+    }
+  ],
+  "deployment_flavour":[
+    {
+      "flavour_key":"m1.small"
+    }
+  ],
+  "type":"server",
+  "endpoint":"generic",
+  "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
 }
 ```
 #### Image
@@ -226,13 +219,13 @@ Important to notice here is the vm_image that points to the image we have define
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of image.
 We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
 
-### VNFPackage [iperf-client]
+### VNF Package [iperf-client]
 
-This iperf-server VNFPackage has to install the iperf client and needs to configure it to set the iperf servers' IP.
+This iperf-client VNF Package has to install the iPerf client and needs to be configured in order to know the iPerf servers' IP.
 
 #### Metadata [iperf-client]
-In the Metadata.yaml we define the name of the VNFPackage, the scripts location and also the properties for the image to upload.
-Since the image-link is not implemented in the current release we will put the image directly into the VNFPackage.
+In the Metadata.yaml we define the name of the VNF Package, the scripts location and also the properties for the image to upload.
+Since passing an image is not supported in the current release we will use the image link inside the `Metadata.yaml`.
 Finally, it looks as shown below.
 
 ```yaml
@@ -255,67 +248,59 @@ image-config:
 
 #### VNFD [iperf-client]
 
-This is how the [VNFD](vnf-descriptor) looks like for the iperf-client VNFPackage.
-Important to notice here is the vm_image that points to the image we have defined in the Metadata.yaml
+This is how the [VNFD](vnf-descriptor) looks like for the iperf-client VNF Package.
+Important to notice here is that the vm_image defined in the Metadata.yaml is filled automatically during the onboarding process of the VNF Package.
 
 ```json
 {
-    "vendor":"fokus",
-    "version":"0.1",
-    "name":"iperf-client",
-    "type":"client",
-    "endpoint":"generic",
-    "vdu":[
+  "name":"iperf-client",
+  "vendor":"FOKUS",
+  "version":"1.0",
+  "lifecycle_event":[
+    {
+      "event":"CONFIGURE",
+      "lifecycle_events":[
+        "server_configure.sh"
+      ]
+    },
+    {
+      "event":"INSTANTIATE",
+      "lifecycle_events":[
+        "install.sh"
+      ]
+    }
+  ],
+  "vdu":[
+    {
+      "vm_image":[
+        ""
+      ],
+      "scale_in_out":1,
+      "vnfc":[
         {
-            "vm_image":[
-                "iperf_client_image"
-            ],
-            "virtual_memory_resource_element":"1024",
-            "virtual_network_bandwidth_resource":"1000000",
-            "vimInstanceName":"vim-instance",
-            "vdu_constraint":"",
-            "scale_in_out":2,
-            "vnfc":[
-                {
-                    "connection_point":[
-                        {
-                            "virtual_link_reference":"private"
-                        }
-                    ]
-                }
-            ]
+          "connection_point":[
+            {
+              "virtual_link_reference":"private"
+            }
+          ]
         }
-    ],
-    "virtual_link":[
-        {
-            "name":"private"
-        }
-    ],
-    "lifecycle_event":[
-        {
-            "event":"INSTANTIATE",
-            "lifecycle_events":[
-                "install.sh"
-            ]
-        },
-        {
-            "event":"CONFIGURE",
-            "lifecycle_events":[
-                "server_configure.sh"
-            ]
-        }
-    ],
-    "deployment_flavour":[
-        {
-            "df_constraint":[
-                "constraint1",
-                "constraint2"
-            ],
-            "costituent_vdu":[
-            ],
-            "flavour_key":"m1.small"
-        }
-    ]
+      ],
+      "vimInstanceName":["vim-instance"]
+    }
+  ],
+  "virtual_link":[
+    {
+      "name":"private"
+    }
+  ],
+  "deployment_flavour":[
+    {
+      "flavour_key":"m1.small"
+    }
+  ],
+  "type":"client",
+  "endpoint":"generic",
+  "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
 }
 ```
 
@@ -324,29 +309,29 @@ Important to notice here is the vm_image that points to the image we have define
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
 We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
 
-## Onboarding VNFPackages
+## Onboarding VNF Packages
 
-Once we have finalized the creation of VNFPackages and packed them into a tar we can onboard them on the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done as shown in the following:
+Once we have finalized the creation of VNF Packages and packed them into a tar we can onboard them to the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done as shown in the following:
 
 ```bash
 $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/vnf-packages"
 ```
 
-This must be done for both VNFPackages expecting that the NFVO is running locally and the tar archive is called vnf-package.tar.
+This must be done for both VNF Packages expecting that the NFVO is running locally and the tar archive is called vnf-package.tar.
 Otherwise you need to adapt the path to the package and also the URL where the NFVO is located.
-Now where we onboarded the VNFPackages they are available on the NFVO and we can make use of it by referencing them in the NSD by their ids'.
+Now where we onboarded the VNF Packages they are available on the NFVO and we can make use of it by referencing them in the NSD by their IDs'.
 
-**Note** You could use the [Dashboard][dashboard-link] as well for onboarding the VNFPackages.
+**Note** You could use the [Dashboard][dashboard-link] as well for onboarding the VNF Packages.
 
-To get the ids of the newly created VNFDs you need to fetch the VNFDs by invoking the following command:
+To get the IDs of the newly created VNFDs you need to fetch the VNFDs by invoking the following command:
 
 ```bash
 $ curl -X GET "http://localhost:8080/api/v1/vnf-descriptors"
 ```
 
 This request will return a list of already existing VNFDs.
-Just looking for the VNFDs we created before and use the id to reference them in the NSD.
-The following list of VNFDs is an example of this request.
+Just looking for the VNFDs we created before and use their IDs to reference them in the NSD.
+The following list of VNFDs is an output example of this request.
 To make it more readable only the interesting parts are shown.
 ```json
 [
@@ -368,11 +353,11 @@ To make it more readable only the interesting parts are shown.
 ```
 
 ## NSD [iperf]
-In this section we will create a [NSD](ns-descriptor) and reference the previously created VNFPackages by their ids'.
+In this section we will create a [NSD](ns-descriptor) and reference the previously created VNF Packages by their IDs.
 For doing that we just need to define the **id** for each VNFPackges' VNFD in the list of VNFDs.
-To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can find under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **private1**.
+To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can find under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **private** that indicates the private IP address of the iPerf server in the network "private".
 
-**Note** When creating the NSD the VNFD is fetched by the id defined. Other properties we would set in the VNFD in this NSD will be ignored.
+**Note** When creating the NSD the VNFD is fetched by the ID defined. Other properties we would set in the VNFD in this NSD will be ignored.
 
 ```json
 {
@@ -401,14 +386,14 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
                 "name": "iperf-client"
             },
             "parameters":[
-                "private1"
+                "private"
             ]
         }
     ]
 }
 ```
 
-Finally you can onboard this NSD and create a NSR that bases on both VNFPackages created before.
+Finally you can onboard this NSD and deploy an NSR that bases on both VNF Packages created before.
 
 ### Onboard NSD
 The following command will onboard the NSD on the NFVO:
@@ -416,7 +401,7 @@ The following command will onboard the NSD on the NFVO:
 $ curl -X POST -v -F file=@nsd.json "http://localhost:8080/api/v1/ns-descriptors"
 ```
 
-This will return the NSD with the id we need to create NSR.
+This will return the NSD with the ID we need to create the NSR.
 Afterwards, we can deploy the NSD.
 
 **Note** You could use the [Dashboard][dashboard-link] as well for onboarding the NSD.
@@ -428,7 +413,7 @@ To deploy the NSD we create a NSR with the following command:
 $ curl -X POST -v -F file=@vnf-package.tar "http://localhost:8080/api/v1/ns-records/<NSD_ID>"
 ```
 
-Installation and configuration is done automatically and provides you with a configured iperf server/client infrastructure.
+Installation and configuration is done automatically and provides you with a configured iperf server/client service.
 
 **Note** You could use the [Dashboard][dashboard-link] as well for creating the NSR of this NSD.
 
