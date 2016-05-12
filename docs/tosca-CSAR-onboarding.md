@@ -12,7 +12,7 @@ The CSAR is a zip file with this structure:
 └── TOSCA-Metadata
     └── TOSCA.meta
 ```
-The TOSCA.meta file must contains the reference to the Definition that will be translated in VNFs in this case **Entry-Definitions: Definitions/toscav1.yaml**
+The TOSCA.meta file must contain the reference to the definition that will be translated in VNFs in this case **Entry-Definitions: Definitions/toscav1.yaml**
 
 ```bash
 TOSCA-Meta-File-Version: 1.0
@@ -157,7 +157,7 @@ OpenBaton is using different lifecycle events the mapping between these two defi
 ## CSAR on-bording
 
 After create the CSAR with all scripts in the folder and the link to the definition, you can store this package and OpenBaton will persist all the Scripts and the VNFs inside of the definition. 
-To retrieve the files you can see the Dashboard in the page of VNFPackages under Catalogue menu, also you can see in the page of VNF Descriptors the VNFs defined into **toscav1.yaml**
+To retrieve the files you can use the dashboard in the page of VNFPackages under Catalogue menu, also you can use the page of VNF Descriptors to see the VNFs defined in **toscav1.yaml**
 
 For on-boarding the CSAR use this command:
 

@@ -23,7 +23,7 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
             "vm_image":[  
                 "ubuntu-14.04-server-cloudimg-amd64-disk1"
             ],
-            "vimInstanceName":"vim-instance",
+            "vimInstanceName":["vim-instance"],
             "scale_in_out":2,
             "vnfc":[  
                 {  
@@ -56,12 +56,7 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
             "flavour_key":"m1.small"
         }
     ],
-    "provides":[
-        "ip",
-        "source",
-        "param1",
-        "param2"
-      ]
+    "vnfPackageLocation":"link_to_gitrepo"
 }
 ```
 
@@ -81,7 +76,7 @@ The other most important parameters are described in the following sections.
 | Params          				| Meaning       																|
 | -------------   				| -------------:																|
 | vm_image  					| The list of image names or ids existing in the VimInstance or in the VNF Package						|
-| vimInstanceName				| The VimInstance name chosen      				|
+| vimInstanceName				| The list of VimInstances. Only one of it will be chosen, randomly      				|
 | scale_in_out					| The maximum number of instances (VMs) which can be created to support scale out/in.      	|
 | vnfc                                          | This field contains a list of VNFComponents which will be deployed for this VNFD.  |
 

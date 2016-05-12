@@ -40,18 +40,31 @@ On this page you can see the list of NS Descriptors stored in OpenBaton
 
 You have two options for storing a NS Descriptor:
 
-1. Create a NSD by filling in a form
+1. Create a NSD by using the VNFDs from the Packages
 2. Create a NSD by using a json file
 
 
-Create a NSD by using a json file
+Upload a json-file that contains the NSD
 
 ![NSD create by File][NSDcreateFile]
 
 
-Create a NSD by filling in a form
+Create a NSD by using the VNFD from the Packages, just click on the button "Create NSD"
 
-![NSD create by Form][NSDcreateForm]
+![NSD create by VNFDs][NSDcreateButton]
+
+This is the form which allows you to choose the VNFDs to be used in the NSD come from the Catalogue (and contained inside the VNFPackages)
+
+![NSD create by VNFDs][NSDcreateSelect]
+
+
+Once you have added the VNFDs to the NSD you can add one o more VLD and VNF Dependency like in the picture below
+
+![Form with VNFDs][NSDcreateWithVNF]
+
+In the picture below you can see how to add a VNF Dependency to the NSD and possible parameters
+
+![Add VNF Dependency NSD][NSDcreateDependency]
 
 ### Network Service Descriptor Information
 If you click on the id of a NSD shown in the list of NSDs you can see the information
@@ -73,8 +86,25 @@ and the information about the *Dependencies* stored in the Network Service Descr
 
 ![Network Service Descriptor Dependencies Information][VNFDlistintoNSD1]
 
-If you click on the *Action* button in the list of VNFDependencies you can delete the VNFDependency from the NSD
+If you click on the **Action** button in the list of VNFDependencies you can delete the VNFDependency from the NSD
 
+#### Edit a Network Service Descriptor
+
+If you want to Edit the NSD just click on the **Edit** button under the button **Action** in the list of NSD
+
+![NSD Edit][editNSD1]
+
+The same for the VNF inside the NSD
+
+![NSD Graph][editNSD2]
+
+![NSD Graph][editNSD3]
+
+And the same for the VDU inside the VNF
+
+![NSD Graph][editNSD4]
+
+![NSD Graph][editNSD5]
 
 #### Virtual Network Function Descriptor Information
 In the list of Virtual Network Function Descriptors in NSD template you can click on the id of a Virtual Network Function Descriptor to get to this page
@@ -92,7 +122,7 @@ For uploading a _.tar_ you can click on the button **Upload VNFPackage** and thi
 
 ![Drag&Drop modal][drag_drop]
 
-After you click on the button **Start** the package will be sent to the _NFVO_ and once the process is finished you will see the package appearing in the list
+After you click on the button **Send All** the packages will be sent to the _NFVO_ and once the process is finished you will see the package appearing in the list
 
 ![Drag&Drop modal start][drag_drop1]
 
@@ -116,6 +146,22 @@ To look at the details of a VNFR just click on the **id** of it.
 
 ![VNF Record Information][VNFRecordInformation]
 
+## Event
+The Events are sent by the Orchestrator to the specific **EndPoint** where an external component is listening to be aware when the Orchestrator 
+changes the STATE of a particular **virtualNetworkFunctionId** or **networkServiceId**
+
+To add a new Event just click the button "Create event" and will be shown the form as follow:
+
+![Event Form][EventForm]
+
+For getting the information click on the id link of the Event
+
+![Event List][EventList]
+
+This are the information of the Event selected
+
+![Event Info][EvenInfo]
+
 
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
@@ -126,6 +172,19 @@ To look at the details of a VNFR just click on the **id** of it.
 [drag_drop2]:images/nfvo-how-to-use-gui-drag-drop2.png
 [NSDcreateFile]:images/nfvo-how-to-use-gui-NSD-create-file.png
 [NSDcreateForm]:images/nfvo-how-to-use-gui-NSD-create-form.png
+[NSDcreateButton]:images/nds-create-NSD.png
+[NSDcreateSelect]:images/form-create-NSD.png
+[NSDcreateDependency]:images/form-add-dependecy-pkg.png
+[NSDcreateWithVNF]:images/form-with-VNFDs.png
+[EventForm]:images/event-form.png
+[EventList]:images/event-list.png
+[EvenInfo]:images/even-info.png
+[editNSD1]:images/edit-NSD1.png
+[editNSD2]:images/edit-NSD2.png
+[editNSD3]:images/edit-NSD3.png
+[editNSD4]:images/edit-NSD4.png
+[editNSD5]:images/edit-NSD5.png
+
 [VNFDlistintoNSD]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
 [VNFDlistintoNSD1]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD1.png
 [VNFDescriptorInformation]:images/nfvo-how-to-use-gui-VNFD-information.png

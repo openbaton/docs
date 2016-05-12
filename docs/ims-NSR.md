@@ -76,7 +76,7 @@ Take a look at the Scscf Virtual Network Function Descriptor for this example.
                ]
             }
          ],
-         "vimInstanceName":"your_vim"
+         "vimInstanceName":["your_vim"]
       }
    ],
    "virtual_link":[  
@@ -411,7 +411,7 @@ Now that we have uploaded the Network Service Descriptor we can launch it. You c
 
 To test your [OpenIMSCore](http://www.openimscore.org/) you may use a Sip client of your choice. Be sure to use the realm defined in your [Bind9 Virtual Network Function Descriptor](https://github.com/openbaton/opemimscore_example/bind9) while testing registration and call. By default the [FHoSS](http://www.openimscore.org/) conaints 2 users : alice and bob. The user is the same as the password, but you may also alter it to your needs modifying the [FHoSS Virtual Network Function Descriptor][openims-repo] ( You will find the users in "var_user_data.sql" file under the fhoss folder)
 
-For Benchmarking we can use [IMS Bench SIPp](http://sipp.sourceforge.net/ims_bench/) but therefor you should add more users to the [FHoSS](http://www.openimscore.org/) database since by default it only contains 2 users.
+For Benchmarking we can use [IMS Bench SIPp](http://sipp.sourceforge.net/ims_bench/) but then you should add more users to the [FHoSS](http://www.openimscore.org/) database since by default it only contains 2 users.
 
 
 [ims-struc]:images/ims-architecture.png

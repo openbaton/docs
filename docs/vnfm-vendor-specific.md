@@ -29,11 +29,13 @@ POST request on
 
 _*OrEndpoint*_/admin/v1/vnfm-register
 ###### request body
-```
+```json
 {
     "type":"dummy",
     "endpointType":"REST",
-    "endpoint":"VnfmEndpoint"
+    "endpoint":"VnfmEndpoint",
+    "description":"MyVnfm",
+    "enabled":"true"
 }
 ```
 ###### request structure
@@ -41,7 +43,7 @@ _*OrEndpoint*_/admin/v1/vnfm-register
 | Field      | Meaning    |
 | ---------- | ----------:|
 | _*type*_   | the vnfm type you are going to handle (specified in VirtualNetowrkFunctionDescriptor → endpoint) |
-| _*endpointType*_ | the vnfm type you are going to implement (REST or JMS) |
+| _*endpointType*_ | the vnfm type you are going to implement (REST or AMQP) |
 | _*endpoint*_ | the vnfm endpoint you have chosen (basically http://<IP\>:<PORT\>) |
 
 ### INSTANTIATE (Or-Vnfm)
@@ -49,46 +51,157 @@ _*OrEndpoint*_/admin/v1/vnfm-register
 This call sends the Vnfm the Virtual Network Function Descriptor, which shall be used to create the Virtual Network Funtion Record and also sends to the Vnfm all the scripts which are executed in actions like INSTANTIATE, MODIFY or START. This call triggers the creation of a virtual machine for the sent vnfd and the execution of the scripts which are associated with the INSTANTIATE lifecycle event in the vnfd. 
 
 ###### request path
-POST request on
-
-_*VnfmEnpoint*_
+POST request on _*VnfmEnpoint*_
 ###### request body
-```
+```json
 {
-    "scriptsLink":"linktogit", 
-    "scripts":"scriptsfiles", 
     "vnfd":{  ...  }, 
-    "vnfdf":{  ...  }, 
-    "vlrs":[  ...  ], 
-    "extention":{  "nsr-id":"..."  }, 
-    "action":"INSTANTIATE" 
+    "vnfdf":{  ...  },
+    "vlrs":[  ...  ],
+    "extention":{  
+      "nsr-id":"...",
+      "brokerIp":"...",
+      ...
+    },
+    "action":"INSTANTIATE",
+    "vimInstances": {
+      "vdu_id":[
+        { ... },
+        { ... }
+      ]
+    },
+    "vnfPackage": { ... };     
 }
 ```
-
-In this action either the _scriptsLink_ or the _scripts_ fields are set. The vnfm-sdk will take care of them.
 
 ###### request structure
 
 | Field      | Meaning    |
 | ---------- | ----------:|
-| _*scriptsLink*_   | a link to the repository where the links are located |
-| _*scripts*_ | the script files coming from the vnfPackage, in case no scriptsLink is provided |
 | _*vnfd*_ | the VirtualNetworkFunctionDescriptor from which a VirtualNetworkFunctionRecord is created |
 | _*vnfdf*_   | the deployment flavours to be used |
 | _*vlrs*_ | the list of VirtualLinkRecords of the NetworkServiceRecord |
 | _*extention*_ | some info like the NetworkServiceRecord id |
 | _*action*_ | the action to be executed |
+| _*vimInstances*_ | a map containing per each vdu id the list of VimInstance objects |
+| _*vnfPackage*_ | the VNFPackage of the VirtualNetowrkFunctionRecord |
+
+
+
+### GrantOperation (Vnfm-Or)
+
+This call sends the Virtual Network Function Record to the Nfvo in order to ask if there are enough resources
+
+###### request path
+POST request on _*OrEndpoint*_/admin/v1/vnfm-core-grant
+
+###### request body
+```json
+{
+    "virtualNetworkFunctionDescriptor":{..},
+    "vduSet":[
+      { ... }
+    ],
+    "deploymentFlavourKey":"whatever",
+    "action":"GRANT_OPERATION",
+    "virtualNetworkFunctionRecord":{..}
+}
+```
+
+###### request structure
+
+| Field      | Meaning    |
+| ---------- | ----------:|
+| _*action*_ | the action has to be executed |
+| _*virtualNetworkFunctionRecord*_ | the VirtualNetowrkFunctionRecord |
+| _*virtualNetworkFunctionDescriptor*_ | the virtualNetworkFunctionDescriptor |
+| _*vduSet*_ | the Set of all the VDU of this virtualNetworkFunctionRecord |
+
+
+### GrantOperation (Or-Vnfm)
+
+This call returns the answer from the Nfvo of the grant operation
+
+###### request path
+POST request on _*VnfmEnpoint*_
+
+###### request body
+```json
+{
+    "grantAllowed": true,
+    "vduVim": {
+      "vdu_id": {  }
+    },
+    "virtualNetworkFunctionRecord":{}
+}
+```
+
+###### request structure
+
+| Field      | Meaning    |
+| ---------- | ----------:|
+| _*grantAllowed*_ | if the nfvo has granted the allocate resources |
+| _*vduVim*_ | which vim was chosen per vdu |
+| _*virtualNetworkFunctionRecord*_ | the virtualNetworkFunctionRecord |
+
+
+### AllocateResources (Vnfm-Or)
+
+This call sends the Virtual Network Function Record to the Nfvo in order to allocate resources
+
+###### request path
+POST request on _*OrEndpoint*_/admin/v1/vnfm-core-allocate
+
+###### request body
+```json
+{
+    "virtualNetworkFunctionRecord":{..},
+    "vimInstances":{
+      "vdu_id":{ ... }
+    },
+    "userdata":""
+}
+```
+
+###### request structure
+
+| Field      | Meaning    |
+| ---------- | ----------:|
+| _*virtualNetworkFunctionRecord*_ | the VirtualNetowrkFunctionRecord |
+| _*vimInstances*_ | the chosen vim per vdu |
+| _*userdata*_ | the userdata |
+
+
+### AllocateResources (Or-Vnfm)
+
+This call returns the new VirtualNetowrkFunctionRecord to the Vnfm
+
+###### request path
+POST request on _*VnfmEnpoint*_
+
+###### request body
+```json
+{
+    "vnfr": { ... }
+}
+```
+
+###### request structure
+
+| Field      | Meaning    |
+| ---------- | ----------:|
+| _*virtualNetworkFunctionRecord*_ | the virtualNetworkFunctionRecord updated |
+
 
 ### Instantiate (Vnfm-Or)
 
 This call sends back the created Virtual Network Function Record to the Nfvo. 
 
 ###### request path
-POST request on
+POST request on _*OrEndpoint*_/admin/v1/vnfm-core-actions
 
-_*OrEndpoint*_/admin/v1/vnfm-core-actions
 ###### request body
-```
+```json
 {
     "virtualNetworkFunctionRecord":{  ...  }, 
     "action":"INSTANTIATE"
@@ -102,6 +215,7 @@ _*OrEndpoint*_/admin/v1/vnfm-core-actions
 | _*virtualNetworkFunctionRecord*_   | the created VirtualNetworkFunctionRecord |
 | _*action*_ | the action that was executed |
 
+
 ### Modify (aka AddRelations) (Or-Vnfm)
 
 The Nfvo uses this request to provide dependencies of Virtual Network Functions to the Vnfm. The scripts associated with the CONFIGURATION lifecycle event in the vnfr will be executed.
@@ -111,7 +225,7 @@ POST request on
 
 _*VnfmEnpoint*_
 ###### request body
-```
+```json
 {
     "vnfr":{ ... }, 
     "vnfrd":{ ... }, 
@@ -138,7 +252,7 @@ POST request on
 _*OrEndpoint*_/admin/v1/vnfm-core-actions
 ###### request body
 
-```
+```json
 {
     "virtualNetworkFunctionRecord":{ ... },
     "action":"MODIFY"
@@ -161,7 +275,7 @@ POST request on
 
 _*VnfmEnpoint*_
 ###### request body
-```
+```json
 {
     "vnfr":{  ...  },
     "action":"START"
@@ -183,7 +297,7 @@ POST request on
 _*OrEndpoint*_/admin/v1/vnfm-core-actions
 ###### request body
 
-```
+```json
 {
     "virtualNetworkFunctionRecord":{  ...  },
     "action":"START"

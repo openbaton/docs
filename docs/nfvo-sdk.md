@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:1.0.2'
+    compile 'org.openbaton:sdk:2.0.1'
 }
 ```
 
@@ -29,7 +29,7 @@ The UML diagram of the classes follows:
 
 The NFVORequestor is the main and only class you need to use. From this class it is possible to retrieve all the Agents that are in charge of making calls to the NFVO. The NFVORequestor takes as constructor parameters:
 
-| Params          	| Meaning       |
+| Params          	| Description       |
 | -------------   	| -------------:|
 | username  		| the username if the security is enabled in the NFVO |
 | password 			| the password if the security is enabled in the NFVO      |
@@ -43,10 +43,12 @@ Once you have the NFVORequestor object, you can get the Agents. Available agents
 * EventAgent
 * ImageRestAgent
 * NetworkServiceDescriptorRestAgent
+* VirtualNetworkFunctionDescriptorRestAgent
 * NetworkServiceRecordRestAgent
 * VimInstanceRestAgent
 * VirtualLinkRestAgent
 * VNFFGRestAgent
+* VNFPackageAgent
 
 each of them exposes these methods:
 

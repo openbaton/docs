@@ -10,6 +10,11 @@ Five tests are run.
 3. scenario-real-iperf
 4. scenario-complex-iperf
 5. scenario-scaling
+6. error-in-configure
+7. error-in-instantiate
+8. error-in-start
+9. error-in-terminate
+10. wrong-lifecycle-event
 
 scenario-dummy-iperf uses the [Dummy VNFM][vnfm-dummy] to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
 It does not actually deploy a network service. The fake network service is a simple iperf scenario with one server and one client. 
@@ -32,6 +37,10 @@ The test scenario-scaling tests the scaling function of Openbaton.
 It starts by deploying an iperf server and an iperf client which connects to the server. 
 Then it executes some scaling functions like scale out and scale in and checks if new instances of the server and the client are deployed. Cases like scale in on just one instance and scale out on the maximum number of instances are included. 
 It also examines if the client instances are provided with the ip addresses of the new server instances, so that they are able to connect to them. 
+
+The tests error-in-configure, error-in-instantiate, error-in-start, error-in-terminate each deploy a network service from a NSD which contains a failing script in the particular lifecycle event and tests if the NFVO handles it correctly. 
+
+The test wrong-lifecycle-event tries to onboard a NSD to the NFVO which contains an undefined lifecycle event. The test will pass if the onboarding is not successful. 
 
 In every test a vim instance and a network service descriptor are stored on the orchestrator and the network service launched. 
 If that is successful, the network service is stopped and the network service record, network service descriptor and the vim instance are removed. 
@@ -104,7 +113,10 @@ After that you will find the folder *build/libs/* in the project. Inside of this
 ## Start the integration test
 
 Before starting the integration test be sure that the NFVO, Generic VNFM and Dummy VNFM you want to use are already running. 
-Then start the test by navigating into the folder *integration-tests/build/libs* and execute the command *java -jar integration-tests-*.jar*.
+Then start the test by navigating into the folder *integration-tests/build/libs* and execute the command *java -jar integration-tests-*.jar*. 
+It is possible to specify the test scenarios you want to run so that not every test in the */src/main/resources/integration-test-scenarios* folder is executed. 
+Therefore use command line arguments while starting the integration tests. Every scenario occuring as an argument will be executed. For example *java -jar integration-tests-*.jar scenario-real-iperf.ini scenario-scaling.ini* will just execute the tests described in the files *scenario-real-iperf.ini* and *scenario-scaling.ini* located in the folder */src/main/resources/integration-test-scenarios*.
+If you do not pass any command line arguments, every scenario will be executed. 
 
 ## Test results
 

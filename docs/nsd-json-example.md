@@ -22,7 +22,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "vm_image":[
                   "ubuntu-14.04-server-cloudimg-amd64-disk1"
                ],
-               "vimInstanceName":"vim-instance",
+               "vimInstanceName":["vim-instance"],
                "scale_in_out":1,
                "vnfc":[
                   {
@@ -54,9 +54,8 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "flavour_key":"m1.small"
             }
          ],
-         "vnfPackage":{
-            "scriptsLink":"https://ENTER A VALID LINK TO REACH THE SCRIPTS"
-         }
+            "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
+         
       },
       {
          "vendor":"tbr",
@@ -75,7 +74,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "vm_image":[
                   "ubuntu-14.04-server-cloudimg-amd64-disk1"
                ],
-               "vimInstanceName":"vim-instance",
+               "vimInstanceName":["vim-instance"],
                "scale_in_out":2,
                "vnfc":[
                   {
@@ -121,9 +120,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "flavour_key":"m1.small"
             }
          ],
-         "vnfPackage":{
-            "scriptsLink":"https://ENTER A VALID LINK TO REACH THE SCRIPTS"
-         }
+          "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
       }
    ],
    "vnffgd":[

@@ -279,6 +279,7 @@ h1, h2{
     font-variant: small-caps;
     text-transform: lowercase;
     font-family: 'Open Sans', sans-serif;
+    font-size: 250%;
 }
 
 h1{
