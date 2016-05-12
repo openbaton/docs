@@ -169,6 +169,35 @@ $ openbaton.sh NetworkServiceDescriptor-deleteVNFDependency id-network-service-d
 $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor id-network-service-descriptor id-vnfd
 ```
 
+### **Virtual Network Function Descriptor Subcommands**
+* **create**
+  * Create the object of type Virtual Network Function Descriptor
+
+```sh
+ $ openbaton.sh VirtualNetworkFunctionDescriptor-create file.json
+```
+
+* **delete**
+  * Delete the object of type Virtual Network Function Descriptor passing the id
+
+```sh
+ $ openbaton.sh VirtualNetworkFunctionDescriptor-delete id-virtual-network-function-descriptor
+```
+
+* **findAll**
+  * Find all the objects of type Virtual Network Function Descriptor
+
+```sh
+ $ openbaton.sh VirtualNetworkFunctionDescriptor-findAll
+```
+
+* **findById**
+  * Find the object of type Virtual Network Function Descriptor through the id
+
+```sh
+ $ openbaton.sh VirtualNetworkFunctionDescriptor-findById id-virtual-network-function-descriptor
+```
+
 ### **Network Service Record Subcommands**
 **create**
  
