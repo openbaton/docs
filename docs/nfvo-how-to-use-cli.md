@@ -369,6 +369,42 @@ $ openbaton.sh Image-delete id-image
 ```sh
  $ openbaton.sh VirtualLink-findById id-virtual-link
 ```
+
+### **VNFPackage Subcommands**
+* **create**
+
+  * Create a VNFPackage by uploading a tar file to the NFVO
+  ```sh
+   $ openbaton.sh VNFPackage-upload file.tar 
+  ```
+
+* **delete**
+
+  * Delete the object of type VNFPackage passing the id
+    ```sh
+     $ openbaton.sh VNFPackage-delete id-vnfPackage 
+    ```
+
+* **update**
+
+  * Update the object of type VNFPackage passing the new object and the id of the old object
+    ```sh
+     $ openbaton.sh VNFPackage-update file.json id-vnfPackage
+    ```
+
+* **findAll**
+
+  * Find all the objects of type VNFPackage
+    ```sh
+     $ openbaton.sh VNFPackage-findAll
+    ```
+
+* **findById**
+
+  * Find the object of type VNFPackage through the id
+    ```sh
+     $ openbaton.sh VNFPackage-findById id-vnfPackage
+    ```
     
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
