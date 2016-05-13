@@ -62,15 +62,15 @@ Open it and set the property values according to your needs.
 
 | Field          				| Value       																|
 | -------------   				| -------------:																|
-| nfvo-ip  					| The ip of the machine on which the NFVO you want to use is running |
-| nfvo-port					| The port on which the NFVO is running |
-| nfvo-usr					| The username if a login is required for the NFVO |
-| nfvo-pwd                                      | The password if a login is required for the NFVO |
-| local-ip					| The ip of the machine on which the integration test is running |
-| clear-after-test                              | If set to *true*, the NFVO will be cleared of all the remaining NSRs, NSD, VNFPackages and Vim-Instances left from previous test |
-| integration-test-scenarios                    | Here you can specify a folder in which you can put integration test scenarios. If *.ini* files exist in this folder, the integration test will use just those files. If there are no files it will use the ones in the projects resource folder |
+| nfvo-ip  					| The ip of the machine on which the NFVO you want to use is running. |
+| nfvo-port					| The port on which the NFVO is running. |
+| nfvo-usr					| The username if a login is required for the NFVO. |
+| nfvo-pwd                                      | The password if a login is required for the NFVO. |
+| local-ip					| The ip of the machine on which the integration test is running. |
+| clear-after-test          | If set to *true*, the NFVO will be cleared of all the remaining NSRs, NSD, VNFPackages and Vim-Instances left from the previous test. |
+| integration-test-scenarios                    | Here you can specify a folder in which you can put integration test scenarios. If *.ini* files exist in this folder, the integration test will use just those files. If there are no files it will use the ones in the projects resource folder. |
+| external-properties-file   | If you want to use another file for fetching the properties. It is already preset to */etc/openbaton/integration-test/integration-test.properties*. If it does not exist it will not be used. |
 
-Alternatively you can also create a directory */etc/openbaton/integration-test* on your machine and put a file named *integration-test.properties* in it. There you have to write and set the properties mentioned above. 
 
 After that you will also need a keypair for openstack. Create one and download the private key as a .pem file. 
 Rename it to integration-test.pem and provide it with the needed permissions by executing *chmod 400 integration-test.pem*.
@@ -107,16 +107,15 @@ If you are using another image, you also have to configure the .ini files of the
 That is you have to look for the tasks of *GenericServiceTester* and change the value of vm-scripts-path to the path where you want to have the test scripts stored on your virtual machine and the value of user-name according to the user name used on the virtual machines deployed by the image. These were the steps to use another image. 
 
 Then use a shell to navigate into the project's root directory. 
-Execute the command *./gradlew clean build*.
-After that you will find the folder *build/libs/* in the project. Inside of this folder is the project's executable jar file. 
+Execute the command *./integration-tests.sh compile*.
 
 ## Start the integration test
 
 Before starting the integration test be sure that the NFVO, Generic VNFM and Dummy VNFM you want to use are already running. 
-Then start the test by navigating into the folder *integration-tests/build/libs* and execute the command *java -jar integration-tests-*.jar*. 
+Then start the test by executing *./integration-tests.sh start*.
 It is possible to specify the test scenarios you want to run so that not every test in the */src/main/resources/integration-test-scenarios* folder is executed. 
-Therefore use command line arguments while starting the integration tests. Every scenario occuring as an argument will be executed. For example *java -jar integration-tests-*.jar scenario-real-iperf.ini scenario-scaling.ini* will just execute the tests described in the files *scenario-real-iperf.ini* and *scenario-scaling.ini* located in the folder */src/main/resources/integration-test-scenarios*.
-If you do not pass any command line arguments, every scenario will be executed. 
+Therefore use additional command line arguments while starting the integration tests. Every scenario occuring as an argument will be executed. For example *./integration-tests.sh start scenario-real-iperf.ini scenario-scaling.ini* will just execute the tests described in the files *scenario-real-iperf.ini* and *scenario-scaling.ini* located in the folder */src/main/resources/integration-test-scenarios*.
+If you do not pass any command line arguments, every available scenario will be executed. To see which scenarios are available execute *./integration-tests.sh list*.
 
 ## Test results
 
@@ -130,6 +129,7 @@ Please refer to [this page][integration-test-write].
 
 <!---
 References
+
 -->
 
 [complex-iperf]:images/complex-iperf.png
