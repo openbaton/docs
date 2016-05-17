@@ -34,9 +34,10 @@ Blue is the network *private* and black *private2*.
 ![Complex scenario][complex-iperf]
 
 The test scenario-scaling tests the scaling function of Openbaton. 
-It starts by deploying an iperf server and an iperf client which connects to the server. 
+It starts by deploying two VMs one acting as a ncat server and one as a ncat client which sends his ip address to the server so that it is possible to check if the client actually connected to the server. 
 Then it executes some scaling functions like scale out and scale in and checks if new instances of the server and the client are deployed. Cases like scale in on just one instance and scale out on the maximum number of instances are included. 
 It also examines if the client instances are provided with the ip addresses of the new server instances, so that they are able to connect to them. 
+To see detailed information about which scaling functions are executed exactly please refer to the *scenario-scaling.ini* file in the project.
 
 The tests error-in-configure, error-in-instantiate, error-in-start, error-in-terminate each deploy a network service from a NSD which contains a failing script in the particular lifecycle event and tests if the NFVO handles it correctly. 
 
