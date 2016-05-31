@@ -475,6 +475,8 @@ As mentioned earlier here is a summary of all the class-names available at the m
 |||vnf-type| The type of the VNFR whose number of VNFCs should be checked |
 | VimInstanceCreate  				| Store a vim instance on the NFVO from a json file | name-file | The name of the json file that contains the VimInstance |
 | VimInstanceDelete				| Delete a vim instance |  |  |
+| VirtualNetworkFunctionDescriptorDelete        | Delete the VNFDs of a NSD passed from the preceding task, filtered by vnfd name and/or type; if no name and type are passed, all the VNFDs associated to the passed NSD will be deleted | vnf-type | The type of the VNFDs that shall be deleted; this field can be omitted if the type is not important for the choice of VNFDs to delete |
+||| vnf-name | The name of the VNFDs that shall be deleted; this field can be omitted if the name is not important for the choice of VNFDs to delete |
 | VirtualNetworkFunctionRecordWait		| Wait for an action sent by the NFVO which is related to a VNFR | action | The action which will be waited for to happen |
 |||timeout| After this time (in seconds) the task will fail if the action did not occur yet |
 |||vnf-type| The type of the VNFR that should produce the awaited action |
