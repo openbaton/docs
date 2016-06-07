@@ -31,11 +31,12 @@ The NFVORequestor is the main and only class you need to use. From this class it
 
 | Params          	| Description       |
 | -------------   	| -------------:|
-| username  		| the username if the security is enabled in the NFVO |
-| password 			| the password if the security is enabled in the NFVO      |
-| nfvo_ip 			| the ip of the NFVO      |
+| username  		| the username  |
+| password 		| the password  |
+| project-id		| the id of the project to use |
+| nfvo_ip 		| the ip of the NFVO      |
 | nfvo_port 		| the port of the orchestrator      |
-| version 			| the API version. Now only "1" is available      |
+| version 		| the API version. Now only "1" is available      |
 
 Once you have the NFVORequestor object, you can get the Agents. Available agents are:
 
@@ -45,6 +46,8 @@ Once you have the NFVORequestor object, you can get the Agents. Available agents
 * NetworkServiceDescriptorRestAgent
 * VirtualNetworkFunctionDescriptorRestAgent
 * NetworkServiceRecordRestAgent
+* ProjectAgent
+* UserAgent
 * VimInstanceRestAgent
 * VirtualLinkRestAgent
 * VNFFGRestAgent
