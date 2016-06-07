@@ -251,7 +251,7 @@ $ openbaton.sh NetworkServiceRecord-update file.json id-network-service-record
 
   * Get all the Virtual Network Function Records of Network Service Record with specific id
 ```sh
-$ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecords id-network-service-record
+ $ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecords id-network-service-record
 ```
 
 **getVirtualNetworkFunctionRecord**
@@ -265,14 +265,35 @@ $ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecords id-network-
 
   * Delete the Virtual Network Function Record of NetworkS ervice Record with specific id
 ```sh
-$ openbaton.sh NetworkServiceRecord-deleteVirtualNetworkFunctionRecord id-network-service-record id-vnfr
+ $ openbaton.sh NetworkServiceRecord-deleteVirtualNetworkFunctionRecord id-network-service-record id-vnfr
 ```
 
-**deleteVNFDependency**
+* **createVNFDependency**
 
-  * Delete the Virtual Network Function Record Dependency of a Network Service Record with specific id
+  * Create a VirtualNetworkFunctionRecord Dependency of a NetworkServiceRecord with specific id
 ```sh
-$ openbaton.sh NetworkServiceRecord-deleteVNFDependency id-network-service-record id-vnfdependency
+ $ openbaton.sh NetworkServiceRecord-createVNFDependency id-network-service-record file.json
+```
+  
+* **deleteVNFDependency**
+
+  * Delete the VirtualNetworkFunctionRecord Dependency of a NetworkServiceRecord with specific id
+  ```sh
+   $ openbaton.sh NetworkServiceRecord-deleteVNFDependency id-network-service-record id-vnfdependency
+  ```
+  
+* **getVNFDependencies**
+
+  * Get all the VirtualNetworkFunctionRecord Dependencies of a NetworkServiceRecord with specific id
+```sh
+ $ openbaton.sh NetworkServiceRecord-getVNFDependencies id-network-service-record
+```
+  
+* **getVNFDependency**
+
+  * Get the VirtualNetworkFunctionRecord Dependency of a NetworkServiceRecord with specific id
+```sh
+ $ openbaton.sh NetworkServiceRecord-getVNFDependency id-network-service-record id-vnfdependency
 ```
 
 **createVNFCInstance**
