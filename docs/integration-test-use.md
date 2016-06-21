@@ -106,7 +106,9 @@ If you want to use another image, change every occurence of the above mentioned 
 
 If you want to use another image, change every occurence of the above mentioned image to the name of the one you want to use and of course make sure it is available on openstack. 
 If you are using another image, you also have to configure the .ini files of the scenario-complex-iperf and scenario-real-iperf. 
-That is you have to look for the tasks of *GenericServiceTester* and change the value of vm-scripts-path to the path where you want to have the test scripts stored on your virtual machine and the value of user-name according to the user name used on the virtual machines deployed by the image. These were the steps to use another image. 
+That is you have to look for the tasks of *GenericServiceTester* and change the value of vm-scripts-path to the path where you want to have the test scripts stored on your virtual machine and the value of user-name according to the user name used on the virtual machines deployed by the image. These were the steps to use another image.
+
+The scenario *error-in-terminate.ini* needs some special configuration in the NFVO. Change *nfvo.delete.vnfr.wait* to *true* in openbaton.properties before starting the NFVO.
 
 Then use a shell to navigate into the project's root directory. 
 Execute the command *./integration-tests.sh compile*.

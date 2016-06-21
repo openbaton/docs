@@ -55,7 +55,6 @@ class-name = VimInstanceDelete
 ```
 The successor-remover field specifies, that the node *vim-d-1* will be executed after every child node/task of *vim-c-1* has finished. 
 Every node can only have one successor-remover. 
-A successor remover node cannot have child nodes. 
 The new node gets the information which vim instance it should delete passed from the first node. 
 
 The next step will be to create and delete a network service descriptor (NSD). 
@@ -430,6 +429,46 @@ Of course, this will only work if there is a floating ip for that virtual machin
 The configurations are accessible by typing ${vnfrtype_configurationkey}. 
 For all the variables it is essential, that you enclose them with braces otherwise they won't work. 
 
+
+## Task execution order
+
+Just to clarify the execution order of the tasks specified in the ini files here is a little example without describing what the tasks do. 
+The successor-removers of a task are just executed when all the other child tasks and their subsequent tasks finished.
+
+```ini
+[it/A]
+successor-remover = H
+
+[it/A/H]
+...
+
+[it/A/B]
+...
+
+[it/A/C]
+...
+
+[it/A/C/D]
+successor-remover = G
+
+[it/A/C/D/G]
+...
+
+[it/A/C/D/E]
+...
+
+[it/A/C/D/F]
+...
+```
+
+The execution order of this example looks like this:
+
+- A
+- B|C
+- B|D
+- B|E|F
+- B|G
+- H
 
 ## Other important information
 
