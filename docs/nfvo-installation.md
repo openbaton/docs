@@ -95,6 +95,18 @@ spring.jpa.show-sql=false
 spring.jpa.hibernate.ddl-auto=create-drop
 ```
 
+The NFVO is capable of using SSL to encrypt communication. Just uncomment the following properties to enable it. 
+```properties
+server.port: 8443
+server.ssl.enabled = true
+server.ssl.key-store = /etc/openbaton/keystore.p12
+server.ssl.key-store-password = password
+server.ssl.keyStoreType = PKCS12
+server.ssl.keyAlias = tomcat
+```
+
+The NFVO will then use port 8443 and the dashboard will be accessible by using https.
+
 **IMPORTANT NOTES:**
 
 (Keep in mind that whenever some of the parameters below referred are changed, you will need to restart the NFVO)
