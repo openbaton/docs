@@ -162,6 +162,15 @@ This are the information of the Event selected
 
 ![Event Info][EvenInfo]
 
+## Security
+If the security is enabled, projects and users are introduced to the NFVO. You will have to log in with credentials before using the GUI and a new menu item named *Identity* will appear.
+
+![Security overview][SecurityOverview]
+
+If you select *Projects* or *Users* under the *Identity* menu item you will get to overviews of the selected subject. There you can see, add and remove projects and users **if you are authorized**. 
+
+The NFVO also supports SSL. If SSL is enabled you have to use *https://url-to-nfvo:8443* to access the GUI. 
+
 
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
@@ -184,6 +193,7 @@ This are the information of the Event selected
 [editNSD3]:images/edit-NSD3.png
 [editNSD4]:images/edit-NSD4.png
 [editNSD5]:images/edit-NSD5.png
+[SecurityOverview]:images/security-overview.png
 
 [VNFDlistintoNSD]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
 [VNFDlistintoNSD1]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD1.png
