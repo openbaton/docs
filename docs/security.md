@@ -17,9 +17,11 @@ The default password can be changed by setting
 ```properties
 nfvo.security.admin.password = 
 ```
-in *openbaton.properties*.  
+in *openbaton.properties*. 
+
 The next available role is *ADMIN*. If a user is the *ADMIN* of a project he can create, delete and update PoPs, NSD, VNFD, VNFPackages, NSR and VNFR in his projects. 
-He cannot access or see other projects or users.  
+He cannot access or see other projects or users. 
+
 The last role is the *GUEST*. He can just see the components (PoPs, NSD, NSR etc.) of the project he is assigned to but he cannot create update or delete them. 
 Furthermore he does not see other projects and users. 
 
