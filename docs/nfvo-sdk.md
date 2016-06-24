@@ -31,11 +31,13 @@ The NFVORequestor is the main and only class you need to use. From this class it
 
 | Params          	| Description       |
 | -------------   	| -------------:|
-| username  		| the username if the security is enabled in the NFVO |
-| password 			| the password if the security is enabled in the NFVO      |
-| nfvo_ip 			| the ip of the NFVO      |
-| nfvo_port 		| the port of the orchestrator      |
-| version 			| the API version. Now only "1" is available      |
+| username  		| the username  |
+| password 		| the password  |
+| projectId		| the id of the project to use |
+| sslEnabled		| set this to true if the NFVO uses SSL |
+| nfvoIp 		| the ip of the NFVO      |
+| nfvoPort 		| the port of the orchestrator      |
+| version 		| the API version. Now only "1" is available      |
 
 Once you have the NFVORequestor object, you can get the Agents. Available agents are:
 
@@ -45,6 +47,8 @@ Once you have the NFVORequestor object, you can get the Agents. Available agents
 * NetworkServiceDescriptorRestAgent
 * VirtualNetworkFunctionDescriptorRestAgent
 * NetworkServiceRecordRestAgent
+* ProjectAgent
+* UserAgent
 * VimInstanceRestAgent
 * VirtualLinkRestAgent
 * VNFFGRestAgent
@@ -82,15 +86,16 @@ plus some specific methods and they refer to the _catalogue_ class contained in 
 
 The method names are explicit, they do what the name explains.
 
-### Use it
+### Usage example
 
-###### Create VimInstance
+###### Create a VimInstance using the SDK
 
 ```java
 public class Main {
 	
 	public static void main(String[] args) {
-        NFVORequestor nfvoRequestor = new NFVORequestor("username","password","nfvo_ip","nfvo_port","1");
+        boolean sslEnabled = true;
+        NFVORequestor nfvoRequestor = new NFVORequestor("username", "password", "projectId", sslEnabled, "nfvo_ip", "nfvo_port", "1");
         VimInstanceRestAgent vimInstanceAgent = nfvoRequestor.getVimInstanceAgent();
 
         VimInstance vimInstance = new VimInstance();

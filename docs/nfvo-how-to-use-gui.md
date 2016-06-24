@@ -3,6 +3,14 @@ The Dashboard of OpenBaton helps you managing the lifecycle of different objects
 VimInstaces, Network Service Descriptors/Records and Virtual Network Function Descriptors/Records in the OpenBaton environment.
 
 
+## Login
+
+The first page that you will see after typing *http://url-to-nfvo:8080* or *https://url-to-nfvo:8443* (depends whether SSL is enabled or not) into your browser is the following login form.
+
+![Login][login]
+
+The default user is called *admin* and has the password *openbaton*. 
+
 ## Overview
 The index page shows an overview of the state of the NFVO 
  
@@ -12,6 +20,24 @@ The index page shows an overview of the state of the NFVO
  4. Number of Network Service Descriptors
 
 ![Overview][overview]
+
+## Security
+The NFVO uses projects and users with assigned roles so that multiple selected users can work in the same project environment.  
+The parts of the GUI to manage users and projects are marked red in the following screenshot. 
+
+![Security overview][SecurityOverview]
+
+In the upper right corner you can see a the current project in which you are working next to the folder label.  
+Click on it to switch to other projects you have access to.  
+Next to this you can see your user name. Click on it to extend a menu with the logout button. 
+
+If you select *Projects* or *Users* under the *Identity* menu item on the left side you will get to overviews of the selected subject. There you can see, add and remove projects and users **if you are authorized**. 
+
+The following screenshot shows the creation of a new user named *new user* who is assigned to the project *default* as a *GUEST* and to the project *another project* as an *ADMIN*.
+
+![Add user][AddUser]
+
+The NFVO also supports SSL. If SSL is enabled you have to use *https://url-to-nfvo:8443* to access the GUI. 
 
 
 ## Manage PoPs
@@ -49,20 +75,17 @@ Upload a json-file that contains the NSD
 ![NSD create by File][NSDcreateFile]
 
 
-Create a NSD by using the VNFD from the Packages, just click on the button "Create NSD"
-
-![NSD create by VNFDs][NSDcreateButton]
-
+Create a NSD by using the VNFD from the Packages, just click on the button "Create NSD".  
 This is the form which allows you to choose the VNFDs to be used in the NSD come from the Catalogue (and contained inside the VNFPackages)
 
 ![NSD create by VNFDs][NSDcreateSelect]
 
 
-Once you have added the VNFDs to the NSD you can add one o more VLD and VNF Dependency like in the picture below
+Once you have added the VNFDs to the NSD you can add one or more VLD and VNF Dependency like in the picture below using the + button
 
 ![Form with VNFDs][NSDcreateWithVNF]
 
-In the picture below you can see how to add a VNF Dependency to the NSD and possible parameters
+In the picture below you can see how to add a VNF Dependency to the NSD and possible parameters by clicking on *Dependencies +*
 
 ![Add VNF Dependency NSD][NSDcreateDependency]
 
@@ -172,18 +195,19 @@ This are the information of the Event selected
 [drag_drop2]:images/nfvo-how-to-use-gui-drag-drop2.png
 [NSDcreateFile]:images/nfvo-how-to-use-gui-NSD-create-file.png
 [NSDcreateForm]:images/nfvo-how-to-use-gui-NSD-create-form.png
-[NSDcreateButton]:images/nds-create-NSD.png
 [NSDcreateSelect]:images/form-create-NSD.png
 [NSDcreateDependency]:images/form-add-dependecy-pkg.png
 [NSDcreateWithVNF]:images/form-with-VNFDs.png
 [EventForm]:images/event-form.png
 [EventList]:images/event-list.png
-[EvenInfo]:images/even-info.png
+[EvenInfo]:images/event-info.png
 [editNSD1]:images/edit-NSD1.png
 [editNSD2]:images/edit-NSD2.png
 [editNSD3]:images/edit-NSD3.png
 [editNSD4]:images/edit-NSD4.png
 [editNSD5]:images/edit-NSD5.png
+[SecurityOverview]:images/nfvo-how-to-use-gui-security-overview.png
+[AddUser]:images/nfvo-how-to-use-gui-add-user.png
 
 [VNFDlistintoNSD]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
 [VNFDlistintoNSD1]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD1.png
