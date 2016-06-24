@@ -2,12 +2,7 @@
 
 ## Roles and projects
 
-Openbaton's security model consists of different user roles and projects. 
-This security feature can be enabled by setting 
-```properties
-nfvo.security.enabled = true
-``` 
-in the */etc/openbaton/openbaton.properties* file. 
+Openbaton's security model consists of different user roles and projects. Users can get assigned to projects so that multiple selected users can work in the same project environment.
 
 A project is a separate realm in which permitted users can work.  
 Users can be assigned to projects and adopt different roles.  
