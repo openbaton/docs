@@ -69,6 +69,7 @@ Open it and set the property values according to your needs.
 | nfvo-usr					| The username required for logging in the NFVO |
 | nfvo-pwd                                      | The password required for logging in the NFVO |
 | nfvo-project-id                               | The id of the project that the integration tests shall use |
+| nfvo-ssl-enabled				| Set this to *true* if the NFVO uses SSL |
 | local-ip					| The ip of the machine on which the integration test is running |
 | clear-after-test                              | If set to *true*, the NFVO will be cleared of all the remaining NSRs, NSD, VNFPackages and Vim-Instances left from previous test |
 | integration-test-scenarios                    | Here you can specify a folder in which you can put integration test scenarios. If *.ini* files exist in this folder, the integration test will use just those files. If there are no files it will use the ones in the projects resource folder |
