@@ -23,7 +23,7 @@ Download the following [iPerf NSD using private IPs][iperf-nsd-privateIPs] or [i
 
 ### Using dashboard
 
-If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://your-ip-here:8080, go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://your-ip-here:8080 and log in (default username and password are *admin* and *openbaton*). Go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
 
 ![Onboarding-NSD][nsd-onboarding]
 
