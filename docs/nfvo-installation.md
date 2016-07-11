@@ -236,8 +236,6 @@ nfvo.monitoring.ip = the Zabbix server ip
 
 These are other parameters about the configuration of the nfvo behaviour:
 ```properties
-# True to enable security (username and password to access), default to false
-nfvo.security.enabled = true
 # Wait for the NSR to be deleted
 nfvo.delete.wait = false 
 # The broker ip that needs to be reachable from all the components
@@ -258,7 +256,7 @@ nfvo.ems.queue.heartbeat = 60
 # Set the ems queues to be autodeleted after the shut down
 nfvo.ems.queue.autodelete = true
 # Set the ems version to be installed
-nfvo.ems.version = 0.15
+nfvo.ems.version = 0.17
 
 # Allow infinite quotas during the GRANT_OPERATION
 nfvo.vim.drivers.allowInfiniteQuota = false
