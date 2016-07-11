@@ -376,7 +376,7 @@ For gathering the vnfm-sdk-amqp library you need to import the libraries by addi
 
 dependencies {
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
-    compile 'org.openbaton:vnfm-sdk-amqp:2.0.1'
+    compile 'org.openbaton:vnfm-sdk-amqp:2.1.0'
 }
 
 //...
@@ -668,9 +668,9 @@ Therefore, you need to do several things:
 **Note** If you want to use the Vim with plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:2.0.1'
-compile 'org.openbaton:vim-impl:2.0.1'
-compile 'org.openbaton:sdk:2.0.1'
+compile 'org.openbaton:vim-int:2.1.0'
+compile 'org.openbaton:vim-impl:2.1.0'
+compile 'org.openbaton:sdk:2.1.0'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 

@@ -15,6 +15,7 @@ To install the OpenBaton NFVO through its debian package you can type the follow
 ```bash
 bash <(curl -fsSkL http://get.openbaton.org/bootstrap)
 ```
+During the procedure you will be prompted to insert the public ip of where the messaging broker is running (usually the machine where you are installing Open Baton) and other information such as the admin password. For more details about the identity management please check out [first access page](security.md)
 
 At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
 ```bash
@@ -67,11 +68,9 @@ logging.level.org.springframework=INFO
 logging.level.org.hibernate=INFO
 logging.level.org.apache=INFO
 logging.level.org.jclouds=WARN
-# logging.level.org.springframework.security=WARN
 logging.level.org.springframework.web = WARN
 
-# Level for loggers on classes inside the root package "org.project.openbaton" (and its
-# sub-packages)
+# Level for loggers on classes inside the root package "org.project.openbaton" (and its sub-packages)
 logging.level.org.openbaton=INFO
 
 # Direct log to a log file
@@ -93,6 +92,12 @@ spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect
 # hibernate properties
 spring.jpa.show-sql=false
 spring.jpa.hibernate.ddl-auto=create-drop
+```
+
+Other parameters related with access and authorization:
+```properties
+# It will be empty once installed, for security reasons
+nfvo.security.admin.password = openbaton
 ```
 
 The NFVO is capable of using SSL to encrypt communication. Just uncomment the following properties to enable it. 
