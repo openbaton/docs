@@ -3,7 +3,7 @@ pages:
 - ['index.md', 'Get Started', 'Get Started']
 - ['nfvo-installation.md', 'Installation', 'Install Open Baton']
 - ['use.md', 'Use it', 'Introduction']
-- ['security.md', 'Use it', 'Security']
+- ['security.md', 'Use it', 'First access']
 - ['vim-instance.md', 'Use it', 'Register a PoP']
 - ['vnfpackage.md', 'Use it', 'Create your own VNF Package']
 - ['vnfm-generic.md', 'Use it', 'Generic VNFM']
