@@ -100,7 +100,11 @@ The available parameters are defined in the VirtualNetworkFunctionDescriptor fie
 
 <!-- * **provides**: it contains the VMs parameters which will be available after the instantiation (e.g. IP) for other VNFs. -->
 * **configurations**: it contains specific parameters which you want to use in the scripts.
-* **out-of-the-box**: some parameters are automatically available into the scripts. These parameters are the IPs. They can be used in the script just using a variable called with the network name.
+* **out-of-the-box**: the following parameters are automatically available into the scripts:  
+    1. Private IP
+    2. Floating IP (if requested)
+    3. Hostname  
+Please check the example at the end of the page to understand this mechanism.
 
 In the INSTANTIATE scripts, the parameters defined in these two fields are then available as environment variables into the script exactly as defined (i.e. you can get by $parameter_name).
 
@@ -118,15 +122,15 @@ As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can
 To launch the Generic VNFM, execute the following command:
 ```bash
 $ cd <generic directory>
-$ ./generic.sh start
+$ ./generic-vnfm.sh start
 ```
 The Generic VNFM can handle more than one VNF (in parallel) of the same or different type, so that you need to start only one Generic VNFM.
 
 # EXAMPLE WITH DEPENDENCY AND SCRIPTS
 
-Let's see a simple example with two VNFs: vnf-server and vnf-database.
+Let's see a simple example with two VNFs: vnf-server and vnf-database.  
 The vnf-server needs the ip of the vnf-database to be able to connect properly. The following figure shows the source (vnf-database), the target (vnf-server)
-and the dependency (IP).
+and the dependency (IP). Such VNFs are connected in the same virtual network called "vnet".
 
 ![ns with dependency][ns-with-dependency]
 
@@ -138,25 +142,35 @@ To start the VNFs we'll have two scripts **instantiate-vnf-server.sh** and **ins
 
 echo "INSTANTIATIATION of the VNF server"
 echo "The following parameters are available:"
+
+echo "Out-of-the-box parameters:"
+echo "Hostname: ${hostname}"
+echo "Private IP: ${vnet}"
+echo "Floating IP (if requested otherwise it does not exist): ${vnet_floatingIp}"
+
+echo "Configuration parameters:"
 echo "The answer to everything is.. ${ANSWER_TO_EVERYTHING}"
 
 # ... Add the code to start the vnf_server ...
 ```
 
 
-**MODIFY script**
+**CONFIGURE script**
 
 After the instantiation of the vnf-server we would configure it with the following **database_connectToDb.sh** script:
 
 ```bash
 #!/bin/bash
 
-echo "This is the ip of the vnf-database: ${database_private}"
-# ... Add the code to connect to the vnf-database with the ip: ${database_private1} ...
+echo "This is the ip of the vnf-database: ${database_vnet}"
+echo "This is the floating ip of the vnf-database: ${database_vnet_floatingIp}"
+echo "This is the hostname of the vnf-database: ${database_hostname}"
+
+# ... Add the code to connect to the vnf-database with the ip: ${database_vnet} ...
 
 ```
 
-**Note1**: _database_ is the type of the vnf-database, _private_ is the name of the network.
+**Note1**: _database_ is the type of the vnf-database, _vnet_ is the name of the network.
 
 **Note2**: All the scripts need to be in a repository or in the vnf package (see the vnf package structure [here][vnfpackage-doc-link]).
 
@@ -232,7 +246,7 @@ The result network service descriptor shall include both the vnf descriptors abo
     ],
     "vld":[
         {
-            "name":"private"
+            "name":"vnet"
         }
     ],
     "vnf_dependency":[
@@ -244,7 +258,7 @@ The result network service descriptor shall include both the vnf descriptors abo
                 "name": "vnf-server"
             },
             "parameters":[
-                "private"
+                "vnet"
             ]
         }
     ]
