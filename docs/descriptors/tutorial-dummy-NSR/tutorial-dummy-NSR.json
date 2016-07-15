@@ -4,7 +4,7 @@
   "version":"0.1",
   "vnfd":[
     {
-      "vendor":"tbr",
+      "vendor":"Fokus",
       "version":"0.1",
       "name":"dummy-server",
       "type":"server",
@@ -54,7 +54,7 @@
 
     },
     {
-      "vendor":"tbr",
+      "vendor":"Fokus",
       "version":"0.1",
       "name":"dummy-client",
       "type":"client",

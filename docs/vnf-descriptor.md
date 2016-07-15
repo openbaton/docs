@@ -120,9 +120,45 @@ The VNF events state machine follows the  state diagram for the VNFR (and NSR) d
 A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
 For example if you are using Openstack as Vim, the flavour_key parameter shall correspond to a [flavour name of Openstack][openstack-flavours] (e.q. m1.small).
 
-### Provides, Requires
+### Provides
 
-This list of parameter names defines the parameters that the VnfManager will fill at runtime. For that reason they have a meaning only if you [write your own VnfManager][vnfm-how-to]. This parameters are then available in any scripts. For the usage of the parameters, please, refer to [How to use the parameters][param-how-to] page.
+This list of parameter names defines the parameters that the VnfManager will fill at runtime. For that reason they have a meaning only if you [write your own VnfManager][vnfm-how-to]. These parameters are then available in any scripts. For the usage of the parameters, please, refer to [How to use the parameters][param-how-to] page.
+
+### Requires
+
+The requires field provides an alternative method for defining VNF dependencies. The regular way is to define VNF dependencies in the Network Service Descriptor by defining the source, target and parameters of the dependency. But you can also use the requires field in the VNFD to achieve the same result. Let's look at an example to understand how to do this. Here is a VNF dependency defined in the classic way. 
+```json
+...
+"vnf_dependency":[
+        {
+            "source":{
+                "name":"server"
+            },
+            "target":{
+                "name":"client"
+            },
+            "parameters":[
+                "netname_floatingIp"
+            ]
+        }
+]
+...
+```
+
+This creates a VNF dependency that provides the floating ip of the VNFD with the type server to the VNFD with the type client. 
+The same can be done by writing the following in the requires field of the VNFD with type client: 
+
+```json
+...
+"requires":{
+	"server":{
+		"parameters":["netname_floatingIp"]
+	}
+}
+...
+```
+
+The *"server"* field specifies that the source of the dependency is the VNFD with the type server. The target is the VNFD that contains the requires field, in this case the VNFD with type client. 
 
 <!---
 References
