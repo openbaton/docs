@@ -2,6 +2,10 @@
 
 The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
+### Install the latest NFVO version from the source code (for development purposes)
+
+Please refer to [this tutorial](nfvo-installation.md) if you are willing to start a development process and modify the code. 
+
 ### Install the latest NFVO version from the debian package
 
 The NFVO can be installed using different mechanisms. In this HowTo we will show you how to install it directly from its debian package.
@@ -10,7 +14,7 @@ The NFVO uses the AMQP protocol for communicating with the VNFMs. Therefore an i
 To facilitate the installation procedures we provide an installation procedure which will install the NFVO and the prerequired libraries.
 To execute the following command you need to have curl installed (see http://curl.haxx.se/).
 
-To install the OpenBaton NFVO through its debian package you can type the following command:
+To install the Open Baton NFVO through its debian package you can type the following command:
 
 ```bash
 sh <(curl -fsSkL http://get.openbaton.org/bootstrap-deb) release
@@ -32,9 +36,9 @@ At the end of the installation procedure, if there are no errors, the dashboard 
 
 Where:
 
-* `openbaton-*jar` is the jar file related to the version of OpenBaton NFVO which has been installed
-* `gvnfm` (present only if during the installation procedure you also installed the Generic VNFM) contains the jar file related to the OpenBaton Generic VNFM
-* `plugins` contains the plugins for OpenBaton. So far, if you downloaded the VIM-Driver Plugins during the installation procedure, it will contain only the jar files related to the plugins downloaded
+* `openbaton-*jar` is the jar file related to the version of Open Baton NFVO which has been installed
+* `gvnfm` (present only if during the installation procedure you also installed the Generic VNFM) contains the jar file related to the Open Baton Generic VNFM
+* `plugins` contains the plugins for Open Baton. So far, if you downloaded the VIM-Driver Plugins during the installation procedure, it will contain only the jar files related to the plugins downloaded
 
 Additionally you should also have the following structure:
 ```bash
@@ -45,14 +49,11 @@ Additionally you should also have the following structure:
 
 Where:
 
-* `openbaton-nfvo` is the OpenBaton NFVO executable
-* `openbaton-gvnfm` (present only if you also installed the Generic VNFM) is the OpenBaton Generic GVNFM executable
+* `openbaton-nfvo` is the Open Baton NFVO executable
+* `openbaton-gvnfm` (present only if you also installed the Generic VNFM) is the Open Baton Generic GVNFM executable
 
 At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
 
-### Install the latest NFVO version from the source code (for development purposes)
-
-Please refer to [this tutorial](nfvo-installation.md) if are willing to start a development process and modify the code. 
 
 ### Starting and stopping NFVO (and the Generic VNFM)
 
