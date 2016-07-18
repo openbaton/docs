@@ -56,35 +56,54 @@ Please refer to [this tutorial](nfvo-installation.md) if are willing to start a 
 
 ### Starting and stopping NFVO (and the Generic VNFM)
 
-After the installation procedure the NFVO is running. If you want to stop it, enter one of the following commands:
+After the installation procedure the NFVO is running.  
+If you want to stop it, enter one of the following commands depending on your OS.
+* With Ubuntu 14.04:
 ```bash
 sudo service openbaton-nfvo stop
 sudo stop openbaton-nfvo
 sudo openbaton-nfvo stop
-
+```
+* With Debian Jessie:
+```bash
+sudo systemctl stop openbaton-nfvo.service
 ```
 
-To start the NFVO, instead, enter one of the following commands:
+To start the NFVO, instead, enter one of the following commands depending on your OS.
+* With Ubuntu 14.04:
 ```bash
 sudo service openbaton-nfvo start
 sudo start openbaton-nfvo
 sudo openbaton-nfvo start
 ```
+* With Debian Jessie:
+```bash
+sudo systemctl start openbaton-nfvo.service
+```
 
-**Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running at the end of the installation procedure. You can stop it with one of the following commands:
+**Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running at the end of the installation procedure. You can stop it with one of the following commands depending on your OS.
+* With Ubuntu 14.04:
 ```bash
 sudo service openbaton-gvnfm stop
 sudo stop openbaton-gvnfm
 sudo openbaton-gvnfm stop
 ```
+* With Debian Jessie:
+```bash
+sudo systemctl stop openbaton-gvnfm.service
+```
 
-**Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM with one of the following commands:
+**Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM with one of the following commands depending on your OS.
+* With Ubuntu 14.04:
 ```bash
 sudo service openbaton-gvnfm start
 sudo start openbaton-gvnfm
 sudo openbaton-gvnfm start
 ```
-
+* With Debian Jessie:
+```bash
+sudo systemctl start openbaton-gvnfm.service
+```
 
 ### NFVO properties overview
 
