@@ -13,7 +13,13 @@ To execute the following command you need to have curl installed (see http://cur
 To install the OpenBaton NFVO through its debian package you can type the following command:
 
 ```bash
-bash <(curl -fsSkL http://get.openbaton.org/bootstrap-deb)
+sh <(curl -fsSkL http://get.openbaton.org/bootstrap-deb) release
+```
+
+in case you want to install the nigthly build please run:
+
+```bash
+sh <(curl -fsSkL http://get.openbaton.org/bootstrap-deb) nightly
 ```
 
 At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
@@ -43,6 +49,10 @@ Where:
 * `openbaton-gvnfm` (present only if you also installed the Generic VNFM) is the OpenBaton Generic GVNFM executable
 
 At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
+
+### Install the latest NFVO version from the source code (for development purposes)
+
+Please refer to [this tutorial](nfvo-installation.md) if are willing to start a development process and modify the code. 
 
 ### Starting and stopping NFVO (and the Generic VNFM)
 

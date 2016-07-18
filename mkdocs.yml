@@ -1,7 +1,7 @@
 site_name: OpenBaton Documentation
 pages:
 - ['index.md', 'Get Started', 'Get Started']
-- ['nfvo-installation.md', 'Installation', 'Install Open Baton']
+- ['nfvo-installation-deb.md', 'Installation', 'Install Open Baton']
 - ['use.md', 'Use it', 'Introduction']
 - ['security.md', 'Use it', 'First access']
 - ['vim-instance.md', 'Use it', 'Register a PoP']
@@ -25,6 +25,7 @@ pages:
 - ['vnfm-vendor-specific.md', 'Extend it', 'Integrate your own VNFM']
 - ['FAQ.md', 'FAQ', 'FAQ']
 - ['**HIDDEN**': 'vnf-descriptor.md']
+- ['**HIDDEN**': 'nfvo-installation.md']
 - ['**HIDDEN**': 'zabbix-server-configuration.md']
 - ['**HIDDEN**': 'vnfr-states.md']
 - ['**HIDDEN**': 'vnf-parameters.md']
