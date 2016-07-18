@@ -2,13 +2,10 @@
 
 The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
 
-### Install the latest NFVO version from the source code (for development purposes)
-
-Please refer to [this tutorial](nfvo-installation.md) if you are willing to start a development process and modify the code. 
-
 ### Install the latest NFVO version from the debian package
 
-The NFVO can be installed using different mechanisms. In this HowTo we will show you how to install it directly from its debian package.
+The NFVO can be installed using different mechanisms. In this HowTo we will show you how to install it directly from its debian package.  
+**NOTE:** Please refer to [this tutorial](nfvo-installation.md) if you are willing to start a development process and modify the code.
 
 The NFVO uses the AMQP protocol for communicating with the VNFMs. Therefore an implementation of it is necessary, we chose [RabbitMQ][reference-to-rabbit-site].
 To facilitate the installation procedures we provide an installation procedure which will install the NFVO and the prerequired libraries.
