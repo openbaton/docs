@@ -14,13 +14,13 @@ To execute the following command you need to have curl installed (see http://cur
 To install the Open Baton NFVO through its debian package you can type the following command:
 
 ```bash
-sh <(curl -fsSkL http://get.openbaton.org/bootstrap-deb) release
+sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) release
 ```
 
 in case you want to install the nigthly build please run:
 
 ```bash
-sh <(curl -fsSkL http://get.openbaton.org/bootstrap-deb) nightly
+sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) nightly
 ```
 
 At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:

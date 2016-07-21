@@ -11,7 +11,7 @@ To execute the following command you need to have curl installed (see http://cur
 To install the OpenBaton NFVO through its debian package you can type the following command:
 
 ```bash
-bash <(curl -fsSkL http://get.openbaton.org/bootstrap)
+sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) develop
 ```
 
 At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
