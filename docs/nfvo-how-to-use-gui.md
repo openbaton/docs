@@ -29,7 +29,7 @@ The parts of the GUI to manage users and projects are marked red in the followin
 In the upper right corner you can see a the current project in which you are working next to the folder label.  
 Click on it to switch to other projects you have access to.  
 Next to this you can see your user name. Click on it to extend a menu with the logout button. 
-You can also change the the password by choosing the command in this menu or use the "help" button to open the documentation. 
+You can also change the password by choosing the command in this menu or use the "help" button to open the documentation. 
 
 If you select *Projects* or *Users* under the *Identity* menu item on the left side you will get to overviews of the selected subject. There you can see, add and remove projects and users **if you are authorized**. 
 
