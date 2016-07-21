@@ -26,13 +26,13 @@ apt-get install curl
 To start the bootstrap procedure of the Open Baton environment you can type the following command:
 
 ```bash
-sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) release
+sh <(curl -s http://get.openbaton.org/bootstrap) release
 ```
 
 just in case you are interested in the latest nigthly versions of the binaries please run:
 
 ```bash
-sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) nightly
+sh <(curl -s http://get.openbaton.org/bootstrap) nightly
 ```
 
 **NOTE - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be

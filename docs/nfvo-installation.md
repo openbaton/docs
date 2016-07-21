@@ -18,7 +18,7 @@ This installation guide will provide you details on how to install the minimal s
 To facilitate the installation procedures we provide a bootstrap script which will install the desired components and configure them for running a hello world VNF out of the box. To execute the bootstrap procedure you need to have curl installed (see http://curl.haxx.se/). This command should work on any linux system: 
 
 ```bash
-sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) develop
+sh <(curl -s http://get.openbaton.org/bootstrap) develop
 ```
 
 
