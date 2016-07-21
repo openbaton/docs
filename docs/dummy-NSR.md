@@ -9,14 +9,11 @@ In order to execute this scenario, you need to have the following components up 
  
  * [NFVO]
  * [Test plugin]
- * [Dummy-VNFM] ([REST version])
+ * [Dummy-VNFM] 
 
 ## Preparation
 
-Before starting the NFVO we have to pass the test-plugin to it. Navigate into the root folder of the test-plugin and execute *./gradlew build*.  
-After that you will find a jar file in the folder *build/libs/*.  
-Move this file into the folder *plugins/vim-drivers/* in the NFVO project (create the folder if it does not exist yet). 
-Then start the NFVO and the Dummy-VNFM. 
+If not yet running start the NFVO and the Dummy-VNFM (refer to it's readme file on how to start it).
 
 ## Store the VimInstance
 
@@ -38,14 +35,13 @@ Deploy the stored NSD either using the dashboard or the cli. Below you find a vi
 
 After the Dummy-Vnfm and the NFVO finished their work the deployed NSR will change to *ACTIVE* state.  
 No virtual machines were created and no real network service was deployed.  
-The dummy-plugin ensured that the NFVO thought that all the required resources were allocated and the VimInstance created. 
+The test-plugin ensured that the NFVO thought that all the required resources were allocated and the VimInstance created. 
 The Dummy-Vnfm lead the NFVO to believe that it created virtual machines and executed the lifecycle event scripts on them. 
 
 <!---
 References
 -->
 [Dummy-VNFM]: https://github.com/openbaton/dummy-vnfm-amqp
-[REST version]: https://github.com/openbaton/dummy-vnfm-rest
 [vim-doc]:vim-instance-documentation
 [Test Plugin]: https://github.com/openbaton/test-plugin
 [NSD]: descriptors/tutorial-dummy-NSR/tutorial-dummy-NSR.json
