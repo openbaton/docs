@@ -1,29 +1,47 @@
-## Install NFVO
+# Install Open Baton
 
-The NFVO is implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the extend it section.
+This tutorial will guide towards the installation of a minimal Open Baton environment composed by the following components: 
 
-### Install the latest NFVO version from the debian package
+* The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
+* RabbitMQ as messaging system [RabbitMQ][reference-to-rabbit-site].
+* Test plugin for being able to execute the [dummy NSR][dummy-NSR] tutorial without needing an OpenStack instance. 
 
-The NFVO can be installed using different mechanisms. In this HowTo we will show you how to install it directly from its debian package.  
-**NOTE:** Please refer to [this tutorial](nfvo-installation.md) if you are willing to start a development process and modify the code.
+And a set of optional components: 
 
-The NFVO uses the AMQP protocol for communicating with the VNFMs. Therefore an implementation of it is necessary, we chose [RabbitMQ][reference-to-rabbit-site].
-To facilitate the installation procedures we provide an installation procedure which will install the NFVO and the prerequired libraries.
-To execute the following command you need to have curl installed (see http://curl.haxx.se/).
+* Generic VNFM
+* OpenStack plugin: in case you want to use OpenStack as VIM
 
-To install the Open Baton NFVO through its debian package you can type the following command:
+### Install a stable binary version of Open Baton on a debian (Jessy) or ubuntu (14.04) based Operating System
+
+This installation guide will provide you details on how to install the minimal set of Open Baton components using the boostrap scripts.
+
+**NOTE:** Please refer to [this tutorial](nfvo-installation.md) if you are willing to install a development environment where you can easily modify, compile and commit changes to the code base directly.
+
+To facilitate the installation procedures we provide a bootstrap script which will install the desired components and configure them for running a hello world VNF out of the box. To execute the bootstrap procedure you need to have curl installed (see http://curl.haxx.se/). This command should work on any linux system: 
+
+```bash
+apt-get install curl
+```
+
+To start the bootstrap procedure of the Open Baton environment you can type the following command:
 
 ```bash
 sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) release
 ```
 
-in case you want to install the nigthly build please run:
+just in case you are interested in the latest nigthly versions of the binaries please run:
 
 ```bash
 sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) nightly
 ```
 
-At the end of the installation procedure, if there are no errors, the dashboard is reachable at: [localhost:8080] and you should have the following structure:
+**NOTE - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be
+  reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues. If you are installing Open Baton on a VM running in OpenStack, the best is that you put here
+  the floating IP. **
+ 
+
+During the bootstrap procedure you will be prompted for inputs. For instance you can choose to install or not the Generic VNFM, or enable or not SSL. 
+At the end of the bootstrap procedure, if there are no errors, the dashboard shuold be reachable at: [localhost:8080] and you should have the following structure:
 ```bash
 /usr/lib/openbaton
 ├── openbaton-*.jar
@@ -49,7 +67,7 @@ Where:
 * `openbaton-nfvo` is the Open Baton NFVO executable
 * `openbaton-gvnfm` (present only if you also installed the Generic VNFM) is the Open Baton Generic GVNFM executable
 
-At this point the NFVO is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
+At this point Open Baton is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it.
 
 
 ### Starting and stopping NFVO (and the Generic VNFM)
@@ -68,6 +86,7 @@ sudo systemctl stop openbaton-nfvo.service
 ```
 
 To start the NFVO, instead, enter one of the following commands depending on your OS.
+
 * With Ubuntu 14.04:
 ```bash
 sudo service openbaton-nfvo start
@@ -80,6 +99,7 @@ sudo systemctl start openbaton-nfvo.service
 ```
 
 **Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running at the end of the installation procedure. You can stop it with one of the following commands depending on your OS.
+
 * With Ubuntu 14.04:
 ```bash
 sudo service openbaton-gvnfm stop
@@ -92,6 +112,7 @@ sudo systemctl stop openbaton-gvnfm.service
 ```
 
 **Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM with one of the following commands depending on your OS.
+
 * With Ubuntu 14.04:
 ```bash
 sudo service openbaton-gvnfm start
@@ -105,12 +126,12 @@ sudo systemctl start openbaton-gvnfm.service
 
 ### NFVO properties overview
 
-The NFVO is configured with default configuration parameters at the beginning. The configuration file is located at: 
+After the bootstrap procedure, the NFVO the configuration file is located at: 
 ```bash
 /etc/openbaton/openbaton.properties
 ```
 
-This file can be modified for specific parameters. For instance, you can decide to change logging levels (TRACE, DEBUG, INFO, WARN, and ERROR) and mechanisms:
+Feel free to modify that file for adding or removing specific functionalities. For instance, you can decide to change logging levels (TRACE, DEBUG, INFO, WARN, and ERROR) and mechanisms:
 ```properties
 logging.level.org.springframework=INFO
 logging.level.org.hibernate=INFO
@@ -324,6 +345,7 @@ Dependening on the approach used for deploying your VNF, you'll have either to i
 [localhost:8080]:http://localhost:8080/
 [vim_plugin_doc]:vim-plugin
 [use-openbaton]:use.md
+[dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [zabbix-server-configuration]:zabbix-server-configuration.md
 
