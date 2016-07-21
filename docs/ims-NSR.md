@@ -11,6 +11,7 @@ In order to execute this scenario, you need to have the following components up 
  
  * [NFVO]
  * [Generic VNFM](http://openbaton.github.io/documentation/vnfm-generic/)
+ * [Openstack-Plugin][openstack-plugin]
 
 ## Store the VimInstance
 
@@ -18,15 +19,37 @@ Upload a VimInstance to the NFVO (e.g. this [VimInstance]).
  
 ## Prepare the VNF Packages
 
-Download the necessary [files][vnf-package] from the [github repository][openims-repo], pack the [VNF Packages](http://openbaton.github.io/documentation/vnfpackage/) and onboard the packages.
+Download the necessary [files][vnf-package] from the [github repository][openims-repo] and pack the [VNF Packages](http://openbaton.github.io/documentation/vnfpackage/) for all 5 components ( scscf, icscf, pcscf, bind9, fhoss ).
+
+#### Example for creating the Icscf Virtual Network Function Package
+```bash
+# Where to save the scripts
+GIT_REPO_LOC=/opt/vnf_packages_example_openimscore_openbaton
+# Clone the repository
+git clone https://github.com/openbaton/opemimscore_example $GIT_REPO_LOC
+# Create the .tar file which needs to be uploaded
+cd $GIT_REPO_LOC/icscf
+tar -cf icscf.tar *
+```
+
+For this example we assume the network used to interconnect the components is called "mgmt", if you want to modify this example ensure you are naming the network accordingly, the scripts from the github do not handle different network names yet. Also the vimInstanceName may be different to you, depending on your setup. The deployment_flavor is optional but should containg enough RAM for the default configuration of the components to be able to run, else some components may crash on start. This example setup has been successfuly tested on clean [Ubuntu14.04 images](https://cloud-images.ubuntu.com/) with 2048 Mb RAM deployed on an [Openstack Kilo (2015.1.3)](https://www.openstack.org/). Ensure that the image name defined in the Metadata.yaml of each package is existing.
+
+Finally onboard the packages.
 
 ## Store the Network Service Descriptor
 
 Download the following [NSD] and upload it to the NFVO either using the dashboard or the cli. 
+Take care to replace the vnfd ids with the ones you deployed.
+
+Open the Dashboard (checkout the [dashboard documentation](http://openbaton.github.io/documentation/nfvo-how-to-use-gui/) for more information on how to use it), open it at the URL http://your-ip-here:8080 and log in (default username and password are *admin* and *openbaton*). Go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
 
 ## Deploy the Network Service Descriptor 
 
-Deploy the stored NSD either using the dashboard or the cli.
+Deploy the stored NSD either using the dashboard.
+
+You need to go again to the GUI, go to `Catalogue -> NS Descriptors`, and open the drop down menu by clicking on `Action`. Afterwards you need to press the `Launch` button in order to start the deployment of this NSD.
+
+If you go to `Orchestrate NS -> NS Records` in the menu on the left side, you can follow the deployment process and check the current status of the deploying NSD.
 
 ## Conclusions
 
@@ -49,6 +72,9 @@ References
 [NSD]: descriptors/tutorial-ims-NSR/tutorial-ims-NSR.json
 [VimInstance]: descriptors/vim-instance/openstack-vim-instance.json
 [NFVO]: https://github.com/openbaton/NFVO
+[openstack-plugin]:https://github.com/openbaton/openstack-plugin
+
+
 [ims-struc]:images/ims-architecture.png
 [nfvo]:http://openbaton.github.io/documentation/nfvo-installation/
 [vnf-package]:http://openbaton.github.io/documentation/vnfpackage/
