@@ -44,13 +44,14 @@ Once you have the NFVORequestor object, you can get the Agents. Available agents
 * ConfigurationRestRequest
 * EventAgent
 * ImageRestAgent
+* KeyAgent
 * NetworkServiceDescriptorRestAgent
-* VirtualNetworkFunctionDescriptorRestAgent
 * NetworkServiceRecordRestAgent
 * ProjectAgent
 * UserAgent
 * VimInstanceRestAgent
 * VirtualLinkRestAgent
+* VirtualNetworkFunctionDescriptorRestAgent
 * VNFFGRestAgent
 * VNFPackageAgent
 
