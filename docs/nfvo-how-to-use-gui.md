@@ -81,7 +81,7 @@ In order to launch NSD press the *Action* near the NSD you want to lauch and pre
  2. Press *Launch with VIM key* in order to use the key you have mentioned in VIM instance JSON or to use no key at all(this will be the case if no key was mentioned in the VIM file). 
 
 ![NSD Launch][launchNSD]
-
+#### Storing NSD
 You have two options for storing a NS Descriptor:
 
 1. Create a NSD by using the VNFDs from the Packages
