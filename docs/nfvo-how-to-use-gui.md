@@ -33,7 +33,7 @@ You can also change the password by choosing the command in this menu or use the
 
 If you select *Projects* or *Users* under the *Identity* menu item on the left side you will get to overviews of the selected subject. There you can see, add and remove projects and users **if you are authorized**. 
 
-The following screenshot shows the creation of a new user named *new user* who is assigned to the project *default* as a *USER*. This means that he can modify the resources in this project. The role *GUEST* would basically grant the read-only privilege to the user. If you would like the user to have access to all the projects and resources of the NFVO, you can put a mark to on the *Make Admin* marker, after this the individual roles you choose will not matter any more and the user will be saved as an *ADMIN*. 
+The following screenshot shows the creation of a new user named *new user* who is assigned to the project *default* as a *USER*. This means that he can modify the resources in this project. The role *GUEST* would basically grant the read-only privilege to the user. If you would like the user to have access to all the projects and resources of the NFVO, you can put a mark to on the *Make Admin* marker, if the marker is turned on the individual roles you choose will not matter any more and the user will be saved as an *ADMIN*. 
 
 ![Add user][AddUser]
 
@@ -52,10 +52,21 @@ For registering a new Vim Instance you should click on the button in the top-rig
 If you want to delete a Vim Instance you can click on the button **Action** and then **Delete** in the menu
 
 ## Catalogue
+
 In the menu on the left side under the template _Catalogue_ you can manage 
 
 1. NS Descriptors
 2. VNF Packages
+3. Key Pairs
+
+### Key Pairs
+You can add a key pairs to use for ssh access to the VMs via *Key Pairs* menu. You have to option in terms of adding the keys. 
+1. You can promt NFVO to create a key for you with a given name:
+![Create key][Create key]
+*IMPORTANT*: You will be promted to download the private key after you press *Generate*. Currently there is no option to regenerate a key. If you do not download the key, you will have to generate a new one. 
+2. You can import key for your host user via providing your public key to the NFVO:
+![Import key][Import key]
+
 
 ### Network Service Descriptors
 In the menu on the left side under the template Catalogue you can find the **NS Decriptors** button.
@@ -220,6 +231,8 @@ This are the information of the Event selected
 [NetworkServiceRecordsList]:images/nfvo-how-to-use-gui-NSR-list.png
 [NSRinfo]:images/nfvo-how-to-use-gui-NSR-info.png
 [VNFRecordInformation]:images/nfvo-how-to-use-gui-VNFR-information.png
+[Create key]:image/nfvo-how-to-use-gui-generate-key.png
+[Import key]:image/nfvo-how-to-use-gui-import-key.png
 [VNF Package documentation]: vnfpackage.md
 <!---
 Script for open external links in a new tab
