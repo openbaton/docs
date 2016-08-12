@@ -231,8 +231,8 @@ This are the information of the Event selected
 [NetworkServiceRecordsList]:images/nfvo-how-to-use-gui-NSR-list.png
 [NSRinfo]:images/nfvo-how-to-use-gui-NSR-info.png
 [VNFRecordInformation]:images/nfvo-how-to-use-gui-VNFR-information.png
-[createkey]:image/nfvo-how-to-use-gui-generate-key.png
-[importkey]:image/nfvo-how-to-use-gui-import-key.png
+[createkey]:images/nfvo-how-to-use-gui-generate-key.png
+[importkey]:images/nfvo-how-to-use-gui-import-key.png
 [VNF Package documentation]: vnfpackage.md
 <!---
 Script for open external links in a new tab
