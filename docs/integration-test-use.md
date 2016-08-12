@@ -3,7 +3,7 @@
 ## Overview
 
 This project provides integration tests for OpenBaton. 
-Ten tests are run.
+Eleven tests are run.
 
 ## Test descriptions
 
@@ -17,6 +17,7 @@ Ten tests are run.
 8. error-in-start
 9. error-in-terminate
 10. wrong-lifecycle-event
+11. user-project-test
 
 *scenario-dummy-iperf* uses the [Dummy VNFM][vnfm-dummy] to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
 It does not actually deploy a network service. The fake network service is a simple iperf scenario with one server and one client. 
@@ -46,7 +47,10 @@ The tests *error-in-configure*, *error-in-instantiate*, *error-in-start*, *error
 
 The test *wrong-lifecycle-event* tries to onboard a NSD to the NFVO which contains an undefined lifecycle event. The test will pass if the onboarding is not successful. 
 
-In every test a vim instance and a network service descriptor are stored on the orchestrator and the network service launched. 
+The user-project-test checks if the NFVO handles user and project management correctly. It adds and deletes users, projects and a vim instance from different 
+user perspectives. This test can be executed without a VNFManager. 
+
+In most of the tests a vim instance and a network service descriptor are stored on the orchestrator and the network service launched. 
 If that is successful, the network service is stopped and the network service record, network service descriptor and the vim instance are removed. 
 In the cases of the *scenario-real-iperf*, *scenario-complex-ncat* and *scenario-scaling* test also the service itself is tested, i.e. if iperf is running and the clients can connect to the server. Therefore the integration tests will execute some scripts for testing on the virtual machines. 
 
