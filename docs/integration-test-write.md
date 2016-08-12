@@ -504,14 +504,52 @@ As mentioned earlier here is a summary of all the class-names available at the m
 | PackageDelete                                 | Delete a VNFPackage | package-name | The name of the package that will be deleted |
 | PackageUpload					| Upload a VNFPackage | package-upload | The name of the package that will be uploaded |
 | Pause					        | Used to elapse time until the next task will start | duration | The time (in seconds) that this task shall do nothing and after which it will finish |
+|ProjectCreate|Used to create a new Project|as-user-name|If specified the integration tests will use this user to create the Project. If not the default user specified in the integration-test.properties will be used.|
+|||as-user-password|The password of the User that shall create the new Project. Just needed if *as-user-name* is specified.|
+|||expected-to-fail|Set this to true if you expect the Project creation to fail.|
+|||project-name|The name of the new Project.|
+|ProjectDelete|Used to delete a project|as-user-name|If specified the integration tests will use this user to delete the Project. If not the default user specified in the integration-test.properties will be used.|
+|||as-user-password|The password of the User that shall delete the new Project. Just needed if *as-user-name* is specified.|
+|||expected-to-fail|Set this to true if you expect deleting the Project to fail.|
+|||project-name|The name of the project to delete.|
 | ScaleIn					| Triggers one scale in operation on a VNFR specified in the ini file | vnf-type | The type of VNFR that shall be scaled in |
 | ScaleOut					| Triggers one scale out operation on a VNFR specified in the ini file | floating-ip | The floating IP which shall be assigned to the new instance |
 |||virtual-link| The network/virtual-link to which the new instance shall be connected |
 |||vnf-type| The type of the VNFR on which the scale out shall be performed |
 | ScalingTester					| Verifies if the number of VNFCInstances is equal to a given number and passes an updated NSR to the next task, which can be important after a scaling operation | vnfc-count | The expected number of instances of this VNF |
 |||vnf-type| The type of the VNFR whose number of VNFCs should be checked |
+|UserCreate|Used to create a new User|as-user-name|If specified the integration tests will use this user to create the User. If not the default user specified in the integration-test.properties will be used.|
+|||as-user-password|The password of the User that shall create the new User. Just needed if *as-user-name* is specified.|
+|||enabled|Set to true if the new User should be enabled. |
+|||expected-to-fail|Set this to true if you expect the User creation to fail.|
+|||guest-projects|A comma separated list of project names. In each listed project the new User will obtain a GUEST role.|
+|||new-user-is-admin|Set this to true if the new User should be an ADMIN.|
+|||new-user-name|The name of the User to create.|
+|||new-user-password|The password of the User to create.|
+|||user-projects|A comma separated list of project names. In each listed project the new User will obtain a USER role.|
+|UserDelete|Used to delete a User|as-user-name|If specified the integration tests will use this user to delete the User. If not the default user specified in the integration-test.properties will be used.|
+|||as-user-password|The password of the User that shall delete the User. Just needed if *as-user-name* is specified.|
+|||expected-to-fail|Set this to true if you expect the User deletion to fail.|
+|||user-to-delete|The name of the User that shall be deleted.|
+|UserUpdate|Used to update a User|as-user-name|If specified the integration tests will use this user to update the User. If not the default user specified in the integration-test.properties will be used.|
+|||as-user-password|The password of the User that shall create the new User. Just needed if *as-user-name* is specified.|
+|||enabled|Set to true if the updated User should be enabled. |
+|||expected-to-fail|Set this to true if you expect updating the User to fail.|
+|||guest-projects|A comma separated list of project names. In each listed project the updated User will obtain a GUEST role.|
+|||user-is-admin|Set this to true if the updated User should be an ADMIN.|
+|||user-name-new|The new name of the User.|
+|||user-name-old|The name of the User to update.|
+|||user-password-new|The new password of the User.|
+|||user-projects|A comma separated list of project names. In each listed project the updated User will obtain a USER role.|
 | VimInstanceCreate  				| Store a vim instance on the NFVO from a json file | name-file | The name of the json file that contains the VimInstance |
-| VimInstanceDelete				| Delete a vim instance |  |  |
+|||as-user-name|If specified the integration tests will use this user to create the Vim Instance. If not the default user specified in the integration-test.properties will be used. |
+|||as-user-password|The password of the user that shall create the Vim Instance. Just needed if *as-user-name* is specified.|
+|||expected-to-fail|Set this to true if you expect the Vim Instance creation to fail|
+|||in-project|The name of the project to which the Vim Instance shall be uploaded. Just usable if you also specify a user to upload with *as-user-name* and *as-user-password*. If not specified the default project specified in the integration-test.properties will be used.|
+| VimInstanceDelete				| Delete a vim instance |as-user-name|If specified the integration tests will use this user to delete the Vim Instance. If not the default user specified in the integration-test.properties will be used.|
+|||as-user-password|The password of the user that shall delete the Vim Instance. Just needed if *as-user-name* is specified.|
+|||expected-to-fail|Set this to true if you expect a failure while trying to delete the Vim Instance.|
+|||in-project|The name of the project to which the Vim Instance shall be uploaded. Just usable if you also specify a user to upload with *as-user-name* and *as-user-password*. If not specified the default project specified in the integration-test.properties will be used.|
 | VirtualNetworkFunctionDescriptorDelete        | Delete the VNFDs of a NSD passed from the preceding task, filtered by vnfd name and/or type; if no name and type are passed, all the VNFDs associated to the passed NSD will be deleted | vnf-type | The type of the VNFDs that shall be deleted; this field can be omitted if the type is not important for the choice of VNFDs to delete |
 ||| vnf-name | The name of the VNFDs that shall be deleted; this field can be omitted if the name is not important for the choice of VNFDs to delete |
 | VirtualNetworkFunctionRecordWait		| Wait for an event sent by the NFVO which is related to a VNFR | action | The event which will be waited for to happen |
