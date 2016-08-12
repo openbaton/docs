@@ -26,14 +26,14 @@ The parts of the GUI to manage users and projects are marked red in the followin
 
 ![Security overview][SecurityOverview]
 
-In the upper right corner you can see a the current project in which you are working next to the folder label.  
+In the upper right corner you can see the current project in which you are working next to the folder label.  
 Click on it to switch to other projects you have access to.  
 Next to this you can see your user name. Click on it to extend a menu with the logout button. 
 You can also change the password by choosing the command in this menu or use the "help" button to open the documentation. 
 
 If you select *Projects* or *Users* under the *Identity* menu item on the left side you will get to overviews of the selected subject. There you can see, add and remove projects and users **if you are authorized**. 
 
-The following screenshot shows the creation of a new user named *new user* who is assigned to the project *default* as a *GUEST* and to the project *another project* as an *ADMIN*.
+The following screenshot shows the creation of a new user named *new user* who is assigned to the project *default* as a *USER*. This means that he can modify the resources in this project. The role *GUEST* would basically grant the read-only privilege to the user. If you would like the user to have access to all the projects and resources of the NFVO, you can put a mark to on the *Make Admin* marker, after this the individual roles you choose will not matter any more and the user will be saved as an *ADMIN*. 
 
 ![Add user][AddUser]
 
