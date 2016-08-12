@@ -29,9 +29,9 @@ The parts of the GUI to manage users and projects are marked red in the followin
 In the upper right corner you can see the current project in which you are working next to the folder label.  
 Click on it to switch to other projects you have access to.  
 Next to this you can see your user name. Click on it to extend a menu with the logout button. 
-You can also change the password by choosing the command in this menu or use the "help" button to open the documentation. 
+You can also change the password by choosing the command in this menu or use the *Help* button to open the documentation. 
 
-If you select *Projects* or *Users* under the *Identity* menu item on the left side you will get to overviews of the selected subject. There you can see, add and remove projects and users **if you are authorized**. 
+If you select *Identity* tab, you can add and change projects and users. *Identity tab* is available only to the users with admin privileges. 
 
 The following screenshot shows the creation of a new user named *new user* who is assigned to the project *default* as a *USER*. This means that he can modify the resources in this project. The role *GUEST* would basically grant the read-only privilege to the user. If you would like the user to have access to all the projects and resources of the NFVO, you can put a mark to on the *Make Admin* marker, if the marker is turned on the individual roles you choose will not matter any more and the user will be saved as an *ADMIN*. 
 
@@ -141,6 +141,14 @@ And the same for the VDU inside the VNF
 
 ![NSD Graph][editNSD5]
 
+#### Launching the NSD
+
+In order to launch NSD press the *Action* near the NSD you want to lauch and press *launch*. You will be promted with a dialogue that will let you choose the key name for the NSR. You have 2 options in this case:
+1. Pick key that you have added to the NFVO or created with it, you can pick multiple keys too, and press *Launch* to use these keys later to access the VMs. 
+2. Press *Launch with VIM key* in order to use the key you have mentioned in VIM instance JSON or to use no key at all(this will be the case if no key was mentioned in the VIM file). 
+
+![NSD Launch][launchNSD]
+
 #### Virtual Network Function Descriptor Information
 In the list of Virtual Network Function Descriptors in NSD template you can click on the id of a Virtual Network Function Descriptor to get to this page
 
@@ -234,6 +242,7 @@ This are the information of the Event selected
 [VNFRecordInformation]:images/nfvo-how-to-use-gui-VNFR-information.png
 [createkey]:images/nfvo-how-to-use-gui-generate-key.png
 [importkey]:images/nfvo-how-to-use-gui-import-key.png
+[launchNSD]:images/nfvo-how-to-use-gui-launch-nsd.png
 [VNF Package documentation]: vnfpackage.md
 <!---
 Script for open external links in a new tab
