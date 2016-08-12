@@ -74,7 +74,13 @@ In the menu on the left side under the template Catalogue you can find the **NS 
 On this page you can see the list of NS Descriptors stored in OpenBaton
 
 ![List of NS Descriptors][NSDlist]
+#### Launching the NSD
 
+In order to launch NSD press the *Action* near the NSD you want to lauch and press *launch*. You will be promted with a dialogue that will let you choose the key name for the NSR. You have 2 options in this case:
+ 1. Pick key that you have added to the NFVO or created with it, you can pick multiple keys too, and press *Launch* to use these keys later to access the VMs. 
+ 2. Press *Launch with VIM key* in order to use the key you have mentioned in VIM instance JSON or to use no key at all(this will be the case if no key was mentioned in the VIM file). 
+
+![NSD Launch][launchNSD]
 
 You have two options for storing a NS Descriptor:
 
