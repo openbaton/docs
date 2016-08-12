@@ -60,10 +60,11 @@ In the menu on the left side under the template _Catalogue_ you can manage
 3. Key Pairs
 
 ### Key Pairs
-You can add a key pairs to use for ssh access to the VMs via *Key Pairs* menu. You have to option in terms of adding the keys. 
+You can add a key pairs to use for ssh access to the VMs via *Key Pairs* menu. You have two options in terms of adding the keys. 
 1. You can promt NFVO to create a key for you with a given name:
 ![Create key][createkey]
 *IMPORTANT*: You will be promted to download the private key after you press *Generate*. Currently there is no option to regenerate a key. If you do not download the key, you will have to generate a new one. 
+
 2. You can import key for your host user via providing your public key to the NFVO:
 ![Import key][importkey]
 
