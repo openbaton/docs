@@ -1,4 +1,4 @@
-# Install Open Baton from source code
+# Install Open Baton 
 
 This tutorial will guide towards the installation of a minimal Open Baton environment composed by the following components: 
 
@@ -10,16 +10,16 @@ And a set of optional components:
 * OpenStack plugin in case you want to use OpenStack as VIM
 * Test plugin for being able to execute the [dummy NSR][dummy-NSR] tutorial without needing an OpenStack instance. 
 
-In order to execute the minimal Open Baton setup you need the RabbitMQ messaging system ([RabbitMQ][reference-to-rabbit-site]). In some installation mechanisms RabbitMQ is automatically installed and configured. In some other cases you will need to manually install and configure it if explicetely mentioned.
+In order to execute the minimal Open Baton setup you need the RabbitMQ messaging system ([RabbitMQ][reference-to-rabbit-site]). For some environments we provide installation mechanisms for automatically installing and configuring RabbitMQ. In some other cases you will need to manually install and configure it.
 
 We provide several ways for installing Open Baton. You can choose between: 
 
 * Direct installation on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version
-* Install it on MacOS using the brew formula. More info [here][macos]
+* Install it on MacOS using the provided brew formula. More info [here][macos]
 * Launching a pre-configured docker image containing a standalone Open Baton environment. More info [here][docker]
 * Launching a vagrant box using the provided vagrantfile. More info [here][vagrant]
 
-Once you have done with the installation, you can decide to either fine tuning your environment configuring the different configuration parameters following the [configuration guide][nfvo-configuration] or moving forward and start your first [hello world tutorial][dummy-NSR].
+Once you have done with the installation, you can decide to either to fine tune your environment configuring the different parameters as described in the [configuration guide][nfvo-configuration] or moving forward and start with your first [hello world tutorial][dummy-NSR].
 
 
 [spring]:https://spring.io

@@ -1,11 +1,10 @@
-# Install Open Baton using Docker
+# Install Open Baton on MacOS using brew
 
 This tutorial will guide towards the installation of the NFVO implemented in java using the [spring.io][spring] framework on top a MacOS. For more details about the NFVO architecture, you can refer to the next sections.
  
 ### Requirements
 
 In order to execute this tutorial you need to have Brew installed. In order to execute the NFVO you need to have RabbitMQ installed, properly configured and started: 
-
 
 
 ### Install the NFVO
@@ -25,7 +24,7 @@ openbaton-nfvo start
 ```
 
 
-### disinstall the NFVO
+### Disinstall the NFVO
 
 You can execute the following command for disinstalling the NFVO: 
 

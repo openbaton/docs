@@ -1,5 +1,5 @@
-## OpenBaton
-OpenBaton is an open source project providing a comprehensive implementation of the ETSI Management and Orchestration (MANO) specification. 
+## Open Baton
+Open Baton is an open source project providing a comprehensive implementation of the ETSI Management and Orchestration (MANO) specification. 
 
 ## What is NFV  
 ETSI NFV represents a concerted telco operator initiative fostering the development of virtual network infrastructures by porting and further adapting network functions to the specific cloud environment. 
@@ -9,7 +9,7 @@ One of the main concerns of ETSI NFV is to prove the feasibility of the cloud de
 ETSI NFV limits itself to this level of indications, considering that other standardization bodies and de-facto open source standards such as 3GPP and OpenStack should finalize the specific implementation work. 
 
 ## Its main components
-OpenBaton rel.2 provides the many different features and components. 
+Open Baton rel.2 provides the many different features and components. 
 
 * A Network Function Virtualisation Orchestrator (NFVO) completely designed and implemented following the ETSI MANO specification. Read more [here][nfvo]
 * A generic Virtual Network Function Manager (VNFM) able to manage the lifecycle of VNFs based on their descriptors. Read more [here][vnfm-generic]
@@ -28,8 +28,8 @@ Yes, this is possible using two different approaches:
 * integrating your own VNFM. In this case you can use either the REST interface, or the AMQP one for interoperating with the NFVO
 * implementing a set of scripts which can be executed as part of the lifecycle event of your Virtual Network Function Descriptor. We provide a generic VNFM and EMS which can be used for executing them
 
-## Can I use OpenBaton to build my own Network Service?
-Yes! OpenBaton provides a NFVO which can interoperate with VNFMs implemented by third parties. In this project we provide also a set of tools (like the vnfm-sdk) which supports developers in building their own VNFM. 
+## Can I use Open Baton to build my own Network Service?
+Yes! Open Baton provides a NFVO which can interoperate with VNFMs implemented by third parties. In this project we provide also a set of tools (like the vnfm-sdk) which supports developers in building their own VNFM. 
 
 ## Get started 
 In order to get started you can follow the [installation guide][install-guide]
@@ -41,7 +41,7 @@ In order to get started you can follow the [installation guide][install-guide]
 * Sending us an email to: [info-at-openbaton-dot-org]
 
 ## Supported by
-Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], [CogNet][cognet]
+Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], [CogNet][cognet], [SoftFIRE][softfire].
 
 [install-guide]:nfvo-installation
 [openbaton]:https://twitter.com/openbaton
@@ -53,6 +53,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [fm-system]: https://github.com/openbaton/fm-system
 [autoscaling-system]: https://github.com/openbaton/autoscaling
 [zabbix-plugin]: zabbix-plugin
+[softfire]: https://www.softfire.eu/
 [openbaton-libs]: https://github.com/openbaton/openbaton-libs
 [vim-plugin]: vim-plugin
 [vnfm-generic]: vnfm-generic
