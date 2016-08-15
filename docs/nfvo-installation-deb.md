@@ -5,7 +5,7 @@
 
 This tutorial will guide towards the installation of a minimal Open Baton environment using the stable binaries version. 
 
-**NOTE:** Please refer to [this tutorial](nfvo-installation.md) if you are willing to install a development environment where you can easily modify, compile and commit changes to the code base directly.
+**NOTE:** Please refer to [this tutorial](nfvo-installation-src.md) if you are willing to install a development environment where you can easily modify, compile and commit changes to the code base directly.
 
 This minimal version is composed by the following components: 
 
