@@ -42,9 +42,9 @@ just in case you are interested in the latest nigthly versions of the binaries p
 sh <(curl -s http://get.openbaton.org/bootstrap) nightly
 ```
 
-**VERY IMPORTANT NOTE - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be
+*\*VERY IMPORTANT NOTE - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be
   reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues. If you are installing Open Baton on a VM running in OpenStack, the best is that you put here
-  the floating IP. **
+  the floating IP. \**
  
 During the bootstrap procedure you will be prompted for inputs. For instance you can choose to install or not the Generic VNFM, or enable or not SSL. 
 
@@ -94,6 +94,8 @@ sudo stop openbaton-nfvo
 sudo systemctl stop openbaton-nfvo.service
 ```
 
+<br>
+
 To start the NFVO (as a service), enter one of the following commands depending on your OS.
 
 * With Ubuntu 14.04:
@@ -109,13 +111,16 @@ sudo start openbaton-nfvo
 sudo systemctl start openbaton-nfvo.service
 ```
 
-Instead, to start and stop the NFVO as a normal process, you can use the executables in the '/usr/bin/' folder and type the following commands:
+<br>
+
+Instead, to start and stop the NFVO as a normal process, you can use the Open Baton executables in the '/usr/bin/' folder and type the following commands:
 
 ```bash
 sudo openbaton-nfvo start
 sudo openbaton-nfvo stop
 ```
 
+<br>
 
 **Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running (as a service) at the end of the installation procedure. You can stop it with one of the following commands depending on your OS.
 
@@ -132,6 +137,8 @@ sudo stop openbaton-gvnfm
 sudo systemctl stop openbaton-gvnfm.service
 ```
 
+<br>
+
 **Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM (as a service) with one of the following commands depending on your OS.
 
 * With Ubuntu 14.04:
@@ -147,7 +154,9 @@ sudo start openbaton-gvnfm
 sudo systemctl start openbaton-gvnfm.service
 ```
 
-Instead, to start and stop the GVNFM as a normal process, you can use the executables in the '/usr/bin/' folder and type the following commands:
+<br>
+
+Instead, to start and stop the GVNFM as a normal process, you can use the Open Baton executables in the '/usr/bin/' folder and type the following commands:
 
 ```bash
 sudo openbaton-gvnfm start
