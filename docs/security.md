@@ -2,17 +2,9 @@
 
 When accessing the dashboard, you will be prompted for a username and password. The first access can only be done with the super user created during the installation. Then it is possible to create other users and projects. For the configuration of the first access please follow this guide.
 
-## Roles and projects
+### Roles and projects
 
 Openbaton's security model consists of different user roles and projects.
-
-This security feature is always enabled, so the propery
-
-```properties
-nfvo.security.enabled = true
-``` 
-
-in the */etc/openbaton/openbaton.properties* file is **deprecated**. 
 
 A project is a separate realm in which permitted users can work. Users can be assigned to projects and adopt different roles. Changes made in a project's environment are not visible from another project. When the NFVO starts a default project is created. Every project has a **unique** name and a project-id.  
 
@@ -28,7 +20,7 @@ The next available role is *USER*. If a user is the *USER* of a project he can c
 
 The last role is the *GUEST*. He can just see the components (PoPs, NSD, NSR etc.) of the project he is assigned to but he cannot create update or delete them. Furthermore he does not see other projects and users.
 
-## SSL
+### SSL
 
 The NFVO can use SSL to encrypt communication. To enable this feature set 
 ```properties
