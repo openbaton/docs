@@ -4,30 +4,33 @@ This tutorial will guide towards the installation of the NFVO implemented in jav
  
 ### Requirements
 
-In order to execute this tutorial you need to have Brew installed. In order to execute the NFVO you need to have RabbitMQ installed, properly configured and started: 
+- [Homebrew][homebrew-website] installed and updated.  
+- [RabbitMQ][rabbitmq-website] installed, properly configured and started. Once RabbitMQ is installed, you can configure it with the following commands:
+```
+rabbitmqctl add_user admin openbaton
+rabbitmqctl set_user_tags admin administrator
+rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+```
 
 
 ### Install the NFVO
 
-In order to execute the installation of the NFVO you need to execute the following instruction: 
+In order to install the NFVO you need to execute the following instructions: 
 ```bash
-brew update
 brew install https://raw.githubusercontent.com/openbaton/NFVO/master/gradle/gradle/scripts/osx/openbaton-nfvo.rb
 ```
 
 ### Start the NFVO 
 
 After the installation is completed you can launch the NFVO: 
-
 ```
 openbaton-nfvo start
 ```
+After few seconds you can open the dashboard http://localhost:8080
 
+### Uninstall the NFVO
 
-### Disinstall the NFVO
-
-You can execute the following command for disinstalling the NFVO: 
-
+You can execute the following command for uninstalling the NFVO: 
 ```
 brew remove openbaton-nfvo
 ```
@@ -40,6 +43,8 @@ brew remove openbaton-nfvo
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [zabbix-server-configuration]:zabbix-server-configuration.md
+[homebrew-website]:http://brew.sh
+[rabbitmq-website]:https://www.rabbitmq.com
 
 <!---
 Script for open external links in a new tab
