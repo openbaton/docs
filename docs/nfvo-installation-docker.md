@@ -5,7 +5,7 @@
 This tutorial will guide towards the installation of a minimal Open Baton environment composed by the following components: 
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
-* RabbitMQ as messaging system [RabbitMQ][reference-to-rabbit-site]
+* [RabbitMQ][reference-to-rabbit-site] as messaging system
 * Test plugin for being able to execute the [hello world][dummy-NSR] tutorial without needing an OpenStack instance. 
 * Generic VNFM for the instantiation of VNFs part of the Open Baton ecosystem 
 * OpenStack plugin: for deploying VNFs on OpenStack. 
@@ -13,21 +13,24 @@ This tutorial will guide towards the installation of a minimal Open Baton enviro
 To have a running standalone Open Baton Docker container type the following commands:
 
 ```bash
-sudo docker pull openbaton/standalone:2.1.1
-sudo docker run -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone:2.1.1
+sudo docker pull openbaton/standalone:<Open Baton version>
+sudo docker run -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone:<Open Baton version>
 ```
 
-**VERY IMPORTANT NOTE - You should put as input for the RABBITMQ_BROKERIP the RabbitMQ IP making sure that this IP can be
+*\*VERY IMPORTANT NOTE - You should put the Open Baton version which you would like to run. You can see which ones
+  are available from [this][reference-to-op-repo-on-public-docker-hub] list \**
+
+*\*VERY IMPORTANT NOTE - You should put as input for the RABBITMQ_BROKERIP the RabbitMQ IP making sure that this IP can be
   reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues. 
-  In particular, you should select the external IP of your host on top of which the docker container is running **
+  In particular, you should select the external IP of your host on top of which the docker container is running \**
   
-After running the container you should see as output an alphanumeric string similar to the following:
+After running the container you should see as output an alphanumeric string (which represents the Open Baton container's full ID running) similar to the following:
 
 ```bash
 cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07
 ```
 
-You should see that the container is running by typing the following command:
+To verify that the container is running you can type the following command:
 
 ```bash
 sudo docker ps -a
@@ -54,7 +57,7 @@ To log in, the default credentials for the administrator user are:
 * password: openbaton 
 ```
 
-To stop and delete the running container you can type respectively the following commands:
+To stop and delete the running Open Baton container you can type respectively the following commands:
 
 ```bash
 sudo docker stop cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07
@@ -69,6 +72,7 @@ sudo docker rm cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [zabbix-server-configuration]:zabbix-server-configuration.md
+[reference-to-op-repo-on-public-docker-hub]:https://hub.docker.com/r/openbaton/standalone/tags/
 
 <!---
 Script for open external links in a new tab
