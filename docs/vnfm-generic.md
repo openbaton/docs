@@ -119,7 +119,7 @@ As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can
 
 ## Launch the Generic VNFM
 
-To launch the Generic VNFM, execute the following command:
+Please check also the [installation page](nfvo-installation). To launch the Generic VNFM, execute the following command:
 ```bash
 $ cd <generic directory>
 $ ./generic-vnfm.sh start
