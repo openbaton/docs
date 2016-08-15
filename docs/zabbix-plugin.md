@@ -107,13 +107,13 @@ external-properties-file=/etc/openbaton/plugins/zabbix-plugin.conf
 In order to use the MonitorPluginCaller you need to import the relative plugin-sdk, coming from [Openbaton][openbaton-website] project.
 To import the plugin-sdk, please add in your gradle file the following dependencies:
 
-```
+```gradle
 repositories {
        maven { url "http://get.openbaton.org:8081/nexus/content/groups/public/" }
 }
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:2.0.0'
+    compile 'org.openbaton:plugin-sdk:2.1.2'
 }
 ```
 

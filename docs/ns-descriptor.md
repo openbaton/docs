@@ -38,7 +38,7 @@ You can see a complete NSD json [here][nsd-iperf].
 | version 						| The version of the NetworkServiceDescriptor (can be any string)      	|
 | vnfd 							| A list of VirtualNetworkFunctionDescriptors (see [VirtualNetworkFunctionDescriptor][vnf-descriptor])      	|
 | vld 							| A list of VirtualLinkDescriptors      	|
-| vnf_dependency 				| A list of VNF_Dependencies      	|
+| vnf_dependency 				| A list of VNF_Dependencies (**Not mandatory**, please check the [vnfd page](vnf-descriptor) in order to understand how to get rid of it)     	|
 
 ### VirtualLinkDescriptor
 
@@ -48,7 +48,7 @@ If the network exists, then this network will be used, if not a new one will be 
 
 ### VNF Dependencies
 
-A VNF Dependency is composed by 
+A VNF Dependency is composed by:
 
 | Params          				| Meaning       													|
 | -------------   				| -------------:													|
@@ -56,6 +56,7 @@ A VNF Dependency is composed by
 | target 						| The name of the VirtualNetworkFunctionDescriptor that requires one or more parameters	(see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
 | parameters					| The name of the parameters that the *target* requires     	|
 
+It is possible to let the Orchestrator to calculate dependencies automatically by providing some parameters in the VNF Descriptor part. Please check the [VNF Descriptor page](vnf-descriptor)
 
 <!---
 References

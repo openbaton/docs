@@ -26,7 +26,7 @@ After you typed in all the required properties you can start using the cli for s
     
 ### Run a command: 
 ```sh
-### openbaton.sh command-name [arg-1] [arg-2] [arg-3]
+# openbaton.sh command_name [arg-1] [arg-2] [arg-3]
 ```
 
 ### Show the configuration: 
@@ -36,7 +36,7 @@ openbaton.sh -c
 
 ### Activate debug mode: 
 ```sh
-openbaton.sh -d command-name [arg-1] [arg-2] [arg-3]
+openbaton.sh -d COMMAND [arg-1] [arg-2] [arg-3]
 ``` 
 
 ### Print help: 
@@ -46,7 +46,7 @@ openbaton.sh -h
 
 ### Print help for a command: 
 ```sh
-openbaton.sh command-name help
+openbaton.sh COMMAND help
 ```
     
 ### List the available commands: 
