@@ -53,8 +53,8 @@ After few minutes the Open Baton NFVO should be started, then you can open a bro
 To log in, the default credentials for the administrator user are:
 
 ```
-* user: admin
-* password: openbaton 
+user: admin
+password: openbaton 
 ```
 
 To stop and delete the running Open Baton container you can type respectively the following commands:
