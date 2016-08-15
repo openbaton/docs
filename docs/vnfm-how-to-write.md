@@ -20,7 +20,7 @@ Before you can start with developing your own VNFManager you need to prepare you
 
 This part is going to describe the steps you need to do to develop your own VNFManager with the help of any vnfm-sdk.
 
-The practical parts of implementing a basic VNFManager will focus on the usage of a specific vnfm-sdk, namely the vnfm-sdk-jms.
+The practical parts of implementing a basic VNFManager will focus on the usage of a specific vnfm-sdk, namely the vnfm-sdk-amqp.
 
 ### Preparations
 
@@ -349,8 +349,7 @@ Where the parameters mean:
 | endpoint-type                 | type of the endpoint, either RABBIT or REST, depending on the sdk chosen. Check out next section |
 | enabled                       | true if you want your vnfm to be enabled |
 | allocate 						| true if the NFVO will ALLOCATE_RESOURCES, false if the VNFManager will do      	|
-| concurrency	 				| The number of concurrent Receiver (only for vnfm-sdk-jms)|
-| transacted 					| Whenever the JMS receiver method shoud be transacted, this allows the message to be resent in case of exception VNFManager side (only for vnfm-sdk-jms)     	|
+| concurrency	 				| The number of concurrent Receiver (only for vnfm-sdk-amqp)|
 
 ## Choose a vnfm-sdk
 
@@ -363,7 +362,7 @@ By using the simple vnfm-sdk you need to take care about all the communication b
 
 Once you have imported one of the vnfm-sdks you will have access to all the model classes and the vnfm-sdk classes needed to implement a VNFManager.
 
-The following section shows you how to import the vnfm-sdk-jms, representative for all the other opportunities.
+The following section shows you how to import the vnfm-sdk-amqp, representative for all the other opportunities.
 
 ### Import a vnfm-sdk
 
@@ -430,7 +429,7 @@ You can also do this by using the IDE by running the corresponding gradle task.
 
 ## Implementation of the VNFManager
 
-This section is going to describe the implementation of a basic VNFManager by using the vnfm-sdk-jms.
+This section is going to describe the implementation of a basic VNFManager by using the vnfm-sdk-amqp.
 In the end, the VNFManager will be able to allocate and terminate resources by using its own openstack-plugin.
 
 So first of all you need to define the main method used for starting your VNFManager.
@@ -699,7 +698,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-public class MyVNFM extends AbstractVnfmSpringJMS {
+public class MyVNFM extends AbstractVnfmSpringAmqp {
 
 	@Autowired
     private ConfigurableApplicationContext context;
