@@ -6,7 +6,7 @@
 This tutorial will guide towards the installation of a minimal Open Baton environment composed by the following components: 
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
-* RabbitMQ as messaging system [RabbitMQ][reference-to-rabbit-site].
+* [RabbitMQ][reference-to-rabbit-site] as messaging system
 * Test plugin for being able to execute the [dummy NSR][dummy-NSR] tutorial without needing an OpenStack instance. 
 * Generic VNFM
 * OpenStack plugin: in case you want to use OpenStack as VIM 
