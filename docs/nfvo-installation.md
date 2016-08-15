@@ -19,20 +19,20 @@ We provide several ways for installing Open Baton. You can choose between:
 * Launching a pre-configured docker image containing a standalone Open Baton environment. More info [here][docker]
 * Launching a vagrant box using the provided vagrantfile. More info [here][vagrant]
 
-Once you have done with the installation, you can decide to either to fine tune your environment configuring the different parameters as described in the [configuration guide][nfvo-configuration] or moving forward and start with your first [hello world tutorial][dummy-NSR].
+Once you have done with the installation, you can decide either to fine tune your environment configuring the different parameters as described in the [configuration guide][nfvo-configuration] or to move forward and start with your first [hello world tutorial][dummy-NSR].
 
 
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
-[dummy-NSR]:dummy-NSR
-[docker]: nfvo-installation-docker
-[macos]: nfvo-installation-mac
-[nfvo-configuration]: nfvo-configuration
-[nfvo-installation-deb]: nfvo-installation-deb
-[nfvo-installation-src]: nfvo-installation-src
-[use-openbaton]:use
+[dummy-NSR]:dummy-NSR.md
+[docker]: nfvo-installation-docker.md
+[macos]: nfvo-installation-mac.md
+[nfvo-configuration]: nfvo-configuration.md
+[nfvo-installation-deb]: nfvo-installation-deb.md
+[nfvo-installation-src]: nfvo-installation-src.md
+[use-openbaton]:use.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
-[vagrant]: nfvo-installation-vagrant
+[vagrant]: nfvo-installation-vagrant.md
 [zabbix-server-configuration]:zabbix-server-configuration.md
 
 <!---
