@@ -1,7 +1,7 @@
 # Tutorial: iPerf Network Service
 -----------------------------------------
 
-This tutorial explains how to deploy Network Service that uses iPerf. iPerf is a tool for active measurements of the maximum achievable bandwidth between two or more machines.
+This tutorial explains how to deploy a network service that uses iPerf. [iPerf][iperf-website] is a tool for active measurements of the maximum achievable bandwidth between two or more machines.
 This tutorial makes use of:
 
 * Generic VNFM ([generic-vnfm][generic-vnfm])
@@ -29,13 +29,13 @@ If you want to use the Dashboard (checkout the [dashboard documentation][dashboa
 
 ### Using CLI
 
-If you want to use the CLI (checkout the [openbaton-client documentation][cli] for more information on how to install it), you need to execute the following command in order to onboard the NSD iof the iPerf scenario by using private IPs:
+If you want to use the CLI (checkout the [openbaton-client documentation][cli] for more information on how to install it), you need to execute the following command in order to onboard the iPerf's NSD by using private IPs:
 
 ```bash
 $./openbaton.sh NetworkServiceDescriptor-create tutorial-iperf-NSR-privateIPs.json
 ```
 
-Once this request is processed successfully it returns the following:
+Once this request is processed successfully, it returns the following:
 
 ```bash
 +------------------ +------------------------------------------------------------------ +
@@ -66,7 +66,7 @@ Once this request is processed successfully it returns the following:
 ```
 
 ## Deploy the Network Service Descriptor
-As soon as you onboarded the NSD to the NFVO you can deploy this NSD either by using the dashboard or the CLI.
+As soon as you onboarded the NSD in the NFVO you can deploy this NSD either by using the dashboard or the CLI.
 
 ### Using dashboard
 
@@ -262,7 +262,7 @@ References
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
 [vnf-package]:vnfpackage
-[vim-doc]:vim-instance-documentation
+[vim-doc]:vim-instance
 [iperf]:https://iperf.fr
 [generic-vnfm]:https://github.com/openbaton/generic-vnfm
 [openstack-plugin]:https://github.com/openbaton/openstack-plugin
@@ -272,6 +272,7 @@ References
 [nsd-deployment]: images/tutorials/tutorial-iperf-NSR/nsd-deploy.png
 [nsd-onboarding]: images/tutorials/tutorial-iperf-NSR/nsd-onboarding.png
 [ems-github]: https://github.com/openbaton/ems/tree/master
+[iperf-website]:https://iperf.fr
 <!---
 Script for open external links in a new tab
 -->

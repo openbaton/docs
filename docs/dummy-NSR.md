@@ -1,7 +1,7 @@
 # Tutorial: Dummy Network Service Record
 -----------------------------------------
 
-This tutorial explains how to deploy a Network Service Record composed by Dummy VNFs. It is typically used for testing that the installation of the NFVO went fine. This tutorial makes use of: 
+This tutorial explains how to deploy a Network Service Record composed by Dummy VNFs. It is typically used for testing that the installation of the NFVO went fine.
 
 ## Requirements
 
@@ -18,7 +18,7 @@ If not yet running start the NFVO and the Dummy-VNFM (refer to it's readme file 
 ## Store the VimInstance
 
 Upload a VimInstance with the type *test* to the NFVO (e.g. this [VimInstance]). 
-The type *test* will make sure that the NFVO uses the test-plugin for network services deployed using this VimInstance.  
+The type *test* will make sure that the NFVO uses the test-plugin for deploying network services.  
 
 
 ## Store the Network Service Descriptor 
@@ -41,6 +41,7 @@ The Dummy-Vnfm lead the NFVO to believe that it created virtual machines and exe
 <!---
 References
 -->
+[nfvo-installation]:nfvo-installation.md
 [Dummy-VNFM]: https://github.com/openbaton/dummy-vnfm-amqp
 [vim-doc]:vim-instance-documentation
 [Test Plugin]: https://github.com/openbaton/test-plugin
