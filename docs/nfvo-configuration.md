@@ -9,7 +9,9 @@ After the bootstrap procedure, the NFVO the configuration file is located at:
 /etc/openbaton/openbaton.properties
 ```
 
-Feel free to modify that file for adding or removing specific functionalities. For instance, you can decide to change logging levels (TRACE, DEBUG, INFO, WARN, and ERROR) and mechanisms:
+This is a property file that is used to configure the *Spring* environment and the **NFVO**. Since the component is based on the Spring framework some parameters are inherited, for a deeper explanation on all the parameters meaning, please refer to the [Spring documentation](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html). 
+
+ Feel free to modify that file for adding or removing specific functionalities.  For instance, you can decide to change logging levels (TRACE, DEBUG, INFO, WARN, and ERROR) and mechanisms:
 ```properties
 logging.level.org.springframework=INFO
 logging.level.org.hibernate=INFO
@@ -129,13 +131,6 @@ spring.rabbitmq.port=5672
 # Virtual host to use when connecting to the broker.
 # spring.rabbitmq.virtual-host=
 
-```
-
-These parameters represent the maximum file size of the VNF Package which can be uploaded to the NFVO and the total maximum request size
-```properties
-# filesUpload
-multipart.maxFileSize=2046MB
-multipart.maxRequestSize=2046MB
 ```
 
 The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [vim plugin documentation][vim_plugin_doc]). The NFVO will load them at runtime.  
