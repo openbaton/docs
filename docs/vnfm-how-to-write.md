@@ -332,7 +332,6 @@ enabled = true
 endpoint-type = RABBIT
 script-max-time = 300000
 concurrency = 15
-transacted = false
 
 
 #### Additionally

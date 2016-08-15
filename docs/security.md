@@ -6,23 +6,11 @@ When accessing the dashboard, you will be prompted for a username and password. 
 
 Openbaton's security model consists of different user roles and projects.
 
-This security feature is always enabled, so the propery
-
-```properties
-nfvo.security.enabled = true
-``` 
-
-in the */etc/openbaton/openbaton.properties* file is **deprecated**. 
-
 A project is a separate realm in which permitted users can work. Users can be assigned to projects and adopt different roles. Changes made in a project's environment are not visible from another project. When the NFVO starts a default project is created. Every project has a **unique** name and a project-id.  
 
 A user can have the role *USER* or *GUEST* in a project. Administrators with the role *ADMIN* has control over the whole system. He may add and delete users and projects, assign roles and has access to all the projects. When starting the NFVO there will be already the super user (with the role of an *ADMIN*) defined by default with the user name *admin* and the default password *openbaton*.
 
-The default password can be changed by setting 
-```properties
-nfvo.security.admin.password = 
-```
-in *openbaton.properties*.  
+The default password can be changed in the top right corner of the dashboard.
 
 The next available role is *USER*. If a user is the *USER* of a project he can create, delete and update PoPs, NSD, VNFD, VNFPackages, NSR and VNFR in his projects. He cannot access or see other projects or users.
 
