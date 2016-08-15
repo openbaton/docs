@@ -1,3 +1,5 @@
+<img src="../images/apple-logo.gif" alt="Vagrant" style="width: 50px;"/>
+
 # Install Open Baton on MacOS using brew
 
 This tutorial will guide towards the installation of the NFVO implemented in java using the [spring.io][spring] framework on top a MacOS. For more details about the NFVO architecture, you can refer to the next sections.

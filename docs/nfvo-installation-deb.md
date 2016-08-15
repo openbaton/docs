@@ -1,3 +1,6 @@
+<img src="../images/linux-logo.png" alt="Vagrant" style="width: 50px;"/>
+
+
 # Install Open Baton on Linux 
 
 This tutorial will guide towards the installation of a minimal Open Baton environment using the stable binaries version. 

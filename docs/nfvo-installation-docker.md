@@ -1,3 +1,5 @@
+<img src="../images/docker-logo.png" alt="Vagrant" style="width: 100px;"/>
+
 # Install Open Baton using Docker
 
 This tutorial will guide towards the installation of a minimal Open Baton environment composed by the following components: 

@@ -1,4 +1,7 @@
-# Install Open Baton using Vagrant
+<img src="../images/vagrant-logo.png" alt="Vagrant" style="width: 50px;"/>
+
+
+# Install Open Baton using Vagrant 
 
 This tutorial will guide towards the installation of a minimal Open Baton environment composed by the following components: 
 
