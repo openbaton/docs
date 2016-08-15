@@ -14,10 +14,10 @@ In order to execute the minimal Open Baton setup you need the RabbitMQ messaging
 
 We provide several ways for installing Open Baton. You can choose between: 
 
-* Direct installation on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version
-* Install it on MacOS using the provided brew formula. More info [here][macos]
-* Launching a pre-configured docker image containing a standalone Open Baton environment. More info [here][docker]
-* Launching a vagrant box using the provided vagrantfile. More info [here][vagrant]
+* **Linux OS**: Direct installation on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version
+* **Mac OS**: Install it on MacOS using the provided brew formula. More info [here][macos]
+* **Docker**: Launching a pre-configured docker image containing a standalone Open Baton environment. More info [here][docker]
+* **Vagrant**: Launching a vagrant box using the provided vagrantfile. More info [here][vagrant]
 
 Once you have done with the installation, you can decide either to fine tune your environment configuring the different parameters as described in the [configuration guide][nfvo-configuration] or to move forward and start with your first [hello world tutorial][dummy-NSR].
 
