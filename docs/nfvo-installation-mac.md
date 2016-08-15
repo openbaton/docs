@@ -28,7 +28,11 @@ After the installation is completed you can launch the NFVO:
 ```
 openbaton-nfvo start
 ```
-After few seconds you can open the dashboard http://localhost:8080
+After few seconds you can open the dashboard at: http://localhost:8080
+
+### Configure the NFVO 
+
+The configuration file (openbaton.properties) is in the folder /usr/local/Cellar/openbaton. To configure the NFVO please refer to [nfvo configuration][nfvo-configuration]
 
 ### Uninstall the NFVO
 
@@ -47,6 +51,7 @@ brew remove openbaton-nfvo
 [zabbix-server-configuration]:zabbix-server-configuration.md
 [homebrew-website]:http://brew.sh
 [rabbitmq-website]:https://www.rabbitmq.com
+[nfvo-configuration]:nfvo-configuration.md
 
 <!---
 Script for open external links in a new tab
