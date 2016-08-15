@@ -10,7 +10,7 @@ This tutorial will guide towards the installation of a minimal Open Baton enviro
 This minimal version is composed by the following components: 
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
-* RabbitMQ as messaging system [RabbitMQ][reference-to-rabbit-site].
+* [RabbitMQ][reference-to-rabbit-site] as messaging system
 * Test plugin for being able to execute the [hello world][dummy-NSR] tutorial without needing an OpenStack instance. 
 
 And a set of optional components: 
@@ -60,7 +60,7 @@ Where:
 
 * `openbaton-*jar` is the jar file related to the version of the NFVO which has been installed
 * `gvnfm` (present only if during the installation procedure you also installed the Generic VNFM) contains the jar file related to the Open Baton Generic VNFM
-* `plugins` contains the plugins for Open Baton. So far, if you downloaded the VIM-Driver Plugins during the installation procedure, it will contain only the jar files related to the plugins downloaded
+* `plugins` contains the plugins for Open Baton. By default the Test VIM Driver plugin is installed, therefore its jar file is stored in this directory. Additionally, if during the installation procedure you decide to install the OpenStack VIM-Driver Plugins then also its jar file will be stored in this directory.
 
 Additionally you should also have the following structure:
 ```bash
@@ -76,9 +76,9 @@ Where:
 
 At this point Open Baton is ready to be used. Please refer to the [Introduction][use-openbaton] on how to start using it or step into the [hello world][dummy-NSR] tutorial immediately.
 
-### Starting and stopping NFVO (and the Generic VNFM)
+### Starting and stopping the NFVO (and the Generic VNFM)
 
-After the installation procedure the NFVO is running.  
+After the installation procedure the NFVO is running as a service.
 If you want to stop it, enter one of the following commands depending on your OS.
 
 * With Ubuntu 14.04:
@@ -86,7 +86,6 @@ If you want to stop it, enter one of the following commands depending on your OS
 ```bash
 sudo service openbaton-nfvo stop
 sudo stop openbaton-nfvo
-sudo openbaton-nfvo stop
 ```
 
 * With Debian Jessie:
@@ -95,14 +94,13 @@ sudo openbaton-nfvo stop
 sudo systemctl stop openbaton-nfvo.service
 ```
 
-To start the NFVO, instead, enter one of the following commands depending on your OS.
+To start the NFVO (as a service), enter one of the following commands depending on your OS.
 
 * With Ubuntu 14.04:
 
 ```bash
 sudo service openbaton-nfvo start
 sudo start openbaton-nfvo
-sudo openbaton-nfvo start
 ```
 
 * With Debian Jessie:
@@ -111,14 +109,21 @@ sudo openbaton-nfvo start
 sudo systemctl start openbaton-nfvo.service
 ```
 
-**Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running at the end of the installation procedure. You can stop it with one of the following commands depending on your OS.
+Instead, to start and stop the NFVO as a normal process, you can use the executables in the '/usr/bin/' folder and type the following commands:
+
+```bash
+sudo openbaton-nfvo start
+sudo openbaton-nfvo stop
+```
+
+
+**Note (in case you also installed the Generic VNFM):** If you also installed the Generic VNFM it is also already running (as a service) at the end of the installation procedure. You can stop it with one of the following commands depending on your OS.
 
 * With Ubuntu 14.04:
 
 ```bash
 sudo service openbaton-gvnfm stop
 sudo stop openbaton-gvnfm
-sudo openbaton-gvnfm stop
 ```
 
 * With Debian Jessie:
@@ -127,14 +132,13 @@ sudo openbaton-gvnfm stop
 sudo systemctl stop openbaton-gvnfm.service
 ```
 
-**Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM with one of the following commands depending on your OS.
+**Note (in case you also installed the Generic VNFM):** You can start the Generic VNFM (as a service) with one of the following commands depending on your OS.
 
 * With Ubuntu 14.04:
 
 ```bash
 sudo service openbaton-gvnfm start
 sudo start openbaton-gvnfm
-sudo openbaton-gvnfm start
 ```
 
 * With Debian Jessie:
@@ -143,19 +147,27 @@ sudo openbaton-gvnfm start
 sudo systemctl start openbaton-gvnfm.service
 ```
 
+Instead, to start and stop the GVNFM as a normal process, you can use the executables in the '/usr/bin/' folder and type the following commands:
+
+```bash
+sudo openbaton-gvnfm start
+sudo openbaton-gvnfm stop
+```
+
+
 ### Configure it
 
 For specific configuration refer to the [configuration]
 
 [bootstrap]: https://github.com/openbaton/bootstrap/
 [spring]:https://spring.io
-[configuration]:nfvo-configuration
+[configuration]:nfvo-configuration.md
 [localhost:8080]:http://localhost:8080/
-[vim_plugin_doc]:vim-plugin
-[use-openbaton]:use
-[dummy-NSR]:dummy-NSR
+[vim_plugin_doc]:vim-plugin.md
+[use-openbaton]:use.md
+[dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
-[zabbix-server-configuration]:zabbix-server-configuration
+[zabbix-server-configuration]:zabbix-server-configuration.md
 
 <!---
 Script for open external links in a new tab
