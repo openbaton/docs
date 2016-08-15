@@ -1,7 +1,7 @@
 # Tutorial: OpenIMSCore Network Service Record
 -----------------------------------------
 
-This tutorial shows how to deploy a Network Service Record composed by 5 VNFs, a basic OpenIMSCore.
+This tutorial shows how to deploy a Network Service Record composed by 5 VNFs, a basic [OpenIMSCore][openims-website].
 
 Compared to the [Iperf-Server - Iperf-Client](http://openbaton.github.io/documentation/iperf-NSR/) the example provided here is far more complex. So we assume you are fimiliar with the architecture.
 
@@ -19,7 +19,7 @@ Upload a VimInstance to the NFVO (e.g. this [VimInstance]).
  
 ## Prepare the VNF Packages
 
-Download the necessary [files][vnf-package] from the [github repository][openims-repo] and pack the [VNF Packages](http://openbaton.github.io/documentation/vnfpackage/) for all 5 components ( scscf, icscf, pcscf, bind9, fhoss ).
+Download the necessary files from the [github repository][openims-repo] and pack the [VNF Packages][vnf-package] for all 5 components ( scscf, icscf, pcscf, bind9, fhoss ).
 
 #### Example for creating the Icscf Virtual Network Function Package
 ```bash
@@ -41,7 +41,7 @@ Finally onboard the packages.
 Download the following [NSD] and upload it to the NFVO either using the dashboard or the cli. 
 Take care to replace the vnfd ids with the ones you deployed.
 
-Open the Dashboard (checkout the [dashboard documentation](http://openbaton.github.io/documentation/nfvo-how-to-use-gui/) for more information on how to use it), open it at the URL http://your-ip-here:8080 and log in (default username and password are *admin* and *openbaton*). Go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+Open the Dashboard (checkout the [dashboard documentation][how-to-gui]) for more information on how to use it), open it at the URL http://your-ip-here:8080 and log in (default username and password are *admin* and *openbaton*). Go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
 
 ## Deploy the Network Service Descriptor 
 
@@ -53,13 +53,13 @@ If you go to `Orchestrate NS -> NS Records` in the menu on the left side, you ca
 
 ## Conclusions
 
-Once the Network Service Record went to "ACTIVE" your [OpenIMSCore](http://www.openimscore.org/) - [Bind9](https://wiki.ubuntuusers.de/DNS-Server_Bind) - [FHoSS](http://www.openimscore.org/) deployment is finished.
+Once the Network Service Record went to "ACTIVE" your [OpenIMSCore][openims-website] - [Bind9](https://wiki.ubuntuusers.de/DNS-Server_Bind) - [FHoSS][openims-website] deployment is finished.
 
 ![ims-deployment][ims-struc]
 
-To test your [OpenIMSCore](http://www.openimscore.org/) you may use a Sip client of your choice. Be sure to use the realm defined in your [Bind9 Virtual Network Function Descriptor][bind9-vnf] while testing registration and call. By default the [FHoSS](http://www.openimscore.org/) conaints 2 users : alice and bob. The user is the same as the password, but you may also alter it to your needs modifying the [FHoSS Virtual Network Function Descriptor][openims-repo] ( You will find the users in "var_user_data.sql" file under the fhoss folder)
+To test your [OpenIMSCore][openims-website] you may use a Sip client of your choice. Be sure to use the realm defined in your [Bind9 Virtual Network Function Descriptor][bind9-vnf] while testing registration and call. By default the [FHoSS](http://www.openimscore.org/) conaints 2 users : alice and bob. The user is the same as the password, but you may also alter it to your needs modifying the [FHoSS Virtual Network Function Descriptor][openims-repo] ( You will find the users in "var_user_data.sql" file under the fhoss folder)
 
-For Benchmarking we can use [IMS Bench SIPp](http://sipp.sourceforge.net/ims_bench/) but then you should add more users to the [FHoSS](http://www.openimscore.org/) database since by default it only contains 2 users.
+For Benchmarking we can use [IMS Bench SIPp](http://sipp.sourceforge.net/ims_bench/) but then you should add more users to the [FHoSS][openims-website] database since by default it only contains 2 users.
 
 <!---
 References
@@ -74,6 +74,8 @@ References
 [NFVO]: https://github.com/openbaton/NFVO
 [openstack-plugin]:https://github.com/openbaton/openstack-plugin
 [bind9-vnf]: bind9/vnfd.json
+[how-to-gui]:nfvo-how-to-use-gui
+[openims-website]:http://www.openimscore.org
 
 [ims-struc]:images/ims-architecture.png
 [nfvo]:http://openbaton.github.io/documentation/nfvo-installation/
