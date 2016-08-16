@@ -10,11 +10,7 @@ A project is a separate realm in which permitted users can work. Users can be as
 
 A user can have the role *USER* or *GUEST* in a project. Administrators with the role *ADMIN* has control over the whole system. He may add and delete users and projects, assign roles and has access to all the projects. When starting the NFVO there will be already the super user (with the role of an *ADMIN*) defined by default with the user name *admin* and the default password *openbaton*.
 
-The default password can be changed by setting 
-```properties
-nfvo.security.admin.password = 
-```
-in *openbaton.properties*.  
+The default password can be changed in the top right corner of the dashboard.
 
 The next available role is *USER*. If a user is the *USER* of a project he can create, delete and update PoPs, NSD, VNFD, VNFPackages, NSR and VNFR in his projects. He cannot access or see other projects or users.
 

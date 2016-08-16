@@ -17,12 +17,12 @@ sudo docker pull openbaton/standalone:<Open Baton version>
 sudo docker run -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone:<Open Baton version>
 ```
 
-*\*VERY IMPORTANT NOTE - You should put the Open Baton version which you would like to run. You can see which ones
-  are available from [this][reference-to-op-repo-on-public-docker-hub] list \**
+***VERY IMPORTANT NOTE*** - You should put the Open Baton version which you would like to run. You can see which ones
+  are available from [this][reference-to-op-repo-on-public-docker-hub] list
 
-*\*VERY IMPORTANT NOTE - You should put as input for the RABBITMQ_BROKERIP the RabbitMQ IP making sure that this IP can be
+***VERY IMPORTANT NOTE*** - You should put as input for the RABBITMQ_BROKERIP the RabbitMQ IP making sure that this IP can be
   reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues. 
-  In particular, you should select the external IP of your host on top of which the docker container is running \**
+  In particular, you should select the external IP of your host on top of which the docker container is running
   
 After running the container you should see as output an alphanumeric string (which represents the Open Baton container's full ID running) similar to the following:
 
@@ -53,8 +53,8 @@ After few minutes the Open Baton NFVO should be started, then you can open a bro
 To log in, the default credentials for the administrator user are:
 
 ```
-* user: admin
-* password: openbaton 
+user: admin
+password: openbaton 
 ```
 
 To stop and delete the running Open Baton container you can type respectively the following commands:
