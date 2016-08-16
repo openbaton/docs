@@ -56,12 +56,7 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
             "flavour_key":"m1.small"
         }
     ],
-    "vnfPackageLocation":"link_to_gitrepo",
-    "requires":{
-    	"server":{
-        	"parameters":["netname_floatingIp"]
-    	}
-    }
+    "vnfPackageLocation":"link_to_gitrepo"
 }
 ```
 

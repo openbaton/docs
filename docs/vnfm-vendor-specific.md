@@ -70,10 +70,7 @@ POST request on _*VnfmEnpoint*_
         { ... }
       ]
     },
-    "vnfPackage": { ... },
-    "keypairs":[
-	{ ... }
-    ]     
+    "vnfPackage": { ... };     
 }
 ```
 
@@ -88,7 +85,6 @@ POST request on _*VnfmEnpoint*_
 | _*action*_ | the action to be executed |
 | _*vimInstances*_ | a map containing per each vdu id the list of VimInstance objects |
 | _*vnfPackage*_ | the VNFPackage of the VirtualNetowrkFunctionRecord |
-| _*keypairs*_ | the list of additional keypairs to be added to the VM |
 
 
 
@@ -163,10 +159,7 @@ POST request on _*OrEndpoint*_/admin/v1/vnfm-core-allocate
     "vimInstances":{
       "vdu_id":{ ... }
     },
-    "userdata":"",
-    "keypairs":[
-	{ ... }
-    ]
+    "userdata":""
 }
 ```
 
@@ -177,7 +170,6 @@ POST request on _*OrEndpoint*_/admin/v1/vnfm-core-allocate
 | _*virtualNetworkFunctionRecord*_ | the VirtualNetowrkFunctionRecord |
 | _*vimInstances*_ | the chosen vim per vdu |
 | _*userdata*_ | the userdata |
-| _*keypairs*_ | the keypairs to be added to the VM by the NFVO |
 
 
 ### AllocateResources (Or-Vnfm)
