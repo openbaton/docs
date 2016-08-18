@@ -81,7 +81,7 @@ If you go to `Orchestrate NS -> NS Records` in the menu on the left side, you ca
 You can also use the CLI for deploying existing NSDs. Therefore, you need to execute the following command in order to start the deployment. The ID of the NSD to deploy can be found either by using the dashboard or getting it from the output when onboarding a new NSD as done in the previous step. The command to deploy the previously onboarded NSD looks like shown below:
 
 ```bash
-$./openbaton.sh NetworkServiceRecord-create 658c2b21-4af6-4489-84f7-ee864159404c
+$./openbaton.sh NetworkServiceRecord-create 658c2b21-4af6-4489-84f7-ee864159404c {} []
 ```
 
 The execution of this command produces the following output:

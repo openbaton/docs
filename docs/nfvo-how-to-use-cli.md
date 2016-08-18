@@ -210,19 +210,28 @@ $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor id-n
 ```
 
 ### **Network Service Record Subcommands**
-**create**
- 
-  * Create a Network Service Record from a file
-```sh
- $ openbaton.sh NetworkServiceRecord-create file.json
-```
 
 **create**
  
   * Create a Network Service Record from a Network Service Descriptor stored in the orchestrator
 ```sh
- $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor
+ $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor {} []
 ```
+
+The two arguments after the NSD id can be used to specify the VIM on which a VDU should be deployed and the keypairs that shall be used to deploy the NSR.  
+If you want to specify the VIM to use for a particular VDU you can pass a map like this:
+```sh
+ $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor {"vdu1Name":[vim1,vim2,vim3], "vdu2Name":[vim1]} []
+```
+
+In this case the VDU named vdu2Name would be deployed on vim1 and the VDU named vdu1Name randomly on one of the VIMs vim1, vim2 or vim3.  
+
+The last command argument describes which keypairs shall be used to deploy the NSR. Here is an example: 
+```sh
+ $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor {"vdu1Name":[vim1,vim2,vim3], "vdu2Name":[vim1]} ["key1", "key2", "key3"]
+```
+
+Of course you do not have to specify VIMs and keys. If you do not want to specify them just pass empty braces. 
 
 **delete**
 
@@ -273,28 +282,28 @@ $ openbaton.sh NetworkServiceRecord-update file.json id-network-service-record
  $ openbaton.sh NetworkServiceRecord-deleteVirtualNetworkFunctionRecord id-network-service-record id-vnfr
 ```
 
-* **createVNFDependency**
+**createVNFDependency**
 
   * Create a Virtual Network Function Record Dependency of a NetworkServiceRecord with a specific id
 ```sh
  $ openbaton.sh NetworkServiceRecord-createVNFDependency id-network-service-record file.json
 ```
   
-* **deleteVNFDependency**
+**deleteVNFDependency**
 
   * Delete the Virtual Network Function Record Dependency of a NetworkServiceRecord with a specific id
-  ```sh
-   $ openbaton.sh NetworkServiceRecord-deleteVNFDependency id-network-service-record id-vnfdependency
-  ```
+```sh
+ $ openbaton.sh NetworkServiceRecord-deleteVNFDependency id-network-service-record id-vnfdependency
+```
   
-* **getVNFDependencies**
+**getVNFDependencies**
 
   * Get all the Virtual Network Function Record Dependencies of a Network Service Record with a specific id
 ```sh
  $ openbaton.sh NetworkServiceRecord-getVNFDependencies id-network-service-record
 ```
   
-* **getVNFDependency**
+**getVNFDependency**
 
   * Get the Virtual Network Function Record Dependency of a Network Service Record with a specific id
 ```sh
@@ -313,6 +322,127 @@ $ openbaton.sh NetworkServiceRecord-createVNFCInstance id-network-service-record
   * Perform a SCALE_IN operation on a Virtual Network Function by deleting a VNFCInstance from the Virtual Network Function Record
 ```sh
 $ openbaton.sh NetworkServiceRecord-deleteVNFCInstance id-network-service-record id-virtual-network-function-record
+```
+
+
+### **User Subcommands**
+**create**
+
+  * Create a new User
+```sh
+$ openbaton.sh User-create file.json
+```
+
+**delete**
+
+  * Delete a user passing his id
+```
+$ openbaton.sh User-delete user-id
+```
+
+**update**
+
+  * Update a User
+```sh
+$ openbaton.sh User-update file.json user-id
+```
+
+**findAll**
+
+  * Find all Users
+```sh
+$ openbaton.sh User-findAll
+```
+
+**findByName**
+
+  * Find a User by his username
+```sh
+$ openbaton.sh User-findByName username
+```
+
+**changePassword**
+
+  * Change the password of the current user
+```sh
+$ openbaton.sh User-changePassword oldPassword newPassword
+```
+
+Remember to source nfvo.properties afterwards and set the new password if you want to continue working as this User. 
+
+
+### **Project Subcommands**
+**create**
+
+  * Create a new Project
+```sh
+$ openbaton.sh Project-create file.json
+```
+
+**delete**
+
+  * Delete a Project passing its id
+```sh
+$ openbaton.sh Project-delete id-project
+```
+
+**update**
+
+  * Delete a Project passing its id
+```sh
+$ openbaton.sh Project-delete id-project
+```
+
+**findAll**
+
+  * Find all Projects
+```sh
+$ openbaton.sh Project-findAll
+```
+
+**findById**
+
+  * Find a Project by passing its id
+```sh
+$ openbaton.sh Project-findById id-project
+```
+
+### **Key Subcommands**
+**generateKey**
+
+  * Generate a new Key in the NFVO
+```sh
+$ openbaton.sh Key-generateKey keyname
+```
+
+You will get back the private key.
+
+**importKey**
+
+  * Import a Key into the NFVO
+```sh
+$ openbaton.sh Key-importKey keyname publicKey
+```
+
+**delete**
+
+  * Delete a Key passing its id
+```sh
+$ openbaton.sh Key-delete id-key
+```
+
+**findAll**
+
+  * Find all Keys
+```sh
+$ openbaton.sh Key-findAll
+```
+
+**findById**
+
+  * Find a Key by passing its id
+```sh
+$ openbaton.sh Key-findById id-key
 ```
 
 
@@ -357,7 +487,7 @@ $ openbaton.sh Configuration-create file.json
 
   * Delete a Configuration passing its id
 ```sh
- $ openbaton.sh Configuration-delete id-configuration
+$ openbaton.sh Configuration-delete id-configuration
 ```
 
 **findAll**
