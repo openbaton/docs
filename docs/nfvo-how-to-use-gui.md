@@ -81,6 +81,10 @@ In order to launch NSD press the *Action* near the NSD you want to lauch and pre
  1. Pick key that you have added to the NFVO or created with it, you can pick multiple keys too, and press *Launch* to use these keys later to access the VMs. 
 
  2. Press *Launch with VIM key* in order to use the key you have mentioned in VIM instance JSON or to use no key at all(this will be the case if no key was mentioned in the VIM file). 
+ 
+
+ 3. You can now also pick PoP if you have named VDUs in your NSD, if you pick no PoP, NFVO will pick one of the PoPs that you have written in NSD's VDUs. You can pick one PoP for all the named VDU by simply pressing plus and adding picking a PoP in selection bar. If you want to pick PoP per VNF, you can mark expand and it will let you add PoP choice per VNF, the same goes for picking PoPs per VDU. 
+ *IMPORTANT*: Only the named VDU will be affected by higher level choices, unnamed VDUs' PoPs will be picked by NFVO automatically. 
 
 ![NSD Launch][launchNSD]
 #### Storing NSD
