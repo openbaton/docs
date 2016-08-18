@@ -167,7 +167,7 @@ In the list of Virtual Network Function Descriptors in NSD template you can clic
 ![VNF Descriptor Information][VNFDescriptorInformation]
 
 At the bottom of the page you can see the Virtual Deployment Unit (VDU) tab and if you click on the **id** of the 
-VDU you can see the details of it
+VDU you can see the details of it. Here you can also start stop VNFC Instances with button. 
 
 ![VDU Information][VDUInformation]
 
