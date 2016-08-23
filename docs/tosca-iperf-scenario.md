@@ -19,120 +19,87 @@ The prerequisites are:
 
 | TOSCA Type          			| ETSI Entity       													|
 | -------------   				| -------------:													|
-| openbaton.type.VNF.GENERIC  	| Virtual Network Function Descriptor (type: GENERIC) 
-| openbaton.type.VDU 			| Virtual Deployment Unit (vnfd:vdu)     	|
+| openbaton.type.VNF  	| Virtual Network Function Descriptor 
+| tosca.nodes.nfv.VDU			| Virtual Deployment Unit (vnfd:vdu)     	|
 | tosca.nodes.nfv.VL 			| Virtual Link Descriptor     	|
 | tosca.nodes.nfv.CP 			| Connection Point      	|
 
 
-## Deploy an Iperf TOSCA definition
+## Deploy a NSD TOSCA Template
 
-We are going to create a NSD from TOSCA-definition that create a [iperf][iperf] scenario.
+We are going to create a NSD from TOSCA-defined NSD Template that creates an [iperf][iperf] scenario.
 
 The components in the definition are these in the picture below:
 
 ![Iperf overview][iperf-TOSCA]
 
+##Topology Template
+
+For now the Topology template includes only the Node Templates. 
 
 ## Node Templates
 
-The Node Templates are the description of the Objects which constitute the Network Service Descriptor.
-Each Object is defined by ```Map<String , Object>```
+The Node Templates are the description of the objects which constitute the Network Service Descriptor. Each node is defined by its name and the parameters needed to create its descriptor.
 
-### Node Template: VNF
+### Node Template: Virtual Network Function (VNF)
 
-You can see the definition of the VNF as described below:
+This is an example of VNF Template defined inside the NSD Template. The parameters available and needed to create a Virtual Network Function Descriptor are defined and explained below: 
 
 ```yaml
-iperf-server: #VNF1
-      type: openbaton.type.VNF.GENERIC
-      properties:
-        id:
-        vendor: Fokus
-        version: 0.1
-        configurations:
-          name: server-configurations
-          configurationParameters:
-            - key: value
-            - key2: value2
-        vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
-        deployment_flavour:
-          - flavour_key: m1.small
-      requirements:
-        - virtualLink: private
-        - host:
-            node: VDU2
-            type: openbaton.relationships.HostedOn
-      interfaces:
-        Standard: # lifecycle
-          create: install.sh
-          start: install-srv.sh
+iperf-server:
+  type: openbaton.type.VNF
+  properties:
+    vendor: Fokus
+    version: 0.1
+    endpoint: dummy
+    configurations:
+      name: server-configurations
+      configurationParameters:
+        - key: value
+        - key2: value2
+    vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+    deployment_flavour:
+      - flavour_key: m1.small
+  requirements:
+    - virtualLink: private
+    - vdu: VDU2
+  interfaces:
+    lifecycle: # lifecycle
+      instantiate:
+        - install.sh
 ```
-This VNF is called ```iperf-server``` and below you can see the description of the fields:
+
+This Virtual Network Function is called ```iperf-server``` 
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| type  	            | openbaton.type.VNF.GENERIC    | It is the type of the VNF and defines the type of the Virtual Network Function Manager (VNFG) which will handle the VNF |
-| properties 			| See the Table below    	    | It is  a Object where are mapped some values for deploying the VNF    |
-| requirements 			| See the Table below           | It describes the requirements for the VNF |
-| interfaces			| See the Table below      	    | It is an Object which maps for each lifecycle interface  with the Script that will be executed for the lifecycle event specified |
+| type  	            | openbaton.type.VNF    | Type of the node. In the example it defines the node as a VNF node. |
+| properties 			| See the Table below    	    | Defines parameters needed for deploying a VNFD    |
+| requirements 			| See the Table below           | Describes the component requirements for the VNF |
+| interfaces			| See the Table below      	    | Defines the lifecycle events and the scripts needed for their execution.  |
 
 
 The **Properties** for the VNF are:
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| id  	                | String     | Identifier of the VNF |
 | vendor  	            | String    | Name of the provider of the VNF |
 | version  	            | String     | Version of the provider of the VNF  |
 | configurations  	    | Object with two values **name**, **configurationParameters**  | **name**: is a String with the name of the Configuration, **configurationParameters**: the list of Parameters defined by a pair of < key, value > |
 | vnfPackageLocation  	| URL    | It is URL where the Orchestrator will fetch the Scripts needed in the lifecycle events defined in the **interfaces** |
 | deployment_flavour  	| List of flavour_key    | It is a list flavors each one refers to Virtual hardware templates called "flavors" in OpenStack  |
+| endpoint 	| String    | The VNFManager deploying the VNF itself  |
 
-The **Requirements** for the VNF are:
+The **Requirements** for the VNF is an object containing a list of String key-value pairs and the keys are defined the following way:
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| virtualLink  	        | List     | It is the List of *virtuaLink* where this VNF is connected |
-| host  	            | List of VDU    | It is the List of VDU. Each *host* refers to a **node** VDU. This parameter follows the ETSI definition of VNF which should have the list of VDU. |
+| virtualLink  	        | String    | Shows where the VNF is connected |
+| vdu  	            | String    | Defines a VDU which is a part of the VNF |
 
-The **Interfaces** for the VNF cloud be of two types:
-The TOSCA-Parser can handle both configurations.
-
-#### 1. Standard
-
-This interface follows the definition of **tosca.interfaces.node.lifecycle.Standard** described in the [TOSCA Simple YAML][TOSCA-simple-YAML] standard.
-    
-| Lifecycle event       | Value   	     | Description       											|
-| -------------   		| -------------: | --------------:												|
-| create  	            | Script file    | The Script will be called for this Lifecycle event |
-| configure  	        | Script file    | The Script will be called for this Lifecycle event |
-| start  	            | Script file    | The Script will be called for this Lifecycle event|
-| stop  	            | Script file    | The Script will be called for this Lifecycle event|
-| delete  	            | Script file    | The Script will be called for this Lifecycle event|
-    
-**NOTE** You can define the relationship between two VNFs in the *configuration* event like you can see in the example below:
-
-```yaml
-interfaces:
-   Standard: # lifecycle
-      create: install.sh
-      configure:
-         implementation: configure.sh
-         inputs:
-            server_ip: { get_attribute: [iperf-server, mgmt] }
-      start: start.sh
-
-```
-The ```configure``` has two fields:
-
-1. **implementation**: refers to the script which will be execute for this event
-2. **inputs**: is the list of parameters that this VNF needs from the *source* VNF in the case above the source is **iperf-server** and the parameter is **mgmt**
-
-
-#### 2. openbaton.interfaces.lifecycle 
+The **Interfaces** for the VNF has only one option at the moment: **lifecycle**
  
-This Interface has these events compared with the definition by TOSCA this one follows the ETSI Lifecycle Events. 
+For the **lifecycle** object are the following events defined in compliance with the ETSI Lifecycle Events. 
 
 | Lifecycle event       | Value   	        | Description       											|
 | -------------   		| -------------:	        | --------------:												|
@@ -142,85 +109,80 @@ This Interface has these events compared with the definition by TOSCA this one f
 | STOP  	            | List of Script files      | The Scripts will be called for this Lifecycle event|
 | TERMINATE  	        | List of Script files      | The Scripts will be called for this Lifecycle event|
 
-### Node Template: VDU
-This is the definition of VDU called ```VDU1```:
+### Node Template: Virtual Deployment Unit (VDU)
+This is an example of a VDU template and similar to above after that we explain briefly the components of the template.
 
 ```yaml
-VDU1:
-      type: openbaton.type.VDU
-      properties:
-        vm_image:
-          - ubuntu-14.04-server-cloudimg-amd64-disk1
-        scale_in_out: 2
-        vimInstanceName: vim-instance
-      requirements:
-         - virtual_link: [CP1]
-      capabilities:
-        host:
-          valid_source_types: openbaton.type.VDU
-
+VDU2:
+  type: tosca.nodes.nfv.VDU
+  properties:
+    vm_image:
+      - ubuntu-14.04-server-cloudimg-amd64-disk1
+    scale_in_out: 2
+    vimInstanceName: vim-instance
+  requirements:
+    - virtual_link: CP2
 ```
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| type  	            | openbaton.type.VDU            | It is the type of the VDU |
-| properties 			| See the Table below    	    | It is  a Object where are mapped some values for deploying the VDU    |
-| requirements 			| List of requirement         | It describes the requirements for the VDU in the example above the VDU needs a virtual_link which is a list of Connection Point in this case **CP1**|
-| capabilities			| Object      	    | Type of capability offered |
+| type  	            | tosca.nodes.nfv.VDU            |  Type of the node. In the example it defines the node as a VDU node. |
+| properties 			| See the Table below    	    | Defines parameters needed for deploying a VDU    |
+| requirements 			| List of requirement         | Describes the component requirements for the VDU |
 
-The **Properties** for the VDU are:
+The **Properties** Object of a VDU node has the following components:
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
 | vm_image  	                | List < String >     | It is the list of images present in the OpenStack that will be used to instantiate a VNFC (aka Virtual Machine) |
 | scale_in_out  	            | Integer    | Maximum value of VNFCs that can be instantiated in the process of scale-in/out |
-| vimInstanceName  	            | String     | Name of Point of Persistence (PoP aka Datacenter) where this VNFC will be instantiated  |
+| vimInstanceName  	            | String     | Name of Point of Persistence (PoP) where this VNFC will be instantiated  |
 
+The **Requirements** Object of a VDU node defines a list of virtual links to Connection Points. Exactly like the VNF Node the **Requirements** define a list of key-value pair, but in this case the only key is defined as follows:
 
+| Name          		| Value   	                    | Description       											|
+| -------------   		| -------------:	            | --------------:												|
+| virtualLink  	        | String    | Shows where the VDU is connected |
 
 ### Node Template: Connection Point (CP)
 
-This is the definition of CP called ```CP2```:
+This is an example of a CP template and similar to above after that we explain briefly the components of the template.
 
 ```yaml
-CP2: #endpoint of VDU2
-      type: tosca.nodes.nfv.CP
-      properties:
-        floatingIp: random
-      requirements:
-        virtualbinding: VDU2
-      virtualLink: private
+CP1:
+  type: tosca.nodes.nfv.CP
+  properties:
+    floatingIP: random
+  requirements:
+    virtualBinding: VDU1
+    virtualLink: private
 
 ```
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| type  	            | tosca.nodes.nfv.CP            | It is the type of the CP |
-| properties 			| Object   	    | It is a Object where are mapped some values for deploying the CP in this case **floatingIp** means that has a public IP chosen **random**  by OpenStack |
-| requirements 			| Object         | It describes the requirements for the CP in the example above the CP needs a virtualbinding to the VDU in this case **VDU2**|
-| virtualLink			| String      	    | It refers to Node Template which describes the Virtual Link in this case the Virtual Link is called **private**  |
+| type  	            | tosca.nodes.nfv.CP            | Type of the node. In the example it defines the node as a CP node. |
+| properties: floatiIP			| String  	    | Only property defined at the moment is **floatingIP**. In this case **floatingIp** means that has a public IP chosen **random**  by OpenStack |
+| requirements: virtualBinding 			| String        | It describes the requirements for the CP in the example above the CP needs a **virtualBinding** to the VDU in this case **VDU1**|
+| requirements: virtualLink			| String      	    | It refers to Node Template which describes the Virtual Link in this case the Virtual Link is called **private**  |
 
 
 ### Node Template: Virtual Link (VL)
 
-OpenBaton uses virtual Link name as subnets from OpenStack.
+OpenBaton uses Virtual Link names as subnets from OpenStack.
 
 This is the definition of VL called ```private```:
 
 ```yaml
 private:
-    type: tosca.nodes.nfv.VL
-    properties:
-      vendor: Fokus
-    capabilities:
-      virtual_linkable:
-        valid_source_types: tosca.nodes.nfv.CP
+  type: tosca.nodes.nfv.VL
+  properties:
+    vendor: Fokus
 
 ```
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| type  	            | tosca.nodes.nfv.VL            | It is the type of the CP |
-| properties 			| Object   	    | It is a Object that has some information in this case vendor |
-| capabilities 			| Object      	    | Type of capability offered |
+| type  	            | tosca.nodes.nfv.VL            | It is the type of the node. In this example Virtual Link. |
+| properties:vendor 			| String   	    | Information about the vendor of this VL. |
 
 
 
@@ -260,107 +222,93 @@ metadata:
   version: 0.1 Alpha  # Version of the Network Service Descriptor
   
 topology_template:
+
   node_templates:
+
     iperf-server: #VNF1
-      type: openbaton.type.VNF.GENERIC
+        type: openbaton.type.VNF
+        properties:
+          vendor: Fokus
+          version: 0.1
+          endpoint: dummy
+          configurations:
+            name: server-configurations
+            configurationParameters:
+              - key: value
+              - key2: value2
+          vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+          deployment_flavour:
+            - flavour_key: m1.small
+            - flavour_key: m1.large
+        requirements:
+          - virtualLink: private
+          - vdu: VDU2
+        interfaces:
+          lifecycle: # lifecycle
+            instantiate:
+              - install.sh
+
+    iperf-client: #VNF2
+      type: openbaton.type.VNF
       properties:
-        id:
+        ID: x
         vendor: Fokus
         version: 0.1
-        configurations:
-          name: server-configurations
-          configurationParameters:
-            - key: value
-            - key2: value2
         vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
-        deployment_flavour:
+        deploymentFlavour:
           - flavour_key: m1.small
+        endpoint: dummy
       requirements:
-        - virtualLink: private
-        - host:
-            node: VDU2
-            type: openbaton.relationships.HostedOn
+         - virtualLink: private
+         - vdu: VDU1
       interfaces:
-        Standard: # lifecycle
-          create: install.sh
-          start: install-srv.sh
-    iperf-client:
-      type: openbaton.type.VNF.GENERIC
-      properties:
-        id:
-        vendor: Fokus
-        version: 0.1
-        configurations:
-          name: client-configurations
-          configurationParameters:
-            - key: value
-            - key2: value2
-        vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
-        deployment_flavour:
-          - flavour_key: m1.small
-      requirements:
-        - virtualLink: private
-        - host:
-            node: VDU1
-            type: openbaton.relationships.HostedOn
-      interfaces:
-        openbaton.interfaces.lifecycle: # lifecycle
-          INSTANCIATE:
-            - install.sh
-          CONFIGURE:
-            - server_configure_only.sh
-          START:
-            - iperf_client_start.sh
+          lifecycle: # lifecycle
+            INSTANTIATE:
+              - install.sh
+            CONFIGURE:
+              - server_configure_only.sh
+            START:
+              - iperf_client_start.sh
+
     VDU1:
-      type: openbaton.type.VDU
+      type: tosca.nodes.nfv.VDU
       properties:
         vm_image:
           - ubuntu-14.04-server-cloudimg-amd64-disk1
-        scale_in_out: 2
-        vimInstanceName: vim-instance
-      requirements:
-         - virtual_link: [CP1]
-      capabilities:
-        host:
-          valid_source_types: openbaton.type.VDU
+        scale_in_out: 1
+        vim_instance_name: vim-instance
+
     VDU2:
-      type: openbaton.type.VDU
+      type: tosca.nodes.nfv.VDU
       properties:
         vm_image:
           - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 2
         vimInstanceName: vim-instance
       requirements:
-        - virtual_link: [CP2]
-      capabilities:
-        host:
-          valid_source_types: openbaton.type.VDU
+        - virtual_link: CP2
+
+    CP1:
+      type: tosca.nodes.nfv.CP
+      properties:
+        floatingIP: random
+      requirements:
+        virtualBinding: VDU1
+        virtualLink: private
+
+    CP2: #endpoints of VNF2
+      type: tosca.nodes.nfv.CP
+      requirements:
+        virtualBinding: VDU2
+        virtualLink: private
 
     private:
       type: tosca.nodes.nfv.VL
       properties:
         vendor: Fokus
-      capabilities:
-        virtual_linkable:
-          valid_source_types: tosca.nodes.nfv.CP
-
-    CP1: #endpoint of VDU1
-      type: tosca.nodes.nfv.CP
-      properties:
-      requirements:
-        virtualbinding: VDU1
-      virtualLink: private
-
-    CP2: #endpoint of VDU2
-      type: tosca.nodes.nfv.CP
-      properties:
-        floatingIp: random
-      requirements:
-        virtualbinding: VDU2
-      virtualLink: private
 
 relationships_template:
-  connection_server_client:
+  connection_server_client: #DO I NEED THIS AT ALL ?
     type: tosca.nodes.relationships.ConnectsTo
     source: iperf-server
     target: iperf-client
@@ -412,3 +360,4 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
+
