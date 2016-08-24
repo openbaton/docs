@@ -1,4 +1,4 @@
-# TOSCA definition
+#TOSCA definition
 
 The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
@@ -32,6 +32,29 @@ We are going to create a NSD from TOSCA-defined NSD Template that creates an [ip
 The components in the definition are these in the picture below:
 
 ![Iperf overview][iperf-TOSCA]
+
+The Template has the following structure: 
+
+```yaml
+tosca_definitions_version: tosca_simple_iperf_scenario
+description: Example of NSD
+
+metadata:
+  ID: dummy-NS
+  vendor: Fokus
+  version: 0.1
+
+topology_template: #Explained below
+relationships_template: #Explained below
+```
+
+| Name          		| Description       											|
+| -------------   		| -------------	            | 
+| tosca_definitions_version 	| The version of the template that follows it.    |
+| description  	| A short description of the template.    |
+| metadata  	| An Object containing metadata about the Network Service - name, version and creator.    |
+| relationships_template  	| Explained below    |
+| topology_template 	| Explained below   |
 
 ##Topology Template
 
@@ -136,7 +159,7 @@ The **Properties** Object of a VDU node has the following components:
 | -------------   		| -------------:	            | --------------:												|
 | vm_image  	                | List < String >     | It is the list of images present in the OpenStack that will be used to instantiate a VNFC (aka Virtual Machine) |
 | scale_in_out  	            | Integer    | Maximum value of VNFCs that can be instantiated in the process of scale-in/out |
-| vimInstanceName  	            | String     | Name of Point of Persistence (PoP) where this VNFC will be instantiated  |
+| vimInstanceName  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated  |
 
 The **Requirements** Object of a VDU node defines a list of virtual links to Connection Points. Exactly like the VNF Node the **Requirements** define a list of key-value pair, but in this case the only key is defined as follows:
 
@@ -308,7 +331,7 @@ topology_template:
         vendor: Fokus
 
 relationships_template:
-  connection_server_client: #DO I NEED THIS AT ALL ?
+  connection_server_client:
     type: tosca.nodes.relationships.ConnectsTo
     source: iperf-server
     target: iperf-client
@@ -360,4 +383,5 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
+
 

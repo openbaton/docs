@@ -1,4 +1,4 @@
-CA definition
+#TOSCA Definition
 
 The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
@@ -27,10 +27,28 @@ The prerequisites are:
 ## Deploy a VNFD TOSCA Template
 
 We are going to create a Virtual Network Function Descriptor (VNFD) from a TOSCA-defined VNFD Template.
+It has the following structure:
 
-The components in the definition are these in the picture below:
+```yaml
+tosca_definitions_version: tosca_simple_profile_for_vnf_1_0
+description: Example of VNFD Template
 
-![Iperf overview][iperf-TOSCA]
+metadata:
+  ID: dummy-server
+  vendor: Fokus
+  version: 1.0
+  
+inputs: #Explained below
+topology_template: #Explained below
+```
+| Name          		| Description       											|
+| -------------   		| -------------	            | 
+| tosca_definitions_version 	| The version of the template that follows it.    |
+| description  	| A short description of the template.    |
+| metadata  	| An Object containing metadata about the Virtual Network Function - name, version and creator.    |
+| inputs  	| Explained below    |
+| topology_template 	| Explained below   |
+
 
 ##Inputs Template
 
@@ -79,7 +97,7 @@ For the **lifecycle** object are the following events defined in compliance with
 
 ##Topology Template
 
-For now the Topology template includes only the Node Templates. 
+At the moment the Topology template includes only the Node Templates. 
 
 ## Node Templates
 
@@ -112,7 +130,7 @@ The **Properties** Object of a VDU node has the following components:
 | -------------   		| -------------:	            | --------------:												|
 | vm_image  	                | List < String >     | It is the list of images present in the OpenStack that will be used to instantiate a VNFC (aka Virtual Machine) |
 | scale_in_out  	            | Integer    | Maximum value of VNFCs that can be instantiated in the process of scale-in/out |
-| vimInstanceName  	            | String     | Name of Point of Persistence (PoP) where this VNFC will be instantiated  |
+| vimInstanceName  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated  |
 
 The **Requirements** Object of a VDU node defines a list of virtual links to Connection Points. Exactly like the VNF Node the **Requirements** define a list of key-value pair, but in this case the only key is defined as follows:
 
