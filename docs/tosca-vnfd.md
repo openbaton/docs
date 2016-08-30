@@ -1,4 +1,4 @@
-#TOSCA Definition
+##TOSCA Definition
 
 The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
@@ -235,17 +235,44 @@ topology_template:
 
 ```
 
-**NOTE**: Save the definition in a file called VNFD.yaml.
+**NOTE**: Save the template in a file called server-iperf.yaml.
 
-To store this VNFD written in TOSCA in the NFVO catalogue you need to send it to the NFVO with this curl command:
+Using the API you can store the VNFD written in TOSCA directly in the NFVO. You will need the dummy-vnfm and test vim instance.
+ To do that follow these steps:
+
+1) Authentication:
+Run this command:
+```bash
+$curl -v -u openbatonOSClient:secret -X POST http://localhost:8080/oauth/token -H "Accept: application/json" -d "username=admin&password=openbaton&grant_type=password"
+```
+The NFVO will answer with an authetication key and a project id. You will need them to send the VNFD in the next step. The response should look like this:
 
 ```bash
-$ curl -i -X POST http://localhost:8080/api/v1/tosca -H "Content-Type: text/yaml" "Accept: application/json" --data-binary @iperf-TOSCA.yaml
+{
+  # Authentication Key
+  "value": "e8726a35-61c8-4bcb-873e-3ab6cc989f6f",
+  "expiration": "Aug 30, 2016 9:14:22 PM",
+  "tokenType": "bearer",
+  "refreshToken": {
+    "expiration": "Sep 29, 2016 9:14:22 AM",
+    # Project ID
+    "value": "336ca2e6-8e78-48eb-b8f8-c5de862a21da"
+  },...
+```
+2) To add a VIM instance, save it in json format and add it using the api with the following command:
+
+```bash
+curl -i -X POST http://localhost:8080/api/v1/datacenters -H "Content-Type: application/json" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @test-vim.json
 ```
 
-The NFVO will answer with json translation of the NSD. 
-To retrieve or to instantiate this NSD please use the Dashboard of OpenBaton in the page under the menu Catalogue > NS Descriptors.
+3) To send the VNFD in the TOSCA format run this:
 
+```bash
+$curl -i -X POST http://localhost:8080/api/v1/vnfd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @server-iperf.yaml
+```
+
+The NFVO will answer with json translation of the VNFD. 
+To retrieve or to instantiate this VNFD please use the Dashboard of OpenBaton in the page under the menu Catalogue > VNF Descriptors.
 
 <!------------
 References
