@@ -215,23 +215,33 @@ $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor id-n
  
   * Create a Network Service Record from a Network Service Descriptor stored in the orchestrator
 ```sh
- $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor {} []
+ $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor vim-map-file keypair-file configurations-file
 ```
 
-The two arguments after the NSD id can be used to specify the VIM on which a VDU should be deployed and the keypairs that shall be used to deploy the NSR.  
-If you want to specify the VIM to use for a particular VDU you can pass a map like this:
-```sh
- $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor {"vdu1Name":[vim1,vim2,vim3], "vdu2Name":[vim1]} []
+The three arguments after the NSD id can be used to specify the VIM on which a VDU should be deployed, the keypairs that shall be used to deploy the NSR and configuration parameters for the VNFRs.  
+If you want to specify the VIM to use for a particular VDU you can pass a file containing a map like this:
+```json
+ {"vdu1Name":[vim1,vim2,vim3], "vdu2Name":[vim1]}
 ```
 
 In this case the VDU named vdu2Name would be deployed on vim1 and the VDU named vdu1Name randomly on one of the VIMs vim1, vim2 or vim3.  
 
-The last command argument describes which keypairs shall be used to deploy the NSR. Here is an example: 
-```sh
- $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor {"vdu1Name":[vim1,vim2,vim3], "vdu2Name":[vim1]} ["key1", "key2", "key3"]
+The second command argument specifies a file containing a list that describes which keypairs shall be used to deploy the NSR. Here is an example: 
+```json
+ ["key1", "key2", "key3"]
 ```
 
-Of course you do not have to specify VIMs and keys. If you do not want to specify them just pass empty braces. 
+The last command argument specifies a file containing a map of VNFR names and configuration parameters. Here is an example: 
+```json
+{
+  "configurations":{ 
+    "vnfrName1":{"name":"conf1","configurationParameters":[{"confKey":"key1", "value":"value1", "description":"description1"}]}, 
+    "vnfrName2":{"name":"conf2","configurationParameters":[{"confKey":"key1", "value":"value1", "description":"description1"}]} 
+  }
+}
+```
+
+Of course you do not have to specify VIMs, keys and configurations. If you do not want to specify them just put empty objects into the files i.e. {} and []. 
 
 **delete**
 
