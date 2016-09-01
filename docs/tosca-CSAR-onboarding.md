@@ -1,6 +1,6 @@
-#TOSCA CSAR on-boarding
-The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA.
-It is a compressed file that includes a TOSCA template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
+# TOSCA CSAR on-boarding
+This tutorial is more advanced and expects that you already know what TOSCA is and how Virtual Network Function Descriptor or Network Service Descriptor defined in the TOSCA format is structured.
+The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA. It is a compressed file that includes a TOSCA template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
 The CSAR is a zip file with this structure:
 
 ```bash
@@ -12,13 +12,14 @@ The CSAR is a zip file with this structure:
 └── TOSCA-Metadata
     └── TOSCA.meta
 ```
-The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference being that when reading a NSD it will onboard all VNFs included in the NSD. The TOSCA.meta file must contain the reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml**
+The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference being that when reading a NSD it will onboard all VNFs included in the NSD and after that the NSD itself. The TOSCA.meta file must contain the reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml**. An optional feature is to define the vm image here in the metadata. It is easier to add it here one time instead of adding it multiple times in the template.
 
 ```bash
 TOSCA-Meta-File-Version: 1.0
 CSAR-Version: 1.1
 Created-By: OASIS TOSCA TC
 Entry-Definitions: Definitions/testNSDIperf.yaml
+image: ubuntu-14.04-server-cloudimg-amd64-disk1 # optional
 ```
 
 The Scripts folder contains all the files required from the lifecycle interfaces of the VNFs.
@@ -53,6 +54,7 @@ topology_template:
           vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
           deployment_flavour:
             - flavour_key: m1.small
+            - flavour_key: m1.large
         requirements:
           - virtualLink: private
           - vdu: VDU2
@@ -89,7 +91,7 @@ topology_template:
       properties:
         scale_in_out: 1
         vim_instance_name:
-          - vim-instance
+          - test-vim-instance
       artifacts:
         VDU1Image:
           type: tosca.artifacts.Deployment.Image.VM
@@ -101,7 +103,7 @@ topology_template:
         vm_image:
           - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 2
-        vimInstanceName:
+        vim_instance_name:
           - test-vim-instance
       requirements:
         - virtual_link: CP2
@@ -115,14 +117,14 @@ topology_template:
       properties:
         floatingIP: random
       requirements:
-        virtualBinding: VDU1
-        virtualLink: private
+        - virtualBinding: VDU1
+        - virtualLink: private
 
     CP2: #endpoints of VNF2
       type: tosca.nodes.nfv.CP
       requirements:
-        virtualBinding: VDU2
-        virtualLink: private
+        - virtualBinding: VDU2
+        - virtualLink: private
 
     private:
       type: tosca.nodes.nfv.VL
@@ -130,7 +132,7 @@ topology_template:
         vendor: Fokus
 
 relationships_template:
-  connection_server_client: 
+  connection_server_client: #DO I NEED THIS AT ALL ?
     type: tosca.nodes.relationships.ConnectsTo
     source: iperf-server
     target: iperf-client
@@ -142,7 +144,7 @@ relationships_template:
 
 ## VNF packages from CSAR on-boarding
 
-After archiving the folders you need to change the version of the file to **.csar** The initial steps for setting up the NFVO before sending the VNF packages is the same as a NSD or a VNFD. 
+After zipping the folders you need to change the version of the file to **.csar** The initial steps for setting up the NFVO before sending the VNF packages is the same as a NSD or a VNFD. 
 
 For on-boarding packages in NSD format use this command:
 
@@ -178,5 +180,4 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
-
 

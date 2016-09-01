@@ -10,7 +10,8 @@ Premise: some of the objects are defined by OpenBaton
 The prerequisites are:
 
 * OpenBaton running
-* Generic VNFM running
+* Dummy VNFM running
+*  Test plugin 
 * [Vim Instance][vim-doc] stored in the Catalogue
 
 
@@ -159,7 +160,7 @@ The **Properties** Object of a VDU node has the following components:
 | -------------   		| -------------:	            | --------------:												|
 | vm_image  	                | List < String >     | It is the list of images present in the OpenStack that will be used to instantiate a VNFC (aka Virtual Machine) |
 | scale_in_out  	            | Integer    | Maximum value of VNFCs that can be instantiated in the process of scale-in/out |
-| vimInstanceName  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated  |
+| vim_instance_name  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated  |
 
 The **Requirements** Object of a VDU node defines a list of virtual links to Connection Points. Exactly like the VNF Node the **Requirements** define a list of key-value pair, but in this case the only key is defined as follows:
 
@@ -177,16 +178,18 @@ CP1:
   properties:
     floatingIP: random
   requirements:
-    virtualBinding: VDU1
-    virtualLink: private
+    - virtualBinding: VDU1
+    - virtualLink: private
 
 ```
+
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
 | type  	            | tosca.nodes.nfv.CP            | Type of the node. In the example it defines the node as a CP node. |
 | properties: floatiIP			| String  	    | Only property defined at the moment is **floatingIP**. In this case **floatingIp** means that has a public IP chosen **random**  by OpenStack |
-| requirements: virtualBinding 			| String        | It describes the requirements for the CP in the example above the CP needs a **virtualBinding** to the VDU in this case **VDU1**|
-| requirements: virtualLink			| String      	    | It refers to Node Template which describes the Virtual Link in this case the Virtual Link is called **private**  |
+| requirements: virtualBinding                  | String        | It describes the requirements for the CP in the example above the CP needs a **virtualBinding** to the VDU in this case **VDU1**. The bindings can be multiple hence the requirements is a node.|
+| requirements: virtualLink                     | String            | It refers to Node Template which describes the Virtual Link in this case the Virtual Link is called **private**. Same applies here regarding requirements being a list.  |
+
 
 
 ### Node Template: Virtual Link (VL)
@@ -232,18 +235,28 @@ relationships_template:
 | parameters 			| List < String >      	    | List of parameters for this dependency |
 
 
-The yaml definition that describe all the components and creates the Iperf-NSD is this below:
+**NOTE**: Whenever a value of a given parameter is a string, it is best to put it in quotation marks. Example : 
+
+```yaml
+configurations:
+    name: server-configurations
+    configurationParameters:
+      - key: "value"
+
+```
+
+### Complete Example
 
 
 ```yaml
-tosca_definitions_version: tosca_iperf_1_0_0
-tosca_default_namespace:    # Optional. default namespace (schema, types version)
-description: NSD for deploing an iperf scenario
+tosca_definitions_version: tosca_simple_iperf_scenario
+description: Example of NSD
+
 metadata:
-  ID:                 # ID of this Network Service Descriptor
-  vendor: Fokus       # Provider or vendor of the Network Service
-  version: 0.1 Alpha  # Version of the Network Service Descriptor
-  
+  ID: dummy-NS
+  vendor: Fokus
+  version: 0.1
+
 topology_template:
 
   node_templates:
@@ -254,6 +267,7 @@ topology_template:
           vendor: Fokus
           version: 0.1
           endpoint: dummy
+          type: server
           configurations:
             name: server-configurations
             configurationParameters:
@@ -271,12 +285,13 @@ topology_template:
             instantiate:
               - install.sh
 
-    iperf-client: #VNF2
+    iperf-client:
       type: openbaton.type.VNF
       properties:
         ID: x
         vendor: Fokus
         version: 0.1
+        type: client
         vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
         deploymentFlavour:
           - flavour_key: m1.small
@@ -296,10 +311,13 @@ topology_template:
     VDU1:
       type: tosca.nodes.nfv.VDU
       properties:
-        vm_image:
-          - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 1
-        vim_instance_name: vim-instance
+        vim_instance_name:
+          - test-vim-instance
+      artifacts:
+        VDU1Image:
+          type: tosca.artifacts.Deployment.Image.VM
+          file: ubuntu-14.04-server-cloudimg-amd64-disk1
 
     VDU2:
       type: tosca.nodes.nfv.VDU
@@ -307,23 +325,28 @@ topology_template:
         vm_image:
           - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 2
-        vimInstanceName: vim-instance
+        vim_instance_name:
+          - test-vim-instance
       requirements:
         - virtual_link: CP2
+      artifacts:
+        VDU1Image:
+          type: tosca.artifacts.Deployment.Image.VM
+          file: ubuntu-14.04-server-cloudimg-amd64-disk1
 
     CP1:
       type: tosca.nodes.nfv.CP
       properties:
         floatingIP: random
       requirements:
-        virtualBinding: VDU1
-        virtualLink: private
+        - virtualBinding: VDU1
+        - virtualLink: private
 
     CP2: #endpoints of VNF2
       type: tosca.nodes.nfv.CP
       requirements:
-        virtualBinding: VDU2
-        virtualLink: private
+        - virtualBinding: VDU2
+        - virtualLink: private
 
     private:
       type: tosca.nodes.nfv.VL
@@ -371,7 +394,7 @@ The NFVO will answer with an authetication key and a project id. You will need t
 curl -i -X POST http://localhost:8080/api/v1/datacenters -H "Content-Type: application/json" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @test-vim.json
 ```
 
-3) To send the NSD in the TOSCA format run this:
+3) To send the NSD in the TOSCA format save the example above in a file named testNSDIperf.yaml and run this:
 
 ```bash
 $curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @testNSDIperf.yaml
@@ -411,5 +434,6 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
+
 
 

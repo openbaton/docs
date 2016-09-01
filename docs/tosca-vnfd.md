@@ -10,7 +10,8 @@ Premise: some of the objects are defined by OpenBaton
 The prerequisites are:
 
 * OpenBaton running
-* Generic VNFM running
+* Dummy VNFM running
+* Test plugin
 * [Vim Instance][vim-doc] stored in the Catalogue
 
 
@@ -77,7 +78,7 @@ inputs:
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
 | vnfPackageLocation  	| URL    | It is URL where the Orchestrator will fetch the Scripts needed in the lifecycle events defined in the **interfaces** |
-| deployment_flavour  	| List of flavour_key    | It is a list flavors each one refers to Virtual hardware templates called "flavors" in OpenStack  |
+| deploymentFlavour  	| List of flavour_key    | It is a list flavors each one refers to Virtual hardware templates called "flavors" in OpenStack  |
 | endpoint 	| String    | The VNFManager deploying the VNF itself  |
 | interfaces			| See the Table below      	    | Defines the lifecycle events and the scripts needed for their execution.  |
 | configurations  	    | Object with two values **name**, **configurationParameters**  | **name**: is a String with the name of the Configuration, **configurationParameters**: the list of Parameters defined by a pair of < key, value > |
@@ -130,7 +131,7 @@ The **Properties** Object of a VDU node has the following components:
 | -------------   		| -------------:	            | --------------:												|
 | vm_image  	                | List < String >     | It is the list of images present in the OpenStack that will be used to instantiate a VNFC (aka Virtual Machine) |
 | scale_in_out  	            | Integer    | Maximum value of VNFCs that can be instantiated in the process of scale-in/out |
-| vimInstanceName  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated  |
+| vim_instance_name  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated  |
 
 The **Requirements** Object of a VDU node defines a list of virtual links to Connection Points. Exactly like the VNF Node the **Requirements** define a list of key-value pair, but in this case the only key is defined as follows:
 
@@ -148,16 +149,16 @@ CP1:
   properties:
     floatingIP: random
   requirements:
-    virtualBinding: VDU1
-    virtualLink: private
+    - virtualBinding: VDU1
+    - virtualLink: private
 
 ```
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| type  	            | tosca.nodes.nfv.CP            | Type of the node. In the example it defines the node as a CP node. |
+| type  	           | tosca.nodes.nfv.CP            | Type of the node. In the example it defines the node as a CP node. |
 | properties: floatiIP			| String  	    | Only property defined at the moment is **floatingIP**. In this case **floatingIp** means that has a public IP chosen **random**  by OpenStack |
-| requirements: virtualBinding 			| String        | It describes the requirements for the CP in the example above the CP needs a **virtualBinding** to the VDU in this case **VDU1**|
-| requirements: virtualLink			| String      	    | It refers to Node Template which describes the Virtual Link in this case the Virtual Link is called **private**  |
+| requirements: virtualBinding 			| String        | It describes the requirements for the CP in the example above the CP needs a **virtualBinding** to the VDU in this case **VDU1**. The bindings can be multiple hence the requirements is a node.|
+| requirements: virtualLink			| String      	    | It refers to Node Template which describes the Virtual Link in this case the Virtual Link is called **private**. Same applies here regarding requirements being a list.  |
 
 
 ### Node Template: Virtual Link (VL)
@@ -178,8 +179,17 @@ private:
 | type  	            | tosca.nodes.nfv.VL            | It is the type of the node. In this example Virtual Link. |
 | properties:vendor 			| String   	    | Information about the vendor of this VL. |
 
+**NOTE**: Whenever a value of a given parameter is a string, it is best to put it in quotation marks. Example : 
 
-Here is a complete example of a VNFD Template in the yaml format:
+```yaml
+configurations:
+    name: server-configurations
+    configurationParameters:
+      - key: "value"
+
+```
+
+### Complete Example
 
 
 ```yaml
@@ -200,7 +210,6 @@ inputs:
 
   deploymentFlavour:
     - flavour_key: m1.small
-
   configurations:
     name: server-configurations
     configurationParameters:
@@ -209,6 +218,7 @@ inputs:
 
   vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
   endpoint: dummy
+  type: server
 
 topology_template:
 
@@ -217,16 +227,19 @@ topology_template:
     vdu1:
       type: tosca.nodes.nfv.VDU
       properties:
-        vm_image:
-          - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 1
-        vim_instance_name: vim-instance
+        vim_instance_name:
+         - vim-instance
+      artifacts:
+        VDU1Image:
+          type: tosca.artifacts.Deployment.Image.VM
+          file: ubuntu-14.04-server-cloudimg-amd64-disk1
 
     cp1:
       type: tosca.nodes.nfv.CP
       requirements:
-        virtualBinding: vdu1
-        virtualLink: private
+        - virtualBinding: vdu1
+        - virtualLink: private
 
     private:
       type: tosca.nodes.nfv.VL
@@ -304,5 +317,6 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
+
 
 
