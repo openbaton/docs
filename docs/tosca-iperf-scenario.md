@@ -388,13 +388,9 @@ The NFVO will answer with an authetication key and a project id. You will need t
     "value": "336ca2e6-8e78-48eb-b8f8-c5de862a21da"
   },...
 ```
-2) To add a VIM instance, save it in json format and add it using the api with the following command:
+**Note: ** Do not pay attention to the project-id supplied in this response.
 
-```bash
-curl -i -X POST http://localhost:8080/api/v1/datacenters -H "Content-Type: application/json" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @test-vim.json
-```
-
-3) To send the NSD in the TOSCA format save the example above in a file named testNSDIperf.yaml and run this:
+2) To send the NSD in the TOSCA format save the example above in a file named testNSDIperf.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
 
 ```bash
 $curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @testNSDIperf.yaml
