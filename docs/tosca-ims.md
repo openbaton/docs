@@ -17,17 +17,17 @@ In order to execute this scenario, you need to have the following components up 
 
 Upload a VimInstance to the NFVO (e.g. this [VimInstance]). 
  
-## Prepare the VNF Packages
+## Prepare the CSAR Packages
 
-Download the necessary files from the [github repository][openims-repo] and pack the [VNF Packages][vnf-package] for all 5 components ( scscf, icscf, pcscf, bind9, fhoss ).
+Download the necessary files from the **tosca** branch of the [github repository][openims-repo] and pack the [VNF Packages][vnf-package] for all 5 components ( scscf, icscf, pcscf, bind9, fhoss ).
 
 #### Example for creating the Icscf Virtual Network Function Package
 ```bash
 # Where to save the scripts
 GIT_REPO_LOC=/opt/vnf_packages_example_openimscore_openbaton
 # Clone the repository
-git clone https://github.com/openbaton/opemimscore_example $GIT_REPO_LOC
-# Create the .tar file which needs to be uploaded
+git clone -b tosca https://github.com/openbaton/openimscore-packages.git $GIT_REPO_LOC
+# Create the .csar file which needs to be uploaded
 cd $GIT_REPO_LOC/icscf
 zip -r icscf.csar . -x ".*" -x "*/.*"
 ```
@@ -37,7 +37,7 @@ For this example we assume the network used to interconnect the components is ca
 When all 5 packages are in the CSAR format you can onboard them using the API with this command:
 
 ```bash
-$curl -X POST http://your-ip-here:8080/api/v1/csar-vnfd -H "Accept: application/json" -H "project-id: $Project ID here$" -H "Authorization: Bearer $Auth token here$" -v -F file=@icscf.csar
+$curl -X POST http://your-ip-here:8080/api/v1/csar-nsd -H "Accept: application/json" -H "project-id: $Project ID here$" -H "Authorization: Bearer $Auth token here$" -v -F file=@icscf.csar
 ```
 
 ## Store the Network Service Descriptor
