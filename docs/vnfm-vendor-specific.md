@@ -72,8 +72,8 @@ POST request on _*VnfmEnpoint*_
     },
     "vnfPackage": { ... },
     "keypairs":[
-	{ ... }
-    ]     
+    { ... }
+    ]  
 }
 ```
 
@@ -165,7 +165,7 @@ POST request on _*OrEndpoint*_/admin/v1/vnfm-core-allocate
     },
     "userdata":"",
     "keypairs":[
-	{ ... }
+ 	{ ... }
     ]
 }
 ```

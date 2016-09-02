@@ -1,169 +1,159 @@
 # TOSCA CSAR on-boarding
-The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA.
-It is a compressed file that includes a TOSCA definition template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
+This tutorial is more advanced and expects that you already know what TOSCA is and how Virtual Network Function Descriptor or Network Service Descriptor defined in the TOSCA format is structured.
+The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA. It is a compressed file that includes a TOSCA template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
 The CSAR is a zip file with this structure:
 
 ```bash
 ├── Definitions
-|   └── toscav1.yaml
+|   └── testNSDiperf.yaml
 ├── Scripts
 |   ├── install.sh
 |   └── ...
 └── TOSCA-Metadata
     └── TOSCA.meta
 ```
-The TOSCA.meta file must contain the reference to the definition that will be translated in VNFs in this case **Entry-Definitions: Definitions/toscav1.yaml**
+The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference being that when reading a NSD it will onboard all VNFs included in the NSD and after that the NSD itself. The TOSCA.meta file must contain the reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml**. An optional feature is to define the vm image here in the metadata. It is easier to add it here one time instead of adding it multiple times in the template.
 
 ```bash
 TOSCA-Meta-File-Version: 1.0
 CSAR-Version: 1.1
 Created-By: OASIS TOSCA TC
-Entry-Definitions: Definitions/toscav1.yaml
+Entry-Definitions: Definitions/testNSDIperf.yaml
+image: ubuntu-14.04-server-cloudimg-amd64-disk1 # optional
 ```
 
 The Scripts folder contains all the files required from the lifecycle interfaces of the VNFs.
 
-The **toscav1.yaml** is a Definition of Network Service. It contains this descriptor.
+The **testNSDIperf.yaml** is a Definition of Network Service. It contains this descriptor.
 
 ```yaml
+tosca_definitions_version: tosca_simple_iperf_scenario
+description: Example of NSD
 
-tosca_definitions_version: tosca_iperf_nsd
-tosca_default_namespace:    # Optional. default namespace (schema, types version)
-description: NSD for deploing an iperf scenario
 metadata:
-  ID:                 # ID of this Network Service Descriptor
-  vendor: Fokus       # Provider or vendor of the Network Service
-  version: 0.1 Alpha  # Version of the Network Service Descriptor imports:
-
+  ID: NSD-Iperf + Floating Ips
+  vendor: Fokus
+  version: 1.0
 
 topology_template:
+
   node_templates:
+
     iperf-server: #VNF1
-      type: openbaton.type.VNF.GENERIC
-      properties:
-        id:
-        vendor: Fokus
-        version:
-        configurations:
-          name: server-configurations
-          configurationParameters:
-            - key: value
-            - key2: value2
-        vnfPackageLocation: 
-        deployment_flavour:
-          - flavour_key: m1.small
-      requirements:
-        - virtualLink: private
-        - host:
-            node: VDU2
-            type: openbaton.relationships.HostedOn
-      interfaces:
-        Standard: # lifecycle
-          create: install.sh
-          start: install-srv.sh
+        type: openbaton.type.VNF
+        properties:
+          vendor: Fokus
+          version: 1.0
+          endpoint: generic
+          type: server
+          vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
+          deploymentFlavour:
+            - flavour_key: m1.small
+        requirements:
+          - virtualLink: private
+          - vdu: VDU2
+        interfaces:
+          lifecycle: # lifecycle
+            instantiate:
+              - install.sh
+              - install-srv.sh
+
     iperf-client:
-      type: openbaton.type.VNF.GENERIC
+      type: openbaton.type.VNF
       properties:
-        id:
+        ID: x
         vendor: Fokus
-        version: 0.1
-        configurations:
-          name: server-configurations
-          configurationParameters:
-            - key: value
-            - key2: value2
-        vnfPackageLocation: 
-        deployment_flavour:
+        version: 1.0
+        type: client
+        vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
+        deploymentFlavour:
           - flavour_key: m1.small
+        endpoint: generic
       requirements:
-        - virtualLink: private
-        - host:
-            node: VDU1
-            type: openbaton.relationships.HostedOn
+         - virtualLink: private
+         - vdu: VDU1
       interfaces:
-        openbaton.interfaces.lifecycle: # lifecycle
-          INSTANCIATE:
-            - install.sh
-          CONFIGURE:
-            - server_configure_only.sh
-          START:
-            - iperf_client_start.sh
+          lifecycle: # lifecycle
+            INSTANTIATE:
+              - install.sh
+            CONFIGURE:
+              - server_configure.sh
+
     VDU1:
-      type: openbaton.type.VDU
+      type: tosca.nodes.nfv.VDU
       properties:
-        vm_image:
-          - ubuntu-14.04-server-cloudimg-amd64-disk1
-        scale_in_out: 2
-        vimInstanceName: vim-instance
-      requirements:
-         - virtual_link: [CP1]
-      capabilities:
-        host:
-          valid_source_types: openbaton.type.VDU
+        scale_in_out: 1
+        vim_instance_name:
+          - vim-instance
+      artifacts:
+        VDU1Image:
+          type: tosca.artifacts.Deployment.Image.VM
+          file: ubuntu-14.04-server-cloudimg-amd64-disk1
+
     VDU2:
-      type: openbaton.type.VDU
+      type: tosca.nodes.nfv.VDU
       properties:
         vm_image:
           - ubuntu-14.04-server-cloudimg-amd64-disk1
-        scale_in_out: 2
-        vimInstanceName: vim-instance
+        scale_in_out: 3
+        vim_instance_name:
+          - vim-instance
       requirements:
-        - virtual_link: [CP2]
-      capabilities:
-        host:
-          valid_source_types: openbaton.type.VDU
+        - virtual_link: CP2
+      artifacts:
+        VDU1Image:
+          type: tosca.artifacts.Deployment.Image.VM
+          file: ubuntu-14.04-server-cloudimg-amd64-disk1
+
+    CP1:
+      type: tosca.nodes.nfv.CP
+      properties:
+        floatingIP: random
+      requirements:
+        - virtualBinding: VDU1
+        - virtualLink: private
+
+    CP2: #endpoints of VNF2
+      type: tosca.nodes.nfv.CP
+      requirements:
+        - virtualBinding: VDU2
+        - virtualLink: private
 
     private:
       type: tosca.nodes.nfv.VL
       properties:
         vendor: Fokus
-      capabilities:
-        virtual_linkable:
-          valid_source_types: tosca.nodes.nfv.CP
 
-    CP1: #endpoint of VNF1
-      type: tosca.nodes.nfv.CP
-      properties:
-        floatingIp: random
-      requirements:
-        virtualbinding: VDU1
-      virtualLink: private
-
-    CP2: #endpoint of VNF2
-      type: tosca.nodes.nfv.CP
-      properties:
-        floatingIp: random
-      requirements:
-        virtualbinding: VDU2
-      virtualLink: private
-
+relationships_template:
+  connection_server_client: #DO I NEED THIS AT ALL ?
+    type: tosca.nodes.relationships.ConnectsTo
+    source: iperf-server
+    target: iperf-client
+    parameters:
+        - private
 
 ```
 
-## TOSCA lifecycle interface to OpenBaton lifecycle event
 
-In [TOSCA simple profile YAML][TOSCA-simple-yaml-lifecycle] is defined the interface *tosca.interfaces.node.lifecycle.Standard* . This interface defines the lifecycle of a service since 
-OpenBaton is using different lifecycle events the mapping between these two definitions follows the rules described in the table below:
+## VNF packages from CSAR on-boarding
 
-| tosca.interfaces.node.lifecycle.Standard  | openbaton.interfaces.lifecycle      |
-| -----------------------------------:      | -------------------------:		|
-| create 	                                | INSTANTIATE |
-| configure 			                    | CONFIGURE     	|
-| start 			                        | START     	|
-| stop 			                            | STOP      	|
-| delete 			                        | TERMINATE      	|
+To create the **.csar** package from the folder run this command:
+```bash
+zip -r iperf.csar . -x ".*" -x "*/.*"
+```
+To create the  The initial steps for setting up the NFVO before sending the VNF packages are the same as for the [Iperf][tosca-iperf] example. 
 
-
-## CSAR on-bording
-
-After create the CSAR with all scripts in the folder and the link to the definition, you can store this package and OpenBaton will persist all the Scripts and the VNFs inside of the definition. 
-To retrieve the files you can use the dashboard in the page of VNFPackages under Catalogue menu, also you can use the page of VNF Descriptors to see the VNFs defined in **toscav1.yaml**
-
-For on-boarding the CSAR use this command:
+For on-boarding packages in NSD format use this command:
 
 ```bash
-$ curl -X POST -v -F file=@iperf.csar "http://localhost:8080/api/v1/csar"
+curl -X POST http://localhost:8080/api/v1/csar-nsd -H "Accept: application/json" -H "project-id: " -H "Authorization: Bearer " -v -F file=@iperf.csar
 ```
+For on-boarding a single VNF package use this:
+
+```bash
+curl -X POST http://localhost:8080/api/v1/csar-vnfd -H "Accept: application/json" -H "project-id: $PROJECT ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" -v -F file=@iperf-server.csar
+```
+
 
 
 <!------------
@@ -171,6 +161,8 @@ References
 -------------->
 [TOSCA-simple-yaml-lifecycle]:http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/csprd01/TOSCA-Simple-Profile-YAML-v1.0-csprd01.html#_Toc430015766
 [csar-tosca]:https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjVyb-Ll5PLAhXCDCwKHTh3AEAQFggdMAA&url=https%3A%2F%2Fwww.oasis-open.org%2Fcommittees%2Fdownload.php%2F46057%2FCSAR%2520V0-1.docx&usg=AFQjCNG-Xqjz_D4ZY8TbJGls58Hp7LdNBg&sig2=w7waCIxRy_-ODL7GyZNFUg
+
+[tosca-iperf]:tosca-iperf-scenario
 
 
 <!---
@@ -187,3 +179,4 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
+
