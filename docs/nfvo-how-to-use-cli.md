@@ -334,6 +334,20 @@ $ openbaton.sh NetworkServiceRecord-createVNFCInstance id-network-service-record
 $ openbaton.sh NetworkServiceRecord-deleteVNFCInstance id-network-service-record id-virtual-network-function-record
 ```
 
+**startVNFCInstance**
+  
+  * Start a VNFCInstance specified by it's id
+```sh
+$ openbaton.sh NetworkServiceRecord-startVNFCInstance id-nsr id-vnfr id-vdu id-vnfcinstance
+```
+  
+**stopVNFCInstance**
+    
+  * Stop a VNFCInstance specified by it's id
+```sh
+$ openbaton.sh NetworkServiceRecord-stopVNFCInstance id-nsr id-vnfr id-vdu id-vnfcinstance
+```
+
 
 ### **User Subcommands**
 **create**
