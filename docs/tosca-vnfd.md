@@ -229,7 +229,7 @@ topology_template:
       properties:
         scale_in_out: 1
         vim_instance_name:
-         - vim-instance
+         - test-vim-instance
       artifacts:
         VDU1Image:
           type: tosca.artifacts.Deployment.Image.VM
@@ -274,10 +274,10 @@ The NFVO will answer with an authetication key and a project id. You will need t
 ```
 **Note: ** Do not pay attention to the project-id supplied in this response.
 
-2) To send the NSD in the TOSCA format save the example above in a file named testNSDIperf.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
+2) To send the VNFD in the TOSCA format save the example above in a file named dummy-vnf.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
 
 ```bash
-$curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @testNSDIperf.yaml
+$curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @dummy-vnf.yaml
 ```
 ```
 
@@ -297,7 +297,7 @@ References
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
 [vnf-package]:vnfpackage
-[vim-doc]:vim-instance
+[vim-doc]:descriptors/vim-instance/test-vim-instance.json
 [iperf]:https://iperf.fr
 
 <!---

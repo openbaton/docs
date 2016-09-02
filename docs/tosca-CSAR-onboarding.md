@@ -31,9 +31,9 @@ tosca_definitions_version: tosca_simple_iperf_scenario
 description: Example of NSD
 
 metadata:
-  ID: dummy-NS
+  ID: NSD-Iperf + Floating Ips
   vendor: Fokus
-  version: 0.1
+  version: 1.0
 
 topology_template:
 
@@ -43,18 +43,12 @@ topology_template:
         type: openbaton.type.VNF
         properties:
           vendor: Fokus
-          version: 0.1
-          endpoint: dummy
+          version: 1.0
+          endpoint: generic
           type: server
-          configurations:
-            name: server-configurations
-            configurationParameters:
-              - key: value
-              - key2: value2
-          vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
-          deployment_flavour:
+          vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
+          deploymentFlavour:
             - flavour_key: m1.small
-            - flavour_key: m1.large
         requirements:
           - virtualLink: private
           - vdu: VDU2
@@ -62,18 +56,19 @@ topology_template:
           lifecycle: # lifecycle
             instantiate:
               - install.sh
+              - install-srv.sh
 
     iperf-client:
       type: openbaton.type.VNF
       properties:
         ID: x
         vendor: Fokus
-        version: 0.1
+        version: 1.0
         type: client
-        vnfPackageLocation: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+        vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
         deploymentFlavour:
           - flavour_key: m1.small
-        endpoint: dummy
+        endpoint: generic
       requirements:
          - virtualLink: private
          - vdu: VDU1
@@ -82,16 +77,14 @@ topology_template:
             INSTANTIATE:
               - install.sh
             CONFIGURE:
-              - server_configure_only.sh
-            START:
-              - iperf_client_start.sh
+              - server_configure.sh
 
     VDU1:
       type: tosca.nodes.nfv.VDU
       properties:
         scale_in_out: 1
         vim_instance_name:
-          - test-vim-instance
+          - vim-instance
       artifacts:
         VDU1Image:
           type: tosca.artifacts.Deployment.Image.VM
@@ -102,9 +95,9 @@ topology_template:
       properties:
         vm_image:
           - ubuntu-14.04-server-cloudimg-amd64-disk1
-        scale_in_out: 2
+        scale_in_out: 3
         vim_instance_name:
-          - test-vim-instance
+          - vim-instance
       requirements:
         - virtual_link: CP2
       artifacts:
@@ -144,7 +137,11 @@ relationships_template:
 
 ## VNF packages from CSAR on-boarding
 
-After zipping the folders you need to change the version of the file to **.csar** The initial steps for setting up the NFVO before sending the VNF packages is the same as a NSD or a VNFD. 
+To create the **.csar** package from the folder run this command:
+```bash
+zip -r iperf.csar . -x ".*" -x "*/.*"
+```
+To create the  The initial steps for setting up the NFVO before sending the VNF packages are the same as for the [Iperf][tosca-iperf] example. 
 
 For on-boarding packages in NSD format use this command:
 
@@ -164,6 +161,8 @@ References
 -------------->
 [TOSCA-simple-yaml-lifecycle]:http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/csprd01/TOSCA-Simple-Profile-YAML-v1.0-csprd01.html#_Toc430015766
 [csar-tosca]:https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjVyb-Ll5PLAhXCDCwKHTh3AEAQFggdMAA&url=https%3A%2F%2Fwww.oasis-open.org%2Fcommittees%2Fdownload.php%2F46057%2FCSAR%2520V0-1.docx&usg=AFQjCNG-Xqjz_D4ZY8TbJGls58Hp7LdNBg&sig2=w7waCIxRy_-ODL7GyZNFUg
+
+[tosca-iperf]:tosca-iperf-scenario
 
 
 <!---

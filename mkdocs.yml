@@ -31,6 +31,7 @@ pages:
 - ['**HIDDEN**': 'nfvo-installation-src.md']
 - ['**HIDDEN**': 'zabbix-server-configuration.md']
 - ['**HIDDEN**': 'tosca-iperf-scenario.md']
+- ['**HIDDEN**': 'tosca-dummy-nsr.md']
 - ['**HIDDEN**': 'tosca-CSAR-onboarding.md']
 - ['**HIDDEN**': 'tosca-vnfd.md']
 - ['**HIDDEN**': 'tosca-ims.md']
