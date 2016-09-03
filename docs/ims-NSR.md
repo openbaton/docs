@@ -2,6 +2,7 @@
 -----------------------------------------
 
 This tutorial shows how to deploy a Network Service Record composed by 5 VNFs, a basic [OpenIMSCore][openims-website].
+You can execute also the same tutorial using the [TOSCA] definitions. 
 
 Compared to the [Iperf-Server - Iperf-Client](http://openbaton.github.io/documentation/iperf-NSR/) the example provided here is far more complex. So we assume you are fimiliar with the architecture.
 
@@ -84,6 +85,8 @@ References
 [ns-descriptor]:http://openbaton.github.io/documentation/ns-descriptor/
 [iperf-example]:./use-case-example.md
 [openims-repo]:https://github.com/openbaton/openimscore-packages
+[TOSCA]: tosca-ims.md
+
 
 <!---
 Script for open external links in a new tab
