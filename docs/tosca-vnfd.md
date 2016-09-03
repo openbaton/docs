@@ -5,15 +5,6 @@ Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-M
 
 Premise: some of the objects are defined by OpenBaton
 
-## Prerequisites
-
-The prerequisites are:
-
-* OpenBaton running
-* Dummy VNFM running
-* Test plugin
-* [Vim Instance][vim-doc] stored in the Catalogue
-
 
 ##  Mapping between TOSCA and ETSI NFV
 

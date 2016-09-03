@@ -2,6 +2,9 @@
 -----------------------------------------
 
 This tutorial explains how to deploy a network service that uses iPerf. [iPerf][iperf-website] is a tool for active measurements of the maximum achievable bandwidth between two or more machines.
+
+You can execute also the same tutorial using the [TOSCA] definitions. 
+
 This tutorial makes use of:
 
 * Generic VNFM ([generic-vnfm][generic-vnfm])
@@ -273,6 +276,8 @@ References
 [nsd-onboarding]: images/tutorials/tutorial-iperf-NSR/nsd-onboarding.png
 [ems-github]: https://github.com/openbaton/ems/tree/master
 [iperf-website]:https://iperf.fr
+[TOSCA]: tosca-iperf-scenario.md
+
 <!---
 Script for open external links in a new tab
 -->

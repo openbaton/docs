@@ -3,6 +3,8 @@
 
 This tutorial explains how to deploy a Network Service Record composed by Dummy VNFs. It is typically used for testing that the installation of the NFVO went fine.
 
+You can execute also the same tutorial using the [TOSCA] definitions. 
+
 ## Requirements
 
 In order to execute this scenario, you need to have the following components up and running: 
@@ -49,7 +51,7 @@ References
 [VimInstance]: descriptors/vim-instance/test-vim-instance.json
 [nsr-deployment]: images/tutorials/tutorial-dummy-NSR/launch-NSD.png
 [NFVO]: https://github.com/openbaton/NFVO
-
+[TOSCA]: tosca-dummy-nsr.md
 
 <!---
 Script for open external links in a new tab
