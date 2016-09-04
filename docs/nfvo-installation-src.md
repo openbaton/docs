@@ -31,7 +31,7 @@ apt-get install curl
 To start the bootstrap procedure of the **development** Open Baton environment you can type the following command:
 
 ```bash
-sh <(curl -s http://get.openbaton.org/bootstraps/bootstrap) develop
+sh <(curl -s http://get.openbaton.org/bootstrap) develop
 ```
 
 
