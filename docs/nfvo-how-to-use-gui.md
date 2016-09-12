@@ -80,7 +80,7 @@ In order to launch NSD press the *Action* near the NSD you want to lauch and pre
 
  1. Pick key that you have added to the NFVO or created with it, you can pick multiple keys too, and press *Launch* to use these keys later to access the VMs. You can also create or import key from here if you want 
  
- 2.You can now also pick PoP for VNFDs that you have in your NSD. 
+ 2. You can now also pick PoP for VNFDs that you have in your NSD. 
 
 ![NSD Launch][launchNSD1]
 ![NSD Launch][launchNSD2]
