@@ -78,15 +78,12 @@ On this page you can see the list of NS Descriptors stored in OpenBaton
 
 In order to launch NSD press the *Action* near the NSD you want to lauch and press *launch*. You will be promted with a dialogue that will let you choose the key name for the NSR. You have 2 options in this case:
 
- 1. Pick key that you have added to the NFVO or created with it, you can pick multiple keys too, and press *Launch* to use these keys later to access the VMs. 
-
- 2. Press *Launch with VIM key* in order to use the key you have mentioned in VIM instance JSON or to use no key at all(this will be the case if no key was mentioned in the VIM file). 
+ 1. Pick key that you have added to the NFVO or created with it, you can pick multiple keys too, and press *Launch* to use these keys later to access the VMs. You can also create or import key from here if you want 
  
+ 2.You can now also pick PoP for VNFDs that you have in your NSD. 
 
- 3. You can now also pick PoP if you have named VDUs in your NSD, if you pick no PoP, NFVO will pick one of the PoPs that you have written in NSD's VDUs. You can pick one PoP for all the named VDU by simply pressing plus and adding picking a PoP in selection bar. If you want to pick PoP per VNF, you can mark expand and it will let you add PoP choice per VNF, the same goes for picking PoPs per VDU. 
- *IMPORTANT*: Only the named VDU will be affected by higher level choices, unnamed VDUs' PoPs will be picked by NFVO automatically. 
-
-![NSD Launch][launchNSD]
+![NSD Launch][launchNSD1]
+![NSD Launch][launchNSD2]
 #### Storing NSD
 You have two options for storing a NS Descriptor:
 
@@ -254,7 +251,8 @@ This are the information of the Event selected
 [VNFRecordInformation]:images/nfvo-how-to-use-gui-VNFR-information.png
 [createkey]:images/nfvo-how-to-use-gui-generate-key.png
 [importkey]:images/nfvo-how-to-use-gui-import-key.png
-[launchNSD]:images/nfvo-how-to-use-gui-launch-nsd.png
+[launchNSD1]:images/gui-launch-pop.png
+[launchNSD2]:images/gui-launch-key.png
 [VNF Package documentation]: vnfpackage.md
 <!---
 Script for open external links in a new tab
