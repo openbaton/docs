@@ -125,7 +125,7 @@ topology_template:
         vendor: Fokus
 
 relationships_template:
-  connection_server_client: #DO I NEED THIS AT ALL ?
+  connection_server_client:
     type: tosca.nodes.relationships.ConnectsTo
     source: iperf-server
     target: iperf-client
