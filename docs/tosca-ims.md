@@ -42,7 +42,7 @@ $curl -X POST http://your-ip-here:8080/api/v1/csar-nsd -H "Accept: application/j
 
 Deploy the stored NSD by using the dashboard.
 
-You need to go again to the GUI, go to `Catalogue -> NS Descriptors`, and open the drop down menu by clicking on `Action`. Afterwards you need to press the `Launch` button in order to start the deployment of this NSD.
+You need to go again to the GUI, go to `Catalogue -> NS Descriptors`, and open the drop down menu of the openIMSCore NSD by clicking on `Action`. Afterwards you need to press the `Launch` button in order to start the deployment of this NSD.
 
 If you go to `Orchestrate NS -> NS Records` in the menu on the left side, you can follow the deployment process and check the current status of the deploying NSD.
 

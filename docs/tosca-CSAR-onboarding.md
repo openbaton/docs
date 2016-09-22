@@ -1,4 +1,4 @@
-# TOSCA CSAR on-boarding
+#TOSCA CSAR on-boarding
 This tutorial is more advanced and expects that you already know what TOSCA is and how Virtual Network Function Descriptor or Network Service Descriptor defined in the TOSCA format is structured.
 The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA. It is a compressed file that includes a TOSCA template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
 The CSAR is a zip file with this structure:
@@ -10,9 +10,13 @@ The CSAR is a zip file with this structure:
 |   ├── install.sh
 |   └── ...
 └── TOSCA-Metadata
+    ├── Metadata.yaml
     └── TOSCA.meta
+    
 ```
-The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference being that when reading a NSD it will onboard all VNFs included in the NSD and after that the NSD itself. The TOSCA.meta file must contain the reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml**. An optional feature is to define the vm image here in the metadata. It is easier to add it here one time instead of adding it multiple times in the template.
+The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference being that when reading a NSD it will onboard all VNFs included in the NSD and after that the NSD itself.
+
+ The **TOSCA.meta** file must contain the reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml**. An optional feature is to define the vm image here in the metadata. It is easier to add it here one time instead of adding it multiple times in the template.
 
 ```bash
 TOSCA-Meta-File-Version: 1.0
@@ -21,8 +25,17 @@ Created-By: OASIS TOSCA TC
 Entry-Definitions: Definitions/testNSDIperf.yaml
 image: ubuntu-14.04-server-cloudimg-amd64-disk1 # optional
 ```
+The **Metadata.yaml** defines essential properties for the VNF or VNFs and every CSAR has to include one. For more information on how to create such a file refer to the [VNF Package tutorial][metadata]. This is a simple example:
+```yaml
+name: bind9
+image:
+    upload: false
+    names:
+        - ubuntu-14.04-server-cloudimg-amd64-disk1
 
-The Scripts folder contains all the files required from the lifecycle interfaces of the VNFs.
+```
+
+The **Scripts** folder contains all the files required from the lifecycle interfaces of the VNFs.
 
 The **testNSDIperf.yaml** is a Definition of Network Service. It contains this descriptor.
 
@@ -163,6 +176,7 @@ References
 [csar-tosca]:https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjVyb-Ll5PLAhXCDCwKHTh3AEAQFggdMAA&url=https%3A%2F%2Fwww.oasis-open.org%2Fcommittees%2Fdownload.php%2F46057%2FCSAR%2520V0-1.docx&usg=AFQjCNG-Xqjz_D4ZY8TbJGls58Hp7LdNBg&sig2=w7waCIxRy_-ODL7GyZNFUg
 
 [tosca-iperf]:tosca-iperf-scenario
+[metadata]:vnfpackage
 
 
 <!---
@@ -179,4 +193,5 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
+
 
