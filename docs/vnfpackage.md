@@ -111,6 +111,8 @@ This lifecycle_events are triggered by the NFVO in the meaning of: if the event 
     This means that the scripts in that folder have less priority than the scripts located under ***scripts-link***.
 
 **Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
+**Note** The *scripts* folder cannot contain subfolder. All scripts must be under the _scripts_ folder.
+**Note** The scripts inside the *scripts* folder can be either shell scripts or python scripts. In both cases the parameters are passed as environment variables.
 
 ## <image\>.img
 
