@@ -17,6 +17,9 @@ The index page shows an overview of the state of the NFVO
  1. Number of Network Service Records
  2. Number of Virtual Network Functions
  3. Number of Network Service Descriptors
+ 4. Number of SSH Keys
+ 
+ It also shows the summary of the available resources, like floating ips, instances, RAM and CPU cores. The data is collected from the available PoPs if possible and then the summary is displayed. Test POPs do not grant any resources.   
 
 ![Overview][overview]
 
