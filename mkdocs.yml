@@ -22,6 +22,7 @@ pages:
 - ['dummy-NSR.md', 'Tutorials', 'Dummy NSR']
 - ['iperf-NSR.md', 'Tutorials', 'Iperf Scenario']
 - ['ims-NSR.md', 'Tutorials', 'OpenIMSCore example']
+- ['how-to-register-event.md', 'Tutorials','The Event Mechanism tutorial']
 - ['integration-test-use.md', 'Tutorials', 'Integration Tests']
 - ['extend.md', 'Extend it', 'Extend it']
 - ['nfvo-architecture.md', 'Extend it', 'NFVO Architecture']
