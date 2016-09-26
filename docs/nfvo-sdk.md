@@ -9,13 +9,16 @@ The build.gradle file must contain:
 ```gradle
 repositories {
     mavenCentral()
+    /**
+     * Only needed for openbaton snapshots dependencies
+     */
     maven {
-        url "http://get.openbaton.org:8081/nexus/content/groups/public"
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:2.1.2'
+    compile 'org.openbaton:sdk:2.2.0'
 }
 ```
 
