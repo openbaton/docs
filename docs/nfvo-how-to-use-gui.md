@@ -61,6 +61,13 @@ In the menu on the left side under the template _Catalogue_ you can manage
 1. NS Descriptors
 2. VNF Packages
 3. Key Pairs
+4. VNF Descriptors
+5. Marketplace
+
+### Marketplace
+
+With the opening of the Openbaton Marketplace, it became possbile to download VNFPackages and NSDs directly into the NFVO, for this, 
+go to Marketplace tab and browse the available packages. You can click download button to download and onboard it. 
 
 ### Key Pairs
 You can add a key pairs to use for ssh access to the VMs via *Key Pairs* menu. You have two options in terms of adding the keys. 
