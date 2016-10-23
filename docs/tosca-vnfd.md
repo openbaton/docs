@@ -287,7 +287,7 @@ References
 [vnfr-states]:vnfr-states
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
-[vnf-package]:vnfpackage
+[vnf-package]:vnf-package
 [vim-doc]:descriptors/vim-instance/test-vim-instance.json
 [iperf]:https://iperf.fr
 

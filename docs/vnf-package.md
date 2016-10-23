@@ -1,7 +1,5 @@
 # VNF Package
 
-**Note**: This is the initial version of the VNF Package and might change most probably in the next releases to improve and simplify the creation, usability and power.
-
 This doc describes essential components of a VNF Package, how to create them and how to use them after onboarding.
 Therefore, you can find a practical tutorial at the end with all the steps starting from the creation over onboarding and finally referencing it by an NSD.
 

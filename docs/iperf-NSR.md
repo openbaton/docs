@@ -264,7 +264,7 @@ References
 [vnfr-states]:vnfr-states
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
-[vnf-package]:vnfpackage
+[vnf-package]:vnf-package
 [vim-doc]:vim-instance
 [iperf]:https://iperf.fr
 [generic-vnfm]:https://github.com/openbaton/generic-vnfm

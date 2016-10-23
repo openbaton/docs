@@ -68,8 +68,7 @@ References
 
 [Dummy-VNFM]: https://github.com/openbaton/dummy-vnfm-amqp
 [REST version]: https://github.com/openbaton/dummy-vnfm-rest
-[vim-doc]:vim-instance-documentation
-[Test Plugin]: https://github.com/openbaton/test-plugin
+[vim-doc]:vim-instance
 [NSD]: descriptors/tutorial-ims-NSR/tutorial-ims-NSR.json
 [VimInstance]: descriptors/vim-instance/openstack-vim-instance.json
 [NFVO]: https://github.com/openbaton/NFVO
@@ -79,11 +78,11 @@ References
 [openims-website]:http://www.openimscore.org
 
 [ims-struc]:images/ims-architecture.png
-[nfvo]:http://openbaton.github.io/documentation/nfvo-installation/
-[vnf-package]:http://openbaton.github.io/documentation/vnfpackage/
-[vnf-descriptors]:http://openbaton.github.io/documentation/vnf-descriptor/
-[ns-descriptor]:http://openbaton.github.io/documentation/ns-descriptor/
-[iperf-example]:./use-case-example.md
+[nfvo]:nfvo-installation
+[vnf-package]: vnf-package
+[vnf-descriptors]: vnf-descriptor
+[ns-descriptor]: ns-descriptor
+[iperf-example]: iperf-NSR
 [openims-repo]:https://github.com/openbaton/openimscore-packages
 [TOSCA]: tosca-ims.md
 

@@ -263,7 +263,7 @@ This are the information of the Event selected
 [importkey]:images/nfvo-how-to-use-gui-import-key.png
 [launchNSD1]:images/gui-launch-pop.png
 [launchNSD2]:images/gui-launch-key.png
-[VNF Package documentation]: vnfpackage.md
+[VNF Package documentation]: vnf-package.md
 <!---
 Script for open external links in a new tab
 -->

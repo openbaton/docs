@@ -73,11 +73,11 @@ References
 [openims-website]:http://www.openimscore.org
 
 [ims-struc]:images/ims-architecture.png
-[nfvo]:http://openbaton.github.io/documentation/nfvo-installation/
-[vnf-package]:http://openbaton.github.io/documentation/vnfpackage/
-[vnf-descriptors]:http://openbaton.github.io/documentation/vnf-descriptor/
-[ns-descriptor]:http://openbaton.github.io/documentation/ns-descriptor/
-[iperf-example]:./use-case-example.md
+[nfvo]:nfvo-installation
+[vnf-package]: vnf-package
+[vnf-descriptors]: vnf-descriptor
+[ns-descriptor]: ns-descriptor
+[iperf-example]: iperf-NSR
 [openims-repo]:https://github.com/openbaton/openimscore-packages
 
 <!---

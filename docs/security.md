@@ -1,12 +1,14 @@
-# First access to the Open Baton platform
+# Identity management
 
-When accessing the dashboard, you will be prompted for a username and password. The first access can only be done with the super user created during the installation. Then it is possible to create other users and projects. For the configuration of the first access please follow this guide.
+Open Baton provides several mechanisms for managing users, roles and projects. When accessing the dashboard, you will be prompted for a username and password. 
+The first access can only be done with the super user created during the installation. Then it is possible to create other users and projects. 
 
 ### Roles and projects
 
-Openbaton's security model consists of different user roles and projects.
+Open Baton security model consists of different users, roles and projects.
 
-A project is a separate realm in which permitted users can work. Users can be assigned to projects and adopt different roles. Changes made in a project's environment are not visible from another project. When the NFVO starts a default project is created. Every project has a **unique** name and a project-id.  
+A project can be used for isolating a group of users from the others and/or VNFs. Users can be assigned to projects and adopt different roles. Changes made in a project's environment are not visible from another project. 
+When the NFVO starts a default project is created. Every project has a **unique** name and a project-id.  
 
 A user can have the role *USER* or *GUEST* in a project. Administrators with the role *ADMIN* has control over the whole system. He may add and delete users and projects, assign roles and has access to all the projects. When starting the NFVO there will be already the super user (with the role of an *ADMIN*) defined by default with the user name *admin* and the default password *openbaton*.
 
@@ -18,7 +20,7 @@ The last role is the *GUEST*. He can just see the components (PoPs, NSD, NSR etc
 
 ### SSL
 
-The NFVO can use SSL to encrypt communication. To enable this feature set 
+The NFVO can use SSL to encrypt communication on the norhbound REST APIs. To enable this feature set 
 ```properties
 server.ssl.enabled = true
 server.port: 8443

@@ -1,10 +1,14 @@
 # How to use OpenBaton
 
+After completing the installation, you should be able to reach the dashboard of the NFVO at the following url: http://your-ip-here:8080
+
+When accessing the dashboard, you will be prompted for a username and password. The first access can only be done with the super user ("admin") created during the installation. Please refer to this 
+
 In order to use OpenBaton for launching your first Network Service, you will need to follow these steps:
 
 1. Register one or more Point of Presences (PoPs). [Learn more here][Register PoP]
-2. Build your VNF Package
-    * Decide which VNFM to use.
+2. Build or download one or more VNF Packages
+    * Decide which VNFM to use. 
     * Create the VNF Package(s).
     * Prepare the Network Service Descriptor (NSD).
 

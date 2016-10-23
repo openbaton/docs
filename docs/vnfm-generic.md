@@ -288,7 +288,7 @@ References
 [nfvo-vnfm-communication]: images/generic-vnfm-vnfm-or-communication.png
 [generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg.png
 [ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
-[vnfpackage-tutorial-link]:vnfpackage#tutorial
+[vnfpackage-tutorial-link]:vnf-package#tutorial
 [vnfpackage-doc-link]:vnfpackage
 
 <!---

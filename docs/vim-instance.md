@@ -37,7 +37,8 @@ In order to interoperate with a PoP it is required to register the VIM instance 
 | password 				    | The password of the user recognized in the OpenStack in the keystone service    	                                                   |
 | keyPair 				    | The keyPair name stored into OpenStack to get the access to the VMs                                                                  |
 | securityGroups 		  | Recognise a Security group into OpenStack where gives a sets of IP filter rules that are applied to an instance's networking.   	   |
-| type 		            | The type of the Vim Instance that will start the corresponding plugin. Possible values are: _openstack_ or _test_                    |
+| type 		            | The type of the Vim Instance that will start the corresponding plugin. Please refer to the [Marketplace][marketplace-drivers] for checking what are 
+the current VIM drivers available.                   |
 | location 				    | The location of the data Center. Name: String of the place where is the Data Center located. Latitude/Longitude geolocation point  	 |
 
 By default we use only one tenant on your PoP. We are currently working on supporting the instantiation of different NSDs in different tenants. 
@@ -62,7 +63,7 @@ By default the NFVO supports two different VIM types:
 * openstack: for interoperating with an OpenStack instance
 * test: for testing purposes implementing a VIM mockup
 
-For each of those types there is a different implementation of the VIM API. The NFVO uses a plugin mechanism for interacting with VIMs. In the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your VIM ( i.e. [Openstack][openstack-link] )
+For each of those types there is a different implementation of the VIM API. The NFVO uses a driver mechanism for interacting with VIMs. In the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your VIM ( i.e. [Openstack][openstack-link] )
 (you can change the folder where OpenBaton searches for the plugins by changing the variable `plugin-installation-dir` in the `openbaton.properties` file under /etc/openbaton)
 This jar is the implementation of the interface that communicates with your VIM.
 
@@ -72,12 +73,13 @@ This jar is the implementation of the interface that communicates with your VIM.
 
 OpenBaton platform provides an openstack and a test plugin. They are automatically download by the bootstrap. Anyway you can find them [here](http://get.openbaton.org/plugins)
 
-[OpenBaton Dashboard]:nfvo-how-to-use-gui
-[Vim plugin]:vim-plugin.md
-[OpenBaton Dashboard]:nfvo-how-to-use-gui.md
 [localhost:8080]:localhost:8080
-[register-new-pop]:images/vim-instance-register-new-pop.png
+[marketplace-drivers]: http://marketplace.openbaton.org:8082/#/
+[OpenBaton Dashboard]:nfvo-how-to-use-gui
+[OpenBaton Dashboard]:nfvo-how-to-use-gui.md
 [openstack-link]:https://www.openstack.org/
+[register-new-pop]:images/vim-instance-register-new-pop.png
+[Vim plugin]:vim-plugin.md
 
 <!---
 Script for open external links in a new tab

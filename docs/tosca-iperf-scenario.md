@@ -182,7 +182,7 @@ References
 [vnfr-states]:vnfr-states
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
-[vnf-package]:vnfpackage
+[vnf-package]:vnf-package
 [vim-doc]:vim-instance
 [dummy-NSR]:dummy-NSR
 [iperf-scenario]:iperf-NSR
