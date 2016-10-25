@@ -26,7 +26,7 @@ After you typed in all the required properties you can start using the cli for s
     
 ### Run a command: 
 ```sh
-# openbaton.sh command_name [arg-1] [arg-2] [arg-3]
+openbaton.sh command_name [arg-1] [arg-2] [arg-3]
 ```
 
 ### Show the configuration: 
@@ -54,35 +54,31 @@ openbaton.sh COMMAND help
 openbaton.sh -l
 ```
 
-### For help on a specific openbaton command, enter:
-```sh
- $ openbaton.sh COMMAND help
-```
-
 ## Available commands
 
-In the following section we list all the currently avalilable commands for the cli grouped by the components they work with. 
+In the following section we list all the currently avalilable commands for the cli grouped by the components they work with.  
+Typically commands take either IDs or file paths as parameters where the files contain an object in json format. 
 
 ### **Vim Instance Subcommands**
 **create**
 
   * Create a Vim Instance 
 ```sh
- $ openbaton.sh VimInstance-create file.json
+ $ openbaton.sh VimInstance-create <file.json>
 ```
 
 **delete**
 
   * Delete the Vim Instance with the specified id
 ```sh
- $ openbaton.sh VimInstance-delete id-vim-instance
+ $ openbaton.sh VimInstance-delete <id-vim-instance>
 ```
 
 **update**
 
   * Update a Vim Instance by passing a file containing the new one and the id of the old one
 ```sh
- $ openbaton.sh VimInstance-update file.json id-vim-instance
+ $ openbaton.sh VimInstance-update <file.json> <id-vim-instance>
 ```
 
 **findAll**
@@ -96,7 +92,7 @@ In the following section we list all the currently avalilable commands for the c
  
   * Find a Vim Instance specified by the id
 ```sh
- $ openbaton.sh VimInstance-findById id-vim-instance
+ $ openbaton.sh VimInstance-findById <id-vim-instance>
 ```
 
 ### **Network Service Descriptor Subcommands**
@@ -104,14 +100,14 @@ In the following section we list all the currently avalilable commands for the c
  
   * Create a Network Service Descriptor
 ```sh
- $ openbaton.sh NetworkServiceDescriptor-create file.json
+ $ openbaton.sh NetworkServiceDescriptor-create <file.json>
 ```
 
 **delete**
  
-  * Delete a Network Service Descriptor passing its id
+  * Delete a Network Service Descriptor by passing its id
 ```sh
- $ openbaton.sh NetworkServiceDescriptor-delete id-network-service-descriptor
+ $ openbaton.sh NetworkServiceDescriptor-delete <id-network-service-descriptor>
 ```
 
 **findAll**
@@ -125,14 +121,14 @@ In the following section we list all the currently avalilable commands for the c
  
   * Find a Network Service Descriptor by passing its id
 ```sh
- $ openbaton.sh NetworkServiceDescriptor-findById id-network-service-descriptor
+ $ openbaton.sh NetworkServiceDescriptor-findById <id-network-service-descriptor>
 ```
 
 **createVNFDependency**
 
   * Create a Virtual Network Function Descriptor dependency for a Network Service Descriptor with a specific id
 ```sh
- $ openbaton.sh NetworkServiceDescriptor-createVNFDependency id-network-service-descriptor file.json
+ $ openbaton.sh NetworkServiceDescriptor-createVNFDependency <id-network-service-descriptor> <file.json>
 ```
 
 The file should look similar to this:
@@ -146,55 +142,55 @@ The file should look similar to this:
 }
 ```
 
-The ids belong to the particular VirtualNettworkFunctionDescriptor.
+The ids belong to the particular VirtualNetworkFunctionDescriptor.
 
 **deleteVNFDependency**
 
   * Delete the Virtual Network Function Descriptor dependency of a Network Service Descriptor with a specific id
 ```sh
-   $ openbaton.sh NetworkServiceDescriptor-deleteVNFDependency id-network-service-descriptor id-vnfdependency
+   $ openbaton.sh NetworkServiceDescriptor-deleteVNFDependency <id-network-service-descriptor> <id-vnfdependency>
 ```
 
 **getVNFDependencies**
 
   * Get all the Virtual Network Function Descriptor Dependencies of a Network Service Descriptor with a specific id
 ```sh
- $ openbaton.sh NetworkServiceDescriptor-getVNFDependencies id-network-service-descriptor
+ $ openbaton.sh NetworkServiceDescriptor-getVNFDependencies <id-network-service-descriptor>
 ```
 
 **getVNFDependency**
 
-  * Get the VirtualNetwork Function Descriptor Dependency with a specific id of a Network Service Descriptor with a specific id
+  * Get a certain Virtual Network Function Descriptor Dependency of a Network Service Descriptor with a specific id
 ```sh
- $ openbaton.sh NetworkServiceDescriptor-getVNFDependency id-network-service-descriptor id-vnfdependency
+ $ openbaton.sh NetworkServiceDescriptor-getVNFDependency <id-network-service-descriptor> <id-vnfdependency>
 ```
 
   
 **getVirtualNetworkFunctionDescriptors**
  
-  * Find all Virtual Network Function Descriptors
+  * Find all Virtual Network Function Descriptors of a certain Network Service Descriptor
 ```sh
- $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptors id-network-service-descriptor
+ $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptors <id-network-service-descriptor>
 ```
 
 **getVirtualNetworkFunctionDescriptor**
  
-  * Find a Virtual Network Function Descriptor specified by its id
+  * Find a Virtual Network Function Descriptor specified by its id and the id of the Network Service Descriptor containing it
 ```sh
-$ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor id-network-service-descriptor id-vnfd
+$ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor <id-network-service-descriptor> <id-vnfd>
 ```
 
 ### **Virtual Network Function Descriptor Subcommands**
 * **create**
   * Create a Virtual Network Function Descriptor
 ```sh
- $ openbaton.sh VirtualNetworkFunctionDescriptor-create file.json
+ $ openbaton.sh VirtualNetworkFunctionDescriptor-create <file.json>
 ```
 
 * **delete**
   * Delete a Virtual Network Function Descriptor passing its id
 ```sh
- $ openbaton.sh VirtualNetworkFunctionDescriptor-delete id-virtual-network-function-descriptor
+ $ openbaton.sh VirtualNetworkFunctionDescriptor-delete <id-virtual-network-function-descriptor>
 ```
 
 * **findAll**
@@ -206,7 +202,7 @@ $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor id-n
 * **findById**
   * Find a Virtual Network Function Descriptor by passing its id
 ```sh
- $ openbaton.sh VirtualNetworkFunctionDescriptor-findById id-virtual-network-function-descriptor
+ $ openbaton.sh VirtualNetworkFunctionDescriptor-findById <id-virtual-network-function-descriptor>
 ```
 
 ### **Network Service Record Subcommands**
@@ -215,11 +211,11 @@ $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor id-n
  
   * Create a Network Service Record from a Network Service Descriptor stored in the orchestrator
 ```sh
- $ openbaton.sh NetworkServiceRecord-create id-network-service-descriptor vim-map-file keypair-file configurations-file
+ $ openbaton.sh NetworkServiceRecord-create <id-network-service-descriptor> <vim-map-file> <keypair-file> <configurations-file>
 ```
 
 The three arguments after the NSD id can be used to specify the VIM on which a VDU should be deployed, the keypairs that shall be used to deploy the NSR and configuration parameters for the VNFRs.  
-If you want to specify the VIM to use for a particular VDU you can pass a file containing a map like this:
+If you want to specify the VIM that a particular VDU shall use you can pass a file containing a map like this:
 ```json
  {"vdu1Name":[vim1,vim2,vim3], "vdu2Name":[vim1]}
 ```
@@ -247,14 +243,14 @@ Of course you do not have to specify VIMs, keys and configurations. If you do no
 
   * Delete a Network Service Record passing its id
 ```sh
- $ openbaton.sh NetworkServiceRecord-delete id-network-service-record
+ $ openbaton.sh NetworkServiceRecord-delete <id-network-service-record>
 ```
 
 **update**
 
   * Update the Network Service Record by passing a file with the new version of it and the id of the Network Service Record to update
 ```sh
-$ openbaton.sh NetworkServiceRecord-update file.json id-network-service-record 
+$ openbaton.sh NetworkServiceRecord-update <file.json> <id-network-service-record>
 ```
 
 **findAll**
@@ -268,84 +264,84 @@ $ openbaton.sh NetworkServiceRecord-update file.json id-network-service-record
 
   * Find a Network Service Record by passing its id
 ```sh
- $ openbaton.sh NetworkServiceRecord-findById id-network-service-record
+ $ openbaton.sh NetworkServiceRecord-findById <id-network-service-record>
 ```
 
 **getVirtualNetworkFunctionRecords**
 
   * Get all the Virtual Network Function Records of a Network Service Record with a specific id
 ```sh
- $ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecords id-network-service-record
+ $ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecords <id-network-service-record>
 ```
 
 **getVirtualNetworkFunctionRecord**
 
-  * Get the Virtual Network Function Record by providing its id of a Network Service Record with a specific id
+  * Get a Virtual Network Function Record of a Network Service Record by providing its id 
 ```sh
- $ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecord id-network-service-record id-vnfr
+ $ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecord <id-network-service-record> <id-vnfr>
 ```
 
 **deleteVirtualNetworkFunctionRecord**
 
   * Delete the Virtual Network Function Record of a Network Service Record with a specific id
 ```sh
- $ openbaton.sh NetworkServiceRecord-deleteVirtualNetworkFunctionRecord id-network-service-record id-vnfr
+ $ openbaton.sh NetworkServiceRecord-deleteVirtualNetworkFunctionRecord <id-network-service-record> <id-vnfr>
 ```
 
 **createVNFDependency**
 
   * Create a Virtual Network Function Record Dependency of a NetworkServiceRecord with a specific id
 ```sh
- $ openbaton.sh NetworkServiceRecord-createVNFDependency id-network-service-record file.json
+ $ openbaton.sh NetworkServiceRecord-createVNFDependency <id-network-service-record> <file.json>
 ```
   
 **deleteVNFDependency**
 
   * Delete the Virtual Network Function Record Dependency of a NetworkServiceRecord with a specific id
 ```sh
- $ openbaton.sh NetworkServiceRecord-deleteVNFDependency id-network-service-record id-vnfdependency
+ $ openbaton.sh NetworkServiceRecord-deleteVNFDependency <id-network-service-record> <id-vnfdependency>
 ```
   
 **getVNFDependencies**
 
   * Get all the Virtual Network Function Record Dependencies of a Network Service Record with a specific id
 ```sh
- $ openbaton.sh NetworkServiceRecord-getVNFDependencies id-network-service-record
+ $ openbaton.sh NetworkServiceRecord-getVNFDependencies <id-network-service-record>
 ```
   
 **getVNFDependency**
 
   * Get the Virtual Network Function Record Dependency of a Network Service Record with a specific id
 ```sh
- $ openbaton.sh NetworkServiceRecord-getVNFDependency id-network-service-record id-vnfdependency
+ $ openbaton.sh NetworkServiceRecord-getVNFDependency <id-network-service-record> <id-vnfdependency>
 ```
 
 **createVNFCInstance**
 
   * Perform a SCALE_OUT operation on a Virtual Network Function by adding a VNFCInstance to its Virtual Network Function Record
 ```sh
-$ openbaton.sh NetworkServiceRecord-createVNFCInstance id-network-service-record id-virtual-network-function-record file.json
+$ openbaton.sh NetworkServiceRecord-createVNFCInstance <id-network-service-record> <id-virtual-network-function-record> <file.json>
 ```
 
 **deleteVNFCInstance**
 
   * Perform a SCALE_IN operation on a Virtual Network Function by deleting a VNFCInstance from the Virtual Network Function Record
 ```sh
-$ openbaton.sh NetworkServiceRecord-deleteVNFCInstance id-network-service-record id-virtual-network-function-record
+$ openbaton.sh NetworkServiceRecord-deleteVNFCInstance <id-network-service-record> <id-virtual-network-function-record>
 ```
 
 **startVNFCInstance**
   
   * Start a VNFCInstance specified by it's id
 ```sh
-$ openbaton.sh NetworkServiceRecord-startVNFCInstance id-nsr id-vnfr id-vdu id-vnfcinstance
+$ openbaton.sh NetworkServiceRecord-startVNFCInstance <id-nsr> <id-vnfr> <id-vdu> <id-vnfcinstance>
 ```
   
 **stopVNFCInstance**
     
   * Stop a VNFCInstance specified by it's id
 ```sh
-$ openbaton.sh NetworkServiceRecord-stopVNFCInstance id-nsr id-vnfr id-vdu id-vnfcinstance
+$ openbaton.sh NetworkServiceRecord-stopVNFCInstance <id-nsr> <id-vnfr> <id-vdu> <id-vnfcinstance>
 ```
 
 
@@ -354,21 +350,21 @@ $ openbaton.sh NetworkServiceRecord-stopVNFCInstance id-nsr id-vnfr id-vdu id-vn
 
   * Create a new User
 ```sh
-$ openbaton.sh User-create file.json
+$ openbaton.sh User-create <file.json>
 ```
 
 **delete**
 
   * Delete a user passing his id
 ```
-$ openbaton.sh User-delete user-id
+$ openbaton.sh User-delete <user-id>
 ```
 
 **update**
 
   * Update a User
 ```sh
-$ openbaton.sh User-update file.json user-id
+$ openbaton.sh User-update <file.json> <user-id>
 ```
 
 **findAll**
@@ -382,14 +378,14 @@ $ openbaton.sh User-findAll
 
   * Find a User by his username
 ```sh
-$ openbaton.sh User-findByName username
+$ openbaton.sh User-findByName <username>
 ```
 
 **changePassword**
 
   * Change the password of the current user
 ```sh
-$ openbaton.sh User-changePassword oldPassword newPassword
+$ openbaton.sh User-changePassword <oldPassword> <newPassword>
 ```
 
 Remember to source nfvo.properties afterwards and set the new password if you want to continue working as this User. 
@@ -400,21 +396,21 @@ Remember to source nfvo.properties afterwards and set the new password if you wa
 
   * Create a new Project
 ```sh
-$ openbaton.sh Project-create file.json
+$ openbaton.sh Project-create <file.json>
 ```
 
 **delete**
 
   * Delete a Project passing its id
 ```sh
-$ openbaton.sh Project-delete id-project
+$ openbaton.sh Project-delete <id-project>
 ```
 
 **update**
 
-  * Delete a Project passing its id
+  * Update a Project
 ```sh
-$ openbaton.sh Project-delete id-project
+$ openbaton.sh Project-update <file.json> <id-project>
 ```
 
 **findAll**
@@ -428,7 +424,7 @@ $ openbaton.sh Project-findAll
 
   * Find a Project by passing its id
 ```sh
-$ openbaton.sh Project-findById id-project
+$ openbaton.sh Project-findById <id-project>
 ```
 
 ### **Key Subcommands**
@@ -436,23 +432,23 @@ $ openbaton.sh Project-findById id-project
 
   * Generate a new Key in the NFVO
 ```sh
-$ openbaton.sh Key-generateKey keyname
+$ openbaton.sh Key-generateKey <keyname>
 ```
 
-You will get back the private key.
+This command will return the private key.
 
 **importKey**
 
   * Import a Key into the NFVO
 ```sh
-$ openbaton.sh Key-importKey keyname publicKey
+$ openbaton.sh Key-importKey <keyname> <publicKey>
 ```
 
 **delete**
 
   * Delete a Key passing its id
 ```sh
-$ openbaton.sh Key-delete id-key
+$ openbaton.sh Key-delete <id-key>
 ```
 
 **findAll**
@@ -466,7 +462,7 @@ $ openbaton.sh Key-findAll
 
   * Find a Key by passing its id
 ```sh
-$ openbaton.sh Key-findById id-key
+$ openbaton.sh Key-findById <id-key>
 ```
 
 
@@ -475,14 +471,14 @@ $ openbaton.sh Key-findById id-key
 
   * Create an Event
 ```sh
- $ openbaton.sh Event-create file.json
+ $ openbaton.sh Event-create <file.json>
 ```
 
 **delete**
 
   * Delete an Event passing its id
 ```sh
-$ openbaton.sh Event-delete id-event
+$ openbaton.sh Event-delete <id-event>
 ```
 
 **findAll**
@@ -496,7 +492,7 @@ $ openbaton.sh Event-findAll
 
   * Find an Event by passing its id
 ```sh
-$ openbaton.sh Event-findById id-event
+$ openbaton.sh Event-findById <id-event>
 ```
 
 ### **Configuration Subcommands**
@@ -504,14 +500,14 @@ $ openbaton.sh Event-findById id-event
 
   * Create a Configuration
 ```sh
-$ openbaton.sh Configuration-create file.json
+$ openbaton.sh Configuration-create <file.json>
 ```
 
 **delete**
 
   * Delete a Configuration passing its id
 ```sh
-$ openbaton.sh Configuration-delete id-configuration
+$ openbaton.sh Configuration-delete <id-configuration>
 ```
 
 **findAll**
@@ -525,58 +521,29 @@ $ openbaton.sh Configuration-delete id-configuration
 
   * Find a Configuration by passint its id
 ```sh
- $ openbaton.sh Configuration-findById id-configuration
+ $ openbaton.sh Configuration-findById <id-configuration>
 ```
 
-### **Image Subcommands**
-**create**
-
-  * Create an Image
-```sh
- $ openbaton.sh Image-create file.json
-```
-
-**delete**
-
-  * Delete an Image passing its id
-```sh
-$ openbaton.sh Image-delete id-image
-```
-
-**findAll**
-
-  * Find all Images
-```sh
- $ openbaton.sh Image-findAll
-```
-
-**findById**
-
-  * Find an Image by passing its id
-```sh
- $ openbaton.sh Image-findById id-image 
-```
-
-### **VirtualLink Subcommands**
+### **Virtual Link Subcommands**
 **create**
 
   * Create a Virtual Link
 ```sh
- $ openbaton.sh VirtualLink-create file.json 
+ $ openbaton.sh VirtualLink-create <file.json>
 ```
 
 **delete**
 
   * Delete a Virtual Link by passing its id
 ```sh
- $ openbaton.sh VirtualLink-delete id-virtual-link 
+ $ openbaton.sh VirtualLink-delete <id-virtual-link>
 ```
 
 **update**
 
   * Update a Virtual Link passing the new object and the id of the old Virtual Link
 ```sh
- $ openbaton.sh VirtualLink-update file.json id-virtual-link
+ $ openbaton.sh VirtualLink-update <file.json> <id-virtual-link>
 ```
 
 **findAll**
@@ -590,7 +557,7 @@ $ openbaton.sh Image-delete id-image
 
   * Find a Virtual Link by passing its id
 ```sh
- $ openbaton.sh VirtualLink-findById id-virtual-link
+ $ openbaton.sh VirtualLink-findById <id-virtual-link>
 ```
 
 ### **VNFPackage Subcommands**
@@ -598,14 +565,14 @@ $ openbaton.sh Image-delete id-image
 
   * Create a VNFPackage by uploading a tar file to the NFVO
 ```sh
- $ openbaton.sh VNFPackage-upload file.tar 
+ $ openbaton.sh VNFPackage-upload <file.tar>
 ```
 
 **delete**
 
   * Delete a VNFPackage by passing its id
 ```sh
- $ openbaton.sh VNFPackage-delete id-vnfPackage 
+ $ openbaton.sh VNFPackage-delete <id-vnfPackage>
 ```
 
 **findAll**
@@ -619,7 +586,7 @@ $ openbaton.sh Image-delete id-image
 
   * Find a VNFPackage by passing its id
 ```sh
- $ openbaton.sh VNFPackage-findById id-vnfPackage
+ $ openbaton.sh VNFPackage-findById <id-vnfPackage>
 ```
     
 [overview]:images/nfvo-how-to-use-gui-overview.png
