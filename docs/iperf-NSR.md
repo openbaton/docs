@@ -1,163 +1,216 @@
 # Tutorial: iPerf Network Service
 -----------------------------------------
 
-This tutorial explains how to deploy a network service that uses iPerf. [iPerf][iperf-website] is a tool for active measurements of the maximum achievable bandwidth between two or more machines.
+This tutorial explains how to deploy a network service that uses iPerf.  
+[iPerf][iperf-website] is a tool for active measurements of the maximum achievable bandwidth between two or more machines.
 
 You can execute also the same tutorial using the [TOSCA] definitions. 
 
 This tutorial makes use of:
 
-* Generic VNFM ([generic-vnfm][generic-vnfm])
-* Generic EMS ([generic ems][ems-github])
-* OpenStack plugin ([openstack-plugin][openstack-plugin])
+* [NFVO][nfvo-github]
+* [Generic VNFM][generic-vnfm]
+* Generic [EMS][ems-github]
+* [OpenStack plugin][openstack-plugin]
 
 ## Requirements
 
 In order to execute this scenario, you need to have the following components up and running:
 
- * The NFVO
- * the OpenStack plugin
- * the Generic VNFM (includes already generic EMS)
- * a PoP (of type openstack) registered. You can use the following [json descriptor][vim] by changing the values to your needs.
+ * The [NFVO][nfvo-github]
+ * the [OpenStack plugin][openstack-plugin]
+ * the [Generic VNFM][generic-vnfm]
+ * OpenStack
+
+Start the NFVO and Generic VNFM depending on how you [installed][installation] it.  
+If you used the bootstrap script for installing you do not have to care about the OpenStack plugin as it will be installed already. 
+
+## Store the Vim Instance
+
+For registering the Point of Presence of type OpenStack to the NFVO you have to upload a Vim Instance. You can use the following [json descriptor][vim] by changing the values to your needs. 
+
+### Using the dashboard
+
+If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://ip-where-nfvo-runs:8080 (change port and protocol if you use SSL) and log in (default username and password are *admin* and *openbaton*).  
+Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice by clicking on `Register Vim` and selecting the Vim Instance's json file.
+
+![Onboarding-Vim][vim-onboarding]
+
+### Using the CLI
+
+If you want to use the CLI (checkout the [openbaton-client documentation][cli] for more information on how to install and use it), you need to execute the following command in order to onboard the Vim Instance where *vim-instance.json* is the path to the Vim Instance file:
+
+```bash
+$./openbaton.sh VimInstance-create vim-instance.json
+```
 
 ## Store the Network Service Descriptor
 
-Download the following [iPerf NSD using private IPs][iperf-nsd-privateIPs] or [iPerf NSD using floating IPs][iperf-nsd-floatingIPs], and upload it in the catalogue either using the dashboard or the cli.
+Download the [iPerf NSD using private IPs][iperf-nsd-privateIPs] or [iPerf NSD using floating IPs][iperf-nsd-floatingIPs], and upload it in the catalogue either using the dashboard or the CLI.  
+The difference is that the first NSD will deploy Virtual Machines without floating IPs on OpenStack whereas the second one will use floating IPs. 
 
-### Using dashboard
+### Using the dashboard
 
-If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://your-ip-here:8080 and log in (default username and password are *admin* and *openbaton*). Go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
 
 ![Onboarding-NSD][nsd-onboarding]
 
-### Using CLI
+### Using the CLI
 
-If you want to use the CLI (checkout the [openbaton-client documentation][cli] for more information on how to install it), you need to execute the following command in order to onboard the iPerf's NSD by using private IPs:
+If you want to use the CLI you need to execute the following command in order to onboard the NSD:
 
 ```bash
-$./openbaton.sh NetworkServiceDescriptor-create tutorial-iperf-NSR-privateIPs.json
+$./openbaton.sh NetworkServiceDescriptor-create tutorial-iperf-NSD.json
 ```
 
 Once this request is processed successfully, it returns the following:
 
 ```bash
-+------------------ +------------------------------------------------------------------ +
-| PROPERTY          | VALUE                                                             |
-+------------------ +------------------------------------------------------------------ +
-| VNFD              |                                                                   |
-|                   | id: 4625f79d-8d02-44bf-a97b-d93c991d8bef - name:  iperf-server    |
-|                   | id: 703f09db-0b05-4260-bbf0-89ee4d976ae3 - name:  iperf-client    |
-|                   |                                                                   |
-| VNF_DEPENDENCY    |                                                                   |
-|                   | id: b1e850b7-0194-4062-9bdb-75ee356e1dce                          |
-|                   |                                                                   |
-| id                | 658c2b21-4af6-4489-84f7-ee864159404c                              |
-|                   |                                                                   |
-| hb_version        | 1                                                                 |
-|                   |                                                                   |
-| name              | NSD iperf + privateIPs                                            |
-|                   |                                                                   |
-| vendor            | FOKUS                                                             |
-|                   |                                                                   |
-| version           | 1.0                                                               |
-|                   |                                                                   |
-| VLD               |                                                                   |
-|                   | id: 53ab8671-126c-4918-b3e1-34aaa449558a - name:  private         |
-|                   |                                                                   |
-+------------------ +------------------------------------------------------------------ +
-
++------------------ +------------------------------------------------------------------ + 
+| PROPERTY          | VALUE                                                             | 
++------------------ +------------------------------------------------------------------ + 
+| VNFD              |                                                                   | 
+|                   | id: 2dd6a30d-0eee-4f88-aa45-9f3a420f341b - name:  iperf-server    | 
+|                   | id: 55ac1b21-fdf0-4fe3-861e-5b1f6b5079e3 - name:  iperf-client    | 
+|                   |                                                                   | 
+| VNF_DEPENDENCY    |                                                                   | 
+|                   | id: 123b3dc1-4310-405c-8c50-17dbb1becd2d                          | 
+|                   |                                                                   | 
+| id                | f2086f71-4ecf-4ed8-a692-36775ebdfc68                              | 
+|                   |                                                                   | 
+| hb_version        | 1                                                                 | 
+|                   |                                                                   | 
+| name              | NSD iperf + privateIPs                                            | 
+|                   |                                                                   | 
+| projectId         | 7bc76eb0-c48c-4328-a234-c779ab54cd2a                              | 
+|                   |                                                                   | 
+| vendor            | FOKUS                                                             | 
+|                   |                                                                   | 
+| version           | 1.0                                                               | 
+|                   |                                                                   | 
+| VLD               |                                                                   | 
+|                   | id: bd65ee00-ce56-42f4-9d31-5cd220ee64a6 - name:  private         | 
+|                   |                                                                   | 
++------------------ +------------------------------------------------------------------ + 
 ```
 
 ## Deploy the Network Service Descriptor
-As soon as you onboarded the NSD in the NFVO you can deploy this NSD either by using the dashboard or the CLI.
+As soon as you onboarded the NSD in the NFVO you can deploy this NSD either by using the dashboard or the CLI.  
+This will create a Network Service Record (NSR) and actually launch the Virtual Machines on OpenStack. 
 
-### Using dashboard
+### Using the dashboard
 
-This part shows you how to deploy an onboarded NSD via the dashboard. You need to go again to the GUI, go to `Catalogue -> NS Descriptors`, and open the drop down menu by clicking on `Action`. Afterwards you need to press the `Launch` button in order to start the deployment of this NSD.
+This part shows you how to deploy an onboarded NSD via the dashboard. You need to go to the GUI again and navigate to `Catalogue -> NS Descriptors`. Open the drop down menu by clicking on `Action`. Afterwards you need to press the `Launch` button and a window with launching options will appear. Just click on `Launch` again in order to start the deployment of this NSD.
 
-![nsr-deployment][nsd-deployment]
+![nsr-deploy][nsr-deploy]
 
-If you go to `Orchestrate NS -> NS Records` in the menu on the left side, you can follow the deployment process and check the current status of the deploying NSD.
+If you go to `Orchestrate NS -> NS Records` in the menu on the left side, you can follow the deployment process and check the current status of the created NSR.
 
-### Using CLI
+### Using the CLI
 
-You can also use the CLI for deploying existing NSDs. Therefore, you need to execute the following command in order to start the deployment. The ID of the NSD to deploy can be found either by using the dashboard or getting it from the output when onboarding a new NSD as done in the previous step. The command to deploy the previously onboarded NSD looks like shown below:
+You can also use the CLI for deploying existing NSDs. The command needs the ID of the NSD to deploy as an argument. It can be found either by using the dashboard or getting it from the output when onboarding a new NSD as done in the previous step. The command to deploy the previously onboarded NSD looks like shown below:
 
 ```bash
-$./openbaton.sh NetworkServiceRecord-create 658c2b21-4af6-4489-84f7-ee864159404c {} []
+$./openbaton.sh NetworkServiceRecord-create f2086f71-4ecf-4ed8-a692-36775ebdfc68 vimmap.json keypair.json conf.json
+```
+
+The first argument is the ID of the NSD from which the NSR will be created. The following arguments are files that can contain additional configuration while deploying. 
+You have to pass these files even if you do not want to pass any configuration like in our case. So just create the three files and fill them with empty json objects/arrays (i.e. *{}* and *[]*).  
+The *vimmap.json* and the *conf.json* files should contain this:
+```json
+{}
+```
+And the *keypair.json* file this:
+```json
+[]
 ```
 
 The execution of this command produces the following output:
 
 ```bash
-+------------------------ +------------------------------------------------------------- +
-| PROPERTY                | VALUE                                                        |
-+------------------------ +------------------------------------------------------------- +
-| id                      | 8c6cca05-9042-4a9b-8736-4178c75f5c54                         |
-|                         |                                                              |
-| vendor                  | FOKUS                                                        |
-|                         |                                                              |
-| version                 | 1.0                                                          |
-|                         |                                                              |
-| VLR                     |                                                              |
-|                         | id: 09dfce1d-12ee-450c-8ca8-eb3c68ecf768 - name:  private    |
-|                         |                                                              |
-| VNF_DEPENDENCY          |                                                              |
-|                         | id: e88b2593-d339-4ec8-9606-f9300cf6163e                     |
-|                         |                                                              |
-| descriptor_reference    | 658c2b21-4af6-4489-84f7-ee864159404c                         |
-|                         |                                                              |
-| status                  | NULL                                                         |
-|                         |                                                              |
-| name                    | NSD iperf + privateIPs                                       |
-|                         |                                                              |
-+------------------------ +------------------------------------------------------------- +
++------------------------ +------------------------------------------------------------- + 
+| PROPERTY                | VALUE                                                        | 
++------------------------ +------------------------------------------------------------- + 
+| id                      | af12b18b-9aa2-4fed-9b07-bbe1dcad9c98                         | 
+|                         |                                                              | 
+| vendor                  | FOKUS                                                        | 
+|                         |                                                              | 
+| projectId               | 7bc76eb0-c48c-4328-a234-c779ab54cd2a                         | 
+|                         |                                                              | 
+| task                    | Onboarding                                                   | 
+|                         |                                                              | 
+| version                 | 1.0                                                          | 
+|                         |                                                              | 
+| VLR                     |                                                              | 
+|                         | id: 7c9996a4-eac8-4862-872b-dfccc4ab1790 - name:  private    | 
+|                         |                                                              | 
+| VNF_DEPENDENCY          |                                                              | 
+|                         | id: 4b0d291e-883b-40e0-b64e-faeb196d2aaf                     | 
+|                         |                                                              | 
+| descriptor_reference    | f2086f71-4ecf-4ed8-a692-36775ebdfc68                         | 
+|                         |                                                              | 
+| status                  | NULL                                                         | 
+|                         |                                                              | 
+| createdAt               | 2016.10.25 at 11:52:04 CEST                                  | 
+|                         |                                                              | 
+| name                    | NSD iperf + privateIPs                                       | 
+|                         |                                                              | 
++------------------------ +------------------------------------------------------------- + 
 ```
 
-In order to follow the deployment process you can retrieve information by passing the ID of the deploying NSR:
+In order to follow the deployment process you can retrieve information by passing the ID of the deploying NSR to this command:
+
 ```bash
-$./openbaton.sh NetworkServiceRecord-findById 8c6cca05-9042-4a9b-8736-4178c75f5c54
-+------------------------ +------------------------------------------------------------------ +
-| PROPERTY                | VALUE                                                             |
-+------------------------ +------------------------------------------------------------------ +
-| id                      | 8c6cca05-9042-4a9b-8736-4178c75f5c54                              |
-|                         |                                                                   |
-| vendor                  | FOKUS                                                             |
-|                         |                                                                   |
-| version                 | 1.0                                                               |
-|                         |                                                                   |
-| VLR                     |                                                                   |
-|                         | id: 09dfce1d-12ee-450c-8ca8-eb3c68ecf768 - name:  private         |
-|                         |                                                                   |
-| VNFR                    |                                                                   |
-|                         | id: f1ed92eb-8b41-4113-a4c0-958e629dd425 - name:  iperf-client    |
-|                         | id: d11c93ff-c7b2-4ad2-8e7e-32571a5cd3b0 - name:  iperf-server    |
-|                         |                                                                   |
-| VNF_DEPENDENCY          |                                                                   |
-|                         | id: e88b2593-d339-4ec8-9606-f9300cf6163e                          |
-|                         |                                                                   |
-| descriptor_reference    | 658c2b21-4af6-4489-84f7-ee864159404c                              |
-|                         |                                                                   |
-| status                  | ACTIVE                                                            |
-|                         |                                                                   |
-| name                    | NSD iperf + privateIPs                                            |
-|                         |                                                                   |
-+------------------------ +------------------------------------------------------------------ +
+$./openbaton.sh NetworkServiceRecord-findById af12b18b-9aa2-4fed-9b07-bbe1dcad9c98
+
+
++------------------------ +------------------------------------------------------------------ + 
+| PROPERTY                | VALUE                                                             | 
++------------------------ +------------------------------------------------------------------ + 
+| id                      | af12b18b-9aa2-4fed-9b07-bbe1dcad9c98                              | 
+|                         |                                                                   | 
+| vendor                  | FOKUS                                                             | 
+|                         |                                                                   | 
+| projectId               | 7bc76eb0-c48c-4328-a234-c779ab54cd2a                              | 
+|                         |                                                                   | 
+| task                    | Onboarded                                                         | 
+|                         |                                                                   | 
+| version                 | 1.0                                                               | 
+|                         |                                                                   | 
+| VLR                     |                                                                   | 
+|                         | id: 7c9996a4-eac8-4862-872b-dfccc4ab1790 - name:  private         | 
+|                         |                                                                   | 
+| VNFR                    |                                                                   | 
+|                         | id: ecd372b4-b170-46de-93a4-06b8f03a6436 - name:  iperf-server    | 
+|                         | id: 20011a5c-73a5-46d6-a7c8-19bfa47de0e6 - name:  iperf-client    | 
+|                         |                                                                   | 
+| VNF_DEPENDENCY          |                                                                   | 
+|                         | id: 4b0d291e-883b-40e0-b64e-faeb196d2aaf                          | 
+|                         |                                                                   | 
+| descriptor_reference    | f2086f71-4ecf-4ed8-a692-36775ebdfc68                              | 
+|                         |                                                                   | 
+| status                  | ACTIVE                                                            | 
+|                         |                                                                   | 
+| createdAt               | 2016.10.25 at 11:52:04 CEST                                       | 
+|                         |                                                                   | 
+| name                    | NSD iperf + privateIPs                                            | 
+|                         |                                                                   | 
++------------------------ +------------------------------------------------------------------ + 
 ```
 
 ## Conclusions
 
-When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service was correctly run.
+When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service is deployed correctly.
 
 # Addtional information about this scenario
 
-In this page there is a full use case example explaining how the deployment process works, step-by-step. We assume that the NFVO and the Generic VNFM are ready to receive invocations.
+When you access your OpenStack dashnoard you should be able to see the deployed Virtual Machines. One of them will act as an iPerf server and the other one as an iPerf client that connects to the server. 
 
-The following pictures shows what is going to be deployed, an [Iperf][iperf] client and an Iperf server.
+The following pictures shows the deployment.
 
 ![iperf-deployment][iperf-client-server]
 
-As shown in the picture, the iperf server is the source of the dependency and the client is the target. In this case the client needs the IP of the server. The semantics of the vnf dependency is: the source provides some parameters to the target.
+As indicated by the blue arrow the iperf server is the source of a dependency and the client is the target. In this case the client needs the IP of the server in order to connect.
 
 Before starting we need to send the VimInstance to the NFVO and the Network Service Descriptor. For doing this please have a look into the [Vim instance documentation][vim-doc], [VNF Package documentation][vnf-package] and [Network Service Descriptor documentation][nsd-doc]. In fact, for creating a Network Service Record, we need to have a Network Service Descriptor loaded into the catalogue with two Virtual Network Functions (iperf client and server) created from a VNF Package. A Virtual Network Function Descriptor Json-File for Iperf client looks like this:
 
@@ -267,12 +320,15 @@ References
 [vnf-package]:vnf-package
 [vim-doc]:vim-instance
 [iperf]:https://iperf.fr
+[nfvo-github]:https://github.com/openbaton/NFVO
 [generic-vnfm]:https://github.com/openbaton/generic-vnfm
 [openstack-plugin]:https://github.com/openbaton/openstack-plugin
 [vim]: descriptors/vim-instance/openstack-vim-instance.json
+[installation]:nfvo-installation
 [iperf-nsd-privateIPs]: descriptors/tutorial-iperf-NSR/tutorial-iperf-NSR-privateIPs.json
 [iperf-nsd-floatingIPs]: descriptors/tutorial-iperf-NSR/tutorial-iperf-NSR-floatingIPs.json
-[nsd-deployment]: images/tutorials/tutorial-iperf-NSR/nsd-deploy.png
+[nsr-deploy]: images/tutorials/tutorial-iperf-NSR/nsr-deploy.png
+[vim-onboarding]: images/tutorials/tutorial-iperf-NSR/vim-onboarding.png
 [nsd-onboarding]: images/tutorials/tutorial-iperf-NSR/nsd-onboarding.png
 [ems-github]: https://github.com/openbaton/ems/tree/master
 [iperf-website]:https://iperf.fr
