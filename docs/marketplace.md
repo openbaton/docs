@@ -1,0 +1,13 @@
+# Marketplace
+
+Open Baton relase 3 comes with a new public component: the [Marketplace](http://marketplace.openbaton.org/#/). From this page you can browse all the free and open source VNF. You can also download NSDs, images and drivers. In the near future it will be possible for a registered user to upload his own VNF Package, making it in this way pubblic.
+
+A VNF Package can be downloaded from this page and it can be helpfull as an example when you are writing your own VNF Package. If you want to import VNF Packages and/or NSDs in your own NFVO, you may want to directly go to the NFVO Dashboard on the Marketplace page:
+
+![NFVO Marketplace page][nfvo-marketplace-page]
+
+From this page you can import in the NFVO Catalogue VNF Packages and VNF Descriptors or directly NSDs.
+
+**IMPORTANT NOTE**: The NSDs/VNFDs do not specify the PoP where they will be deployed (_vimInstanceName_) since of course the Marketplace is not aware of the PoP currently onboarded on the NFVO. Please remeber to specify during the deployement message where you want to deploy each single VNF. You can also avoid choosing the PoP in the deployment form, but the NFVO will choose randomly between the available onboarded PoPs. 
+
+[nfvo-marketplace-page]:images/nfvo-marketplace-page.png
