@@ -168,13 +168,12 @@ VDU you can see the details of it. Here you can also start stop VNFC Instances w
 
 ### VNF Packages
 On this page you can upload the **VNF Package**. For more information about the VNF Package please read the [VNF Package documentation] 
-For uploading a _.tar_ you can click on the button **Upload VNFPackage** and this window will be shown where you can drag & drop the file or just click on the white area and choose your file using your file manager
+For uploading a _.tar_ you can click on the button **Upload VNFPackage** and this window will be shown where you can drag & drop the file or just click on the white area and choose your file using your file manager. You can also upload csar package instead of usual tar one, for this, just click on "Use CSAR parser" before sending the packages. 
 
 ![Drag&Drop modal][drag_drop]
 
 After you click on the button **Send All** the packages will be sent to the _NFVO_ and once the process is finished you will see the package appearing in the list
 
-![Drag&Drop modal start][drag_drop1]
 
 
 
