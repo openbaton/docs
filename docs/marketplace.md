@@ -8,7 +8,7 @@ A VNF Package can be downloaded from this page and it can be helpfull as an exam
 
 ![NFVO Marketplace page][nfvo-marketplace-page]
 
-You can onboard the packages simply by clicking on the button, They will be automatically downloaded and onboarded, ready to be used for deployment.
+You can onboard the packages simply by clicking on the button, еhey will be automatically downloaded and onboarded, ready to be used for deployment.
 
 **IMPORTANT NOTE**: The NSDs/VNFDs do not specify the PoP where they will be deployed (_vimInstanceName_) since of course the Marketplace is not aware of the PoP currently onboarded on the NFVO. Please remeber to specify during the deployement message where you want to deploy each single VNF. You can also avoid choosing the PoP in the deployment form, but the NFVO will choose randomly between the available onboarded PoPs. 
 
