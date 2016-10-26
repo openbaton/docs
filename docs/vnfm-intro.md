@@ -1,4 +1,4 @@
-## Virtual Network Function Manager Approaches
+# Virtual Network Function Manager Approaches
 
 Open Baton release 3 provides three different alternatives with regard to VNF Managers:  
 
@@ -28,3 +28,7 @@ This approach allows you to integrate your VNFM and VNF within Openbaton. In thi
 The three pages following describe in details these three different approaches.
 
 Please refer to the following doc for more details: [Bring your own VNFM]
+
+[generic]: vnfm-generic
+[juju]: vnfm-juju
+
