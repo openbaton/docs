@@ -1,7 +1,8 @@
 # Tutorial: Dummy Network Service Record
 -----------------------------------------
 
-This tutorial explains how to deploy a Network Service Record composed of Dummy VNFs. It is typically used for testing that the installation of the NFVO went fine.
+This tutorial explains how to deploy a Network Service Record composed of Dummy VNFs. It is typically used for testing that the installation of the NFVO went fine. 
+It will not launch any Virtual Machines nor actually deploy a real Network Service.
 
 You can execute also the same tutorial using the [TOSCA] definitions. 
 
