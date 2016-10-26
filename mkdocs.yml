@@ -50,4 +50,7 @@ pages:
 google_analytics: ['UA-68429895-1', 'openbaton.github.io']
 theme: readthedocs
 theme_dir: 'custom_theme'
-
+repo_url: https://github.com/openbaton
+repo_name: OpenBaton GitHub
+site_favicon: favicon.ico
+copyright: Copyright (c) 2016 Open Baton (http://www.openbaton.org)

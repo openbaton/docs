@@ -659,45 +659,6 @@ Furthermore note that the ScalingTester passes the updated NSR to the next teste
 So the recommended proceeding after a scale out or scale in is to wait until the operation finishes and then use the *ScalingTester* or at least the *NetworkServiceRecordGetLatest* to have the updated NSR. 
 
 
-## Parser
-The class Parser looks for a configuration file with this syntax:
-
-old_value = new_value
-
-In the json file, passed to the method Parser.randomize(), all the old_value will be replace with new_value.
-IMPORTANT: in the json file, the old_value must have the following sintax:
-
-"some_parameter" = "<::old_value::>"
-
-If we want to put random values:
-
-old_value = new_value***
-
-In the json file, passed to the method Parser.randomize(), all the old_value will be replace
-with new_value plus 3 random characters (e.g. new_valuezxd).
-
-### Simple parser example
-Parser properties file:
-```
-admin=admin***
-```
-Json file:
-```
-{
-"username":"<::admin::>"
-}
-```
-The new json file used by the integration tests will be:
-```
-{
-"username":"adminxkz"
-}
-```
-
-### Parser configuration
-If you want to apply the parser on NSDs, create the file **/etc/openbaton/integration-test/parser-properties/nsd.properties**.  
-If you want to apply the parser on Vim Instances, create the file **/etc/openbaton/integration-test/parser-properties/vim.properties**. 
-
 <!---
 References
 
