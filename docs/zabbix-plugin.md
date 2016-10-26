@@ -2,8 +2,8 @@
 
 Zabbix plugin (see it on [GitHub][GitHub]) is an open source project providing a reference implementation of two interfaces of the VIM, based on the ETSI [NFV MANO] specification.
 
-The two interfaces are:
--   VirtualisedResourceFaultManagement
+The two interfaces are:  
+-   VirtualisedResourceFaultManagement  
 -   VirtualisedResourcePerformanceManagement
 
 A detailed description of the interfaces is in the last ETSI Draft [IFA005_Or-Vi_ref_point_Spec].  
@@ -11,12 +11,11 @@ In particular with the Zabbix plugin you can create/delete items, trigger and ac
 
 ![Zabbix plugin architecture][zabbix-plugin-architecture]
 
-Some of the benefits introduced by the usage of such plugin: 
+Some of the benefits introduced by the usage of such plugin:  
 1) Make the consumers (NFVO, VNFM) indipendent to the monitoring system.  
 2) The communication between the consumers and zabbix-plugin is JSON based, so the consumers can be written in any languages.  
-3) The values of the items are cached and updated periodically in order to avoid to contact the zabbix server each time a specific metric is required.
-4) If your consumer is written in java, we provide a simple class MonitoringPluginCaller which handle the communication via RabbitMQ.
-
+3) The values of the items are cached and updated periodically in order to avoid to contact the zabbix server each time a specific metric is required.  
+4) If your consumer is written in java, we provide a simple class MonitoringPluginCaller which handle the communication via RabbitMQ.  
 
 ## Getting Started
 
@@ -110,16 +109,10 @@ To import the plugin-sdk, please add in your gradle file the following dependenc
 ```gradle
 repositories {
      mavenCental()
-     /**
-     * Only needed for openbaton snapshots dependencies
-     */
-    maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots/'
-    }
 }
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:2.2.0'
+    compile 'org.openbaton:plugin-sdk:3.0.0'
 }
 ```
 
@@ -344,8 +337,8 @@ According to ETSI specification there are 4 types of notifications.
 
 The interface VirtualisedResourcePerformanceManagement sends two types of notifications:  
 
-1. PerformanceInformationAvailableNotification (NOT YET IMPLEMENTED)  : this notification informs the receiver that performance information is available.      
-2. hresholdCrossedNotification  (NOT YET IMPLEMENTED) : his notification informs the receiver that a threshold value has been crossed.   
+1. PerformanceInformationAvailableNotification (NOT YET IMPLEMENTED): this notification informs the receiver that performance information is available.  
+2. thresholdCrossedNotification  (NOT YET IMPLEMENTED) : his notification informs the receiver that a threshold value has been crossed.  
 
 The interface VirtualisedResourceFaultManagement sends the following notifications:
 
@@ -353,13 +346,13 @@ The interface VirtualisedResourceFaultManagement sends the following notificatio
 2. AlarmStateChangedNotification : This notification informs the receiver of state change of alarm related to the virtualised resources managed by the VIM, e.g. the alarm shall be set to “cleared” if the corresponding fault has been solved.
     It contains the id of the Alarm and the actual status which could be (CLEARED,FIRED,UPDATED). 
 
-Actually the zabbix-plugin when receives the notification by zabbix server, **if the trigger has severity higher than Information**, 
-it creates an alarm (mapping zabbix notification into standard Alarm) and notify the subscribers with a AlarmNotification. If the notification is not new, then it sends an AlarmStateChangedNotification.
+Actually the zabbix-plugin when receives the notification by Zabbix server, **if the trigger has severity higher than Information**, 
+it creates an alarm (mapping zabbix notification into standard Alarm) and notifies the subscribers with a AlarmNotification. If the notification is not new, then it sends an AlarmStateChangedNotification.
 
 
 
 [GitHub]:https://github.com/openbaton/zabbix-plugin
-[IFA005_Or-Vi_ref_point_Spec]:https://docbox.etsi.org/isg/nfv/open/Drafts/IFA005_Or-Vi_ref_point_Spec/
+[IFA005_Or-Vi_ref_point_Spec]:http://www.etsi.org/deliver/etsi_gs/NFV-IFA/001_099/005/02.01.01_60/gs_nfv-ifa005v020101p.pdf
 [NFV MANO]:http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_nfv-man001v010101p.pdf
 [zabbix-plugin-architecture]:images/zabbix-plugin-architecture.png
 [zabbix-doc-2.2]:https://www.zabbix.com/documentation/2.2/manual/config/items/itemtypes/zabbix_agent
