@@ -101,6 +101,7 @@ You have two options for storing a NS Descriptor:
 
 1. Create a NSD by using the VNFDs from the Packages
 2. Create a NSD by using a json file
+3. If you are using TOSCA NSD you can choose  "upload CSAR NSD" and upload it via drag and drop.
 
 
 Upload a json-file that contains the NSD
