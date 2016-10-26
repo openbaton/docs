@@ -26,6 +26,7 @@ The example of the Metadata file below shows a basic definition of a VNF Package
 ```yaml
 name: VNF Package_name
 scripts-link: scripts_link
+vim_types: list_of_vim_types
 image:
     upload: option
     ids: list_of_ids
@@ -44,6 +45,7 @@ image-config:
 In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
 
 * ***name***: The name defines the name of the VNF Package itself used to store it in the database.
+* ***vim_types***: The list of the vim types that the VNF Package supports.
 * ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
     * **Note** Either you can define the scripts-link or put the scripts into the folder scripts/.
         The scripts-link has a higher priority than the scripts located in the folder scripts/.
