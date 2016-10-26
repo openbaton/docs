@@ -42,6 +42,8 @@ The following screenshot shows the creation of a new user named *new user* who i
 
 The NFVO also supports SSL. If SSL is enabled you have to use *https://url-to-nfvo:8443* to access the GUI. 
 
+## Vim Driver Installation
+If you are admin you call also use vim-drivers menu to download the drivers from marketplace and install and start them. You also have an access to the information about the drivers that are already installed. 
 
 ## Manage PoPs
 On this page you can see the list of Vim Instances registered
@@ -67,7 +69,7 @@ In the menu on the left side under the template _Catalogue_ you can manage
 ### Marketplace
 
 With the opening of the Openbaton Marketplace, it became possbile to download VNFPackages and NSDs directly into the NFVO, for this, 
-go to Marketplace tab and browse the available packages. You can click download button to download and onboard it. 
+go to Marketplace tab and browse the available packages. You can click download button to download and onboard it. If you download NSD, the packages will be downloaded and onboarded automatically. You can find more about marketplace  out at the pages dedicated to it. 
 
 ### Key Pairs
 You can add a key pairs to use for ssh access to the VMs via *Key Pairs* menu. You have two options in terms of adding the keys. 
@@ -156,17 +158,8 @@ The same for the VNF inside the NSD
 
 And the same for the VDU inside the VNF
 
-![NSD Graph][editNSD4]
-
 ![NSD Graph][editNSD5]
 
-#### Launching the NSD
-
-In order to launch NSD press the *Action* near the NSD you want to lauch and press *launch*. You will be promted with a dialogue that will let you choose the key name for the NSR. You have 2 options in this case:
-1. Pick key that you have added to the NFVO or created with it, you can pick multiple keys too, and press *Launch* to use these keys later to access the VMs. 
-2. Press *Launch with VIM key* in order to use the key you have mentioned in VIM instance JSON or to use no key at all(this will be the case if no key was mentioned in the VIM file). 
-
-![NSD Launch][launchNSD]
 
 #### Virtual Network Function Descriptor Information
 In the list of Virtual Network Function Descriptors in NSD template you can click on the id of a Virtual Network Function Descriptor to get to this page
@@ -188,7 +181,7 @@ After you click on the button **Send All** the packages will be sent to the _NFV
 
 ![Drag&Drop modal start][drag_drop1]
 
-![Drag&Drop list][drag_drop2]
+
 
 ## Network Service Records 
 
@@ -250,7 +243,7 @@ This are the information of the Event selected
 [Login]:images/login.png
 
 [VNFDlistintoNSD]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
-[VNFDlistintoNSD1]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD1.png
+[VNFDlistintoNSD1]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
 [VNFDescriptorInformation]:images/nfvo-how-to-use-gui-VNFD-information.png
 [JSONofNSR]:images/nfvo-how-to-use-gui-JSON-of-NSR.png
 [NSDgraph]:images/nfvo-how-to-use-gui-NSD-graph.png
