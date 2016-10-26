@@ -1,9 +1,27 @@
 # OpenBaton Command Line Interface (CLI)
 
-The Openbaton Client project provides a command-line interface, which enables you to use the NFVO's API and send commands to it. 
+The [Openbaton Client project][openbaton-client-github] provides a command-line interface, which enables you to use the NFVO's API and send commands to it. 
 
 ## Install the Openbaton Client
-Git clone the project. Navigate into the root directory of the project and execute *./gradlew build*.
+
+On Linux you can install the Open Baton Command Line Iterface while installing Open Baton using the [bootstrap script][linux-install]. It will prompt you with the question if you also want to install the Command Line Interface.  
+If you did not want to install the CLI at this point you can install it later on Linux using *sudo apt-get install openbaton-cli*.  
+If you use MacOS you have to install the CLI from source code. 
+
+### Set the required environment variables
+
+Source */etc/openbaton/cli/nfvo.properties* to set the required environment variables. A dialog appears and will ask you for some properties. 
+
+```sh
+source /etc/openbaton/cli/nfvo.properties
+```
+
+This has to be done every time before you start working with the CLI in a new terminal. 
+
+
+## Install the Openbaton Client from source code
+
+Git clone the [Openbaton Client project][openbaton-client-github]. Navigate into the root directory of the project and execute *./gradlew build*.
 
 ```sh
 git clone https://github.com/openbaton/openbaton-client.git
@@ -12,6 +30,8 @@ cd openbaton-client
 ```
 
 ### Set the required environment variables
+
+
 Navigate into the project's root directory and execute *source nfvo.properties*. A dialog appears and will ask you for some properties. 
 
 ```sh
@@ -19,10 +39,14 @@ cd openbaton-client
 source nfvo.properties
 ```
 
+This has to be done every time before you start working with the CLI in a new terminal. 
+
 
 ## Openbaton Client usage
 
-After you typed in all the required properties you can start using the cli for sending commands to the NFVO. 
+After you typed in all the required properties you can start using the cli for sending commands to the NFVO.  
+If you installed the Open Baton Client while installing Open Baton with the bootstrap script or with apt-get install you can use the command *openbaton.sh*.  
+If you installed it from source code you have to execute the script *openbaton.sh* in the directory where you cloned the Open Baton Client repository.
     
 ### Run a command: 
 ```sh
@@ -592,6 +616,8 @@ $ openbaton.sh Configuration-delete <id-configuration>
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
 [registeraNewVim]:images/vim-instance-register-new-pop.png
+[openbaton-client-github]:https://github.com/openbaton/openbaton-client
+[linux-install]:nfvo-installation-deb
 
 
 <!---
