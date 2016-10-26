@@ -15,6 +15,7 @@ Premise: some of the objects are defined by OpenBaton
 | tosca.nodes.nfv.VL 			| Virtual Link Descriptor     	|
 | tosca.nodes.nfv.CP 			| Connection Point      	|
 
+**Important Note:** Remember for each component to specify the type and always use the types above. Otherwise the component will not be recognised and can not be parsed.
 
 ## Deploy a VNFD TOSCA Template
 
@@ -35,7 +36,7 @@ topology_template: #Explained below
 ```
 | Name          		| Description       											|
 | -------------   		| -------------	            | 
-| tosca_definitions_version 	| The version of the template that follows it.    |
+| tosca_definitions_version 	| The TOSCA NFV version that the template follows.    |
 | description  	| A short description of the template.    |
 | metadata  	| An Object containing metadata about the Virtual Network Function - name, version and creator.    |
 | inputs  	| Explained below    |
@@ -44,7 +45,7 @@ topology_template: #Explained below
 
 ##Inputs Template
 
-The Inputs Template consists of parameters needed for creating a Virtual Network Function Descriptor that can be added to OpenBaton. An example of how the template should look like is shown below.
+The Inputs Template consists of parameters needed for creating a Virtual Network Function Descriptor that can be added to Open Baton. An example of how the template should look like is shown below.
 
 ```yaml
 inputs:
@@ -102,12 +103,11 @@ This is an example of a VDU template and similar to above after that we explain 
 VDU2:
   type: tosca.nodes.nfv.VDU
   properties:
-    vm_image:
-      - ubuntu-14.04-server-cloudimg-amd64-disk1
     scale_in_out: 2
     vimInstanceName: vim-instance
-  requirements:
-    - virtual_link: CP2
+  artifacts:
+    type: tosca.artifacts.Deployment.Image.VM
+    file: ubuntu-14.04-server-cloudimg-amd64-disk1
 ```
 
 | Name          		| Value   	                    | Description       											|
@@ -115,14 +115,23 @@ VDU2:
 | type  	            | tosca.nodes.nfv.VDU            |  Type of the node. In the example it defines the node as a VDU node. |
 | properties 			| See the Table below    	    | Defines parameters needed for deploying a VDU    |
 | requirements 			| List of requirement         | Describes the component requirements for the VDU |
+| artifacts                 | List of artifacts         | Describes the list of images in OpenStack that will be used to instantiate a VNFC |
+
 
 The **Properties** Object of a VDU node has the following components:
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| vm_image  	                | List < String >     | It is the list of images present in the OpenStack that will be used to instantiate a VNFC (aka Virtual Machine) |
 | scale_in_out  	            | Integer    | Maximum value of VNFCs that can be instantiated in the process of scale-in/out |
-| vim_instance_name  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated  |
+| vim_instance_name  	            | List < String >     | Names of Points of Persistence (PoP) where this VNFC will be instantiated **NOTE:** This is not required. |
+
+The **Artifacts** Object of a VDU node has the following components:
+
+| Name                          | Value                             | Description                                                                                               |
+| -------------                 | -------------:                    | --------------:                                                                                           |
+| type                     | tosca.artifacts.Deployment.Image.VM	| Only one type supported at the moment		|
+| file                 | String     | Name of the file located on OpenStack  |
+
 
 The **Requirements** Object of a VDU node defines a list of virtual links to Connection Points. Exactly like the VNF Node the **Requirements** define a list of key-value pair, but in this case the only key is defined as follows:
 
@@ -144,10 +153,11 @@ CP1:
     - virtualLink: private
 
 ```
+
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
 | type  	           | tosca.nodes.nfv.CP            | Type of the node. In the example it defines the node as a CP node. |
-| properties: floatiIP			| String  	    | Only property defined at the moment is **floatingIP**. In this case **floatingIp** means that has a public IP chosen **random**  by OpenStack |
+| properties: floatingIP			| String  	    | Only property defined at the moment is **floatingIP**. In this case **floatingIp** means that has a public IP chosen **random**  by OpenStack |
 | requirements: virtualBinding 			| String        | It describes the requirements for the CP in the example above the CP needs a **virtualBinding** to the VDU in this case **VDU1**. The bindings can be multiple hence the requirements is a node.|
 | requirements: virtualLink			| String      	    | It refers to Node Template which describes the Virtual Link in this case the Virtual Link is called **private**. Same applies here regarding requirements being a list.  |
 
@@ -156,19 +166,22 @@ CP1:
 
 OpenBaton uses Virtual Link names as subnets from OpenStack.
 
-This is the definition of VL called ```private```:
+This is the definition of a Virtual Link called **private**:
+
 
 ```yaml
+
 private:
   type: tosca.nodes.nfv.VL
   properties:
     vendor: Fokus
-
 ```
+
+
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
 | type  	            | tosca.nodes.nfv.VL            | It is the type of the node. In this example Virtual Link. |
-| properties:vendor 			| String   	    | Information about the vendor of this VL. |
+| properties:vendor 			| String   	    | Information about the vendor of this Virtual Link. |
 
 **NOTE**: Whenever a value of a given parameter is a string, it is best to put it in quotation marks. Example : 
 
@@ -287,7 +300,7 @@ References
 [vnfr-states]:vnfr-states
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
-[vnf-package]:vnf-package
+[vnf-package]:vnfpackage
 [vim-doc]:descriptors/vim-instance/test-vim-instance.json
 [iperf]:https://iperf.fr
 
