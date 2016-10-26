@@ -1,0 +1,113 @@
+# Network Slicing Engine
+
+This external component provides a Network Slicing Engine (NSE). In the following fundamentals are described such as installing the NSE, configuring it and how to configure Network Slicing requirements.
+
+In a nutshell this component ensures QoS configuration defined in the Descriptors provided by the NFVO.
+
+The `network-slicing-engine` is implemented in java using the [spring.io] framework. It runs as an external component and communicates with the NFVO via Open Baton's SDK.
+
+Additionally, the NSE uses the a plugin mechanism to allow whatever driver is needed to setup QoS. Currently, it supports only the neutron driver which allows to configure QoS in OpenStack directly. Hence, the NSE requires at least version Mitaka of OpenStack since it was recently introduced.
+
+Before starting this component you have to do the configuration of the NSE that is described in the [next chapter](#manual-configuration-of-the-network-slicing-engine) followed by the guide of [how to start](#starting-the-network-slicing-engine) and [how to use](#how-to-use-the-network-slicing-engine) it.
+
+# Technical Requirements
+This section covers the requirements that must be met by the environment in order to satisfy the demands of the NSE:
+
+* Installed and configured Open Baton NFVO/gVNFM (>=2.1.3)
+* Installed and configured Openstack (>=Mitaka)
+
+# How to install Network Slicing Engine
+Different options are available for the installation of the NSE. Either you use the fully automated bootstrap where all configurations are done automatically where you can choose between the installation based on the debian package or on the source code which is suggested for development. Apart from the bootstrap you can also use the debian or the source code installation where you need to configure the NSE manually. 
+
+## Installation via bootstrap
+
+Using the bootstrap gives a fully automated standalone installation of the NS including installation and configuration.
+
+The only thing to do is to execute the following command and follow the configuration process: 
+
+```bash
+bash <(curl -fsSkl https://raw.githubusercontent.com/openbaton/network-slicing-engine/master/bootstrap)
+```
+
+## Installation via debian package
+
+
+
+## Installation from the source code
+
+The latest stable version NSE can be cloned from this [repository][nse-repo] by executing the following command:
+
+```bash
+git clone https://github.com/openbaton/network-slicing-engine.git
+```
+
+Once this is done, go inside the cloned folder and make use of the provided script to compile the project as done below:
+
+```bash
+./network-slicing-engine.sh compile
+```
+
+# Manual configuration of the Network Slicing Engine
+
+This chapter describes what needs to be done before starting the Network Slicing Engine. This includes the configuration file and properties, and also how to define QoS requirements in the descriptor.
+
+## Configuration file
+The configuration file must be copied to `etc/openbaton/network-slicing-engine.properties` by executing the following command from inside the repository folder:
+
+```bash
+cp etc/network-slicing-engine.properties /etc/openbaton/network-slicing-engine.properties
+```
+
+If done, check out the following chapter in order to understand the configuration parameters.
+
+## Configuration properties
+
+This chapter describes the parameters that must be considered for configuring the Network Slicing Engine.
+
+| Params          				| Meaning       																|
+| -------------   				| -------------																|
+| logging.file					| location of the logging file |
+| logging.level.*               | logging levels of the defined modules  |
+| rabbitmq.host                 | host of RabbitMQ |
+| rabbitmq.username             | username for authorizing towards RabbitMQ |
+| rabbitmq.password             | password for authorizing towards RabbitMQ |
+| nfvo.ip                       | IP of the NFVO |
+| nfvo.port                     | Port of the NFVO |
+| nfvo.username                 | username for authorizing towards NFVO |
+| nfvo.password                 | password for authorizing towards NFVO |
+| nfvo.project.name             | project used for registering for the events|
+
+# Starting the Network Slicing Engine
+
+Starting the NSE can be achieved easily by using the the provided script with the following command:
+
+```bash
+./network-slicing-engine.sh start
+```
+
+Once the NSE is started, you can access the screen session by executing:
+
+```bash
+screen -r openbaton
+```
+
+**Note** Since the NSE subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the NSE.
+
+# How to use Network Slicing Engine
+The currently only supported driver is neutron, which will use the native QoS capabilities of Openstack Mitaka. To use it simply set ```nse.driver=neutron``` in the configuration file. To set QoS policies in your NSD specify the following QoS parameter in the virtual_link of your vnfd configuration. 
+
+```
+  "virtual_link":[
+    {
+      "name":"NAME_OF_THE_NETWORK",
+      "qos":[
+        "minimum_bandwith:BRONZE"
+      ]
+    }
+  ]
+```
+
+[nse-repo]: https://github.com/openbaton/network-slicing
+[openbaton]: http://openbaton.org
+[openbaton-doc]: http://openbaton.org/documentation
+[spring.io]:https://spring.io/
