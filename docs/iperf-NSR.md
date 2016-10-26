@@ -2,7 +2,7 @@
 -----------------------------------------
 
 This tutorial explains how to deploy a network service that uses iPerf.  
-[iPerf][iperf-website] is a tool for active measurements of the maximum achievable bandwidth between two or more machines.
+[iPerf][iperf-website] is a tool for active measurements of the maximum achievable bandwidth between two or more machines where an iPerf client connects to an iPerf server.
 
 You can execute also the same tutorial using the [TOSCA] definitions. 
 
@@ -38,7 +38,7 @@ Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice 
 
 ### Using the CLI
 
-If you want to use the CLI (checkout the [openbaton-client documentation][cli] for more information on how to install and use it), you need to execute the following command in order to onboard the Vim Instance where *vim-instance.json* is the path to the Vim Instance file:
+If you want to use the CLI (checkout the [Open Baton Client documentation][cli] for more information on how to install and use it), you need to execute the following command in order to onboard the Vim Instance where *vim-instance.json* is the path to the Vim Instance file:
 
 ```bash
 $./openbaton.sh VimInstance-create vim-instance.json
@@ -200,90 +200,73 @@ $./openbaton.sh NetworkServiceRecord-findById af12b18b-9aa2-4fed-9b07-bbe1dcad9c
 
 ## Conclusions
 
-When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service is deployed correctly.
+When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service is deployed correctly. For learning more about the states of a VNF Record please refer to the [VNF Record state documentation][vnfr-states].
+
 
 # Addtional information about this scenario
 
-When you access your OpenStack dashnoard you should be able to see the deployed Virtual Machines. One of them will act as an iPerf server and the other one as an iPerf client that connects to the server. 
+When you access your OpenStack dashboard you should be able to see the deployed Virtual Machines. One of them will act as an iPerf server and the other one as an iPerf client that connects to the server. 
 
 The following pictures shows the deployment.
 
 ![iperf-deployment][iperf-client-server]
 
 As indicated by the blue arrow the iperf server is the source of a dependency and the client is the target. In this case the client needs the IP of the server in order to connect.
-
-Before starting we need to send the VimInstance to the NFVO and the Network Service Descriptor. For doing this please have a look into the [Vim instance documentation][vim-doc], [VNF Package documentation][vnf-package] and [Network Service Descriptor documentation][nsd-doc]. In fact, for creating a Network Service Record, we need to have a Network Service Descriptor loaded into the catalogue with two Virtual Network Functions (iperf client and server) created from a VNF Package. A Virtual Network Function Descriptor Json-File for Iperf client looks like this:
+Let's have a look at the NSD we used to deploy this scenario in order to see how the dependencies are described.  
+You will see that the NSD contains a field called *vnf_dependency*. 
 
 ```json
-{
-  "name":"iperf-client",
-  "vendor":"FOKUS",
-  "version":"1.0",
-  "lifecycle_event":[
+"vnf_dependency":[
     {
-      "event":"CONFIGURE",
-      "lifecycle_events":[
-        "server_configure.sh"
-      ]
-    },
-    {
-      "event":"INSTANTIATE",
-      "lifecycle_events":[
-        "install.sh"
+      "source":{
+        "name":"iperf-server"
+      },
+      "target":{
+        "name":"iperf-client"
+      },
+      "parameters":[
+        "private_floatingIp"
       ]
     }
-  ],
-  "vdu":[
-    {
-      "vm_image":[
-        "ubuntu-14.04-server-cloudimg-amd64-disk1"
-      ],
-      "scale_in_out":1,
-      "vnfc":[
+  ]
+```
+
+The json array *vnf_dependency* may contain multiple dependencies. In our case it is just one, which describes that the VNFD named *iperf-client* needs a parameter called *private_floaingIp* from the VNFD *iperf-server*. This parameter can be used by the iperf-client as a variable in its lifecycle scripts. 
+
+Also the lifecycle scripts are specified in the NSD. For example the VNFD *iperf-client* has the following lifecycle events: 
+
+```json
+"lifecycle_event":[
         {
-          "connection_point":[
-            {
-              "virtual_link_reference":"private"
-            }
+          "event":"CONFIGURE",
+          "lifecycle_events":[
+            "server_configure_floatingIp.sh"
+          ]
+        },
+        {
+          "event":"INSTANTIATE",
+          "lifecycle_events":[
+            "install.sh"
           ]
         }
-      ],
-      "vimInstanceName":["vim-instance"]
-    }
-  ],
-  "virtual_link":[
-    {
-      "name":"private"
-    }
-  ],
-  "deployment_flavour":[
-    {
-      "flavour_key":"m1.small"
-    }
-  ],
-  "type":"client",
-  "endpoint":"generic",
-  "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
-}
+      ]
 ```
 
-This is a perfect example of a dependency. The VNFManager Generic, after creation of the client VNF described, will run the `install.sh` script during the instantiate method. The install.sh script is:
-
+You can see that there is one lifecycle event called *INSTANTIATE* and one called *CONFIGURE*. Actually there exist also other lifecycle events, read about them [here][vnf-descriptor].  
+Each one will be executed at a different point in time. By execution we mean that the scripts that are listed in the *lifecycle_events* field will run with root permissions on the Virtual Machine.  
+The scripts are located in a public git repository. The url is specified in the *vnfPackageLocation* field in the VNFDs.  
+In our example the *INSTANTIATE* event will run first after the Virtual Machine was initialized. It will run the *install.sh* script which installs iPerf and screen on the Virtual Machine.  
+The *CONFIGURE* lifecycle event starts after the *INSTANTIATE* lifecycle event. The *CONFIGURE* lifecycle event has a special role. In the lifecycle scripts of this event the dependency parameters are available.  
+That is why we use this event to tell iPerf to connect to the server ip. In the example NSD that uses floating IPs the dependency parameter is called *private_floatingIp*. 
+In the *CONFIGURE* lifecycle script we will therefore run 
 ```bash
-#!/bin/bash
-
-sudo apt-get update && sudo apt-get install -y iperf screen
+screen -d -m -S client iperf -c $server_private_floatingIp -t 300
 ```
+You wonder why the variable in the script has another name than the dependency parameter? Well, you have to prepend the type of the source VNFD and an underscore to the variable. This is why *private_floatingIp* becomes *server_private_floatingIp*.  
+And there is another restriction. In order to use the dependency parameter in the *CONFIGURE* script its name has to start with the source VNFD type followed by an underscore.  
+If you want to learn more about dependencies, lifecycle events and variables read [this][vnfm-generic] section. 
 
-As said before in the documentation [VNFManager Generic][vnfm-generic], _the scripts in the CONFIGURE lifecycle event need to start with the type of the source VNF followed by \_ and the name of the script_, so the `server_configure.sh is:
-
-```bash
-#!/bin/bash
-
-screen -d -m -S client iperf -c $server_private -t 300
-```
-
-These scripts shown above, are contained in the VNF Package or in a git repository accessible from the VM. Be aware that all the scripts will be executed with root permissions. Once all these steps are done we are ready to create a Network Service Record from the id of the Network Service Descriptor. 
+## The process in details
 
 Let's again have a look at the sequence diagram of a create Network Service Record operation.
 
@@ -293,7 +276,7 @@ When the Network Service Record create is called with the Iperf Network Service 
 
 ##### INSTANTIATE Method
 
-The first message sent to the Generic VNFM is the INSTANTIATE message **(1)**. This message contains the VNF Descriptor and some other parameters needed to create the VNF Record, for instance the list of Virtual Link Records. The Generic VNFM  is called and then the create Virtual Network Function Record and the Virtual Network Function Record is created **(2)** and sent back to the NFVO into a GrantOperation message **(3)**. This message will trigger the NFVO to check if there are enough resources to create that VNF Record. If so, then a GrantOperation message with the updated VNF Record is sent back to the Generic VNFManager. Then the Generic VNFManager creates an AllocateResources message with the received VNF Record and sends it to the NFVO **(4)**. The NFVO after creating the Resources (VMs) sends back the AllocateResources message to the VNFManager. Here the instantiate method is called **(5)**. Inside this method, the scripts (or the link to the git repository containing the scripts) contained in the VNF Package is sent to the EMS, the scripts are saved locally to the VM and then the Generic VNFManager will call the execution of each script defined in the VNF Descriptor **(6)**. Once all of the scripts are executed and there wasn't any error, the VNFManager sends the Instantiate message back to the NFVO **(7)**. 
+The first message sent to the Generic VNFM is the INSTANTIATE message **(1)**. This message contains the VNF Descriptor and some other parameters needed to create the VNF Record, for instance the list of Virtual Link Records. The Generic VNFM  is called and then the create Virtual Network Function Record and the Virtual Network Function Record is created **(2)** and sent back to the NFVO into a GrantOperation message **(3)**. This message will trigger the NFVO to check if there are enough resources to create that VNF Record. If so, then a GrantOperation message with the updated VNF Record is sent back to the Generic VNFManager. Then the Generic VNFManager creates an AllocateResources message with the received VNF Record and sends it to the NFVO **(4)**. After creating the resources (VMs) the NFVO sends back the AllocateResources message to the VNFManager. Here the instantiate method is called **(5)**. Inside this method, the scripts contained in the VNF Package (or the git repository containing the scripts) is sent to the EMS, the scripts are saved locally to the VM and then the Generic VNFManager will call the execution of each script defined in the VNF Descriptor **(6)**. Once all of the scripts are executed and there wasn't any error, the VNFManager sends the Instantiate message back to the NFVO **(7)**. 
 
 ##### MODIFY Method
 
@@ -302,10 +285,6 @@ If the VNF is target for some dependencies, like the iperf client, the MODIFY me
 ##### START Method
 
 Here exactly as before, the NFVO sends the START message to the Generic VNFManager **(11)**, and the VNFManager calls the EMS for execution of the scripts defined in the START lifecycle (none for this example) **(12)**. And the start message is then sent back to the NFVO meaning that no errors occurred **(13)**.
-
-## Conclusions
-
-When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service was correctly run. For knowing more about the states of a VNF Record please refer to [VNF Record state documentation][vnfr-states]
 
 <!---
 References
@@ -318,6 +297,7 @@ References
 [vnfm-generic]: vnfm-generic
 [nsd-doc]:ns-descriptor
 [vnf-package]:vnf-package
+[vnf-descriptor]:vnf-descriptor
 [vim-doc]:vim-instance
 [iperf]:https://iperf.fr
 [nfvo-github]:https://github.com/openbaton/NFVO
