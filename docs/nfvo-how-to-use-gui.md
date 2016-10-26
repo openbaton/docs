@@ -151,6 +151,8 @@ The same for the VNF inside the NSD
 ![NSD Graph][editNSD2]
 
 ![NSD Graph][editNSD3]
+![NSD Graph][editNSD4]
+![NSD Graph][editNSD5]
 
 And the same for the VDU inside the VNF
 
