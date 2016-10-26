@@ -102,11 +102,6 @@ POST request on _*OrEndpoint*_/admin/v1/vnfm-core-grant
 ###### request body
 ```json
 {
-    "virtualNetworkFunctionDescriptor":{..},
-    "vduSet":[
-      { ... }
-    ],
-    "deploymentFlavourKey":"whatever",
     "action":"GRANT_OPERATION",
     "virtualNetworkFunctionRecord":{..}
 }
@@ -118,9 +113,6 @@ POST request on _*OrEndpoint*_/admin/v1/vnfm-core-grant
 | ---------- | ----------:|
 | _*action*_ | the action has to be executed |
 | _*virtualNetworkFunctionRecord*_ | the VirtualNetowrkFunctionRecord |
-| _*virtualNetworkFunctionDescriptor*_ | the virtualNetworkFunctionDescriptor |
-| _*vduSet*_ | the Set of all the VDU of this virtualNetworkFunctionRecord |
-
 
 ### GrantOperation (Or-Vnfm)
 
@@ -136,7 +128,9 @@ POST request on _*VnfmEnpoint*_
     "vduVim": {
       "vdu_id": {  }
     },
-    "virtualNetworkFunctionRecord":{}
+    "virtualNetworkFunctionRecord":{
+        ...
+    }
 }
 ```
 
@@ -319,11 +313,13 @@ _*OrEndpoint*_/admin/v1/vnfm-core-actions
 | _*virtualNetworkFunctionRecord*_   | the Virtual Network Function Record |
 | _*action*_ | the action that was executed |
 
+
+With this last message the VNF managed by this VNFM will be set to ACTIVE. When all the VNF are set to ACTIVE also the NSR will be set to ACTIVE and the deployment is concluded.
 <!---
 References
 -->
 
-[or-vnfm-seq]:images/generic-vnfm-or-vnfm-seq-dg.png
+[or-vnfm-seq]:images/nfvo-rest-vnfm-seq-dg.png
 
 <!---
 Script for open external links in a new tab
