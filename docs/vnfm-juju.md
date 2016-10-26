@@ -31,6 +31,7 @@ These list of issues is something we are working on for the future release.
 # Requirements
 
 * A running [NFVO][nfvo-github] (> v2.1.3)
+* The [Test vim driver][test-plugin-github]
 * A running Juju instance with a controller named *obcontroller*. Please refer to the juju [installation guide][installation-guide]
 * The [Juju-VNFM][juju-vnfm-github] needs to run on the same machine where Juju is installed
 
@@ -256,4 +257,5 @@ you should not rely on the NSR status shown by the Gui, but check using the *juj
 [juju-vnfm-architecture]:images/juju-vnfm-architecture.png
 [juju-vnfm-github]:https://github.com/openbaton/juju-vnfm
 [nfvo-github]:https://github.com/openbaton/NFVO
+[test-plugin-github]:https://github.com/openbaton/test-plugin
 
