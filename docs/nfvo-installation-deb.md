@@ -7,7 +7,7 @@ This tutorial will guide towards the installation of a minimal Open Baton enviro
 
 **NOTE:** Please refer to [this tutorial](nfvo-installation-src.md) if you are willing to install a development environment where you can easily modify, compile and commit changes to the code base directly.
 
-This minimal version is composed by the following components: 
+This version is composed by the following components: 
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
 * [RabbitMQ][reference-to-rabbit-site] as messaging system

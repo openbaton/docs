@@ -1,23 +1,16 @@
 # Install Open Baton 
 
-This tutorial will guide towards the installation of a minimal Open Baton environment composed by the following components: 
+Open Baton provides several installation mechanisms. Open Baton has two different flavors: 
 
-* The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
+* **minimal** containing only the RabbitMQ and Open Baton NFV Orchestrator. This version is the most suitable for getting started immediately with a development environment. 
+* **complete** containing all components as listed in the get started section. Some of the components can be either installed or not using the provided installers. This version is the most suitable for a production infrastructure. 
 
-And a set of optional components: 
+Please select the most suitable installation tool for your needs: 
 
-* Generic VNFM if you don't want to implement your own VNFM
-* OpenStack plugin in case you want to use OpenStack as VIM
-* Test plugin for being able to execute the [dummy NSR][dummy-NSR] tutorial without needing an OpenStack instance. 
-
-In order to execute the minimal Open Baton setup you need the RabbitMQ messaging system ([RabbitMQ][reference-to-rabbit-site]). For some environments we provide installation mechanisms for automatically installing and configuring RabbitMQ. In some other cases you will need to manually install and configure it.
-
-We provide several ways for installing Open Baton. You can choose between: 
-
-* **Linux OS**: Direct installation on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version
-* **Mac OS**: Install it on MacOS using the provided brew formula. More info [here][macos]
-* **Docker**: Launching a pre-configured docker image containing a standalone Open Baton environment. More info [here][docker]
-* **Vagrant**: Launching a vagrant box using the provided vagrantfile. More info [here][vagrant]
+* **Linux OS**: Direct installation of a complete Open Baton environment on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version. 
+* **Mac OS**: Install a minimal Open Baton environment on MacOS using the provided brew formula. More info [here][macos]
+* **Docker**: Launching a pre-configured docker image containing a minimal Open Baton environment. More info [here][docker]
+* **Vagrant**: Launching a vagrant box using the provided vagrantfile containing a minimal Open Baton environment. More info [here][vagrant]
 
 Once you have done with the installation, you can decide either to fine tune your environment configuring the different parameters as described in the [configuration guide][nfvo-configuration] or to move forward and start with your first [hello world tutorial][dummy-NSR].
 
