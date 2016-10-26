@@ -154,7 +154,7 @@ The same for the VNF inside the NSD
 
 And the same for the VDU inside the VNF
 
-![NSD Graph][editNSD5]
+
 
 
 #### Virtual Network Function Descriptor Information
