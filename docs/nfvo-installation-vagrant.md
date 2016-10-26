@@ -7,9 +7,9 @@ This tutorial will guide towards the installation of a minimal Open Baton enviro
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
 * [RabbitMQ][reference-to-rabbit-site] as messaging system
-* Test plugin for being able to execute the [dummy NSR][dummy-NSR] tutorial without needing an OpenStack instance. 
-* Generic VNFM
-* OpenStack plugin: in case you want to use OpenStack as VIM 
+* Test VIM Driver for being able to execute the [hello world][dummy-NSR] tutorial without needing an OpenStack instance 
+* OpenStack VIM Driver for deploying VNFs on OpenStack
+* Generic VNFM for the instantiation of VNFs part of the Open Baton ecosystem
 
 ## Requirements 
 
@@ -17,7 +17,7 @@ You need to have Vagrant installed.
 
 ## Installation guide
 
-If you already have Vagrant installed in your system, you can install the latest RELEASE Open Baton version by using this [Vagrantfile][vagrantfile] and simply typing the following command:
+If you already have Vagrant installed in your system, you can install the latest Open Baton version by using this [Vagrantfile][vagrantfile] and simply typing the following command:
 
 ```bash
 vagrant up
