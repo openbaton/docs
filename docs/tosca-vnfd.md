@@ -104,7 +104,8 @@ VDU2:
   type: tosca.nodes.nfv.VDU
   properties:
     scale_in_out: 2
-    vimInstanceName: vim-instance
+    vim_instance_name:
+         - test-vim-instance
   artifacts:
     type: tosca.artifacts.Deployment.Image.VM
     file: ubuntu-14.04-server-cloudimg-amd64-disk1
