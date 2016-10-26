@@ -132,11 +132,6 @@ You can observe the NSD in json format by clicking on the **Show JSON** button
 
 ![JSON of Network Service Descriptor][JSONofNSR]
 
-On the page **Network Service Descriptor Information** you can also look at the **Graphical view** of the Network Service Descriptor 
-by clicking on *Show Graph*
-
-![NSD Graph][NSDgraph]
-
 If you click on the *Action* button in the list of VNFDs you can delete the VNFD from the NSD
 and the information about the *Dependencies* stored in the Network Service Descriptor
 
