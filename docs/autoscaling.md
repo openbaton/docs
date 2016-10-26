@@ -1,15 +1,12 @@
-# AutoScaling System
+# AutoScaling Engine
 
-OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI [NFV MANO] specification.
-
-This project provides the first version of an NFV-compliant AutoScaling System. In the following fundamentals are described such as installing the AutoScaling System, configuring it and how to create AutoScaling policies.
+This external component provides an NFV-compliant AutoScaling Engine (ASE). In the following fundamentals are described such as installing the ASE, configuring it and how to use it such as creating AutoScaling policies.
 
 The `autoscaling-engine` is implemented in java using the [spring.io] framework. It runs as an external component and communicates with the NFVO via Open Baton's SDK.
 
-Additionally, the AutoScaling System uses the plugin mechanism to allow whatever Monitoring System you prefer. We use [Zabbix][zabbix] as the monitoring system in the following that must be preinstalled and configured. Additional information about [zabbix-plugin] can be found [here][zabbix-plugin-doc].
+Additionally, the AutoScaling Engine uses the plugin mechanism to allow whatever Monitoring System you prefer. We use [Zabbix][zabbix] as the monitoring system in the following that must be preinstalled and configured. Additional information about [zabbix-plugin] can be found [here][zabbix-plugin-doc].
 
-Before starting this component you have to do the configuration of the AutoScaling System that is described in the [next chapter](#manual-configuration-of-the-autoscaling-system) followed by the guide of [how to start](#starting-the-autoscaling-system) and [how to use](#how-to-use-the-autoscaling-system) it.
-
+Before starting this component you have to do the configuration of the AutoScaling Engine that is described in the [next chapter](#manual-configuration-of-the-autoscaling-engine) followed by the guide of [how to start](#starting-the-autoscaling-engine) and [how to use](#how-to-use-the-autoscaling-engine) it.
 
 # Technical Requirements
 
@@ -17,12 +14,12 @@ Before starting this component you have to do the configuration of the AutoScali
 * Running Zabbix server (if Zabbix is the monitoring system of choice) 
 * Preconfgiured and running zabbix plugin either located in the folder `NFVO/plugins` or `autoscaling/plugins` to let it start automatically; or started manually. (if Zabbix is the monitoring system of choice)
 
-# How to install AutoScaling System
-Different options are available for the installation of the AutoScaling System. Either you use the fully automated bootstrap where all configurations are done automatically where you can choose between the installation based on the debian package or on the source code which is suggested for development. Apart from the bootstrap you can also use the debian or the source code installation where you need to configure the AutoScaling System manually. 
+# How to install AutoScaling Engine
+Different options are available for the installation of the AutoScaling Engine. Either you use the fully automated bootstrap where all configurations are done automatically where you can choose between the installation based on the debian package or on the source code which is suggested for development. Apart from the bootstrap you can also use the debian or the source code installation where you need to configure the AutoScaling Engine manually. 
 
 ## Installation via bootstrap
 
-Using the bootstrap gives a fully automated installation of this component including installation and configuration. If you use the bootstrap you should place your monitoring plugin of choice directly in the `NFVO/plugins` folder before starting the orchestrator to have it already available when starting the AutoScaling System.
+Using the bootstrap gives a fully automated installation of this component including installation and configuration. If you use the bootstrap you should place your monitoring plugin of choice directly in the `NFVO/plugins` folder before starting the orchestrator to have it already available when starting the AutoScaling Engine.
 
 The only thing to do is to execute the following command and follow the configuration process: 
 
@@ -36,7 +33,7 @@ bash <(curl -fsSkl https://raw.githubusercontent.com/openbaton/autoscaling/maste
 
 ## Installation from the source code
 
-The latest stable version AutoScaling System can be cloned from this [repository][autoscaling-repo] by executing the following command:
+The latest stable version AutoScaling Engine can be cloned from this [repository][autoscaling-repo] by executing the following command:
 
 ```bash
 git clone https://github.com/openbaton/autoscaling.git
@@ -48,9 +45,9 @@ Once this is done, go inside the cloned folder and make use of the provided scri
 ./autoscaling-engine.sh compile
 ```
 
-# Manual configuration of the AutoScaling System
+# Manual configuration of the AutoScaling Engine
 
-This chapter describes what needs to be done before starting the AutoScaling System. This includes the configuration file and properties, and also how to make use of monitoring plugin.
+This chapter describes what needs to be done before starting the AutoScaling Engine. This includes the configuration file and properties, and also how to make use of monitoring plugin.
 
 ## Configuration file
 The configuration file must be copied to `etc/openbaton/autoscaling.properties` by executing the following command from inside the repository folder:
@@ -63,13 +60,13 @@ If done, check out the following chapter in order to understand the configuratio
 
 ## Configuration properties
 
-This chapter describes the parameters that must be considered for configuring the AutoScaling System.
+This chapter describes the parameters that must be considered for configuring the AutoScaling Engine.
 
 | Params          				| Meaning       																|
 | -------------   				| -------------																|
 | logging.file					| location of the logging file |
 | logging.level.*               | logging levels of the defined modules  |
-| autoscaling.server.ip         | IP where the AutoScaling System is running. localhost might fit for most in the case when the System is running locally. If the System is running on another machine than the NFVO, you have to set the external IP here in order to subscribe for events towards the NFVO properly.      	|
+| autoscaling.server.ip         | IP where the AutoScaling Engine is running. localhost might fit for most in the case when the System is running locally. If the System is running on another machine than the NFVO, you have to set the external IP here in order to subscribe for events towards the NFVO properly.      	|
 | autoscaling.server.port       | Port where the System is reachable |
 | autoscaling.rabbitmq.brokerIp | IP of the machine where RabbitMQ is running. This is needed for communicating with the monitoring plugin.	|
 | spring.rabbitmq.username      | username for authorizing towards RabbitMQ |
@@ -82,29 +79,29 @@ This chapter describes the parameters that must be considered for configuring th
 ## Monitoring plugin
 
 The montoring plugin must be placed in the folder `plugins`. The zabbix plugin can be found [here][zabbix-plugin] with additional information about how to use and how to compile it.
-If the plugin is placed in the folder mentioned before, it will be started automatically when starting the AutoScaling System. Additionally, you can place the plugin also in the `NFVO/plugins` folder to let it start automatically. 
+If the plugin is placed in the folder mentioned before, it will be started automatically when starting the AutoScaling Engine. Additionally, you can place the plugin also in the `NFVO/plugins` folder to let it start automatically. 
 
-**Note** If the NFVO is already in charge of starting the plugin, you should avoid to start it a second time from the AutoScaling System. Once started it can be used by all components.
+**Note** If the NFVO is already in charge of starting the plugin, you should avoid to start it a second time from the AutoScaling Engine. Once started it can be used by all components.
 
-## Starting the AutoScaling System
+# Starting the AutoScaling Engine
 
-Starting the AutoScaling System can be achieved easily by using the the provided script with the following command:
+Starting the AutoScaling Engine can be achieved easily by using the the provided script with the following command:
 
 ```bash
 ./autoscaling-engine.sh start
 ```
 
-Once the AutoScaling System is started, you can access the screen session by executing:
+Once the AutoScaling Engine is started, you can access the screen session by executing:
 
 ```bash
 screen -r autoscaling-engine
 ```
 
-**Note** Since the AutoScaling System subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the AutoScaling System. Otherwise the AutoScaling System will wait for 600 seconds for the availability of the NFVO before terminating automatically.
+**Note** Since the AutoScaling Engine subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the AutoScaling Engine. Otherwise the AutoScaling Engine will wait for 600 seconds for the availability of the NFVO before terminating automatically.
 
-# How to use the AutoScaling System
+# How to use the AutoScaling Engine
 
-This guide shows you how to make use of the AutoScaling System. In particular, it describes how to define AutoScaling Policies.
+This guide shows you how to make use of the AutoScaling Engine. In particular, it describes how to define AutoScaling Policies.
 
 ## Creating AutoScaling Policies
 
@@ -142,7 +139,7 @@ An example of an AutoScalePolicy can be found below followed by descriptions for
 ```
 
 This AutoScalePolicy indicates an scaling-out operation of two new VNFC Instances if the averaged value of all measurement results of the metric `cpu load` is greater than the threshold of 0.7 (70%).
-This condition is checked every 30 seconds as defined via the period. Once the scaling-out is finished it starts a cooldown of 60 seconds. For this cooldown time further scaling requests are rejected by the AutoScaling System.
+This condition is checked every 30 seconds as defined via the period. Once the scaling-out is finished it starts a cooldown of 60 seconds. For this cooldown time further scaling requests are rejected by the AutoScaling Engine.
 
 The following table describes the meanings of the parameters more in detail.
 
