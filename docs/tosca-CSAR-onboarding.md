@@ -7,8 +7,9 @@ The CSAR is a zip file with this structure:
 ├── Definitions
 |   └── testNSDiperf.yaml
 ├── Scripts
-|   ├── install.sh
-|   └── ...
+|   ├── install.sh   
+|   └── (VNF NAME)
+|        └── script.sh 
 └── TOSCA-Metadata
     ├── Metadata.yaml
     └── TOSCA.meta
@@ -36,6 +37,9 @@ image:
 ```
 
 The **Scripts** folder contains all the files required from the lifecycle interfaces of the VNFs.
+If the CSAR has a Network Service Template, then for every type of VNF included in the NS Template you have to include a folder with the scripts for that particular type.
+Example if one VNF is of type client, then the scripts for that VNF have to be put in Scripts/client folder. 
+
 
 The **testNSDIperf.yaml** is a Definition of Network Service. It contains this descriptor.
 
@@ -96,8 +100,6 @@ topology_template:
       type: tosca.nodes.nfv.VDU
       properties:
         scale_in_out: 1
-        vim_instance_name:
-          - vim-instance
       artifacts:
         VDU1Image:
           type: tosca.artifacts.Deployment.Image.VM
@@ -106,11 +108,8 @@ topology_template:
     VDU2:
       type: tosca.nodes.nfv.VDU
       properties:
-        vm_image:
           - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 3
-        vim_instance_name:
-          - vim-instance
       requirements:
         - virtual_link: CP2
       artifacts:
@@ -147,25 +146,24 @@ relationships_template:
 
 ```
 
+## Saving as CSAR
 
-## VNF packages from CSAR on-boarding
+To save the three folders - Scripts, Definitions, TOSCA-Metadata as a CSAR go to the folder where you have saved them and run:
 
-To create the **.csar** package from the folder run this command:
 ```bash
 zip -r iperf.csar . -x ".*" -x "*/.*"
 ```
-To create the  The initial steps for setting up the NFVO before sending the VNF packages are the same as for the [Iperf][tosca-iperf] example. 
 
-For on-boarding packages in NSD format use this command:
 
-```bash
-curl -X POST http://localhost:8080/api/v1/csar-nsd -H "Accept: application/json" -H "project-id: " -H "Authorization: Bearer " -v -F file=@iperf.csar
-```
-For on-boarding a single VNF package use this:
+## Onboarding VNF CSARs
 
-```bash
-curl -X POST http://localhost:8080/api/v1/csar-vnfd -H "Accept: application/json" -H "project-id: $PROJECT ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" -v -F file=@iperf-server.csar
-```
+Go to the Catalogue -> VNF Packages -> Upload VNFPackage, check the "Use CSAR Parser" box and select the csar that you want to upload.
+
+![Drag&Drop modal][drag_drop] 
+
+## Onboard Network Service CSARs
+
+Go to the Catalogue -> NS Descriptors and click on "Upload CSAR NSD" and select the file.
 
 
 
@@ -177,6 +175,7 @@ References
 
 [tosca-iperf]:tosca-iperf-scenario
 [metadata]:vnf-package
+[drag_drop]:images/nfvo-how-to-use-gui-drag-drop.png
 
 
 <!---

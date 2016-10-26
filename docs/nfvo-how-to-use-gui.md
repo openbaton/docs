@@ -152,6 +152,7 @@ The same for the VNF inside the NSD
 
 ![NSD Graph][editNSD3]
 
+
 And the same for the VDU inside the VNF
 
 
@@ -224,7 +225,6 @@ This are the information of the Event selected
 [NSDcreateForm]:images/nfvo-how-to-use-gui-NSD-create-form.png
 [NSDcreateSelect]:images/form-create-NSD.png
 [NSDcreateDependency]:images/form-add-dependecy-pkg.png
-[NSDcreateWithVNF]:images/form-with-VNFDs.png
 [EventForm]:images/event-form.png
 [EventList]:images/event-list.png
 [EvenInfo]:images/event-info.png

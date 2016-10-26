@@ -11,19 +11,19 @@ This tutorial makes use of:
 * [NFVO][nfvo-github]
 * [Generic VNFM][generic-vnfm]
 * Generic [EMS][ems-github]
-* [OpenStack plugin][openstack-plugin]
+* [OpenStack vim driver][openstack-plugin]
 
 ## Requirements
 
 In order to execute this scenario, you need to have the following components up and running:
 
  * The [NFVO][nfvo-github]
- * the [OpenStack plugin][openstack-plugin]
+ * the [OpenStack vim driver][openstack-plugin]
  * the [Generic VNFM][generic-vnfm]
  * OpenStack
 
 Start the NFVO and Generic VNFM depending on how you [installed][installation] it.  
-If you used the bootstrap script for installing you do not have to care about the OpenStack plugin as it will be installed already. 
+If you used the bootstrap script for installing you do not have to care about the OpenStack vim driver as it will be installed already. 
 
 ## Store the Vim Instance
 

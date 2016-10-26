@@ -59,6 +59,7 @@ In the cases of the **scenario-real-iperf**, **scenario-complex-ncat** and **sce
 1. A running [NFVO][nfvo-github] with the OpenStack vim driver and Test vim driver
 2. A running [Generic VNFM][generic-vnfm-github]
 3. A running [Dummy VNFM][dummy-vnfm-amqp-github]
+4. OpenStack
 
 ## Installation and configuration
 

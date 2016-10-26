@@ -51,8 +51,7 @@ topology_template:
             - flavour_key: m1.small
         requirements:
           - virtualLink: private
-          - vdu: VDU2
-        interfaces:
+          - vdu: VDU2        interfaces:
           lifecycle: # lifecycle
             instantiate:
               - install.sh
@@ -83,8 +82,6 @@ topology_template:
       type: tosca.nodes.nfv.VDU
       properties:
         scale_in_out: 1
-        vim_instance_name:
-          - vim-instance
       artifacts:
         VDU1Image:
           type: tosca.artifacts.Deployment.Image.VM
@@ -93,13 +90,7 @@ topology_template:
     VDU2:
       type: tosca.nodes.nfv.VDU
       properties:
-        vm_image:
-          - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 3
-        vim_instance_name:
-          - vim-instance
-      requirements:
-        - virtual_link: CP2
       artifacts:
         VDU1Image:
           type: tosca.artifacts.Deployment.Image.VM
