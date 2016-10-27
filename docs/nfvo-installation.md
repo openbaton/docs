@@ -8,7 +8,7 @@ Open Baton provides several installation mechanisms. Open Baton has two differen
 Please select the most suitable installation tool for your needs: 
 
 * **Linux OS**: Direct installation of a standalone or complete Open Baton environment on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version. 
-* **Mac OS**: Install a standalone Open Baton environment on MacOS using the provided brew formula. More info [here][macos]
+* **Mac OS**: Install the Open Baton NFVO on MacOS using the provided brew formula. More info [here][macos]
 * **Docker**: Launching a pre-configured docker image containing a standalone Open Baton environment. More info [here][docker]
 * **Vagrant**: Launching a vagrant box using the provided 'Vagrantfile' containing a standalone Open Baton environment. More info [here][vagrant]
 
