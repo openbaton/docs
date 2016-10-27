@@ -1,4 +1,4 @@
-# Create Vim Plugin
+# Create Vim Driver
 
 OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, it is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
@@ -7,7 +7,7 @@ OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plu
 
 ## Requirements
 
-Before you can start with developing your own Vim Plugin you need to prepare your programming environment by installing/configuring the following requirements:
+Before you can start with developing your own Vim Driver you need to prepare your programming environment by installing/configuring the following requirements:
 
 * JDK 7 ([installation][openjdk])
 * Gradle ([installation][gradle-installation])
@@ -46,7 +46,7 @@ Once this is done you can click on Finish and continue with creating the Main Cl
 
 ### Create the Main Class
 
-Afterwards, you need to create the Main Class of the VIM plugin which will be started in the end.
+Afterwards, you need to create the Main Class of the VIM driver which will be started in the end.
 For doing so, right click on the root folder my-vim, then click on New -> Directory and insert what is show below.
 
 ![dialog][new_project_vim_new_directory]
@@ -65,10 +65,10 @@ Finally you can create your MyVim Class by clicking (right click) on the previou
 ![dialog][new_project_vim_new_class]
 
 Once you did all these steps, the initial project structure is created.
-What we miss right now is the configuration of the gradle files to define and fetch dependencies we need for implementing the Vim plugin.
+What we miss right now is the configuration of the gradle files to define and fetch dependencies we need for implementing the Vim driver.
 This is described in later sections.
 
-In order to create a VIM plugin for OpenBaton system you need to add to your *build.gradle* file:
+In order to create a VIM driver for OpenBaton system you need to add to your *build.gradle* file:
 
 ```gradle
 
@@ -110,9 +110,9 @@ dependencies {
 
 ```
 
-## Write your Vim plugin
+## Write your Vim driver
 
-The Vim plugin is a simple class extending one abstract class and using a Starter utility 
+The Vim driver is a simple class extending one abstract class and using a Starter utility 
 
 #### Type of Vim Instance
 OpenBaton provides a specific class for handling the **openstack** type or the **test** type thus these two types are supported. For all the other types a generic class will handle the communication between the NFVO and your plugin.
@@ -196,13 +196,13 @@ public class MyVim extends VimDriver{
 
 As you can notice, there is the need of a _main_ method to start multiple instances of the plugin (in this example are 10, the last parameter).
 
-## Run your Vim plugin in OpenBaton environment
+## Run your Vim driver in OpenBaton environment
 
 Under the folder of your project *src/main/resources* you should create a file **plugin.conf.properties** and write the variable **type = _the-vim-type_**.
 
 The structure of your project should be like:
 
-![Vim plugin structure][vim_plugin_structure]
+![Vim driver structure][vim_plugin_structure]
 
 Now you can run **./gradlew build** and Gradle will create the jar that you can find in the folder *build/libs/myPlugin-1.0-SNAPSHOT.jar*.
 
