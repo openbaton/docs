@@ -154,7 +154,6 @@ To save the three folders - Scripts, Definitions, TOSCA-Metadata as a CSAR go to
 zip -r iperf.csar . -x ".*" -x "*/.*"
 ```
 
-
 ## Onboarding VNF CSARs
 
 Go to the Catalogue -> VNF Packages -> Upload VNFPackage, check the "Use CSAR Parser" box and select the csar that you want to upload.
