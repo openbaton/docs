@@ -29,6 +29,7 @@ pages:
 - ['dummy-NSR.md', 'Tutorials', 'Dummy NSR']
 - ['iperf-NSR.md', 'Tutorials', 'Iperf Scenario']
 - ['ims-NSR.md', 'Tutorials', 'OpenIMSCore example']
+- ['fms-sipp-tutorial.md', 'Tutorials', 'Fault Management System']
 - ['integration-test-use.md', 'Tutorials', 'Integration Tests']
 - ['nfvo-architecture.md', 'Learn more', 'NFVO Architecture']
 - ['vim-plugin.md', 'Learn more', 'Create a VIM Plugin']
