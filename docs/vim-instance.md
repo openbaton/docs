@@ -3,7 +3,7 @@
 The *Virtualised Infrastructure Manager* (Vim) is the functional block, responsible for controlling and managing the
  NFVI compute, storage and network resources within a Point of Presence (PoP).
  
-In order to interoperate with a PoP it is required to register the VIM instance responsible for it on the NFVO. For doing that you can write a JSon file containing the details of a Vim Instance like the one described below: 
+In order to interoperate with a PoP it is required to register the VIM instance responsible for it to the NFVO. For doing that you can write a JSON file containing the details of a Vim Instance like the one described below: 
 
 
 ```javascript
@@ -32,25 +32,25 @@ In order to interoperate with a PoP it is required to register the VIM instance 
 | name           | The name of the VimInstance                                                                                                                                                            |       yes |
 | authUrl        | The endpoint to request the authentication                                                                                                                                             |       yes |
 | tenant         | The tenant is a string to refer to a group of users                                                                                                                                    |       yes |
-| username       | The name of the user recognized in OpenStack in the keystone service                                                                                                                   |       yes |
-| password       | The password of the user recognized in the OpenStack in the keystone service                                                                                                           |       yes |
-| keyPair        | The keyPair _name_ stored into **OpenStack** to get the access to the VMs                                                                                                              |       yes |
-| securityGroups | Recognise a Security group into OpenStack where gives a sets of IP filter rules that are applied to an instance's networking.                                                          |        no |
-| type           | The type of the Vim Instance that will start the corresponding plugin. Please refer to the [Marketplace][marketplace-drivers] for checking what are the current VIM drivers available. |       yes |
-| location       | The location of the data Center. Name: String of the place where is the Data Center located. Latitude/Longitude geolocation point                                                      |        no |
+| username       | The name of the user recognized in the OpenStack keystone service                                                                                                                   |       yes |
+| password       | The password of the user recognized in the OpenStack keystone service                                                                                                           |       yes |
+| keyPair        | The keyPair _name_ stored into OpenStack to get the access to the VMs                                                                                                              |       yes |
+| securityGroups | Use a Security group in OpenStack that provides a sets of IP filtering rules that are applied to an instance's networking.                                                          |        no |
+| type           | The type of the Vim Instance that will start the corresponding plugin. Please refer to the [Marketplace][marketplace-drivers] for checking which VIM drivers are currently available. |       yes |
+| location       | The location of the Data Center.                                                      |        no |
 
 By default we use only one tenant on your PoP. We are currently working on supporting the instantiation of different NSDs in different tenants. But it is possible to achieve this by creating two different PoPs with different names and the different tenants. 
 
 ## Register the PoP using the GUI
 In order to make use of your VIM described within your JSON descriptor, you need to request the NFVO to register it. 
 You can use the dashboard available at [localhost:8080] for this purpose. 
-Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your VIM descriptor. Following picture shows the dashboard: 
+Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your VIM descriptor. The following picture shows the dashboard: 
 
 ![register a new PoP][register-new-pop]
 
 Once the VIM instance is registered, it will appear on the list of available PoPs, filled with the information regarding the available images, networks and flavors. At this point the VIM/PoP can be included in your Network Service Descriptors.
 
-**_Please note that the name chosen must be unique inside the project and will be used to refer the VimInstance_.**
+**_Please note that the name chosen must be unique inside the project and will be used to refer to the VimInstance_.**
 
 For more information about the dashboard see: [OpenBaton Dashboard]
 
@@ -61,11 +61,10 @@ By default the NFVO supports two different VIM types:
 * openstack: for interoperating with an OpenStack instance
 * test: for testing purposes implementing a VIM mockup
 
-For each of those types there is a different implementation of the VIM API. The NFVO uses a driver mechanism for interacting with VIMs. In the folders `plugins` under nfvo folder should be a jar file that implements the interface to the your VIM ( i.e. [Openstack][openstack-link] )
-(you can change the folder where OpenBaton searches for the plugins by changing the variable `plugin-installation-dir` in the `openbaton.properties` file under /etc/openbaton)
+For each of those types there is a different implementation of the VIM API. The NFVO uses a driver mechanism for interacting with VIMs. Inside the NFVO folder is a folder called `plugins` where the jar file that implements the interface to your VIM ( i.e. [Openstack][openstack-link] ) should be placed (you can change the folder where OpenBaton searches for the plugins by changing the variable `plugin-installation-dir` in the `openbaton.properties` file under /etc/openbaton).  
 This jar is the implementation of the interface that communicates with your VIM.
 
-**Note**: You can implement your own interface just follow the documentation [Vim plugin].
+**Note**: You can implement your own interface just follow the documentation on writing your own [Vim plugin].
 
 ## Where do I find the open source plugins?
 
