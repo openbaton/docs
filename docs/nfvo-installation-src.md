@@ -110,7 +110,6 @@ For specific configuration refer to the [configuration]
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
 [dummy-NSR]:dummy-NSR.md
-[vim_plugin_doc]:vim-plugin
 [use-openbaton]:use.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [reference-to-mysql]:https://www.mysql.com/

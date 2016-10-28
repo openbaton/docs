@@ -133,7 +133,7 @@ spring.rabbitmq.port=5672
 
 ```
 
-The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [vim plugin documentation][vim_plugin_doc]). The NFVO will load them at runtime.  
+The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [VIM driver documentation][vim-driver]). The NFVO will load them at runtime.  
 ```properties
 ########## plugin install ###############
 # directory for the vim driver plugins
@@ -207,7 +207,7 @@ nfvo.vmanager.executor.keepalive = 30
 [spring]:https://spring.io
 [configuratino]:nfvo-configuration
 [localhost:8080]:http://localhost:8080/
-[vim_plugin_doc]:vim-plugin
+[vim-driver]:vim-driver-create
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/

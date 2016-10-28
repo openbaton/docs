@@ -7,7 +7,7 @@ Open Baton provides many different features and components:
 * A Network Function Virtualisation Orchestrator (NFVO) completely designed and implemented following the ETSI MANO specification. Read more [here][nfvo]
 * A generic Virtual Network Function Manager (VNFM) able to manage the lifecycle of VNFs based on their descriptors. Read more [here][vnfm-generic]
 * A Juju VNFM Adapter in order to deploy Juju Charms or Open Baton VNF Packages using the Juju VNFM. Read more [here][juju-vnfm]
-* A plugin mechanism for adding and removing different type of VIMs without having to re-write anything in your orchestration logic. Read more [here][vim-plugin]
+* A driver mechanism for adding and removing different type of VIMs without having to re-write anything in your orchestration logic. Read more [here][vim-driver]
 * A powerful event engine useful based on a pub/sub mechanism for the dispatching of lifecycle events execution
 * An autoscaling engine which can be used for automatic runtime management of the scaling operation operations of your VNFs. Read more [here][autoscaling-system]
 * A fault management system which can be used for automatic runtime management of faults which may occur at any level. Read more [here][fm-system]
@@ -15,7 +15,7 @@ Open Baton provides many different features and components:
 * A set of libraries (the openbaton-libs) which could be used for building your own VNFM. Read more [here][openbaton-libs]
 * A [Marketplace][marketplace] useful for downloading VNFs compatible with the Open Baton NFVO and VNFMs. Read more at [here][marketplace-doc]
 
-![Setup architecture][install-architecture]
+![Setup architecture][architecture-release-3]
 
 ## Can I plug in my Network Functions?
 Yes, this is possible using (at least) two different approaches:
@@ -53,7 +53,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [cognet]: http://www.cognet.5g-ppp.eu/cognet-in-5gpp/
 [fm-system]: https://github.com/openbaton/fm-system
 [info-at-openbaton-dot-org]: mailto:info@openbaton.org
-[install-architecture]:images/install-architecture-rel.2.png
+[architecture-release-3]:images/openbaton-release-3.png
 [install-guide]:nfvo-installation
 [juju-vnfm]:vnfm-juju
 [marketplace]: http://marketplace.openbaton.org
@@ -67,7 +67,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [users-at-openbaton-dot-org]: mailto:listen@openbaton.org?subject=subscribe%20users
 [youtube]: https://www.youtube.com/channel/UCYXY4rGKrKbBNheClFEKaAw
 [zabbix-plugin]: zabbix-plugin
-[vim-plugin]: vim-plugin
+[vim-driver]: vim-driver
 [vnfm-generic]: vnfm-generic
 
 <!---

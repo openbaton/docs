@@ -67,7 +67,6 @@ sudo docker rm cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07
 
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
-[vim_plugin_doc]:vim-plugin
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
