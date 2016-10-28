@@ -1,8 +1,8 @@
-# NFVO SDK
+# NFVO Northbound SDK
 
 A SDK is available if you want to use the NFVO from a java application.
 
-### Import it
+## Import it
 
 The build.gradle file must contain:
 
@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:2.2.0'
+    compile 'org.openbaton:sdk:3.3.0'
 }
 ```
 

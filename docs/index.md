@@ -20,11 +20,15 @@ Open Baton provides many different features and components:
 ## Can I plug in my Network Functions?
 Yes, this is possible using (at least) two different approaches:
 
-* integrating your own VNFM. In this case you can use either the REST interface, or the AMQP one for interoperating with the NFVO
-* implementing a set of scripts which can be executed as part of the lifecycle event of your Virtual Network Function Descriptor. We provide a generic VNFM and EMS which can be used for executing them
+* Integrating your own VNFM. In this case you can use either the REST interface, or the AMQP one for interoperating with the NFVO
+* Implementing a set of scripts which can be executed as part of the lifecycle event of your Virtual Network Function Descriptor. We provide a generic VNFM and EMS which can be used for executing them
+
+Learn more [here][nfvo-intro]
 
 ## Can I use Open Baton to build my own Network Service?
 Yes! Open Baton provides a NFVO which can interoperate with VNFMs implemented by third parties. We provide also a set of tools (like the vnfm-sdk) which supports developers in building their own VNFM. 
+
+Learn more [here][nfvo-intro]
 
 ## Get started 
 In order to get started you can follow the [installation guide][install-guide]
@@ -60,6 +64,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [marketplace-doc]: marketplace
 [mcn]: http://mobile-cloud-networking.eu/site/
 [nfvo]: nfvo-installation
+[nfvo-intro]: use
 [nubomedia]: https://www.nubomedia.eu/
 [openbaton-libs]: https://github.com/openbaton/openbaton-libs
 [openbaton]:https://twitter.com/openbaton
