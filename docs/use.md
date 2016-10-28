@@ -2,11 +2,11 @@
 
 After completing the installation, you should be able to reach the dashboard of the NFVO at the following url: http://your-ip-here:8080
 
-When accessing the dashboard, you will be prompted for a username and password. The first access can only be done with the super user ("admin") created during the installation. Please refer to the [Identity Management][security] section for more information about security mechanisms.
+When accessing the dashboard, you will be prompted for a username and password. The first access can only be done with the super user ("admin") created during the installation process. Please refer to the [Identity Management][security] section for more information about security mechanisms.
 
-In order to use OpenBaton for launching your first Network Service, you will need to follow these steps:
+In order to use Open Baton for launching your first Network Service, you will need to follow these steps:
 
-1. Install a VIM driver. [Learn more here][]
+1. Install a VIM driver. [Learn more here][vim-driver]
 2. Register one or more Point of Presences (PoPs). [Learn more here][vim-registration]
 3. Install a VNF Manager
 4. Build or download one or more VNF Packages
@@ -18,6 +18,7 @@ Once these steps are completed you will be able to orchestrate your Network Serv
 [dashboard]: nfvo-how-to-use-gui
 [generic]: vnfm-generic
 [juju]: vnfm-juju
+[vim-driver]: vim-driver
 [vim-registration]: vim-instance
 [rest-api]: http://get.openbaton.org/api/ApiDoc.pdf
 [security]: security

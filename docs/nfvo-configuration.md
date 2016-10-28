@@ -59,7 +59,7 @@ to:
 nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
 ``` 
 
-2) At the end of the installation the NFVO is working with an in-memory database. In order to start using persistency through mysql database, you need to change the properties as shown below:
+2) Depending on the installation mode you selected, it maybe that you have an in-memory database. In order to reconfigure the NFVO to use a more persistent database, like MySQL, you need to change the properties as shown below:
 ```properties
 # DB properties
 spring.datasource.username=admin
@@ -146,13 +146,13 @@ This property allows the user to delete the Network Service Records no matter in
 nfvo.delete.all-status = true
 ```
 
-**MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
-Once the Zabbix server is correctly configured and running, you only need to add following property. 
-Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to the Zabbix server.
+**MONITORING:** Openbaton allows the monitoring of the VMs on top of which the VNFs are exeucting via an external monitoring system. At the moment Zabbix is the monitoring system supported. If you want to enable it, you need first to install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
+Once the Zabbix server is correctly configured and running, you only need to add following property.
 
 ```properties 
 nfvo.monitoring.ip = the Zabbix server ip
 ```
+Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to the Zabbix server.
 
 These are other parameters for configuring the NFVO's behaviour:
 ```properties
