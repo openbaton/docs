@@ -67,7 +67,7 @@ By default the NFVO is installed with the two following VIM drivers:
 For each of those types there is a different implementation of the VIM API. The NFVO uses a driver mechanism for interacting with VIMs. Inside the NFVO folder is a folder called `plugins` where the binary file that implements the interface to your VIM ( i.e. [Openstack][openstack-link] ) should be placed (you can change the folder where Open Baton searches for the plugins by changing the variable `plugin-installation-dir` in the `openbaton.properties` file under /etc/openbaton).  
 This binary file is the implementation of the interface that communicates with your VIM.
 
-**Note**: You can implement your own interface just follow the documentation on writing your own [Vim plugin].
+**Note**: You can implement your own interface just follow the documentation on writing your own [VIM driver].
 
 ## Where do I find the open source plugins?
 
@@ -80,7 +80,7 @@ Open Baton platform provides an openstack and a test plugin. They are automatica
 [OpenBaton Dashboard]:nfvo-how-to-use-gui.md
 [openstack-link]:https://www.openstack.org/
 [register-new-pop]:images/vim-instance-register-new-pop.png
-[Vim plugin]:vim-plugin.md
+[VIM driver]:vim-driver-create.md
 
 <!---
 Script for open external links in a new tab

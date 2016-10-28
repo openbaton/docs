@@ -44,7 +44,6 @@ brew remove openbaton-nfvo
 
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
-[vim_plugin_doc]:vim-plugin
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/

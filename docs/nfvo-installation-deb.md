@@ -197,7 +197,6 @@ For specific configuration refer to the [configuration]
 [spring]:https://spring.io
 [configuration]:nfvo-configuration.md
 [localhost:8080]:http://localhost:8080/
-[vim_plugin_doc]:vim-plugin.md
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/

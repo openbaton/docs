@@ -34,7 +34,7 @@ pages:
 - ['fms-sipp-tutorial.md', 'Tutorials', 'Fault Management System']
 - ['integration-test-use.md', 'Tutorials', 'Integration Tests']
 - ['nfvo-architecture.md', 'Learn more', 'NFVO Architecture']
-- ['vim-plugin.md', 'Learn more', 'Create a VIM Plugin']
+- ['vim-driver-create.md', 'Learn more', 'Create a VIM Driver']
 - ['nfvo-sdk.md', 'Learn more', 'Open Baton SDKs']
 - ['how-to-register-event.md', 'Learn more','The Event Mechanism tutorial']
 - ['FAQ.md', 'FAQ', 'FAQ']

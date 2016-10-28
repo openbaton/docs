@@ -320,7 +320,7 @@ The **conf.properties** is also a very important configuration file.
 Here you need to define the type and endpoint of your VNFManager that is later used for registering on the NFVO.
 Furthermore, you can define your own parameters which can be used at runtime for whatever you want.
 So this file has to contain at least the type and endpoint.
-Additionally, it is defined the folder where the vim-plugins are located.
+Additionally, it is defined the folder where the vim drivers are located.
 In this case the file should contain the following lines.
 
 ```gradle
