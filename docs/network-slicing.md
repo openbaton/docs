@@ -29,9 +29,28 @@ The only thing to do is to execute the following command and follow the configur
 bash <(curl -fsSkl https://raw.githubusercontent.com/openbaton/network-slicing-engine/master/bootstrap)
 ```
 
+Once you started the bootstrap you can choose between different options, such as installing this component via debian packages or from the source code (mainly for development)
+
 ## Installation via debian package
 
+When using the debian package you need to add the apt-repository of Open Baton to your local environment with the following command if not yet done:
+ 
+```bash
+wget -O - http://get.openbaton.org/keys/public.gpg.key | apt-key add -
+echo "deb http://get.openbaton.org/repos/apt/debian/ stable main" >> /etc/apt/sources.list
+```
 
+Once you added the repo to your environment you should update the list of repos by executing:
+
+```bash
+apt-get update
+```
+
+Now you can install the NSE by executing:
+
+```bash
+apt-get install openbaton-nse
+```
 
 ## Installation from the source code
 
@@ -79,7 +98,25 @@ This chapter describes the parameters that must be considered for configuring th
 
 # Starting the Network Slicing Engine
 
-Starting the NSE can be achieved easily by using the the provided script with the following command:
+How to start the NSE depends of the way you installed this component.
+
+### Debian packages
+
+If you installed the NSE with the debian packages you can start it with the following command:
+
+```bash
+openbaton-nse start
+```
+
+For stopping it you can just type:
+
+```bash
+openbaton-nse stop
+```
+
+### Source code
+
+If you are using the source code you can start the NSE  easily by using the provided script with the following command:
 
 ```bash
 ./network-slicing-engine.sh start
@@ -89,6 +126,11 @@ Once the NSE is started, you can access the screen session by executing:
 
 ```bash
 screen -r openbaton
+```
+
+For stopping you can use:
+```bash
+./network-slicing-engine.sh kill
 ```
 
 **Note** Since the NSE subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the NSE.
