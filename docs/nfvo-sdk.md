@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:3.3.0'
+    compile 'org.openbaton:sdk:3.0.0'
 }
 ```
 
@@ -41,6 +41,8 @@ The NFVORequestor is the main and only class you need to use. From this class it
 | nfvoIp 		| the ip of the NFVO      |
 | nfvoPort 		| the port of the orchestrator      |
 | version 		| the API version. Now only "1" is available      |
+
+**Important NOTE**: Please pay attention that the NFVORequestor _is not_ thread safe! To make it so is up to the developer. 
 
 Once you have the NFVORequestor object, you can get the Agents. Available agents are:
 
