@@ -19,16 +19,19 @@ Please refer to the following doc for more details: [Use the generic VNFM][gener
 Openbaton provides a Java SDK called vnfm-sdk which helps you to simply create a VNFM for your VNF.
 Regarding the type of the communication between the NFVO and the VNFM (Or-Vnfm), you can use the vnfm-sdk-amqp or vnfm-sdk-rest, depending if you prefer to communicate with AMQP or REST.
 
-Please refer to the following doc for more details: [Build your own VNFM]
+Please refer to the following doc for more details: [Build your own VNFM][vnfm-how-to]
 
 ### 3. Use your own VNFM
 
 This approach allows you to integrate your VNFM and VNF within Openbaton. In this case, the Or-Vnfm communication will be via REST interfaces.
 
-The three pages following describe in details these three different approaches.
+Please refer to the following doc for more details: [Bring your own VNFM][vnfm-rest]
 
-Please refer to the following doc for more details: [Bring your own VNFM]
+
+The pages in this section describe in details these three different approaches.
 
 [generic]: vnfm-generic
 [juju]: vnfm-juju
+[vnfm-how-to]: vnfm-how-to-write
+[vnfm-rest]: vnfm-vendor-specific
 
