@@ -24,12 +24,31 @@ Using the bootstrap gives a fully automated installation of this component inclu
 The only thing to do is to execute the following command and follow the configuration process: 
 
 ```bash
-bash <(curl -fsSkl https://raw.githubusercontent.com/openbaton/autoscaling/master/bootstrap)
+bash <(curl -fsSkl https://raw.githubusercontent.com/openbaton/autoscaling-engine/master/bootstrap)
 ```
+
+Once you started the bootstrap you can choose between different options, such as installing this component via debian packages or via the source code (mainly for development)
 
 ## Installation via debian package
 
+When using the debian package you need to add the apt-repository of Open Baton to your local environment with the following command if not yet done:
+ 
+```bash
+wget -O - http://get.openbaton.org/keys/public.gpg.key | apt-key add -
+echo "deb http://get.openbaton.org/repos/apt/debian/ stable main" >> /etc/apt/sources.list
+```
 
+Once you added the repo to your environment you should update the list of repos by executing:
+
+```bash
+apt-get update
+```
+
+Now you can install the NSE by executing:
+
+```bash
+apt-get install openbaton-ase
+```
 
 ## Installation from the source code
 
@@ -85,7 +104,25 @@ If the plugin is placed in the folder mentioned before, it will be started autom
 
 # Starting the AutoScaling Engine
 
-Starting the AutoScaling Engine can be achieved easily by using the the provided script with the following command:
+How to start the ASE depends of the way you installed this component.
+
+### Debian packages
+
+If you installed the ASE with the debian packages you can start it with the following command:
+
+```bash
+openbaton-ase start
+```
+
+For stopping it you can just type:
+
+```bash
+openbaton-ase stop
+```
+
+### Source code
+
+If you are using the source code you can start the ASE easily by using the provided script with the following command:
 
 ```bash
 ./autoscaling-engine.sh start
@@ -94,8 +131,14 @@ Starting the AutoScaling Engine can be achieved easily by using the the provided
 Once the AutoScaling Engine is started, you can access the screen session by executing:
 
 ```bash
-screen -r autoscaling-engine
+screen -r openbaton
 ```
+
+For stopping you can use:
+```bash
+./autoscaling-engine.sh kill
+```
+
 
 **Note** Since the AutoScaling Engine subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the AutoScaling Engine. Otherwise the AutoScaling Engine will wait for 600 seconds for the availability of the NFVO before terminating automatically.
 
