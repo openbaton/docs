@@ -32,7 +32,7 @@ These list of issues is something we are working on for the future release.
 
 * A running [NFVO][nfvo-github]
 * The [Test vim driver][test-plugin-github]
-* A running Juju instance with a controller named *obcontroller*. Please refer to the juju [installation guide][installation-guide]
+* A running Juju 2.0 instance with a controller named *obcontroller*. Please refer to the juju [installation guide][installation-guide]
 * The [Juju-VNFM][juju-vnfm-github] needs to run on the same machine where Juju is installed
 
 
