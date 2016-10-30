@@ -1,4 +1,4 @@
-##TOSCA Definition
+##TOSCA Virtual Network Function Template
 
 The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
@@ -255,39 +255,7 @@ topology_template:
 
 **NOTE**: Save the template in a file called server-iperf.yaml.
 
-Using the API you can store the VNFD written in TOSCA directly in the NFVO. You will need the dummy-vnfm and test vim instance.
- To do that follow these steps:
-
-1) Authentication:
-Run this command:
-```bash
-$curl -v -u openbatonOSClient:secret -X POST http://localhost:8080/oauth/token -H "Accept: application/json" -d "username=admin&password=openbaton&grant_type=password"
-```
-The NFVO will answer with an authetication key and a project id. You will need them to send the VNFD in the next step. The response should look like this:
-
-```bash
-{
-  # Authentication Key
-  "value": "e8726a35-61c8-4bcb-873e-3ab6cc989f6f",
-  "expiration": "Aug 30, 2016 9:14:22 PM",
-  "tokenType": "bearer",
-  "refreshToken": {
-    "expiration": "Sep 29, 2016 9:14:22 AM",
-    # Project ID
-    "value": "336ca2e6-8e78-48eb-b8f8-c5de862a21da"
-  },...
-```
-**Note: ** Do not pay attention to the project-id supplied in this response.
-
-2) To send the VNFD in the TOSCA format save the example above in a file named dummy-vnf.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
-
-```bash
-$curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @dummy-vnf.yaml
-```
-```
-
-The NFVO will answer with json translation of the VNFD. 
-To retrieve or to instantiate this VNFD please use the Dashboard of OpenBaton in the page under the menu Catalogue > VNF Descriptors.
+You can create a [CSAR][csar-onboarding] and upload it to the NFVO using the [Dashboard][dashboard]. 
 
 <!------------
 References
@@ -304,6 +272,8 @@ References
 [vnf-package]:vnfpackage
 [vim-doc]:descriptors/vim-instance/test-vim-instance.json
 [iperf]:https://iperf.fr
+[csar-onboarding]:tosca-CSAR-onboarding
+[dashboard]:nfvo-how-to-use-gui
 
 <!---
 Script for open external links in a new tab

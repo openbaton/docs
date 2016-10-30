@@ -41,7 +41,9 @@ If the CSAR has a Network Service Template, then for every type of VNF included 
 Example if one VNF is of type client, then the scripts for that VNF have to be put in Scripts/client folder. 
 
 
-The **testNSDIperf.yaml** is a Definition of Network Service. It contains this descriptor.
+In this example **testNSDIperf.yaml** is a template for a Network Service. 
+In a CSAR the template can define either a Virtual Network Function or a Network Service that consists of multiple Virtual Network Functions. 
+The [VNF Tosca tutorial][tosca-vnf] and [NS Tosca tutorial][tosca-ns] provide more information on how to construct a template of each kind. 
 
 ```yaml
 tosca_definitions_version: tosca_simple_iperf_scenario
@@ -175,6 +177,8 @@ References
 [tosca-iperf]:tosca-iperf-scenario
 [metadata]:vnf-package
 [drag_drop]:images/nfvo-how-to-use-gui-drag-drop.png
+[tosca-vnf]:tosca-vnfd
+[tosca-ns]:tosca-nsd
 
 
 <!---

@@ -44,6 +44,7 @@ pages:
 - ['**HIDDEN**': 'tosca-dummy-nsr.md']
 - ['**HIDDEN**': 'tosca-ims.md']
 - ['**HIDDEN**': 'tosca-vnfd.md']
+- ['**HIDDEN**': 'tosca-nsd.md']
 - ['**HIDDEN**': 'tosca-CSAR-onboarding.md']
 - ['**HIDDEN**': 'vnfr-states.md']
 - ['**HIDDEN**': 'vnf-parameters.md']
