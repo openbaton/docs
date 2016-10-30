@@ -15,7 +15,7 @@ To have a running standalone Open Baton Docker container type the following comm
 
 ```bash
 sudo docker pull openbaton/standalone
-sudo docker run -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone
+sudo docker run --name openbaton -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone
 ```
 
 ***VERY IMPORTANT NOTE*** - You should put as input for the RABBITMQ_BROKERIP the RabbitMQ IP making sure that this IP can be
@@ -46,7 +46,7 @@ cfc4a7fb23d0        openbaton/standalone:latest  "/usr/bin/supervisord"   49 sec
 To connect to the running container containing Open Baton you can type the following command:
 
 ```bash
-sudo docker exec -ti cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07 bash
+sudo docker exec -ti openbaton bash
 ```
 
 After few minutes the Open Baton NFVO should be started, then you can open a browser and go on localhost:8080.
