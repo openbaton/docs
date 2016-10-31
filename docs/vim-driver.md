@@ -14,9 +14,9 @@ This binary file is the implementation of the interface that communicates with y
 
 **Note**: You can implement your own interface just follow the documentation on writing your own [VIM driver][vim-driver].
 
-## Where do I find the open source plugins?
+## Where can I find other open source VIM drivers?
 
-Open Baton platform provides an openstack and a test plugin. They are automatically download by the bootstrap. Anyway they can be found on our [Marketplace][marketplace-drivers]
+Open Baton platform provides an openstack and a test plugin. They are automatically download by the bootstrap. During next releases there will be additional drivers available on our [Marketplace][marketplace-drivers]
 
 [marketplace-drivers]: http://marketplace.openbaton.org:8082/#/
 [openstack-link]:https://www.openstack.org/

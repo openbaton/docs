@@ -50,7 +50,7 @@ ETSI NFV limits itself to this level of indications, considering that other stan
 * Sending us an email to: [info-at-openbaton-dot-org]
 
 ## Supported by
-Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], [CogNet][cognet], [SoftFIRE][softfire]. Open Baton is one of the main components in the [5G Berlin][5g-berlin] initiative.  
+Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], [CogNet][cognet], [SoftFIRE][softfire]. Open Baton is one of the main components of the [5G Berlin][5g-berlin] initiative.  
 
 [5g-berlin]: http://www.5g-berlin.org/
 [autoscaling-system]: https://github.com/openbaton/autoscaling

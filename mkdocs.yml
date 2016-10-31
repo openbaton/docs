@@ -18,6 +18,7 @@ pages:
 - ['vnfm-generic.md', 'VNF Managers', 'Generic VNFM']
 - ['vnfm-juju.md', 'VNF Managers', 'Juju VNFM']
 - ['vim-driver.md', 'VIM Driver', 'VIM Driver Overview']
+- ['vim-driver-openstack.md', 'VIM Driver', 'OpenStack VIM Driver']
 - ['vnfm-how-to-write.md', 'VNF Managers', 'Develop a VNFM']
 - ['vnfm-vendor-specific.md', 'VNF Managers', 'Integrate your own VNFM']
 - ['monitoring.md', 'Monitoring', 'Monitoring overview']

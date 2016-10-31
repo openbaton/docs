@@ -60,8 +60,8 @@ password: openbaton
 To stop and delete the running Open Baton container you can type respectively the following commands:
 
 ```bash
-sudo docker stop cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07
-sudo docker rm cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07
+sudo docker stop openbaton
+sudo docker rm openbaton
 ```
 
 
