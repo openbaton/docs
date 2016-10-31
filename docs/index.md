@@ -8,7 +8,7 @@ Open Baton provides many different features and components:
 * A generic Virtual Network Function Manager (VNFM) able to manage the lifecycle of VNFs based on their descriptors. Read more [here][vnfm-generic]
 * A Juju VNFM Adapter in order to deploy Juju Charms or Open Baton VNF Packages using the Juju VNFM. Read more [here][juju-vnfm]
 * A driver mechanism for adding and removing different type of VIMs without having to re-write anything in your orchestration logic. Read more [here][vim-driver]
-* A powerful event engine useful based on a pub/sub mechanism for the dispatching of lifecycle events execution
+* A powerful event engine useful based on a pub/sub mechanism for the dispatching of lifecycle events execution. Read more [here][events]
 * An autoscaling engine which can be used for automatic runtime management of the scaling operation operations of your VNFs. Read more [here][autoscaling-system]
 * A fault management system which can be used for automatic runtime management of faults which may occur at any level. Read more [here][fm-system]
 * It integrates with the Zabbix monitoring system. Read more [here][zabbix-plugin]
@@ -20,21 +20,21 @@ Open Baton provides many different features and components:
 ## Can I plug in my Network Functions?
 Yes, this is possible using (at least) two different approaches:
 
-* Integrating your own VNFM. In this case you can use either the REST interface, or the AMQP one for interoperating with the NFVO
-* Implementing a set of scripts which can be executed as part of the lifecycle event of your Virtual Network Function Descriptor. We provide a generic VNFM and EMS which can be used for executing them
+* Integrating your own VNFM. In this case you can use either the REST interface, or the AMQP one for interoperating with the NFVO.
+* Implementing a set of scripts which can be executed as part of the lifecycle event of your Virtual Network Function Descriptor. We provide a generic VNFM and EMS which can be used for executing them.
 
-Learn more [here][nfvo-intro]
+Learn more [here][nfvo-intro].
 
 ## Can I use Open Baton to build my own Network Service?
 Yes! Open Baton provides a NFVO which can interoperate with VNFMs implemented by third parties. We provide also a set of tools (like the vnfm-sdk) which supports developers in building their own VNFM. 
 
-Learn more [here][nfvo-intro]
+Learn more [here][nfvo-intro].
 
 ## Get started 
-In order to get started you can follow the [installation guide][install-guide]
+In order to get started you can follow the [installation guide][install-guide].
 
 ## Learn more
-Please refer to the "Tutorials" and "Learn More" sections for having more information about the Open Baton project. You can also learn more via our video tutorials published on the Open Baton [Youtube Channel][youtube]
+Please refer to the "Tutorials" and "Learn More" sections for having more information about the Open Baton project. You can also learn more via our video tutorials published on the Open Baton [Youtube Channel][youtube].
 
 ## What is NFV  
 ETSI NFV represents a concerted telco operator initiative fostering the development of virtual network infrastructures by porting and further adapting network functions to the specific cloud environment. 
@@ -74,6 +74,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [zabbix-plugin]: zabbix-plugin
 [vim-driver]: vim-driver
 [vnfm-generic]: vnfm-generic
+[events]: how-to-register-event
 
 <!---
  Script for open external links in a new tab
