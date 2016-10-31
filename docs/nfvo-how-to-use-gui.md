@@ -117,7 +117,7 @@ This is the form which allows you to choose the VNFDs to be used in the NSD come
 
 Once you have added the VNFDs to the NSD you can add one or more VLD and VNF Dependency like in the picture below using the + button
 
-![Form with VNFDs][NSDcreateWithVNF]
+![Form with VNFDs][NSDcreateForm]
 
 In the picture below you can see how to add a VNF Dependency to the NSD and possible parameters by clicking on *Dependencies +*
 
