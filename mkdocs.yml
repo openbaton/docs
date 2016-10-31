@@ -30,6 +30,7 @@ pages:
 - ['dummy-NSR.md', 'Tutorials', 'Dummy NSR']
 - ['iperf-NSR.md', 'Tutorials', 'Iperf Scenario']
 - ['ims-NSR.md', 'Tutorials', 'OpenIMSCore example']
+- ['tutorial-sipp.md', 'Tutorials', 'SIPp example']
 - ['fms-sipp-tutorial.md', 'Tutorials', 'Fault Management System']
 - ['integration-test-use.md', 'Tutorials', 'Integration Tests']
 - ['nfvo-architecture.md', 'Learn more', 'NFVO Architecture']
