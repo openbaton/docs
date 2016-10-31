@@ -315,7 +315,7 @@ We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
 
 ## Onboarding VNF Packages
 
-Once we have finalized the creation of VNF Packages and packed them into a tar we can onboard them to the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done easily via the [Dashboard][dashboard-link].
+Once we have finalized the creation of VNF Packages and packed them into a tar we can onboard them to the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done easily via the [Dashboard][dashboard-link] or the [Command Line Interface][cli].
 
 
 ## NSD [iperf]
@@ -363,7 +363,7 @@ Finally you can onboard this NSD and deploy an NSR that bases on both VNF Packag
 
 ### Onboarding and deploying NSD 
 
-You could also use the [Dashboard][dashboard-link] as well for onboarding and deploying the NSD.
+You could also use the [Dashboard][dashboard-link] or the [Command Line Interface][cli] as well for onboarding and deploying the NSD.
 
 
 [iperf-link]:https://iperf.fr/
@@ -372,6 +372,7 @@ You could also use the [Dashboard][dashboard-link] as well for onboarding and de
 [image-link]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img
 [tosca-nfv]:https://docs.oasis-open.org/tosca/tosca-nfv/v1.0/tosca-nfv-v1.0.html
 [csar-onboarding]:tosca-CSAR-onboarding
+[cli]:nfvo-how-to-use-cli
 
 <!---
 Script for open external links in a new tab
