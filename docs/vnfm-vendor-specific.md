@@ -5,13 +5,13 @@ In this section are described the REST interfaces which allow you to use your Vi
 NFVO - VNFM ReST interface
 ===============================
 
-The NFVO exposes a ReST interface for the communication with the VNFMs. The sequence diagram regarding the instantiation of a NetworkServiceRecord (NSR) is shown in the following picture.
+NFVO exposes a REST interface for the communication with the VnfManagers. The sequence diagram regarding the instantiation of a NetworkServiceRecord is shown in the following picture.
 
-![NFVO - VNFM ReST interface][or-vnfm-seq]
+![NFVO - VNFM REST interface][or-vnfm-seq]
 
 As shown in the picture, the NFVO calls some ReST methods on the VNFM in a particular order. Then it expects the corresponding call back. The different types of exchanges are described in the following sections. The ALLOCATE_RESOURCES call is not needed if the VNFM will take care of creating VMs. The communication with the EMS is particular to each VNFM. In order to be able to be found, the VNFM needs to register to the NFVO. This can be done through a particular registration call.
 
-In the following 'Vnfm-Or' means that the VNFM sends to the NFVO and 'Or-Vnfm' means that the NFVO sends to the VNFM.
+In the following 'Vnfm-Or' means that the Vnfm sends to the Nfvo and 'Or-Vnfm' means that the Nfvo sends to the Vnfm.
 
 | Params          | Meaning       |
 | -------------   | -------------:|
@@ -292,8 +292,6 @@ _*VnfmEnpoint*_
 | _*action*_ | the action to be executed |
 
 ### Start (Vnfm-Or)
-
-This call sends back the VNFR to the NFVO.
 
 ###### request path
 POST request on

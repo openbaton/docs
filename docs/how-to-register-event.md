@@ -1,5 +1,4 @@
-# How to register to an NFVO Event
--------------------------------------------
+# How to register to NFVO Events
 
 The Open Baton platform can be easily extended by writing new external modules that can "react" on some events happening in the system. We already showed how to trigger some operations to the NFVO in the page regarding the [NFVO sdk](nfvo-sdk). In this short tutorial we will show how to write an external module aware of the NFV environment managed by Open Baton. The NFVO sdk already gives the tools for registering to events, so the first steps are the same of the [NFVO sdk](nfvo-sdk) page.
 

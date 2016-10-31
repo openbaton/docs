@@ -10,7 +10,7 @@ Open Baton release 3 provides three different alternatives with regard to VNF Ma
 
 ### 1. Use the Generic VNFM or Juju VNFM 
 
-This approach allows you to start immediately focusing mainly on the implementation of the VNF Package. Both VNF Manager supports the execution of VNF Packages CSAR based (please read more [here][] for more details about VNF Packaging). 
+This approach allows you to start immediately focusing mainly on the implementation of the VNF Package. Both VNF Manager supports the execution of VNF Packages CSAR based (please read more [here][tosca-csar] for more details about VNF Packaging). 
 
 Please refer to the following doc for more details: [Use the generic VNFM][generic] or [Use the Juju VNFM][juju]
 
@@ -34,4 +34,4 @@ The pages in this section describe in details these three different approaches.
 [juju]: vnfm-juju
 [vnfm-how-to]: vnfm-how-to-write
 [vnfm-rest]: vnfm-vendor-specific
-
+[tosca-csar]: tosca-CSAR-onboarding
