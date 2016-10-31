@@ -32,11 +32,7 @@ zip -r ims.csar . -x ".*" -x "*/.*"
 
 For this example we assume the network used to interconnect the components is called "mgmt", if you want to modify this example ensure you are naming the network accordingly, the scripts from the github do not handle different network names yet. Also the vimInstanceName may be different to you, depending on your setup. The deployment_flavor is optional but should containg enough RAM for the default configuration of the components to be able to run, else some components may crash on start. This example setup has been successfuly tested on clean [Ubuntu14.04 images](https://cloud-images.ubuntu.com/) with 2048 Mb RAM deployed on an [Openstack Kilo (2015.1.3)](https://www.openstack.org/). Ensure that the image name defined in the Metadata.yaml of each package is existing.
 
-After you authenticate yourself to the API, you can onboard the CSAR by running this command:
-
-```bash
-$curl -X POST http://your-ip-here:8080/api/v1/csar-nsd -H "Accept: application/json" -H "project-id: $Project ID here$" -H "Authorization: Bearer $Auth token here$" -v -F file=@ims.csar
-```
+You can easily onboard the CSAR from the Dashboard. ( Catalogue -> NS Descriptors -> Upload CSAR NSD)
 
 ## Deploy the Network Service Descriptor 
 
@@ -73,11 +69,11 @@ References
 [openims-website]:http://www.openimscore.org
 
 [ims-struc]:images/ims-architecture.png
-[nfvo]:http://openbaton.github.io/documentation/nfvo-installation/
-[vnf-package]:http://openbaton.github.io/documentation/vnfpackage/
-[vnf-descriptors]:http://openbaton.github.io/documentation/vnf-descriptor/
-[ns-descriptor]:http://openbaton.github.io/documentation/ns-descriptor/
-[iperf-example]:./use-case-example.md
+[nfvo]:nfvo-installation
+[vnf-package]: vnf-package
+[vnf-descriptors]: vnf-descriptor
+[ns-descriptor]: ns-descriptor
+[iperf-example]: iperf-NSR
 [openims-repo]:https://github.com/openbaton/openimscore-packages
 
 <!---

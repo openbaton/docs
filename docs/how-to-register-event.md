@@ -1,7 +1,6 @@
-# How to register to a NFVO Event
--------------------------------------------
+# How to register to NFVO Events
 
-The Open Baton platform can be easily extended by writing new external modules that can "react" on some events happening in the system. We already showed how to trigger some operations to the NFVO in the page regarding [the NFVO sdk](nfvo-sdk). In this short tutorial we will show how to write an external module aware of the NFV environment managed by Open Baton. The NFVO sdk already gives the tools for registering to events, so the first steps are the same of the [NFVO sdk](nfvo-sdk) page.
+The Open Baton platform can be easily extended by writing new external modules that can "react" on some events happening in the system. We already showed how to trigger some operations to the NFVO in the page regarding the [NFVO sdk](nfvo-sdk). In this short tutorial we will show how to write an external module aware of the NFV environment managed by Open Baton. The NFVO sdk already gives the tools for registering to events, so the first steps are the same of the [NFVO sdk](nfvo-sdk) page.
 
 Inside the project folder create a *build.gradle* file as follows:
 
@@ -22,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:2.2.0'
+    compile 'org.openbaton:sdk:3.0.0'
 }
 ```
 
@@ -115,7 +114,7 @@ public class EventModule {
 
 ```
 
-As written in the comment, some event are related only to NSR and some other only to the VNFR. The following table describes all the events:
+As written in the comment, some events are related only to NSR and some other only to the VNFR. The following table describes all the events:
 
 | Event Type (Action)      | NSR or VNFR related (or both) |                                                                                           Description |
 |--------------------------|:-----------------------------:|------------------------------------------------------------------------------------------------------:|

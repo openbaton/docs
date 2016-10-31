@@ -320,7 +320,7 @@ The **conf.properties** is also a very important configuration file.
 Here you need to define the type and endpoint of your VNFManager that is later used for registering on the NFVO.
 Furthermore, you can define your own parameters which can be used at runtime for whatever you want.
 So this file has to contain at least the type and endpoint.
-Additionally, it is defined the folder where the vim-plugins are located.
+Additionally, it is defined the folder where the vim drivers are located.
 In this case the file should contain the following lines.
 
 ```gradle
@@ -374,7 +374,7 @@ For gathering the vnfm-sdk-amqp library you need to import the libraries by addi
 
 dependencies {
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
-    compile 'org.openbaton:vnfm-sdk-amqp:2.2.0'
+    compile 'org.openbaton:vnfm-sdk-amqp:3.0.0'
 }
 
 //...
@@ -409,7 +409,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-amqp:2.2.0'
+    compile 'org.openbaton:vnfm-sdk-amqp:3.0.0'
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
 }
 
@@ -507,9 +507,10 @@ public class MyVNFM extends AbstractVnfmSpringAmqp{
      * (out/in, up/down) a VNF instance.
      */
     @Override
-    public VirtualNetworkFunctionRecord scale(Action scaleInOrOut, VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance component, Object scripts, VNFRecordDependency dependency) throws Exception {
+    public VirtualNetworkFunctionRecord scale(Action scaleInOrOut, VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFComponent component, Object scripts, VNFRecordDependency dependency) throws Exception {
         return virtualNetworkFunctionRecord;
     }
+
 
     /**
      * This operation allows verifying if
@@ -533,9 +534,10 @@ public class MyVNFM extends AbstractVnfmSpringAmqp{
      * software update (e.g. patch) to a VNF instance.
      */
     @Override
-    public void updateSoftware() {
-
+    public VirtualNetworkFunctionRecord updateSoftware(Script script, VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return virtualNetworkFunctionRecord;
     }
+
 
     /**
      * This operation allows making structural changes
@@ -562,10 +564,12 @@ public class MyVNFM extends AbstractVnfmSpringAmqp{
     /**
      * This operation allows terminating gracefully
      * or forcefully a previously created VNF instance.
+     *
      * @param virtualNetworkFunctionRecord
      */
     @Override
-    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+    public VirtualNetworkFunctionRecord terminate(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) {
+        log.info("Terminating vnfr with id " + virtualNetworkFunctionRecord.getId());
         return virtualNetworkFunctionRecord;
     }
 
@@ -575,8 +579,13 @@ public class MyVNFM extends AbstractVnfmSpringAmqp{
     }
 
     @Override
-    protected void checkEmsStarted(String hostname) throws RuntimeException {
+    protected void checkEMS(String hostname) {
+        log.warn("EMS is not supported by this VNFM");
+    }
 
+    @Override
+    protected void checkEmsStarted(String hostname) throws RuntimeException {
+        log.warn("EMS is not supported by this VNFM");
     }
 
     @Override
@@ -585,7 +594,27 @@ public class MyVNFM extends AbstractVnfmSpringAmqp{
     }
 
     @Override
+    public VirtualNetworkFunctionRecord stop(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord startVNFCInstance(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance vnfcInstance) throws Exception {
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord stopVNFCInstance(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance vnfcInstance) throws Exception {
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
     public VirtualNetworkFunctionRecord configure(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord) throws Exception {
+        return virtualNetworkFunctionRecord;
+    }
+
+    @Override
+    public VirtualNetworkFunctionRecord resume(VirtualNetworkFunctionRecord virtualNetworkFunctionRecord, VNFCInstance vnfcInstance, VNFRecordDependency dependency) throws Exception {
         return virtualNetworkFunctionRecord;
     }
 
@@ -669,9 +698,9 @@ Therefore, you need to do several things:
 **Note** If you want to use the Vim with plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:2.2.0'
-compile 'org.openbaton:vim-impl:2.2.0'
-compile 'org.openbaton:sdk:2.2.0'
+compile 'org.openbaton:vim-int:3.0.0'
+compile 'org.openbaton:vim-impl:3.0.0'
+compile 'org.openbaton:sdk:3.0.0'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 
@@ -750,10 +779,21 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
      * Allocation of Resources
      *  the grant operation is already done before this method
      */
+    String userdata = "";
+    Iterator<ConfigurationParameter> configIterator = virtualNetworkFunctionRecord.getConfigurations().getConfigurationParameters().iterator();
+    while (configIterator.hasNext()) {
+        ConfigurationParameter configurationParameter = configIterator.next();
+        log.debug("Configuration Parameter: " + configurationParameter);
+        if (configurationParameter.getConfKey().equals("GROUP_NAME")) {
+            userdata = "export GROUP_NAME=" + configurationParameter.getValue() + "\n";
+            userdata += "echo $GROUP_NAME > /home/ubuntu/group_name.txt\n";
+        }
+    }
+    userdata += getUserData();
+
     log.debug("Processing allocation of Recources for vnfr: " + virtualNetworkFunctionRecord);
     for (VirtualDeploymentUnit vdu : virtualNetworkFunctionRecord.getVdu()) {
         VimInstance vimInstance = vimInstances.get(vdu.getParent_vdu()).iterator().next();
-        List<Future<VNFCInstance>> vnfcInstancesFuturePerVDU = new ArrayList<>();
         log.debug("Creating " + vdu.getVnfc().size() + " VMs");
         for (VNFComponent vnfComponent : vdu.getVnfc()) {
             Map<String, String> floatingIps = new HashMap<>();
@@ -762,32 +802,14 @@ public VirtualNetworkFunctionRecord instantiate(VirtualNetworkFunctionRecord vir
                     floatingIps.put(connectionPoint.getVirtual_link_reference(), connectionPoint.getFloatingIp());
                 }
             }
-            Future<VNFCInstance> allocate = null;
             try {
-                allocate = resourceManagement.allocate(vimInstance, vdu, virtualNetworkFunctionRecord, vnfComponent, "", floatingIps);
-                vnfcInstancesFuturePerVDU.add(allocate);
+                VNFCInstance vnfcInstance = resourceManagement.allocate(vimInstance, vdu, virtualNetworkFunctionRecord, vnfComponent, userdata, floatingIps, new HashSet<>()).get();
+                log.debug("Created VNFCInstance with id: " + vnfcInstance);
+                vdu.getVnfc_instance().add(vnfcInstance);
             } catch (VimException e) {
                 log.error(e.getMessage());
                 if (log.isDebugEnabled())
                     log.error(e.getMessage(), e);
-            }
-        }
-        //Print ids of deployed VNFCInstances
-        for (Future<VNFCInstance> vnfcInstanceFuture : vnfcInstancesFuturePerVDU) {
-            try {
-                VNFCInstance vnfcInstance = vnfcInstanceFuture.get();
-                vdu.getVnfc_instance().add(vnfcInstance);
-                log.debug("Created VNFCInstance with id: " + vnfcInstance);
-            } catch (InterruptedException e) {
-                log.error(e.getMessage());
-                if (log.isDebugEnabled())
-                    log.error(e.getMessage(), e);
-                //throw new RuntimeException(e.getMessage(), e);
-            } catch (ExecutionException e) {
-                log.error(e.getMessage());
-                if (log.isDebugEnabled())
-                    log.error(e.getMessage(), e);
-                //throw new RuntimeException(e.getMessage(), e);
             }
         }
     }

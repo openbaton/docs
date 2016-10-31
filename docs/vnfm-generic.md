@@ -1,15 +1,15 @@
 # Generic VNF Manager
 
-The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. It works as intermediate component between the NFVO and the VNFs, particularly the Virtual Machines on top of which the VNF software is installed. In order to complete the lifecycle of a VNF, it interoperates with the Element Management System (EMS) acting as an agent inside the VMs and executing scripts containeed in the vnf package.
-This VNFM may be assigned the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
+The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. It works as intermediate component between the NFVO and the VNFs, particularly the Virtual Machines on top of which the VNF software is installed. In order to complete the lifecycle of a VNF, it interoperates with the Open Baton Element Management System (EMS) which acts as an agent inside the VMs and executing scripts contained in a VNF package or defined via the `scripts-link` inside the VNFD.
+This VNFM may be assigned to the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
 
-The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the AMQP protocol over RabbitMQ.  
+The Generic VNFM handles communication between the NFVO and the EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the AMQP protocol over RabbitMQ.  
 
-The communication between the NFVO and Generic VNFManager:
+The communication between the NFVO and Generic VNFM:
 
 ![NFVO - Generic VNFM communication][nfvo-vnfm-communication]
 
-The communication between the Generic VNFManager and EMS:
+The communication between the Generic VNFM and EMS:
 
 ![Generic VNFM - EMS communication][vnfm-ems-communication]
 
@@ -288,7 +288,7 @@ References
 [nfvo-vnfm-communication]: images/generic-vnfm-vnfm-or-communication.png
 [generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg.png
 [ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
-[vnfpackage-tutorial-link]:vnfpackage#tutorial
+[vnfpackage-tutorial-link]:vnf-package#tutorial
 [vnfpackage-doc-link]:vnfpackage
 
 <!---

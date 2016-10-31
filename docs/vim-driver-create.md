@@ -1,13 +1,13 @@
-# Create Vim Plugin
+# Create Vim Driver
 
-OpenBaton is an open source project providing a reference implementation of the NFVO and VNFM based on the ETSI specification, it is implemented in java using the spring.io framework. It consists of two main components: a NFVO and a generic VNFM. This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
+This tutorial will give This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this work?
 OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plugins. It offers an implementation of an interface that is used by the NFVO. 
 
 ## Requirements
 
-Before you can start with developing your own Vim Plugin you need to prepare your programming environment by installing/configuring the following requirements:
+Before you can start with developing your own Vim Driver you need to prepare your programming environment by installing/configuring the following requirements:
 
 * JDK 7 ([installation][openjdk])
 * Gradle ([installation][gradle-installation])
@@ -46,7 +46,7 @@ Once this is done you can click on Finish and continue with creating the Main Cl
 
 ### Create the Main Class
 
-Afterwards, you need to create the Main Class of the VIM plugin which will be started in the end.
+Afterwards, you need to create the Main Class of the VIM driver which will be started in the end.
 For doing so, right click on the root folder my-vim, then click on New -> Directory and insert what is show below.
 
 ![dialog][new_project_vim_new_directory]
@@ -65,10 +65,10 @@ Finally you can create your MyVim Class by clicking (right click) on the previou
 ![dialog][new_project_vim_new_class]
 
 Once you did all these steps, the initial project structure is created.
-What we miss right now is the configuration of the gradle files to define and fetch dependencies we need for implementing the Vim plugin.
+What we miss right now is the configuration of the gradle files to define and fetch dependencies we need for implementing the Vim driver.
 This is described in later sections.
 
-In order to create a VIM plugin for OpenBaton system you need to add to your *build.gradle* file:
+In order to create a VIM driver for OpenBaton system you need to add to your *build.gradle* file:
 
 ```gradle
 
@@ -104,25 +104,22 @@ mainClassName = 'org.myplugin.example.Starter'
 
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:2.2.0'
+    compile 'org.openbaton:plugin-sdk:3.0.0'
     compile'org.springframework:spring-context:4.2.1.RELEASE'
 }
 
 ```
 
-## Write your Vim plugin
+## Write your Vim driver
 
-The Vim plugin is splitted into two classes 
-
-1. Implementation of **VimDriver**
-2. The **Starter Class** that contain the main function for bootstrapping the Vim plugin
+The Vim driver is a simple class extending one abstract class and using a Starter utility 
 
 #### Type of Vim Instance
 OpenBaton provides a specific class for handling the **openstack** type or the **test** type thus these two types are supported. For all the other types a generic class will handle the communication between the NFVO and your plugin.
 
-### 1. Implement VimDriver
+### Implement VimDriver
 
-The *VimDriver* is an bastract class that contains tha basic functionalities that a Vim Instance has to provide. 
+The *VimDriver* is an abastract class that contains tha basic functionalities that a Vim Instance has to provide. 
 
 _**NOTE**_: If you want to implement a Monitoring plugin, then you need to implement the Abstract Class _MonitoringPlugin_
 
@@ -166,14 +163,11 @@ import org.openbaton.vim.drivers.interfaces.VimDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Service
-@Scope("prototype")
 public class MyVim extends VimDriver{
 
 
@@ -194,7 +188,6 @@ public class MyVim extends VimDriver{
         // ...
     }
 
-
     public static void main(String[] args) {
         PluginStarter.registerPlugin(MyVim.class, "my-type", "broker-ip", 5672, 10);
     }
@@ -203,12 +196,13 @@ public class MyVim extends VimDriver{
 
 As you can notice, there is the need of a _main_ method to start multiple instances of the plugin (in this example are 10, the last parameter).
 
-## Run your Vim plugin in OpenBaton environment
+## Run your Vim driver in OpenBaton environment
 
 Under the folder of your project *src/main/resources* you should create a file **plugin.conf.properties** and write the variable **type = _the-vim-type_**.
+
 The structure of your project should be like:
 
-![Vim plugin structure][vim_plugin_structure]
+![Vim driver structure][vim_plugin_structure]
 
 Now you can run **./gradlew build** and Gradle will create the jar that you can find in the folder *build/libs/myPlugin-1.0-SNAPSHOT.jar*.
 
@@ -218,7 +212,7 @@ Congratulations you have your version of the interface for your Vim Instance tha
 
 ## Use my plugin
 
-Once you copied the jar file into the right folder, you need to (re)start the NFVO. The plugin will automatically register and you can see that there will be a log file in the NFVO folder called _plugin-myPlugin.log_ containing the logs of the plugin. The myPlugin now acts as a normal plugin so for using it check out the [Vim instance documentation][vim-instance-documentation] in order to point out to the new plugin.
+Once you copied the jar file into the right folder, either you need to (re)start the NFVO or you type _installPlugin_ in the NFVO console passing the needed arguments. In case you restart the NFVO, the plugin will automatically register and you can see that there will be a log file in the NFVO folder called _plugin-myPlugin.log_ containing the logs of the plugin. The myPlugin now acts as a normal plugin so for using it check out the [Vim instance documentation][vim-instance-documentation] in order to point out to the new plugin.
 
 **NOTE**: you can also launch your plugin from your command line just typing
 

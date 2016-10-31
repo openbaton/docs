@@ -1,0 +1,195 @@
+{
+  "name":"SIPp with fms",
+  "vendor":"FOKUS",
+  "version":"1.0",
+  "vld":[
+    {
+      "name":"private"
+    }
+  ],
+  "vnfd":[
+    {
+      "name":"sipp-client",
+      "vendor":"FOKUS",
+      "version":"1.0",
+      "lifecycle_event":[
+        {
+          "event":"INSTANTIATE",
+          "lifecycle_events":[
+            "sipp_install.sh"
+          ]
+        },
+        {
+          "event":"CONFIGURE",
+          "lifecycle_events":[
+            "server_sipp_configure.sh"
+          ]
+        },
+        {
+          "event":"START",
+          "lifecycle_events":[
+            "sipp_client_start.sh"
+          ]
+        }
+      ],
+      "vdu":[
+        {
+          "vm_image":[
+            "ubuntu-14.04-x86_64"
+          ],
+          "scale_in_out":1,
+          "vnfc":[
+            {
+              "connection_point":[
+                {
+                  "floatingIp":"random",
+                  "virtual_link_reference":"private"
+                }
+              ]
+            }
+          ],
+          "vimInstanceName":[]
+        }
+      ],
+      "configurations": {
+        "configurationParameters": [
+          {
+            "confKey": "SIPP_LENGTH",
+            "value": "0",
+            "description": "Controls the length (in milliseconds) of calls. More precisely, this controls the duration of 'pause' instructions in the scenario, if they do not have a 'milliseconds' section. Default value is 0."
+          },
+          {
+            "confKey": "SIPP_RATE",
+            "value": "10",
+            "description": "Set the call rate (in calls per seconds). Default is 10. If the -rp option is used, the call rate is calculated with the period in ms given by the user."
+          },
+          {
+            "confKey": "SIPP_RATE_PERIOD",
+            "value": "1000",
+            "description": "Specify the rate period in milliseconds for the call rate.  Default is 1 second.  This allows you to have n calls every m milliseconds (by using -r n -rp m). Example: -r 7 -rp 2000 ==> 7 calls every 2 seconds."
+          },
+          {
+            "confKey": "SIPP_RATE_MAX",
+            "value": "10",
+            "description": "If -rate_increase is set, then quit after the rate reaches this value. Example: -rate_increase 10 -max_rate 100 ==> increase calls by 10 until 100 cps is hit."
+          },
+          {
+            "confKey": "SIPP_RATE_INCREASE",
+            "value": "0",
+            "description": "Specify the rate increase every -fd seconds.  This allows you to increase the load for each independent logging period. Example: -rate_increase 10 -fd 10 ==> increase calls by 10 every 10 seconds."
+          },
+          {
+            "confKey": "SIPP_RTP_ECHO",
+            "value": "10",
+            "description": "Enable RTP echo. RTP/UDP packets received on port defined by -mp are echoed to their sender. RTP/UDP packets coming on this port + 2 are also echoed to their sender (used for sound and video echo)."
+          },
+          {
+            "confKey": "SIPP_TRANSPORT_MODE",
+            "value": "u1",
+            "description": "Set the transport mode: - u1: UDP with one socket (default), - un: UDP with one socket per call, - ui: UDP with one socket per IP address The IP addresses must be defined in the injection file. - t1: TCP with one socket, - tn: TCP with one socket per call, - l1: TLS with one socket, - ln: TLS with one socket per call, - c1: u1 + compression (only if compression plugin loaded), - cn: un + compression (only if compression plugin loaded)."
+          }
+        ],
+        "name": "sipp-configuration"
+      },
+      "virtual_link":[
+        {
+          "name":"private"
+        }
+      ],
+      "deployment_flavour":[
+        {
+          "flavour_key":"m1.small"
+        }
+      ],
+      "type":"client",
+      "endpoint":"generic",
+      "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
+    },
+    {
+      "name":"sipp-server",
+      "vendor":"FOKUS",
+      "version":"1.0",
+      "lifecycle_event":[
+        {
+          "event":"INSTANTIATE",
+          "lifecycle_events":[
+            "sipp_install.sh"                    ]
+        },
+        {
+          "event":"START",
+          "lifecycle_events":[
+            "sipp_server_start.sh"
+          ]
+        }
+      ],
+      "virtual_link":[
+        {
+          "name":"private"
+        }
+      ],
+      "vdu":[
+        {
+          "vm_image":[
+            "ubuntu-14.04-x86_64"
+          ],
+          "scale_in_out":2,
+          "vnfc":[
+            {
+              "connection_point":[
+                {
+                  "floatingIp":"random",
+                  "virtual_link_reference":"private"
+                }
+              ]
+            }
+          ],
+          "high_availability":{
+            "resiliencyLevel":"ACTIVE_STANDBY_STATELESS",
+            "redundancyScheme":"1:N"
+          },
+          "monitoring_parameter":[
+            "agent.ping"
+          ],
+          "fault_management_policy":[
+            {
+              "name":"Sipp Server not available",
+              "criteria":[
+                {
+                  "parameter_ref":"agent.ping",
+                  "function":"nodata(1m)",
+                  "vnfc_selector":"at_least_one",
+                  "comparison_operator":"=",
+                  "threshold":"1"
+                }
+              ],
+              "severity":"CRITICAL",
+              "period":60
+            }
+          ],
+          "vimInstanceName":[]
+        }
+      ],
+      "deployment_flavour":[
+        {
+          "flavour_key":"m1.small"
+        }
+      ],
+      "type":"server",
+      "endpoint":"generic",
+      "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
+    }
+  ],
+  "vnf_dependency":[
+    {
+      "source":{
+        "name":"sipp-server"
+      },
+      "target":{
+        "name":"sipp-client"
+      },
+      "parameters":[
+        "private"
+      ]
+    }
+  ]
+}

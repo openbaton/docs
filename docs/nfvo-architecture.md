@@ -6,7 +6,7 @@
 
 ##### API
 
-This module contains the necessary classes exposing APIs as ReST server. The most importat ones are the classes managing VimInstances, NetworkServiceDescriptors and NetworkServiceRecords. For more details please see [the api documentation][api]
+This module contains the necessary classes exposing APIs as ReST server. For more details please see [the api documentation][api]
 
 ##### MAIN
 
@@ -30,7 +30,7 @@ This module contains the interfaces of the core functionalities regarding only t
 
 ##### CORE-IMPL
 
-This module contains the beans implementing the core-int interfaces.
+This module contains the beans implementing the **core-int** interfaces.
 
 ##### VNFM-INT
 
@@ -38,15 +38,15 @@ This module contains the interfaces of the core functionalities regarding only t
 
 ##### VNFM-IMPL
 
-This module contains the beans implementing the vnfm-int interfaces.
+This module contains the beans implementing the **vnfm-int** interfaces.
 
 ##### REPOSITORY
 
-This module contains specific repositories interfacing the database in a generic way.
+This module contains specific repositories interfacing the database in a generic way using Spring CrudRepository.
 
 ##### CATALOGUE
 
-This module contains the complete model of NFVO that is sharde in the openbaton libraries.
+This module contains the complete model of NFVO that is sharde in the openbaton libraries. The model is definend in [ETSI MANO specification][nfv-mano].
 
 ##### VIM-INT
 
@@ -54,7 +54,7 @@ This module contains the interfaces of the core functionalities regarding only t
 
 ##### VIM-IMPL
 
-This module contains the beans implementing the vim-int interfaces.
+This module contains the beans implementing the **vim-int** interfaces.
 
 ##### PLUGIN
 
@@ -71,6 +71,18 @@ This module contains all the exception classes common to every project containin
 ##### MONITORING
 
 This module contains the interface for the monitoring of the openbaton plugins.
+
+##### TOSCA-PARSER
+
+This module contains all the classes of the parser in charge of managing the TOSCA packages
+
+##### SECURITY
+
+This module configures the security mechanisms used in the NFVO
+
+
+
+All the platform modules are based on the [Spring Framework](http://spring.io/) and the comunication between NFVO and other external modules are mostly based on RabbitMQ messaging system.  
 
 <!---
 References

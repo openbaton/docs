@@ -4,12 +4,12 @@
 
 ### NFVO properties overview
 
-After the bootstrap procedure, the NFVO the configuration file is located at: 
+After the bootstrap procedure the NFVO's configuration file is located at: 
 ```bash
 /etc/openbaton/openbaton.properties
 ```
 
-This is a property file that is used to configure the *Spring* environment and the **NFVO**. Since the component is based on the Spring framework some parameters are inherited, for a deeper explanation on all the parameters meaning, please refer to the [Spring documentation](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html). 
+This is a property file that is used to configure the *Spring* environment and the **NFVO**. Since the component is based on the Spring framework some parameters are inherited, for a deeper explanation on all the parameters meaning, please refer to the [Spring documentation][spring-properties]. 
 
  Feel free to modify that file for adding or removing specific functionalities.  For instance, you can decide to change logging levels (TRACE, DEBUG, INFO, WARN, and ERROR) and mechanisms:
 ```properties
@@ -48,18 +48,18 @@ spring.jpa.hibernate.ddl-auto=create-drop
 (Keep in mind that whenever some of the parameters below referred are changed, you will need to restart the NFVO)
 
 1) By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need RabbitMQ to be reachable also from the outside.  
-So when you want to deploy a VNF (EMS) in a VM which runs on a different host in respect to the NFVO, you will need to configure the rabbitmq endpoint (**nfvo.rabbit.brokerIp**) with the real IP of the NFVO host (instead of localhost).
+So when you want to deploy a VNF (EMS) in a VM which runs on a different host than the NFVO, you will need to configure the rabbitmq endpoint (**nfvo.rabbit.brokerIp**) with the real IP of the NFVO host (instead of localhost).
 
-This can be done changing the following properties of the _/etc/openbaton/openbaton.properties_ file:
+This can be done by changing the following properties of the _/etc/openbaton/openbaton.properties_ file:
 ```properties
 nfvo.rabbit.brokerIp = localhost 
 ```
 to:
 ```properties
-nfvo.rabbit.brokerIp = the rabbitmq broker ip
+nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
 ``` 
 
-2) At the end of the installation the NFVO is working with a in-memory database. In order to start using persistency through mysql database, you need to make the properties changes shown below:
+2) Depending on the installation mode you selected, it may be that you have an in-memory database. In order to reconfigure the NFVO to use a persistent database, like MySQL, you need to change the properties as shown below:
 ```properties
 # DB properties
 spring.datasource.username=admin
@@ -83,7 +83,7 @@ Where:
 * _spring.datasource.username_ and _spring.datasource.password_ need to be adapted to the mysql username and password.
 * _spring.jpa.hibernate.ddl-auto_ has to be set to **update** if you want the NFVO not to drop all the tables after being shut down and to make it reuse the same tables after restarting.
 
-For more details please see the [Spring Documentation](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html) regarding the configuration parameters.
+For more details please see the [Spring Documentation][spring-doc] regarding the configuration parameters.
 
 These are other parameters about the configuration of Rabbit MQ:
 ```properties
@@ -133,28 +133,28 @@ spring.rabbitmq.port=5672
 
 ```
 
-The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [vim plugin documentation][vim_plugin_doc]). The NFVO will load them at runtime.  
+The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. The `vim-plugin-installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [VIM driver documentation][vim-driver]). The NFVO will load them at runtime.  
 ```properties
 ########## plugin install ###############
 # directory for the vim driver plugins
 plugin-installation-dir = /usr/local/lib/openbaton/plugins
 ```
 
-This property allows the user to delete the Network Service Records no matter in which status are they. Pleas note that in any case it is possible to remove a Network Service Record in _NULL_ state.
+This property allows the user to delete the Network Service Records no matter in which status they are. Please note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 ```properties
 # nfvo behaviour
 nfvo.delete.all-status = true
 ```
 
-**MONITORING:** Openbaton allows the monitoring of the VNFs via Zabbix. If you want to use this feature, install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
-Once the Zabbix server is correctly configured and running, you need only to add following property. 
-Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to Zabbix server.
+**MONITORING:** Open Baton allows the monitoring of the VMs on top of which the VNFs are executing via an external monitoring system. At the moment Zabbix is the monitoring system supported. If you want to enable it, you need first to install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
+Once the Zabbix server is correctly configured and running, you only need to add following property:
 
 ```properties 
 nfvo.monitoring.ip = the Zabbix server ip
 ```
+Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to the Zabbix server.
 
-These are other parameters about the configuration of the nfvo behaviour:
+These are other parameters for configuring the NFVO's behaviour:
 ```properties
 # Wait for the NSR to be deleted
 nfvo.delete.wait = false 
@@ -194,7 +194,7 @@ nfvo.delete.vnfr.wait = false
 nfvo.delete.vnfr.wait.timeout = 60
 ```
 
-Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html) 
+Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor][spring-doc-thread-pool]. 
 ```properties
 # Thread pool executor configuration
 # for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
@@ -205,9 +205,12 @@ nfvo.vmanager.executor.keepalive = 30
 ```
 
 [spring]:https://spring.io
+[spring-doc]:http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+[spring-properties]: http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+[spring-doc-thread-pool]:http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
 [configuratino]:nfvo-configuration
 [localhost:8080]:http://localhost:8080/
-[vim_plugin_doc]:vim-plugin
+[vim-driver]:vim-driver-create
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
