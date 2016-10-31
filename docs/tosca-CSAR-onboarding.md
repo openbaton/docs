@@ -110,7 +110,6 @@ topology_template:
     VDU2:
       type: tosca.nodes.nfv.VDU
       properties:
-          - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 3
       requirements:
         - virtual_link: CP2
