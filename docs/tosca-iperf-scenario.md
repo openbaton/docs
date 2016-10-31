@@ -3,7 +3,7 @@
 
 #TOSCA Iperf Scenario
 
-The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]. Information about creating a complete TOSCA Template from scratch can be found in this [tutorial][tosca-dummy].
+The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]. Information about creating a complete TOSCA Template from scratch can be found in this [tutorial][ns-template].
 
 This tutorial explains how to deploy a network service that uses iPerf. [iPerf][iperf-website] is a tool for active measurements of the maximum achievable bandwidth between two or more machines.
 This tutorial makes use of:
@@ -127,39 +127,9 @@ relationships_template:
 
 **NOTE**: Save the definition in a file called iperf-floating-ips.yaml.
 
-Using the API you can store the NSD written in TOSCA directly in the NFVO. You will need the dummy-vnfm and test vim instance.
- To do that follow these steps:
+## Onboarding
 
-1) Authentication:
-Run this command:
-```bash
-$curl -v -u openbatonOSClient:secret -X POST http://localhost:8080/oauth/token -H "Accept: application/json" -d "username=admin&password=openbaton&grant_type=password"
-```
-The NFVO will answer with an authetication key and a project id. You will need them to send the NSD in the next step. The response should look like this:
-
-```bash
-{
-  # Authentication Key
-  "value": "e8726a35-61c8-4bcb-873e-3ab6cc989f6f",
-  "expiration": "Aug 30, 2016 9:14:22 PM",
-  "tokenType": "bearer",
-  "refreshToken": {
-    "expiration": "Sep 29, 2016 9:14:22 AM",
-    # Project ID
-    "value": "336ca2e6-8e78-48eb-b8f8-c5de862a21da"
-  },...
-```
-**Note: ** Do not pay attention to the project-id supplied in this response.
-
-2) To send the NSD in the TOSCA format save the example above in a file named testNSDIperf.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
-
-```bash
-$curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @iperf-floating-ips.yaml
-```
-
-The NFVO will answer with json translation of the NSD. 
-To retrieve or to instantiate this NSD please use the Dashboard of OpenBaton in the page under the menu Catalogue > NS Descriptors.
-
+The Iperf Template can be added used in [CSAR][csar] and onboarded using the [Dashboard][dashboard].
 
 <!------------
 References
@@ -192,7 +162,9 @@ References
 [nsd-onboarding]: images/tutorials/tutorial-iperf-NSR/nsd-onboarding.png
 [ems-github]: https://github.com/openbaton/ems/tree/master
 [iperf-website]:https://iperf.fr
-[tosca-dummy]:tosca-dummy-nsr
+[ns-template]:tosca-nsd
+[csar]:tosca-CSAR-onboarding
+[dashboard]:nfvo-how-to-use-gui
 
 <!---
 Script for open external links in a new tab
