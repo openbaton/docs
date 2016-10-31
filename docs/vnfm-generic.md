@@ -1,15 +1,15 @@
 # Generic VNF Manager
 
-The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. It works as intermediate component between the NFVO and the VNFs, particularly the Virtual Machines on top of which the VNF software is installed. In order to complete the lifecycle of a VNF, it interoperates with the Element Management System (EMS) acting as an agent inside the VMs and executing scripts containeed in the vnf package.
-This VNFM may be assigned the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
+The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. It works as intermediate component between the NFVO and the VNFs, particularly the Virtual Machines on top of which the VNF software is installed. In order to complete the lifecycle of a VNF, it interoperates with the Open Baton Element Management System (EMS) which acts as an agent inside the VMs and executing scripts contained in a VNF package or defined via the `scripts-link` inside the VNFD.
+This VNFM may be assigned to the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
 
-The Generic VNFManager handles communication with the NFVO and with EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the AMQP protocol over RabbitMQ.  
+The Generic VNFM handles communication between the NFVO and the EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the AMQP protocol over RabbitMQ.  
 
-The communication between the NFVO and Generic VNFManager:
+The communication between the NFVO and Generic VNFM:
 
 ![NFVO - Generic VNFM communication][nfvo-vnfm-communication]
 
-The communication between the Generic VNFManager and EMS:
+The communication between the Generic VNFM and EMS:
 
 ![Generic VNFM - EMS communication][vnfm-ems-communication]
 
@@ -70,13 +70,19 @@ Here an example (to make it more readable it is shown only the **VNF lifecycle e
         {
             "event":"START",
             "lifecycle_events":[
-                 "server_start.sh"
+                 "start.sh"
+            ]
+        },
+        {
+            "event":"STOP",
+            "lifecycle_events":[
+                 "stop.sh"
             ]
         },
         {
             "event":"TERMINATE",
             "lifecycle_events":[
-                 "server_terminate.sh"
+                 "terminate.sh"
             ]
         }
     ],
@@ -92,6 +98,7 @@ In the following table is described for each **VNF lifecycle event** when the sc
 | INSTANTIATE         |  During the instantiation of the corresponding VNF
 | CONFIGURE           |  After the instantiation. Useful if the VNF depends on other VNFs, because we can get parameters provided by them (e.g. IP). The parameters are available as environment variables (see later).
 | START               |  After the instantiation or configuration (It depends whether the event CONFIGURE specified).
+| STOP                |  During the stop of the corresponding VNF
 | TERMINATE           |  During the termination of the corresponding VNF
 | SCALE_IN            |  When the VNF is target of a scaled in vnfcInstance
 
@@ -104,18 +111,22 @@ The available parameters are defined in the VirtualNetworkFunctionDescriptor fie
     1. Private IP
     2. Floating IP (if requested)
     3. Hostname  
-Please check the example at the end of the page to understand this mechanism.
+
+
+__Please check the example at the end of the page to understand this mechanism.__
 
 In the INSTANTIATE scripts, the parameters defined in these two fields are then available as environment variables into the script exactly as defined (i.e. you can get by $parameter_name).
 
 In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
 These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency→parameters fields (of the NSD), and are then available as $*type_of_vnf_source*_*name_of_parameter* (in the VNF target).
 
-_**NOTE**_: _the scripts in the CONFIGURE lifecycle event need to start with the type of the source VNF followed by \_ and the name of the script (i.e. server_configure.sh)_
+_**NOTE**_: _the scripts in the CONFIGURE lifecycle event need to start with the type of the source VNF followed by \_ (underscore) and the name of the script (i.e. server_configure.sh)_
 
-### VMs termination
+##### VMs termination
 
+The STOP lifecycle event is meant to just stop the VNF service and afterward be able to start it again. The TERMINATE lifecycle event delete the virtual resources from the PoP
 As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
+ 
 
 ## Launch the Generic VNFM
 
@@ -277,7 +288,7 @@ References
 [nfvo-vnfm-communication]: images/generic-vnfm-vnfm-or-communication.png
 [generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg.png
 [ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
-[vnfpackage-tutorial-link]:vnfpackage#tutorial
+[vnfpackage-tutorial-link]:vnf-package#tutorial
 [vnfpackage-doc-link]:vnfpackage
 
 <!---

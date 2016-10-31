@@ -1,21 +1,24 @@
-# NFVO SDK
+# NFVO Northbound SDK
 
 A SDK is available if you want to use the NFVO from a java application.
 
-### Import it
+## Import it
 
 The build.gradle file must contain:
 
 ```gradle
 repositories {
     mavenCentral()
+    /**
+     * Only needed for openbaton snapshots dependencies
+     */
     maven {
-        url "http://get.openbaton.org:8081/nexus/content/groups/public"
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:2.1.2'
+    compile 'org.openbaton:sdk:3.0.0'
 }
 ```
 
@@ -38,6 +41,8 @@ The NFVORequestor is the main and only class you need to use. From this class it
 | nfvoIp 		| the ip of the NFVO      |
 | nfvoPort 		| the port of the orchestrator      |
 | version 		| the API version. Now only "1" is available      |
+
+**Important NOTE**: Please pay attention that the NFVORequestor _is not_ thread safe! To make it so is up to the developer. 
 
 Once you have the NFVORequestor object, you can get the Agents. Available agents are:
 

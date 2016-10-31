@@ -1,6 +1,10 @@
 # Network Service Descriptor
 
-The Network Service Descriptor contains the values that are defined in [ETSI MANO specification][nfv-mano]. The NFVO is able to handle JSON file describing a Network Service Descriptor. An example of the most important fields follows:
+The Network Service Descriptor contains the values that are defined in [ETSI MANO specification][nfv-mano]. The NFVO is able to handle JSON file describing a Network Service Descriptor.
+
+The NFVO can also handle onboarding a Network Service Template inside a CSAR compliant with the [TOSCA Simple Profile for NFV][tosca]. Refer to the [NS Template tutorial][ns-template] and [CSAR Onboarding tutorial][csar-onboard].
+
+ An example of the most important fields follows:
 
 ```
 {  
@@ -58,6 +62,10 @@ A VNF Dependency is composed by:
 
 It is possible to let the Orchestrator to calculate dependencies automatically by providing some parameters in the VNF Descriptor part. Please check the [VNF Descriptor page](vnf-descriptor)
 
+### Network Service Onboarding
+
+After saving the NSD as json you could easily upload it via the [Dashboard][dashboard] or the [Command Line Interface][cli]. 
+
 <!---
 References
 -->
@@ -67,6 +75,11 @@ References
 [vnf-parameters]:vnf-parameters
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 [nsd-iperf]:nsd-json-example.md
+[tosca]:http://docs.oasis-open.org/tosca/tosca-nfv/v1.0/csd03/tosca-nfv-v1.0-csd03.pdf
+[csar-onboard]:tosca-CSAR-onboarding
+[ns-template]:tosca-nsd
+[dashboard]:nfvo-how-to-use-gui
+[cli]:nfvo-how-to-use-cli
 
 <!---
 Script for open external links in a new tab
