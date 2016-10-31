@@ -4,7 +4,7 @@ This external component provides an NFV-compliant AutoScaling Engine (ASE). In t
 
 The `autoscaling-engine` is implemented in java using the [spring.io] framework. It runs as an external component and communicates with the NFVO via Open Baton's SDK.
 
-Additionally, the AutoScaling Engine uses the plugin mechanism to allow whatever Monitoring System you prefer. We use [Zabbix][zabbix] as the monitoring system in the following that must be preinstalled and configured. Additional information about [zabbix-plugin] can be found [here][zabbix-plugin-doc].
+Additionally, the AutoScaling Engine uses the plugin mechanism to allow whatever Monitoring System you prefer. We use [Zabbix][zabbix] as the monitoring system in the following that must be preinstalled and configured. Additional information about [zabbix-plugin] can be found [here][zabbix-plugin].
 
 Before starting this component you have to do the configuration of the AutoScaling Engine that is described in the [next chapter](#manual-configuration-of-the-autoscaling-engine) followed by the guide of [how to start](#starting-the-autoscaling-engine) and [how to use](#how-to-use-the-autoscaling-engine) it.
 
@@ -15,6 +15,8 @@ Before starting this component you have to do the configuration of the AutoScali
 * Preconfgiured and running zabbix plugin either located in the folder `NFVO/plugins` or `autoscaling/plugins` to let it start automatically; or started manually. (if Zabbix is the monitoring system of choice)
 
 # How to install AutoScaling Engine
+If you installed this component already with the general bootstrap of Open Baton, the ASE is already installed, configured and running. In this case you can jump directly to this section [How to use AutoScaling Engine](#how-to-use-autoscaling-engine). If the NSE is not yet installed please continue with this section.
+
 Different options are available for the installation of the AutoScaling Engine. Either you use the fully automated bootstrap where all configurations are done automatically where you can choose between the installation based on the debian package or on the source code which is suggested for development. Apart from the bootstrap you can also use the debian or the source code installation where you need to configure the AutoScaling Engine manually. 
 
 ## Installation via bootstrap

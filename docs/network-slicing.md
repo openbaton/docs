@@ -13,10 +13,12 @@ Before starting this component you have to do the configuration of the NSE that 
 # Technical Requirements
 This section covers the requirements that must be met by the environment in order to satisfy the demands of the NSE:
 
-* Installed and configured Open Baton NFVO/gVNFM (>=2.1.3)
-* Installed and configured Openstack (>=Mitaka)
+* Installed and configured Open Baton NFVO/gVNFM (>=3.0.0)
+* Installed and configured Openstack (>=Mitaka) (for Mitaka check [here][os-neutron-mitaka-conf] or Newton [here][os-neutron-newton-conf]) 
 
 # How to install Network Slicing Engine
+If you installed this component already with the general bootstrap of Open Baton, the NSE is already installed, configured and running. In this case you can jump directly to this section [How to use Network Slicing Engine](#how-to-use-network-slicing-engine). If the NSE is not yet installed please continue with this section.
+
 Different options are available for the installation of the NSE. Either you use the fully automated bootstrap where all configurations are done automatically where you can choose between the installation based on the debian package or on the source code which is suggested for development. Apart from the bootstrap you can also use the debian or the source code installation where you need to configure the NSE manually. 
 
 ## Installation via bootstrap
@@ -153,3 +155,5 @@ The currently only supported driver is neutron, which will use the native QoS ca
 [openbaton]: http://openbaton.org
 [openbaton-doc]: http://openbaton.org/documentation
 [spring.io]:https://spring.io/
+[os-neutron-mitaka-conf]:http://docs.openstack.org/mitaka/networking-guide/config-qos.html
+[os-neutron-newton-conf]:http://docs.openstack.org/newton/networking-guide/config-qos.html

@@ -2,7 +2,7 @@
 -----------------------------------------
 
 This tutorial explains how to deploy a network service that uses SIPp.  
-[SIPp][sipp-website] is a free Open Source test tool / traffic generator for the SIP protocol which follows a client/server approach. In the following you will see how to create the NSD which defines the allocations of virtual resources, the installation and configuration of the the SIPp server and client. Furthermore, you can see how to create dependencies, using the AutoScaling Engine and apply AutoScaling to this SIPp scenario.
+[SIPp][sipp-website] is a free Open Source test tool / traffic generator for the SIP protocol which follows a client/server approach. In the following you will see how to create the NSD which defines the allocations of virtual resources, the installation and configuration of the the SIPp server and client. Furthermore, you can see how to create dependencies.
 
 This tutorial makes use of:
 
@@ -10,8 +10,6 @@ This tutorial makes use of:
 * [Generic VNFM][generic-vnfm]
 * [Generic EMS][ems-github]
 * [OpenStack vim driver][openstack-plugin]
-* [Zabbix plugin][zabbix-plugin]
-* [AutoScaling Engine][autoscaling-engine]
 
 ## Requirements
 
@@ -21,8 +19,6 @@ In order to execute this scenario, you need to have the following components up 
  * Running [OpenStack vim driver][openstack-plugin]
  * Running [Generic VNFM][generic-vnfm]
  * Configured and running OpenStack environment
- * Running [AutoScaling Engine][autosclaing-engine] (if you want to use autoscaling capabilities)
- * Configured and running [Zabbix plugin][zabbix-plugin] (if you want to use autoscaling capabilities)
 
 ## Store the Vim Instance
 
@@ -203,13 +199,6 @@ $./openbaton.sh NetworkServiceRecord-findById a648c1fa-621e-4cc3-9f27-8e950e695d
 
 When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service is deployed correctly. For learning more about the states of a VNF Record please refer to the [VNF Record state documentation][vnfr-states].
 
-# Addtional information about this scenario
-This section provides you with additional information about the AutoScaling Engine, Configuration Parameters and dependencies between VNFs.
-
-## AutoScaling
-
-***TODO*** 
-
 ## Configuration Parameters
 
 Additionally, there are a bundge of parameters which can configure the SIP client to simulate several scenarios such as increasing number of calls, changing the call rates or changing the transport mode. These parameters can be changed inside the NSD directly or provided during the launch of the NSD. Below you can find the configuration parameters as put in the SIPp NSD, in particular in the SIPp client VNFD. Checkout the following overview of all available paramters and the meanings.
@@ -361,8 +350,6 @@ References
 [ems-github]: https://github.com/openbaton/ems/tree/master
 
 [sipp-website]: http://sipp.sourceforge.net/
-[autoscaling-engine]: autoscaling
-[zabbix-plugin]: zabbix-plugin
 
 <!---
 Script for open external links in a new tab
