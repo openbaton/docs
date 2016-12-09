@@ -18,6 +18,7 @@ Eleven tests are run.
 9. error-in-terminate
 10. wrong-lifecycle-event
 11. user-project-test
+12. stress-test
 
 **scenario-dummy-iperf** uses the [Dummy VNFM][vnfm-dummy] to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
 It does not actually deploy a network service. The fake network service is a simple iperf scenario with one server and one client. 
@@ -49,6 +50,8 @@ The test **wrong-lifecycle-event** tries to onboard a NSD to the NFVO which cont
 
 The **user-project-test** checks if the NFVO handles user and project management correctly. It adds and deletes users, projects and a vim instance from different 
 user perspectives. This test can be executed without a VNFManager. 
+
+The **stress-test** checks if the NFVO can handle a large number of NSR deployments from the same or different NSDs at the same time. This test uses the Dummy-VNFM. For this test you should set the property *nfvo.vmanager.executor.maxpoolsize* to a large number (e.g. 200) in the /etc/openbaton/openbaton.properties file.
 
 In most of the tests a vim instance and a network service descriptor are stored on the orchestrator and the network service launched. 
 If that is successful, the network service is stopped and the network service record, network service descriptor and the vim instance are removed. 
