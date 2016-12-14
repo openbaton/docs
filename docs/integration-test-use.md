@@ -67,7 +67,7 @@ In the cases of the **scenario-real-iperf**, **scenario-complex-ncat** and **sce
 ## Installation and configuration
 
 Use git to clone the integration-test project to your machine. 
-In *integration-tests/src/main/resources* is a file named integration-test.properties. 
+In *integration-tests/src/main/resources* is a file named integration-tests.properties. 
 Open it and set the property values according to your needs. 
 
 | Field          				| Value       																|
@@ -81,12 +81,12 @@ Open it and set the property values according to your needs.
 | local-ip					| The ip of the machine on which the integration test is running |
 | clear-after-test                              | If set to *true*, the NFVO will be cleared of all the remaining NSRs, NSD, VNFPackages and Vim-Instances left from previous test |
 | integration-test-scenarios                    | Here you can specify a folder in which you can put integration test scenarios. If *.ini* files exist in this folder, the integration test will use just those files. If there are no files it will use the ones in the projects resource folder |
-| external-properties-file   | If you want to use another file for fetching the properties. It is already preset to */etc/openbaton/integration-test/integration-test.properties*. If it does not exist it will not be used. |
+| external-properties-file   | If you want to use another file for fetching the properties. It is already preset to */etc/openbaton/integration-tests/integration-tests.properties*. If it does not exist it will not be used. |
 
 
 After that you will also need a keypair for OpenStack. Create one and download the private key as a .pem file. 
 Rename it to *integration-test.pem* and provide it with the needed permissions by executing *chmod 400 integration-test.pem*.
-If it does not exist already create the directory */etc/openbaton/integration-test* on your machine and move the pem file into it. 
+If it does not exist already create the directory */etc/openbaton/integration-tests* on your machine and move the pem file into it. 
 The next step is to create a vim file. 
 Here is an example where you just have to change some fields. 
 ```json
