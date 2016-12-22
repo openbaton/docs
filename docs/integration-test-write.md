@@ -33,7 +33,7 @@ name-file = real-vim.json
 The node we just added will create a vim instance. That is defined by the class-name field. 
 The class VimInstanceCreate stores a vim instance from the *real-vim.json* file to the orchestrator. 
 A complete list of classes you can use is provided later in this document. 
-The file *real-vim.json* has to be stored either in **/etc/openbaton/integration-test/vim-instances/real-vim.json** or in **.../integration-tests/src/main/resources/etc/json_file/vim_instances/real-vim.json**. 
+The file *real-vim.json* has to be stored either in **/etc/openbaton/integration-tests/vim-instances/real-vim.json** or in **.../integration-tests/src/main/resources/etc/json_file/vim_instances/real-vim.json**. 
 The file in the first folder has a higher priority than the one in the second one.
 
 We already know that we want to delete this vim from the orchestrator at the end of the test. 
@@ -95,7 +95,7 @@ At the moment there is just one so only one NSD will be stored on the orchestrat
 But if we would provide for example a 2, then this task would be executed twice concurrently. 
 Every task would be independent and every child node which is defined for *nsd-c-1* would be executed for every instance separately. 
 The name-file specifies the .json file that shall be used to create the NSD. 
-It may be stored either in **/etc/openbaton/integration-test/network-service-descriptors/NetworkServiceDescriptor-iperf-real.json** or in **.../integration-tests/src/main/resources/etc/json_file/network_service_descriptors/NetworkServiceDescriptor-iperf-real.json**. 
+It may be stored either in **/etc/openbaton/integration-tests/network-service-descriptors/NetworkServiceDescriptor-iperf-real.json** or in **.../integration-tests/src/main/resources/etc/json_file/network_service_descriptors/NetworkServiceDescriptor-iperf-real.json**. 
 Again the former folder has a higher priority than the latter one. 
 
 In the next step we will deploy the network service record (NSR) from the created NSDs and wait for its instantiation. 
@@ -147,7 +147,7 @@ This waits for the orchestrator to send the action INSTANTIATE_FINISH. If it rec
 Now we will show how to test, if the network service is actually running.
 Therefore you can tell the integration test to ssh the instantiated virtual machines and execute commands.
 Those commands have to be written in scripts which can be placed in two locations.
-Either in **/etc/openbaton/integration-test/scripts/** or in **/integration-tests/src/main/resources/etc/scripts/** in the
+Either in **/etc/openbaton/integration-tests/scripts/** or in **/integration-tests/src/main/resources/etc/scripts/** in the
 project itself. The former directory is checked first for a script name. If it does not exist there the latter location is used. 
 Bash sources the scripts on the remote machines. 
 But where do I specify the Virtual Machines on which the scripts shall be executed? Well, also in the .ini file.
@@ -471,7 +471,7 @@ Tasks that are side by side can run concurrently.
 ## Other important information
 
 For the integration test to be able to ssh to the virtual machines on openstack, you have to provide a .pem file of a key-pair you are using on openstack.
-Download this file, name it *integration-test.pem* and put it into the directory **/etc/openbaton/integration-test/**.
+Download this file, name it *integration-test.pem* and put it into the directory **/etc/openbaton/integration-tests/**.
 Furthermore it has to have the correct permissions so you probably have to execute *chmod 400 integration-test.pem*.
 And don't forget to make the scripts executable.
 Do NOT use '-' in types of VNFDs or configuration names as you cannot use them in bash scripts it will not work for the integration test scripts. 
@@ -504,11 +504,11 @@ As mentioned earlier here is a summary of all the class-names available at the m
 | PackageDelete                                 | Delete a VNFPackage | package-name | The name of the package that will be deleted |
 | PackageUpload					| Upload a VNFPackage | package-upload | The name of the package that will be uploaded |
 | Pause					        | Used to elapse time until the next task will start | duration | The time (in seconds) that this task shall do nothing and after which it will finish |
-|ProjectCreate|Used to create a new Project|as-user-name|If specified the integration tests will use this user to create the Project. If not the default user specified in the integration-test.properties will be used.|
+|ProjectCreate|Used to create a new Project|as-user-name|If specified the integration tests will use this user to create the Project. If not the default user specified in the integration-tests.properties will be used.|
 |||as-user-password|The password of the User that shall create the new Project. Just needed if *as-user-name* is specified.|
 |||expected-to-fail|Set this to true if you expect the Project creation to fail.|
 |||project-name|The name of the new Project.|
-|ProjectDelete|Used to delete a project|as-user-name|If specified the integration tests will use this user to delete the Project. If not the default user specified in the integration-test.properties will be used.|
+|ProjectDelete|Used to delete a project|as-user-name|If specified the integration tests will use this user to delete the Project. If not the default user specified in the integration-tests.properties will be used.|
 |||as-user-password|The password of the User that shall delete the new Project. Just needed if *as-user-name* is specified.|
 |||expected-to-fail|Set this to true if you expect deleting the Project to fail.|
 |||project-name|The name of the project to delete.|
@@ -518,7 +518,7 @@ As mentioned earlier here is a summary of all the class-names available at the m
 |||vnf-type| The type of the VNFR on which the scale out shall be performed |
 | ScalingTester					| Verifies if the number of VNFCInstances is equal to a given number and passes an updated NSR to the next task, which can be important after a scaling operation | vnfc-count | The expected number of instances of this VNF |
 |||vnf-type| The type of the VNFR whose number of VNFCs should be checked |
-|UserCreate|Used to create a new User|as-user-name|If specified the integration tests will use this user to create the User. If not the default user specified in the integration-test.properties will be used.|
+|UserCreate|Used to create a new User|as-user-name|If specified the integration tests will use this user to create the User. If not the default user specified in the integration-tests.properties will be used.|
 |||as-user-password|The password of the User that shall create the new User. Just needed if *as-user-name* is specified.|
 |||enabled|Set to true if the new User should be enabled. |
 |||expected-to-fail|Set this to true if you expect the User creation to fail.|
@@ -527,11 +527,11 @@ As mentioned earlier here is a summary of all the class-names available at the m
 |||new-user-name|The name of the User to create.|
 |||new-user-password|The password of the User to create.|
 |||user-projects|A comma separated list of project names. In each listed project the new User will obtain a USER role.|
-|UserDelete|Used to delete a User|as-user-name|If specified the integration tests will use this user to delete the User. If not the default user specified in the integration-test.properties will be used.|
+|UserDelete|Used to delete a User|as-user-name|If specified the integration tests will use this user to delete the User. If not the default user specified in the integration-tests.properties will be used.|
 |||as-user-password|The password of the User that shall delete the User. Just needed if *as-user-name* is specified.|
 |||expected-to-fail|Set this to true if you expect the User deletion to fail.|
 |||user-to-delete|The name of the User that shall be deleted.|
-|UserUpdate|Used to update a User|as-user-name|If specified the integration tests will use this user to update the User. If not the default user specified in the integration-test.properties will be used.|
+|UserUpdate|Used to update a User|as-user-name|If specified the integration tests will use this user to update the User. If not the default user specified in the integration-tests.properties will be used.|
 |||as-user-password|The password of the User that shall create the new User. Just needed if *as-user-name* is specified.|
 |||enabled|Set to true if the updated User should be enabled. |
 |||expected-to-fail|Set this to true if you expect updating the User to fail.|
@@ -542,14 +542,14 @@ As mentioned earlier here is a summary of all the class-names available at the m
 |||user-password-new|The new password of the User.|
 |||user-projects|A comma separated list of project names. In each listed project the updated User will obtain a USER role.|
 | VimInstanceCreate  				| Store a vim instance on the NFVO from a json file | name-file | The name of the json file that contains the VimInstance |
-|||as-user-name|If specified the integration tests will use this user to create the Vim Instance. If not the default user specified in the integration-test.properties will be used. |
+|||as-user-name|If specified the integration tests will use this user to create the Vim Instance. If not the default user specified in the integration-tests.properties will be used. |
 |||as-user-password|The password of the user that shall create the Vim Instance. Just needed if *as-user-name* is specified.|
 |||expected-to-fail|Set this to true if you expect the Vim Instance creation to fail|
-|||in-project|The name of the project to which the Vim Instance shall be uploaded. Just usable if you also specify a user to upload with *as-user-name* and *as-user-password*. If not specified the default project specified in the integration-test.properties will be used.|
-| VimInstanceDelete				| Delete a vim instance |as-user-name|If specified the integration tests will use this user to delete the Vim Instance. If not the default user specified in the integration-test.properties will be used.|
+|||in-project|The name of the project to which the Vim Instance shall be uploaded. Just usable if you also specify a user to upload with *as-user-name* and *as-user-password*. If not specified the default project specified in the integration-tests.properties will be used.|
+| VimInstanceDelete				| Delete a vim instance |as-user-name|If specified the integration tests will use this user to delete the Vim Instance. If not the default user specified in the integration-tests.properties will be used.|
 |||as-user-password|The password of the user that shall delete the Vim Instance. Just needed if *as-user-name* is specified.|
 |||expected-to-fail|Set this to true if you expect a failure while trying to delete the Vim Instance.|
-|||in-project|The name of the project to which the Vim Instance shall be uploaded. Just usable if you also specify a user to upload with *as-user-name* and *as-user-password*. If not specified the default project specified in the integration-test.properties will be used.|
+|||in-project|The name of the project to which the Vim Instance shall be uploaded. Just usable if you also specify a user to upload with *as-user-name* and *as-user-password*. If not specified the default project specified in the integration-tests.properties will be used.|
 | VirtualNetworkFunctionDescriptorDelete        | Delete the VNFDs of a NSD passed from the preceding task, filtered by vnfd name and/or type; if no name and type are passed, all the VNFDs associated to the passed NSD will be deleted | vnf-type | The type of the VNFDs that shall be deleted; this field can be omitted if the type is not important for the choice of VNFDs to delete |
 ||| vnf-name | The name of the VNFDs that shall be deleted; this field can be omitted if the name is not important for the choice of VNFDs to delete |
 | VirtualNetworkFunctionRecordWait		| Wait for an event sent by the NFVO which is related to a VNFR | action | The event which will be waited for to happen |
@@ -602,7 +602,7 @@ class-name = NetworkServiceDescriptorDelete
 ```
 
 This example begins by storing a vim instance. Then the package iperf-server-package.tar is stored by specifying the package file name in the package-name attribute. 
-The packages have to be in the directory /etc/openbaton/integration-test/vnf-packages/. 
+The packages have to be in the directory /etc/openbaton/integration-tests/vnf-packages/. 
 Afterwards a NSD is created from the VNFDs in the package and right after that deleted (to keep this example short we did not create a NSR from the NSD and so on). Be aware that you 
 have to use the class NetworkServiceDescriptorCreateFromPackage to store a NSD from a package. 
 Then also the package will be deleted. You have to provide the name of the package you want to delete (not the file name this time but the name of the package defined in the Metadata.yaml). 

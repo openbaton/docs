@@ -347,7 +347,7 @@ Where the parameters mean:
 | description                   | Just a useless description |
 | endpoint-type                 | type of the endpoint, either RABBIT or REST, depending on the sdk chosen. Check out next section |
 | enabled                       | true if you want your vnfm to be enabled |
-| allocate 						| true if the NFVO will ALLOCATE_RESOURCES, false if the VNFManager will do      	|
+| allocate 						| true if the VNFM will ALLOCATE_RESOURCES, false if the NFVO will do      	|
 | concurrency	 				| The number of concurrent Receiver (only for vnfm-sdk-amqp)|
 
 ## Choose a vnfm-sdk

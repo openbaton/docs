@@ -18,6 +18,7 @@ Eleven tests are run.
 9. error-in-terminate
 10. wrong-lifecycle-event
 11. user-project-test
+12. stress-test
 
 **scenario-dummy-iperf** uses the [Dummy VNFM][vnfm-dummy] to simulate a VNFM and therefore tests the communication between NFVO and VNFM. 
 It does not actually deploy a network service. The fake network service is a simple iperf scenario with one server and one client. 
@@ -50,6 +51,8 @@ The test **wrong-lifecycle-event** tries to onboard a NSD to the NFVO which cont
 The **user-project-test** checks if the NFVO handles user and project management correctly. It adds and deletes users, projects and a vim instance from different 
 user perspectives. This test can be executed without a VNFManager. 
 
+The **stress-test** checks if the NFVO can handle a large number of NSR deployments from the same or different NSDs at the same time. This test uses the Dummy-VNFM. For this test you should set the property *nfvo.vmanager.executor.maxpoolsize* to a large number (e.g. 200) in the /etc/openbaton/openbaton.properties file.
+
 In most of the tests a vim instance and a network service descriptor are stored on the orchestrator and the network service launched. 
 If that is successful, the network service is stopped and the network service record, network service descriptor and the vim instance are removed. 
 In the cases of the **scenario-real-iperf**, **scenario-complex-ncat** and **scenario-scaling** test also the service itself is tested, i.e. if iperf is running and the clients can connect to the server. Therefore the integration tests will execute some scripts for testing on the virtual machines. 
@@ -64,7 +67,7 @@ In the cases of the **scenario-real-iperf**, **scenario-complex-ncat** and **sce
 ## Installation and configuration
 
 Use git to clone the integration-test project to your machine. 
-In *integration-tests/src/main/resources* is a file named integration-test.properties. 
+In *integration-tests/src/main/resources* is a file named integration-tests.properties. 
 Open it and set the property values according to your needs. 
 
 | Field          				| Value       																|
@@ -78,12 +81,12 @@ Open it and set the property values according to your needs.
 | local-ip					| The ip of the machine on which the integration test is running |
 | clear-after-test                              | If set to *true*, the NFVO will be cleared of all the remaining NSRs, NSD, VNFPackages and Vim-Instances left from previous test |
 | integration-test-scenarios                    | Here you can specify a folder in which you can put integration test scenarios. If *.ini* files exist in this folder, the integration test will use just those files. If there are no files it will use the ones in the projects resource folder |
-| external-properties-file   | If you want to use another file for fetching the properties. It is already preset to */etc/openbaton/integration-test/integration-test.properties*. If it does not exist it will not be used. |
+| external-properties-file   | If you want to use another file for fetching the properties. It is already preset to */etc/openbaton/integration-tests/integration-tests.properties*. If it does not exist it will not be used. |
 
 
 After that you will also need a keypair for OpenStack. Create one and download the private key as a .pem file. 
 Rename it to *integration-test.pem* and provide it with the needed permissions by executing *chmod 400 integration-test.pem*.
-If it does not exist already create the directory */etc/openbaton/integration-test* on your machine and move the pem file into it. 
+If it does not exist already create the directory */etc/openbaton/integration-tests* on your machine and move the pem file into it. 
 The next step is to create a vim file. 
 Here is an example where you just have to change some fields. 
 ```json
