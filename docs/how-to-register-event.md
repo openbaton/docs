@@ -158,7 +158,8 @@ public class RestApi {
   private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
   @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void receiveEvent(JsonObject event){
+  public void receiveEvent(@RequestBody String msg){
+    JsonObject event = new JsonParser().parse(msg).getAsJsonObject();
     System.out.println("Received event from NFVO:\n" + event);
     String action = event.get("action").getAsString();
     System.out.println("The action is: " + action);
