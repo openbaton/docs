@@ -140,6 +140,8 @@ For stopping you can use:
 # How to use Network Slicing Engine
 The currently only supported driver is neutron, which will use the native QoS capabilities of Openstack Mitaka. To use it simply set ```nse.driver=neutron``` in the configuration file. To set QoS policies in your NSD specify the following QoS parameter in the virtual_link of your vnfd configuration. 
 
+In JSON:
+
 ```
   "virtual_link":[
     {
@@ -150,6 +152,18 @@ The currently only supported driver is neutron, which will use the native QoS ca
     }
   ]
 ```
+In YAML:
+
+```yaml
+mgmt:
+  type: tosca.nodes.nfv.VL
+  properties:
+    vendor: Fokus
+    qos:
+      - minimum_bandwith:BRONZE
+
+```
+
 
 [nse-repo]: https://github.com/openbaton/network-slicing
 [openbaton]: http://openbaton.org
