@@ -13,8 +13,6 @@ This is a property file that is used to configure the *Spring* environment and t
 
 ### Modify NFVO General properties 
 
-#### NFVO RabbitMQ IP
-
 **IMPORTANT NOTES:**
 
 (Keep in mind that whenever some of the parameters below referred are changed, you will need to restart the NFVO)
@@ -31,7 +29,7 @@ to:
 nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
 ``` 
 
-### Modify the NFVO general properties
+#### parameters related with NFVO behaviour runtime
 
 This property allows the user to delete the Network Service Records no matter in which status they are. Please note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 
@@ -48,6 +46,16 @@ nfvo.history.level=1
 nfvo.history.max-entities=250
 ```
 
+#### Initial admin password
+
+The initial admin password is set via the configuration file property: 
+
+```properties
+nfvo.security.admin.password=openbaton
+#nfvo.security.guest.password=guest
+```
+
+Please bare in mind that if the property is modified via APIs/dashboard, the change won't be reflected in this file. 
 
 #### parameters related with the monitoring system
 
@@ -68,7 +76,7 @@ nfvo.marketplace.ip=marketplace.openbaton.org
 nfvo.marketplace.port=8082
 ```
 
-### Modify paramters related with plugins and drivers 
+#### paramters related with plugins and drivers 
 
 The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. 
 
@@ -108,17 +116,6 @@ nfvo.rabbitmq.exclusive=false
 ```
 
 
-#### Initial admin password
-
-The initial admin password is set via the configuration file property: 
-
-```properties
-nfvo.security.admin.password=openbaton
-#nfvo.security.guest.password=guest
-```
-
-Please bare in mind that if the property is modified via APIs/dashboard, the change won't be reflected in this file. 
-
 #### Addition parameters for the NFVO and VNFM tuning
 ```parameters
 # Execute the start event sequentially and in order based on the VNFDependencies. This implies the NSD not to have cycling dependencies
@@ -129,8 +126,6 @@ nfvo.vim.active.check=true
 nfvo.vim.drivers.allowInfiniteQuota=false
 nfvo.vim.delete.check.vnfr=true
 ```
-
-
 
 Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor][spring-doc-thread-pool]. 
 ```properties
