@@ -1,4 +1,4 @@
-#TOSCA Network Service Template
+# TOSCA Network Service Template
 
 This definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 In this documentation we will present how to create a TOSCA Network Service Template compliant with OpenBaton. This template can be added to a CSAR and onboarded on the NFVO.

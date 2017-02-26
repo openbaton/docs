@@ -1,4 +1,4 @@
-## Monitoring
+# Monitoring
 
 Open Baton interfaces with monitoring systems using a plugin mechanism. 
 The plugin mechanism allows Open Baton to easily use multiple monitoring system. The following figure shows how the monitoring plugin communicate with the NFVO.

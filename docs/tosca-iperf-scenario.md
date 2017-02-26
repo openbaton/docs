@@ -1,7 +1,4 @@
-
-
-
-#TOSCA Iperf Scenario
+# TOSCA Iperf Scenario
 
 The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]. Information about creating a complete TOSCA Template from scratch can be found in this [tutorial][ns-template].
 

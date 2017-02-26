@@ -1,5 +1,4 @@
 # Tutorial: SIPp Network Service
------------------------------------------
 
 This tutorial explains how to deploy a network service that uses SIPp.  
 [SIPp][sipp-website] is a free Open Source test tool / traffic generator for the SIP protocol which follows a client/server approach. In the following you will see how to create the NSD which defines the allocations of virtual resources, the installation and configuration of the the SIPp server and client. Furthermore, you can see how to create dependencies.

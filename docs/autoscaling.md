@@ -60,10 +60,10 @@ The latest stable version AutoScaling Engine can be cloned from this [repository
 git clone https://github.com/openbaton/autoscaling.git
 ```
 
-Once this is done, go inside the cloned folder and make use of the provided script to compile the project as done below:
+Once this is done, go inside the cloned folder and make use of the provided script to compile the project and start as done below:
 
 ```bash
-./autoscaling-engine.sh compile
+./autoscaling-engine.sh compile start
 ```
 
 # Manual configuration of the AutoScaling Engine
@@ -71,10 +71,10 @@ Once this is done, go inside the cloned folder and make use of the provided scri
 This chapter describes what needs to be done before starting the AutoScaling Engine. This includes the configuration file and properties, and also how to make use of monitoring plugin.
 
 ## Configuration file
-The configuration file must be copied to `etc/openbaton/autoscaling.properties` by executing the following command from inside the repository folder:
+The configuration file must be copied to `etc/openbaton/openbaton-ase.properties` by executing the following command from inside the repository folder:
 
 ```bash
-cp etc/autoscaling.properties /etc/openbaton/autoscaling.properties
+cp etc/ase.properties /etc/openbaton/autoscaling.properties
 ```
 
 If done, check out the following chapter in order to understand the configuration parameters.

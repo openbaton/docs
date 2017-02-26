@@ -29,6 +29,17 @@ to:
 nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
 ``` 
 
+#### additional rabbitMQ paramters required by the NFVO: 
+
+```parameters
+nfvo.rabbit.management.port=15672
+# Set the queues to be autodeleted after the shut down
+nfvo.rabbitmq.autodelete=true
+nfvo.rabbitmq.durable=true
+nfvo.rabbitmq.exclusive=false
+```
+
+
 #### parameters related with NFVO behaviour runtime
 
 This property allows the user to delete the Network Service Records no matter in which status they are. Please note that in any case it is possible to remove a Network Service Record in _NULL_ state.
@@ -46,7 +57,7 @@ nfvo.history.level=1
 nfvo.history.max-entities=250
 ```
 
-#### Initial admin password
+#### initial admin password
 
 The initial admin password is set via the configuration file property: 
 
@@ -70,13 +81,14 @@ Every time a new Network Service is instantiated, each VNFC (VM) is automaticall
 
 #### parameters related with the marketplace
 
+This parameter allow you to modify the marketplace IP, in case you want to use a different catalogue for providing VNF Packages. 
 ```parameters
 #nfvo.marketplace.privateip=
 nfvo.marketplace.ip=marketplace.openbaton.org
 nfvo.marketplace.port=8082
 ```
 
-#### paramters related with plugins and drivers 
+#### parameters related with plugins and drivers 
 
 The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. 
 
@@ -95,7 +107,7 @@ where the `nfvo.plugin.installation-dir` is the directory where all the jar file
 While the `nfvo.plugin.log.path` defines the location where plugin log files will be available. 
 
 
-#### Parameters related with quota management
+#### parameters related with quota management
 
 Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. 
 
@@ -104,23 +116,13 @@ Modify this parameter in case you want to disable checking quota while deploying
 nfvo.quota.check=true
 ```
 
-#### additional rabbitMQ paramters required by the NFVO: 
+Please consider also the property `nfvo.vim.drivers.allowInfiniteQuota` explained in the next section for the quota maangement during the allocate resources mechanism
 
-```parameters
-nfvo.rabbit.brokerIp=localhost
-nfvo.rabbit.management.port=15672
-# Set the queues to be autodeleted after the shut down
-nfvo.rabbitmq.autodelete=true
-nfvo.rabbitmq.durable=true
-nfvo.rabbitmq.exclusive=false
-```
-
-
-#### Addition parameters for the NFVO and VNFM tuning
+#### addition parameters for the NFVO and VNFM tuning
 ```parameters
 # Execute the start event sequentially and in order based on the VNFDependencies. This implies the NSD not to have cycling dependencies
 nfvo.start.ordered=false
-
+# It can be used for enabling/disabling an active check to the VIM authentication URL 
 nfvo.vim.active.check=true
 # Allow infinite quotas during the GRANT_OPERATION
 nfvo.vim.drivers.allowInfiniteQuota=false
@@ -141,7 +143,7 @@ nfvo.vnfd.cascade.delete=false
 vnfd.vnfp.cascade.delete=true
 ```
 
-####  Enable SSL
+####  enable SSL
 By default SSL is disabled. Comment out those parameters in case you want to enable it. 
 
 ```parameters
@@ -178,7 +180,7 @@ logging.file=/var/log/openbaton.log
 
 ### Modidy DB properties
 
-2) Depending on the installation mode you selected, it may be that you have an in-memory database. In order to reconfigure the NFVO to use a persistent database, like MySQL, you need to change the properties as shown below:
+Depending on the installation mode you selected, it may be that you have an in-memory database. In order to reconfigure the NFVO to use a persistent database, like MySQL, you need to change the properties as shown below:
 
 ```properties
 #########################################

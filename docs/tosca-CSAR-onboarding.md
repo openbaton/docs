@@ -1,4 +1,4 @@
-#TOSCA CSAR on-boarding
+# TOSCA CSAR on-boarding
 This tutorial is more advanced and expects that you already know what TOSCA is and how Virtual Network Function Descriptor or Network Service Descriptor defined in the TOSCA format is structured.
 The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA. It is a compressed file that includes a TOSCA template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
 The CSAR is a zip file with this structure:

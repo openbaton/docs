@@ -1,4 +1,4 @@
-##TOSCA Virtual Network Function Template
+# TOSCA Virtual Network Function Template
 
 The definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]

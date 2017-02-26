@@ -1,5 +1,4 @@
 # Tutorial: Fault Management System
------------------------------------------  
 
 This tutorial explain how to use the Fault Management System in a simple network service. The network service is composed by a SIPp client and a SIPp server. 
 The Fault Management System will create a standby SIPp server in order to protect the active SIPp server from failures.
