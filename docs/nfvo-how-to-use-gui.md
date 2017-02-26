@@ -46,12 +46,14 @@ The NFVO also supports SSL. If SSL is enabled you have to use *https://url-to-nf
 If you are admin you call also use vim-drivers menu to download the drivers from marketplace and install and start them. You also have an access to the information about the drivers that are already installed. 
 
 ## Manage PoPs
-On this page you can see the list of Vim Instances registered
+On this page you can see the list of PoPs registered
 
 ![List of Vim Instances][vimpage]
 
-For registering a new Vim Instance you should click on the button in the top-right corner **Register Vim** of this page and select your json to register a Vim Instance
+For registering a new Point-of-Presence you can click on the button in the top-right corner **Register Vim** of this page. In the new window you have two ways to register a new PoP. First is to fill out the form with all the data needed to register the PoP. You can choose the type of PoP from the drivers that you currently have installed (test, openstack, etc).
+![Register PoP form][registeraNewVimfile]
 
+You can copy json with the data or provide a file.
 ![Register a new Vim Instances][registeraNewVim]
 
 If you want to delete a Vim Instance you can click on the button **Action** and then **Delete** in the menu
@@ -212,6 +214,7 @@ This are the information of the Event selected
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
 [registeraNewVim]:images/vim-instance-register-new-pop.png
+[registeraNewVimfile]:images/vim-instance-register-new-pop-file.png
 [NSDlist]:images/nfvo-how-to-use-gui-NSDlist.png
 [drag_drop]:images/nfvo-how-to-use-gui-drag-drop.png
 [drag_drop1]:images/nfvo-how-to-use-gui-drag-drop1.png
