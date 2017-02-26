@@ -51,10 +51,11 @@ On this page you can see the list of PoPs registered
 ![List of Vim Instances][vimpage]
 
 For registering a new Point-of-Presence you can click on the button in the top-right corner **Register Vim** of this page. In the new window you have two ways to register a new PoP. First is to fill out the form with all the data needed to register the PoP. You can choose the type of PoP from the drivers that you currently have installed (test, openstack, etc).
-![Register PoP form][registeraNewVimfile]
+![Register a new Vim Instances][registeraNewVim]
 
 You can copy json with the data or provide a file.
-![Register a new Vim Instances][registeraNewVim]
+
+![Register PoP form][registeraNewVimfile]
 
 If you want to delete a Vim Instance you can click on the button **Action** and then **Delete** in the menu
 
