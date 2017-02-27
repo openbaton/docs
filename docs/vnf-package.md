@@ -26,9 +26,12 @@ The Metadata.yaml defines essential properties for the VNF. This file is based o
 The example of the Metadata file below shows a basic definition of a VNF Package.
 
 ```yaml
-name: VNF Package_name
+name: VNF_package_name
 scripts-link: scripts_link
 vim_types: list_of_vim_types
+description: description_of_VNF
+provider: provider_of_package
+nfvo_version: target_NFVO_version
 image:
     upload: option
     ids: list_of_ids
@@ -47,7 +50,10 @@ image-config:
 In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
 
 * ***name***: The name defines the name of the VNF Package itself used to store it in the database.
+* ***description***: Human readable description of the VNF.
+* ***provider***: The creator and maintainer of the VNF.
 * ***vim_types***: The list of the vim types that the VNF Package supports.
+* ***nfvo_version***: The version of the NFVO which supports this package. First two digits will be used for the check.
 * ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
     * **Note** Either you can define the scripts-link or put the scripts into the folder scripts/.
         The scripts-link has a higher priority than the scripts located in the folder scripts/.
@@ -152,12 +158,17 @@ Since passing an image is not supported in the current release we will use the i
 Finally, it looks as shown below.
 ```yaml
 name: iperf-server
+description: iPerf server
+provider: FOKUS
 scripts-link: https://script-link-to-git.git
+nfvo_version: 3.2.0
+vim_types:
+ - openstack
 image:
     upload: "check"
     names:
         - iperf_server_image
-    link: "http://releases.ubuntu.com/14.04/ubuntu-14.04.3-server-amd64.iso"
+    link: "http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img"
 image-config:
     name: iperf_server_image
     diskFormat: QCOW2
@@ -207,7 +218,7 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
           ]
         }
       ],
-      "vimInstanceName":["vim-instance"]
+      "vimInstanceName":[]
     }
   ],
   "deployment_flavour":[
@@ -223,7 +234,7 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of image.
-We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
+We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link].
 
 ### VNF Package [iperf-client]
 
@@ -236,12 +247,17 @@ Finally, it looks as shown below.
 
 ```yaml
 name: iperf-client
+description: iPerf client
+provider: FOKUS
+nfvo_version: 3.2.0
+vim_types:
+ - openstack
 scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
 image:
     upload: "check"
     names:
         - iperf_client_image
-    link: "http://releases.ubuntu.com/14.04/ubuntu-14.04.3-server-amd64.iso"
+    link: "http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img"
 image-config:
     name: iperf_client_image
     diskFormat: QCOW2
@@ -293,7 +309,7 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
           ]
         }
       ],
-      "vimInstanceName":["vim-instance"]
+      "vimInstanceName":[]
     }
   ],
   "virtual_link":[
@@ -315,7 +331,7 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
-We have chosen this one [ubuntu-14.04.3-server-amd64.iso][image-link].
+We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link].
 
 ## Onboarding VNF Packages
 
@@ -373,7 +389,7 @@ You could also use the [Dashboard][dashboard-link] or the [Command Line Interfac
 [iperf-link]:https://iperf.fr/
 [dashboard-link]:nfvo-how-to-use-gui
 [vnfd-link]:vnf-descriptor
-[image-link]:http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img
+[image-link]:http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
 [tosca-nfv]:https://docs.oasis-open.org/tosca/tosca-nfv/v1.0/tosca-nfv-v1.0.html
 [csar-onboarding]:tosca-CSAR-onboarding
 [cli]:nfvo-how-to-use-cli
