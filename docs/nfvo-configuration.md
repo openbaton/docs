@@ -100,6 +100,7 @@ nfvo.plugin.install=true
 nfvo.plugin.installation-dir=./plugins
 nfvo.plugin.log.path=./plugin-logs
 nfvo.plugin.wait=true
+# timeout for plugin operations
 nfvo.plugin.timeout=300000
 ```
 
@@ -109,11 +110,13 @@ While the `nfvo.plugin.log.path` defines the location where plugin log files wil
 
 #### parameters related with quota management
 
-Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. 
+Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. In case of any exceptions which come with some certain scenarios, you can also avoid failing on exceptions by changing the `nfvo.quota.check.failOnException` to `false`.
 
 ```properties
 # Avoid doing the GRANT_OPERATION
 nfvo.quota.check=true
+# Avoid failing if unpredictable exceptions are thrown.
+nfvo.quota.check.failOnException = true
 ```
 
 Please consider also the property `nfvo.vim.drivers.allowInfiniteQuota` explained in the next section for the quota maangement during the allocate resources mechanism
