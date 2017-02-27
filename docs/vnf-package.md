@@ -166,6 +166,8 @@ image-config:
     minDisk: 5
     minRam: 2048
     isPublic: false
+vim_types:
+    - openstack
 ```
 
 #### VNFD [iperf-server]
@@ -248,6 +250,8 @@ image-config:
     minDisk: 5
     minRam: 2048
     isPublic: false
+vim_types:
+    - openstack
 ```
 
 #### VNFD [iperf-client]

@@ -22,18 +22,18 @@ The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference be
 ```bash
 TOSCA-Meta-File-Version: 1.0
 CSAR-Version: 1.1
-Created-By: OASIS TOSCA TC
+Created-By: Fokus
 Entry-Definitions: Definitions/testNSDIperf.yaml
-image: ubuntu-14.04-server-cloudimg-amd64-disk1 # optional
 ```
 The **Metadata.yaml** defines essential properties for the VNF or VNFs and every CSAR has to include one. For more information on how to create such a file refer to the [VNF Package tutorial][metadata]. This is a simple example:
 ```yaml
-name: bind9
+name: NSDExample
 image:
     upload: false
     names:
         - ubuntu-14.04-server-cloudimg-amd64-disk1
-
+vim_types:
+    - openstack
 ```
 
 The **Scripts** folder contains all the files required from the lifecycle interfaces of the VNFs.
@@ -46,11 +46,11 @@ In a CSAR the template can define either a Virtual Network Function or a Network
 The [VNF Tosca tutorial][tosca-vnf] and [NS Tosca tutorial][tosca-ns] provide more information on how to construct a template of each kind. 
 
 ```yaml
-tosca_definitions_version: tosca_simple_iperf_scenario
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0
 description: Example of NSD
 
 metadata:
-  ID: NSD-Iperf + Floating Ips
+  ID: NSD-Iperf
   vendor: Fokus
   version: 1.0
 

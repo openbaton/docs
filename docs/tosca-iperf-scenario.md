@@ -24,11 +24,11 @@ More information about the Iperf Scenario [here][iperf-scenario].
 
 
 ```yaml
-tosca_definitions_version: tosca_simple_iperf_scenario
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0
 description: Example of NSD
 
 metadata:
-  ID: NSD-Iperf + Floating Ips
+  ID: NSD-Iperf+FloatingIps
   vendor: Fokus
   version: 1.0
 
@@ -48,9 +48,10 @@ topology_template:
             - flavour_key: m1.small
         requirements:
           - virtualLink: private
-          - vdu: VDU2        interfaces:
+          - vdu: VDU2        
+        interfaces:
           lifecycle: # lifecycle
-            instantiate:
+            INSTANTIATE:
               - install.sh
               - install-srv.sh
 
