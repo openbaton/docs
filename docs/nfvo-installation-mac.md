@@ -48,7 +48,6 @@ brew remove openbaton-nfvo
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
-[zabbix-server-configuration]:zabbix-server-configuration.md
 [homebrew-website]:http://brew.sh
 [rabbitmq-website]:https://www.rabbitmq.com
 [nfvo-configuration]:nfvo-configuration.md

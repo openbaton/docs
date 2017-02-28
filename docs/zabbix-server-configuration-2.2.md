@@ -1,4 +1,4 @@
-# Zabbix server installation and configuration
+# Zabbix server (2.2) installation and configuration
 
 ## On Ubuntu 14.04 
 

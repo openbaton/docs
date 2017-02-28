@@ -21,7 +21,7 @@ Some of the benefits introduced by the usage of such plugin:
 
 The prerequisites are:  
 
-- Zabbix server (2.2 or 3.0) installed and running. See [how to configure Zabbix server 2.2][zabbix-server-configuration].
+- Zabbix server (2.2 or 3.0) installed and running. See [how to configure Zabbix server 2.2][zabbix-server-configuration-2.2] or [Zabbix server 3.0]zabbix-server-configuration-3.0].
 - RabbitMQ server installed and running  
 - Git installed
 - Gradle installed
@@ -401,4 +401,5 @@ it creates an alarm (mapping zabbix notification into standard Alarm) and notify
 [openbaton-website]:http://openbaton.github.io
 [custom-alertscripts]:https://www.zabbix.com/documentation/2.2/manual/config/notifications/media/script
 [action-zabbix]:https://www.zabbix.com/documentation/2.2/manual/config/notifications/action
-[zabbix-server-configuration]:zabbix-server-configuration.md
+[zabbix-server-configuration-2.2]:zabbix-server-configuration-2.2.md
+[zabbix-server-configuration-3.0]:zabbix-server-configuration-3.0.md

@@ -113,7 +113,6 @@ For specific configuration refer to the [configuration]
 [use-openbaton]:use.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [reference-to-mysql]:https://www.mysql.com/
-[zabbix-server-configuration]:zabbix-server-configuration.md
 [bootstrap]:https://github.com/openbaton/bootstrap
 
 <!---

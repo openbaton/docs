@@ -26,7 +26,6 @@ Once you have done with the installation, you can decide either to fine tune you
 [use-openbaton]:use.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [vagrant]: nfvo-installation-vagrant.md
-[zabbix-server-configuration]:zabbix-server-configuration.md
 
 <!---
 Script for open external links in a new tab

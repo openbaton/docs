@@ -203,7 +203,6 @@ For specific configuration refer to the [configuration]
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [reference-to-mysql]:https://www.mysql.com/
-[zabbix-server-configuration]:zabbix-server-configuration.md
 
 <!---
 Script for open external links in a new tab

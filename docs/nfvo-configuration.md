@@ -70,7 +70,8 @@ Please bare in mind that if the property is modified via APIs/dashboard, the cha
 
 #### parameters related with the monitoring system
 
-**MONITORING:** Open Baton allows the monitoring of the VMs on top of which the VNFs are executing via an external monitoring system. At the moment Zabbix is the monitoring system supported. If you want to enable it, you need first to install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration].
+**MONITORING:** Open Baton allows the monitoring of the VMs on top of which the VNFs are executing via an external monitoring system. At the moment Zabbix is the monitoring system supported.
+If you want to enable it, you need first to install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration-3.0].
 Once the Zabbix server is correctly configured and running, you only need to add following property:
 
 ```properties 
@@ -282,4 +283,4 @@ spring.rabbitmq.requested-heartbeat=60
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
-[zabbix-server-configuration]:zabbix-server-configuration.md
+[zabbix-server-configuration-3.0]:zabbix-server-configuration-3.0.md
