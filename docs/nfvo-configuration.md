@@ -1,6 +1,7 @@
 # How to configure the NFVO 
 
 This guide explains you how to configure the NFVO after installation is completed. In general, after using the bootsrap procedure no changes described here are required unless you want to tune up your installation. 
+In addition to this, you may need to modify also the configuration paramenters of the [Generic VNFM][generic-vnfm]
 
 ## NFVO properties overview
 
@@ -11,16 +12,15 @@ After the bootstrap procedure the NFVO's configuration file is located at:
 
 This is a property file that is used to configure the *Spring* environment and the **NFVO**. Since the component is based on the Spring framework some parameters are inherited, for a deeper explanation on all the parameters meaning, please refer to the [Spring documentation][spring-properties]. 
 
+Keep in mind that whenever some of the parameters below referred are changed, you will need to restart the NFVO.
+
 ### Modify NFVO General properties 
 
 **IMPORTANT NOTES:**
 
-(Keep in mind that whenever some of the parameters below referred are changed, you will need to restart the NFVO)
+By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that if you want any of your additional external components to be executed on a different host, you will need RabbitMQ to be reachable also from the outside.  
 
-1) By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that if you want your VNFM to be executed on a different host, you will need RabbitMQ to be reachable also from the outside.  
-So when you want to deploy a VNF (EMS) in a VM which runs on a different host than the NFVO, you will need to configure the rabbitmq endpoint (**nfvo.rabbit.brokerIp**) with the real IP of the NFVO host (instead of localhost).
-
-This can be done by changing the following properties of the _/etc/openbaton/openbaton.properties_ file:
+In general, also the NFVO can be executed on a different host changing the following properties of the _/etc/openbaton/openbaton.properties_ file:
 ```properties
 nfvo.rabbit.brokerIp = localhost 
 ```
@@ -29,7 +29,7 @@ to:
 nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
 ``` 
 
-#### additional rabbitMQ paramters required by the NFVO: 
+#### additional rabbitMQ paramters required by the NFVO 
 
 ```parameters
 nfvo.rabbit.management.port=15672
@@ -276,9 +276,9 @@ spring.rabbitmq.requested-heartbeat=60
 [spring-doc]:http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 [spring-properties]: http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 [spring-doc-thread-pool]:http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
-[configuratino]:nfvo-configuration
 [localhost:8080]:http://localhost:8080/
 [vim-driver]:vim-driver-create
+[generic-vnfm]:vnfm-generic-configuration
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
