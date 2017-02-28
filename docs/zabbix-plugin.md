@@ -17,29 +17,20 @@ Some of the benefits introduced by the usage of such plugin:
 3) The values of the items are cached and updated periodically in order to avoid to contact the zabbix server each time a specific metric is required.  
 4) If your consumer is written in java, we provide a simple class MonitoringPluginCaller which handle the communication via RabbitMQ.  
 
-## Prerequisites
+### Prerequisites
 
 The prerequisites are:  
 
-- Zabbix server installed and running. See [how to configure Zabbix server][zabbix-server-configuration].
+- Zabbix server (2.2 or 3.0) installed and running. See [how to configure Zabbix server 2.2][zabbix-server-configuration].
 - RabbitMQ server installed and running  
-- Git and a Java SDK installed in case you want to install the source code version 
+- Git installed
+- Gradle installed
+
 
 ## Additional Zabbix Server configuration required for receiving notifications
 
-How is the zabbix-plugin receiving notification from the Zabbix Server? 
-
-When using the method createThreshold provided by the plugin,it automatically creates an [action][action-zabbix] executed when the specific condition is met. 
-If the threshold is crossed (the status of the trigger goes from OK to PROBLEM or vice versa) the action is performed. The action gets the information of the threshold and sends them to a custom alertScript.
-The custom alertScript is executed on the zabbix server and its task is to send the information received from the action to the zabbix-plugin. 
-
-The zabbix-plugin waits for notifications at the url: http://zabbix-plugin-ip:defaultPort/defaultContext.
-
-Defatult context and ports are specified in the configuration file as: 
-* **notification-receiver-server-context**.
-* **notification-receiver-server-port**.
-
-The custom alert script in use is the following:  
+If you are going to use Open Baton FM system or you wish to use the createThreshold method, you need this additional configuration.  
+Create a script called "send_notification.sh" with the following content.
 
 ```bash
 #!/bin/bash
@@ -47,11 +38,31 @@ to=$1
 body=$3
 curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "$body" http://$to
 ```
-
-Copy this script in the directory defined in the Zabbix server configuration file as AlertScriptsPath variable.
 The variable 'to' is the endpoint where zabbix-plugin receives the notification (specified in **notification-receiver-server-context** property). 
-After you copied the script in the right directory, the Zabbix server needs to be configured correctly in order to use [custom alertscripts][custom-alertscripts]. 
-This configuration will be done automatically in later releases. 
+Copy the following script in the Zabbix Server machine. In particular, in a special directory defined in the Zabbix Server configuration file (/etc/zabbix/zabbix_server.conf) as AlertScriptsPath variable. If the value of the variable AlertScriptsPath is for example "/usr/lib/zabbix/alertscripts", 
+then copy the send_notification.sh script just created in that folder.  
+Once you are in the directory "/usr/lib/zabbix/alertscripts", add executable permissions to the script running the command:
+```bash
+sudo chmod +x send_notification.sh
+```
+
+*Note*: when you will use the method createThreshold, Zabbix Plugin will configure Zabbix Server automatically in order to use the script "send_notification.sh". 
+What it will try to do is the configuration at this page [custom alertscripts][custom-alertscripts]. 
+If for any reason this auto-configuration won't work, you will see in the Zabbix Plugin logs, then you should execute this configuration manually as explained in the Zabbix documentation.
+
+## Notification mechanism
+
+How does Zabbix plugin receive notifications from the Zabbix Server? 
+
+When using the method createThreshold provided by the plugin, it automatically creates an [action][action-zabbix] executed when the specific condition is met. 
+If the threshold is crossed (the status of the trigger goes from OK to PROBLEM or viceversa) the action is performed. The action gets the informations of the threshold and sends them to a custom alertScript.
+The custom alertscripts is executed on the Zabbix Server and its task is to send the information received from the action to the Zabbix plugin. 
+
+Zabbix plugin waits for notifications at the url: http://zabbix-plugin-ip:defaultPort/defaultContext.
+
+Defatult context and ports are specified in the configuration file as: 
+* **notification-receiver-server-context**.
+* **notification-receiver-server-port**.
 
 ### Installation
 
@@ -60,41 +71,57 @@ Once the prerequisites are met, you can clone the following project from git, co
 ```bash  
 git clone https://github.com/openbaton/zabbix-plugin.git
 cd zabbix-plugin
-./gradlew build
-java -jar build/lib/zabbix-plugin-<version>.jar
+./gradlew build -x test
+java -jar build/lib/openbaton-plugin-monitoring-zabbix-<version>.jar
 ```
 
 ### Configuration
-Create a configuration file called zabbix-plugin.conf in the folder /etc/openbaton/plugins/ and fill it with the configuration parameter explained in the following section.
+
+If the prerequisites are met you should already have the folder "/etc/openbaton". Then copy the configuration file in src/main/resources/plugin.conf.properties to the path /etc/openbaton/ with the name openbaton-plugin-monitoring-zabbix.properties. Once you are inside the zabbix-plugin directory type this command:
+
+```bash  
+cp src/main/resources/plugin.conf.properties /etc/openbaton/openbaton-plugin-monitoring-zabbix.properties
+```
+
+The configuration parameters are explained in the following table.
 
 | Parameter           | Description     | Default
 | ------------------- | --------------  | ----------
-| zabbix-ip                             |  IP of the Zabbix Server      | not null
-| zabbix-port                           |  Port of the Zabbix Server    | can be empty
+| zabbix-plugin-ip                      |  IP of the Zabbix Plugin machine      | localhost
+| zabbix-host                           |  IP of the Zabbix Server      | localhost
+| zabbix-port                           |  Port of the Zabbix Server    | 
 | type                                  |  The type of the plugin       | zabbix-plugin
-| user-zbx                              |  User of the Zabbix Server    | 
-| password-zbx                          |  Password of Zabbix Server    |
-| client-request-frequency              |  Update cache period (Basically each time t, the zabbix plugin ask to every items value for all hosts and fill the local cache)   | 15 (seconds)
+| user-zbx                              |  User of the Zabbix Server    | Admin
+| password-zbx                          |  Password of Zabbix Server    | zabbix
+| zabbix-server-version                 |  Zabbix Server version        | 3.0
+| client-request-frequency              |  Update cache period (Basically each time t, Zabbix Plugin ask to every items value for all hosts and fill the local cache). Set 0 to disable it   | 10 (seconds)
 | history-length                        |  How long is the history. If the client-request-frequency is 10 seconds and history-length 100, we have available the value of the items of the previous 1000 seconds. | 250
 | notification-receiver-server-context  |  Context where the zabbix-plugin receive the notifications by the zabbix server. (see the section 'How to configure Zabbix to get notifications') | /zabbixplugin/notifications 
 | notification-receiver-server-port     |  Port where the zabbix-plugin receive the notifications by the zabbix server. | 8010
-| external-properties-file              |  Full path of the configuration file.  | /etc/openbaton/plugins/zabbix-plugin.conf
+| external-properties-file              |  Full path of the configuration file.  | /etc/openbaton/openbaton-plugin-monitoring-zabbix.properties
 
-The configuration file should look like as shown below:
+The configuration file should look like the one below:
 
 ```bash  
-zabbix-ip = xxx.xxx.xxx.xxx
-zabbix-port = xxxxx
-type = zabbix-plugin
-user-zbx = zabbixUser
-password-zbx = zabbixPassword
-client-request-frequency = 10
-history-length = 250
+## Zabbix Plugin
 
-notification-receiver-server-context = /zabbixplugin/notifications
-notification-receiver-server-port = 8010
+zabbix-plugin-ip=localhost
+# Set client-request-frequency to 0 to disable the caching
+type=zabbix-plugin
+client-request-frequency=10
+history-length=250
+notification-receiver-server-context=/zabbixplugin/notifications
+notification-receiver-server-port=8010
+external-properties-file=/etc/openbaton/openbaton-plugin-monitoring-zabbix.properties
 
-external-properties-file=/etc/openbaton/plugins/zabbix-plugin.conf
+## Zabbix Server info
+
+zabbix-host=localhost
+# zabbix-port=
+user-zbx=Admin
+password-zbx=zabbix
+# Supported Zabbix versions: 2.2 and 3.0
+zabbix-server-version=3.0
 ```
 
 
@@ -103,37 +130,51 @@ external-properties-file=/etc/openbaton/plugins/zabbix-plugin.conf
 In order to use the MonitorPluginCaller you need to import the relative plugin-sdk, coming from [Openbaton][openbaton-website] project.
 To import the plugin-sdk, please add in your gradle file the following dependencies:
 
-```gradle
+```
 repositories {
-     mavenCental()
+       maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+       maven { url 'https://oss.sonatype.org/content/repositories/releases/'  }
 }
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:3.2.0'
+    compile 'org.openbaton:monitoring:3.2.1-SNAPSHOT'
 }
 ```
 
 Then in your main, obtain the MonitoringPluginCaller as follow:
 
 ```java
-MonitoringPluginCaller monitoringPluginCaller=null;
-try {
-    monitoringPluginCaller = new MonitoringPluginCaller("zabbix","15672");
-} catch (TimeoutException e) {
-    e.printStackTrace();
-} catch (NotFoundException e) {
-    e.printStackTrace();
-} catch (IOException e) {
-    e.printStackTrace();
-}
+MonitoringPluginCaller monitoringPluginCaller = null;
+    try {
+      monitoringPluginCaller =
+          new MonitoringPluginCaller(
+              "brokerIp", "username", "password", 5601, "zabbix-plugin", "zabbix", "15672",120000);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (TimeoutException e) {
+      e.printStackTrace();
+    } catch (NotFoundException e) {
+      e.printStackTrace();
+    }
 ```
+
+Make sure to use the correct arguments' values. A description is provided in the following:  
+
+| Argument value      | Description     
+| ------------------- | --------------  
+| brokerIp            |  IP of RabbitMQ (broker)  
+| username            |  Username for RabbitMQ   
+| password            |  Password for RabbitMQ    
+| 5672                |  RabbitMQ default port (change it if needed)        
+| zabbix-plugin       |  Type of the Monitoring Plugin    
+| zabbix              |  Name of the Monitoring Plugin    
+| 15672               |  RabbitMQ default management port        
+| 120000               |  Timeout of the calls on the MonitoringPluginCaller        
 
 ## Functionalities provided by the Zabbix Plugin Interface 
 
-In the following you can find the interfaces and explanations which are implemented by the Zabbix plugin.
-
 ### VirtualisedResourcePerformanceManagement interface
-In the overview below you can find all methods which have to be implemented by this interface.
+
 | Methods             | Description
 | ------------------- | --------------
 | CREATE PM JOB       |  Create one or more items to be monitored in one or more hosts.
@@ -145,24 +186,31 @@ In the overview below you can find all methods which have to be implemented by t
 | DELETE THRESHOLD    |  Delete a threshold.
 | QUERY THRESHOLD     |  Get information about the status of the thresholds
 
-In the following sections you can find descriptions of all methods mentioned above.
+### VirtualisedResourceFaultManagement interface
 
+| Methods             | Description
+| ------------------- | --------------
+| SUBSCRIBE           |  Subscribe for alarm coming from an host
+| NOTIFY              |  Notification method invoked by zabbix plugin, the customer must not invoke directly this method.
+| GET ALARM LIST      |  Get alarms and relative status
+
+### VirtualisedResourcePerformanceManagement interface
 #### Create PM Job
 
 ```java
 String createPMJob(ObjectSelection selector, List<String> performanceMetrics, List<String> performanceMetricGroup, Integer collectionPeriod,Integer reportingPeriod) throws MonitoringException;
 ```
-This method creates one or more items to be monitored in one or more hosts.
+This method create one or more items to be monitored in one or more hosts.
 
-**selector**: Object to select the hosts in which we want to add the items.
+**selector**: object to select the hosts in which we want to add the items.
 
-**performanceMetrics**: List of items. We can create items which are available in the [Zabbix documentation 2.2][zabbix-doc-2.2].
+**performanceMetrics**: List of items. We can create items which are available in the [Zabbix documentation 2.2][zabbix-doc-2.2] or [Zabbix documentation 3.0][zabbix-doc-3.0].
 
-**performanceMetricGroup**: Pre-defined list of metrics. (NOT YET IMPLEMENTED, please pass an empty list of string).
+**performanceMetricGroup**: pre-defined list of metrics. (NOT YET IMPLEMENTED, please pass an empty list of string).
 
 **collectionPeriod**: Update interval of the item/s in seconds.
 
-**reportingPeriod**: Specifies the periodicity at which the VIM will report to the customers about performance information  . (NOT YET IMPLEMENTED, please pass an integer >= 0 ).
+**reportingPeriod**: Specifies the periodicity at which the VIM will report to the customers about performance information. (NOT YET IMPLEMENTED, please pass an integer >= 0 ).
 
 In the following example we create two items ('net.tcp.listen[8080]' and 'agent.ping') for two hosts ('host-1' and 'host-2'). As a return value we get the ID of the PMJob.
 ```java
@@ -204,12 +252,12 @@ List<Item> queryPMJob(List<String> hostnames, List<String> performanceMetrics, S
 ```
 This method get item values from one or more host. As a return value we get the list of items.
 
-**hostnames**: List of hostnames which we want to know items values.
+**hostnames**: list of hostnames which we want to know items values.
 
-**performanceMetrics**: List of items which are available in the [Zabbix documentation 2.2][zabbix-doc-2.2] and in the **hostnames**.
+**performanceMetrics**: List of items. We can get items which are available in: the [Zabbix documentation 2.2][zabbix-doc-2.2], [Zabbix documentation 3.0][zabbix-doc-3.0], and in the **hostnames**.
 
-**period**: Period in seconds for the frequent check. If period is 0 than you get the last available value of the item. If > 0 you get the average of the values inside that period.
-    Remember that the zabbix-plugin read all values of the all hosts every **client-request-frequency** (see the configuration section) and keep them in the history.
+**period**: period in seconds. If period is 0 than you get the last available value of the item. If > 0 you get the average of the values inside that period.
+    Remember than the zabbix-plugin read all value of the all hosts every **client-request-frequency** (see the configuration section) and keep them in the history.
     So if **client-request-frequency** is 15 seconds and the period 30 seconds you get the average of the previous 2 values of the item.
 
 In the following example we ask for the last value of two items ('net.tcp.listen[8080]' and 'agent.ping') for the hosts 'host-1'.
@@ -220,28 +268,28 @@ ArrayList<String> performanceMetrics = getPerformanceMetrics("net.tcp.listen[808
 List<Item> items = monitoringPluginCaller.queryPMJob(hostnames,performanceMetrics,"0");
 ```
 
-**items**: List of items which are coming from Zabbix. An item is a simple object of openbaton-libs which contains properties like: metric, hostname, lastValue, value.
+**items**: list of items. An item is a simple object of openbaton-libs which contains properties like: metric, hostname, lastValue, value.
 
 #### Subscribe & notifyInfo
 
-**NOT YET IMPLEMENTED**
+NOT YET IMPLEMENTED
 
 #### Create Threshold
 
 ```java
 String createThreshold(ObjectSelection selector, String performanceMetric, ThresholdType thresholdType, ThresholdDetails thresholdDetails) throws MonitoringException;
 ```
-This method creates a trigger on a specific item for one or more hosts. As a return value we get the id of the threshold.
+This method create a trigger on a specific item for one or more hosts. As a return value we get the id of the threshold.
 
-**selector**: This is the object to select hosts which will be part of the trigger.
+**selector**: object to select the hosts which will be part of the trigger.
 
-**performanceMetric**: Item to include in the trigger which needs to be already present in the hosts specified in the *selector*.
+**performanceMetric**: item to include in the trigger. The item need to be already present in the hosts specified in the *selector*.
 
-**thresholdType**: Defines the type of threshold. (NOT YET IMPLEMENTED, please pass ThresholdType.SINGLE for the moment).
+**thresholdType**: defines the type of threshold. (NOT YET IMPLEMENTED, please pass ThresholdType.SINGLE for the moment).
 
-**thresholdDetails**: This contains details of the threshold. It contains:
+**thresholdDetails**: details of the threshold. It contains:
 
-- function: refer to [Zabbix trigger function 2.2][zabbix-trigger-function-2.2]  
+- function: refer to [Zabbix trigger function 2.2][zabbix-trigger-function-2.2] or [Zabbix documentation 3.0][zabbix-trigger-function-3.0] 
 - triggerOperator: operator
 - perceiverSeverity: severity of the trigger.
 - value: threshold value to compare with the actual value of the *performanceMetric*.
@@ -256,29 +304,19 @@ String thresholdId = zabbixMonitoringAgent.createThreshold(objectSelector,"net.t
 ```
 The trigger that will be created has this expression: {host-1:net.tcp.listen[5001].last(0)}=0|{host-2:net.tcp.listen[5001].last(0)}=0.
 It means that if host-1 OR host-2 have no more process listening on the port 5001 then create an alarm with severity critical.
-Refer to [Zabbix expression 2.2][zabbix-trigger-expression-2.2] to understand better the expression.
+Refer to [Zabbix expression 2.2][zabbix-trigger-expression-2.2] or [Zabbix expression 3.0][zabbix-trigger-expression-3.0] to understand better the expression.
 
 #### Delete Threshold
 ```java
 List<String> deleteThreshold(List<String> thresholdIds) throws MonitoringException;
 ```
-This method delete an existing threshold or several threshold. We can get the id of the threshold after the creation with createThreshold. As a return value we get the list of the ID of the threshold effectively deleted.
+This method delete an existing threshold/s. We can get the id of the threshold after the creation with createThreshold. As a return value we get the list of the ID of the threshold effectively deleted.
 
 #### Query Threshold
 
 NOT YET IMPLEMENTED
 
 ### VirtualisedResourceFaultManagement interface
-
-This interface implements the methods responsible of the fault management. The following table shows a short overview of the methods available.
-
-| Methods             | Description
-| ------------------- | --------------
-| SUBSCRIBE           |  Subscribe for alarm coming from an host
-| NOTIFY              |  Notification method invoked by zabbix plugin, the customer must not invoke directly this method.
-| GET ALARM LIST      |  Get alarms and relative status
-
-In the next sections all of the methods which needs to be implemented are explained more in detail.
 
 #### Subscribe
 ```java
@@ -288,8 +326,8 @@ Subscribe for alarm generated by thresholds. As a return value we get the id of 
 **filter**: AlarmEndpoint object which contains:
 -  name: name of the alarmEndpoint.
 -  resourceId: hostname which we want to subscribe.
--  type: REST or RABBIT.
--  endpoint: endpoint where we want to be notified. It is and url for REST or a queue name for RabbitMQ. (actually only rest is supported).
+-  type: REST or JMS.
+-  endpoint: endpoint where we want to be notified. It is and url for REST or a queue name for JMS. (actually only rest is supported).
 -  perceivedSeverity: define the severity of the alarm we want to get.
     If we specify PerceivedSeverity.WARNING we will able to get notification from alarm with severity equals or higher than WARNING.
 
@@ -304,7 +342,7 @@ String subscriptionId = monitoringPluginCaller.subscribeForFault(alarmEndpoint);
 ```java
 String unsubscribeForFault(String subscriptionId) throws MonitoringException;
 ```
-This method deletes the subscription with the ID passed as an argument. As a return value we get the id of the subscription effectively deleted.
+This method detele the subscription with the ID passed as a argument. As a return value we get the id of the subscription effectively deleted.
 We can get the id of the subscription after the creation with subscribeForFault.
 
 #### Get alarm list
@@ -339,8 +377,8 @@ According to ETSI specification there are 4 types of notifications.
 
 The interface VirtualisedResourcePerformanceManagement sends two types of notifications:  
 
-1. PerformanceInformationAvailableNotification (NOT YET IMPLEMENTED): This notification informs the receiver that performance information are available.  
-2. thresholdCrossedNotification (NOT YET IMPLEMENTED) : This notification informs the receiver that a threshold value has been crossed.  
+1. PerformanceInformationAvailableNotification (NOT YET IMPLEMENTED) : this notification informs the receiver that performance information is available.     
+2. hresholdCrossedNotification (NOT YET IMPLEMENTED) : his notification informs the receiver that a threshold value has been crossed.  
 
 The interface VirtualisedResourceFaultManagement sends the following notifications:
 
@@ -348,8 +386,8 @@ The interface VirtualisedResourceFaultManagement sends the following notificatio
 2. AlarmStateChangedNotification: This notification informs the receiver of state change of alarm related to the virtualised resources managed by the VIM, e.g. the alarm shall be set to “cleared” if the corresponding fault has been solved.
     It contains the id of the Alarm and the actual status which could be (CLEARED,FIRED,UPDATED).
 
-Actually, the zabbix-plugin receives the notification by the Zabbix server, **if the trigger has severity higher than Information**. 
-It creates an alarm (mapping zabbix notification into standard Alarm) and notifies the subscribers with a AlarmNotification. If the notification is not new, then it sends an AlarmStateChangedNotification.
+Actually the zabbix-plugin when receives the notification by zabbix server, **if the trigger has severity higher than Information**, 
+it creates an alarm (mapping zabbix notification into standard Alarm) and notify the subscribers with a AlarmNotification. If the notification is not new, then it sends an AlarmStateChangedNotification.
 
 
 
