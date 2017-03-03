@@ -60,10 +60,10 @@ The latest stable version AutoScaling Engine can be cloned from this [repository
 git clone https://github.com/openbaton/autoscaling.git
 ```
 
-Once this is done, go inside the cloned folder and make use of the provided script to compile the project as done below:
+Once this is done, go inside the cloned folder and make use of the provided script to compile the project and start as done below:
 
 ```bash
-./autoscaling-engine.sh compile
+./autoscaling-engine.sh compile start
 ```
 
 # Manual configuration of the AutoScaling Engine
@@ -71,10 +71,10 @@ Once this is done, go inside the cloned folder and make use of the provided scri
 This chapter describes what needs to be done before starting the AutoScaling Engine. This includes the configuration file and properties, and also how to make use of monitoring plugin.
 
 ## Configuration file
-The configuration file must be copied to `etc/openbaton/autoscaling.properties` by executing the following command from inside the repository folder:
+The configuration file must be copied to `etc/openbaton/openbaton-ase.properties` by executing the following command from inside the repository folder:
 
 ```bash
-cp etc/autoscaling.properties /etc/openbaton/autoscaling.properties
+cp etc/ase.properties /etc/openbaton/autoscaling.properties
 ```
 
 If done, check out the following chapter in order to understand the configuration parameters.
@@ -182,6 +182,7 @@ An example of an AutoScalePolicy can be found below followed by descriptions for
   }
 ]
 ```
+An example using the **TOSCA YAML descriptors** can be found [here][tosca-as].
 
 This AutoScalePolicy indicates an scaling-out operation of two new VNFC Instances if the averaged value of all measurement results of the metric `cpu load` is greater than the threshold of 0.7 (70%).
 This condition is checked every 30 seconds as defined via the period. Once the scaling-out is finished it starts a cooldown of 60 seconds. For this cooldown time further scaling requests are rejected by the AutoScaling Engine.
@@ -239,3 +240,4 @@ Actions types are the operations that can be executed when defined conditions ar
 [spring.io]:https://spring.io/
 [openbaton]: http://openbaton.org
 [openbaton-doc]: http://openbaton.org/documentation
+[tosca-as]:tosca-asp.md

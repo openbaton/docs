@@ -43,7 +43,8 @@ pages:
 - ['**HIDDEN**': 'tosca-CSAR-onboarding.md']
 - ['**HIDDEN**': 'vnf-descriptor.md']
 - ['**HIDDEN**': 'nfvo-installation-src.md']
-- ['**HIDDEN**': 'zabbix-server-configuration.md']
+- ['**HIDDEN**': 'zabbix-server-configuration-3.0.md']
+- ['**HIDDEN**': 'zabbix-server-configuration-2.2.md']
 - ['**HIDDEN**': 'tosca-iperf-scenario.md']
 - ['**HIDDEN**': 'tosca-dummy-nsr.md']
 - ['**HIDDEN**': 'tosca-ims.md']
@@ -52,8 +53,12 @@ pages:
 - ['**HIDDEN**': 'tosca-CSAR-onboarding.md']
 - ['**HIDDEN**': 'vnfr-states.md']
 - ['**HIDDEN**': 'vnf-parameters.md']
+- ['**HIDDEN**': 'vnfm-generic-configuration.md']
 - ['**HIDDEN**': 'nsd-json-example.md']
 - ['**HIDDEN**': 'integration-test-write.md']
+- ['**HIDDEN**': 'tosca-fm.md']
+- ['**HIDDEN**': 'tosca-asp.md']
+
 google_analytics: ['UA-68429895-1', 'openbaton.github.io']
 theme: readthedocs
 theme_dir: 'custom_theme'

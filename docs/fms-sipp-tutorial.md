@@ -1,5 +1,4 @@
 # Tutorial: Fault Management System
------------------------------------------  
 
 This tutorial explain how to use the Fault Management System in a simple network service. The network service is composed by a SIPp client and a SIPp server. 
 The Fault Management System will create a standby SIPp server in order to protect the active SIPp server from failures.
@@ -10,17 +9,17 @@ In order to execute this scenario, you need to have the following components up 
 
  * [NFVO][nfvo-github]
  * [OpenStack vim driver][openstack-plugin]
- * [Zabbix plugin][zabbix-plugin] + Zabbix Server 2.2v
+ * [Zabbix plugin][zabbix-plugin] + Zabbix Server (2.2 or 3.0 version)
  * [Generic VNFM][generic-vnfm]
  * [Fault Management System][fms]
  * OpenStack
 
 Start the NFVO and Generic VNFM depending on how you [installed][installation] it.  
-If you used the bootstrap script for installing you do not have to care about the OpenStack vim driver as it will be installed already. 
+If you used the bootstrap script for installing you do not have to care about the OpenStack vim driver as it will be installed already, as well as Zabbix Plugin. 
 
 ## Store the Vim Instance
 
-For registering the Point of Presence of type OpenStack to the NFVO you have to upload a Vim Instance. You can use the following [json descriptor][vim] by changing the values to your needs. 
+For registering the Point of Presence of type OpenStack to the NFVO you have to upload a Vim Instance. You can use the following [json descriptor][vim-instance-json] by changing the values to your needs. 
 
 ### Using the dashboard
 
@@ -39,13 +38,12 @@ $./openbaton.sh VimInstance-create vim-instance.json
 
 ## Store the Network Service Descriptor
 
-Download the [sipp-fms-nsd.json][sipp-fms-nsd] file, and upload it in the catalogue either using the dashboard or the CLI.  
+Download the [sipp-fms-nsd.json][sipp-fms-nsd] file, make sure that all the parameters fit with your environment and then upload it in the catalogue either using the dashboard or the CLI.  
+The main parameters you should check before uploading the NSD are: vm_image (make sure you have and Ubuntu image in OpenStack and its name matches the one in this parameter), vimInstanceName (if you only have one vim instance you can leave it empty otherwise you must specify the vim instance name in this parameter or when you will launch the NSD) and flavour_key (make sure you have a flavour in OpenStack matching the one in this parameter).
 
 ### Using the dashboard
 
-If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
-
-![Onboarding-NSD][nsd-onboarding]
+If you want to use the Dashboard go to `Catalogue -> NS Descriptors`, copy the text of NSD "sipp-fms-nsd.json", click `Add NSD -> Upload NSD`, paste the NSD and click `Store NSD`.
 
 ### Using the CLI
 
@@ -87,7 +85,7 @@ Once this request is processed successfully, it returns the following:
 ```
 
 ## Deploy the Network Service Descriptor
-As soon as you onboarded the NSD in the NFVO you can deploy this NSD either by using the dashboard or the CLI.  
+As soon as you uploaded the NSD in the NFVO you can deploy this NSD either by using the dashboard or the CLI.  
 This will create a Network Service Record (NSR) and actually launch the Virtual Machines on OpenStack. The network service is composed by two VNFC instances (virtual machines), however the Fault Management System creates a third virtual machine, which consists in the SIPp server in standby.
 
 ### Using the dashboard
@@ -106,7 +104,7 @@ Regarding the SIPp server VNF you should see the following:
 
 Now you can trigger the switch to standby simulating a failure.  
 Go to Openstack dashboard and terminate the virtual machine which correspond to the ACTIVE SIPp server. As you can expect the SIPp client will loose the connection with the server.  
-However after 1/2 minutes the FMS will execute the switch to standby. After this action, the standby SIPp server is activated and the client will connect to the new one, so that the network service recovers from the failure.
+However after 1/2 minutes the FMS will execute the switch to standby. After this action, the standby SIPp server will be activated and the client will connect to the new one, so that the network service recovers from the failure.
 
 <!---
 References
@@ -124,3 +122,5 @@ References
 [nsd-onboarding]: images/tutorials/tutorial-iperf-NSR/nsd-onboarding.png
 [nsr-deploy]: images/tutorials/tutorial-iperf-NSR/nsr-deploy.png
 [vnfc-active-standby]:images/tutorials/tutorial-sipp-fms/vnfc-active-standby.png
+[vim-instance-json]:descriptors/vim-instance/openstack-vim-instance.json
+[vim-onboarding]: images/tutorials/tutorial-iperf-NSR/vim-onboarding.png

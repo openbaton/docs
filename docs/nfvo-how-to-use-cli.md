@@ -2,21 +2,11 @@
 
 The [Openbaton Client project][openbaton-client-github] provides a command-line interface, which enables you to use the NFVO's API and send commands to it. 
 
-## Install the Openbaton Client
+## Install the Openbaton Client as binaries
 
 On Linux you can install the Open Baton Command Line Iterface while installing Open Baton using the [bootstrap script][linux-install]. It will prompt you with the question if you also want to install the Command Line Interface.  
 If you did not want to install the CLI at this point you can install it later on Linux using *sudo apt-get install openbaton-cli*.  
 If you use MacOS you have to install the CLI from source code. 
-
-### Set the required environment variables
-
-Source */etc/openbaton/cli/nfvo.properties* to set the required environment variables. A dialog appears and will ask you for some properties. 
-
-```sh
-source /etc/openbaton/cli/nfvo.properties
-```
-
-This has to be done every time before you start working with the CLI in a new terminal. 
 
 
 ## Install the Openbaton Client from source code
@@ -29,8 +19,19 @@ cd openbaton-client
 ./gradlew build
 ```
 
-### Set the required environment variables
+## Set the required environment variables
 
+### in case of binaries installation
+
+Source */etc/openbaton/openbaton-cli.properties* to set the required environment variables. A dialog appears and will ask you for some properties. 
+
+```sh
+source /etc/openbaton/openbaton-cli.properties
+```
+
+This has to be done every time before you start working with the CLI in a new terminal. 
+
+### in case of source code insallation
 
 Navigate into the project's root directory and execute *source nfvo.properties*. A dialog appears and will ask you for some properties. 
 
@@ -44,9 +45,9 @@ This has to be done every time before you start working with the CLI in a new te
 
 ## Openbaton Client usage
 
-After you typed in all the required properties you can start using the cli for sending commands to the NFVO.  
-If you installed the Open Baton Client while installing Open Baton with the bootstrap script or with apt-get install you can use the command *openbaton.sh*.  
-If you installed it from source code you have to execute the script *openbaton.sh* in the directory where you cloned the Open Baton Client repository.
+After environment variables have been set, you can start using the cli for sending commands to the NFVO.  
+If you installed the Open Baton Client while installing Open Baton with the bootstrap script or with apt-get install the command *openbaton* should be available.  
+If you installed it from source code you have to execute the script *openbaton.sh* within the directory where you cloned the Open Baton Client repository.
     
 ### Run a command: 
 ```sh

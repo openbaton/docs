@@ -1,4 +1,4 @@
-#TOSCA Dummy Network Service Example
+# TOSCA Dummy Network Service Example
 
 The template follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 Regarding the objects defined from ETSI please see: [ETSI GS NFV-MAN 001][ETSI-MANO]
@@ -21,7 +21,7 @@ The prerequisites are:
 
 
 ```yaml
-tosca_definitions_version: tosca_1.0
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0
 description: NSDummy
 
 metadata:
@@ -33,7 +33,7 @@ topology_template:
 
   node_templates:
 
-    dummy-server: #VNF1
+    dummy-server: 
         type: openbaton.type.VNF
         properties:
           vendor: Fokus
@@ -52,8 +52,8 @@ topology_template:
           - virtualLink: private
           - vdu: VDU2
         interfaces:
-          lifecycle: # lifecycle
-            instantiate:
+          lifecycle: 
+            INSTANTIATE:
               - install.sh
               - install-srv.sh
 
@@ -84,6 +84,10 @@ topology_template:
         scale_in_out: 1
         vim_instance_name:
           - test-vim-instance
+      artifacts:
+        VDU1Image:
+          type: tosca.artifacts.Deployment.Image.VM
+          file: ubuntu-14.04-server-cloudimg-amd64-disk1
 
     VDU2:
       type: tosca.nodes.nfv.VDU
@@ -91,6 +95,10 @@ topology_template:
         scale_in_out: 2
         vim_instance_name:
           - test-vim-instance
+      artifacts:
+        VDU1Image:
+          type: tosca.artifacts.Deployment.Image.VM
+          file: ubuntu-14.04-server-cloudimg-amd64-disk1
 
     CP1:
       type: tosca.nodes.nfv.CP
@@ -148,13 +156,12 @@ The NFVO will answer with an authetication key and a project id. You will need t
 ```
 **Note: ** Do not pay attention to the project-id supplied in this response.
 
-2) To send the NSD in the TOSCA format save the example above in a file named testNSDIperf.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
+2) To send the NSD in the TOSCA format save the example above in a file named dummyns.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
 
 ```bash
-$curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @testNSDIperf.yaml
+$curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @dummyns.yaml
 ```
 
-The NFVO will answer with json translation of the NSD. 
 To retrieve or to instantiate this NSD please use the Dashboard of OpenBaton in the page under the menu Catalogue > NS Descriptors.
 
 

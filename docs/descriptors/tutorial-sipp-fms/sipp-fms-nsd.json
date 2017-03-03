@@ -43,7 +43,8 @@
               "connection_point":[
                 {
                   "floatingIp":"random",
-                  "virtual_link_reference":"private"
+                  "virtual_link_reference":"private",
+                  "interfaceId":0
                 }
               ]
             }
@@ -138,7 +139,8 @@
               "connection_point":[
                 {
                   "floatingIp":"random",
-                  "virtual_link_reference":"private"
+                  "virtual_link_reference":"private",
+                  "interfaceId":0
                 }
               ]
             }

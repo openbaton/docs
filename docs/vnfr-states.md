@@ -1,5 +1,4 @@
 # VNF Record States
--------------------
 
 The states of a VNF Record are reflecting the [ETSI NFV states][etsi-state] and they are shown in the following picture.
 

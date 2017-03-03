@@ -70,7 +70,6 @@ sudo docker rm openbaton
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
-[zabbix-server-configuration]:zabbix-server-configuration.md
 [reference-to-op-repo-on-public-docker-hub]:https://hub.docker.com/r/openbaton/standalone/tags/
 
 <!---

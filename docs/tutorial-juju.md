@@ -1,4 +1,3 @@
-
 # OpenIMS Tutorial with Juju-VNFM and Openstack
 
 This Tutorial will demonstrate how to deploy the OpenIMSCore implementation on Openstack using Open Baton and the Juju-VNFM. 
@@ -7,10 +6,10 @@ This Tutorial will demonstrate how to deploy the OpenIMSCore implementation on O
 
 * NFVO (> 3.0.0) 
 * Juju and Juju VNFM installed and configured following the [installation-guide][vnfm-juju]  
-* An Openstack instance configured and available as PoP
+* An OpenStack instance configured and available as PoP
 * [OpenIMSCore packages][openimscore-github]
 
-## Configure Juju to work with Openstack
+## Configure Juju to work with OpenStack
 
 Create a document called *mystack.yaml*. 
 Here you will provide the necessary information for Juju to connect to Openstack. 
@@ -43,14 +42,14 @@ The next step is to set credentials for the mystack cloud configuration. Execute
 juju add-credential mystack
 ```
 
-## Configure Openstack to work with Juju
+## Configure OpenStack to work with Juju
 
-Then we also have to configure Openstack to provide an image usable by Juju. 
+Then we also have to configure OpenStack to provide an image usable by Juju. 
 For this please refer to [this][juju-private-cloud] guide. 
 
 ## Bootstrap the environment
 
-Finally we can bootstrap the openstack environment using this command:
+Finally we can bootstrap the OpenStack environment using this command:
 
 ``` bash
 juju bootstrap obcontroller mystack --config image-metadata-url=$METADATA_URL --config network=$NETWORK_ID --config use-floating-ip=true --config use-default-secgroup=true --bootstrap-series=$SERIES
@@ -103,7 +102,7 @@ tar -cf icscf.tar *
 Start the NFVO and the Juju-VNFM and upload a VimInstance named *vim-instance* with type *test* to the NFVO. 
 Then upload the VNFPackages to the NFVO using the Gui or Cli. 
 This will also create VNFDs in the NFVO. Download this [NSD][openims-nsd] and replace the VNFD ids with the ones of the stored VNFDs. 
-Upload the NSD to the NFVO and launch it. This will create an NSR and deploy the OpenIMSCore on Openstack. 
+Upload the NSD to the NFVO and launch it. This will create an NSR and deploy the OpenIMSCore on OpenStack. 
 Since the correct reporting of the deployment's status from the Juju-VNFM to the NFVO is still a future task 
 you should not rely on the NSR status shown by the Gui, but check using the *juju status* command. 
 

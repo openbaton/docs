@@ -1,4 +1,4 @@
-#TOSCA Network Service Template
+# TOSCA Network Service Template
 
 This definition follows the TOSCA Simple Profile for Network Functions Virtualization (NFV) [Version 1.0][tosca-nfv]
 In this documentation we will present how to create a TOSCA Network Service Template compliant with OpenBaton. This template can be added to a CSAR and onboarded on the NFVO.
@@ -56,7 +56,7 @@ The Node Templates are the description of the objects which constitute the Netwo
 This is an example of VNF Template defined inside the NSD Template. The parameters available and needed to create a Virtual Network Function Descriptor are defined and explained below: 
 
 ```yaml
-dummy-server: #VNF1
+dummy-server:
         type: openbaton.type.VNF
         properties:
           vendor: Fokus
@@ -247,7 +247,7 @@ configurations:
 
 
 ```yaml
-tosca_definitions_version: tosca_simple_dummy_nsd
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0
 description: Example of NSD
 
 metadata:
@@ -259,7 +259,7 @@ topology_template:
 
   node_templates:
 
-    dummy-server: #VNF1
+    dummy-server:
         type: openbaton.type.VNF
         properties:
           vendor: Fokus
@@ -279,8 +279,8 @@ topology_template:
           - virtualLink: private
           - vdu: VDU2
         interfaces:
-          lifecycle: # lifecycle
-            instantiate:
+          lifecycle:
+            INSTANTIATE:
               - install.sh
               - install-srv.sh
 
@@ -319,8 +319,6 @@ topology_template:
     VDU2:
       type: tosca.nodes.nfv.VDU
       properties:
-        vm_image:
-          - ubuntu-14.04-server-cloudimg-amd64-disk1
         scale_in_out: 2
         vim_instance_name:
           - test-vim-instance

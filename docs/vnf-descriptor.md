@@ -30,7 +30,8 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
                     "connection_point":[  
                         {  
                             "floatingIp":"random",
-                            "virtual_link_reference":"private"
+                            "virtual_link_reference":"private",
+                            "interfaceId":0
                         }
                     ]
                 }
@@ -92,7 +93,7 @@ VNFCs contain the following fields:
 
 | Params                        | Meaning                                                                       |
 | -------------                 | -------------:                                                                |
-|connection_point               | each connection point is a reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano]). Moreover you can specify a floatingIp to be assigned to this connection point. The possible values are the actual floatingip ip or "random" if no preference is specified. If omitted no floatingip will be assigned.    	        |
+|connection_point               | each connection point is a reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano]). Moreover you can specify a floatingIp to be assigned to this connection point in the form "192.168.0.123". Please be aware of the fact that the NFVO will try to allocate this IP from the external network associated to the tenant. Therefore it is important to have an already configured external network before making use of floating IPs. The possible values are the actual floatingip ip or "random" if no preference is specified. If omitted no floatingip will be assigned. Optionally, the ethernet interface to be attached to a specific network can be chosen through the `interfaceId`. The interfaceId have to be a numeric value and is used while sorting the list of networks.  	        |
 
 ### Configurations
 

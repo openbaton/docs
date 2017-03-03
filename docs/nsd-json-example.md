@@ -28,7 +28,8 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                   {
                      "connection_point":[
                         {
-                           "virtual_link_reference":"private"
+                           "virtual_link_reference":"private",
+                           "interfaceId":0
                         }
                      ]
                   }
@@ -81,7 +82,8 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                      "connection_point":[
                         {
                            "floatingIp":"random",
-                           "virtual_link_reference":"private"
+                           "virtual_link_reference":"private",
+                           "interfaceId":0
                         }
                      ]
                   },
@@ -89,7 +91,8 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                      "connection_point":[
                         {
                            "floatingIp":"random",
-                           "virtual_link_reference":"private"
+                           "virtual_link_reference":"private",
+                           "interfaceId":0
                         }
                      ]
                   }

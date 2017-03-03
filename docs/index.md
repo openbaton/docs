@@ -1,4 +1,4 @@
-## Open Baton
+# Open Baton
 Open Baton is an open source project providing a comprehensive implementation of the ETSI Management and Orchestration (MANO) specification. 
 
 ## Its main components

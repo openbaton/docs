@@ -19,7 +19,7 @@ The index page shows an overview of the state of the NFVO
  3. Number of Network Service Descriptors
  4. Number of SSH Keys
  
- It also shows the summary of the available resources, like floating ips, instances, RAM and CPU cores. The data is collected from the available PoPs if possible and then the summary is displayed. Test POPs do not grant any resources. You can now also see the NFVO version on the header panel.
+ It also shows the summary of the available resources, like floating ips, instances, RAM and CPU cores. The data is collected from the available PoPs if possible and then the summary is displayed. Test POPs do not grant any resources. The quota informatrion is backed up in cache to avoid unnecessary traffic. You can refresh the data by going into upper right corner drop down menu and choosing refresh quota option. You can now also see the NFVO version on the header panel. 
 
 ![Overview][overview]
 
@@ -46,13 +46,16 @@ The NFVO also supports SSL. If SSL is enabled you have to use *https://url-to-nf
 If you are admin you call also use vim-drivers menu to download the drivers from marketplace and install and start them. You also have an access to the information about the drivers that are already installed. 
 
 ## Manage PoPs
-On this page you can see the list of Vim Instances registered
+On this page you can see the list of PoPs registered
 
 ![List of Vim Instances][vimpage]
 
-For registering a new Vim Instance you should click on the button in the top-right corner **Register Vim** of this page and select your json to register a Vim Instance
-
+For registering a new Point-of-Presence you can click on the button in the top-right corner **Register Vim** of this page. In the new window you have two ways to register a new PoP. First is to fill out the form with all the data needed to register the PoP. You can choose the type of PoP from the drivers that you currently have installed (test, openstack, etc).
 ![Register a new Vim Instances][registeraNewVim]
+
+You can copy json with the data or provide a file.
+
+![Register PoP form][registeraNewVimfile]
 
 If you want to delete a Vim Instance you can click on the button **Action** and then **Delete** in the menu
 
@@ -212,6 +215,7 @@ This are the information of the Event selected
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
 [registeraNewVim]:images/vim-instance-register-new-pop.png
+[registeraNewVimfile]:images/vim-instance-register-new-pop-file.png
 [NSDlist]:images/nfvo-how-to-use-gui-NSDlist.png
 [drag_drop]:images/nfvo-how-to-use-gui-drag-drop.png
 [drag_drop1]:images/nfvo-how-to-use-gui-drag-drop1.png
