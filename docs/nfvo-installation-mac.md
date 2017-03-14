@@ -18,7 +18,7 @@ rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 
 In order to install the NFVO you need to execute the following instructions: 
 ```bash
-brew install https://raw.githubusercontent.com/openbaton/NFVO/master/gradle/gradle/scripts/osx/openbaton-nfvo.rb
+brew install http://get.openbaton.org/homebrew/openbaton-nfvo.rb
 ```
 
 ### Start the NFVO 
@@ -48,7 +48,7 @@ brew remove openbaton-nfvo
 
 In order to install the Generic VNFM you need to execute the following instructions: 
 ```bash
-brew install https://raw.githubusercontent.com/openbaton/generic-vnfm/master/gradle/gradle/scripts/osx/openbaton-vnfm-generic.rb
+brew install http://get.openbaton.org/homebrew/openbaton-vnfm-generic.rb
 ```
 
 ### Start the Generic VNFM
@@ -77,7 +77,7 @@ brew remove openbaton-vnfm-generic
 
 In order to install the Open Baton CLI you need to execute the following instructions: 
 ```bash
-brew install https://raw.githubusercontent.com/openbaton/openbaton-client/master/cli/gradle/gradle/scripts/osx/openbaton-client.rb
+brew install http://get.openbaton.org/homebrew/openbaton-client.rb
 ```
 
 ### Uninstall the Open Baton CLI
