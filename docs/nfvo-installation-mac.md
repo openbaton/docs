@@ -14,14 +14,12 @@ rabbitmqctl set_user_tags admin administrator
 rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 ```
 
-### Install the NFVO
+## Install the NFVO
 
 In order to install the NFVO you need to execute the following instructions: 
 ```bash
 brew install https://raw.githubusercontent.com/openbaton/NFVO/master/gradle/gradle/scripts/osx/openbaton-nfvo.rb
 ```
-
-This command will install the NFVO via brew. How to configure, start and stop the NFVO once it is installed is shown in the next section.
 
 ### Start the NFVO 
 
@@ -29,17 +27,64 @@ After the installation is completed you can launch the NFVO:
 ```
 openbaton-nfvo start
 ```
-After few seconds you can open the dashboard at: http://localhost:8080. How to use the dashboard is shown [here][dashboard-doc]. Additonally, you can also use the [CLI][cli-doc].
+After few seconds you can open the dashboard at: http://localhost:8080. How to use the dashboard is shown [here][dashboard-doc].
 
 ### Configure the NFVO 
 
-The configuration file (openbaton.properties) is in the folder /usr/local/Cellar/openbaton. To configure the NFVO please refer to [nfvo configuration][nfvo-configuration].
+The configuration file (openbaton.properties) is in the folder /usr/local/etc/openbaton. To configure the NFVO please refer to [nfvo configuration][nfvo-configuration]. 
+If you change the configuration make sure to restart the NFVO running:
+```bash
+openbaton-nfvo stop
+openbaton-nfvo start
+```
 
 ### Uninstall the NFVO
 
 You can execute the following command for uninstalling the NFVO: 
 ```
 brew remove openbaton-nfvo
+```
+## Install the Generic VNFM
+
+In order to install the Generic VNFM you need to execute the following instructions: 
+```bash
+brew install https://raw.githubusercontent.com/openbaton/generic-vnfm/master/gradle/gradle/scripts/osx/openbaton-vnfm-generic.rb
+```
+
+### Start the Generic VNFM
+
+After the installation is completed you can launch the Generic VNFM: 
+```
+openbaton-vnfm-generic start
+```
+
+### Configure the Generic VNFM 
+
+The configuration file (application.properties) is in the folder /usr/local/etc/openbaton/vnfm/generic. 
+If you change the configuration make sure to restart the Generic VNFM running:
+```bash
+openbaton-vnfm-generic stop
+openbaton-vnfm-generic start
+```
+
+### Uninstall the Generic VNFM
+
+You can uninstall the Generic VNFM running: 
+```
+brew remove openbaton-vnfm-generic
+```
+## Install the Open Baton CLI
+
+In order to install the Open Baton CLI you need to execute the following instructions: 
+```bash
+brew install https://raw.githubusercontent.com/openbaton/openbaton-client/master/cli/gradle/gradle/scripts/osx/openbaton-client.rb
+```
+
+### Uninstall the Open Baton CLI
+
+You can uninstall the Open Baton CLI running: 
+```
+brew remove openbaton-client
 ```
 
 
