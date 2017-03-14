@@ -2,7 +2,7 @@
 
 # Install Open Baton on MacOS using brew
 
-This tutorial will guide you through the installation of the NFVO on top of MacOS.
+This tutorial will guide you through the installation of the NFVO on top of OSX.
  
 ### Requirements
 
