@@ -50,6 +50,8 @@ pages:
 - ['**HIDDEN**': 'tosca-nsd.md']
 - ['**HIDDEN**': 'tosca-CSAR-onboarding.md']
 - ['**HIDDEN**': 'vnfr-states.md']
+- ['**HIDDEN**': 'vnf-dependencies.md']
+- ['**HIDDEN**': 'vnf-dependencies-generic.md']
 - ['**HIDDEN**': 'vnf-parameters.md']
 - ['**HIDDEN**': 'vnfm-generic-configuration.md']
 - ['**HIDDEN**': 'nsd-json-example.md']
