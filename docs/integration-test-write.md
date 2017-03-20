@@ -470,11 +470,10 @@ Tasks that are side by side can run concurrently.
 
 ## Other important information
 
-For the integration test to be able to ssh to the virtual machines on openstack, you have to provide a .pem file of a key-pair you are using on openstack.
-Download this file, name it *integration-test.pem* and put it into the directory **/etc/openbaton/integration-tests/**.
-Furthermore it has to have the correct permissions so you probably have to execute *chmod 400 integration-test.pem*.
-And don't forget to make the scripts executable.
-Do NOT use '-' in types of VNFDs or configuration names as you cannot use them in bash scripts it will not work for the integration test scripts. 
+For the integration test to be able to ssh into the virtual machines on OpenStack, you have to import a key pair in OpenStack and assign the public key of the host, on which the integration tests run, to it.
+The key pair's name has to be contained in the VIM instance used for deployments on OpenStack. 
+Remember to make the scripts executable, that are run for testing the actual functionlity of the deployed Network Service.
+Do NOT use '-' in types of VNFDs or configuration names as you cannot use them in bash scripts. 
 
 
 ## The class-name types available

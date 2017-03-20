@@ -84,9 +84,8 @@ Open it and set the property values according to your needs.
 | external-properties-file   | If you want to use another file for fetching the properties. It is already preset to */etc/openbaton/integration-tests/integration-tests.properties*. If it does not exist it will not be used. |
 
 
-After that you will also need a keypair for OpenStack. Create one and download the private key as a .pem file. 
-Rename it to *integration-test.pem* and provide it with the needed permissions by executing *chmod 400 integration-test.pem*.
-If it does not exist already create the directory */etc/openbaton/integration-tests* on your machine and move the pem file into it. 
+After that you also need a keypair for OpenStack. 
+Import a key pair in the OpenStack dashboard, give it a name and assign the public key of the host, on which the integration tests will run, to it. 
 The next step is to create a vim file. 
 Here is an example where you just have to change some fields. 
 ```json
@@ -96,7 +95,7 @@ Here is an example where you just have to change some fields.
   "tenant":"the tenant you use",
   "username":"openstack username",
   "password":"openstack password",
-  "keyPair":"in here the one you created",
+  "keyPair":"the name of the imported key pair",
   "securityGroups": [
     "default"
   ],
