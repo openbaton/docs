@@ -1,12 +1,12 @@
 # OpenBaton Command Line Interface (CLI)
 
-The [Openbaton Client project][openbaton-client-github] provides a command-line interface, which enables you to use the NFVO's API and send commands to it. 
+The [Openbaton Client project][openbaton-client-github] provides a command-line interface, which enables you to use the NFVO's API and send commands to it.
 
 ## Install the Openbaton Client as binaries
 
 On Linux you can install the Open Baton Command Line Iterface while installing Open Baton using the [bootstrap script][linux-install]. It will prompt you with the question if you also want to install the Command Line Interface.  
 If you did not want to install the CLI at this point you can install it later on Linux using *sudo apt-get install openbaton-cli*.  
-If you use MacOS you have to install the CLI from source code. 
+If you use MacOS you have to install the CLI from source code.
 
 
 ## Install the Openbaton Client from source code
@@ -23,24 +23,24 @@ cd openbaton-client
 
 ### in case of binaries installation
 
-Source */etc/openbaton/openbaton-cli.properties* to set the required environment variables. A dialog appears and will ask you for some properties. 
+Source */etc/openbaton/openbaton-cli.properties* to set the required environment variables. A dialog appears and will ask you for some properties.
 
 ```sh
 source /etc/openbaton/openbaton-cli.properties
 ```
 
-This has to be done every time before you start working with the CLI in a new terminal. 
+This has to be done every time before you start working with the CLI in a new terminal.
 
-### in case of source code insallation
+### in case of source code installation
 
-Navigate into the project's root directory and execute *source nfvo.properties*. A dialog appears and will ask you for some properties. 
+Navigate into the project's root directory and execute *source nfvo.properties*. A dialog appears and will ask you for some properties.
 
 ```sh
 cd openbaton-client
 source nfvo.properties
 ```
 
-This has to be done every time before you start working with the CLI in a new terminal. 
+This has to be done every time before you start working with the CLI in a new terminal.
 
 
 ## Openbaton Client usage
@@ -48,33 +48,33 @@ This has to be done every time before you start working with the CLI in a new te
 After environment variables have been set, you can start using the cli for sending commands to the NFVO.  
 If you installed the Open Baton Client while installing Open Baton with the bootstrap script or with apt-get install the command *openbaton* should be available.  
 If you installed it from source code you have to execute the script *openbaton.sh* within the directory where you cloned the Open Baton Client repository.
-    
-### Run a command: 
+
+### Run a command:
 ```sh
 openbaton.sh command_name [arg-1] [arg-2] [arg-3]
 ```
 
-### Show the configuration: 
+### Show the configuration:
 ```sh
 openbaton.sh -c
 ```
 
-### Activate debug mode: 
+### Activate debug mode:
 ```sh
 openbaton.sh -d COMMAND [arg-1] [arg-2] [arg-3]
-``` 
+```
 
-### Print help: 
+### Print help:
 ```sh
 openbaton.sh -h
 ```
 
-### Print help for a command: 
+### Print help for a command:
 ```sh
 openbaton.sh COMMAND help
 ```
-    
-### List the available commands: 
+
+### List the available commands:
 ```sh
 openbaton.sh -l
 ```
@@ -82,12 +82,12 @@ openbaton.sh -l
 ## Available commands
 
 In the following section we list all the currently avalilable commands for the cli grouped by the components they work with.  
-Typically commands take either IDs or file paths as parameters where the files contain an object in json format. 
+Typically commands take either IDs or file paths as parameters where the files contain an object in json format.
 
 ### **Vim Instance Subcommands**
 **create**
 
-  * Create a Vim Instance 
+  * Create a Vim Instance
 ```sh
  $ openbaton.sh VimInstance-create <file.json>
 ```
@@ -107,14 +107,14 @@ Typically commands take either IDs or file paths as parameters where the files c
 ```
 
 **findAll**
- 
+
   * Find all Vim Instances
 ```sh
  $ openbaton.sh VimInstance-findAll
 ```
 
 **findById**
- 
+
   * Find a Vim Instance specified by the id
 ```sh
  $ openbaton.sh VimInstance-findById <id-vim-instance>
@@ -122,28 +122,28 @@ Typically commands take either IDs or file paths as parameters where the files c
 
 ### **Network Service Descriptor Subcommands**
 **create**
- 
+
   * Create a Network Service Descriptor
 ```sh
  $ openbaton.sh NetworkServiceDescriptor-create <file.json>
 ```
 
 **delete**
- 
+
   * Delete a Network Service Descriptor by passing its id
 ```sh
  $ openbaton.sh NetworkServiceDescriptor-delete <id-network-service-descriptor>
 ```
 
 **findAll**
- 
+
   * Find all Network Service Descriptors
 ```sh
  $ openbaton.sh NetworkServiceDescriptor-findAll
 ```
 
 **findById**
- 
+
   * Find a Network Service Descriptor by passing its id
 ```sh
  $ openbaton.sh NetworkServiceDescriptor-findById <id-network-service-descriptor>
@@ -160,9 +160,9 @@ The file should look similar to this:
 
 ```json
 {
- "parameters":["theParameter"], 
- "version":1, 
- "source":{"id":"950811b6-ebb6-4a17-bf4e-ab61974acbc8"}, 
+ "parameters":["theParameter"],
+ "version":1,
+ "source":{"id":"950811b6-ebb6-4a17-bf4e-ab61974acbc8"},
  "target": {"id":"9873ad54-2963-424d-ab5d-39403a5dd544"}
 }
 ```
@@ -190,16 +190,16 @@ The ids belong to the particular VirtualNetworkFunctionDescriptor.
  $ openbaton.sh NetworkServiceDescriptor-getVNFDependency <id-network-service-descriptor> <id-vnfdependency>
 ```
 
-  
+
 **getVirtualNetworkFunctionDescriptors**
- 
+
   * Find all Virtual Network Function Descriptors of a certain Network Service Descriptor
 ```sh
  $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptors <id-network-service-descriptor>
 ```
 
 **getVirtualNetworkFunctionDescriptor**
- 
+
   * Find a Virtual Network Function Descriptor specified by its id and the id of the Network Service Descriptor containing it
 ```sh
 $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor <id-network-service-descriptor> <id-vnfd>
@@ -233,7 +233,7 @@ $ openbaton.sh NetworkServiceDescriptor-getVirtualNetworkFunctionDescriptor <id-
 ### **Network Service Record Subcommands**
 
 **create**
- 
+
   * Create a Network Service Record from a Network Service Descriptor stored in the orchestrator
 ```sh
  $ openbaton.sh NetworkServiceRecord-create <id-network-service-descriptor> <vim-map-file> <keypair-file> <configurations-file>
@@ -247,22 +247,22 @@ If you want to specify the VIM that a particular VDU shall use you can pass a fi
 
 In this case the VDU named vdu2Name would be deployed on vim1 and the VDU named vdu1Name randomly on one of the VIMs vim1, vim2 or vim3.  
 
-The second command argument specifies a file containing a list that describes which keypairs shall be used to deploy the NSR. Here is an example: 
+The second command argument specifies a file containing a list that describes which keypairs shall be used to deploy the NSR. Here is an example:
 ```json
  ["key1", "key2", "key3"]
 ```
 
-The last command argument specifies a file containing a map of VNFR names and configuration parameters. Here is an example: 
+The last command argument specifies a file containing a map of VNFR names and configuration parameters. Here is an example:
 ```json
 {
-  "configurations":{ 
-    "vnfrName1":{"name":"conf1","configurationParameters":[{"confKey":"key1", "value":"value1", "description":"description1"}]}, 
-    "vnfrName2":{"name":"conf2","configurationParameters":[{"confKey":"key1", "value":"value1", "description":"description1"}]} 
+  "configurations":{
+    "vnfrName1":{"name":"conf1","configurationParameters":[{"confKey":"key1", "value":"value1", "description":"description1"}]},
+    "vnfrName2":{"name":"conf2","configurationParameters":[{"confKey":"key1", "value":"value1", "description":"description1"}]}
   }
 }
 ```
 
-Of course you do not have to specify VIMs, keys and configurations. If you do not want to specify them just put empty objects into the files i.e. {} and []. 
+Of course you do not have to specify VIMs, keys and configurations. If you do not want to specify them just put empty objects into the files i.e. {} and [].
 
 **delete**
 
@@ -282,7 +282,7 @@ $ openbaton.sh NetworkServiceRecord-update <file.json> <id-network-service-recor
 
   * Find all Network Service Records
 ```sh
- $ openbaton.sh NetworkServiceRecord-findAll 
+ $ openbaton.sh NetworkServiceRecord-findAll
 ```
 
 **findById**
@@ -301,7 +301,7 @@ $ openbaton.sh NetworkServiceRecord-update <file.json> <id-network-service-recor
 
 **getVirtualNetworkFunctionRecord**
 
-  * Get a Virtual Network Function Record of a Network Service Record by providing its id 
+  * Get a Virtual Network Function Record of a Network Service Record by providing its id
 ```sh
  $ openbaton.sh NetworkServiceRecord-getVirtualNetworkFunctionRecord <id-network-service-record> <id-vnfr>
 ```
@@ -319,21 +319,21 @@ $ openbaton.sh NetworkServiceRecord-update <file.json> <id-network-service-recor
 ```sh
  $ openbaton.sh NetworkServiceRecord-createVNFDependency <id-network-service-record> <file.json>
 ```
-  
+
 **deleteVNFDependency**
 
   * Delete the Virtual Network Function Record Dependency of a NetworkServiceRecord with a specific id
 ```sh
  $ openbaton.sh NetworkServiceRecord-deleteVNFDependency <id-network-service-record> <id-vnfdependency>
 ```
-  
+
 **getVNFDependencies**
 
   * Get all the Virtual Network Function Record Dependencies of a Network Service Record with a specific id
 ```sh
  $ openbaton.sh NetworkServiceRecord-getVNFDependencies <id-network-service-record>
 ```
-  
+
 **getVNFDependency**
 
   * Get the Virtual Network Function Record Dependency of a Network Service Record with a specific id
@@ -356,14 +356,14 @@ $ openbaton.sh NetworkServiceRecord-deleteVNFCInstance <id-network-service-recor
 ```
 
 **startVNFCInstance**
-  
+
   * Start a VNFCInstance specified by it's id
 ```sh
 $ openbaton.sh NetworkServiceRecord-startVNFCInstance <id-nsr> <id-vnfr> <id-vdu> <id-vnfcinstance>
 ```
-  
+
 **stopVNFCInstance**
-    
+
   * Stop a VNFCInstance specified by it's id
 ```sh
 $ openbaton.sh NetworkServiceRecord-stopVNFCInstance <id-nsr> <id-vnfr> <id-vdu> <id-vnfcinstance>
@@ -413,7 +413,7 @@ $ openbaton.sh User-findByName <username>
 $ openbaton.sh User-changePassword <oldPassword> <newPassword>
 ```
 
-Remember to source nfvo.properties afterwards and set the new password if you want to continue working as this User. 
+Remember to source nfvo.properties afterwards and set the new password if you want to continue working as this User.
 
 
 ### **Project Subcommands**
@@ -613,7 +613,7 @@ $ openbaton.sh Configuration-delete <id-configuration>
 ```sh
  $ openbaton.sh VNFPackage-findById <id-vnfPackage>
 ```
-    
+
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
 [registeraNewVim]:images/vim-instance-register-new-pop.png
