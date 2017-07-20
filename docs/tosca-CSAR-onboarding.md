@@ -8,7 +8,7 @@ The CSAR is a zip file with this structure:
 |   └── testNSDiperf.yaml
 ├── Scripts
 |   ├── install.sh   
-|   └── (VNF NAME)
+|   └── (VNF TYPE)
 |        └── script.sh 
 └── TOSCA-Metadata
     ├── Metadata.yaml
