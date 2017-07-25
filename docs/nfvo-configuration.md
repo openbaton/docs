@@ -202,12 +202,12 @@ spring.datasource.password=changeme
 #       org.hibernate.dialect.HSQLDialect
 # JDBC configurations' values for MYSQL:
 #       jdbc:mysql://localhost:3306/openbaton
-#       com.mysql.jdbc.Driver
+#       org.mariadb.jdbc.Driver
 #       org.hibernate.dialect.MySQLDialect
 #
 # Active configurations by default MySQL:
 spring.datasource.url=jdbc:mysql://localhost:3306/openbaton
-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 spring.jpa.show-sql=false
 # ddl-auto available values: create-drop, update
