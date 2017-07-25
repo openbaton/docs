@@ -155,7 +155,7 @@ name: iperf-server
 description: iPerf server
 provider: FOKUS
 scripts-link: https://script-link-to-git.git
-nfvo_version: 3.2.0
+nfvo_version: 4.0.0
 vim_types:
  - openstack
 image:
@@ -243,7 +243,7 @@ Finally, it looks as shown below.
 name: iperf-client
 description: iPerf client
 provider: FOKUS
-nfvo_version: 3.2.0
+nfvo_version: 4.0.0
 vim_types:
  - openstack
 scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
