@@ -85,6 +85,7 @@ References
 [vnf-parameters]:vnf-parameters
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 [nsd-iperf]:nsd-json-example.md
+[multi-vnfd-select]:images/multi-vnfd-select.png
 [tosca]:http://docs.oasis-open.org/tosca/tosca-nfv/v1.0/csd03/tosca-nfv-v1.0-csd03.pdf
 [csar-onboard]:tosca-CSAR-onboarding
 [ns-template]:tosca-nsd

@@ -15,7 +15,7 @@ Open Baton provides many different features and components:
 * A set of libraries (the openbaton-libs) which could be used for building your own VNFM. Read more [here][openbaton-libs]
 * A [Marketplace][marketplace] useful for downloading VNFs compatible with the Open Baton NFVO and VNFMs. Read more at [here][marketplace-doc]
 
-![Open Baton architecture][openbaton-arch-1]
+![Open Baton architecture][architecture-release-4]
 
 ## Can I plug in my Network Functions?
 Yes, this is possible using (at least) two different approaches:
@@ -57,7 +57,7 @@ Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is suppo
 [cognet]: http://www.cognet.5g-ppp.eu/cognet-in-5gpp/
 [fm-system]: https://github.com/openbaton/fm-system
 [info-at-openbaton-dot-org]: mailto:info@openbaton.org
-[architecture-release-3]:images/openbaton-release-3.png
+[architecture-release-4]:images/openbaton-arch-1.png
 [install-guide]:nfvo-installation
 [juju-vnfm]:vnfm-juju
 [marketplace]: http://marketplace.openbaton.org
