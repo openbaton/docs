@@ -2,8 +2,8 @@
 
 The *Virtualised Infrastructure Manager* (Vim) is the functional block, responsible for controlling and managing the
  NFVI compute, storage and network resources within a Point of Presence (PoP).
- 
-In order to interoperate with a PoP it is required to register the VIM instance responsible for it to the NFVO. Assuming that you already installed the proper VIM driver, in order to connect to the selected Point of Presence (PoP), you need to register it at the NFVO. For doing that you can write a JSON file containing the details of a VIM Instance like the one described below: 
+
+In order to interoperate with a PoP it is required to register the VIM instance responsible for it to the NFVO. Assuming that you already installed the proper VIM driver, in order to connect to the selected Point of Presence (PoP), you need to register it at the NFVO. For doing that you can write a JSON file containing the details of a VIM Instance like the one described below:
 
 
 ```javascript
@@ -41,13 +41,16 @@ Most of the parameters are based on the OpenStack VIM type, since OpenStack repr
 | type           | The type of the VIM Instance you are using. This information will be used by the NFVO for locating the corresponding driver. Please refer to the [Marketplace][marketplace-drivers] for checking which VIM drivers are currently available. |       yes |
 | location       | The location of the Point of PoP.                                                      |        no |
 
-By default we use only one tenant on your PoP. We are currently working on supporting the instantiation of different NSDs in different tenants. But it is possible to achieve this by creating two different PoPs with different names and the different tenants. 
+By default we use only one tenant on your PoP. We are currently working on supporting the instantiation of different NSDs in different tenants. But it is possible to achieve this by creating two different PoPs with different names and the different tenants.
+
+**NOTE:** If you are going to use the provided _openstack_ vim driver, you can use either _**v2**_ or _**v3**_ keystone API version: if you want to use v2, then in _authUrl_ you must put an url ending with "2.0" or "2" and in the _tenant_ field you must put the openstack **tenant name**. In case you are willing to use v3, then the _authUrl_ must be finishing with "3" and in the _tenant_ field you must put **the tenant id**
+
 
 ## Register the PoP using the GUI
 
-In order to make use of your VIM described within your JSON descriptor, you need to upload the VIM json file to the NFVO. 
-You can use the dashboard available at [localhost:8080] for this purpose. 
-Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your VIM descriptor. The following picture shows the dashboard: 
+In order to make use of your VIM described within your JSON descriptor, you need to upload the VIM json file to the NFVO.
+You can use the dashboard available at [localhost:8080] for this purpose.
+Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your VIM descriptor. The following picture shows the dashboard:
 
 ![register a new PoP][register-new-pop]
 
