@@ -27,7 +27,7 @@ Yes, this is possible using (at least) two different approaches:
 Learn more [here][nfvo-intro].
 
 ## Can I use Open Baton to build my own Network Service?
-Yes! Open Baton provides a NFVO which can interoperate with VNFMs implemented by third parties. We provide also a set of tools (like the vnfm-sdk) which supports developers in building their own VNFM.
+Yes! Open Baton provides a NFVO which can interoperate with VNFMs implemented by third parties. We provide also a set of tools (like the vnfm-sdk) which support developers in building their own VNFM.
 
 Learn more [here][nfvo-intro].
 
