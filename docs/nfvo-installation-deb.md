@@ -42,12 +42,6 @@ To start the bootstrap procedure of the Open Baton environment you can type the 
 sh <(curl -s http://get.openbaton.org/bootstrap) release
 ```
 
-In case you are interested in the latest nigthly versions of the binaries please run:
-
-```bash
-sh <(curl -s http://get.openbaton.org/bootstrap) nightly
-```
-
 ***VERY IMPORTANT NOTE*** - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be
   reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues. If you are installing Open Baton on a VM running in OpenStack, the best is that you put here
   the floating IP.
@@ -63,7 +57,8 @@ Depending on which additional component you decided to add to the Open Baton ins
 ├── fms
 ├── ase
 ├── nse
-├── plugins
+├── plugins/vim-drivers
+├── plugins/monitoring
 └── systemd
 ```
 
@@ -74,7 +69,8 @@ Where:
 * `fms` contains the jar file related of Open Baton Fault Management System (FMS)
 * `ase` contains the jar file related of Open Baton Auto Scaling Engine (ASE)
 * `nse` contains the jar file related of Open Baton Network Slicing Engine (NSE)
-* `plugins` contains the plugins for Open Baton. By default the Test VIM Driver plugin is installed, therefore its jar file is stored in this directory. Additionally, if during the installation procedure you decide to install the OpenStack VIM-Driver Plugins then also its jar file will be stored in this directory
+* `plugins/vim-drivers` contains the VIM-Driver plugins for Open Baton. By default the Test VIM Driver plugin is installed, therefore its jar file is stored in this directory. Additionally, if during the installation procedure you decide to install the OpenStack VIM-Driver Plugin then also its jar file will be stored in this directory
+* `plugins/monitoring` contains the monitoring plugins for Open Baton. If during the installation procedure you decide to install the Fault Management system then also the Zabbix plugin will be automatically installed and therefore its jar file will be stored in this directory
 * `systemd` contains the Open Baton configuration files for the system and service manager "systemd"
 
 
@@ -110,7 +106,7 @@ sudo service openbaton-nfvo stop
 sudo stop openbaton-nfvo
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl stop openbaton-nfvo.service
@@ -127,7 +123,7 @@ sudo service openbaton-nfvo start
 sudo start openbaton-nfvo
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl start openbaton-nfvo.service
@@ -154,7 +150,7 @@ sudo service openbaton-vnfm-generic stop
 sudo stop openbaton-vnfm-generic
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl stop openbaton-vnfm-generic.service
@@ -171,7 +167,7 @@ sudo service openbaton-vnfm-generic start
 sudo start openbaton-vnfm-generic
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl start openbaton-vnfm-generic.service
