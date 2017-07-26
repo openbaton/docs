@@ -15,7 +15,7 @@ This page provides more information about the first option, while more informati
 A VNF Package is a tar-archive containing all the information required for managing the lifecycle of a VNF. First step is to build the archive which can be later on on boarded to the NFVO.
 A typical VNF Package includes
 
-* VNF Descriptor: containing all the information required by the NFVO for deploying the VNF (more information available at: [vnf-descriptor])
+* VNF Descriptor: containing all the information required by the NFVO for deploying the VNF (more information available at the [VNF Descriptor page][vnfd-link].
 * Image: passed using a link to an image file (typically QCOW) available for dowloaded via HTTP. At the moment passing an image file inside the VNF Package is not supported. There is some work in progress to allow it. 
 * Metadata file providing additional information to the NFVO for understanding what's the content of the package
 * scripts: containing all scripts which could be used for lifecycle management
@@ -119,7 +119,7 @@ A more detailed explanation of the VNFD can be found [here][vnfd-link].
 
 ## scripts
 
-The scripts folder contains all the scripts required for starting, configuring, and starting a VNF on the Virtual Machines or containers instantiated during the lifecycle. 
+The scripts folder contains all the scripts required for instatiating, configuring, and starting a VNF on the Virtual Machines or containers instantiated during the lifecycle. 
 The execution order is defined by the lifecycle_events inside the VNFD. Please refer to the [VNF Description page][vnfd-link] for more information about this.
 
 **Note** The scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.

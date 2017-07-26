@@ -18,6 +18,6 @@ This binary file is the implementation of the interface that communicates with y
 
 Open Baton platform provides an openstack and a test plugin. They are automatically download by the bootstrap. During next releases there will be additional drivers available on our [Marketplace][marketplace-drivers]
 
-[marketplace-drivers]: http://marketplace.openbaton.org:8082/#/
+[marketplace-drivers]: http://marketplace.openbaton.org/#/
 [openstack-link]:https://www.openstack.org/
 [vim-driver]:vim-driver-create.md
