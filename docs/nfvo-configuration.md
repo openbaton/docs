@@ -33,7 +33,7 @@ nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
 
 Again, this property is very important to be set to the broker ip reachable from outside the machine were is running.
 
-#### additional rabbitMQ paramters required by the NFVO
+#### Additional rabbitMQ paramters required by the NFVO
 
 ```parameters
 nfvo.rabbit.management.port=15672
@@ -44,7 +44,7 @@ nfvo.rabbitmq.exclusive=false
 ```
 
 
-#### parameters related with NFVO behaviour runtime
+#### Parameters related with NFVO behaviour runtime
 
 This property allows the user to delete the Network Service Records no matter in which status they are. Please note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 
@@ -61,7 +61,7 @@ nfvo.history.level=1
 nfvo.history.max-entities=250
 ```
 
-#### initial admin password
+#### Initial admin password
 
 The initial admin password is set via the configuration file property:
 
@@ -71,11 +71,11 @@ nfvo.security.admin.password=openbaton
 
 Please bare in mind that if the property is modified via APIs/dashboard, the change *won't be reflected in this file*.
 
-#### parameters related with the monitoring system
+#### Parameters related with the monitoring system
 
 **MONITORING:** Open Baton allows the monitoring of the VMs on top of which the VNFs are executing via an external monitoring system. At the moment Zabbix is the monitoring system supported.
 If you want to enable it, you need first to install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration-3.0].
-Once the Zabbix server is correctly configured and running, you only need to add following property:
+Once the Zabbix server is correctly configured and running, you only need to add the following property:
 
 ```properties
 nfvo.monitoring.ip = the Zabbix server ip
@@ -83,16 +83,16 @@ nfvo.monitoring.ip = the Zabbix server ip
 Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to the Zabbix server.
 
 
-#### parameters related with the marketplace
+#### Parameters related with the marketplace
 
-This parameter allow you to modify the marketplace IP, in case you want to use a different catalogue for providing VNF Packages.
+This parameters allow you to modify the marketplace IP, in case you want to use a different catalogue for providing VNF Packages.
 
 ```properties
 nfvo.marketplace.ip=marketplace.openbaton.org
 nfvo.marketplace.port=8082
 ```
 
-#### parameters related with plugins and drivers
+#### Parameters related with plugins and drivers
 
 The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances.
 
@@ -108,13 +108,13 @@ nfvo.plugin.wait=true
 nfvo.plugin.timeout=300000
 ```
 
-where the `nfvo.plugin.installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [VIM driver documentation][vim-driver]), and which will be automatically started by the NFVO after booting.
+where the `nfvo.plugin.installation-dir` is the directory where all the jar files are located. Each of these plugins implement the VIM interface (see the [VIM driver documentation][vim-driver]), and will be automatically started by the NFVO after booting.
 While the `nfvo.plugin.log.path` defines the location where plugin log files will be available.
 
 
-#### parameters related with quota management
+#### Parameters related with quota management
 
-Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. In case of any exceptions which come with some certain scenarios, you can also avoid failing on exceptions by changing the `nfvo.quota.check.failOnException` to `false`.
+Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request to the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. In case of any exceptions which come with some certain scenarios, you can also avoid failing on exceptions by changing the `nfvo.quota.check.failOnException` to `false`.
 
 ```properties
 # Avoid doing the GRANT_OPERATION
@@ -123,9 +123,9 @@ nfvo.quota.check=true
 nfvo.quota.check.failOnException = true
 ```
 
-Please consider also the property `nfvo.vim.drivers.allowInfiniteQuota` explained in the next section for the quota maangement during the allocate resources mechanism
+Please consider also the property `nfvo.vim.drivers.allowInfiniteQuota` explained in the next section for the quota management during the allocate resources mechanism
 
-#### addition parameters for the NFVO and VNFM tuning
+#### Addition parameters for the NFVO and VNFM tuning
 ```parameters
 # Execute the start event sequentially and in order based on the VNFDependencies. This implies the NSD not to have cycling dependencies
 nfvo.start.ordered=false
@@ -136,7 +136,7 @@ nfvo.vim.drivers.allowInfiniteQuota=false
 nfvo.vim.delete.check.vnfr=true
 ```
 
-Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor][spring-doc-thread-pool].
+Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allow you to change the pool configuration. For more details please check the [spring documentation regarding thread pool executor][spring-doc-thread-pool].
 
 ```properties
 # Thread pool executor configuration
@@ -151,7 +151,7 @@ nfvo.vnfd.cascade.delete=false
 vnfd.vnfp.cascade.delete=true
 ```
 
-####  enable SSL
+#### Enable SSL
 By default SSL is disabled. Comment out those parameters in case you want to enable it.
 
 ```parameters
