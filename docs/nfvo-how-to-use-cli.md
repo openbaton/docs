@@ -6,7 +6,7 @@ The [Openbaton Client project][openbaton-client-github] provides a command-line 
 
 On Linux you can install the Open Baton Command Line Iterface while installing Open Baton using the [bootstrap script][linux-install]. It will prompt you with the question if you also want to install the Command Line Interface.  
 If you did not want to install the CLI at this point you can install it later on Linux using *sudo apt-get install openbaton-cli*.  
-If you use MacOS you have to install the CLI from source code. 
+If you use MacOS you can install the CLI with [Homebrew][homebrew-website] or source code. 
 
 
 ## Install the Openbaton Client from source code
@@ -17,6 +17,13 @@ Git clone the [Openbaton Client project][openbaton-client-github]. Navigate into
 git clone https://github.com/openbaton/openbaton-client.git
 cd openbaton-client
 ./gradlew build
+```
+
+## Install the Openbaton Client with Homebrew (MacOS)
+
+In MacOS you need to execute the following instruction: 
+```bash
+brew install http://get.openbaton.org/homebrew/openbaton-client.rb
 ```
 
 ## Set the required environment variables
@@ -31,13 +38,23 @@ source /etc/openbaton/openbaton-cli.properties
 
 This has to be done every time before you start working with the CLI in a new terminal. 
 
-### in case of source code insallation
+### in case of source code installation
 
 Navigate into the project's root directory and execute *source nfvo.properties*. A dialog appears and will ask you for some properties. 
 
 ```sh
 cd openbaton-client
 source nfvo.properties
+```
+
+This has to be done every time before you start working with the CLI in a new terminal. 
+
+### in case of installation through Homebrew
+
+Execute the following command:
+
+```sh
+source /usr/local/etc/openbaton/cli/nfvo.properties
 ```
 
 This has to be done every time before you start working with the CLI in a new terminal. 
@@ -619,6 +636,7 @@ $ openbaton.sh Configuration-delete <id-configuration>
 [registeraNewVim]:images/vim-instance-register-new-pop.png
 [openbaton-client-github]:https://github.com/openbaton/openbaton-client
 [linux-install]:nfvo-installation-deb
+[homebrew-website]:http://brew.sh
 
 
 <!---
