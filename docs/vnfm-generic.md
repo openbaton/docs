@@ -113,11 +113,9 @@ The available parameters are defined in the VirtualNetworkFunctionDescriptor fie
     3. Hostname  
 
 
-__Please check the example at the end of the page to understand this mechanism.__
-
 In the INSTANTIATE scripts, the parameters defined in these two fields are then available as environment variables into the script exactly as defined (i.e. you can get by $parameter_name).
 
-In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
+In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field.
 These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency→parameters fields (of the NSD), and are then available as $*type_of_vnf_source*_*name_of_parameter* (in the VNF target).
 
 _**NOTE**_: _the scripts in the CONFIGURE lifecycle event need to start with the type of the source VNF followed by \_ (underscore) and the name of the script (i.e. server_configure.sh)_
@@ -126,7 +124,7 @@ _**NOTE**_: _the scripts in the CONFIGURE lifecycle event need to start with the
 
 The STOP lifecycle event is meant to just stop the VNF service and afterward be able to start it again. The TERMINATE lifecycle event delete the virtual resources from the PoP
 As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
- 
+
 
 <!---
 References
@@ -156,5 +154,3 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
-
-

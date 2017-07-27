@@ -1,13 +1,13 @@
 # Network Service Descriptor
 
-The Network Service Descriptor is a template file, whose parameters are following the [ETSI MANO specification][nfv-mano], used by the NFV Orchestrator (NFVO) for deploying network services (as combination of multiple VNFs). There are two different formats supported by the NFVO for NSD: 
+The Network Service Descriptor is a template file, whose parameters are following the [ETSI MANO specification][nfv-mano], used by the NFV Orchestrator (NFVO) for deploying network services (as combination of multiple VNFs). There are two different formats supported by the NFVO for NSD:
 
 * JSON file representation of the information model specificied by the [ETSI MANO specification][nfv-mano]
-* TOSCA compliant Network Service Template on boarded via CSAR archive compliant with the [TOSCA Simple Profile for NFV][tosca]. 
+* TOSCA compliant Network Service Template on boarded via CSAR archive compliant with the [TOSCA Simple Profile for NFV][tosca].
 
 This page provide further details about option 1 (which is at the moment the more advanced feature-wise API offered by the NFVO). Refer to the [NS Template tutorial][ns-template] and [CSAR Onboarding tutorial][csar-onboard] for examples about TOSCA.
 
-## Overview 
+## Overview
 
 Below you can find an example of a NSD for deploying 1..n VNFs:
 
@@ -49,6 +49,12 @@ You can see the complete NSD file of this example [here][nsd-iperf].
 | vld 							| A list of Virtual Link Descriptors      	|
 | vnf_dependency 				| A list of VNF Dependencies (**Not mandatory**, please check the [vnfd page](vnf-descriptor) in order to understand more about this topic, as you may not need to specifiy dependencies here if those are already provided in terms of requirements at the VNFD level)     	|
 
+### VNF Descriptors
+
+In the _vnfd_ field you must put a list of ids `[{"id":"id_1"},{"id":"id_2"},{"id":"id_2"}]`, corresponding to the ids of the VNF Descriptors already uploaded. Alternatively, you can put the full VNFD, if you don't have specific scripts to be executed. If you already have uploaded some VNF Packages, building this list can be annoying, so just go in the VNFD page of the dashboard, select all wanted VNFDs and click on the clipboard copy button on the top left. You will have in the clipboard the list of ids already pre-build.
+
+![Multiple VNF selection][multi-vnfd-select]
+
 ### Virtual Link Descriptor
 
 The Virtual Link Descriptor (VLD) describes Virtual Link requirements for connecting one or more VNFs together.
@@ -79,6 +85,7 @@ References
 [vnf-parameters]:vnf-parameters
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 [nsd-iperf]:nsd-json-example.md
+[multi-vnfd-select]:images/multi-vnfd-select.png
 [tosca]:http://docs.oasis-open.org/tosca/tosca-nfv/v1.0/csd03/tosca-nfv-v1.0-csd03.pdf
 [csar-onboard]:tosca-CSAR-onboarding
 [ns-template]:tosca-nsd

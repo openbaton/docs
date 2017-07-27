@@ -5,20 +5,20 @@ Therefore, you can find a practical tutorial at the end with all the steps start
 
 The NFVO supports two different formats for VNF Packages:  
 
-* TAR archive following the ETSI NFV specification for VNF Descriptors and Packages 
-* CSAR archive following the [Tosca simple profile for NFV][tosca-nfv] specification. 
+* TAR archive following the ETSI NFV specification for VNF Descriptors and Packages
+* CSAR archive following the [Tosca simple profile for NFV][tosca-nfv] specification.
 
 This page provides more information about the first option, while more information about the second option are given in this [tutorial][csar-onboarding].
 
 # Overview
 
-A VNF Package is a tar-archive containing all the information required for managing the lifecycle of a VNF. First step is to build the archive which can be later on on boarded to the NFVO.
+A VNF Package is a tar-archive containing all the information required for managing the lifecycle of a VNF. First step is to build the archive which then can be onboarded to the NFVO.
 A typical VNF Package includes
 
-* VNF Descriptor: containing all the information required by the NFVO for deploying the VNF (more information available at: [vnf-descriptor])
-* Image: passed using a link to an image file (typically QCOW) available for dowloaded via HTTP. At the moment passing an image file inside the VNF Package is not supported. There is some work in progress to allow it. 
-* Metadata file providing additional information to the NFVO for understanding what's the content of the package
-* scripts: containing all scripts which could be used for lifecycle management
+* VNF Descriptor: containing all the information required by the NFVO for deploying the VNF (more information available at the [VNF Descriptor page][vnfd-link]).
+* Image: passed using a link to an image file (typically QCOW) available for being dowloaded via HTTP. At the moment, passing an image file inside the VNF Package is not supported: there is some work in progress to allow it.
+* Metadata file providing additional information to the NFVO for understanding what's the content of the package.
+* scripts: containing all the scripts which could be used for lifecycle management.
 
 A typical VNF Package has the following structure:
 
@@ -57,7 +57,7 @@ image-config:
     isPublic: is_public
 ```
 
-In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
+In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than others and override them therefore.
 
 * ***name***: The name defines the name of the VNF Package itself used to store it in the database
 * ***description***: Human readable description of the VNF
@@ -119,7 +119,7 @@ A more detailed explanation of the VNFD can be found [here][vnfd-link].
 
 ## scripts
 
-The scripts folder contains all the scripts required for starting, configuring, and starting a VNF on the Virtual Machines or containers instantiated during the lifecycle. 
+The scripts folder contains all the scripts required for instatiating, configuring, and starting a VNF on the Virtual Machines or containers instantiated during the lifecycle.
 The execution order is defined by the lifecycle_events inside the VNFD. Please refer to the [VNF Description page][vnfd-link] for more information about this.
 
 **Note** The scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.
@@ -155,7 +155,7 @@ name: iperf-server
 description: iPerf server
 provider: FOKUS
 scripts-link: https://script-link-to-git.git
-nfvo_version: 3.2.0
+nfvo_version: 4.0.0
 vim_types:
  - openstack
 image:
@@ -243,7 +243,7 @@ Finally, it looks as shown below.
 name: iperf-client
 description: iPerf client
 provider: FOKUS
-nfvo_version: 3.2.0
+nfvo_version: 4.0.0
 vim_types:
  - openstack
 scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
@@ -375,7 +375,7 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
 
 Finally you can onboard this NSD and deploy an NSR that bases on both VNF Packages created before.
 
-### Onboarding and deploying NSD 
+### Onboarding and deploying NSD
 
 You could also use the [Dashboard][dashboard-link] or the [Command Line Interface][cli] as well for onboarding and deploying the NSD.
 

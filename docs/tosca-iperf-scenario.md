@@ -48,7 +48,7 @@ topology_template:
             - flavour_key: m1.small
         requirements:
           - virtualLink: private
-          - vdu: VDU2        
+          - vdu: VDU1        
         interfaces:
           lifecycle: # lifecycle
             INSTANTIATE:
@@ -68,7 +68,7 @@ topology_template:
         endpoint: generic
       requirements:
          - virtualLink: private
-         - vdu: VDU1
+         - vdu: VDU2
       interfaces:
           lifecycle: # lifecycle
             INSTANTIATE:

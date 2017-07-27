@@ -137,7 +137,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:monitoring:3.2.1-SNAPSHOT'
+    compile 'org.openbaton:monitoring:4.0.0'
 }
 ```
 

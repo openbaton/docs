@@ -73,20 +73,6 @@ You can uninstall the Generic VNFM running:
 ```
 brew remove openbaton-vnfm-generic
 ```
-## Install the Open Baton CLI
-
-In order to install the Open Baton CLI you need to execute the following instructions: 
-```bash
-brew install http://get.openbaton.org/homebrew/openbaton-client.rb
-```
-
-### Uninstall the Open Baton CLI
-
-You can uninstall the Open Baton CLI running: 
-```
-brew remove openbaton-client
-```
-
 
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/

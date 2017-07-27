@@ -17,7 +17,7 @@ The CSAR is a zip file with this structure:
 ```
 The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference being that when reading a NSD it will onboard all VNFs included in the NSD and after that the NSD itself.
 
- The **TOSCA.meta** file must contain the reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml**. An optional feature is to define the vm image here in the metadata. It is easier to add it here one time instead of adding it multiple times in the template.
+ The **TOSCA.meta** file contains a reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml** and versions of the CSAR package and the Meta-File version .
 
 ```bash
 TOSCA-Meta-File-Version: 1.0
@@ -114,7 +114,7 @@ topology_template:
       requirements:
         - virtual_link: CP2
       artifacts:
-        VDU1Image:
+        VDU2Image:
           type: tosca.artifacts.Deployment.Image.VM
           file: ubuntu-14.04-server-cloudimg-amd64-disk1
 

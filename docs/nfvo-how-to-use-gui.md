@@ -1,6 +1,6 @@
 # OpenBaton Dashboard
 The Dashboard of OpenBaton helps you managing the lifecycle of different objects like 
-VimInstaces, Network Service Descriptors/Records and Virtual Network Function Descriptors/Records in the OpenBaton environment.
+Vim Instaces, Network Service Descriptors/Records and Virtual Network Function Descriptors/Records in the OpenBaton environment.
 
 
 ## Login
@@ -19,7 +19,7 @@ The index page shows an overview of the state of the NFVO
  3. Number of Network Service Descriptors
  4. Number of SSH Keys
  
- It also shows the summary of the available resources, like floating ips, instances, RAM and CPU cores. The data is collected from the available PoPs if possible and then the summary is displayed. Test POPs do not grant any resources. The quota informatrion is backed up in cache to avoid unnecessary traffic. You can refresh the data by going into upper right corner drop down menu and choosing refresh quota option. You can now also see the NFVO version on the header panel. 
+ It also shows the summary of the available resources, like floating ips, instances, RAM and CPU cores. The data is collected from the available PoPs if possible and then the summary is displayed. Test POPs do not grant any resources. The quota information is backed up in cache to avoid unnecessary traffic. You can refresh the data by going into the drop down menu (upper right corner) and choosing refresh quota option. You can now also see the NFVO version on the header panel. 
 
 ![Overview][overview]
 

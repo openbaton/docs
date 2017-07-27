@@ -1,37 +1,37 @@
 <img src="../images/linux-logo.png" alt="Vagrant" style="width: 50px;"/>
 
 
-# Install Open Baton on Linux 
+# Install Open Baton on Linux
 
-This tutorial will guide towards the installation of an Open Baton environment using the stable binaries version. 
+This tutorial will guide towards the installation of an Open Baton environment using the stable binaries version.
 
 ***NOTE*** - Please refer to [this tutorial](nfvo-installation-src.md) if you are willing to install a development environment where you can easily modify, compile and commit changes to the code base directly.
 
-This version is composed by the following components: 
+This version is composed by the following components:
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
 * [RabbitMQ][reference-to-rabbit-site] as messaging system
-* Test VIM Driver for being able to execute the [hello world][dummy-NSR] tutorial without needing an OpenStack instance. 
+* Test VIM Driver for being able to execute the [hello world][dummy-NSR] tutorial without needing an OpenStack instance.
 
-And a set of optional components: 
+And a set of optional components:
 
 * OpenStack VIM Driver for deploying VNFs on OpenStack
-* Generic VNFM for the instantiation of VNFs part of the Open Baton ecosystem 
+* Generic VNFM for the instantiation of VNFs part of the Open Baton ecosystem
 * Fault Management System for the support to detection and recovery of VNF faults
 * Auto Scaling Engine for the automatic creation and termination of VNF instances due to performance requirements
-* Network Slicing Engine for 
+* Network Slicing Engine for ensuring a specific QoS for your NS
 * [MySQL][reference-to-mysql] as a mean to enable the persistence when using Open Baton
 
 
 ### Requirements
 
-To facilitate the installation procedures we provide a bootstrap script which will install the desired components and configure them for running a [hello world][dummy-NSR] VNF out of the box. To execute the bootstrap procedure you need to have curl installed (see http://curl.haxx.se/). This command should work on any linux system: 
+To facilitate the installation procedures we provide a bootstrap script which will install the desired components and configure them for running a [hello world][dummy-NSR] VNF out of the box. To execute the bootstrap procedure you need to have curl installed (see http://curl.haxx.se/). This command should work on any linux system:
 
 ```bash
 apt-get install curl
 ```
 
-**NOTE** - We assume that you are performing the installation on top of a clean installation either of Ubuntu 14.04 or Debian Jessy. In other cases we suggest to install the components one by one. You can checkout the [bootstrap][bootstrap] repository and see the installation procedures which are executed by the bootstrap script. 
+**NOTE** - We assume that you are performing the installation on top of a clean installation either of Ubuntu 14.04, Ubuntu 16.04 or Debian Jessy. In other cases we suggest to install the components one by one. You can checkout the [bootstrap][bootstrap] repository and see the installation procedures which are executed by the bootstrap script.
 
 
 ### Installation guide
@@ -42,19 +42,13 @@ To start the bootstrap procedure of the Open Baton environment you can type the 
 sh <(curl -s http://get.openbaton.org/bootstrap) release
 ```
 
-In case you are interested in the latest nigthly versions of the binaries please run:
-
-```bash
-sh <(curl -s http://get.openbaton.org/bootstrap) nightly
-```
-
 ***VERY IMPORTANT NOTE*** - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be
   reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues. If you are installing Open Baton on a VM running in OpenStack, the best is that you put here
   the floating IP.
- 
-During the bootstrap procedure you will be prompted for inputs. For instance you can choose to install or not the Generic VNFM as well as other additional components, or enable or not SSL. 
 
-At the end of the bootstrap procedure, if there are no errors, the dashboard should be reachable at: [localhost:8080]. 
+During the bootstrap procedure you will be prompted for inputs. For instance you can choose to install or not the Generic VNFM as well as other additional components, or enable or not SSL.
+
+At the end of the bootstrap procedure, if there are no errors, the dashboard should be reachable at: [localhost:8080].
 Depending on which additional component you decided to add to the Open Baton installation then you should have a structure similar to the following:
 ```bash
 /usr/lib/openbaton
@@ -63,7 +57,8 @@ Depending on which additional component you decided to add to the Open Baton ins
 ├── fms
 ├── ase
 ├── nse
-├── plugins
+├── plugins/vim-drivers
+├── plugins/monitoring
 └── systemd
 ```
 
@@ -74,7 +69,8 @@ Where:
 * `fms` contains the jar file related of Open Baton Fault Management System (FMS)
 * `ase` contains the jar file related of Open Baton Auto Scaling Engine (ASE)
 * `nse` contains the jar file related of Open Baton Network Slicing Engine (NSE)
-* `plugins` contains the plugins for Open Baton. By default the Test VIM Driver plugin is installed, therefore its jar file is stored in this directory. Additionally, if during the installation procedure you decide to install the OpenStack VIM-Driver Plugins then also its jar file will be stored in this directory
+* `plugins/vim-drivers` contains the VIM-Driver plugins for Open Baton. By default the Test VIM Driver plugin is installed, therefore its jar file is stored in this directory. Additionally, if during the installation procedure you decide to install the OpenStack VIM-Driver Plugin then also its jar file will be stored in this directory
+* `plugins/monitoring` contains the monitoring plugins for Open Baton. If during the installation procedure you decide to install the Fault Management system then also the Zabbix plugin will be automatically installed and therefore its jar file will be stored in this directory
 * `systemd` contains the Open Baton configuration files for the system and service manager "systemd"
 
 
@@ -110,7 +106,7 @@ sudo service openbaton-nfvo stop
 sudo stop openbaton-nfvo
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl stop openbaton-nfvo.service
@@ -127,7 +123,7 @@ sudo service openbaton-nfvo start
 sudo start openbaton-nfvo
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl start openbaton-nfvo.service
@@ -154,7 +150,7 @@ sudo service openbaton-vnfm-generic stop
 sudo stop openbaton-vnfm-generic
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl stop openbaton-vnfm-generic.service
@@ -171,7 +167,7 @@ sudo service openbaton-vnfm-generic start
 sudo start openbaton-vnfm-generic
 ```
 
-* With Debian Jessie:
+* With Ubuntu 16.04 or Debian Jessie:
 
 ```bash
 sudo systemctl start openbaton-vnfm-generic.service

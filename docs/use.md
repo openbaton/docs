@@ -25,7 +25,7 @@ Once these steps are completed you will be able to orchestrate your Network Serv
 [vim-registration]: vim-instance
 [vnfm-intro]: vnfm-intro
 [vnf-pacakge]: vnf-package
-[rest-api]: http://get.openbaton.org/swagger-ui/
+[rest-api]: http://get.openbaton.org/openbaton-nfvo-api/
 [security]: security
 
 
