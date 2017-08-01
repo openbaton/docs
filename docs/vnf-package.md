@@ -62,7 +62,7 @@ In the following each property is explained in more detail. Please consider also
 * ***name***: The name defines the name of the VNF Package itself used to store it in the database
 * ***description***: Human readable description of the VNF
 * ***provider***: The creator and maintainer of the VNF
-* ***vim_types***: The list of the vim types that the VNF Package supports. VIM types are related to the plugin types installed on the NFVO. More info at: [vim-drivers][vim-driver]
+* ***vim_types***: The list of the vim types that the VNF Package supports. VIM types are related to the plugin types installed on the NFVO. More info can be found [here][vim-driver].
 * ***nfvo_version***: The version of the NFVO which supports this package in the format (X.Y.Z). First two digits (X.Y) will be used for checking whether the VNF Package is supported by the NFVO on top of which is going to be on-boarded
 * ***scripts-link***: This link points to a public git repository where scripts are stored and could be used instead of passing all scripts inside the VNF Package
     * **Note** Either you can define the scripts-link or put the scripts into the folder scripts/.
@@ -126,7 +126,9 @@ The execution order is defined by the lifecycle_events inside the VNFD. Please r
     This means that the scripts in that folder have less priority than the scripts located under ***scripts-link***.
 
 **Note** Scripts are executed when a specific lifecycle event is fired and this event references to specific scripts.
+
 **Note** At the moment the *scripts* folder cannot contain subfolder. All scripts must be under the _scripts_ folder.
+
 **Note** The scripts inside the *scripts* folder can be either shell scripts or python scripts. Runtime parameters could be passed to those scritps in different ways, depending on the VNF Manager used for managing your VNFs. We suggest you get familiar with the requirements of the VNF Manager you would like to use, before starting implementing any scripts for lifecycle management.  
 
 # Sample tutorial
@@ -387,6 +389,7 @@ You could also use the [Dashboard][dashboard-link] or the [Command Line Interfac
 [tosca-nfv]:https://docs.oasis-open.org/tosca/tosca-nfv/v1.0/tosca-nfv-v1.0.html
 [csar-onboarding]:tosca-CSAR-onboarding
 [cli]:nfvo-how-to-use-cli
+[vim-driver]:vim-driver
 
 <!---
 Script for open external links in a new tab

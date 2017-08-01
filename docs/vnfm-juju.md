@@ -123,7 +123,7 @@ In these cases a *startAfterDependency* script will be created and the relation-
 
 
 [fokus-logo]: https://raw.githubusercontent.com/openbaton/openbaton.github.io/master/images/fokus.png
-[installation-guide]: https://jujucharms.com/docs/stable/getting-started
+[installation-guide]: https://jujucharms.com/docs/stable/reference-install
 [installation-juju-create-container]: https://jujucharms.com/docs/stable/getting-started#create-a-controller
 [openbaton]: http://openbaton.org
 [openbaton-doc]: http://openbaton.org/documentation

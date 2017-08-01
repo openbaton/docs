@@ -9,4 +9,4 @@ Each tutorial is organised in the following way:
 3. It specifies the list of steps which needs to be executed in order to run the tutorial
 
 
-[Marketplace]: http://markteplace.openbaton.org
+[Marketplace]: http://marketplace.openbaton.org

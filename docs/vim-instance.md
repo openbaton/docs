@@ -62,7 +62,7 @@ For more information about the dashboard see: [OpenBaton Dashboard]
 
 
 [localhost:8080]: http://localhost:8080
-[marketplace-drivers]: http://marketplace.openbaton.org:8082/#/
+[marketplace-drivers]: http://marketplace.openbaton.org:80/#/
 [OpenBaton Dashboard]:nfvo-how-to-use-gui
 [OpenBaton Dashboard]:nfvo-how-to-use-gui.md
 [openstack-link]:https://www.openstack.org/
