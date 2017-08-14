@@ -289,7 +289,7 @@ This method create a trigger on a specific item for one or more hosts. As a retu
 
 **thresholdDetails**: details of the threshold. It contains:
 
-- function: refer to [Zabbix trigger function 2.2][zabbix-trigger-function-2.2] or [Zabbix documentation 3.0][zabbix-trigger-function-3.0] 
+- function: refer to [Zabbix trigger function 2.2][zabbix-trigger-function-2.2] or [Zabbix trigger function 3.0][zabbix-trigger-function-3.0] 
 - triggerOperator: operator
 - perceiverSeverity: severity of the trigger.
 - value: threshold value to compare with the actual value of the *performanceMetric*.
@@ -396,8 +396,11 @@ it creates an alarm (mapping zabbix notification into standard Alarm) and notify
 [NFV MANO]:http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_nfv-man001v010101p.pdf
 [zabbix-plugin-architecture]:images/zabbix-plugin-architecture.png
 [zabbix-doc-2.2]:https://www.zabbix.com/documentation/2.2/manual/config/items/itemtypes/zabbix_agent
+[zabbix-doc-3.0]:https://www.zabbix.com/documentation/3.0/manual/config/items/itemtypes/zabbix_agent
 [zabbix-trigger-function-2.2]:https://www.zabbix.com/documentation/2.2/manual/appendix/triggers/functions
+[zabbix-trigger-function-3.0]:https://www.zabbix.com/documentation/3.0/manual/appendix/triggers/functions
 [zabbix-trigger-expression-2.2]:https://www.zabbix.com/documentation/2.2/manual/config/triggers/expression
+[zabbix-trigger-expression-3.0]:https://www.zabbix.com/documentation/3.0/manual/config/triggers/expression
 [openbaton-website]:http://openbaton.github.io
 [custom-alertscripts]:https://www.zabbix.com/documentation/2.2/manual/config/notifications/media/script
 [action-zabbix]:https://www.zabbix.com/documentation/2.2/manual/config/notifications/action
