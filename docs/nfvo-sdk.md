@@ -1,126 +1,78 @@
 # NFVO Northbound SDK
 
-A SDK is available if you want to use the NFVO from a java application.
+An SDK is available if you want to access the NFVO in your Java application.
 
-## Import it
+## Import the Open Baton SDK
 
-The build.gradle file must contain:
+The Open Baton SDK artifacts are published on Maven Central. You can include them into your project by adding the following to your maven pom.xml file:
+
+```xml
+<dependency>
+  <groupId>org.openbaton</groupId>
+  <artifactId>sdk</artifactId>
+  <version>4.0.0</version>
+</dependency>
+```
+
+If you use gradle, add this to your build.gradle file:
 
 ```gradle
 repositories {
-    mavenCentral()
-    /**
-     * Only needed for openbaton snapshots dependencies
-     */
-    maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots/'
-    }
+  mavenCentral()
+  /**
+  * Only needed for openbaton snapshots dependencies
+  */
+  maven {
+    url 'https://oss.sonatype.org/content/repositories/snapshots/'
+  }
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:4.0.0'
+  compile 'org.openbaton:sdk:4.0.0'
 }
 ```
 
-In this way you will have access to the NFVO SDK.
 
-### And then?
+### Using the Open Baton SDK
 
-The UML diagram of the classes follows:
-
-![SDK UML][sdk-uml]
-
-The NFVORequestor is the main and only class you need to use. From this class it is possible to retrieve all the Agents that are in charge of making calls to the NFVO. The NFVORequestor takes as constructor parameters:
-
-| Params          	| Description       |
-| -------------   	| -------------:|
-| username  		| the username  |
-| password 		| the password  |
-| projectId		| the id of the project to use |
-| sslEnabled		| set this to true if the NFVO uses SSL |
-| nfvoIp 		| the ip of the NFVO      |
-| nfvoPort 		| the port of the orchestrator      |
-| version 		| the API version. Now only "1" is available      |
-
-**Important NOTE**: Please pay attention that the NFVORequestor _is not_ thread safe! To make it so is up to the developer. 
-
-Once you have the NFVORequestor object, you can get the Agents. Available agents are:
-
-* ConfigurationRestRequest
-* EventAgent
-* ImageRestAgent
-* KeyAgent
-* NetworkServiceDescriptorRestAgent
-* NetworkServiceRecordRestAgent
-* ProjectAgent
-* UserAgent
-* VimInstanceRestAgent
-* VirtualLinkRestAgent
-* VirtualNetworkFunctionDescriptorRestAgent
-* VNFFGRestAgent
-* VNFPackageAgent
-
-each of them exposes these methods:
-
-* create
-* findById
-* findAll
-* delete
-* update
-
-plus some specific methods and they refer to the _catalogue_ class contained in the name of the Agent. For instance, the NetworkServiceDescriptorRestAgent refers to NetworkServiceDescriptor class and, besides the above methods, exposes:
-
-* getVirtualNetworkFunctionDescriptors
-* getVirtualNetworkFunctionDescriptor
-* deleteVirtualNetworkFunctionDescriptors
-* createVNFD
-* updateVNFD
-* getVNFDependencies
-* getVNFDependency
-* deleteVNFDependency
-* createVNFDependency
-* updateVNFD
-* getPhysicalNetworkFunctionDescriptors
-* getPhysicalNetworkFunctionDescriptor
-* deletePhysicalNetworkFunctionDescriptor
-* createPhysicalNetworkFunctionDescriptor
-* updatePNFD
-* getSecurities
-* deleteSecurity
-* createSecurity
-* updateSecurity
-
-The method names are explicit, they do what the name explains.
+The NFVORequestor is the main class of the SDK.
+Objects of this class can be used to obtain various agent objects for working with the corresponding Open Baton components (e.g. Network Service Descriptors, VIM Instances, etc.).  
+The NFVORequestor's constructor expects several parameters that are related to the NFVO, for example the NFVO's IP address, port and others.
+The agent objects that you retrieve from the NFVORequestor make use of these arguments when communicating with the NFVO.  
+You can find more information about the NFVORequestor and the different agent classes in the Javadoc.
+The Open Baton SDK is thread safe.
 
 ### Usage example
 
-###### Create a VimInstance using the SDK
-
+###### Upload a VimInstance to the NFVO using the SDK
 ```java
 public class Main {
-	
-	public static void main(String[] args) {
-        boolean sslEnabled = true;
-        NFVORequestor nfvoRequestor = new NFVORequestor("username", "password", "projectId", sslEnabled, "nfvo_ip", "nfvo_port", "1");
-        VimInstanceRestAgent vimInstanceAgent = nfvoRequestor.getVimInstanceAgent();
 
-        VimInstance vimInstance = new VimInstance();
+  public static void main(String[] args) {
+    boolean sslEnabled = true;
+    String apiVersion = "1";
+    // create the NFVORequestor object
+    NFVORequestor nfvoRequestor = new NFVORequestor("username", "password", sslEnabled, "projectName", "nfvo_ip", "nfvo_port", apiVersion);
 
-        // fill the vimInstance object accordingly to your VIM chosen
+    // obtain a VimInstanceAgent
+    VimInstanceAgent vimInstanceAgent = nfvoRequestor.getVimInstanceAgent();
 
-        try {
-            vimInstance = vimInstanceAgent.create(vimInstance);
-        } catch (SDKException e) {
-            e.printStackTrace();
-        }
+    // create the VIM Instance
+    VimInstance vimInstance = new VimInstance();
+    // we omitted the setting of the VIM Instance's values here...
 
-        System.out.println("Created VimInstance with id: " + vimInstance.getId());
+    try {
+      // upload the VIM Instance to the NFVO
+      vimInstance = vimInstanceAgent.create(vimInstance);
+    } catch (SDKException e) {
+      e.printStackTrace();
     }
+
+    System.out.println("Created VimInstance with id: " + vimInstance.getId());
+  }
 }
 ```
 
 <!---
 References
 -->
-
-[sdk-uml]:images/nfvo-sdk-uml.png
