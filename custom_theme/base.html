@@ -239,7 +239,9 @@ console.log('--------');
                         {% endblock %}
                       </div>
                     </div>
-
+                    {%- block footer %}
+                    {% include "footer.html" %}
+                    {% endblock %}
                   </div>
                 </div>
 
@@ -253,9 +255,7 @@ console.log('--------');
 <script type="text/javascript" src="{{ base_url }}/assets/plugins/jquery/jquery-migrate.min.js"></script>
   <br>
 
-  {%- block footer %}
-  {% include "footer.html" %}
-  {% endblock %}
+
 <!-- JS Global Compulsory -->
 <script type="text/javascript" src="{{ base_url }}/assets/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="{{ base_url }}/assets/plugins/jquery/jquery-migrate.min.js"></script>
