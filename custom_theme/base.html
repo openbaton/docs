@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% if page_description %}<meta name="description" content="{{ page_description }}">{% endif %}
-  {% if site_author %}<meta name="author" content="{{ site_author }}">{% endif %}
+  {% if config.site_author %}<meta name="author" content="{{ config.site_author }}">{% endif %}
   {% block htmltitle %}
-  <title>{{ site_name }}</title>
+  <title>{{ config.site_name }}</title>
   {% endblock %}
 
   {% if favicon %}<link rel="shortcut icon" href="{{ favicon }}">
@@ -27,21 +27,21 @@
   <link href="{{ path }}" rel="stylesheet">
   {%- endfor %}
 
-  {% if current_page %}
+  {% if page %}
   <script>
     // Current page data
     var mkdocs_page_name = "{{ page_title }}";
-    var mkdocs_page_input_path = "{{ current_page.input_path }}";
-    var mkdocs_page_url = "{{ current_page.abs_url }}";
-     var mkdocs_page_url = "{{ current_page.abs_url }}";
+    var mkdocs_page_input_path = "{{ page.input_path }}";
+    var mkdocs_page_url = "{{ page.abs_url }}";
+     var mkdocs_page_url = "{{ page.abs_url }}";
   </script>
   {% else %}
   </script>
   {% endif %}
-  <!-- site_name == {{ site_name }} -->
+  <!-- site_name == {{ config.site_name }} -->
   <!-- page_title == {{ page_title }} -->
   <!-- base_url == {{ base_url }} -->
-  <!-- current_page == {{ current_page }} -->
+  <!-- page == {{ page }} -->
   <script src="{{ base_url }}/js/jquery-2.1.1.min.js"></script>
   <script src="{{ base_url }}/js/modernizr-2.8.3.min.js"></script>
   <script type="text/javascript" src="{{ base_url }}/js/highlight.pack.js"></script>
@@ -318,7 +318,7 @@ console.log('--------');
 <![endif]-->
 </body>
 </html>
-{% if current_page and current_page.is_homepage %}
+{% if page and page.is_homepage %}
 <!--
 MkDocs version : {{ mkdocs_version }}
 Build Date UTC : {{ build_date_utc }}
