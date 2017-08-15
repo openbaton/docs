@@ -30,7 +30,7 @@
   {% if page %}
   <script>
     // Current page data
-    var mkdocs_page_name = "{{ page_title }}";
+    var mkdocs_page_name = "{{ page.title }}";
     var mkdocs_page_input_path = "{{ page.input_path }}";
     var mkdocs_page_url = "{{ page.abs_url }}";
      var mkdocs_page_url = "{{ page.abs_url }}";
@@ -39,7 +39,7 @@
   </script>
   {% endif %}
   <!-- site_name == {{ config.site_name }} -->
-  <!-- page_title == {{ page_title }} -->
+  <!-- page.title == {{ page.title }} -->
   <!-- base_url == {{ base_url }} -->
   <!-- page == {{ page }} -->
   <script src="{{ base_url }}/js/jquery-2.1.1.min.js"></script>
@@ -101,14 +101,14 @@ display: block;
 $( document).ready(function(){
       //console.log("test");
 
-    //$('.subnav').not( ":has('{{ page_title }}')" ).hide();
+    //$('.subnav').not( ":has('{{ page.title }}')" ).hide();
     $('li.subnav_drop').find('ul.subnav').hide();
     //$('li.subnav_drop').find('ul.subnav').each(function(i,e){console.log(i,e)});
-       $( ".subnav" ).find( "li:contains('{{ page_title }}')" ).each(function(i,e){
+       $( ".subnav" ).find( "li:contains('{{ page.title }}')" ).each(function(i,e){
           var currentElement = $(e);
           currentElement.parent().css({"display":"block","visibility":"visible"}); //css("background-color","blue");
           currentElement.css({"display":"block","visibility":"visible"});
-       });//$( ".subnav" ).find( "li:contains('{{ page_title }}')" ).css("display","block");
+       });//$( ".subnav" ).find( "li:contains('{{ page.title }}')" ).css("display","block");
        //$(".current").css({"background-color":"blue","display":"block","visibility":"visible"});
        //show(1000,function(i,e){console.log(i,e)});
        //$('li.subnav_drop').find('ul.subnav').css("background-color","blue");
@@ -120,11 +120,11 @@ $( document).ready(function(){
 
 });
    
-$( ".wy-nav-content" ).find( "li:contains('{{ page_title }}')" ).css('color','red');
+$( ".wy-nav-content" ).find( "li:contains('{{ page.title }}')" ).css('color','red');
 console.log('--------');
-console.log($( ".wy-nav-content" ).find( "div:contains('{{ page_title }}')" ).css("color","red"));
+console.log($( ".wy-nav-content" ).find( "div:contains('{{ page.title }}')" ).css("color","red"));
 console.log('--------');
-console.log($( ".subnav" ).find( "li:contains('{{ page_title }}')" ));
+console.log($( ".subnav" ).find( "li:contains('{{ page.title }}')" ));
 console.log('--------');
   </script>
 
