@@ -39,6 +39,8 @@ pages:
 - ['nfvo-sdk.md', 'Learn more', 'Open Baton SDKs']
 - ['how-to-register-event.md', 'Learn more','The Event Mechanism tutorial']
 - ['FAQ.md', 'FAQ', 'FAQ']
+- ['**HIDDEN**': 'tosca-iperf-scenario.md']
+- ['**HIDDEN**': 'tosca-CSAR-onboarding.md']
 - ['**HIDDEN**': 'vnf-descriptor.md']
 - ['**HIDDEN**': 'nfvo-installation-src.md']
 - ['**HIDDEN**': 'zabbix-server-configuration-3.0.md']
