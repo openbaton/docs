@@ -221,6 +221,16 @@ a:hover#menu-icon {
 
 }
 
+.container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;font-size;
+  padding:1em 4em 3em 0em;
+  overflow:auto;
+
+
+}
+
   .wy-nav-content{
     width: 100%
   }
@@ -240,11 +250,13 @@ a:hover#menu-icon {
 
 li.current{
     background:none;
+    border-left:4px solid #f9c308;
 }
 
 
 li.subnav_drop a:hover, .subnav a:hover, a:active, .subnav li a:hover  {
     background:none;
+    border-left:4px solid #f9c308;
 }
 
 .wy-menu ,.wy-menu-vertical{
@@ -357,7 +369,6 @@ nav.stickynav {
 
 .wy-menu, .wy-menu-vertical{
     margin-top: 40px;
-    position: inherit !important;
 }
 
 .wy-menu-vertical li.current a{
