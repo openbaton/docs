@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="{{ base_url }}/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="{{ base_url }}/css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="{{ base_url }}/css/highlight.css">
+  <script src="{{ base_url }}/resources/w3.js"></script>
+  <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+  <link rel="stylesheet" href="{{ base_url }}/resources/styles.css">
   {%- for path in extra_css %}
   <link href="{{ path }}" rel="stylesheet">
   {%- endfor %}
@@ -126,23 +129,41 @@ console.log('--------');
 
 
 
-<div class="navcontainer" style="margin:0px; background:#000;">
-    <div class="navholder">
-      <nav>
-        <a href="../../index.html" class="logo"></a>
-        <a href="#" id="menu-icon"></a>
-        <ul class="navigation">
-          
-                <li><a href="../../index.html#about">About</a></li>
-                <li><a href="../../cases.html">Use Cases</a></li>
-                <li><a href="../../features.html">Features</a></li>
-                <li><a href="#">Documentation</a></li>
-                <li><a href="../../index.html#contact">Contact</a></li>
-                <li><a href="http://marketplace.openbaton.org"><i class="material-icons">shopping_cart </i>  Marketplace<div class="ripple-container"></div></a></li>
-          </ul>
-      </nav>
-     </div>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top one-edge-shadow">
+  <div class="container">
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="http://openbaton.github.io/index.html"><img src="resources/images/logo1-default.png" class="img-responsive" title="openbaton" alt="openbaton" /></a>
+    </div>
+    <div class="collapse navbar-collapse" id="top-nav">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="page-scroll">
+          <a href="http://openbaton.github.io/index.html">Home</a>
+        </li>
+        <li class="page-scroll">
+          <a href="http://openbaton.github.io/cases.html">Use Cases</a>
+        </li>
+        <li class="page-scroll">
+          <a href="http://openbaton.github.io/features.html">Features</a>
+        </li>
+        <li class="page-scroll">
+          <a class="active" href="http://openbaton.github.io/documentation/">Documentation</a>
+        </li>
+        <li class="page-scroll">
+          <a href="http://openbaton.github.io/index.html#contact">Contact</a>
+        </li>
+        <li class="page-scroll">
+          <a href="http://marketplace.openbaton.org">Marketplace</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <div  class="container">
   <div class="holder"> 
         <div class="wy-grid-for-nav">
@@ -189,7 +210,20 @@ console.log('--------');
 </div>
 
 
-
+<!-- jQuery -->
+<script src="resources/jquery-3.2.1.min.js"></script>
+<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="resources/scripts.js"></script>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            // Using toggleClass
+            $(".navbar-default").toggleClass("navbar-shrink", $(this).scrollTop() > 50)
+        });
+    });
+</script>
+<br>
+<br>
 </body>
 </html>
 {% if current_page and current_page.is_homepage %}
