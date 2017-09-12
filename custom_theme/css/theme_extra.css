@@ -416,11 +416,11 @@ nav.stickynav {
     position: relative;
     float: left;
     background: none;
-    width:28%;
+    width:35%;
 }
 
 .content_container{
-    max-width: 68%;
+    max-width: 65%;
     float: left;
 }
 

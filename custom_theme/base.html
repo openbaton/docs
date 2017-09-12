@@ -138,24 +138,24 @@ console.log('--------');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="http://openbaton.github.io/index.html"><img src="{{ base_url }}/resources/images/logo1-default.png" class="img-responsive" title="openbaton" alt="openbaton" /></a>
+      <a class="brand" href="../../index.html"><img src="{{ base_url }}/resources/images/logo1-default.png" class="img-responsive" title="openbaton" alt="openbaton" /></a>
     </div>
     <div class="collapse navbar-collapse" id="top-nav">
       <ul class="nav navbar-nav navbar-right">
         <li class="page-scroll">
-          <a href="http://openbaton.github.io/index.html">Home</a>
+          <a class="active" href=".../../index.html">Home</a>
         </li>
         <li class="page-scroll">
-          <a href="http://openbaton.github.io/cases.html">Use Cases</a>
+          <a href="../../cases.html">Use Cases</a>
         </li>
         <li class="page-scroll">
-          <a href="http://openbaton.github.io/features.html">Features</a>
+          <a href="../../features.html">Features</a>
         </li>
         <li class="page-scroll">
-          <a class="active" href="http://openbaton.github.io/documentation/">Documentation</a>
+          <a  href="index.html">Documentation</a>
         </li>
         <li class="page-scroll">
-          <a href="http://openbaton.github.io/index.html#contact">Contact</a>
+          <a href="../../index.html#contact">Contact</a>
         </li>
         <li class="page-scroll">
           <a href="http://marketplace.openbaton.org">Marketplace</a>
@@ -198,15 +198,13 @@ console.log('--------');
                         {% endblock %}
                       </div>
                     </div>
-          	  {%- block footer %}
-                    {% include "footer.html" %}
-          	  {% endblock %}
                   </div>
                 </div>
 
         </section>
     </div>
   </div>
+
 </div>
 
 
@@ -224,6 +222,9 @@ console.log('--------');
 </script>
 <br>
 <br>
+{%- block footer %}
+{% include "footer.html" %}
+{% endblock %}
 </body>
 </html>
 {% if current_page and current_page.is_homepage %}
