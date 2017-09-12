@@ -143,7 +143,7 @@ footer {
 
 }
 .bs-sidebar .nav> .active > li{
-    border-left: 4px solid #f9c308;
+    border-left: 4px solid #ea8e0c;
 }
 .bs-sidebar .nav > li{
     border-bottom:1px solid #ddd;
@@ -153,19 +153,19 @@ footer {
 .bs-sidebar .nav > li > a:hover,
 .bs-sidebar .nav > li > a:focus {
     text-decoration: none;
-    border-left: 4px solid #f9c308;
+    border-left: 4px solid #ea8e0c;
  
 }
 
 .bs-sidebar .nav > li > a:hover, .bs-sidebar .nav > li > a:focus{
-    border-left: 4px solid #f9c308;
+    border-left: 4px solid #ea8e0c;
 }
 .bs-sidebar .nav > .active >li,
 .bs-sidebar .nav > .active:hover >li,
 .bs-sidebar .nav > .active:focus >li{
     font-weight: bold;
     background-color: transparent;
-    border-left: 4px solid #f9c308;
+    border-left: 4px solid #ea8e0c;
 }
 
 .navbar{
