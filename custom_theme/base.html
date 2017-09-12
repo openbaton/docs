@@ -41,7 +41,7 @@
   <!-- page_title == {{ page_title }} -->
   <!-- base_url == {{ base_url }} -->
   <!-- current_page == {{ current_page }} -->
-  <script src="{{ base_url }}/js/jquery-2.1.1.min.js"></script>
+  <script src="{{ base_url }}/js/jquery-2.1.1.min.js"> </script>
   <script src="{{ base_url }}/js/modernizr-2.8.3.min.js"></script>
   <script type="text/javascript" src="{{ base_url }}/js/highlight.pack.js"></script>
   <script src="{{ base_url }}/js/theme.js"></script>
@@ -138,7 +138,7 @@ console.log('--------');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="http://openbaton.github.io/index.html"><img src="resources/images/logo1-default.png" class="img-responsive" title="openbaton" alt="openbaton" /></a>
+      <a class="brand" href="http://openbaton.github.io/index.html"><img src="{{ base_url }}/resources/images/logo1-default.png" class="img-responsive" title="openbaton" alt="openbaton" /></a>
     </div>
     <div class="collapse navbar-collapse" id="top-nav">
       <ul class="nav navbar-nav navbar-right">
@@ -211,9 +211,9 @@ console.log('--------');
 
 
 <!-- jQuery -->
-<script src="resources/jquery-3.2.1.min.js"></script>
-<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="resources/scripts.js"></script>
+<script src="{{ base_url }}/resources/jquery-3.2.1.min.js"></script>
+<script src="{{ base_url }}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="{{ base_url }}/resources/scripts.js"></script>
 <script>
     $(document).ready(function () {
         $(window).scroll(function () {
