@@ -41,13 +41,13 @@ Below you can find an example of a NSD for deploying 1..n VNFs:
 You can see the complete NSD file of this example [here][nsd-iperf].
 
 | Params          				| Meaning       													|
-| -------------   				| -------------:													|
-| name  						| The name given to a Network Service Descriptor |
-| vendor 						| The vendor creating this Network Service Descriptor      	|
-| version 						| The version of the Network Service Descriptor (can be any string)      	|
-| vnfd 							| A list of Virtual Network Function Descriptors (see [Virtual Network Function Descriptor][vnf-descriptor] for more details)      	|
-| vld 							| A list of Virtual Link Descriptors      	|
-| vnf_dependency 				| A list of VNF Dependencies (**Not mandatory**, please check the [vnfd page](vnf-descriptor) in order to understand more about this topic, as you may not need to specifiy dependencies here if those are already provided in terms of requirements at the VNFD level)     	|
+| -------------   				| -------------													|
+| name  						| The name of the Network Service |
+| vendor 						| The vendor or provider of the Network Service      	|
+| version 						| The version of the Network Service (can be any string)      	|
+| vnfd 							| The list of Virtual Network Functions composing the Network Service (see [Virtual Network Function Descriptor][vnf-descriptor] for more details)      	|
+| vld 							| The list of Virtual Links that are referenced by the VNF Descriptors in order to define network connectivity      	|
+| vnf_dependency 				| The list of dependencies between Virtual Network Functions (**Not mandatory**, please check the [VNF Descriptor page](vnf-descriptor) in order to understand more about this topic, as you may not need to specifiy dependencies here if those are already provided in terms of requirements at the VNFD level)     	|
 
 ### VNF Descriptors
 
@@ -65,10 +65,10 @@ The VLD must contain a parameter _name_ with the value of a network that will be
 A VNF Dependency is composed by:
 
 | Params          				| Meaning       													|
-| -------------   				| -------------:													|
-| source  						| The name of the VNFD that provides one or more parameters (see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
-| target 						| The name of the VNFD that requires one or more parameters	(see [VNFManager Generic][vnfm-generic] and [VNF Parameters][vnf-parameters])|
-| parameters					| The name of the parameters that the *target* requires     	|
+| -------------   				| -------------													|
+| source  						| The name of the Virtual Network Function that provides one or more parameters (see [Generic VNF Manager][vnfm-generic] and [VNF Parameters][vnf-parameters])|
+| target 						| The name of the Virtual Network Function that requires one or more parameters	(see [Generic VNF Manager][vnfm-generic] and [VNF Parameters][vnf-parameters])|
+| parameters					| The list of parameters provided by the *source* to the *target*     	|
 
 It is possible to let the Orchestrator to calculate dependencies automatically by providing some parameters in the VNF Descriptor part. Please check the [VNF Descriptor page](vnf-descriptor)
 
