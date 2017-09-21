@@ -3,9 +3,10 @@
 The *Virtualised Infrastructure Manager* (Vim) is the functional block, responsible for controlling and managing the
  NFVI compute, storage and network resources within a Point of Presence (PoP).
 
-In order to interoperate with a PoP it is required to register the VIM instance responsible for it to the NFVO. 
-Assuming that you already installed the proper VIM driver, in order to connect to the selected Point of Presence (PoP), 
-you need to register it at the NFVO. For doing that you can write a JSON file containing the details of a VIM Instance like the one described below:
+In order to instantiate resources on a PoP, the NFVO must be aware of it. 
+Assuming that you already installed the proper VIM driver, you need to register a new PoP. 
+For doing that you can write a JSON file containing the details of your PoP, meaning how to reach via remote APIs the VIM responsible for that particular PoP. 
+Here you have an example:
 
 
 ```javascript
@@ -30,21 +31,22 @@ you need to register it at the NFVO. For doing that you can write a JSON file co
 ```
 
 Most of the parameters are based on the OpenStack VIM type, since OpenStack represents the standard de-facto VIM in the ETSI NFV specification. 
-However, there are additional VIM drivers provided, therefore refer to the actual VIM driver you are using for more details about what to fill in the JSON file:
+However, there are additional VIM drivers provided (soon to come more), therefore refer to the actual VIM driver you are using for more details about what to fill in the JSON file:
 
 * [openstack][openstack]
 * [test][test]
 
+Once you have prepared your JSON file, you need to upload it on the NFVO either via the dashboard (described below) or via the CLI. 
 
 ## Register the PoP using the GUI
 
-In order to make use of your VIM described within your JSON file, you need to upload the JSON file to the NFVO.
+In order to make use of your PoP described within your JSON file, you need to upload the JSON file to the NFVO.
 You can use the dashboard available at [localhost:8080] for this purpose.
-Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your VIM descriptor. The following picture shows the dashboard:
+Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your JSON file (from the File input section). The following picture shows the dashboard:
 
 ![register a new PoP][register-new-pop]
 
-Once the VIM instance is registered, it will appear on the list of available PoPs, filled with the information regarding the available images, networks and flavors. At this point the VIM/PoP can be included in your Network Service Descriptors.
+Once the VIM instance is registered, it will appear on the list of available PoPs, filled with the information regarding the available images, networks and flavors. At this point, you are ready to use this new PoP in any NSDs and VNFDs.
 
 **_Please note that the name chosen must be unique inside the project and will be used to refer to the VimInstance_.**
 

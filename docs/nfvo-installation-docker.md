@@ -2,7 +2,7 @@
 
 # Install Open Baton using Docker
 
-This tutorial will guide towards the installation of a standalone Open Baton environment composed by the following components:
+This tutorial will guide towards the installation of a minimal Open Baton environment on Docker, comprising the following components:
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
 * [RabbitMQ][reference-to-rabbit-site] as messaging system
@@ -10,6 +10,12 @@ This tutorial will guide towards the installation of a standalone Open Baton env
 * OpenStack VIM Driver for deploying VNFs on OpenStack
 * Generic VNFM for the instantiation of VNFs part of the Open Baton ecosystem
 
+
+## Requirements
+
+You need to have [Docker] installed.
+
+## User guide
 
 To have a running standalone Open Baton Docker container type the following commands:
 
@@ -30,10 +36,21 @@ After running the container you should see as output an alphanumeric string (whi
 cfc4a7fb23d02c47e25b447d30f6fe7c0464355a16ee1b02d84657f6fba88e07
 ```
 
+After few minutes the Open Baton NFVO should be started, then you can open a browser and go on [localhost:8080]. To log in, the default credentials for the administrator user are:
+
+```
+user: admin
+password: openbaton
+```
+
+
+### Troubleshooting
+
+
 To verify that the container is running you can type the following command:
 
 ```bash
-sudo docker ps -a
+sudo docker ps
 ```
 
 which output should be similar to the following:
@@ -49,14 +66,6 @@ To connect to the running container containing Open Baton you can type the follo
 sudo docker exec -ti openbaton bash
 ```
 
-After few minutes the Open Baton NFVO should be started, then you can open a browser and go on [localhost:8080].
-To log in, the default credentials for the administrator user are:
-
-```
-user: admin
-password: openbaton
-```
-
 To stop and delete the running Open Baton container you can type respectively the following commands:
 
 ```bash
@@ -64,8 +73,8 @@ sudo docker stop openbaton
 sudo docker rm openbaton
 ```
 
-
-[spring]:https://spring.io
+[docker]: https://www.docker.com/
+[spring]: https://spring.io
 [localhost:8080]:http://localhost:8080/
 [use-openbaton]:use.md
 [dummy-NSR]:dummy-NSR.md

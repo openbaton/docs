@@ -1,5 +1,5 @@
 # Open Baton
-Open Baton is an open source platform providing a comprehensive implementation of the ETSI Management and Orchestration (MANO) specification.
+Open Baton is an open source platform providing a comprehensive implementation of the ETSI NFV Management and Orchestration (MANO) specification.
 
 ## Its main components
 Open Baton provides many different features and components:
@@ -38,7 +38,7 @@ ETSI NFV limits itself to this level of indications, considering that other stan
 * Sending us an email to: [info-at-openbaton-dot-org]
 
 ## Supported by
-Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], [SoftFIRE][softfire]. Open Baton is one of the main components of the [5G Berlin][5g-berlin] initiative.  
+Open Baton is a project developed by Fraunhofer FOKUS and TU Berlin. It is supported by different European publicly funded projects: [NUBOMEDIA][nubomedia], [Mobile Cloud Networking][mcn], and [SoftFIRE][softfire]. Open Baton represents also one of the main components of the [5G Berlin][5g-berlin] initiative.  
 
 [5g-berlin]: http://www.5g-berlin.org/
 [autoscaling-system]: https://github.com/openbaton/autoscaling
