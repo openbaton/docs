@@ -227,7 +227,7 @@ $ java -jar myPlugin-1.0-SNAPSHOT.jar
 [gradle-wrapper]:https://docs.gradle.org/current/userguide/gradle_wrapper.html
 
 [project-guide-naming-conventions]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
-[vim-instance-documentation]:vim-instance.md
+[vim-instance-documentation]:pop-registration.md
 [vim_plugin_structure]: images/vim_plugin_structure.png
 [new_project_vim]: images/new_project_vim.png
 [new_project_vim_groupId]: images/new_project_vim_groupId.png
