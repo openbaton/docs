@@ -67,12 +67,12 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
 ```
 
 | Params          				| Meaning       																|
-| -------------   				| -------------:																|
-| name  						| The name to give to the VirtualNetworkFunctionDescriptor 						|
-| vendor 						| The vendor creating this VirtualNetworkFunctionDescriptor      				|
-| version 						| The version of the VirtualNetworkFunctionDescriptor (can be any string)      	|
-| type	 						| The type of the VirtualNetworkFunctionDescriptor (can be any string) and it is used in the dependency parameters in the scripts      	|
-| endpoint 						| The endpoint of the VirtualNetworkFunctionDescriptor (can be any string) needs to point to a registered VnfManager     	|
+| -------------   				| -------------																|
+| name  						| The name of the Virtual Network Function               						|
+| vendor 						| The provider or vendor of this Virtual Network Function         				|
+| version 						| The version of the Virtual Network Function (can be any string)             	|
+| type	 						| The type of the Virtual Network Function (can be any string) and it is used in the dependency parameters in the scripts      	|
+| endpoint 						| The endpoint of the Virtual Network Function (can be any string) that defines the responsible VNF Manager     	|
 
 
 The other most important parameters are described in the following sections.
@@ -80,11 +80,11 @@ The other most important parameters are described in the following sections.
 ### Virtual Deployment Unit (VDU)
 
 | Params          				| Meaning       																|
-| -------------   				| -------------:																|
-| vm_image  					| The list of image names or ids existing in the VimInstance or in the VNF Package						|
-| vimInstanceName				| The list of VimInstances. Only one of them will be chosen, randomly      				|
-| scale_in_out					| The maximum number of instances (VMs) which can be created to support scale out/in.      	|
-| vnfc                                          | This field contains a list of VNFComponents which will be deployed for this VNFD.  |
+| -------------   				| -------------																|
+| vm_image  					| The list of image names or ids existing in the PoP or in the VNF Package (in case it will be uploaded while onboarding)	|
+| vimInstanceName				| The list of PoP where the VNF Components of this VDU will be deployed. If several are selected, the PoP will be randomly chosen	|
+| scale_in_out					| The maximum number of instances which can be launched (scaled out) at runtime within this VDU |
+| vnfc                          | The list of VNF Components which will be deployed while instantiating the VDU |
 
 ##### VNFC
 
@@ -92,8 +92,8 @@ After launching a network service, every VNFComponent will run on a separate vir
 VNFCs contain the following fields:
 
 | Params                        | Meaning                                                                       |
-| -------------                 | -------------:                                                                |
-|connection_point               | each connection point is a reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano]). Moreover you can specify a floatingIp to be assigned to this connection point in the form "192.168.0.123". Please be aware of the fact that the NFVO will try to allocate this IP from the external network associated to the tenant. Therefore it is important to have an already configured external network before making use of floating IPs. The possible values are the actual floatingip ip or "random" if no preference is specified. If omitted no floatingip will be assigned. Optionally, the ethernet interface to be attached to a specific network can be chosen through the `interfaceId`. The interfaceId have to be a numeric value and is used while sorting the list of networks.  	        |
+| -------------                 | -------------                                                              |
+|connection_point               | This defines the reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano]). Moreover you can specify a Floating IP to be assigned to this connection point in the form "192.168.0.123". Please be aware of the fact that the NFVO will try to allocate this IP from the external network associated to the tenant. Therefore it is important to have an already configured external network before making use of floating IPs. The possible values are the actual floatingip ip or "random" if no preference is specified. If omitted no floatingip will be assigned. Optionally, the ethernet interface to be attached to a specific network can be chosen through the `interfaceId`. The interfaceId have to be a numeric value and is used while sorting the list of networks.  	        |
 
 ### Configurations
 
@@ -112,7 +112,7 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 Currently supported events are:
 
 | Event name    | Description |
-| ---------     | ---------:  |
+| ---------     | ---------   |
 | INSTANTIATE   | ...         |
 | CONFIGURE     | ...         |
 | START         | ...         |
