@@ -11,7 +11,7 @@ The table below provides an explaination about the different parameters used in 
 | password       | The password of your openstack account  |       yes |
 | keyPair        | The keypair _name_ to get the access to the VMs (optional)                                                                                               |       no |
 | securityGroups | Use a Security group that provides a sets of IP filtering rules that are applied to an instance's networking (mainly applicable to OpenStack). Usually set to default                                             |        no |
-| type           | The type of the VIM Instance you are using. This information will be used by the NFVO for locating the corresponding driver. Please refer to the [Marketplace][marketplace-drivers] for checking which VIM drivers are currently available. |       yes |
+| type           | openstack             |       yes |
 | location       | The location of the Point of PoP.                                                      |        no |
 
 

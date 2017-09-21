@@ -5,20 +5,18 @@ Considering that the test VIM driver is just a dummy driver, in the sense that i
 
 | Params         | Meaning                                                                                                                                                                                | Mandatory |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------:|
-| name           | The name of the Point of Presence, important for later on linking it into your VNFD. **_Please note that the name chosen must be unique inside the project and will be used to refer to this particular PoP instance_.**                                                                                                                                                         |       yes |
-| authUrl        |    |       yes |
-| tenant         |    |       yes |
-| username       |                                                                                                                    |       yes |
-| password       | |       yes |
-| keyPair        |                                                                                                |       no |
-| securityGroups |                                              |        no |
-| type           | |       yes |
+| name           | The name of the Point of Presence, important for later on linking it into your VNFD. **_Please note that the name chosen must be unique inside the project and will be used to refer to this particular PoP instance_.**       |       yes |
+| authUrl        | dummy endpoint  |       yes |
+| tenant         | dummy tenant name  |       yes |
+| username       | dummy username                                                                                                                |       yes |
+| password       | dummy password |       yes |
+| type           | test |       yes |
 | location       | The location of the Point of PoP.                                                      |        no |
 
 
 ## Examples
 
-Example for Keystone V3: 
+An example look like: 
 
 ```javascript
 {
@@ -27,10 +25,6 @@ Example for Keystone V3:
    "tenant":"my-tenant",
    "username":"admin",
    "password":"openbaton",
-   "keyPair":"my-key",
-   "securityGroups":[
-      "default"
-   ],
    "type":"test",
    "location":{
       "name":"Berlin",
