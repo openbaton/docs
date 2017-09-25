@@ -162,7 +162,7 @@ dependencies {
 }
 ```
 
-Then in your main, obtain the MonitoringPluginCaller as follow:
+Then in your main, obtain the MonitoringPluginCaller as follows:
 
 ```java
 MonitoringPluginCaller monitoringPluginCaller = null;
