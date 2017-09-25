@@ -18,7 +18,7 @@ In order to execute this scenario, you need to have the following components up 
 
 If not yet running start the NFVO and the Dummy-VNFM (refer to it's [readme][Dummy-VNFM] file on how to start it).  
 If you installed the NFVO using the bootstrap script, the Test vim driver will be installed already.  
-Otherwise you have to provide it manually by cloning the [git repository][test-plugin-github] and building the jar file with *./gradlew build*.
+Otherwise, you have to provide it manually by cloning the [git repository][test-plugin-github] and building the jar file with *./gradlew build*.
 Now move the built jar into **{path-to-nfvo-source-code}/nfvo/plugins/vim-drivers** and restart the NFVO. 
 
 ## Store the VimInstance

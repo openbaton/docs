@@ -3,7 +3,7 @@
 
 ### Q1: What type of database is the NFVO using?
 
-The NFVO uses Hibernate for managing transactions with a relational database. By default the NFVO is configured with an in memory database (HSQL).
+The NFVO uses Hibernate for managing transactions with a relational database. By default, the NFVO is configured with an in memory database (HSQL).
 Other types of databases are supported, for instance MySQL.  
 This can be changed by setting the following properties in the /etc/openbaton/openbaton.properties file:
 ```
