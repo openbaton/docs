@@ -1,7 +1,7 @@
 # How to configure the NFVO
 
-This guide explains you how to configure the NFVO after installation is completed. In general, after using the bootsrap procedure no changes described here are required unless you want to tune up your installation.
-In addition to this, you may need to modify also the configuration paramenters of the [Generic VNFM][generic-vnfm]
+This guide explains you how to configure the NFVO once the installation is completed. In general, after using the bootsrap procedure no changes described here are required unless you want to tune up your installation.
+In addition to this, you may need to modify also the configuration parameters of the [Generic VNFM][generic-vnfm]
 
 ## NFVO properties overview
 
