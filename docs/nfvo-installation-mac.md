@@ -7,7 +7,7 @@ This tutorial will guide you through the installation of the NFVO on top of OSX.
 ### Requirements
 
 - [Homebrew][homebrew-website] installed and updated.  
-- Java 7+ installed and updated (you can install with **brew cask install java**)
+- Java 7+ installed and updated (you can install it with **brew cask install java**)
 - [RabbitMQ][rabbitmq-website] installed, properly configured and started. Once RabbitMQ is installed, you can configure it with the following commands:
 ```
 rabbitmqctl add_user admin openbaton
