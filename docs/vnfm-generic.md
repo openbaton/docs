@@ -135,7 +135,7 @@ References
 [nfv-mano-B.3]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf#page=108
 [vnfm-ems-communication]:images/generic-vnfm-vnfm-ems-communication.png
 [nfvo-vnfm-communication]: images/generic-vnfm-vnfm-or-communication.png
-[generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg.png
+[generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg-v2.png
 [ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
 [vnfpackage-tutorial-link]:vnf-package#tutorial
 [vnfpackage-doc-link]:vnf-package

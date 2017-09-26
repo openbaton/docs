@@ -9,7 +9,7 @@ OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plu
 
 Before you can start with developing your own Vim Driver you need to prepare your programming environment by installing/configuring the following requirements:
 
-* JDK 7 ([installation][openjdk])
+* JDK 8 ([installation][openjdk])
 * Gradle ([installation][gradle-installation])
 
 ### Create a new project

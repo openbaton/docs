@@ -322,7 +322,7 @@ With this last message the VNF managed by this VNFM will be set to ACTIVE. When 
 References
 -->
 
-[or-vnfm-seq]:images/nfvo-rest-vnfm-seq-dg.png
+[or-vnfm-seq]:images/nfvo-rest-vnfm-seq-dg-v2.png
 
 <!---
 Script for open external links in a new tab
