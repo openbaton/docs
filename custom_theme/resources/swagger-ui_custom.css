@@ -12,6 +12,7 @@
 }
 .swagger-ui a.nostyle, .swagger-ui a.nostyle:visited{
     word-break: break-all;
+    flex: 1;
 }
 .base-url{
     margin-top: 20px !important;
