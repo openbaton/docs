@@ -38,6 +38,7 @@ pages:
 - ['fault-management.md', 'Fault Management', 'FM overview']
 - ['network-slicing.md', 'Network Slicing', 'NS overview']
 - ['marketplace.md', 'Marketplace', 'Marketplace overview']
+- ['api.md', 'API', 'NFVO REST API']
 - ['nfvo-architecture.md', 'Learn More', 'NFVO Architecture']
 - ['how-to-register-event.md', 'Learn More','The Event Engine']
 - ['security.md', 'Learn More', 'Identity management']
