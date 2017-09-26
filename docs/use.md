@@ -20,7 +20,7 @@ You can also follow one of the tutorials provided in the [next][tutorials] secti
 [juju]: vnfm-juju
 [ns-descriptor]: ns-descriptor
 [vim-driver]: vim-driver
-[vim-registration]: vim-instance
+[vim-registration]: pop-registration.md
 [vnfm-intro]: vnfm-intro
 [vnf-pacakge]: vnf-package
 [rest-api]: http://get.openbaton.org/openbaton-nfvo-api/

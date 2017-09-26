@@ -1,6 +1,7 @@
 # Register a new PoP of type OpenStack
 
 The table below provides an explaination about the different parameters used in the PoP JSON file. 
+**Please make sure you have read the [prerequisites][openstack-driver] before registering an OpenStack PoP.**
 
 | Params         | Meaning                                                                                                                                                                                | Mandatory |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------:|
@@ -39,3 +40,4 @@ Example for Keystone V3:
 }
 ```
 
+[openstack-driver]: openstack-driver.md

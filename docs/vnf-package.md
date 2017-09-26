@@ -10,6 +10,9 @@ The NFVO supports two different formats for VNF Packages:
 
 This page provides more information about the first option, while more information about the second option are given in this [tutorial][csar-onboarding].
 
+**Important note:** in case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer them in the VNFD as part of the
+*vnfPackageLocation* parameter
+
 # Overview
 
 A VNF Package is a tar-archive containing all the information required for managing the lifecycle of a VNF. First step is to build the archive which then can be onboarded to the NFVO.
@@ -134,9 +137,10 @@ The execution order is defined by the lifecycle_events inside the VNFD. Please r
 # Sample tutorial
 
 This section provides an example about how to create, upload and make use of VNF Packages.
-The chosen scenario is a Network Service for testing the network connectivity by using [iPerf][iperf-link].
-iPerf is a tool for active measurements of the maximum achievable bandwidth on IP networks.
-Therefore, we need a server and a client installing the iPerf server/client and configuring them for communication between.
+The chosen scenario is a simple network service using [iPerf][iperf-link] in a server/client scenario. 
+iPerf is a tool for active measurements of the maximum achievable bandwidth on IP networks. 
+This tutorial is similar to the one already described in the [iperf tutorial][iperf], however making use of VNF packages instead of just the network service descriptor. 
+
 
 ## Creation of VNF Packages
 For doing so, we need to create two VNF Packages and reference them in the NSD.
@@ -383,6 +387,7 @@ You could also use the [Dashboard][dashboard-link] or the [Command Line Interfac
 
 
 [iperf-link]:https://iperf.fr/
+[iperf]: iperf-NSR.md
 [dashboard-link]:nfvo-how-to-use-gui
 [vnfd-link]:vnf-descriptor
 [image-link]:http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img

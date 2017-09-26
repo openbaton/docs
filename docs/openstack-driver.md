@@ -9,7 +9,7 @@ It uses the [OpenStack4J][openstack4j] library providing a set of Java APIs for 
 
 There are no major prerequisites for deploying VNFs on top of OpenStack, unless you want to start making use of dynamic floating IPs allocation, etc. 
 
-First important assumption is that you have configured an external network which could be associated via a router to any internal network in your tenant. 
+First important assumption is that you have configured an external network which could be associated via a router to any private network of your tenant. 
 
 The best would be to use the user account of an admin, while registering the PoP ([refer to PoP registration section][pop-registration]), so that the NFVO 
 has full rights to create new routers, new networks, and attach them together. In case of no-admin user rights, the NFVO should still be able to use the networks 

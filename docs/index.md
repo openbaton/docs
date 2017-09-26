@@ -1,7 +1,10 @@
 # Open Baton
 Open Baton is an open source platform providing a comprehensive implementation of the ETSI NFV Management and Orchestration (MANO) specification.
 
-## Its main components
+![Open Baton architecture][architecture-release-4]
+
+## Main components
+
 Open Baton provides many different features and components:
 
 * A Network Function Virtualisation Orchestrator (NFVO) completely designed and implemented following the ETSI MANO specification. Read more [here][nfvo]
@@ -15,8 +18,6 @@ Open Baton provides many different features and components:
 * A monitoring plugin integrating Zabbix as monitoring system. Read more [here][zabbix-plugin]
 * A [Marketplace][marketplace] useful for downloading VNFs compatible with the Open Baton NFVO and VNFMs. Read more at [here][marketplace-doc]
 * A set of libraries (in Java, Go and Python) which could be used for building your own VNFM. Read more [here][openbaton-libs]
-
-![Open Baton architecture][architecture-release-4]
 
 ## Get started
 In order to get started, first step is to install the framework. You can follow the [installation guide][install-guide] for getting started immediately on several different Operating Systems / virtualization platforms.

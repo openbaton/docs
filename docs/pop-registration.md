@@ -31,7 +31,7 @@ Here you have an example:
 ```
 
 Most of the parameters are based on the OpenStack VIM type, since OpenStack represents the standard de-facto VIM in the ETSI NFV specification. 
-However, there are additional VIM drivers provided (soon to come more), therefore refer to the actual VIM driver you are using for more details about what to fill in the JSON file:
+However, there are additional VIM drivers provided (soon to come drivers for Amazon EC2 and Docker), therefore refer to the actual VIM driver you are using for more details about what to fill in the JSON file:
 
 * [openstack][openstack]
 * [test][test]
