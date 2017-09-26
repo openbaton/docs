@@ -46,8 +46,8 @@ body{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 410px;
-    padding-top: 85px;
+    height: 460px;
+    padding-top: 45px;
 }
 .text-white{
     color: white;
@@ -256,7 +256,7 @@ body{
     color: #ea8e0c !important;
 }
 .partnerBorder{
-    border: 1px solid #e1e1e1;
+    border: 1px #e1e1e1;
     margin-right: 10px;
     margin-left: 10px;
 }

@@ -22,6 +22,8 @@
   <script src="{{ base_url }}/resources/w3.js"></script>
   <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
   <link rel="stylesheet" href="{{ base_url }}/resources/styles.css">
+  <link rel="stylesheet" href="{{ base_url }}/resources/swagger-ui.css">
+  <link rel="stylesheet" href="{{ base_url }}/resources/swagger-ui_custom.css">
   {%- for path in extra_css %}
   <link href="{{ path }}" rel="stylesheet">
   {%- endfor %}
@@ -214,6 +216,8 @@ console.log('--------');
 <script src="{{ base_url }}/resources/jquery-3.2.1.min.js"></script>
 <script src="{{ base_url }}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="{{ base_url }}/resources/scripts.js"></script>
+<script src="{{ base_url }}/resources/swagger-ui-bundle.js"></script>
+<script src="{{ base_url }}/resources/swagger-ui-standalone-preset.js"></script>
 <script>
     $(document).ready(function () {
         $(window).scroll(function () {
