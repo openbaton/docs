@@ -14,12 +14,14 @@ Before starting this component you have to do the configuration of the NSE that 
 This section covers the requirements that must be met by the environment in order to satisfy the demands of the NSE:
 
 * Installed and configured Open Baton NFVO/gVNFM (>=3.0.0)
-* Installed and configured Openstack (>=Mitaka) (for Mitaka check [here][os-neutron-mitaka-conf] or Newton [here][os-neutron-newton-conf]) 
+* Installed and configured OpenStack (>=Mitaka) (for Mitaka check [here][os-neutron-mitaka-conf] or Newton [here][os-neutron-newton-conf]) with QoS APIs enabled
 
 # How to install Network Slicing Engine
-If you installed this component already with the general bootstrap of Open Baton, the NSE is already installed, configured and running. In this case you can jump directly to this section [How to use Network Slicing Engine](#how-to-use-network-slicing-engine). If the NSE is not yet installed please continue with this section.
+If you have the bootstrap procedure and selected the installation of the NSE component, you could skip this section, and move to the [How to use Network Slicing Engine](#how-to) one. 
 
-Different options are available for the installation of the NSE. Either you use the fully automated bootstrap where all configurations are done automatically where you can choose between the installation based on the debian package or on the source code which is suggested for development. Apart from the bootstrap you can also use the debian or the source code installation where you need to configure the NSE manually. 
+
+Otherwise, please continue with this section. Different options are available for the installation of the Network Slicing Engine. Either you use the fully automated bootstrap where all configurations are done automatically choosing between either the debian based installation or the source code one.
+In case you don't use the bootstrap procedure, you can still install the NSE component individually either via apt-get or gradle. 
 
 ## Installation via bootstrap
 
@@ -137,7 +139,7 @@ For stopping you can use:
 
 **Note** Since the NSE subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the NSE.
 
-# How to use Network Slicing Engine
+# <a name="how-to"></a>How to use Network Slicing Engine
 The currently only supported driver is neutron, which will use the native QoS capabilities of Openstack Mitaka. To use it simply set ```nse.driver=neutron``` in the configuration file. To set QoS policies in your NSD specify the following QoS parameter in the virtual_link of your vnfd configuration. 
 
 In JSON:
