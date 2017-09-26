@@ -73,7 +73,7 @@ Regarding the SIPp server VNF you should see the following:
 
 Now you can trigger the switch to standby simulating a failure.  
 Go to Openstack dashboard and terminate the virtual machine which correspond to the ACTIVE SIPp server. As you can expect the SIPp client will loose the connection with the server.  
-However after 1/2 minutes the FMS will execute the switch to standby. After this action, the standby SIPp server will be activated and the client will connect to the new one, so that the network service recovers from the failure.
+However after 1/2 minutes the FMS will execute the switch to standby. After this action, the standby SIPp server will be activated and the client will connect to the new one, so that the network service will recover from the failure.
 
 <!---
 References
