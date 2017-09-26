@@ -15,9 +15,10 @@ Before starting this component you have to do the configuration of the AutoScali
 * Preconfgiured and running zabbix plugin either located in the folder `NFVO/plugins` or `autoscaling/plugins` to let it start automatically; or started manually. (if Zabbix is the monitoring system of choice)
 
 # How to install AutoScaling Engine
-If you installed this component already with the general bootstrap of Open Baton, the ASE is already installed, configured and running. In this case you can jump directly to this section [How to use AutoScaling Engine](#how-to-use-autoscaling-engine). If the NSE is not yet installed please continue with this section.
+If you have the bootstrap procedure and selected the installation of the ASE component, you could skip this section, and move to the [How to use AutoScaling Engine](#how-to) one. 
 
-Different options are available for the installation of the AutoScaling Engine. Either you use the fully automated bootstrap where all configurations are done automatically where you can choose between the installation based on the debian package or on the source code which is suggested for development. Apart from the bootstrap you can also use the debian or the source code installation where you need to configure the AutoScaling Engine manually. 
+Otherwise, please continue with this section. Different options are available for the installation of the AutoScaling Engine. Either you use the fully automated bootstrap where all configurations are done automatically choosing between either the debian based installation or the source code one.
+In case you don't use the bootstrap procedure, you can still install the ASE component individually either via apt-get or gradle. 
 
 ## Installation via bootstrap
 
@@ -54,7 +55,7 @@ apt-get install openbaton-ase
 
 ## Installation from the source code
 
-The latest stable version AutoScaling Engine can be cloned from this [repository][autoscaling-repo] by executing the following command:
+The latest version of the AutoScaling Engine can be cloned from this [repository][autoscaling-repo] by executing the following command:
 
 ```bash
 git clone https://github.com/openbaton/autoscaling.git
@@ -144,7 +145,7 @@ For stopping you can use:
 
 **Note** Since the AutoScaling Engine subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the AutoScaling Engine. Otherwise, the AutoScaling Engine will wait for 600 seconds for the availability of the NFVO before terminating automatically.
 
-# How to use the AutoScaling Engine
+#<a name="how-to"></a> How to use the AutoScaling Engine
 
 This guide shows you how to make use of the AutoScaling Engine. In particular, it describes how to define AutoScaling Policies.
 
