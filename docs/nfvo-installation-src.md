@@ -29,7 +29,7 @@ To facilitate the installation procedures we provide a bootstrap script which wi
 apt-get install curl
 ```
 
-***NOTE*** - We assume that you are performing the installation on top of a clean installation either of Ubuntu 14.04, Ubuntu 16.04 or Debian Jessy. In other cases we suggest to install the components one by one. You can checkout the [bootstrap][bootstrap] repository and see the installation procedures which are executed by the bootstrap script.
+**NOTE** - We assume that you are performing the installation on top of a clean installation either of **Ubuntu 16.04** or **Debian Jessy**. In other cases we suggest to install the components one by one. You can checkout the [bootstrap][bootstrap] repository and see the installation procedures which are executed by the bootstrap script.
 
 Open Baton can be installed on any kind of environment (physical hosts, virtual machines, containers, etc.). Suggested requirements in terms of CPUs, Memory, and disk space are: 
 
@@ -46,12 +46,21 @@ To start the bootstrap procedure of the **development** Open Baton environment y
 sh <(curl -s http://get.openbaton.org/bootstrap) develop
 ```
 
+Alternatively, you can have a non-interactive installation using a configuration file. Specifically, you need to have the configuration file locally available and to pass it to the bootstrap command as a parameter.
+You can download this example of [configuration file][bootstrap-config-file], modify it accordingly and execute the bootstrap typing the following command:
 
-***VERY IMPORTANT NOTE*** - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be
+```bash
+sh <(curl -s http://get.openbaton.org/bootstrap) develop --config-file=<absolute path to your configuration file>
+```
+
+**NOTE** - If you need support, get in contact with us at: ***info@openbaton.org***
+
+**VERY IMPORTANT NOTE** - By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact that during the installation you will be prompted for entering the RabbitMQ IP and Port. Please make sure that this IP can be
   reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues. If you are installing Open Baton on a VM running in OpenStack, the best is that you put here
   the floating IP.
 
 During the bootstrap procedure you will be prompted for inputs. For instance you can choose to install or not the Generic VNFM as well as other additional components, or enable or not SSL.
+For each additional component, you can choose if install a specific TAG of a component or if install the "develop" version of the source code (the default).
 At the end of the bootstrap procedure, if there are no errors, the dashboard should be reachable at: [localhost:8080].
 Depending on which additional component you decided to add to the Open Baton installation then you should have the following structure:
 
@@ -107,7 +116,7 @@ cd /opt/openbaton/generic-vnfm
 ./generic-vnfm.sh start
 ```
 
-***NOTE*** - For all the other additional components the commands above still apply just adapted to the specific component (e.g.: for the Fault Management System you can use the 'fm-system.sh' script, etc.)
+**NOTE** - For all the other additional components the commands above still apply just adapted to the specific component (e.g.: for the Fault Management System you can use the 'fm-system.sh' script, etc.)
 
 
 ### Configure it
@@ -123,6 +132,7 @@ For specific configuration refer to the [configuration]
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 [reference-to-mysql]:https://www.mysql.com/
 [bootstrap]:https://github.com/openbaton/bootstrap
+[bootstrap-config-file]:http://get.openbaton.org/bootstrap-config-file
 
 <!---
 Script for open external links in a new tab
