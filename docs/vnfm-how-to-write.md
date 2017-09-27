@@ -13,7 +13,7 @@ The vnfm-sdk provides the following things:
 
 Before you can start with developing your own VNFManager you need to prepare your programming environment by installing/configuring the following requirements:
 
-* JDK 7 ([installation][openjdk-link])
+* JDK 8 ([installation][openjdk-link])
 * Gradle 1.12 or above ([installation][gradle-installation-link])
 
 ## Develop your own VNFManager
@@ -374,7 +374,7 @@ For gathering the vnfm-sdk-amqp library you need to import the libraries by addi
 
 dependencies {
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
-    compile 'org.openbaton:vnfm-sdk-amqp:3.2.0'
+    compile 'org.openbaton:vnfm-sdk-amqp:4.0.0'
 }
 
 //...
@@ -409,7 +409,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-amqp:3.2.0'
+    compile 'org.openbaton:vnfm-sdk-amqp:4.0.0'
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
 }
 
@@ -698,9 +698,9 @@ Therefore, you need to do several things:
 **Note** If you want to use the Vim with plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:3.2.0'
-compile 'org.openbaton:vim-impl:3.2.0'
-compile 'org.openbaton:sdk:3.2.0'
+compile 'org.openbaton:vim-int:4.0.0'
+compile 'org.openbaton:vim-impl:4.0.0'
+compile 'org.openbaton:sdk:4.0.0'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 

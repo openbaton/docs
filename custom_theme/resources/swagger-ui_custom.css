@@ -1,0 +1,56 @@
+.swagger-ui .info .title small pre{
+    background-color:transparent;
+    border: none;
+    padding: 0px;
+
+}
+.swagger-ui .opblock .opblock-summary-description{
+    display: none;
+}
+.swagger-ui .opblock-tag small{
+    display: none;
+}
+.swagger-ui a.nostyle, .swagger-ui a.nostyle:visited{
+    word-break: break-all;
+    flex: 1;
+}
+.base-url{
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+.info a{
+    display: none;
+}
+.swagger-ui .opblock{
+    margin: 15px 0 15px !important;
+}
+.swagger-ui .info{
+   margin-top: 0px !important;
+    margin-bottom: 25px;
+}
+.swagger-ui .topbar{
+    display: none;
+}
+.swagger-ui .topbar .download-url-wrapper .download-url-button{
+    background: #ea8e0c !important;
+}
+.swagger-ui .topbar .download-url-wrapper input[type=text]{
+    border: 2px solid #ea8e0c;
+}
+.swagger-ui .response-col_description__inner span p{
+    color: white;
+}
+.swagger-ui section.models .model-box{
+    word-break: break-all;
+}
+.swagger-ui .info li, .swagger-ui .info p, .swagger-ui .info table{
+    display: block;
+    padding: 9.5px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

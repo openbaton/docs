@@ -6,21 +6,21 @@ The useful parameters that you can use in your scripts are defined in two differ
 ```json
 ...
 "configurations":{
-                "name":"config_name",
-                "configurationParameters":[
-                {
-                    "confKey":"key1",
-                    "value":"the_value"
-                }
-                ]
-            },
+    "name":"config_name",
+    "configurationParameters":[
+        {
+            "confKey":"key1",
+            "value":"the_value"
+        }
+    ]
+},
 
 ...
 
 "provides":[
-	    "param1",
-	    "param2"
-	  ]
+    "param1",
+    "param2"
+]
 ...
 ```
 
@@ -52,23 +52,23 @@ All the above parameters are available in all the scripts of the VNF that define
 echo "the value of the configuration parameter key1 is $key1"
 ```
 
-As described in the [Generic VNFM][vnfm-generic] page, you can set up dependencies in order to use parameters from another VNF in the MODIFY lifecycle event. For doing that you need to specify in the Network Service Descriptor the VNF Dependency, for instance if a VNF vnf-1 is connected to network net1 and vnf-2 needs the ip of vnf-1 on that network the VNF Dependency will be:
+As described in the [Generic VNF Manager][vnfm-generic] page, you can set up dependencies in order to use parameters from another VNF in the MODIFY lifecycle event. For doing that you need to specify in the Network Service Descriptor the VNF Dependency, for instance if a VNF vnf-1 is connected to network net1 and vnf-2 needs the ip of vnf-1 on that network the VNF Dependency will be:
 
 ```json
 
 "vnf_dependency":[
-        {
-            "source" : {
-                "name": "vnf-1"
-            },
-            "target":{
-                "name": "vnf-2"
-            },
-            "parameters":[
-                "net1"
-            ]
-        }
-    ]
+    {
+        "source" : {
+            "name": "vnf-1"
+        },
+        "target":{
+            "name": "vnf-2"
+        },
+        "parameters":[
+            "net1"
+        ]
+    }
+]
 
 ```
 

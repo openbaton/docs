@@ -2,11 +2,12 @@
 
 # Install Open Baton on MacOS using brew
 
-This tutorial will guide you through the installation of the NFVO on top of MacOS.
+This tutorial will guide you through the installation of the NFVO on top of OSX.
  
 ### Requirements
 
 - [Homebrew][homebrew-website] installed and updated.  
+- Java 7+ installed and updated (you can install it with **brew cask install java**)
 - [RabbitMQ][rabbitmq-website] installed, properly configured and started. Once RabbitMQ is installed, you can configure it with the following commands:
 ```
 rabbitmqctl add_user admin openbaton
@@ -14,14 +15,12 @@ rabbitmqctl set_user_tags admin administrator
 rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 ```
 
-### Install the NFVO
+## Install the NFVO
 
 In order to install the NFVO you need to execute the following instructions: 
 ```bash
-brew install https://raw.githubusercontent.com/openbaton/NFVO/master/gradle/gradle/scripts/osx/openbaton-nfvo.rb
+brew install http://get.openbaton.org/homebrew/openbaton-nfvo.rb
 ```
-
-This command will install the NFVO via brew. How to configure, start and stop the NFVO once it is installed is shown in the next section.
 
 ### Start the NFVO 
 
@@ -29,11 +28,16 @@ After the installation is completed you can launch the NFVO:
 ```
 openbaton-nfvo start
 ```
-After few seconds you can open the dashboard at: http://localhost:8080. How to use the dashboard is shown [here][dashboard-doc]. Additonally, you can also use the [CLI][cli-doc].
+After few seconds you can open the dashboard at: http://localhost:8080. How to use the dashboard is shown [here][dashboard-doc].
 
 ### Configure the NFVO 
 
-The configuration file (openbaton.properties) is in the folder /usr/local/Cellar/openbaton. To configure the NFVO please refer to [nfvo configuration][nfvo-configuration].
+The configuration file (openbaton.properties) is in the folder /usr/local/etc/openbaton. To configure the NFVO please refer to [nfvo configuration][nfvo-configuration]. 
+If you change the configuration make sure to restart the NFVO running:
+```bash
+openbaton-nfvo stop
+openbaton-nfvo start
+```
 
 ### Uninstall the NFVO
 
@@ -41,7 +45,35 @@ You can execute the following command for uninstalling the NFVO:
 ```
 brew remove openbaton-nfvo
 ```
+## Install the Generic VNFM
 
+In order to install the Generic VNFM you need to execute the following instructions: 
+```bash
+brew install http://get.openbaton.org/homebrew/openbaton-vnfm-generic.rb
+```
+
+### Start the Generic VNFM
+
+After the installation is completed you can launch the Generic VNFM: 
+```
+openbaton-vnfm-generic start
+```
+
+### Configure the Generic VNFM 
+
+The configuration file (application.properties) is in the folder /usr/local/etc/openbaton/vnfm/generic. 
+If you change the configuration make sure to restart the Generic VNFM running:
+```bash
+openbaton-vnfm-generic stop
+openbaton-vnfm-generic start
+```
+
+### Uninstall the Generic VNFM
+
+You can uninstall the Generic VNFM running: 
+```
+brew remove openbaton-vnfm-generic
+```
 
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/

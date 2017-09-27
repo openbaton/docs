@@ -22,7 +22,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "vm_image":[
                   "ubuntu-14.04-server-cloudimg-amd64-disk1"
                ],
-               "vimInstanceName":["vim-instance"],
+               "vimInstanceName":[],
                "scale_in_out":1,
                "vnfc":[
                   {
@@ -75,7 +75,7 @@ This network service is composed by two VNF (iperf-server and iperf-client), whi
                "vm_image":[
                   "ubuntu-14.04-server-cloudimg-amd64-disk1"
                ],
-               "vimInstanceName":["vim-instance"],
+               "vimInstanceName":[],
                "scale_in_out":2,
                "vnfc":[
                   {

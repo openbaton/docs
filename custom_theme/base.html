@@ -19,6 +19,11 @@
   <link rel="stylesheet" href="{{ base_url }}/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="{{ base_url }}/css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="{{ base_url }}/css/highlight.css">
+  <script src="{{ base_url }}/resources/w3.js"></script>
+  <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+  <link rel="stylesheet" href="{{ base_url }}/resources/styles.css">
+  <link rel="stylesheet" href="{{ base_url }}/resources/swagger-ui.css">
+  <link rel="stylesheet" href="{{ base_url }}/resources/swagger-ui_custom.css">
   {%- for path in extra_css %}
   <link href="{{ path }}" rel="stylesheet">
   {%- endfor %}
@@ -38,7 +43,7 @@
   <!-- page_title == {{ page_title }} -->
   <!-- base_url == {{ base_url }} -->
   <!-- current_page == {{ current_page }} -->
-  <script src="{{ base_url }}/js/jquery-2.1.1.min.js"></script>
+  <script src="{{ base_url }}/js/jquery-2.1.1.min.js"> </script>
   <script src="{{ base_url }}/js/modernizr-2.8.3.min.js"></script>
   <script type="text/javascript" src="{{ base_url }}/js/highlight.pack.js"></script>
   <script src="{{ base_url }}/js/theme.js"></script>
@@ -92,7 +97,39 @@ display: block;
 </head>
 
 <body role="document">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0">
+  <defs>
+    <symbol viewBox="0 0 20 20" id="unlocked">
+      <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V6h2v-.801C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8z"></path>
+    </symbol>
 
+    <symbol viewBox="0 0 20 20" id="locked">
+      <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8zM12 8H8V5.199C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8z"/>
+    </symbol>
+
+    <symbol viewBox="0 0 20 20" id="close">
+      <path d="M14.348 14.849c-.469.469-1.229.469-1.697 0L10 11.819l-2.651 3.029c-.469.469-1.229.469-1.697 0-.469-.469-.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-.469-.469-.469-1.228 0-1.697.469-.469 1.228-.469 1.697 0L10 8.183l2.651-3.031c.469-.469 1.228-.469 1.697 0 .469.469.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c.469.469.469 1.229 0 1.698z"/>
+    </symbol>
+
+    <symbol viewBox="0 0 20 20" id="large-arrow">
+      <path d="M13.25 10L6.109 2.58c-.268-.27-.268-.707 0-.979.268-.27.701-.27.969 0l7.83 7.908c.268.271.268.709 0 .979l-7.83 7.908c-.268.271-.701.27-.969 0-.268-.269-.268-.707 0-.979L13.25 10z"/>
+    </symbol>
+
+    <symbol viewBox="0 0 20 20" id="large-arrow-down">
+      <path d="M17.418 6.109c.272-.268.709-.268.979 0s.271.701 0 .969l-7.908 7.83c-.27.268-.707.268-.979 0l-7.908-7.83c-.27-.268-.27-.701 0-.969.271-.268.709-.268.979 0L10 13.25l7.418-7.141z"/>
+    </symbol>
+
+
+    <symbol viewBox="0 0 24 24" id="jump-to">
+      <path d="M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z"/>
+    </symbol>
+
+    <symbol viewBox="0 0 24 24" id="expand">
+      <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+    </symbol>
+
+  </defs>
+</svg>
 <script type="text/javascript">
 $( document).ready(function(){
       //console.log("test");
@@ -109,13 +146,13 @@ $( document).ready(function(){
        //show(1000,function(i,e){console.log(i,e)});
        //$('li.subnav_drop').find('ul.subnav').css("background-color","blue");
       //$(this).find('ul.subnav').toggle();
-    $('li.subnav_drop').click(function(i,e) {  
+    $('li.subnav_drop').click(function(i,e) {
       $('li.subnav_drop').not(this).find('ul.subnav').hide();
       $(this).find('ul.subnav').toggle();
-    }); 
+    });
 
 });
-   
+
 $( ".wy-nav-content" ).find( "li:contains('{{ page_title }}')" ).css('color','red');
 console.log('--------');
 console.log($( ".wy-nav-content" ).find( "div:contains('{{ page_title }}')" ).css("color","red"));
@@ -126,25 +163,43 @@ console.log('--------');
 
 
 
-<div class="navcontainer" style="margin:0px; background:#000;">
-    <div class="navholder">
-      <nav>
-        <a href="../../index.html" class="logo"></a>
-        <a href="#" id="menu-icon"></a>
-        <ul class="navigation">
-          
-                <li><a href="../../index.html#about">About</a></li>
-                <li><a href="../../cases.html">Use Cases</a></li>
-                <li><a href="../../features.html">Features</a></li>
-                <li><a href="#">Documentation</a></li>
-                <li><a href="../../index.html#contact">Contact</a></li>
-                <li><a href="http://marketplace.openbaton.org"><i class="material-icons">shopping_cart </i>  Marketplace<div class="ripple-container"></div></a></li>
-          </ul>
-      </nav>
-     </div>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top one-edge-shadow">
+  <div class="container">
+    <div style="margin: auto;" class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="../../index.html"><img style="width: 120px;" src="{{ base_url }}/resources/images/logo1-default.png" class="img-responsive" title="openbaton" alt="openbaton" /></a>
+    </div>
+    <div class="collapse navbar-collapse" id="top-nav">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="page-scroll">
+          <a href=".../../index.html">Home</a>
+        </li>
+        <li class="page-scroll">
+          <a href="../../features.html">Features</a>
+        </li>
+        <li class="page-scroll">
+          <a href="../../cases.html">Use Cases</a>
+        </li>
+        <li class="page-scroll">
+          <a class="active"  href="index.html">Documentation</a>
+        </li>
+        <li class="page-scroll">
+          <a href="../../index.html#contact">Contact</a>
+        </li>
+        <li class="page-scroll">
+          <a href="http://marketplace.openbaton.org">Marketplace</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <div  class="container">
-  <div class="holder"> 
+  <div class="holder">
         <div class="wy-grid-for-nav">
 
           {# SIDE NAV, TOGGLES ON MOBILE #}
@@ -164,12 +219,12 @@ console.log('--------');
     <div class="content_container">
         <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-         
+
 
           {# PAGE CONTENT #}
                 <div class="wy-nav-content">
                   <div class="rst-content">
-                   
+
                     <div role="main">
                       <div class="section">
                         {% block content %}
@@ -177,18 +232,415 @@ console.log('--------');
                         {% endblock %}
                       </div>
                     </div>
-          	  {%- block footer %}
-                    {% include "footer.html" %}
-          	  {% endblock %}
                   </div>
+                  {%- block footer %}
+                  {% include "footer.html" %}
+                  {% endblock %}
                 </div>
 
         </section>
     </div>
+
+  </div>
+
+</div>
+<!-- jQuery -->
+<script src="{{ base_url }}/resources/jquery-3.2.1.min.js"></script>
+<script src="{{ base_url }}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="{{ base_url }}/resources/scripts.js"></script>
+<script src="{{ base_url }}/resources/swagger-ui-bundle.js"></script>
+<script src="{{ base_url }}/resources/swagger-ui-standalone-preset.js"></script>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            // Using toggleClass
+            $(".navbar-default").toggleClass("navbar-shrink", $(this).scrollTop() > 50)
+        });
+    });
+</script>
+<br>
+<br>
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <br>
+      <div class="col-md-11">
+        <p class="footerparagraph">
+          2017 &copy; All Rights Reserved. | The Open Baton project is available under <a
+                href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a> | <a
+                data-toggle="modal" data-target="#cookies" href="#">Cookies</a> & <a data-toggle="modal"
+                                                                                     data-target="#datapro"
+                                                                                     href="#datapro">Data
+          Protection</a> | <a href="../../imprint.html">Imprint</a>
+        </p>
+
+      </div>
+      <div class="col-md-1">
+        <ul class="footer-socials list-inline">
+          <li>
+            <a href="https://twitter.com/OpenBaton" class="text-white">
+              <i class="fa fa-twitter socailIconSize"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/channel/UCYXY4rGKrKbBNheClFEKaAw" class="text-white">
+              <i class="fa fa-youtube socailIconSize"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <br> &nbsp;
+    </div>
   </div>
 </div>
+</div>
+</div>
+<div id="cookies" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h4 class="modal-title">Cookies Disclaimer</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+
+          <b>What Are Cookies?</b>
+          <br>
+
+          As is common practice with almost all professional websites this site uses cookies, which are tiny
+          files that are downloaded to your computer, to improve your experience. This page describes what
+          information they gather, how we use it and why we sometimes need to store these cookies. We will
+          also share how you can prevent these cookies from being stored however this may downgrade or 'break'
+          certain elements of the sites functionality.
+          <br>
+          For more general information on cookies see the <a href="https://en.wikipedia.org/wiki/HTTP_cookie">Wikipedia
+          article on HTTP Cookies</a>.
+          <br><br>
+          <b>How We Use Cookies?</b>
+          <br>
+          We use cookies for a variety of reasons detailed below. Unfortunately is most cases there are no
+          industry standard options for disabling cookies without completely disabling the functionality and
+          features they add to this site. It is recommended that you leave on all cookies if you are not sure
+          whether you need them or not in case they are used to provide a service that you use.
+          Disabling Cookies
+          <br>
+          You can prevent the setting of cookies by adjusting the settings on your browser (see your browser
+          Help for how to do this). Be aware that disabling cookies will affect the functionality of this and
+          many other websites that you visit. Disabling cookies will usually result in also disabling certain
+          functionality and features of the this site. Therefore it is recommended that you do not disable
+          cookies.
+          <br><br>
+          <b>The Cookies We Set</b>
+          <br>
+
+          We use cookies when you are logged in so that we can remember this fact. This prevents you from
+          having to log in every single time you visit a new page. These cookies are typically removed or
+          cleared when you log out to ensure that you can only access restricted features and areas when
+          logged in.
+          <br>
+          This site offers newsletter or email subscription services and cookies may be used to remember if
+          you are already registered and whether to show certain notifications which might only be valid to
+          subscribed/unsubscribed users.
+          <br>
+          When you submit data to through a form such as those found on contact pages or comment forms cookies
+          may be set to remember your user details for future correspondence.
+          <br>
+          In order to provide you with a great experience on this site we provide the functionality to set
+          your preferences for how this site runs when you use it. In order to remember your preferences we
+          need to set cookies so that this information can be called whenever you interact with a page is
+          affected by your preferences.
+
+          <br><br>
+          <b>Third Party Cookies</b>
+
+          <br>
+          In some special cases we also use cookies provided by trusted third parties. The following section
+          details which third party cookies you might encounter through this site.
+          <br>
+          This site uses Google Analytics which is one of the most widespread and trusted analytics solution
+          on the web for helping us to understand how you use the site and ways that we can improve your
+          experience. These cookies may track things such as how long you spend on the site and the pages that
+          you visit so we can continue to produce engaging content.
+          <br>
+          For more information on Google Analytics cookies, see the <a
+                href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage">official
+          Google Analytics page</a>.
+          <br>
+          From time to time we test new features and make subtle changes to the way that the site is
+          delivered. When we are still testing new features these cookies may be used to ensure that you
+          receive a consistent experience whilst on the site whilst ensuring we understand which optimisations
+          our users appreciate the most.
+          <br>
+          In some cases we may provide you with custom content based on what you tell us about yourself either
+          directly or indirectly by linking a social media account. These types of cookies simply allow us to
+          provide you with content that we feel may be of interest to you.
+          <br>
+          We also use social media buttons and/or plugins on this site that allow you to connect with your
+          social network in various ways. For these to work the following social media sites including;
+          Facebook, YouTube, will set cookies through our site which may be used to enhance your profile on
+          their site or contribute to the data they hold for various purposes outlined in their respective
+          privacy policies.
+
+          <br><br>
+          <b>More Information</b>
+          <br>
+
+          Hopefully that has clarified things for you and as was previously mentioned if there is something
+          that you aren't sure whether you need or not it's usually safer to leave cookies enabled in case it
+          does interact with one of the features you use on our site. However if you are still looking for
+          more information then you can contact us through one of our preferred contact methods.
+          <br>
+          Email: info@openbaton.org
+        </p>
+
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn-u  btn btn-default  backgroundimgNone btnstyled"
+                  type="button">Close
+          </button>
+          <button data-dismiss="modal"
+                  class="btn-u btn btn-default text-white backgroundorange backgroundimgNone btnstyled borderOrange"
+                  type="button">Accepted
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="datapro" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h4 id="myLargeModalLabel2" class="modal-title">Statement of Data Protection Conditions for the
+          Internet</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          The Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V. (Fraunhofer-Gesellschaft)
+          takes the protection of your personal data very seriously. When we process the personal data that is
+          collected during your visits to our Web site, we always observe the rules laid down in the
+          applicable data protection laws. Your data will not be disclosed publicly by us, nor transferred to
+          any third parties without your consent.
+          <br>
+          <br>
+
+          <b>1. Recording and processing of data in connection with access over the Internet</b><br>
+          When you visit our Web site, our Web server makes a temporary record of each access and stores it in
+          a log file. The following data are recorded, and stored until an automatic deletion date:
+        <ul>
+          <li>IP address of the requesting processor</li>
+          <li>Date and time of access</li>
+          <li>Name and URL of the downloaded file</li>
+          <li>Volume of data transmitted</li>
+          <li>Indication whether download was successful</li>
+          <li>Data identifying the browser software and operating system</li>
+          <li>Web site from which our site was accessed</li>
+          <li>Name of your Internet service provider</li>
+        </ul>
+        The purpose of recording these data is to allow use of the Web site (connection setup), for system
+        security, for technical administration of the network infrastructure and in order to op-timize our
+        Internet service. The IP address is only evaluated in the event of fraudulent access to the network
+        infrastructure of the Fraunhofer-Gesellschaft.
+        <br>
+        Apart from the special cases cited above, we do not process personal data without first obtaining your
+        explicit consent to do so. Pseudonymous user profiles can be created as stated under web analysis (see
+        below).
+
+        <br>
+        <br>
+        <b>​2. Orders</b><br>
+        If you order information material or other goods via our website, we will use the address data provided
+        only for the purpose of processing your order.
+
+        <br>
+        <br>
+        <b>3. Use and transfer of personal data</b><br>
+        All use of your personal data is confined to the purposes stated above, and is only under-taken to the
+        extent necessary for these purposes. Your data is not disclosed to third parties.
+        <br>
+        Personal data will not be transferred to government bodies or public authorities except in order to
+        comply with mandatory national legislation or if the transfer of such data should be necessary in order
+        to take legal action in cases of fraudulent access to our network infrastructure. Personal data will not
+        be transferred for any other purpose.
+        <br>
+        <br>
+        <b>4. Consent to use data in other contexts</b><br>
+
+        The use of certain services on our website, such as newsletters or discussion forums, may re-quire prior
+        registration and involves a more substantial processing of personal data, such as longer-term storage of
+        e-mail addresses, user IDs and passwords. We use such data only insofar as it has been sent to us by you
+        in person and you have given us your express prior consent for this use. For example, we request your
+        consent separately in the following cases:
+        <br>
+        <br>
+        <b>4.1 Newsletters and press distribution</b><br>
+
+        In order to register for a newsletter service provided by the Fraunhofer-Gesellschaft, we need at least
+        your e-mail address so that we know where to send the newsletter. All other information you supply is on
+        a voluntary basis, and will be only if you give your consent, for example to contact you directly or
+        clear up questions concerning your e-mail address. If you request delivery by post, we need your postal
+        address. If you ask to be included on a press distribution list, we need to know which publication you
+        work for, to allow us to check whether specific publications are actually receiving our press material.
+        <br>
+        As a general rule, we employ the double opt-in method for the registration. In other words, after you
+        have registered for the service and informed us of your e-mail address, you will receive an e-mail in
+        return from us, containing a link that you must use to con-firm your registration. Your registration and
+        confirmation will be recorded. The newsletter will not be sent until this has been done. This procedure
+        is used to ensure that only you yourself can register with the newsletter service under the specified
+        e-mail address. You must confirm your registration as soon as possible after receiving our e-mail,
+        otherwise your registration and e-mail address will be erased from our database. Until we receive your
+        confirmation, our newsletter service will refuse to accept any other registration re-quests using this
+        e-mail address.
+        <br>
+        You can cancel subscriptions to our newsletters at any time. To do so, either send us an e-mail or
+        follow the link at the end of the newsletter.
+        <br>
+        <br>
+        <b>​4.2 Visitors’ books and forums</b><br>
+        If you wish to sign up for an Internet forum run by the Fraunhofer-Gesellschaft, we need at least a user
+        ID, a password, and your e-mail address. For your own protection, the reg-istration procedure for this
+        type of service, like that for the newsletters, involves you con-firming your request using the link
+        contained in the e-mail we send you and you giving your consent to the use of further personal data
+        where this is necessary to use the forum.
+        <br>
+        You can cancel your registration for this type of service at any time, by sending us an e-mail via the
+        Web page offering the service.
+        <br>
+        As a general rule, the content of visitors’ books and forums is not subject to any form of monitoring by
+        the Fraunhofer-Gesellschaft. Nevertheless, we reserve the right to delete posted contributions and to
+        prohibit users from further use of the service at our own dis-cretion, especially in cases where posted
+        content contravenes the law or is deemed in-compatible with the objectives of the
+        Fraunhofer-Gesellschaft.
+        <br>
+        <br>
+
+        <b>5. Cookies</b><br>
+        We don’t normally use cookies on our Web site, but in certain exceptional cases we may use cookies which
+        place technical session-control data in your browser’s memory. These data are automatically erased at
+        the latest when you close your browser.
+        <br>
+        If, exceptionally, one of our applications requires the storage of personal data in a cookie, for
+        instance a user ID, we will point out you to it.
+        <br>
+        Of course, it is perfectly possible to consult our Web site without the use of cookies. Please note,
+        however, that most browsers are programmed to accept cookies in their de-fault configuration. You can
+        prevent this by changing the appropriate setting in the browser options. If you set the browser to
+        refuse all cookies, this may restrict your use of certain functions on our Website
+        <br>
+        <br>
+
+        <b>6. Web analysis</b><br>
+        Personal user profiles are not created. However, Section 15 (3) of the Telemedia Act (TMG) permits the
+        use of user profiles under a pseudonym for the purpose of advertising, market research and the
+        structuring of offers in line with the user's needs provided that the user does not object to this:
+        <br>
+        We also use web analysis services on our web pages, for example from etracker or WiredMinds, which carry
+        out the web analysis on our behalf as contract processors (see the websites of www.wiredminds.de for
+        these providers). Their services have been checked by the supervisory authorities and/or experts and
+        meet all requirements under German and European data protection laws.
+        <br>
+        Using the technologies of these providers, data is collected and stored on our website. From this data,
+        user profiles are produced under a pseudonym for marketing and optimi-zation purposes, for which cookies
+        may be used. Cookies are small text files that are stored locally in the cache memory of the site
+        visitor's web browser. The cookies enable the web browser to be recognized. Furthermore, your user
+        behavior can be measured via a JavaScript code and data collected in this connection can be sent
+        directly to the provider's servers in Germany or the EU via an HTML connection. Without your express
+        consent, the data collected using the tracking technologies will not be used to personally identify you
+        and will not be combined with the personal data about the bearer of the pseudonym. No cross-website
+        analysis will be carried out either.
+        <br>
+        <br> If you wish to technically stop the tracking, you can deactivate JavaScript and cookies in your web
+        browser. Consent for the collection and storage of data can also be refused with effect for the future
+        at any time. Please follow this link to refuse the service provided by WiredMinds:
+        <a href="http://wm.wiredminds.de">http://wm.wiredminds.de.</a>
+        <br>
+        <br>
+
+        <b>7. Social plugins</b><br>
+        We also use social plugins in some cases on our webpages, e.g. from the Facebook, Twit-ter, YouTube or
+        Google+ social networks. These are often technically operated in the USA or in other countries outside
+        Germany and the EU and some are offered via national companies in the EU (see the websites
+        www.facebook.de, www.twitter.de, www.youtube.de or www.google.de for the providers). The plugins are
+        identified with the companies’ logo, comment fields or what are known as a “Like” or “+1” button.
+        <br>
+        If you open a page of our website in your web browser containing such a plugin, your web browser will
+        create a direct connection to the servers of the respective provider in the country concerned.
+        <br>
+        By incorporating the plugins the provider is given at the least the information that you have visited a
+        certain page on our website, and perhaps also other information that your web browser or the device you
+        use also discloses. The content of the plugin is loaded by your web browser directly from the provider
+        and incorporated into our website. If you are registered and have logged in with the provider concerned,
+        your visit can also be assigned to your user account.
+        <br>
+        If you interact with a plugin, e.g. if you click on the “Like” button or enter a comment in a form
+        field, your browser will also transmit this information directly to the provider where it will be saved
+        and, if applicable, continue to be used and published.
+        <br>
+        Above all, marketing measures of the provider and the Fraunhofer-Gesellschaft are the reason for the
+        collection and use of the data as described and determine the extent of this. You can find details on
+        this and on your rights and on ways in which you can pre-vent the collection and use of your data in
+        order to protect your private sphere directly in the data privacy policy of the respective provider.
+        <br>
+        If you do not wish a provider to collect data on you through our website you must deacti-vate the
+        plugins in your web browser. If you wish to avoid a link to any existing user account, you must log out
+        before your visit to our website. By visiting our website, you de-clare your consent to the above
+        provisions.
+        <br>
+        <br>
+        <b>8. Security </b><br>
+        The Fraunhofer-Gesellschaft implements technical and organizational security measures to safeguard
+        stored personal data against inadvertent or deliberate manipulation, loss or destruction and against
+        access by unauthorized persons. Our security measures are continuously im-proved in line with
+        technological progress.
+        <br><br>
+        <b>9. Links to Web sites operated by other providers</b><br>
+        Our Web pages may contain links to other providers’ Web pages. We would like to point out that this
+        statement of data protection conditions applies exclusively to the Web pages managed by the
+        Fraunhofer-Gesellschaft. We have no way of influencing the practices of other providers with respect to
+        data protection, nor do we carry out any checks to ensure that they conform with the relevant
+        legislation.
+        <br><br>
+        <b>10. Right to information and contact data</b><br>
+        You have a legal right to inspect any stored data concerning your person, and also the right to demand
+        their correction or deletion, and to withdraw your consent for their further use.
+        <br>
+        In some cases, if you are a registered user of certain services provided by the Fraunhofer-Gesellschaft,
+        we offer you the possibility of inspecting these data online, and even of deleting or modifying the data
+        yourself, via a user account.
+        <br>
+        If you wish to obtain information on your personal data, or want us to correct or erase such data, or if
+        you have any other questions concerning the use of personal data held by us, please contact: <a
+              href="mailto:data-protection@zv.fraunhofer.de">data-protection@zv.fraunhofer.de</a>
+        <br><br>
+        <b>11. Acceptance, validity and modification of data protection conditions</b><br>
+        By using our Web site, you implicitly agree to accept the use of your personal data as specified above.
+        This present statement of data protection conditions came into effect on October 1st, 2013. As our Web
+        site evolves, and new technologies come into use, it may become necessary to amend the statement of data
+        protection conditions. The Fraunhofer-Gesellschaft reserves the right to modify its data protection
+        conditions at any time, with effect as of a future date. We recommend that you reread the latest version
+        from time to time.
 
 
+        <br>
+        <br>
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn-u  btn btn-default  backgroundimgNone btnstyled"
+                  type="button">Close
+          </button>
+          <button data-dismiss="modal"
+                  class="btn-u btn btn-default text-white backgroundorange backgroundimgNone btnstyled borderOrange"
+                  type="button">Accepted
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

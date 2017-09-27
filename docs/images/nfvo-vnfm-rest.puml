@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+autonumber "<b>(<u>##</u>)"
+
+actor User as U
+participant NFVO as A
+participant "REST-VNFM" as B1
+
+
+activate A
+activate B1
+== Instantiate ==
+U -> A : deploy(nsd_id)
+A -> U : response(nsr_id)
+A -> B1 : instantiate(vnf_package)
+B1 -> B1 : create_vnfr(vnf_package)
+B1 -> A : grant_operation() 
+A -> B1 : ack
+B1 -> A : allocate_resources()
+A -> B1 : allocate_resources_ack()
+B1 -> B1 : instantiate()
+B1 -> A : instantiate_ack()
+
+== Modify ==
+A -> B1 : modify(vnfr)
+B1 -> A : modify_ack(vnfr)
+
+== Start ==
+A -> B1 : start(vnfr)
+B1 -> A : start_ack(vnfr)
+U -> A : get_nsr(nsr-id)
+A -> U : response(nsr)
+@enduml

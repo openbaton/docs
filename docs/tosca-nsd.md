@@ -272,12 +272,11 @@ topology_template:
               - key: value
               - key2: value2
           vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
-          deployment_flavour:
+          deploymentFlavour:
             - flavour_key: m1.small
-            - flavour_key: m1.large
         requirements:
           - virtualLink: private
-          - vdu: VDU2
+          - vdu: VDU1
         interfaces:
           lifecycle:
             INSTANTIATE:
@@ -297,7 +296,7 @@ topology_template:
         endpoint: dummy
       requirements:
          - virtualLink: private
-         - vdu: VDU1
+         - vdu: VDU2
       interfaces:
           lifecycle: # lifecycle
             INSTANTIATE:

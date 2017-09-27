@@ -1,16 +1,29 @@
 # VNF Package
 
-This doc describes essential components of a VNF Package, how to create them and how to use them after onboarding.
-Therefore, you can find a practical tutorial at the end with all the steps starting from the creation over onboarding and finally referencing it by an NSD.
+This page describes essential components of a VNF Package, how to create them and how to use them after onboarding.
+Therefore, you can find a practical tutorial at the end with all the steps starting from the creation over onboarding and finally referencing it in an NSD.
 
-The NFVO can also work with CSAR as described in the [Tosca simple profile for NFV][tosca-nfv]. More information about building and deploying compliant CSARs in this [tutorial][csar-onboarding].
+The NFVO supports two different formats for VNF Packages:  
 
-A VNF Package is a tar-archive that contains all the information required for creating a VNF for the Open Baton's NFVO.
-After onboarding the VNF Package to the NFVO you can use the VNF directly in the NSD by referencing the VNFD by its ID.
-A VNF Package includes the VNFD, the image, scripts and a Metadata file structured as shown in the next part.
+* TAR archive following the ETSI NFV specification for VNF Descriptors and Packages
+* CSAR archive following the [Tosca simple profile for NFV][tosca-nfv] specification.
 
-# Package structure
-The VNF Package has the following structure:
+This page provides more information about the first option, while more information about the second option are given in this [tutorial][csar-onboarding].
+
+**Important note:** in case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer them in the VNFD as part of the
+*vnfPackageLocation* parameter
+
+# Overview
+
+A VNF Package is a tar-archive containing all the information required for managing the lifecycle of a VNF. First step is to build the archive which then can be onboarded to the NFVO.
+A typical VNF Package includes
+
+* VNF Descriptor: containing all the information required by the NFVO for deploying the VNF (more information available at the [VNF Descriptor page][vnfd-link]).
+* Image: passed using a link to an image file (typically QCOW) available for being dowloaded via HTTP. At the moment, passing an image file inside the VNF Package is not supported: there is some work in progress to allow it.
+* Metadata file providing additional information to the NFVO for understanding what's the content of the package.
+* scripts: containing all the scripts which could be used for lifecycle management.
+
+A typical VNF Package has the following structure:
 
 ```bash
 - Metadata.yaml
@@ -18,8 +31,8 @@ The VNF Package has the following structure:
 - scripts/
     - 1_script.sh
     - 2_script.sh
-- image.img (not supported at the moment, use image-link!)
 ```
+
 ## Metadata.yaml
 The Metadata.yaml defines essential properties for the VNF. This file is based on the YAML syntax where information are stored in simple <key\> : <value\> associations.
 
@@ -47,24 +60,24 @@ image-config:
     isPublic: is_public
 ```
 
-In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than other and override them therefore.
+In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than others and override them therefore.
 
-* ***name***: The name defines the name of the VNF Package itself used to store it in the database.
-* ***description***: Human readable description of the VNF.
-* ***provider***: The creator and maintainer of the VNF.
-* ***vim_types***: The list of the vim types that the VNF Package supports.
-* ***nfvo_version***: The version of the NFVO which supports this package. First two digits will be used for the check.
-* ***scripts-link***: This link points to a public git repository where scripts are stored that are needed to be executed for managing the lifecycle of the exposed VNF.
+* ***name***: The name defines the name of the VNF Package itself used to store it in the database
+* ***description***: Human readable description of the VNF
+* ***provider***: The creator and maintainer of the VNF
+* ***vim_types***: The list of the vim types that the VNF Package supports. VIM types are related to the plugin types installed on the NFVO. More info can be found [here][vim-driver].
+* ***nfvo_version***: The version of the NFVO which supports this package in the format (X.Y.Z). First two digits (X.Y) will be used for checking whether the VNF Package is supported by the NFVO on top of which is going to be on-boarded
+* ***scripts-link***: This link points to a public git repository where scripts are stored and could be used instead of passing all scripts inside the VNF Package
     * **Note** Either you can define the scripts-link or put the scripts into the folder scripts/.
         The scripts-link has a higher priority than the scripts located in the folder scripts/.
-        So if you set the scripts-link, the scripts in folder scripts/ are ignored completely.
-    * **Note** The scripts-link is processed by the Element Management System (EMS) in the meaning of fetching the files from that link.
-        So you need to take care about ensuring that the URL defined is available.
-    * **Note** Scripts are executed during different lifecycle-events.
+        So if you set the scripts-link, the scripts in folder scripts/ are completely ignored.
+    * **Note** In most of the cases using script-link means that any component should be able to fetch files from that link.
+        So you need to take care about ensuring that the URL defined is publicly available.
+    * **Note** Scripts are executed during different lifecycle-events, and need to be referenced inside the VNF Descriptor
 * ***image***:
     * ***upload***: Here you can choose between different options (true, false, check).
         * true: choosing this option means to upload the defined image on all the VimInstances. It does not matter if an image with the defined name exists or not.
-        * false: choosing this option means that you assume that the image (defined in the ids or names) is already present.
+        * false: choosing this option means that you assume that the image is already present on the VimInstaces and should be re-uploaded.
         If the image does not exist, the VNF Package onboarding will throw an exception.
         In this case the image (if defined) will be ignored.
         * check: this option means that the VNF PackageManagement checks first if the image is available (defined in ids or names).
@@ -72,7 +85,7 @@ In the following each property is explained in more detail. Please consider also
         * **Note** Please use quotation marks for this option since the values are handled as strings internally.
         Otherwise true and false will be handled as a boolean that would lead to a faulty behavior when onboarding a new VNF Package.
     * ***ids***: The list of image IDs is used to fetch the image from the corresponding VimInstance.
-        To do it, the manager iterates over all IDs and checks if an image with that ID exists on the VimInstance.
+        To do it, the specific VIM driver iterates over all IDs and checks if an image with that ID exists on the VimInstance.
         The defined IDs have a higher priority than the list of names.
         We distinguish between the following cases:
         * If it finds no image with these IDs, it continues with the list of image names.
@@ -86,12 +99,10 @@ In the following each property is explained in more detail. Please consider also
         Then it will create a new image defined in the VNF Package.
         * If it finds one image, this image will be used.
         * If it finds multiple images with the same name or multiple names matching to multiple images, an exception will be thrown because it is not clear which image to use.
-    * ***link***: This link points to an image available at this URL used to upload the image to the cloud environment.
-        * **Note** Either you have to define the image link or put the image directly into the VNF Package if you want to upload a new Image to the VIM by using image upload option `true` or `check`.
+    * ***link***: This link points to a URL providing the image file available for being uploaded on the VIM.
+        * **Note** If you want to upload a new Image to the VIM you need to specify `true` or `check` in the `upload` option.
             Otherwise a NotFoundException will be thrown and the VNF Package will not be onboarded.
-            The image-link has a higher priority than the image stored in the VNF Package directly.
-        * ****Note**** At the moment it is only supported to upload an image by using the `link`. Image uploading from an image inside the package is disabled.
-* ***image-config***: All the properties explained below are required to upload the image to the cloud environment properly.
+* ***image-config***: All the properties explained below are required to upload the image to the VIM properly.
     In case of creating a new image this configuration will be used and is obviously mandatory.
     * ***name***: This defines the name for the image to upload either located directly in the VNF Package or available via the URL defined in image-link.
     * ***diskFormat***: The diskFormat defines the format in which disk type the image is stored.
@@ -99,7 +110,7 @@ In the following each property is explained in more detail. Please consider also
     * ***minCPU***: The minCPU defines the minimum amount of CPU cores for using this image properly.
     * ***minDisk***: The minDisk defines the minimum amount of disk space for using this image properly.
     * ***minRam***: The minRam defines the minimum amount of RAM for using this image properly.
-    * ***isPublic***: The isPublic defines whether the image is available public or not.
+    * ***isPublic***: The isPublic defines whether the image will be available publicly to all tenants on VIM or not.
 
 ## <VNFD\>.json
 
@@ -107,40 +118,29 @@ The <vnfd\>.json contains the VirtualNetworkFunctionDescriptor (VNFD) onboarded 
 This VNFD can later be referenced in a NSD by its ID to make use of it.
 A more detailed explanation of the VNFD can be found [here][vnfd-link].
 
-**Note** The name of the file is not is up to you but the file extension .json is must be present since the VNFPackageManagement is looking for this kind of file.
+**Note** You can specify any names for the file, but its extension must be `.json`.
 
 ## scripts
 
-The scripts folder contains all the scripts required for starting, configuring or whatever you want to do on the running instance during specific lifecycles.
-The execution order is defined by the lifecycle_events inside the VNFD.
-This lifecycle_events are triggered by the NFVO in the meaning of: if the event "INSTANTIATE" contains a script in the lifecycle_events, this script is executed when the NFVO calls the instantiate method for the specific VNFR.
+The scripts folder contains all the scripts required for instatiating, configuring, and starting a VNF on the Virtual Machines or containers instantiated during the lifecycle.
+The execution order is defined by the lifecycle_events inside the VNFD. Please refer to the [VNF Description page][vnfd-link] for more information about this.
 
 **Note** The scripts in the folder ***scripts*** are fetched only if the ***scripts-link*** is not defined in the ***Metadata.yaml***.
     This means that the scripts in that folder have less priority than the scripts located under ***scripts-link***.
 
-**Note** Scripts are executed when a specific Event is fired and this Event references to specific scripts.
-**Note** The *scripts* folder cannot contain subfolder. All scripts must be under the _scripts_ folder.
-**Note** The scripts inside the *scripts* folder can be either shell scripts or python scripts. In both cases the parameters are passed as environment variables.
+**Note** Scripts are executed when a specific lifecycle event is fired and this event references to specific scripts.
 
-## <image\>.img
+**Note** At the moment the *scripts* folder cannot contain subfolder. All scripts must be under the _scripts_ folder.
 
-**Note** At the moment it is only supported to upload an image by using the `link` defined in **Metadata.yaml**. Image uploading from an image inside the package is disabled.
+**Note** The scripts inside the *scripts* folder can be either shell scripts or python scripts. Runtime parameters could be passed to those scritps in different ways, depending on the VNF Manager used for managing your VNFs. We suggest you get familiar with the requirements of the VNF Manager you would like to use, before starting implementing any scripts for lifecycle management.  
 
-This image is used for uploading it to all the cloud environments which are addressed inside the VNFD with that image.
-It doesn't matter whether an image already exists on the considered cloud environment or not.
+# Sample tutorial
 
-**Note** This image has lower priority than the ***image-links*** defined in ***Metadata.yaml***.
-    This means that the image will be ignored if the ***image-links*** is defined.
+This section provides an example about how to create, upload and make use of VNF Packages.
+The chosen scenario is a simple network service using [iPerf][iperf-link] in a server/client scenario. 
+iPerf is a tool for active measurements of the maximum achievable bandwidth on IP networks. 
+This tutorial is similar to the one already described in the [iperf tutorial][iperf], however making use of VNF packages instead of just the network service descriptor. 
 
-**Note** The name of the image doesn't matter but the suffix .img since the VNFPackageManagement is looking for a file with this suffix.
-    However, the name and all the properties for storing it on the cloud environment are defined in ***Metadata.yaml*** under the key ***image***.
-
-# Tutorial
-
-This section explains how to create, upload and make use of VNF Packages.
-The chosen scenario is a Network Service for testing the network connectivity by using [iPerf][iperf-link].
-iPerf is a tool for active measurements of the maximum achievable bandwidth on IP networks.
-Therefore, we need a server and a client installing the iPerf server/client and configuring them for communication between.
 
 ## Creation of VNF Packages
 For doing so, we need to create two VNF Packages and reference them in the NSD.
@@ -161,7 +161,7 @@ name: iperf-server
 description: iPerf server
 provider: FOKUS
 scripts-link: https://script-link-to-git.git
-nfvo_version: 3.2.0
+nfvo_version: 4.0.0
 vim_types:
  - openstack
 image:
@@ -249,7 +249,7 @@ Finally, it looks as shown below.
 name: iperf-client
 description: iPerf client
 provider: FOKUS
-nfvo_version: 3.2.0
+nfvo_version: 4.0.0
 vim_types:
  - openstack
 scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
@@ -381,18 +381,20 @@ To provide also the iperf-servers' IP to the iperf-client we need to define depe
 
 Finally you can onboard this NSD and deploy an NSR that bases on both VNF Packages created before.
 
-### Onboarding and deploying NSD 
+### Onboarding and deploying NSD
 
 You could also use the [Dashboard][dashboard-link] or the [Command Line Interface][cli] as well for onboarding and deploying the NSD.
 
 
 [iperf-link]:https://iperf.fr/
+[iperf]: iperf-NSR.md
 [dashboard-link]:nfvo-how-to-use-gui
 [vnfd-link]:vnf-descriptor
 [image-link]:http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
 [tosca-nfv]:https://docs.oasis-open.org/tosca/tosca-nfv/v1.0/tosca-nfv-v1.0.html
 [csar-onboarding]:tosca-CSAR-onboarding
 [cli]:nfvo-how-to-use-cli
+[vim-driver]:vim-driver
 
 <!---
 Script for open external links in a new tab

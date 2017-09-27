@@ -6,8 +6,8 @@ Open Baton uses the Remote Procedure Call (RPC) mechanism for implementing VIM d
 
 By default the NFVO is installed with the two following VIM drivers: 
 
-* openstack: for interoperating with an OpenStack instance
-* test: for testing purposes implementing a VIM mockup
+* [openstack][openstack]: for interoperating with an OpenStack instance
+* [test][test]: for testing purposes implementing a VIM mockup
 
 For each of those types there is a different implementation of the VIM API. The NFVO uses a driver mechanism for interacting with VIMs. Inside the NFVO folder is a folder called `plugins` where the binary file that implements the interface to your VIM ( i.e. [Openstack][openstack-link] ) should be placed (you can change the folder where Open Baton searches for the plugins by changing the variable `nfvo.plugin.installation-dir` in the `openbaton.properties` file under /etc/openbaton).  
 This binary file is the implementation of the interface that communicates with your VIM.
@@ -18,6 +18,8 @@ This binary file is the implementation of the interface that communicates with y
 
 Open Baton platform provides an openstack and a test plugin. They are automatically download by the bootstrap. During next releases there will be additional drivers available on our [Marketplace][marketplace-drivers]
 
-[marketplace-drivers]: http://marketplace.openbaton.org:8082/#/
+[marketplace-drivers]: http://marketplace.openbaton.org/#/
 [openstack-link]:https://www.openstack.org/
 [vim-driver]:vim-driver-create.md
+[openstack]: openstack-driver.md
+[test]: test-driver.md

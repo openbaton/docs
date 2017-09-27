@@ -1,20 +1,20 @@
-# How to configure the NFVO 
+# How to configure the NFVO
 
-This guide explains you how to configure the NFVO after installation is completed. In general, after using the bootsrap procedure no changes described here are required unless you want to tune up your installation. 
-In addition to this, you may need to modify also the configuration paramenters of the [Generic VNFM][generic-vnfm]
+This guide explains you how to configure the NFVO once the installation is completed. In general, after using the bootsrap procedure no changes described here are required unless you want to tune up your installation.
+In addition to this, you may need to modify also the configuration parameters of the [Generic VNFM][generic-vnfm]
 
 ## NFVO properties overview
 
-After the bootstrap procedure the NFVO's configuration file is located at: 
+After the bootstrap procedure the NFVO's configuration file is located at:
 ```bash
 /etc/openbaton/openbaton-nfvo.properties
 ```
 
-This is a property file that is used to configure the *Spring* environment and the **NFVO**. Since the component is based on the Spring framework some parameters are inherited, for a deeper explanation on all the parameters meaning, please refer to the [Spring documentation][spring-properties]. 
+This is a property file that is used to configure the *Spring* environment and the **NFVO**. Since the component is based on the Spring framework some parameters are inherited, for a deeper explanation on all the parameters meaning, please refer to the [Spring documentation][spring-properties].
 
 Keep in mind that whenever some of the parameters below referred are changed, you will need to restart the NFVO.
 
-### Modify NFVO General properties 
+### Modify NFVO General properties
 
 **IMPORTANT NOTES:**
 
@@ -22,14 +22,18 @@ By default RabbitMQ is installed on the host of the NFVO. Be aware of the fact t
 
 In general, also the NFVO can be executed on a different host changing the following properties of the _/etc/openbaton/openbaton.properties_ file:
 ```properties
-nfvo.rabbit.brokerIp = localhost 
+nfvo.rabbit.brokerIp = localhost
 ```
+
 to:
+
 ```properties
 nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
-``` 
+```
 
-#### additional rabbitMQ paramters required by the NFVO 
+Again, this property is very important to be set to the broker ip reachable from outside the machine were is running.
+
+#### Additional rabbitMQ paramters required by the NFVO
 
 ```parameters
 nfvo.rabbit.management.port=15672
@@ -40,7 +44,7 @@ nfvo.rabbitmq.exclusive=false
 ```
 
 
-#### parameters related with NFVO behaviour runtime
+#### Parameters related with NFVO behaviour runtime
 
 This property allows the user to delete the Network Service Records no matter in which status they are. Please note that in any case it is possible to remove a Network Service Record in _NULL_ state.
 
@@ -57,43 +61,42 @@ nfvo.history.level=1
 nfvo.history.max-entities=250
 ```
 
-#### initial admin password
+#### Initial admin password
 
-The initial admin password is set via the configuration file property: 
+The initial admin password is set via the configuration file property:
 
 ```properties
 nfvo.security.admin.password=openbaton
-#nfvo.security.guest.password=guest
 ```
 
-Please bare in mind that if the property is modified via APIs/dashboard, the change won't be reflected in this file. 
+Please bare in mind that if the property is modified via APIs/dashboard, the change *won't be reflected in this file*.
 
-#### parameters related with the monitoring system
+#### Parameters related with the monitoring system
 
 **MONITORING:** Open Baton allows the monitoring of the VMs on top of which the VNFs are executing via an external monitoring system. At the moment Zabbix is the monitoring system supported.
 If you want to enable it, you need first to install and configure Zabbix server following the guide at this page [Zabbix server configuration][zabbix-server-configuration-3.0].
-Once the Zabbix server is correctly configured and running, you only need to add following property:
+Once the Zabbix server is correctly configured and running, you only need to add the following property:
 
-```properties 
+```properties
 nfvo.monitoring.ip = the Zabbix server ip
 ```
 Every time a new Network Service is instantiated, each VNFC (VM) is automatically registered to the Zabbix server.
 
 
-#### parameters related with the marketplace
+#### Parameters related with the marketplace
 
-This parameter allow you to modify the marketplace IP, in case you want to use a different catalogue for providing VNF Packages. 
-```parameters
-#nfvo.marketplace.privateip=
+This parameters allow you to modify the marketplace IP, in case you want to use a different catalogue for providing VNF Packages.
+
+```properties
 nfvo.marketplace.ip=marketplace.openbaton.org
 nfvo.marketplace.port=8082
 ```
 
-#### parameters related with plugins and drivers 
+#### Parameters related with plugins and drivers
 
-The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances. 
+The following properties are related to the plugin mechanism used for loading VIM and Monitoring instances.
 
-```parameters
+```properties
 # Setting the number of plugin active consumers
 nfvo.plugin.active.consumers=10
 nfvo.plugin.install=true
@@ -105,13 +108,13 @@ nfvo.plugin.wait=true
 nfvo.plugin.timeout=300000
 ```
 
-where the `nfvo.plugin.installation-dir` is the directory where all the jar files are, which implement the VIM interface (see the [VIM driver documentation][vim-driver]), and which will be automatically started by the NFVO after booting. 
-While the `nfvo.plugin.log.path` defines the location where plugin log files will be available. 
+where the `nfvo.plugin.installation-dir` is the directory where all the jar files are located. Each of these plugins implement the VIM interface (see the [VIM driver documentation][vim-driver]), and will be automatically started by the NFVO after booting.
+While the `nfvo.plugin.log.path` defines the location where plugin log files will be available.
 
 
-#### parameters related with quota management
+#### Parameters related with quota management
 
-Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. In case of any exceptions which come with some certain scenarios, you can also avoid failing on exceptions by changing the `nfvo.quota.check.failOnException` to `false`.
+Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request to the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. In case of any exceptions which come with some certain scenarios, you can also avoid failing on exceptions by changing the `nfvo.quota.check.failOnException` to `false`.
 
 ```properties
 # Avoid doing the GRANT_OPERATION
@@ -120,20 +123,21 @@ nfvo.quota.check=true
 nfvo.quota.check.failOnException = true
 ```
 
-Please consider also the property `nfvo.vim.drivers.allowInfiniteQuota` explained in the next section for the quota maangement during the allocate resources mechanism
+Please consider also the property `nfvo.vim.drivers.allowInfiniteQuota` explained in the next section for the quota management during the allocate resources mechanism
 
-#### addition parameters for the NFVO and VNFM tuning
+#### Addition parameters for the NFVO and VNFM tuning
 ```parameters
 # Execute the start event sequentially and in order based on the VNFDependencies. This implies the NSD not to have cycling dependencies
 nfvo.start.ordered=false
-# It can be used for enabling/disabling an active check to the VIM authentication URL 
+# It can be used for enabling/disabling an active check to the VIM authentication URL
 nfvo.vim.active.check=true
 # Allow infinite quotas during the GRANT_OPERATION
 nfvo.vim.drivers.allowInfiniteQuota=false
 nfvo.vim.delete.check.vnfr=true
 ```
 
-Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allows you to change the pool configuration, for more details please check the [spring documentation regarding thread pool executor][spring-doc-thread-pool]. 
+Those properties are needed in case you want to tune a bit the performances of the NFVO. When the VNFMs send a message to the NFVO, there is a pool of threads able to process these messages in parallel. These parameters allow you to change the pool configuration. For more details please check the [spring documentation regarding thread pool executor][spring-doc-thread-pool].
+
 ```properties
 # Thread pool executor configuration
 # for info see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
@@ -147,8 +151,8 @@ nfvo.vnfd.cascade.delete=false
 vnfd.vnfp.cascade.delete=true
 ```
 
-####  enable SSL
-By default SSL is disabled. Comment out those parameters in case you want to enable it. 
+#### Enable SSL
+By default SSL is disabled. Comment out those parameters in case you want to enable it.
 
 ```parameters
 #server.port=8443
@@ -160,7 +164,7 @@ By default SSL is disabled. Comment out those parameters in case you want to ena
 #nfvo.https=false
 ```
 
-### Modify logging levels 
+### Modify logging levels
 
 Feel free to modify that file for adding or removing specific functionalities.  For instance, you can decide to change logging levels (TRACE, DEBUG, INFO, WARN, and ERROR) and mechanisms:
 
@@ -170,8 +174,6 @@ Feel free to modify that file for adding or removing specific functionalities.  
 #########################################
 
 logging.level.org.springframework=WARN
-#logging.level.org.springframework.security=DEBUG
-#logging.level.org.springframework.web=DEBUG
 logging.level.org.hibernate=WARN
 logging.level.org.apache=WARN
 
@@ -200,12 +202,12 @@ spring.datasource.password=changeme
 #       org.hibernate.dialect.HSQLDialect
 # JDBC configurations' values for MYSQL:
 #       jdbc:mysql://localhost:3306/openbaton
-#       com.mysql.jdbc.Driver
+#       org.mariadb.jdbc.Driver
 #       org.hibernate.dialect.MySQLDialect
 #
-# Active configurations by default MySQL: 
+# Active configurations by default MySQL:
 spring.datasource.url=jdbc:mysql://localhost:3306/openbaton
-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 spring.jpa.show-sql=false
 # ddl-auto available values: create-drop, update

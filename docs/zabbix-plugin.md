@@ -6,18 +6,18 @@ The two interfaces are:
 -   VirtualisedResourceFaultManagement  
 -   VirtualisedResourcePerformanceManagement
 
-A detailed description of the interfaces is in the last ETSI Draft [IFA005_Or-Vi_ref_point_Spec].  
+A detailed description of the interfaces is in the ETSI [IFA005_Or-Vi_ref_point_Spec].  
 In particular with the Zabbix plugin you can create/delete items, trigger and action on-demand. 
 
 ![Zabbix plugin architecture][zabbix-plugin-architecture]
 
 Some of the benefits introduced by the usage of such plugin:  
-1) Make the consumers (NFVO, VNFM) indipendent to the monitoring system.  
+1) Make the consumers (NFVO, VNFM) independent to the monitoring system.  
 2) The communication between the consumers and zabbix-plugin is JSON based, so the consumers can be written in any languages.  
-3) The values of the items are cached and updated periodically in order to avoid to contact the zabbix server each time a specific metric is required.  
+3) The values of the items are cached and updated periodically in order to avoid to contact the Zabbix Server each time a specific metric is required.  
 4) If your consumer is written in java, we provide a simple class MonitoringPluginCaller which handle the communication via RabbitMQ.  
 
-### Prerequisites
+## Prerequisites
 
 The prerequisites are:  
 
@@ -26,6 +26,20 @@ The prerequisites are:
 - Git installed
 - Gradle installed
 
+## Set up environment
+
+Create and give the right permissions to the folder which will host the configuration file:
+ 
+```bash
+sudo mkdir -p /etc/openbaton
+sudo chwon -R $USER: /etc/openbaton
+```
+
+The Zabbix Plugin logs at default in the file **/var/log/openbaton/openbaton-plugin-monitoring-zabbix.log**. Create and give the right permissions in that folder running the command:
+```bash
+sudo mkdir -p /var/log/openbaton
+sudo chwon -R $USER: /var/log/openbaton
+```
 
 ## Additional Zabbix Server configuration required for receiving notifications
 
@@ -72,14 +86,13 @@ Once the prerequisites are met, you can clone the following project from git, co
 git clone https://github.com/openbaton/zabbix-plugin.git
 cd zabbix-plugin
 ./gradlew build -x test
-java -jar build/lib/openbaton-plugin-monitoring-zabbix-<version>.jar
 ```
 
 ### Configuration
 
-If the prerequisites are met you should already have the folder "/etc/openbaton". Then copy the configuration file in src/main/resources/plugin.conf.properties to the path /etc/openbaton/ with the name openbaton-plugin-monitoring-zabbix.properties. Once you are inside the zabbix-plugin directory type this command:
+Once you are inside the zabbix-plugin directory type this command:
 
-```bash  
+```bash
 cp src/main/resources/plugin.conf.properties /etc/openbaton/openbaton-plugin-monitoring-zabbix.properties
 ```
 
@@ -88,17 +101,17 @@ The configuration parameters are explained in the following table.
 | Parameter           | Description     | Default
 | ------------------- | --------------  | ----------
 | zabbix-plugin-ip                      |  IP of the Zabbix Plugin machine      | localhost
-| zabbix-host                           |  IP of the Zabbix Server      | localhost
-| zabbix-port                           |  Port of the Zabbix Server    | 
 | type                                  |  The type of the plugin       | zabbix-plugin
-| user-zbx                              |  User of the Zabbix Server    | Admin
-| password-zbx                          |  Password of Zabbix Server    | zabbix
-| zabbix-server-version                 |  Zabbix Server version        | 3.0
 | client-request-frequency              |  Update cache period (Basically each time t, Zabbix Plugin ask to every items value for all hosts and fill the local cache). Set 0 to disable it   | 10 (seconds)
 | history-length                        |  How long is the history. If the client-request-frequency is 10 seconds and history-length 100, we have available the value of the items of the previous 1000 seconds. | 250
 | notification-receiver-server-context  |  Context where the zabbix-plugin receive the notifications by the zabbix server. (see the section 'How to configure Zabbix to get notifications') | /zabbixplugin/notifications 
 | notification-receiver-server-port     |  Port where the zabbix-plugin receive the notifications by the zabbix server. | 8010
 | external-properties-file              |  Full path of the configuration file.  | /etc/openbaton/openbaton-plugin-monitoring-zabbix.properties
+| zabbix-host                           |  IP of the Zabbix Server      | localhost
+| zabbix-port                           |  Port of the Zabbix Server    | 
+| user-zbx                              |  User of the Zabbix Server    | Admin
+| password-zbx                          |  Password of Zabbix Server    | zabbix
+| zabbix-server-version                 |  Zabbix Server version        | 3.0
 
 The configuration file should look like the one below:
 
@@ -123,12 +136,20 @@ password-zbx=zabbix
 # Supported Zabbix versions: 2.2 and 3.0
 zabbix-server-version=3.0
 ```
+## Run the Zabbix Plugin
+
+Simply run the jar with:
+
+```bash
+java -jar build/lib/openbaton-plugin-monitoring-zabbix-<version>.jar
+```
+Check the logs in /var/log/openbaton/openbaton-plugin-monitoring-zabbix.log
 
 
 ## Using it via MonitoringPluginCaller
 
 In order to use the MonitorPluginCaller you need to import the relative plugin-sdk, coming from [Openbaton][openbaton-website] project.
-To import the plugin-sdk, please add in your gradle file the following dependencies:
+To import the plugin-sdk, please add in your Gradle file the following dependencies:
 
 ```
 repositories {
@@ -137,39 +158,41 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:monitoring:3.2.1-SNAPSHOT'
+    compile 'org.openbaton:monitoring:4.0.0'
 }
 ```
 
-Then in your main, obtain the MonitoringPluginCaller as follow:
+Then in your main, obtain the MonitoringPluginCaller as follows:
 
 ```java
 MonitoringPluginCaller monitoringPluginCaller = null;
     try {
       monitoringPluginCaller =
           new MonitoringPluginCaller(
-              "brokerIp", "username", "password", 5601, "zabbix-plugin", "zabbix", "15672",120000);
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (TimeoutException e) {
-      e.printStackTrace();
-    } catch (NotFoundException e) {
+              rabbitmqIp,
+              rabbitmqUsr,
+              rabbitmqPwd,
+              5672,
+              "zabbix-plugin",
+              "zabbix",
+              "15672",
+              120000);
+    } catch (Exception e) {
       e.printStackTrace();
     }
 ```
-
 Make sure to use the correct arguments' values. A description is provided in the following:  
 
 | Argument value      | Description     
 | ------------------- | --------------  
-| brokerIp            |  IP of RabbitMQ (broker)  
-| username            |  Username for RabbitMQ   
-| password            |  Password for RabbitMQ    
+| rabbitmqIp          |  IP of RabbitMQ (broker)  
+| rabbitmqUsr         |  Username for RabbitMQ   
+| rabbitmqPwd         |  Password for RabbitMQ    
 | 5672                |  RabbitMQ default port (change it if needed)        
 | zabbix-plugin       |  Type of the Monitoring Plugin    
 | zabbix              |  Name of the Monitoring Plugin    
 | 15672               |  RabbitMQ default management port        
-| 120000               |  Timeout of the calls on the MonitoringPluginCaller        
+| 120000               |  Timeout of the calls on the MonitoringPluginCaller    
 
 ## Functionalities provided by the Zabbix Plugin Interface 
 
@@ -289,7 +312,7 @@ This method create a trigger on a specific item for one or more hosts. As a retu
 
 **thresholdDetails**: details of the threshold. It contains:
 
-- function: refer to [Zabbix trigger function 2.2][zabbix-trigger-function-2.2] or [Zabbix documentation 3.0][zabbix-trigger-function-3.0] 
+- function: refer to [Zabbix trigger function 2.2][zabbix-trigger-function-2.2] or [Zabbix trigger function 3.0][zabbix-trigger-function-3.0] 
 - triggerOperator: operator
 - perceiverSeverity: severity of the trigger.
 - value: threshold value to compare with the actual value of the *performanceMetric*.
@@ -390,14 +413,17 @@ Actually the zabbix-plugin when receives the notification by zabbix server, **if
 it creates an alarm (mapping zabbix notification into standard Alarm) and notify the subscribers with a AlarmNotification. If the notification is not new, then it sends an AlarmStateChangedNotification.
 
 
-
+[openbaton-website]:http://openbaton.github.io
 [GitHub]:https://github.com/openbaton/zabbix-plugin
 [IFA005_Or-Vi_ref_point_Spec]:http://www.etsi.org/deliver/etsi_gs/NFV-IFA/001_099/005/02.01.01_60/gs_nfv-ifa005v020101p.pdf
 [NFV MANO]:http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_nfv-man001v010101p.pdf
 [zabbix-plugin-architecture]:images/zabbix-plugin-architecture.png
 [zabbix-doc-2.2]:https://www.zabbix.com/documentation/2.2/manual/config/items/itemtypes/zabbix_agent
+[zabbix-doc-3.0]:https://www.zabbix.com/documentation/3.0/manual/config/items/itemtypes/zabbix_agent
 [zabbix-trigger-function-2.2]:https://www.zabbix.com/documentation/2.2/manual/appendix/triggers/functions
+[zabbix-trigger-function-3.0]:https://www.zabbix.com/documentation/3.0/manual/appendix/triggers/functions
 [zabbix-trigger-expression-2.2]:https://www.zabbix.com/documentation/2.2/manual/config/triggers/expression
+[zabbix-trigger-expression-3.0]:https://www.zabbix.com/documentation/3.0/manual/config/triggers/expression
 [openbaton-website]:http://openbaton.github.io
 [custom-alertscripts]:https://www.zabbix.com/documentation/2.2/manual/config/notifications/media/script
 [action-zabbix]:https://www.zabbix.com/documentation/2.2/manual/config/notifications/action

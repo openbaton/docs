@@ -113,11 +113,9 @@ The available parameters are defined in the VirtualNetworkFunctionDescriptor fie
     3. Hostname  
 
 
-__Please check the example at the end of the page to understand this mechanism.__
-
 In the INSTANTIATE scripts, the parameters defined in these two fields are then available as environment variables into the script exactly as defined (i.e. you can get by $parameter_name).
 
-In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field. 
+In the MODIFY scripts, the INSTANTIATE parameters are still available but plus there are environment variables that come from other VNF sources, where they are specified in the provides field.
 These kind of parameters are defined in the _requires_ fields (of the VNF target) and the VNFDependency→parameters fields (of the NSD), and are then available as $*type_of_vnf_source*_*name_of_parameter* (in the VNF target).
 
 _**NOTE**_: _the scripts in the CONFIGURE lifecycle event need to start with the type of the source VNF followed by \_ (underscore) and the name of the script (i.e. server_configure.sh)_
@@ -126,156 +124,7 @@ _**NOTE**_: _the scripts in the CONFIGURE lifecycle event need to start with the
 
 The STOP lifecycle event is meant to just stop the VNF service and afterward be able to start it again. The TERMINATE lifecycle event delete the virtual resources from the PoP
 As for VMs deployment, VMs termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
- 
 
-## Launch the Generic VNFM
-
-Please check also the [installation page](nfvo-installation). To launch the Generic VNFM, execute the following command:
-```bash
-$ cd <generic directory>
-$ ./generic-vnfm.sh start
-```
-The Generic VNFM can handle more than one VNF (in parallel) of the same or different type, so that you need to start only one Generic VNFM.
-
-# EXAMPLE WITH DEPENDENCY AND SCRIPTS
-
-Let's see a simple example with two VNFs: vnf-server and vnf-database.  
-The vnf-server needs the ip of the vnf-database to be able to connect properly. The following figure shows the source (vnf-database), the target (vnf-server)
-and the dependency (IP). Such VNFs are connected in the same virtual network called "vnet".
-
-![ns with dependency][ns-with-dependency]
-
-**INSTANTIATE scripts**
-
-To start the VNFs we'll have two scripts **instantiate-vnf-server.sh** and **instantiate-vnf-database.sh** (more scripts are possible). Here an example of the instantiate-vnf-server.sh script:
-```bash
-#!/bin/bash
-
-echo "INSTANTIATIATION of the VNF server"
-echo "The following parameters are available:"
-
-echo "Out-of-the-box parameters:"
-echo "Hostname: ${hostname}"
-echo "Private IP: ${vnet}"
-echo "Floating IP (if requested otherwise it does not exist): ${vnet_floatingIp}"
-
-echo "Configuration parameters:"
-echo "The answer to everything is.. ${ANSWER_TO_EVERYTHING}"
-
-# ... Add the code to start the vnf_server ...
-```
-
-
-**CONFIGURE script**
-
-After the instantiation of the vnf-server we would configure it with the following **database_connectToDb.sh** script:
-
-```bash
-#!/bin/bash
-
-echo "This is the ip of the vnf-database: ${database_vnet}"
-echo "This is the floating ip of the vnf-database: ${database_vnet_floatingIp}"
-echo "This is the hostname of the vnf-database: ${database_hostname}"
-
-# ... Add the code to connect to the vnf-database with the ip: ${database_vnet} ...
-
-```
-
-**Note1**: _database_ is the type of the vnf-database, _vnet_ is the name of the network.
-
-**Note2**: All the scripts need to be in a repository or in the vnf package (see the vnf package structure [here][vnfpackage-doc-link]).
-
-In order to deploy the VNFs we have to create both the VNF descriptor: **vnf-database-descriptor.json** and **vnf-server-descriptor.json**. Below we'll be showed the most relevant part of them:
-
-**vnf-database-descriptor.json**
-```json
-{
-    "name":"vnf-database",
-    "type":"database",
-    "endpoint":"generic",
-    ...
-    "lifecycle_event":[
-        {
-            "event":"INSTANTIATE",
-            "lifecycle_events":[
-                "instantiate-vnf-database.sh"
-            ]
-        }
-    ],
-    ...
-}
-```
-
-**Note:** to use the Generic VNFM for managing a VNF just set "generic" in the endpoint field.
-
-**vnf-server-descriptor.json**
-```json
-{
-    "name":"vnf-server",
-    "type":"server",
-    "endpoint":"generic",
-    ...
-    "configurations":{
-            "name":"config_name",
-            "configurationParameters":[
-            {
-                "confKey":"ANSWER_TO_EVERYTHING",
-                "value":"42"
-            }
-            ]
-    },
-    ...
-    "lifecycle_event":[
-        {
-            "event":"INSTANTIATE",
-            "lifecycle_events":[
-                "instantiate-vnf-server.sh"
-            ]
-        },
-        {
-            "event":"CONFIGURE",
-            "lifecycle_events":[
-                "database_connectToDb.sh"
-            ]
-        }
-    ],
-    ...
-}
-```
-
-The result network service descriptor shall include both the vnf descriptors above and the dependency:
-```json
-{
-    "name":"simple-nsd",
-    "vnfd":[
-        {
-            "id":"29d918b9-6245-4dc4-abc6-b7dd6e84f2c1"
-        },
-        {
-            "id":"87820607-4048-4fad-b02b-dbcab8bb5c1c"
-        }
-    ],
-    "vld":[
-        {
-            "name":"vnet"
-        }
-    ],
-    "vnf_dependency":[
-        {
-            "source" : {
-                "name": "vnf-database"
-            },
-            "target":{
-                "name": "vnf-server"
-            },
-            "parameters":[
-                "vnet"
-            ]
-        }
-    ]
-}
-```
-See the complete tutorial → [VNFPackage tutorial][vnfpackage-tutorial-link].
 
 <!---
 References
@@ -286,10 +135,10 @@ References
 [nfv-mano-B.3]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf#page=108
 [vnfm-ems-communication]:images/generic-vnfm-vnfm-ems-communication.png
 [nfvo-vnfm-communication]: images/generic-vnfm-vnfm-or-communication.png
-[generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg.png
+[generic-vnfm-or-vnfm-seq-dg]:images/generic-vnfm-or-vnfm-seq-dg-v2.png
 [ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
 [vnfpackage-tutorial-link]:vnf-package#tutorial
-[vnfpackage-doc-link]:vnfpackage
+[vnfpackage-doc-link]:vnf-package
 
 <!---
 Script for open external links in a new tab
@@ -305,5 +154,3 @@ Script for open external links in a new tab
         $(".external").attr('target','_blank');
       })
 </script>
-
-

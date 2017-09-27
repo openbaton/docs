@@ -53,37 +53,6 @@ If you want to use the CLI you need to execute the following command in order to
 $./openbaton.sh NetworkServiceDescriptor-create sipp-fms-nsd.json
 ```
 
-Once this request is processed successfully, it returns the following:
-
-```bash
-+------------------ +------------------------------------------------------------------ + 
-| PROPERTY          | VALUE                                                             | 
-+------------------ +------------------------------------------------------------------ + 
-| VNFD              |                                                                   | 
-|                   | id: 2dd6a30d-0eee-4f88-aa45-9f3a420f341b - name:  sipp-server     | 
-|                   | id: 55ac1b21-fdf0-4fe3-861e-5b1f6b5079e3 - name:  sipp-client     | 
-|                   |                                                                   | 
-| VNF_DEPENDENCY    |                                                                   | 
-|                   | id: 123b3dc1-4310-405c-8c50-17dbb1becd2d                          | 
-|                   |                                                                   | 
-| id                | f2086f71-4ecf-4ed8-a692-36775ebdfc68                              | 
-|                   |                                                                   | 
-| hb_version        | 1                                                                 | 
-|                   |                                                                   | 
-| name              | SIPp with fms                                            | 
-|                   |                                                                   | 
-| projectId         | 7bc76eb0-c48c-4328-a234-c779ab54cd2a                              | 
-|                   |                                                                   | 
-| vendor            | FOKUS                                                             | 
-|                   |                                                                   | 
-| version           | 1.0                                                               | 
-|                   |                                                                   | 
-| VLD               |                                                                   | 
-|                   | id: bd65ee00-ce56-42f4-9d31-5cd220ee64a6 - name:  private         | 
-|                   |                                                                   | 
-+------------------ +------------------------------------------------------------------ + 
-```
-
 ## Deploy the Network Service Descriptor
 As soon as you uploaded the NSD in the NFVO you can deploy this NSD either by using the dashboard or the CLI.  
 This will create a Network Service Record (NSR) and actually launch the Virtual Machines on OpenStack. The network service is composed by two VNFC instances (virtual machines), however the Fault Management System creates a third virtual machine, which consists in the SIPp server in standby.
@@ -104,7 +73,7 @@ Regarding the SIPp server VNF you should see the following:
 
 Now you can trigger the switch to standby simulating a failure.  
 Go to Openstack dashboard and terminate the virtual machine which correspond to the ACTIVE SIPp server. As you can expect the SIPp client will loose the connection with the server.  
-However after 1/2 minutes the FMS will execute the switch to standby. After this action, the standby SIPp server will be activated and the client will connect to the new one, so that the network service recovers from the failure.
+However after 1/2 minutes the FMS will execute the switch to standby. After this action, the standby SIPp server will be activated and the client will connect to the new one, so that the network service will recover from the failure.
 
 <!---
 References
@@ -120,7 +89,7 @@ References
 [cli]: nfvo-how-to-use-cli
 [sipp-fms-nsd]:descriptors/tutorial-sipp-fms/sipp-fms-nsd.json
 [nsd-onboarding]: images/tutorials/tutorial-iperf-NSR/nsd-onboarding.png
-[nsr-deploy]: images/tutorials/tutorial-iperf-NSR/nsr-deploy.png
-[vnfc-active-standby]:images/tutorials/tutorial-sipp-fms/vnfc-active-standby.png
+[nsr-deploy]: images/tutorials/tutorial-sipp-fms/nsr-deploy-rel-4.png
+[vnfc-active-standby]:images/tutorials/tutorial-sipp-fms/vnfc-active-standby-rel-4.png
 [vim-instance-json]:descriptors/vim-instance/openstack-vim-instance.json
-[vim-onboarding]: images/tutorials/tutorial-iperf-NSR/vim-onboarding.png
+[vim-onboarding]: images/tutorials/tutorial-sipp-fms/vim-onboarding-rel-4.png

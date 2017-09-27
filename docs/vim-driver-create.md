@@ -9,7 +9,7 @@ OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plu
 
 Before you can start with developing your own Vim Driver you need to prepare your programming environment by installing/configuring the following requirements:
 
-* JDK 7 ([installation][openjdk])
+* JDK 8 ([installation][openjdk])
 * Gradle ([installation][gradle-installation])
 
 ### Create a new project
@@ -104,7 +104,7 @@ mainClassName = 'org.myplugin.example.Starter'
 
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:3.2.0'
+    compile 'org.openbaton:plugin-sdk:4.0.0'
     compile'org.springframework:spring-context:4.2.1.RELEASE'
 }
 
@@ -227,7 +227,7 @@ $ java -jar myPlugin-1.0-SNAPSHOT.jar
 [gradle-wrapper]:https://docs.gradle.org/current/userguide/gradle_wrapper.html
 
 [project-guide-naming-conventions]:https://maven.apache.org/guides/mini/guide-naming-conventions.html
-[vim-instance-documentation]:vim-instance.md
+[vim-instance-documentation]:pop-registration.md
 [vim_plugin_structure]: images/vim_plugin_structure.png
 [new_project_vim]: images/new_project_vim.png
 [new_project_vim_groupId]: images/new_project_vim_groupId.png

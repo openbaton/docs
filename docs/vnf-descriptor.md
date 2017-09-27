@@ -67,12 +67,12 @@ The VirtualNetworkFunctionDescriptor is contained inside the Network Service Des
 ```
 
 | Params          				| Meaning       																|
-| -------------   				| -------------:																|
-| name  						| The name to give to the VirtualNetworkFunctionDescriptor 						|
-| vendor 						| The vendor creating this VirtualNetworkFunctionDescriptor      				|
-| version 						| The version of the VirtualNetworkFunctionDescriptor (can be any string)      	|
-| type	 						| The type of the VirtualNetworkFunctionDescriptor (can be any string) and it is used in the dependency parameters in the scripts      	|
-| endpoint 						| The endpoint of the VirtualNetworkFunctionDescriptor (can be any string) needs to point to a registered VnfManager     	|
+| -------------   				| -------------																|
+| name  						| The name of the Virtual Network Function               						|
+| vendor 						| The provider or vendor of this Virtual Network Function         				|
+| version 						| The version of the Virtual Network Function (can be any string)             	|
+| type	 						| The type of the Virtual Network Function (can be any string) and it is used in the dependency parameters in the scripts      	|
+| endpoint 						| The endpoint of the Virtual Network Function (can be any string) that defines the responsible VNF Manager     	|
 
 
 The other most important parameters are described in the following sections.
@@ -80,11 +80,11 @@ The other most important parameters are described in the following sections.
 ### Virtual Deployment Unit (VDU)
 
 | Params          				| Meaning       																|
-| -------------   				| -------------:																|
-| vm_image  					| The list of image names or ids existing in the VimInstance or in the VNF Package						|
-| vimInstanceName				| The list of VimInstances. Only one of it will be chosen, randomly      				|
-| scale_in_out					| The maximum number of instances (VMs) which can be created to support scale out/in.      	|
-| vnfc                                          | This field contains a list of VNFComponents which will be deployed for this VNFD.  |
+| -------------   				| -------------																|
+| vm_image  					| The list of image names or ids existing in the PoP or in the VNF Package (in case it will be uploaded while onboarding)	|
+| vimInstanceName				| The list of PoP where the VNF Components of this VDU will be deployed. If several are selected, the PoP will be randomly chosen	|
+| scale_in_out					| The maximum number of instances which can be launched (scaled out) at runtime within this VDU |
+| vnfc                          | The list of VNF Components which will be deployed while instantiating the VDU |
 
 ##### VNFC
 
@@ -92,8 +92,8 @@ After launching a network service, every VNFComponent will run on a separate vir
 VNFCs contain the following fields:
 
 | Params                        | Meaning                                                                       |
-| -------------                 | -------------:                                                                |
-|connection_point               | each connection point is a reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano]). Moreover you can specify a floatingIp to be assigned to this connection point in the form "192.168.0.123". Please be aware of the fact that the NFVO will try to allocate this IP from the external network associated to the tenant. Therefore it is important to have an already configured external network before making use of floating IPs. The possible values are the actual floatingip ip or "random" if no preference is specified. If omitted no floatingip will be assigned. Optionally, the ethernet interface to be attached to a specific network can be chosen through the `interfaceId`. The interfaceId have to be a numeric value and is used while sorting the list of networks.  	        |
+| -------------                 | -------------                                                              |
+|connection_point               | This defines the reference to an Internal Virtual Link (see Connection Point at [ETSI NFV][nfv-mano]). Moreover you can specify a Floating IP to be assigned to this connection point in the form "192.168.0.123". Please be aware of the fact that the NFVO will try to allocate this IP from the external network associated to the tenant. Therefore it is important to have an already configured external network before making use of floating IPs. The possible values are the actual floatingip ip or "random" if no preference is specified. If omitted no floatingip will be assigned. Optionally, the ethernet interface to be attached to a specific network can be chosen through the `interfaceId`. The interfaceId have to be a numeric value and is used while sorting the list of networks.  	        |
 
 ### Configurations
 
@@ -112,59 +112,23 @@ A lifecycle event is composed by an Event and a list of strings that correspond 
 Currently supported events are:
 
 | Event name    | Description |
-| ---------     | ---------:  |
+| ---------     | ---------   |
 | INSTANTIATE   | ...         |
 | CONFIGURE     | ...         |
 | START         | ...         |
 | TERMINATE     | ...         |
 | SCALE_IN      | ...         |
 
-The VNF events state machine follows the  state diagram for the VNFR (and NSR) displayed in [this slide][vnf-state-slide] 
+The VNF events state machine follows the  state diagram for the VNFR (and NSR) displayed in [this slide][vnf-state-slide]
 
 ### Deployment Flavour
 
 A delpoyment flavour corresponds to a flavour name existing in the VimInstance.
 For example if you are using Openstack as Vim, the flavour_key parameter shall correspond to a [flavour name of Openstack][openstack-flavours] (e.q. m1.small).
 
-### Provides
+### Inter-VNFs dependencies
 
-This list of parameter names defines the parameters that the VnfManager will fill at runtime. For that reason they have a meaning only if you [write your own VnfManager][vnfm-how-to]. These parameters are then available in any scripts. For the usage of the parameters, please, refer to [How to use the parameters][param-how-to] page.
-
-### Requires
-
-The requires field provides an alternative method for defining VNF dependencies. The regular way is to define VNF dependencies in the Network Service Descriptor by defining the source, target and parameters of the dependency. But you can also use the requires field in the VNFD to achieve the same result. Let's look at an example to understand how to do this. Here is a VNF dependency defined in the classic way. 
-```json
-...
-"vnf_dependency":[
-        {
-            "source":{
-                "name":"server"
-            },
-            "target":{
-                "name":"client"
-            },
-            "parameters":[
-                "netname_floatingIp"
-            ]
-        }
-]
-...
-```
-
-This creates a VNF dependency that provides the floating ip of the VNFD with the type server to the VNFD with the type client. 
-The same can be done by writing the following in the requires field of the VNFD with type client: 
-
-```json
-...
-"requires":{
-	"server":{
-		"parameters":["netname_floatingIp"]
-	}
-}
-...
-```
-
-The *"server"* field specifies that the source of the dependency is the VNFD with the type server. The target is the VNFD that contains the requires field, in this case the VNFD with type client. 
+In many cases, you may need or you may provide some information in order to interact with other VNFs inside a network service composition. Please refer to the [Inter-VNFs dependencies page][vnf-dependencies] for understanding better this concept, and in particular for learning how to make use of `provides` and `requires` inside a VNFD for interacting with other VNFs.  
 
 <!---
 References
@@ -177,7 +141,7 @@ References
 [vnf-package-link]: vnfpackage
 [openstack-flavours]: http://docs.openstack.org/openstack-ops/content/flavors.html
 [vnf-state-slide]: http://image.slidesharecdn.com/nfvvnfarchitecturepresentation-141006041349-conversion-gate01/95/nfv-virtual-network-function-architecture-22-638.jpg?cb=1436628676
-
+[vnf-dependencies]: vnf-dependencies
 
 <!---
 Script for open external links in a new tab
