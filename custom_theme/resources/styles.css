@@ -287,3 +287,6 @@ a{
 .wy-menu-vertical span:hover{
     color: #ea8e0c;
 }
+a:visited {
+    color: #ea8e0c; !important;
+}
