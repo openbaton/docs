@@ -20,6 +20,7 @@ pages:
 - ['tutorial-juju.md', 'Tutorials', 'OpenIMSCore with Juju VNFM']
 - ['fms-sipp-tutorial.md', 'Tutorials', 'Fault Management System']
 - ['integration-test-use.md', 'Tutorials', 'Integration Tests']
+- ['tutorial-docker.md', 'Tutorials', 'Docker Tutorials']
 - ['nfvo-how-to-use-gui.md', 'User Tools', 'Dashboard']
 - ['nfvo-how-to-use-cli.md', 'User Tools', 'CLI']
 - ['nfvo-sdk.md', 'User Tools', 'Open Baton SDKs']
@@ -74,4 +75,3 @@ theme_dir: 'custom_theme'
 repo_url: https://github.com/openbaton
 repo_name: OpenBaton GitHub
 site_favicon: favicon.ico
-
