@@ -57,31 +57,30 @@ This is an example of VNF Template defined inside the NSD Template. The paramete
 
 ```yaml
 dummy-server:
-        type: openbaton.type.VNF
-        properties:
-          vendor: Fokus
-          version: 0.1
-          endpoint: dummy
-          type: server
-          configurations:
-            name: config_name
-            configurationParameters:
-              - key: value
-              - key2: value2
-          vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
-          deploymentFlavour:
-            - flavour_key: m1.small
-        requirements:
-          - virtualLink: private
-          - vdu: VDU2
-        interfaces:
-          lifecycle: # lifecycle
-            instantiate:
-              - install.sh
-              - start-srv.sh
+  type: openbaton.type.VNF
+  properties:
+    vendor: Fokus
+    version: 0.1
+    endpoint: dummy
+    type: server
+    configurations:
+      name: config_name
+      configurationParameters:
+        - key: value
+        - key2: value2
+    vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
+    deploymentFlavour:
+      - flavour_key: m1.small
+  requirements:
+    - vdu: VDU2
+  interfaces:
+    lifecycle: # lifecycle
+      instantiate:
+        - install.sh
+        - start-srv.sh
 ```
 
-This Virtual Network Function is called ```dummy-server``` 
+This Virtual Network Function is called **dummy-server**
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
@@ -106,7 +105,6 @@ The **Requirements** for the VNF is an object containing a list of String key-va
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
-| virtualLink  	        | String    | Shows where the VNF is connected |
 | vdu  	            | String    | Defines a VDU which is a part of the VNF |
 
 The **Interfaces** for the VNF has only one option at the moment: **lifecycle**
@@ -197,7 +195,6 @@ This is the definition of a Virtual Link called **private**:
 
 
 ```yaml
-
 private:
   type: tosca.nodes.nfv.VL
   properties:
@@ -212,10 +209,9 @@ private:
 
 ### Relationships Template
 The Relationships Template creates the dependency between two VNFs.
-This is the definition of Relationships Template called ```connection_server_client```:
+This is the definition of Relationships Template called **connection_server_client**:
 
 ```yaml
-
 relationships_template:
   connection_server_client:
     type: tosca.nodes.relationships.ConnectsTo
@@ -240,7 +236,6 @@ configurations:
     name: server-configurations
     configurationParameters:
       - key: "value"
-
 ```
 
 ### Complete Example
@@ -275,7 +270,6 @@ topology_template:
           deploymentFlavour:
             - flavour_key: m1.small
         requirements:
-          - virtualLink: private
           - vdu: VDU1
         interfaces:
           lifecycle:
@@ -295,7 +289,6 @@ topology_template:
           - flavour_key: m1.small
         endpoint: dummy
       requirements:
-         - virtualLink: private
          - vdu: VDU2
       interfaces:
           lifecycle: # lifecycle
@@ -354,7 +347,6 @@ relationships_template:
     target: dummy-client
     parameters:
         - private
-
 
 ```
 

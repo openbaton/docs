@@ -148,7 +148,6 @@ The same for the VNF inside the NSD
 
 ![NSD Graph][editNSD2]
 
-![NSD Graph][editNSD3]
 
 
 And the same for the VDU inside the VNF
@@ -249,6 +248,7 @@ This are the information of the Event selected
 [createkey]:images/nfvo-how-to-use-gui-generate-key.png
 [importkey]:images/nfvo-how-to-use-gui-import-key.png
 [launchNSD1]:images/gui-launch-pop.png
+
 [launchNSD2]:images/gui-launch-key.png
 [VNF Package documentation]: vnf-package.md
 <!---

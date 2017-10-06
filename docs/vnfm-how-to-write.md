@@ -632,7 +632,7 @@ public class MyVNFM extends AbstractVnfmSpringAmqp{
 ```
 Now you can implement whatever you want. If the VirtualNetworkFunctionRecord is returned, it will go back directly to the NFVO.
 
-One of the methods that can be overwritten is the _fillParameters_. This method is important when you have specified some "provides" in your VNFD, in facts you can fill them in this method and make them available afterwards to the scripts (see [How to use the parameters][param-how-to]). 
+One of the methods that can be overwritten is the _fillParameters_. This method is important when you have specified some "provides" in your VNFD, in fact you can fill them in this method and make them available afterwards to the scripts (see [How to use the parameters][param-how-to]). 
 
 An example of allocating and terminating resource by using a plugin can be found [here](#allocate-resources) and [here](#release-resources).
 
