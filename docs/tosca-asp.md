@@ -1,28 +1,32 @@
 #Autoscaling in TOSCA
-This is an example of how to create Auto-scale policies with the yaml descriptor. 
+This is an example of how to create Auto-scale policies with the yaml descriptor. The whole Auto-scale policy goes in the **properties** of the Virtual Network Function node. 
 
 
 ```yaml
-auto_scale_policy:
-  scale-out:                  # Policy name 
-    threshod: 100
-    comparisonOperator: ">="
-    period: 30
-    cooldown: 60
-    mode: REACTIVE
-    type: WEIGHTED
-    alarms:
-      alarm1:                 # Alarm name      
-        metric: "system.cpu.load[percpu,avg1]"
-        statistic: "avg"
-        comparisonOperator: ">"
-        threshold: 0.7
-        weight: 1
-    actions:
-      action1:                # Action name
-        type: SCALE_OUT
-        value: "2"
-        target: "<target>"
+example-vnf:
+  type: openbaton.type.VNF
+  properties:
+    # Other properties omitted for brevity
+    auto_scale_policy:
+      scale-out:                  # Policy name 
+        threshod: 100
+        comparisonOperator: ">="
+        period: 30
+        cooldown: 60
+        mode: REACTIVE
+        type: WEIGHTED
+        alarms:
+          alarm1:                 # Alarm name      
+            metric: "system.cpu.load[percpu,avg1]"
+            statistic: "avg"
+            comparisonOperator: ">"
+            threshold: 0.7
+            weight: 1
+        actions:
+          action1:                # Action name
+            type: SCALE_OUT
+            value: "2"
+            target: "<target>"
 
 ```
 

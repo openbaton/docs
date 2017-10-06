@@ -1,6 +1,6 @@
 #Fault Management in TOSCA
 This is an example of how to use the Fault Management system with the yaml descriptor. 
-The Fault Management specifics must be placed in the properties of the VDU node. 
+The Fault Management specifics must be placed in the **properties** of the VDU node. 
 
 This is an example of a VDU Node with a Fault Management Policy:
 
