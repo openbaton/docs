@@ -71,16 +71,16 @@ dummy-server:
     vnfPackageLocation: https://github.com/openbaton/vnf-scripts.git
     deploymentFlavour:
       - flavour_key: m1.small
-    requirements:
-      - vdu: VDU2
-    interfaces:
-      lifecycle: # lifecycle
-        instantiate:
-          - install.sh
-          - start-srv.sh
+  requirements:
+    - vdu: VDU2
+  interfaces:
+    lifecycle: # lifecycle
+      instantiate:
+        - install.sh
+        - start-srv.sh
 ```
 
-This Virtual Network Function is called ```dummy-server``` 
+This Virtual Network Function is called **dummy-server**
 
 | Name          		| Value   	                    | Description       											|
 | -------------   		| -------------:	            | --------------:												|
@@ -209,7 +209,7 @@ private:
 
 ### Relationships Template
 The Relationships Template creates the dependency between two VNFs.
-This is the definition of Relationships Template called ```connection_server_client```:
+This is the definition of Relationships Template called **connection_server_client**:
 
 ```yaml
 relationships_template:
@@ -236,7 +236,6 @@ configurations:
     name: server-configurations
     configurationParameters:
       - key: "value"
-
 ```
 
 ### Complete Example
@@ -348,7 +347,6 @@ relationships_template:
     target: dummy-client
     parameters:
         - private
-
 
 ```
 
