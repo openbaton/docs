@@ -128,7 +128,7 @@ For example if you are using Openstack as Vim, the flavour_key parameter shall c
 
 ### Inter-VNFs dependencies
 
-In many cases, you may need or you may provide some information in order to interact with other VNFs inside a network service composition. Please refer to the [Inter-VNFs dependencies page][vnf-dependencies] for understanding better this concept, and in particular for learning how to make use of `provides` and `requires` inside a VNFD for interacting with other VNFs.  
+In many cases, you may need or you may provide some information in order to interact with other VNFs inside a network service composition. Please refer to the [Inter-VNFs dependencies page][vnf-dependencies] for a better understanding of this concept and in particular for learning how to make use of `provides` and `requires` inside a VNFD for interacting with other VNFs.  
 
 <!---
 References
