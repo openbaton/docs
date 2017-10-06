@@ -68,7 +68,7 @@ The *"server"* field specifies that the source of the dependency is the VNFD wit
 
 ## Inter-VNF dependencies - practical example (Generic VNFM)
 
-For a more detailed example of usage of inter-VNF dependencies, you could read the following [tutorial][vnf-depenendencies-generic]
+For a more detailed example of usage of inter-VNF dependencies, you can read the following [tutorial][vnf-dependencies-generic].
 
 
 [network-service-dependency]:images/network-service-dependency.png
