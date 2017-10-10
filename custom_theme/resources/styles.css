@@ -290,3 +290,7 @@ a{
 a:visited {
     color: #ea8e0c; !important;
 }
+/*to hide the "Try it out" button in Swaggur API, Once we setup the Server, we can remove*/
+.swagger-ui .btn{
+    display: none;
+}
