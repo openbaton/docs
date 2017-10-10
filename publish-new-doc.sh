@@ -11,6 +11,7 @@ while true; do
 done
 
 commit_id=`git log --format="%H" -n 1`
+branch_id=doc-$(date "+%Y-%m-%d")
 
 # build the documentation
 mkdocs build --clean
@@ -23,11 +24,17 @@ git clone git@github.com:openbaton/openbaton.github.io.git $tmp/web
 cp -r site/ $tmp/web/documentation
 
 pushd $tmp/web
+
+# create a new branch for adding the new documentation content
+git checkout -b $branch_id
+
 # commit changes with latest commit id
 git commit -am "Updated documentation folder with content from $commit_id of docs master branch"
  
 # push changes on master branch
-# git push
+git push origin $branch_id
+
+
 
 popd
 
