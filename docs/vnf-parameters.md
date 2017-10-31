@@ -59,9 +59,9 @@ The out-of-the-box parameters are a special case, since you did not specify a ke
 
 | Out-of-the-box-parameter | Usage of variables in scripts |Value
 | ------------------- | -------------- | ----
-| The IP address         |  $< network_name > | The IP address of the virtual machine connected to the network
-| The floating IP address         |  $< network_name >\_floatingIp | The floating IP address of the virtual machine connected to the network
-| The hostname         |  $hostname | The IP address of the virtual machine connected to the network
+| The IP address         |  $< network_name > | The IP address assigned to the virtual machine belonging to the network with name <network_name>
+| The floating IP address         |  $< network_name >\_floatingIp | The floating IP address assigned to the virtual machine belonging to the network with name <network_name>
+| The hostname         |  $hostname | The hostname assigned to the virtual machine
 
 **Note**: Sometimes it may be that the names of VNF parameters are not conform with bash environment variables. For example if a network name contains a hyphen (e.g. network-one). In those cases are the hyphens replaced by Open Baton automatically with underscores. So in you scripts you would write ```$network_one``` instead of ```$network-one```.
 
