@@ -43,7 +43,7 @@
               ]
             }
           ],
-          "vimInstanceName":["vim-instance"]
+          "vimInstanceName":[]
         }
       ],
       "virtual_link":[
@@ -100,7 +100,7 @@
               ]
             }
           ],
-          "vimInstanceName":["vim-instance"]
+          "vimInstanceName":[]
         }
       ],
       "type":"server",

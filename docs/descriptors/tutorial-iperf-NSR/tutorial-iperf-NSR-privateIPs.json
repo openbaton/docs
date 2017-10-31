@@ -42,7 +42,7 @@
               ]
             }
           ],
-          "vimInstanceName":["vim-instance"]
+          "vimInstanceName":[]
         }
       ],
       "virtual_link":[
@@ -93,7 +93,7 @@
               ]
             }
           ],
-          "vimInstanceName":["vim-instance"]
+          "vimInstanceName":[]
         }
       ],
       "deployment_flavour":[
