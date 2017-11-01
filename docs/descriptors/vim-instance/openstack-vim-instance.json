@@ -1,8 +1,8 @@
 {
   "name":"vim-instance",
-  "authUrl":"http://192.168.145.50:5000/v2.0",
-  "tenant":"tenantName",
-  "username":"userName",
+  "authUrl":"http://localhost:5000/v2.0",
+  "tenant":"tenant-name",
+  "username":"username",
   "password":"password",
   "keyPair":"keypair",
   "securityGroups": [
