@@ -87,13 +87,12 @@ buildscript {
 
 repositories {
     mavenCentral()
-    /**
-     * Only needed for openbaton snapshots dependencies
-     */
     maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
     }
-}
+    maven {
+        url "https://oss.sonatype.org/content/repositories/releases/"
+    }
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -104,7 +103,7 @@ mainClassName = 'org.myplugin.example.Starter'
 
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:4.0.0'
+    compile 'org.openbaton:plugin-sdk:5.0.0'
     compile'org.springframework:spring-context:4.2.1.RELEASE'
 }
 
