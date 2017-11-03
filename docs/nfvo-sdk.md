@@ -10,7 +10,7 @@ The Open Baton SDK artifacts are published on Maven Central. You can include the
 <dependency>
   <groupId>org.openbaton</groupId>
   <artifactId>sdk</artifactId>
-  <version>4.0.0</version>
+  <version>5.0.0</version>
 </dependency>
 ```
 
@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-  compile 'org.openbaton:sdk:4.0.0'
+  compile 'org.openbaton:sdk:5.0.0'
 }
 ```
 
