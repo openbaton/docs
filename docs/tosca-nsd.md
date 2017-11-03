@@ -37,7 +37,7 @@ relationships_template: #Explained below
 
 | Name          		| Description       											|
 | -------------   		| -------------	            | 
-| tosca_definitions_version 	| The version of the template that follows it.    |
+| tosca_definitions_version 	| The version of TOSCA, that the template follows.    |
 | description  	| A short description of the template.    |
 | metadata  	| An Object containing metadata about the Network Service - name, version and creator.    |
 | relationships_template  	| Explained below    |
@@ -96,10 +96,10 @@ The **Properties** for the VNF are:
 | -------------   		| -------------:	            | --------------:												|
 | vendor  	            | String    | Name of the provider of the VNF |
 | version  	            | String     | Version of the provider of the VNF  |
-| configurations  	    | Object with two values **name**, **configurationParameters**  | **name**: is a String with the name of the Configuration, **configurationParameters**: the list of Parameters defined by a pair of < key, value > |
+| configurations  	    | Object with two values **name**, **configurationParameters**  | **name**: is a String with the name of the Configuration, **configurationParameters**: the list of Parameters defined by a list of < key, value > pairs |
 | vnfPackageLocation  	| URL    | It is URL where the Orchestrator will fetch the Scripts needed in the lifecycle events defined in the **interfaces** |
 | deploymentFlavour  	| List of flavour_key    | It is a list flavors each one refers to Virtual hardware templates called "flavors" in OpenStack  |
-| endpoint 	| String    | The VNFManager deploying the VNF itself  |
+| endpoint 	| String    | The VNFManager that can be used to deploy the VNF  |
 
 The **Requirements** for the VNF is an object containing a list of String key-value pairs and the keys are defined the following way:
 
@@ -121,7 +121,7 @@ For the **lifecycle** object are the following events defined in compliance with
 
 
 ### Node Template: Virtual Deployment Unit (VDU)
-This is an example of a VDU template and similar to above after that we explain briefly the components of the template.
+This is an example of a VDU template and below it the components of the template are explained.
 
 ```yaml
 VDU2:
