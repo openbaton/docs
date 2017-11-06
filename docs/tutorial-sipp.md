@@ -26,7 +26,7 @@ For registering the Point of Presence of type OpenStack to the NFVO you have to 
 ### Using the dashboard
 
 If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://ip-where-nfvo-runs:8080 (change port and protocol if you use SSL) and log in (default username and password are *admin* and *openbaton*).  
-Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice by clicking on `Register Vim` and selecting the Vim Instance's json file.
+Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice by clicking on `Register a new PoP` and selecting the Vim Instance's json file.
 
 ![Onboarding-Vim][vim-onboarding]
 
@@ -45,7 +45,7 @@ The difference is that the first NSD will deploy Virtual Machines without floati
 
 ### Using the dashboard
 
-If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `On Board NSD -> Upload JSON` and selecting the Descriptor's json file.
 
 ![Onboarding-NSD][nsd-onboarding]
 
