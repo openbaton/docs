@@ -57,6 +57,9 @@ vnfm.ems.script.old = 180
 #where the script log are stored
 vnfm.ems.script.logpath = /var/log/openbaton/scriptsLog/
 vnfm.ems.userdata.filepath = /etc/openbaton/openbaton-vnfm-generic-user-data.sh
+#RabbitMQ credentials passed to ems
+vnfm.ems.username = admin
+vnfm.ems.openbaton = openbaton
 ```
 
 ### Modify logging levels 
