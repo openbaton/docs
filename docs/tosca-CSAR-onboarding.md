@@ -157,13 +157,13 @@ zip -r iperf.csar . -x ".*" -x "*/.*"
 
 ## Onboarding VNF CSARs
 
-Go to the Catalogue -> VNF Packages ->Upload VNF Package(s), check the "Use CSAR Parser" box and select the csar that you want to upload.
+Go to the Catalogue -> VNF Packages -> Upload VNFPackage, check the "Use CSAR Parser" box and select the csar that you want to upload.
 
 ![Drag&Drop modal][drag_drop] 
 
 ## Onboard Network Service CSARs
 
-Go to the Catalogue -> NS Descriptors and click on "On Board NSD -> Upload CSAR" and select the file.
+Go to the Catalogue -> NS Descriptors and click on "Upload CSAR NSD" and select the file.
 
 
 

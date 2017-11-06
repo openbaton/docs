@@ -50,7 +50,7 @@ On this page you can see the list of PoPs registered
 
 ![List of Vim Instances][vimpage]
 
-For registering a new Point-of-Presence you can click on the button in the top-right corner **Register a new PoP** of this page. In the new window you have two ways to register a new PoP. First is to fill out the form with all the data needed to register the PoP. You can choose the type of PoP from the drivers that you currently have installed (test, openstack, etc).
+For registering a new Point-of-Presence you can click on the button in the top-right corner **Register Vim** of this page. In the new window you have two ways to register a new PoP. First is to fill out the form with all the data needed to register the PoP. You can choose the type of PoP from the drivers that you currently have installed (test, openstack, etc).
 ![Register a new Vim Instances][registeraNewVim]
 
 You can copy json with the data or provide a file.
@@ -64,11 +64,10 @@ If you want to delete a Vim Instance you can click on the button **Action** and 
 In the menu on the left side under the template _Catalogue_ you can manage 
 
 1. NS Descriptors
-2. VNF Descriptors
-3. VNF Managers
-4. VNF Packages
-5. Key Pairs
-6. Marketplace
+2. VNF Packages
+3. Key Pairs
+4. VNF Descriptors
+5. Marketplace
 
 ### Marketplace
 
@@ -101,11 +100,11 @@ In order to launch NSD press the *Action* near the NSD you want to lauch and pre
 ![NSD Launch][launchNSD1]
 ![NSD Launch][launchNSD2]
 #### Storing NSD
-You have three options for storing a NS Descriptor:
+You have two options for storing a NS Descriptor:
 
 1. Create a NSD by using the VNFDs from the Packages
 2. Create a NSD by using a json file
-3. If you are using TOSCA NSD you can choose  "upload CSAR" and upload it via drag and drop.
+3. If you are using TOSCA NSD you can choose  "upload CSAR NSD" and upload it via drag and drop.
 
 
 Upload a json-file that contains the NSD
@@ -113,12 +112,12 @@ Upload a json-file that contains the NSD
 ![NSD create by File][NSDcreateFile]
 
 
-Create a NSD by using the VNFD from the Packages, just click on the button "Create NSD".
+Create a NSD by using the VNFD from the Packages, just click on the button "Create NSD".  
 This is the form which allows you to choose the VNFDs to be used in the NSD come from the Catalogue (and contained inside the VNFPackages)
 
 ![NSD create by VNFDs][NSDcreateSelect]
 
-In the picture below you can see how to add a VNF Dependency to the NSD and possible parameters by clicking on *Add new dependency*
+In the picture below you can see how to add a VNF Dependency to the NSD and possible parameters by clicking on *Dependencies +*
 
 ![Add VNF Dependency NSD][NSDcreateDependency]
 
@@ -172,7 +171,7 @@ For uploading a _.tar_ you can click on the button **Upload VNFPackage** and thi
 
 ![Drag&Drop modal][drag_drop]
 
-After you click on the button **Upload All** the packages will be sent to the _NFVO_ and once the process is finished you will see the package appearing in the list
+After you click on the button **Send All** the packages will be sent to the _NFVO_ and once the process is finished you will see the package appearing in the list
 
 
 

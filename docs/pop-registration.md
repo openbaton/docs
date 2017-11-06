@@ -42,7 +42,7 @@ Once you have prepared your JSON file, you need to upload it on the NFVO either 
 
 In order to make use of your PoP described within your JSON file, you need to upload the JSON file to the NFVO.
 You can use the dashboard available at [localhost:8080] for this purpose.
-Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register a new PoP button and upload your JSON file (from the File input section). The following picture shows the dashboard:
+Under the menu `Manage PoPs` you can see the `PoP instances`. Click on the Register VIM button and upload your JSON file (from the File input section). The following picture shows the dashboard:
 
 ![register a new PoP][register-new-pop]
 
