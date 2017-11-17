@@ -138,31 +138,28 @@ Using the API you can store the NSD written in TOSCA directly in the NFVO. You w
 1) Authentication:
 Run this command:
 ```bash
-$curl -v -u openbatonOSClient:secret -X POST http://localhost:8080/oauth/token -H "Accept: application/json" -d "username=admin&password=openbaton&grant_type=password"
+curl -v -u openbatonOSClient:secret -X POST http://localhost:8080/oauth/token -H "Accept: application/json" -d "username=admin&password=openbaton&grant_type=password"
 ```
 The NFVO will answer with an authetication key and a project id. You will need them to send the NSD in the next step. The response should look like this:
 
 ```bash
 {
-  # Authentication Key
-  "value": "e8726a35-61c8-4bcb-873e-3ab6cc989f6f",
-  "expiration": "Aug 30, 2016 9:14:22 PM",
-  "tokenType": "bearer",
-  "refreshToken": {
-    "expiration": "Sep 29, 2016 9:14:22 AM",
-    # Project ID
-    "value": "336ca2e6-8e78-48eb-b8f8-c5de862a21da"
-  },...
+  "access_token": "7debc703-8bb3-43b9-9ed9-927d882ad371",
+  "value": "7debc703-8bb3-43b9-9ed9-927d882ad371",
+  "token_type": "bearer",
+  "refresh_token": "a29d9f1b-9d62-495a-958a-e33115d59631",
+  "expires_in": 42507,
+  "scope": "read write"
+} 
 ```
-**Note: ** Do not pay attention to the project-id supplied in this response.
 
 2) To send the NSD in the TOSCA format save the example above in a file named dummyns.yaml and get the project id of your project from the Dashboard under the menu Identity > Menu. After that run this :
 
 ```bash
-$curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @dummyns.yaml
+curl -i -X POST http://localhost:8080/api/v1/nsd-tosca -H "Content-Type: text/yaml" "Accept: application/json" -H "project-id: $Project-ID HERE$" -H "Authorization: Bearer $AUTH KEY HERE$" --data-binary @dummyns.yaml
 ```
 
-To retrieve or to instantiate this NSD please use the Dashboard of OpenBaton in the page under the menu Catalogue > NS Descriptors.
+To retrieve or to launch this NSD please use the Dashboard of OpenBaton in the page under the menu Catalogue > NS Descriptors.
 
 
 <!------------
