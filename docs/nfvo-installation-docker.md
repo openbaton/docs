@@ -2,7 +2,7 @@
 
 # Install Open Baton using Docker
 
-This tutorial will guide towards the installation of a minimal Open Baton environment on Docker, comprising the following components:
+This tutorial will guide towards the installation of a minimal Open Baton environment on a single Docker container, comprising the following components:
 
 * The NFVO implemented in java using the [spring.io][spring] framework. For more details about the NFVO architecture, you can refer to the next sections
 * [RabbitMQ][reference-to-rabbit-site] as messaging system
@@ -10,18 +10,19 @@ This tutorial will guide towards the installation of a minimal Open Baton enviro
 * OpenStack VIM Driver for deploying VNFs on OpenStack
 * Generic VNFM for the instantiation of VNFs part of the Open Baton ecosystem
 
+In case you would like to run each component in an individual docker container, you can make use of the docker compose files available on the [bootstrap repository][docker-compose] 
 
 ## Requirements
 
-You need to have [Docker] installed.
+You need to have [Docker] installed, please refer to the official docker documentation to setup it on your environment. 
 
 ## User guide
 
 To have a running standalone Open Baton Docker container type the following commands:
 
 ```bash
-sudo docker pull openbaton/standalone
-sudo docker run --name openbaton -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone
+docker pull openbaton/standalone
+docker run --name openbaton -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone
 ```
 
 ***VERY IMPORTANT NOTE*** - You should put as input for the RABBITMQ_BROKERIP the RabbitMQ IP making sure that this IP can be
@@ -43,14 +44,13 @@ user: admin
 password: openbaton
 ```
 
-
 ### Troubleshooting
 
 
 To verify that the container is running you can type the following command:
 
 ```bash
-sudo docker ps
+docker ps
 ```
 
 which output should be similar to the following:
@@ -60,20 +60,21 @@ CONTAINER ID        IMAGE                        COMMAND                  CREATE
 cfc4a7fb23d0        openbaton/standalone:latest  "/usr/bin/supervisord"   49 seconds ago      Up 49 seconds            0.0.0.0:5672->5672/tcp, 0.0.0.0:8080->8080/tcp, 0.0.0.0:8443->8443/tcp, 0.0.0.0:15672->15672/tcp   openbaton
 ```
 
-To connect to the running container containing Open Baton you can type the following command:
+The standalone container uses the standard debian packages for installing the open baton components, thus logs are available under /var/log/openbaton. To connect to the running container containing Open Baton you can type the following command:
 
 ```bash
-sudo docker exec -ti openbaton bash
+docker exec -ti openbaton bash
 ```
 
 To stop and delete the running Open Baton container you can type respectively the following commands:
 
 ```bash
-sudo docker stop openbaton
-sudo docker rm openbaton
+docker stop openbaton
+docker rm openbaton
 ```
 
 [docker]: https://www.docker.com/
+[docker-compose]: https://github.com/openbaton/bootstrap/tree/develop/distributions/docker/compose
 [spring]: https://spring.io
 [localhost:8080]:http://localhost:8080/
 [use-openbaton]:use.md

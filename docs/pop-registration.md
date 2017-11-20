@@ -31,10 +31,13 @@ Here you have an example:
 ```
 
 Most of the parameters are based on the OpenStack VIM type, since OpenStack represents the standard de-facto VIM in the ETSI NFV specification. 
-However, there are additional VIM drivers provided (soon to come drivers for Amazon EC2 and Docker), therefore refer to the actual VIM driver you are using for more details about what to fill in the JSON file:
+However, there are additional VIM drivers provided, therefore refer to the actual VIM driver you are using for more details about what to fill in the JSON file:
 
-* [openstack][openstack]
-* [test][test]
+* [openstack]
+* [amazon]
+* [docker]
+* [test]
+
 
 Once you have prepared your JSON file, you need to upload it on the NFVO either via the dashboard (described below) or via the CLI. 
 
@@ -53,8 +56,10 @@ Once the VIM instance is registered, it will appear on the list of available PoP
 For more information about the dashboard see: [OpenBaton Dashboard]
 
 
+[amazon]: pop-amazon.md
+[docker]: pop-docker.md
 [localhost:8080]: http://localhost:8080
-[marketplace-drivers]: http://marketplace.openbaton.org:80/#/
+[marketplace-drivers]: http://marketplace.openbaton.org
 [OpenBaton Dashboard]:nfvo-how-to-use-gui
 [OpenBaton Dashboard]:nfvo-how-to-use-gui.md
 [openstack-link]:https://www.openstack.org/

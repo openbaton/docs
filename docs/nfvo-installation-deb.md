@@ -3,9 +3,9 @@
 
 # Install Open Baton on Linux
 
-This tutorial will guide towards the installation of an Open Baton environment using the stable binaries version.
+This tutorial will guide towards the installation of an Open Baton environment using the latest stable binaries version.
 
-**NOTE** - Please refer to [this tutorial](nfvo-installation-src.md) if you are willing to install a development environment where you can easily modify, compile and commit changes to the code base directly.
+**NOTE** - Please refer to [this tutorial](nfvo-installation-src.md) if you prefer to install a development environment where you can easily modify, compile and commit changes to the code base directly.
 
 A minimal version comprises the following components:
 

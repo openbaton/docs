@@ -13,7 +13,7 @@ This tutorial will guide towards the installation of a minimal Open Baton enviro
 
 ## Requirements
 
-You need to have [Vagrant] installed.
+You need to have [Vagrant] and [Virtualbox] installed. Please refer to their official documentation for installing them on your environment.
 
 ## Installation guide
 
@@ -35,6 +35,7 @@ password: openbaton
 [localhost:8080]:http://localhost:8080/
 [dummy-NSR]:dummy-NSR.md
 [Vagrant]: https://www.vagrantup.com/
+[Virtualbox]: https://www.virtualbox.org/
 [vagrantfile]: http://get.openbaton.org/vagrant/Vagrantfile
 [reference-to-rabbit-site]:https://www.rabbitmq.com/
 
