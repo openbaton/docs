@@ -1,7 +1,7 @@
 # Register a new PoP of type Docker
 
 The table below provides an explaination about the different parameters used in the PoP JSON file. 
-**Please make sure you have read the [prerequisites][amazon-driver] before registering an OpenStack PoP.**
+**Please make sure you have read the [prerequisites][docker-driver] before registering an OpenStack PoP.**
 
 | Params         | Meaning                                                                                                                                                                                | Mandatory |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------:|
@@ -40,4 +40,4 @@ Example for Region eu-west-1:
 }
 ```
 
-[amazon-driver]: amazon-driver.md
+[docker-driver]: docker-driver.md

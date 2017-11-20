@@ -100,18 +100,15 @@ In order to launch NSD press the *Action* near the NSD you want to lauch and pre
 
 ![NSD Launch][launchNSD1]
 ![NSD Launch][launchNSD2]
-#### Storing NSD
-You have three options for storing a NS Descriptor:
 
-1. Create a NSD by using the VNFDs from the Packages
-2. Create a NSD by using a json file
-3. If you are using TOSCA NSD you can choose  "upload CSAR" and upload it via drag and drop.
+#### On boarding NSD
+You have three options for on boarding a new NS Descriptor:
 
+1. Composing VNFs selected from the catalogue
+2. Uploading the JSON file
+3. Uploading the TOSCA CSAR in case you choose the TOSCA descriptor format
 
-Upload a json-file that contains the NSD
-
-![NSD create by File][NSDcreateFile]
-
+##### Option 1 
 
 Create a NSD by using the VNFD from the Packages, just click on the button "Create NSD".
 This is the form which allows you to choose the VNFDs to be used in the NSD come from the Catalogue (and contained inside the VNFPackages)
@@ -121,6 +118,13 @@ This is the form which allows you to choose the VNFDs to be used in the NSD come
 In the picture below you can see how to add a VNF Dependency to the NSD and possible parameters by clicking on *Add new dependency*
 
 ![Add VNF Dependency NSD][NSDcreateDependency]
+
+##### Option 2
+
+Upload a json-file that contains the NSD
+
+![NSD create by File][NSDcreateFile]
+
 
 ### Network Service Descriptor Information
 If you click on the id of a NSD shown in the list of NSDs you can see the information
@@ -173,8 +177,6 @@ For uploading a _.tar_ you can click on the button **Upload VNFPackage** and thi
 ![Drag&Drop modal][drag_drop]
 
 After you click on the button **Upload All** the packages will be sent to the _NFVO_ and once the process is finished you will see the package appearing in the list
-
-
 
 
 ## Network Service Records 
@@ -235,7 +237,6 @@ This are the information of the Event selected
 [SecurityOverview]:images/nfvo-how-to-use-gui-security-overview.png
 [AddUser]:images/nfvo-how-to-use-gui-add-user.png
 [Login]:images/login.png
-
 [VNFDlistintoNSD]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
 [VNFDlistintoNSD1]:images/nfvo-how-to-use-gui-VNFD-list-into-NSD.png
 [VNFDescriptorInformation]:images/nfvo-how-to-use-gui-VNFD-information.png
@@ -249,7 +250,6 @@ This are the information of the Event selected
 [createkey]:images/nfvo-how-to-use-gui-generate-key.png
 [importkey]:images/nfvo-how-to-use-gui-import-key.png
 [launchNSD1]:images/gui-launch-pop.png
-
 [launchNSD2]:images/gui-launch-key.png
 [VNF Package documentation]: vnf-package.md
 <!---

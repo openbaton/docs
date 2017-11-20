@@ -9,6 +9,7 @@ In order to use Open Baton for launching your own Network Service, assuming that
 
 1. Register one or more Point of Presences (PoPs). [Learn more here][vim-registration]
 2. Build or download one or more VNF Packages. [Learn more here][vnf-pacakge]
+3. On board VNF Packages. [Learn more here][onboard-vnf-pacakge]
 3. Prepare the Network Service Descriptor (NSD). [Learn more here][ns-descriptor]
 4. Launch the NSD, either using the [Learn more here][dashboard] or the [CLI][cli]
 
@@ -19,6 +20,7 @@ You can also follow one of the tutorials provided in the [next][tutorials] secti
 [generic]: vnfm-generic
 [juju]: vnfm-juju
 [ns-descriptor]: ns-descriptor
+[onboard-vnf-pacakge]: vnf-package-onboard.md
 [vim-driver]: vim-driver
 [vim-registration]: pop-registration.md
 [vnfm-intro]: vnfm-intro

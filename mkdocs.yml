@@ -10,7 +10,9 @@ pages:
 - ['use.md', 'Get Started', 'Get Started']
 - ['pop-registration.md', 'Get Started', 'Register a PoP']
 - ['vnf-package.md', 'Get Started', 'Build your VNF Package']
+- ['vnf-package-onboard.md', 'Get Started', 'On board your VNF Package']
 - ['ns-descriptor.md', 'Get Started', 'Build your Network Service Descriptor']
+- ['ns-descriptor-onboard.md', 'Get Started', 'On board your Network Service Descriptor']
 - ['launch-nsd.md', 'Get Started', 'Launch your Network Service']
 - ['tutorial.md', 'Tutorials', 'Tutorials overview']
 - ['dummy-NSR.md', 'Tutorials', 'Dummy NSR']
@@ -45,6 +47,7 @@ pages:
 
 - ['FAQ.md', 'FAQ', 'FAQ']
 - ['**HIDDEN**': 'amazon-driver.md']
+- ['**HIDDEN**': 'docker-driver.md']
 - ['**HIDDEN**': 'how-to-ec2-cli.md']
 - ['**HIDDEN**': 'how-to-ec2-dashboard.md']
 - ['**HIDDEN**': 'integration-test-write.md']
