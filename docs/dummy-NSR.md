@@ -14,12 +14,22 @@ In order to execute this scenario, you need to have the following components up 
  * [Test vim driver]
  * [Dummy-VNFM] 
 
-## Preparation
+### Run it manually 
 
 If not yet running start the NFVO and the Dummy-VNFM (refer to it's [readme][Dummy-VNFM] file on how to start it).  
 If you installed the NFVO using the bootstrap script, the Test vim driver will be installed already.  
 Otherwise, you have to provide it manually by cloning the [git repository][test-plugin-github] and building the jar file with *./gradlew build*.
 Now move the built jar into **{path-to-nfvo-source-code}/nfvo/plugins/vim-drivers** and restart the NFVO. 
+
+### Run it with Docker
+
+You can find a [docker-compose] file ready to launch the required components for this tutorial. Assuming that you have installed the latest version of Docker and Docker Compose, download the file and execute the following command: 
+
+```bash
+docker-compose -p ob -f dummy-ns.yml up -d
+```
+
+Feel free to adapt the dummy-ns.yml file as you wish. 
 
 ## Store the VimInstance
 
@@ -212,6 +222,7 @@ References
 [nfvo-installation]:nfvo-installation.md
 [dashboard]: nfvo-how-to-use-gui
 [Dummy-VNFM]: https://github.com/openbaton/dummy-vnfm-amqp
+[docker-compose]: compose/dummy-ns.yml
 [vim-doc]:vim-instance-documentation
 [Test vim driver]: https://github.com/openbaton/test-plugin
 [NSD]: descriptors/tutorial-dummy-NSR/tutorial-dummy-NSR.json

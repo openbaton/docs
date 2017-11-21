@@ -12,7 +12,7 @@ Below you can find a list of all the available tutorials including the list of c
 
 
 | Name           | Description                            |  Components  |        
-|----------------|----------------------------------------|-------------:|
+|----------------|----------------------------------------|--------------|
 | Dummy NS       | Deploy a Network Service Record composed of Dummy VNFs. Kind of "hello-world" scenario  |   test VIM Driver, test VNFM |
 | Iperf NS       | Deploy a network service that uses iPerf client and server    |   OpenStack VIM Driver, Generic VNFM |
 | SIPp  NS       | Deploy a network service that uses SIPp client and server  |   OpenStack VIM Driver, Generic VNFM |
