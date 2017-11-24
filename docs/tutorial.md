@@ -21,6 +21,4 @@ Below you can find a list of all the available tutorials including the list of c
 | Fault Management System      |  Deploy a network service that uses SIPp client and server showcasing the FMS    |   OpenStack VIM Driver, Generic VNFM, Zabbix Plugin, FMS |
 
 
-
-
 [Marketplace]: http://marketplace.openbaton.org

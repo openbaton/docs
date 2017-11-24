@@ -1,6 +1,6 @@
-# How to write a VNFManager
+# How to write a VNF Manager
 
-This section is going to describe how to write your own VNFManager by using any vnfm-sdk.
+This section is going to describe how to write your own VNF Manager by using the vnfm-sdk.
 Moreover, the vnfm-sdk contains all the things you may need for the development of the VNFManager of your choice as well.
 
 The vnfm-sdk provides the following things:

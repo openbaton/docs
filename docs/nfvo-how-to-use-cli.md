@@ -16,7 +16,7 @@ Git clone the [Openbaton Client project][openbaton-client-github]. Navigate into
 ```sh
 git clone https://github.com/openbaton/openbaton-client.git
 cd openbaton-client
-./gradlew build
+./gradlew build 
 ```
 
 ## Install the Openbaton Client with Homebrew (MacOS)

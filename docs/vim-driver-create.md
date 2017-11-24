@@ -1,6 +1,6 @@
 # Create Vim Driver
 
-This tutorial will give This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
+This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this work?
 OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plugins. It offers an implementation of an interface that is used by the NFVO. 

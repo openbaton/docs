@@ -19,10 +19,26 @@ In order to execute this scenario, you need to have the following components up 
  * The [NFVO][nfvo-github]
  * the [OpenStack vim driver][openstack-plugin]
  * the [Generic VNFM][generic-vnfm]
- * OpenStack
+ * Configured and running OpenStack environment
 
 Start the NFVO and Generic VNFM depending on how you [installed][installation] it.  
 If you used the bootstrap script for installing you do not have to care about the OpenStack vim driver as it will be installed already.
+
+
+### Run it with Docker
+
+You can find a [docker-compose] file ready to launch the required components for this tutorial. Assuming that you have installed the latest version of Docker and Docker Compose, download the [docker-compose] file and execute the following command: 
+
+```bash
+HOST_IP=192.168.42.42 docker-compose -p ob -f min-compose.yml up -d
+```
+
+Where the HOST_IP parameter is the IP of your host where you are executing the docker containers. Please note that the IP must be reachable from the OpenStack environment (in particular from the VMs created)
+for allowing the EMS agent to reach back the Generic VNFM. 
+
+Feel free to adapt the min-compose.yml file as you wish including other components you may need.
+
+**important note** the NFVO uses the in memory database, thus anything stored in the NFVO won't be persisted after restart of the container. 
 
 ## Store the Vim Instance
 
@@ -290,6 +306,7 @@ References
 -->
 [cli]: nfvo-how-to-use-cli
 [dashboard]: nfvo-how-to-use-gui
+[docker-compose]: compose/min-compose.yml
 [iperf-client-server]:images/use-case-example-iperf-client-server.png
 [sequence-diagram-os-vnfm-ems]:images/use-case-example-sequence-diagram-os-vnfm-ems.png
 [vnfr-states]:vnfr-states
