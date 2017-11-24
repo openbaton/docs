@@ -12,7 +12,7 @@ Before starting this component you have to do the configuration of the AutoScali
 
 * Preconfigured Open Baton environment (NFVO, VNFMs, VIM drivers)
 * Running Zabbix server (if Zabbix is the monitoring system of choice) 
-* Preconfgiured and running zabbix plugin either located in the folder `NFVO/plugins` or `autoscaling/plugins` to let it start automatically; or started manually. (if Zabbix is the monitoring system of choice)
+* Preconfgiured and running zabbix plugin **EITHER** located in the folder `NFVO/plugins` **OR** `autoscaling/plugins` to let it start automatically; or started manually. (if Zabbix is the monitoring system of choice)
 
 # How to install AutoScaling Engine
 If you have the bootstrap procedure and selected the installation of the ASE component, you could skip this section, and move to the [How to use AutoScaling Engine](#how-to) one. 

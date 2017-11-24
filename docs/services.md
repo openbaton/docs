@@ -1,14 +1,18 @@
 # Open Baton Services
 
-Open Baton follows a modular approach and aims to be an easily extendable platform. There are already some services extending Open Baton e.g. the [AutoScaling Engine][ase] or the [Fault Management System][fms] and new services can use the Open Baton [SDK][sdk] to facilitate the development.
+Open Baton follows a modular approach and aims to be an easily extendable platform. 
+There are already some services extending Open Baton e.g. the [Autoscaling Engine (ASE)][ase] or the [Fault Management System (FMS)][fms] and new services can use the Open Baton [SDK][sdk] to facilitate the development.
 
-For accessing the NFVO's API, a service has to have credentials. But sometimes, services have different requirements than the access with usual user credentials can provide. This is the reason for the concept of services in Open Baton. You can enable a new service and get a token. With this token it is then possible for a service to use the Open Baton SDK and issue requests in a "privileged" mode. Responses to service requests will for example contain the password of a VIM which is not shown to user requests.
+For accessing the NFVO's API, a service has to be authenticated and authorized.
+However, the authorization process differs from the one used for users, since services have different requirements than the access with usual user credentials can provide. 
+Thus, a service is an entity enabled by the administrator of the platform, and whose token granted allows modifications upon resources deployed by other users. 
+Upon enablement of a new service, the NFVO provides a token, can be used via the Open Baton SDK for making requests in a "privileged" mode. 
 
 ## Enable a new Service
-Admin users can enable a new service using the dashboard.
-Roles specify to which project the service has access.
+Only admin users can enable a new service using the dashboard.
+The role specify to which project the service has access.
 After enabling the service you can download a file containing the service token.
-You can download this file only once.
+As for any private key/token, the NFVO does not maintain a copy of the file generated, thus, you can download this file only once, and you must safely store it for later usage in the configuration file of your service. 
 
 ![Enable new service][service-gif]
 
@@ -19,7 +23,6 @@ The only difference is the constructor of the *NFVORequestor* which does not exp
 
 Here is an example for retrieving the VIM instances of a project using the service token of a service named *testservice*.
 In contrast to requests from normal users, the returned VIM instance objects will contain the password in plain text.
-
 
 
 ```java

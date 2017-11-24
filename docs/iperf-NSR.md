@@ -328,7 +328,7 @@ References
 [nsd-onboarding]: images/tutorials/tutorial-iperf-NSR/nsd-onboarding.png
 [ems-github]: https://github.com/openbaton/ems/tree/master
 [iperf-website]:https://iperf.fr
-[TOSCA]: tosca-iperf-scenario.md
+[TOSCA]: tosca-iperf-scenario
 
 <!---
 Script for open external links in a new tab

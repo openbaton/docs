@@ -29,7 +29,8 @@ A step-by-step tutorial on how to make those changes is available [here for the 
 
 **Disclaimer:** Please be careful while writing your NSD or creating packages, pay attention to the types of instances that you are using, plugin does not keep
 track of the charges that may apply.
-* If you want to use generic-vnfm and EMS that it is coupled with be aware that rabbitmq-host should be reachable from AWS instances. 
+
+Moreover, if you plan to use generic-vnfm and EMS that it is coupled with be aware that rabbitmq-host should be reachable from AWS instances. 
 One of the options in this case is to manually create an instance inside AWS amd install rabbitmq there. The rabbitmq may be reached with instances public DNS after it by all the components.
 
 ## Limitations
