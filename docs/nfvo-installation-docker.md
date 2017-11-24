@@ -22,14 +22,16 @@ To have a running standalone Open Baton Docker container type the following comm
 
 ```bash
 docker pull openbaton/standalone
-docker run --name openbaton -d -h openbaton-rabbitmq -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> openbaton/standalone
+docker run --name openbaton -d -p 8080:8080 -p 5672:5672 -p 15672:15672 -p 8443:8443 -e RABBITMQ_BROKERIP=<RabbitMQ IP> -e RABBITMQ_ADMIN_PSWD=<RabbitMQ admin password> openbaton/standalone
 ```
 
 ***VERY IMPORTANT NOTE*** - You should put as input for the RABBITMQ_BROKERIP the RabbitMQ IP making sure that this IP can be
   reached by external components (VMs, or host where will run other VNFMs) otherwise you will have runtime issues.
   In particular, you should select the external IP of your host on top of which the docker container is running
 
-***NOTE*** - With the command above you will run the latest Open Baton version. You can see all the standalone Open Baton Docker images available from [this][reference-to-op-repo-on-public-docker-hub] list.
+***NOTE*** - the RABBITMQ_ADMIN_PSWD is the password which will be assigned to the "admin" RabbitMQ user. In case you do not set the RABBITMQ_ADMIN_PSWD variable while running the container, the "openbaton" default value will be used as password.
+
+***NOTE*** - With the command above you will run the latest Open Baton version. You can see all the standalone Open Baton Docker images available from [this][reference-to-op-repo-on-public-docker-hub] list (the RABBITMQ_ADMIN_PSWD environment variable is supported only from version 5.0.0).
 
 After running the container you should see as output an alphanumeric string (which represents the full ID of the Open Baton container running) similar to the following:
 
