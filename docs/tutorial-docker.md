@@ -14,7 +14,7 @@ and a reachable Docker engine, usually where the Open Baton platform is running,
 
 ## Setup
 
-In order to start manually the Docker VNFM and VIM Driver, please follow these README: [VNFM](https://github.com/openbaton/go-docker-vnfm) and [VIM Driver](https://github.com/openbaton/go-docker-driver).
+In order to start manually the Docker VNFM and VIM Driver, please follow these README: [VNFM][docker-vnfm] and [VIM Driver][docker-driver].
 When the VNFM and the VIM Driver are running, the NFVO Dashboard should show in the VNF Manager page the Docker VNFM and in the installed vim driver the Docker Vim Driver.
 
 After this you should be able to upload a Vim Instance pointing to the Docker engine:
@@ -241,3 +241,8 @@ After this, you need to refresh the VIM on order to see the new images: go in Po
 ```
 
 and launch the NSD.
+
+
+
+[docker-vnfm]: docker-vnfm.md
+[docker-driver]: docker-driver.md
