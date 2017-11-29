@@ -10,22 +10,16 @@ The _go_ compiler has to be installed, please follow the go documentation on how
 The _dep_ command has to be installed in order to install also dependencies. [Go dependency management tool](https://github.com/golang/dep)
 
 
-## Build the VNFM
+## Download the VNFM
 
-If you installed Open Baton from source code and cloned the git repositories to your computer you will have to add the Docker VNFM to the NFVO by hand.  
-You can build it by yourself by cloning the Docker VNFM's git repository as follows:
-executing
+You can download the VNFM for docker [here](https://github.com/openbaton/go-docker-vnfm/releases/tag/5.0.0). Choose the appropriate distribution.
 
 ```bash
-git clone git@github.com:openbaton/go-docker-vnfm.git
-cd go-docker-vnfm
-dep ensure
-cd main
-go build -o docker-vnfm
+wget https://github.com/openbaton/go-docker-vnfm/releases/download/5.0.0/go-docker-vnfm-darwin-amd64 -O docker-vnfm
+chmod +x docker-vnfm
 ```
 
-Afterwards you will find the binary file in the _main_ folder.  
-Just run it as
+Then run it as:
 
 ```bash
 ./docker-vnfm --help

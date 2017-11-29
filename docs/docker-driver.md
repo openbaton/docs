@@ -7,21 +7,16 @@ Both VNFM and VIM Driver are necessary in order to be able to deploy NS over Doc
 It uses the [go-openbaton go sdk](https://github.com/openbaton/go-openbaton) allowing the NFVO to interoperate with this plugin using AMQP.
 This plugin uses Docker go SDK as implementation of the Docker Engine API. The Docker VIM Driver source code is available at [this GitHub repository](https://github.com/openbaton/go-docker-driver)
 
-### Configure and Build the Vim Driver
+## Download the VNFM
 
-If you installed Open Baton from source code and cloned the git repositories to your computer you will have to add the Docker VNFM to the NFVO by hand.  
-You can build it by yourself by cloning the Docker Vim Driver's git repository as follows:
+You can download the VNFM for docker [here](https://github.com/openbaton/go-docker-driver/releases/). Choose the appropriate distribution.
 
 ```bash
-git clone git@github.com:openbaton/go-docker-driver.git
-cd go-docker-driver
-dep ensure
-cd main
-go build -o docker-driver
+wget https://github.com/openbaton/go-docker-driver/releases/download/5.0.0/go-docker-driver-darwin-amd64 -O docker-driver
+chmod +x docker-driver
 ```
 
-Afterwards you will find the binary file in the _main_ folder.  
-Just run it as
+Then run it as:
 
 ```bash
 ./docker-driver -conf config.toml
