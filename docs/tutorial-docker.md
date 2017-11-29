@@ -244,5 +244,5 @@ and launch the NSD.
 
 
 
-[docker-vnfm]: docker-vnfm.md
-[docker-driver]: docker-driver.md
+[docker-vnfm]: vnfm-docker
+[docker-driver]: docker-driver
