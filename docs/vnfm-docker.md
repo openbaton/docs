@@ -19,19 +19,53 @@ wget https://github.com/openbaton/go-docker-vnfm/releases/download/5.0.0/go-dock
 chmod +x docker-vnfm
 ```
 
-Then run it as:
+Check the usage
 
 ```bash
 ./docker-vnfm --help
-Usage of ./docker-vnfm:
--conf string
-      The config file of the Docker Vim Driver (default "config.toml")
--dir string
-      The directory where to persist the local db (default "badger")
--level string
-      The Log Level of the Docker Vim Driver (default "INFO")
--persist
-      to persist the local database using badger (default true)
+
+Usage of docker-vnfm:
+  -allocate
+    	if the docker vnfm must allocate resources (must be true)
+        (default true)
+  -cert string
+    	Use Handler for docker swarm services
+        (default "/Users/usr/.docker/machine/machines/myvm1/")
+  -conf string
+    	The config file of the Docker Vim Driver
+  -desc string
+    	The description of the Docker Vim Driver(default "The docker vnfm")
+  -dir string
+    	The directory where to persist the local db (default "badger")
+  -ip string
+    	The Broker Ip (default "localhost")
+  -level string
+    	The Log Level of the Docker Vim Driver (default "INFO")
+  -name string
+    	The docker vnfm name (default "docker")
+  -password string
+    	The registering password (default "openbaton")
+  -persist
+    	to persist the local database using badger (default true)
+  -port int
+    	The Broker Port (default 5672)
+  -swarm
+    	Use Handler for docker swarm services
+  -tsl
+    	Use docker client with tsl
+  -type string
+    	The type of the Docker Vim Driver (default "docker")
+  -username string
+    	The registering user (default "openbaton-manager-user")
+  -workers int
+    	The number of workers (default 5)
+exit status 2
+```
+
+Then run it as:
+
+```bash
+./docker-vnfm -conf config.toml
 ```
 
 where config.toml looks like:

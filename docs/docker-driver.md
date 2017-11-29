@@ -16,6 +16,40 @@ wget https://github.com/openbaton/go-docker-driver/releases/download/5.0.0/go-do
 chmod +x docker-driver
 ```
 
+Check the usage
+
+```bash
+./docker-vnfm --help
+
+Usage of docker-driver:
+  -cert string
+    	The certificate directory
+        (default "/Users/usr/.docker/machine/machines/myvm1/")
+  -conf string
+    	The config file of the Docker Vim Driver
+  -ip string
+    	The Broker Ip (default "localhost")
+  -level string
+    	The Log Level of the Docker Vim Driver (default "INFO")
+  -name string
+    	The name of the Docker Vim Driver (default "docker")
+  -password string
+    	The registering password (default "openbaton")
+  -port int
+    	The Broker Port (default 5672)
+  -swarm
+    	if the plugin works against a swarm docker
+  -tsl
+    	use tsl or not
+  -type string
+    	The type of the Docker Vim Driver (default "docker")
+  -username string
+    	The registering user (default "openbaton-manager-user")
+  -workers int
+    	The number of workers (default 5)
+exit status 2
+```
+
 Then run it as:
 
 ```bash
