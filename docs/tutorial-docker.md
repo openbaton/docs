@@ -91,7 +91,7 @@ Where:
 name: MongoDB
 description: MongoDB
 provider: TUB
-nfvo_version: 4.0.0
+nfvo_version: 5.0.0
 vim_types:
  - docker
 image:
