@@ -49,14 +49,7 @@ Usage of docker-driver:
     	The number of workers (default 5)
 exit status 2
 ```
-
-Then run it as:
-
-```bash
-./docker-driver -conf config.toml
-```
-
-where the config.toml looks like:
+Create a file called config.toml that looks like:
 ```toml
 type        = "docker"
 workers     = 5
@@ -67,6 +60,12 @@ brokerIp    = "localhost"
 brokerPort  = 5672
 ```
 
+Then run docker-driver as:
+
+```bash
+./docker-driver -conf config.toml
+```
+
 or as:
 ```bash
 ./docker-driver
@@ -74,7 +73,6 @@ or as:
 and the default values will be used.
 
 Or you can skip all the code installation using docker:
-
 ```bash
 docker run -v /var/run/docker.sock:/var/run/docker.sock openbaton/driver-docker-go driver-docker-go
 ```
