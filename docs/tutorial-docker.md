@@ -155,7 +155,9 @@ and build it with:
 docker build -t iperfserver .
 ```
 
-After this, you need to refresh the VIM on order to see the new images: go in PoPs --> vim-instance id and click on the two round arrows close to the name. This will trigger the Vim refresh. Afterwards, you need to create a NSD using the Upload NSD tab and paste this json content:
+After this, you need to refresh the VIM on order to see the new images: go to Manage PoPs&rarr;PoP instances&rarr;ID and click on the two round arrows close to the name. 
+This will trigger the Vim refresh.  
+Afterwards, you need to create a NSD. From the NFVO dashboard, go to Catalogue&rarr;NS Descriptors&rarr;On Board NSD&rarr;Upload JSON and paste this JSON content:
 
 ```json
 {
