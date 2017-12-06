@@ -1,15 +1,15 @@
 # Docker VIM Driver
 
-This Vim Driver is able together with the [Docker VNFM][docker-vnfm] to deploy NS on top of a Docker engine.
+This Vim Driver is able together with the [Docker VNFM][docker-vnfm] to deploy network services (NSs) on top of a Docker engine.
 
-Both VNFM and VIM Driver are necessary in order to be able to deploy NS over Docker.
+Both VNFM and VIM Driver are necessary in order to be able to deploy NSs over Docker.
 
 It uses the [go-openbaton go sdk](https://github.com/openbaton/go-openbaton) allowing the NFVO to interoperate with this plugin using AMQP.
 This plugin uses Docker go SDK as implementation of the Docker Engine API. The Docker VIM Driver source code is available at [this GitHub repository](https://github.com/openbaton/go-docker-driver)
 
-## Download the VNFM
+## Download the Docker VIM Driver
 
-You can download the VNFM for docker [here](https://github.com/openbaton/go-docker-driver/releases/). Choose the appropriate distribution.
+You can download the VIM Driver for docker [here](https://github.com/openbaton/go-docker-driver/releases/). Choose the appropriate distribution.
 
 ```bash
 wget https://github.com/openbaton/go-docker-driver/releases/download/5.0.0/go-docker-driver-darwin-amd64 -O docker-driver
@@ -19,7 +19,7 @@ chmod +x docker-driver
 Check the usage
 
 ```bash
-./docker-vnfm --help
+./docker-driver --help
 
 Usage of docker-driver:
   -cert string
