@@ -5,10 +5,11 @@ Both VNFM and VIM Driver are necessary in order to be able to deploy NS over Doc
 
 ## Requirements
 
-The _go_ compiler has to be installed, please follow the go documentation on how to [download and install](https://golang.org/dl/) it.
+* _go_ compiler installed, please follow the go documentation on how to [download and install](https://golang.org/dl/) it
 
-The _dep_ command has to be installed in order to install also dependencies. [Go dependency management tool](https://github.com/golang/dep)
+* _dep_ command installed, please follow the documentation for  [Go dependency management tool](https://github.com/golang/dep)
 
+* [RabbitMQ](https://www.rabbitmq.com/) installed and running
 
 ## Download the VNFM
 
