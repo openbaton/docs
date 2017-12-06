@@ -126,7 +126,7 @@ This tutorial will guide you through the deployment of Iperf client and server i
 
 This tutorial is different since you don't have to create a VNFPackage but you need to build two Docker images.
 
-The iperfclient image looks like:
+Create a file called Dockerfile for the Iperf client image that looks like:
 
 ```docker
 FROM networkstatic/iperf3
@@ -139,7 +139,7 @@ and then you can build it as:
 docker build -t iperfclient .
 ```
 
-Do the same for the server:
+Do the same for the Iperf server:
 
 ```docker
 FROM networkstatic/iperf3
