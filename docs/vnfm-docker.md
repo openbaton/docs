@@ -62,13 +62,7 @@ Usage of docker-vnfm:
 exit status 2
 ```
 
-Then run it as:
-
-```bash
-./docker-vnfm -conf config.toml
-```
-
-where config.toml looks like:
+Create a file called config.toml that looks like:
 
 ```toml
 type        = "docker"
@@ -82,8 +76,13 @@ logLevel    = "INFO"
 brokerIp    = "localhost"
 brokerPort  = 5672
 ```
-
 _**NOTE**_: the _allocate_ field is set to true, in order to let the VNFM to allocate containers.
+
+Then run docker-vnfm as:
+
+```bash
+./docker-vnfm -conf config.toml
+```
 
 If you don't need special configuration you can use the default values just by running:
 
