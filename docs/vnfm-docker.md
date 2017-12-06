@@ -1,7 +1,7 @@
-# Docker VNFM for Open Baton
+# Docker VNF Manager for Open Baton
 
-This VNF Manager, together with the [Docker Vim Driver](https://github.com/openbaton/go-docker-driver), allows Open Baton to deploy Container on top of a running [Docker](https://www.docker.com/) engine.
-Both VNFM and VIM Driver are necessary in order to be able to deploy NS over Docker
+This VNF Manager (VNFM), together with the [Docker Vim Driver](https://github.com/openbaton/go-docker-driver), allows Open Baton to deploy Container on top of a running [Docker](https://www.docker.com/) engine.
+Both VNFM and VIM Driver are necessary in order to be able to deploy network services (NSs) over Docker
 
 ## Requirements
 
@@ -91,7 +91,7 @@ If you don't need special configuration you can use the default values just by r
 ./docker-vnfm
 ```
 
-Even better using the docker image of the _go-docker-vnfm_:
+Even better using the docker image of the _vnfm-docker-go_:
 
 ```bash
 docker run -v /var/run/docker.sock:/var/run/docker.sock openbaton/vnfm-docker-go vnfm-docker-go
@@ -99,9 +99,9 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock openbaton/vnfm-docker-go
 
 # How to use the Docker VNFM
 
-The Docker VNFM works with the upstream Open Baton NFVO, so no changes are needed. Some fields of the VNFD could have a different meaning. An example of a MongoDB VNFPackage follows
+The Docker VNFM works with the upstream Open Baton NFVO, so no changes are needed. Some fields of the VNF Descriptor (VNFD) could have a different meaning. An example of a MongoDB VNFPackage follows
 
-### The VNFD
+### The VNF Descriptor
 
 ```json
 {
