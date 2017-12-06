@@ -111,7 +111,7 @@ In order to upload a VimInstance using the docker driver, you need to upload a V
 
 after uploading this Vim Instance, you should be able to see all images and networks in the PoP page of the NFVO dashbaord
 
-[docker-vnfm]: docker-vnfm.md
+[docker-vnfm]: vnfm-docker.md
 [fokus-logo]: https://raw.githubusercontent.com/openbaton/openbaton.github.io/master/images/fokus.png
 [openbaton]: http://openbaton.org
 [openbaton-doc]: http://openbaton.org/documentation
