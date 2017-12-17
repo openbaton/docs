@@ -25,7 +25,7 @@ Please refer to the following doc for more details: [build your own VNFM][vnfm-h
 
 This approach allows you to integrate your VNFM with the NFVO. In this case, you can choose eiththe Or-Vnfm communication will be via REST interfaces.
 
-Please refer to the following doc for more details: [bring your own VNFM][vnfm-rest]
+Please refer to the following doc for more details: [plug your own VNFM][vnfm-rest]
 
 
 The pages in this section describe in details these three different approaches.

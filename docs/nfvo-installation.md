@@ -3,7 +3,7 @@
 Open Baton provides several installation mechanisms. Open Baton has two different flavors: 
 
 * **minimal** containing only the Open Baton NFV Orchestrator, the Open Baton Generic VNF Manager and the RabbitMQ. This version is the most suitable for getting started immediately with some simple scenarios. 
-* **complete** containing all components as listed in the get started section. During the installation procedures users can decide specific configuraion options (i.e. passwords) and which components should be installed. This version is the most suitable for a production environment. 
+* **complete** containing most of the components (docker VNFMs and VIM driver, SFCO, and Amazon VIM driver are currently not included) as listed in the get started section. During the installation procedures users can decide specific configuraion options (i.e. passwords) and which components should be installed. This version is the most suitable for a production environment. 
 
 Please select the most suitable installation tool for your needs: 
 

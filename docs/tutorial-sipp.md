@@ -19,6 +19,22 @@ In order to execute this scenario, you need to have the following components up 
  * Running [Generic VNFM][generic-vnfm]
  * Configured and running OpenStack environment
 
+
+### Run it with Docker
+
+You can find a [docker-compose] file ready to launch the required components for this tutorial. Assuming that you have installed the latest version of Docker and Docker Compose, download the [docker-compose] file and execute the following command: 
+
+```bash
+HOST_IP=192.168.42.42 docker-compose -p ob -f min-compose.yml up -d
+```
+
+Where the HOST_IP parameter is the IP of your host where you are executing the docker containers. Please note that the IP must be reachable from the OpenStack environment (in particular from the VMs created)
+for allowing the EMS agent to reach back the Generic VNFM. 
+
+Feel free to adapt the min-compose.yml file as you wish including other components you may need.
+
+**important note** the NFVO uses the in memory database, thus anything stored in the NFVO won't be persisted after restart of the container. 
+
 ## Store the Vim Instance
 
 For registering the Point of Presence of type OpenStack to the NFVO you have to upload a Vim Instance. You can use the following [json descriptor][vim] by changing the values to your needs. 
@@ -26,7 +42,7 @@ For registering the Point of Presence of type OpenStack to the NFVO you have to 
 ### Using the dashboard
 
 If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://ip-where-nfvo-runs:8080 (change port and protocol if you use SSL) and log in (default username and password are *admin* and *openbaton*).  
-Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice by clicking on `Register Vim` and selecting the Vim Instance's json file.
+Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice by clicking on `Register a new PoP` and selecting the Vim Instance's json file.
 
 ![Onboarding-Vim][vim-onboarding]
 
@@ -45,7 +61,7 @@ The difference is that the first NSD will deploy Virtual Machines without floati
 
 ### Using the dashboard
 
-If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `On Board NSD -> Upload JSON` and selecting the Descriptor's json file.
 
 ![Onboarding-NSD][nsd-onboarding]
 

@@ -3,9 +3,9 @@
 
 # Install Open Baton on Linux
 
-This tutorial will guide towards the installation of an Open Baton environment using the stable binaries version.
+This tutorial will guide towards the installation of an Open Baton environment using the latest stable binaries version.
 
-**NOTE** - Please refer to [this tutorial](nfvo-installation-src.md) if you are willing to install a development environment where you can easily modify, compile and commit changes to the code base directly.
+**NOTE** - Please refer to [this tutorial](nfvo-installation-src.md) if you prefer to install a development environment where you can easily modify, compile and commit changes to the code base directly.
 
 A minimal version comprises the following components:
 
@@ -32,7 +32,7 @@ To facilitate the installation procedures we provide a bootstrap script which wi
 apt-get install curl
 ```
 
-**NOTE** - We assume that you are performing the installation on top of a clean installation either of **Ubuntu 14.04**, **Ubuntu 16.04** or **Debian Jessy**. In other cases we suggest to install the components one by one. You can checkout the [bootstrap][bootstrap] repository and see the installation procedures which are executed by the bootstrap script.
+**NOTE** - We assume that you are performing the installation on top of a clean installation of **Ubuntu 16.04**. To install Open Baton either on **Ubuntu 14.04** or **Debian Jessy** you need first to manually install the "openjdk-8-jre" package. In other cases we suggest to install the components one by one. You can checkout the [bootstrap][bootstrap] repository and see the installation procedures which are executed by the bootstrap script.
 
 Open Baton can be installed on any kind of environment (physical hosts, virtual machines, containers, etc.). Suggested requirements in terms of CPUs, Memory, and disk space are: 
 

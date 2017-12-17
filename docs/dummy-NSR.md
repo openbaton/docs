@@ -14,12 +14,22 @@ In order to execute this scenario, you need to have the following components up 
  * [Test vim driver]
  * [Dummy-VNFM] 
 
-## Preparation
+### Run it manually 
 
 If not yet running start the NFVO and the Dummy-VNFM (refer to it's [readme][Dummy-VNFM] file on how to start it).  
 If you installed the NFVO using the bootstrap script, the Test vim driver will be installed already.  
 Otherwise, you have to provide it manually by cloning the [git repository][test-plugin-github] and building the jar file with *./gradlew build*.
 Now move the built jar into **{path-to-nfvo-source-code}/nfvo/plugins/vim-drivers** and restart the NFVO. 
+
+### Run it with Docker
+
+You can find a [docker-compose] file ready to launch the required components for this tutorial. Assuming that you have installed the latest version of Docker and Docker Compose, download the file and execute the following command: 
+
+```bash
+docker-compose -p ob -f dummy-ns.yml up -d
+```
+
+Feel free to adapt the dummy-ns.yml file as you wish. 
 
 ## Store the VimInstance
 
@@ -33,7 +43,7 @@ For registering the Point of Presence of type *test* to the NFVO you have to upl
 ### Using the dashboard
 
 If you want to use the Dashboard (checkout the [dashboard documentation][dashboard] for more information on how to use it), open it at the URL http://ip-where-nfvo-runs:8080 (change port and protocol if you use SSL) and log in (default username and password are *admin* and *openbaton*).  
-Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice by clicking on `Register Vim` and selecting the Vim Instance's json file.
+Go to `Manage PoPs -> PoP Instances` and choose the Vim Instance of your choice by clicking on `Register a new PoP` and selecting the Vim Instance's json file.
 
 ![Onboarding-Vim][vim-onboarding]
 
@@ -51,7 +61,7 @@ Download this [NSD] and upload it to the NFVO either using the dashboard or the 
 
 ### Using the dashboard
 
-If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+If you want to use the Dashboard go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `On Board NSD -> Upload JSON` and selecting the Descriptor's json file.
 
 ![Onboarding-NSD][nsd-onboarding]
 
@@ -212,6 +222,7 @@ References
 [nfvo-installation]:nfvo-installation.md
 [dashboard]: nfvo-how-to-use-gui
 [Dummy-VNFM]: https://github.com/openbaton/dummy-vnfm-amqp
+[docker-compose]: compose/dummy-ns.yml
 [vim-doc]:vim-instance-documentation
 [Test vim driver]: https://github.com/openbaton/test-plugin
 [NSD]: descriptors/tutorial-dummy-NSR/tutorial-dummy-NSR.json

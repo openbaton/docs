@@ -1,6 +1,6 @@
-# How to write a VNFManager
+# How to write a VNF Manager
 
-This section is going to describe how to write your own VNFManager by using any vnfm-sdk.
+This section is going to describe how to write your own VNF Manager by using the vnfm-sdk.
 Moreover, the vnfm-sdk contains all the things you may need for the development of the VNFManager of your choice as well.
 
 The vnfm-sdk provides the following things:
@@ -409,7 +409,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-amqp:4.0.0'
+    compile 'org.openbaton:vnfm-sdk-amqp:5.0.0'
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
 }
 
@@ -698,9 +698,9 @@ Therefore, you need to do several things:
 **Note** If you want to use the Vim with plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:4.0.0'
-compile 'org.openbaton:vim-impl:4.0.0'
-compile 'org.openbaton:sdk:4.0.0'
+compile 'org.openbaton:vim-int:5.0.0'
+compile 'org.openbaton:vim-impl:5.0.0'
+compile 'org.openbaton:sdk:5.0.0'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 

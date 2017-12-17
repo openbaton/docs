@@ -1,8 +1,6 @@
 # NFVO Architecture
 
-*NFVO* is a modular software composed by the modules illustrated in the following picture:
-
-![NFVO module architecture][nfvo-architecture-full]
+*NFVO* is a modular software composed by those following modules:
 
 ##### API
 
@@ -89,7 +87,7 @@ References
 -->
 
 [api]: http://get.openbaton.org/api/ApiDoc.pdf
-[nfvo-architecture-full]:images/nfvo-architecture-full.png
+[nfvo-architecture-full]:images/nfvo.png
 [nfv-mano]: http://www.etsi.org/deliver/etsi_gs/NFV-MAN/001_099/001/01.01.01_60/gs_NFV-MAN001v010101p.pdf
 
 <!---

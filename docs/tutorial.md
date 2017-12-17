@@ -8,5 +8,17 @@ Each tutorial is organised in the following way:
 2. It provides a list of required components. Considering the specific scenario which will be deployed following the tutorial, it will specify what are the Open Baton components which are required for executing this specific tutorial
 3. It specifies the list of steps which needs to be executed in order to run the tutorial
 
+Below you can find a list of all the available tutorials including the list of components which are validated: 
+
+
+| Name           | Description                            |  Components  |        
+|----------------|----------------------------------------|--------------|
+| Dummy NS       | Deploy a Network Service Record composed of Dummy VNFs. Kind of "hello-world" scenario  |   test VIM Driver, test VNFM |
+| Iperf NS       | Deploy a network service that uses iPerf client and server    |   OpenStack VIM Driver, Generic VNFM |
+| SIPp  NS       | Deploy a network service that uses SIPp client and server  |   OpenStack VIM Driver, Generic VNFM |
+| OpenIMSCore NS | Deploy the OpenIMSCore Network Service |   OpenStack VIM Driver, Generic VNFM |
+| OpenIMSCore NS with Juju VNFM      |   Deploy the OpenIMSCore Network Service using Juju as VNFM   |   OpenStack VIM Driver, Juju VNFM |
+| Fault Management System      |  Deploy a network service that uses SIPp client and server showcasing the FMS    |   OpenStack VIM Driver, Generic VNFM, Zabbix Plugin, FMS |
+
 
 [Marketplace]: http://marketplace.openbaton.org

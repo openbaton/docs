@@ -52,9 +52,8 @@ This property allows the user to delete the Network Service Records no matter in
 # nfvo behaviour
 nfvo.delete.all-status = true
 # if true, after deleting a NSR, the nfvo will wait for "nfvo.delete.vnfr.wait.timeout" after that timeout the VMs and VNFR will be deleted anyway from the NFVO
-nfvo.delete.vnfr.wait.timeout=60
-nfvo.delete.vnfr.wait=false
-nfvo.delete.wait=false
+nfvo.delete.vnfr.wait.timeout=20
+nfvo.delete.vnfr.wait=true
 
 nfvo.history.clear=false
 nfvo.history.level=1
@@ -89,7 +88,7 @@ This parameters allow you to modify the marketplace IP, in case you want to use 
 
 ```properties
 nfvo.marketplace.ip=marketplace.openbaton.org
-nfvo.marketplace.port=8082
+nfvo.marketplace.port=8080
 ```
 
 #### Parameters related with plugins and drivers
@@ -117,9 +116,7 @@ While the `nfvo.plugin.log.path` defines the location where plugin log files wil
 Modify this parameter in case you want to disable checking quota while deploying your network services. Be aware that the NFVO will request to the VIM its quota, so if quota is not properly set on the NFVI, you may have some issues with this. In case of any exceptions which come with some certain scenarios, you can also avoid failing on exceptions by changing the `nfvo.quota.check.failOnException` to `false`.
 
 ```properties
-# Avoid doing the GRANT_OPERATION
-nfvo.quota.check=true
-# Avoid failing if unpredictable exceptions are thrown.
+nfvo.quota.check=false
 nfvo.quota.check.failOnException = true
 ```
 
@@ -214,8 +211,8 @@ spring.jpa.show-sql=false
 spring.jpa.hibernate.ddl-auto=update
 
 # MYSQL configuration (enable it in order to avoid timeout exceptions)
-spring.datasource.validationQuery=SELECT 1
-spring.datasource.testOnBorrow=true
+#spring.datasource.validationQuery=SELECT 1
+#spring.datasource.testOnBorrow=true
 ```
 
 Where:

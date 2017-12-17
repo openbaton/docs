@@ -1,5 +1,5 @@
-#Autoscaling in TOSCA
-This is an example of how to create Auto-scale policies with the yaml descriptor. The whole Auto-scale policy goes in the **properties** of the Virtual Network Function node. 
+#AutoScaling in TOSCA
+This is an example of how to create AutoScale policies with the yaml descriptor. The whole AutoScale policy goes in the **properties** of the Virtual Network Function node. 
 
 
 ```yaml
@@ -30,7 +30,7 @@ example-vnf:
 
 ```
 
-More about Autoscaling and how to se it up: [Autoscaling][as]
+More about AutoScaling and how to set it up: [Autoscaling][as]
 
 
 <!------------

@@ -1,6 +1,6 @@
 # TOSCA CSAR on-boarding
-This tutorial is more advanced and expects that you already know what TOSCA is and how Virtual Network Function Descriptor or Network Service Descriptor defined in the TOSCA format is structured.
-The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA. It is a compressed file that includes a TOSCA template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
+This tutorial is more advanced and expects that you already know what TOSCA is and how a Virtual Network Function Descriptor or a Network Service Descriptor defined in the TOSCA format is structured.
+The Cloud Service Archive [CSAR][csar-tosca] is a package defined by OASIS TOSCA standard. It is a compressed file that includes a TOSCA template of a Network Service, and all the scripts or files that a VNF needs for the lifecycle time from creation to termination.
 The CSAR is a zip file with this structure:
 
 ```bash
@@ -15,7 +15,7 @@ The CSAR is a zip file with this structure:
     └── TOSCA.meta
     
 ```
-The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference being that when reading a NSD it will onboard all VNFs included in the NSD and after that the NSD itself.
+The CSAR reader can read both NSDs and VNFDs written in TOSCA. The difference is, that when reading a NSD it will onboard all VNFs included in the NSD and after that the NSD itself.
 
  The **TOSCA.meta** file contains a reference to the template in this case **Entry-Definitions: Definitions/testNSDIperf.yaml** and versions of the CSAR package and the Meta-File version .
 
@@ -37,7 +37,7 @@ vim_types:
 ```
 
 The **Scripts** folder contains all the files required from the lifecycle interfaces of the VNFs.
-If the CSAR has a Network Service Template, then for every type of VNF included in the NS Template you have to include a folder with the scripts for that particular type.
+If the CSAR has a Network Service Template, then for every type of VNF included in the NS Template you have to include a folder with the scripts for that particular **type**.
 Example if one VNF is of type client, then the scripts for that VNF have to be put in Scripts/client folder. 
 
 
@@ -157,13 +157,13 @@ zip -r iperf.csar . -x ".*" -x "*/.*"
 
 ## Onboarding VNF CSARs
 
-Go to the Catalogue -> VNF Packages -> Upload VNFPackage, check the "Use CSAR Parser" box and select the csar that you want to upload.
+Go to the Catalogue -> VNF Packages ->Upload VNF Package(s), check the "Use CSAR Parser" box and select the csar that you want to upload.
 
 ![Drag&Drop modal][drag_drop] 
 
 ## Onboard Network Service CSARs
 
-Go to the Catalogue -> NS Descriptors and click on "Upload CSAR NSD" and select the file.
+Go to the Catalogue -> NS Descriptors and click on "On Board NSD -> Upload CSAR" and select the file.
 
 
 

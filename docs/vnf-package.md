@@ -10,8 +10,10 @@ The NFVO supports two different formats for VNF Packages:
 
 This page provides more information about the first option, while more information about the second option are given in this [tutorial][csar-onboarding].
 
-**Important note:** in case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer them in the VNFD as part of the
+**Important note-1:** in case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer them in the VNFD as part of the
 *vnfPackageLocation* parameter
+
+**Important note-2:** in case you are using the Docker VIM Driver and Docker VNFM the script folder is not considered, as the docker approach relies on docker images ready to be launched.
 
 # Overview
 
@@ -332,58 +334,6 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
 We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link].
-
-## Onboarding VNF Packages
-
-Once we have finalized the creation of VNF Packages and packed them into a tar we can onboard them to the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done easily via the [Dashboard][dashboard-link] or the [Command Line Interface][cli].
-
-
-## NSD [iperf]
-In this section we will create a [NSD](ns-descriptor) and reference the previously created VNF Packages by their IDs.
-For doing that we just need to define the **id** for each VNFPackges' VNFD in the list of VNFDs.
-To provide also the iperf-servers' IP to the iperf-client we need to define dependencies you can find under the key **vnf_dependency** setting the source to **iperf-server** and the target to **iperf-client** by providing the parameter **private** that indicates the private IP address of the iPerf server in the network "private".
-
-**Note** When creating the NSD the VNFD is fetched by the ID defined. Other properties we would set in the VNFD in this NSD will be ignored.
-
-```json
-{
-	"name":"iperf",
-    "vendor":"fokus",
-    "version":"0.1-ALPHA",
-    "vnfd":[
-        {
-            "id":"29d918b9-6245-4dc4-abc6-b7dd6e84f2c1"
-        },
-        {
-            "id":"87820607-4048-4fad-b02b-dbcab8bb5c1c"
-        }
-    ],
-    "vld":[
-        {
-            "name":"private"
-        }
-    ],
-    "vnf_dependency":[
-        {
-            "source" : {
-                "name": "iperf-server"
-            },
-            "target":{
-                "name": "iperf-client"
-            },
-            "parameters":[
-                "private"
-            ]
-        }
-    ]
-}
-```
-
-Finally you can onboard this NSD and deploy an NSR that bases on both VNF Packages created before.
-
-### Onboarding and deploying NSD
-
-You could also use the [Dashboard][dashboard-link] or the [Command Line Interface][cli] as well for onboarding and deploying the NSD.
 
 
 [iperf-link]:https://iperf.fr/

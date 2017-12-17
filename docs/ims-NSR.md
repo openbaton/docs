@@ -42,7 +42,7 @@ Finally onboard the packages.
 Download the following [NSD] and upload it to the NFVO either using the dashboard or the cli. 
 Take care to replace the vnfd ids with the ones you deployed.
 
-Open the Dashboard (checkout the [dashboard documentation][how-to-gui]) for more information on how to use it), open it at the URL http://your-ip-here:8080 and log in (default username and password are *admin* and *openbaton*). Go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `Upload NSD` and selecting the Descriptor's json file.
+Open the Dashboard (checkout the [dashboard documentation][how-to-gui]) for more information on how to use it), open it at the URL http://your-ip-here:8080 and log in (default username and password are *admin* and *openbaton*). Go to `Catalogue -> NS Descriptors` and choose the NSD of your choice by clicking on `On Board NSD -> Upload JSON` and selecting the Descriptor's json file.
 
 ## Deploy the Network Service Descriptor 
 

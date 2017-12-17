@@ -12,7 +12,7 @@ Before starting this component you have to do the configuration of the AutoScali
 
 * Preconfigured Open Baton environment (NFVO, VNFMs, VIM drivers)
 * Running Zabbix server (if Zabbix is the monitoring system of choice) 
-* Preconfgiured and running zabbix plugin either located in the folder `NFVO/plugins` or `autoscaling/plugins` to let it start automatically; or started manually. (if Zabbix is the monitoring system of choice)
+* Preconfgiured and running zabbix plugin **EITHER** located in the folder `NFVO/plugins` **OR** `autoscaling/plugins` to let it start automatically; or started manually. (if Zabbix is the monitoring system of choice)
 
 # How to install AutoScaling Engine
 If you have the bootstrap procedure and selected the installation of the ASE component, you could skip this section, and move to the [How to use AutoScaling Engine](#how-to) one. 
@@ -75,7 +75,7 @@ This chapter describes what needs to be done before starting the AutoScaling Eng
 The configuration file must be copied to `etc/openbaton/openbaton-ase.properties` by executing the following command from inside the repository folder:
 
 ```bash
-cp etc/ase.properties /etc/openbaton/autoscaling.properties
+cp src/main/resources/application.properties /etc/openbaton/openbaton-ase.properties
 ```
 
 If done, check out the following chapter in order to understand the configuration parameters.
@@ -88,15 +88,14 @@ This chapter describes the parameters that must be considered for configuring th
 | -------------   				| -------------																|
 | logging.file					| location of the logging file |
 | logging.level.*               | logging levels of the defined modules  |
-| autoscaling.server.ip         | IP where the AutoScaling Engine is running. localhost might fit for most in the case when the System is running locally. If the System is running on another machine than the NFVO, you have to set the external IP here in order to subscribe for events towards the NFVO properly.      	|
-| autoscaling.server.port       | Port where the System is reachable |
-| autoscaling.rabbitmq.brokerIp | IP of the machine where RabbitMQ is running. This is needed for communicating with the monitoring plugin.	|
+| ase.server.ip         | IP where the AutoScaling Engine is running. localhost might fit for most in the case when the System is running locally. If the System is running on another machine than the NFVO, you have to set the external IP here in order to subscribe for events towards the NFVO properly.      	|
+| ase.server.port       | Port where the System is reachable |
+| ase.rabbitmq.brokerIp | IP of the machine where RabbitMQ is running. This is needed for communicating with the monitoring plugin.	|
+| ase.service.key | Service Key obtained when registering the `autoscaling-engine` service via the NFVO.|
 | spring.rabbitmq.username      | username for authorizing towards RabbitMQ |
 | spring.rabbitmq.password      | password for authorizing towards RabbitMQ |
 | nfvo.ip                       | IP of the NFVO |
 | nfvo.port                     | Port of the NFVO |
-| nfvo.username                 | username for authorizing towards NFVO |
-| nfvo.password                 | password for authorizing towards NFVO |
 
 ## Monitoring plugin
 
