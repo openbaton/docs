@@ -345,6 +345,7 @@ References
 -->
 [cli]: nfvo-how-to-use-cli
 [dashboard]: nfvo-how-to-use-gui
+[docker-compose]: compose/min-compose.yml
 [sequence-diagram-os-vnfm-ems]:images/use-case-example-sequence-diagram-os-vnfm-ems.png
 [vnfr-states]:vnfr-states
 [vnfm-generic]: vnfm-generic

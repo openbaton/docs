@@ -12,12 +12,14 @@ You will need three Open Baton Components:
 
 and a reachable Docker engine, usually where the Open Baton platform is running, but not necessarily.
 
+**Important note** currently the docker VNFM and Docker VIM driver are not supported by version 5.1.X. Thus, if you plan to use to continue with this tutorial, please make sure you have installed the right version of the NFVO.
+
 ## Setup
 
 In order to start manually the Docker VNFM and VIM Driver, please follow these README: [VNFM][docker-vnfm] and [VIM Driver][docker-driver].
 When the VNFM and the VIM Driver are running, the NFVO Dashboard should show in the VNF Manager page the Docker VNFM and in the installed vim driver the Docker Vim Driver.
 
-After this you should be able to upload a Vim Instance pointing to the Docker engine:
+After this you should be able to register the Docker Engine as a PoP:
 
 ```json
 {
@@ -39,7 +41,7 @@ After this you should be able to upload a Vim Instance pointing to the Docker en
 * **tenant** in the tenant you can specify the api version used by the chosen docker engine
 * **type** is docker if the Docker VIM Driver uses the default type value
 
-after uploading this Vim Instance, you should be able to see all images and networks in the PoP page of the NFVO Dashboard
+after registering your PoP, you should be able to see all images and networks in the PoP page of the NFVO Dashboard
 
 After this step you can pass to the VNF Package. If you don't know what it is or how to create one follow [this guide](vnf-package). However, the content of the _Metadata.yaml_ and of the _vnfd.json_ can be as follow:
 

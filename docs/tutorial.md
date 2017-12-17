@@ -19,6 +19,7 @@ Below you can find a list of all the available tutorials including the list of c
 | OpenIMSCore NS | Deploy the OpenIMSCore Network Service |   OpenStack VIM Driver, Generic VNFM |
 | OpenIMSCore NS with Juju VNFM      |   Deploy the OpenIMSCore Network Service using Juju as VNFM   |   OpenStack VIM Driver, Juju VNFM |
 | Fault Management System      |  Deploy a network service that uses SIPp client and server showcasing the FMS    |   OpenStack VIM Driver, Generic VNFM, Zabbix Plugin, FMS |
+| Docker Tutorial      |  Deploy a network service running as docker container     |   Docker VIM Driver, Docker VNFM |
 
 
 [Marketplace]: http://marketplace.openbaton.org
