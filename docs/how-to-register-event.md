@@ -34,6 +34,7 @@ import org.openbaton.catalogue.nfvo.Action;
 import org.openbaton.catalogue.nfvo.EndpointType;
 import org.openbaton.catalogue.nfvo.EventEndpoint;
 import org.openbaton.sdk.NFVORequestor;
+import org.openbaton.sdk.NfvoRequestorBuilder;
 import org.openbaton.sdk.api.exception.SDKException;
 import org.openbaton.sdk.api.rest.EventAgent;
 
