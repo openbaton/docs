@@ -246,6 +246,11 @@ They are located in src/main/resources and are called application.properties and
 The **application.properties** contains parameters for setting up all log levels. This file is useful for configuring the springframework (see [Spring Boot configuration file](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)). This file can contain the following lines.
 
 ```properties
+
+vnfm.type=my-vnfm
+vnfm.endpoint=my-vnfm-endpoint
+vnfm.endpoint.type = RABBIT
+
 logging.level.org.springframework=INFO
 logging.level.org.hibernate=INFO
 logging.level.org.apache=INFO
@@ -324,8 +329,6 @@ Additionally, it is defined the folder where the vim drivers are located.
 In this case the file should contain the following lines.
 
 ```gradle
-type=my-vnfm
-endpoint=my-vnfm-endpoint
 allocate = false
 description=The VNFM able to handle all the VNFs that follow specific conventions, see http://openbaton.github.io/
 enabled = true
