@@ -10,6 +10,10 @@ This part shows you how to deploy an onboarded NSD via the dashboard. You need t
 
 If you go to `Orchestrate NS -> NS Records` in the menu on the left side, you can follow the deployment process and check the current status of the created NSR.
 
+#### Availability Zones
+
+If you have a vim instance onboarded of type `openstack`, in the launch modal you will be able to select in which Availability Zone deploy your VNF. This option is only supported for Vim Instances of type `openstack`.
+
 ## Using the CLI
 
 You can also use the CLI for deploying existing NSDs. The command needs the ID of the NSD to deploy as an argument. It can be found either by using the dashboard or getting it from the output when onboarding a new NSD as done in the previous step. The command to deploy the previously onboarded NSD looks like shown below:
@@ -20,14 +24,35 @@ $./openbaton.sh NetworkServiceRecord-create f2086f71-4ecf-4ed8-a692-36775ebdfc68
 
 The first argument is the ID of the NSD from which the NSR will be created. The following arguments are files that can contain additional configuration while deploying.
 You have to pass these files even if you do not want to pass any configuration like in our case. So just create the three files and fill them with empty json objects/arrays (i.e. *{}* and *[]*).  
-The *vimmap.json* and the *conf.json* files should contain this:
+
+The *vimmap.json* file should contain this:
 ```json
-{}
+{
+  "vduName":["vim-instance-name"],
+  "vdu2Name":["vim-instance-name2:availabiltyzonename"]
+}
 ```
+or be empty if it is requested the default behaviour.
+
+The *conf.json*:
+
+```json
+{
+  "configName":[{
+    "confKey":"configKey",
+    "value":"value"
+  }]
+}
+```
+
+or be empty if it is requested the default behaviour.
+
 And the *keypair.json* file this:
 ```json
-[]
+["openbaton-keypair"]
 ```
+
+or be empty if it is requested the default behaviour.
 
 The execution of this command produces the following output:
 
