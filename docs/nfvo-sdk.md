@@ -10,7 +10,7 @@ The Open Baton SDK artifacts are published on Maven Central. You can include the
 <dependency>
   <groupId>org.openbaton</groupId>
   <artifactId>sdk</artifactId>
-  <version>5.0.0</version>
+  <version>5.1.2</version>
 </dependency>
 ```
 
@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-  compile 'org.openbaton:sdk:5.0.0'
+  compile 'org.openbaton:sdk:5.1.2'
 }
 ```
 
@@ -52,7 +52,16 @@ public class Main {
     boolean sslEnabled = true;
     String apiVersion = "1";
     // create the NFVORequestor object
-    NFVORequestor nfvoRequestor = new NFVORequestor("username", "password", sslEnabled, "projectName", "nfvo_ip", "nfvo_port", apiVersion);
+    NFVORequestor requestor =
+       NfvoRequestorBuilder.create()
+           .nfvoIp("localhost")
+           .nfvoPort(8080)
+           .username("admin")
+           .password("openbaton")
+           .projectName("default")
+           .sslEnabled(false)
+           .version("1")
+           .build();
 
     // obtain a VimInstanceAgent
     VimInstanceAgent vimInstanceAgent = nfvoRequestor.getVimInstanceAgent();

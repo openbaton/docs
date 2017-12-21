@@ -106,4 +106,4 @@ $./openbaton.sh NetworkServiceRecord-findById af12b18b-9aa2-4fed-9b07-bbe1dcad9c
 
 When all the VNF Records are done with all of the scripts defined in the lifecycle events, the NFVO will put the state of the VNF Record to ACTIVE and when all the VNF Records are in state ACTIVE, also the Network Service Record will be in state ACTIVE. This means that the service is deployed correctly. For learning more about the states of a VNF Record please refer to the [VNF Record state documentation][vnfr-states].
 
-[nsr-deploy]: images/tutorials/tutorial-iperf-NSR/nsr-deploy.png
+[nsr-deploy]: images/launch-nsd.gif

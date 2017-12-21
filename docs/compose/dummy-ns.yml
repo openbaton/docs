@@ -1,25 +1,25 @@
 version: '3'
 services:
   nfvo:
-    image: openbaton/nfvo:5.0.0
+    image: openbaton/nfvo:5.1.2
     depends_on:
       - rabbitmq_broker
     restart: always
-    environment: 
+    environment:
       - NFVO_RABBIT_BROKERIP=rabbitmq_broker
       - NFVO_PLUGIN_INSTALLATION-DIR=/dev/null
       - SPRING_RABBITMQ_HOST=rabbitmq_broker
     ports:
       - "8080:8080"
   vnfm-dummy-amqp:
-    image: openbaton/vnfm-dummy-amqp:5.0.0
+    image: openbaton/vnfm-dummy-amqp:5.1.0
     depends_on:
       - nfvo
     restart: always
     environment:
       - SPRING_RABBITMQ_HOST=rabbitmq_broker
   plugin-vimdriver-test:
-    image: openbaton/plugin-vimdriver-test:5.0.0
+    image: openbaton/plugin-vimdriver-test:5.1.1
     depends_on:
       - nfvo
     restart: always

@@ -12,7 +12,7 @@ You will need three Open Baton Components:
 
 and a reachable Docker engine, usually where the Open Baton platform is running, but not necessarily.
 
-**Important note** currently the docker VNFM and Docker VIM driver are not supported by version 5.1.X. Thus, if you plan to use to continue with this tutorial, please make sure you have installed the right version of the NFVO.
+**Important note** currently the docker VNFM and Docker VIM driver are not supported by version 5.1.X. Thus, if you plan to use to continue with this tutorial, please make sure you have installed the right version of the NFVO (5.0.X).
 
 ## Setup
 
@@ -157,7 +157,7 @@ and build it with:
 docker build -t iperfserver .
 ```
 
-After this, you need to refresh the VIM on order to see the new images: go to Manage PoPs&rarr;PoP instances&rarr;ID and click on the two round arrows close to the name. 
+After this, you need to refresh the VIM on order to see the new images: go to Manage PoPs&rarr;PoP instances&rarr;ID and click on the two round arrows close to the name.
 This will trigger the Vim refresh.  
 Afterwards, you need to create a NSD. From the NFVO dashboard, go to Catalogue&rarr;NS Descriptors&rarr;On Board NSD&rarr;Upload JSON and paste this JSON content:
 

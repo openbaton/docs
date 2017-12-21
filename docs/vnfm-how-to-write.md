@@ -374,7 +374,7 @@ For gathering the vnfm-sdk-amqp library you need to import the libraries by addi
 
 dependencies {
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
-    compile 'org.openbaton:vnfm-sdk-amqp:4.0.0'
+    compile 'org.openbaton:vnfm-sdk-amqp:5.1.2'
 }
 
 //...
@@ -391,13 +391,13 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.1.RELEASE")
-    }	
+    }
 
 }
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
- 
+
 repositories {
     mavenCentral()
     /**
@@ -409,13 +409,13 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:vnfm-sdk-amqp:5.0.0'
+    compile 'org.openbaton:vnfm-sdk-amqp:5.1.2'
     compile 'org.hibernate:hibernate-core:4.3.10.Final'
 }
 
 group 'your.group'
 version '1.0-SNAPSHOT'
- 
+
 bootRepackage {
     mainClass = 'org.openbaton.vnfm.MyVNFM'
 }
@@ -632,7 +632,7 @@ public class MyVNFM extends AbstractVnfmSpringAmqp{
 ```
 Now you can implement whatever you want. If the VirtualNetworkFunctionRecord is returned, it will go back directly to the NFVO.
 
-One of the methods that can be overwritten is the _fillParameters_. This method is important when you have specified some "provides" in your VNFD, in fact you can fill them in this method and make them available afterwards to the scripts (see [How to use the parameters][param-how-to]). 
+One of the methods that can be overwritten is the _fillParameters_. This method is important when you have specified some "provides" in your VNFD, in fact you can fill them in this method and make them available afterwards to the scripts (see [How to use the parameters][param-how-to]).
 
 An example of allocating and terminating resource by using a plugin can be found [here](#allocate-resources) and [here](#release-resources).
 
@@ -698,9 +698,9 @@ Therefore, you need to do several things:
 **Note** If you want to use the Vim with plugins, you need to fetch also the interfaces and VIM implementations by adding the following lines to your build.gradle dependencies
 
 ```gradle
-compile 'org.openbaton:vim-int:5.0.0'
-compile 'org.openbaton:vim-impl:5.0.0'
-compile 'org.openbaton:sdk:5.0.0'
+compile 'org.openbaton:vim-int:5.1.2'
+compile 'org.openbaton:vim-impl:5.1.2'
+compile 'org.openbaton:sdk:5.1.2'
 ```
 After that you need to rebuild your project for fetching the dependencies automatically.
 

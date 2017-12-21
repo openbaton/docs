@@ -3,7 +3,7 @@
 This project plugin-sdk contains modules that are needed to implement a plugin for OpenBaton system.
 
 ## How does this work?
-OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plugins. It offers an implementation of an interface that is used by the NFVO. 
+OpenBaton use the Remote Procedure Call (RPC) mechanism for implementing the Plugins. It offers an implementation of an interface that is used by the NFVO.
 
 ## Requirements
 
@@ -103,7 +103,7 @@ mainClassName = 'org.myplugin.example.Starter'
 
 
 dependencies {
-    compile 'org.openbaton:plugin-sdk:5.0.0'
+    compile 'org.openbaton:plugin-sdk:5.1.2'
     compile'org.springframework:spring-context:4.2.1.RELEASE'
 }
 
@@ -111,19 +111,19 @@ dependencies {
 
 ## Write your Vim driver
 
-The Vim driver is a simple class extending one abstract class and using a Starter utility 
+The Vim driver is a simple class extending one abstract class and using a Starter utility
 
 #### Type of Vim Instance
 OpenBaton provides a specific class for handling the **openstack** type or the **test** type thus these two types are supported. For all the other types a generic class will handle the communication between the NFVO and your plugin.
 
 ### Implement VimDriver
 
-The *VimDriver* is an abastract class that contains tha basic functionalities that a Vim Instance has to provide. 
+The *VimDriver* is an abastract class that contains tha basic functionalities that a Vim Instance has to provide.
 
 _**NOTE**_: If you want to implement a Monitoring plugin, then you need to implement the Abstract Class _MonitoringPlugin_
 
 Your **MyVim** class will implement the methods inherited from *VimDriver* that manages your Vim Instance:
- 
+
 | Function          				    | Description       										|
 | -------------   				        | -------------:											|
 | List\<NFVImage\> listImages			| Returns the list of Images                                |
@@ -181,7 +181,7 @@ public class MyVim extends VimDriver{
     public String getType(VimInstance vimInstance) {
         // ...
     }
-    
+
     @Override
     public List<NFVImage> listImages(VimInstance vimInstance) {
         // ...
@@ -206,7 +206,7 @@ The structure of your project should be like:
 Now you can run **./gradlew build** and Gradle will create the jar that you can find in the folder *build/libs/myPlugin-1.0-SNAPSHOT.jar*.
 
 Once all these steps are done, you can copy and paste the *myPlugin-1.0-SNAPSHOT.jar* under the folder specified in the _openbaton.properties_ (under _/etc/openbaton_ folder) **plugin-installation-dir** property, as default path_to_NFVO/plugins.
-The plugin sends the log messages to NFVO, the NFVO writes them into a log file. The path to this file can be set with nfvo.plugin.log.path properties in the /etc/openbaton/openbaton.properties. 
+The plugin sends the log messages to NFVO, the NFVO writes them into a log file. The path to this file can be set with nfvo.plugin.log.path properties in the /etc/openbaton/openbaton.properties.
 Congratulations you have your version of the interface for your Vim Instance that will be used by NFVO
 
 ## Use my plugin

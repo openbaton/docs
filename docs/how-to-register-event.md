@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openbaton:sdk:5.0.0'
+    compile 'org.openbaton:sdk:5.1.2'
 }
 ```
 
@@ -53,7 +53,7 @@ public class EventModule {
   /**
    * This is the Project ID used to connect to the NFVO
    */
-  private static String obProjectId = "cef9283a-de4b-47e3-a221-d1192ce9e5bd";
+  private static String obProjectName = "default";
   /**
    * This must be true if during the NFVO installation the ssl was enabled
    */
@@ -69,10 +69,16 @@ public class EventModule {
 
   public static void main(String[] args) {
 
-    NFVORequestor
-        requestor =
-        new NFVORequestor(obUsername, obPassword, obProjectId, isSslEnabled, obNfvoIp, obNfvoPort, "1");
-
+    NFVORequestor requestor =
+        NfvoRequestorBuilder.create()
+            .nfvoIp(obNfvoIp)
+            .nfvoPort(obNfvoPort)
+            .username(obUsername)
+            .password(obPassword)
+            .projectName(obProjectName)
+            .sslEnabled(isSslEnabled)
+            .version("1")
+            .build();
     /*
       Now the Event Agent needs to be retrieved
      */
