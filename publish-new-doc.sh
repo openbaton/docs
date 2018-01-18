@@ -29,12 +29,11 @@ pushd $tmp/web
 git checkout -b $branch_id
 
 # commit changes with latest commit id
-git commit -am "Updated documentation folder with content from $commit_id of docs master branch"
+git add -A 
+echo git commit -m "Updated documentation folder with content from $commit_id of docs master branch"
  
 # push changes on master branch
 git push origin $branch_id
-
-
 
 popd
 
