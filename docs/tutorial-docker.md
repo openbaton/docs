@@ -12,7 +12,6 @@ You will need three Open Baton Components:
 
 and a reachable Docker engine, usually where the Open Baton platform is running, but not necessarily.
 
-**Important note** currently the docker VNFM and Docker VIM driver are not supported by version 5.1.X. Thus, if you plan to use to continue with this tutorial, please make sure you have installed the right version of the NFVO (5.0.X).
 
 ## Setup
 
