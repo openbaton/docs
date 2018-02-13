@@ -1,7 +1,7 @@
 version: '3'
 services:
   nfvo:
-    image: openbaton/nfvo:5.1.2
+    image: openbaton/nfvo:5.2.0
     depends_on:
       - rabbitmq_broker
     restart: always
@@ -12,14 +12,14 @@ services:
     ports:
       - "8080:8080"
   vnfm-dummy-amqp:
-    image: openbaton/vnfm-dummy-amqp:5.1.0
+    image: openbaton/vnfm-dummy-amqp:5.2.0
     depends_on:
       - nfvo
     restart: always
     environment:
       - SPRING_RABBITMQ_HOST=rabbitmq_broker
   plugin-vimdriver-test:
-    image: openbaton/plugin-vimdriver-test:5.1.1
+    image: openbaton/plugin-vimdriver-test:5.2.0
     depends_on:
       - nfvo
     restart: always
