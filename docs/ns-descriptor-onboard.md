@@ -31,6 +31,8 @@ Upload a JSON file that contains the NSD
 References
 -->
 
+[dashboard]:nfvo-how-to-use-gui.md
+[cli]:nfvo-how-to-use-cli.md
 [launchNSD1]:images/gui-launch-pop.png
 [launchNSD2]:images/gui-launch-key.png
 [NSDcreateFile]:images/nfvo-how-to-use-gui-NSD-create-file.png
