@@ -1,6 +1,6 @@
 # On board VNF Package
 
-Once you have finalized the creation of VNF Packages and packed them into a tar we can onboard them to the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done easily via the [Dashboard][dashboard-link] or the [Command Line Interface][cli].
+Once you have finalized the creation of VNF Packages and packed them into a tar we can onboard them to the NFVO. Make sure that you also uploaded a VimInstance before onboarding the package. Onboarding can be done easily via the [Dashboard][dashboard] or the [Command Line Interface][cli].
 
 ## Onboarding VNF Packages via the dashboard
 
@@ -12,6 +12,9 @@ For uploading a _.tar_ you can click on the button **Upload VNFPackage** and thi
 After you click on the button **Upload All** the packages will be sent to the _NFVO_ and once the process is finished you will see the package appearing in the list
 
 
+
+[dashboard]:nfvo-how-to-use-gui.md
+[cli]:nfvo-how-to-use-cli.md
 [drag_drop]:images/nfvo-how-to-use-gui-drag-drop.png
 [VNF Package documentation]: vnf-package.md
 
