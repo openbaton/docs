@@ -1,6 +1,6 @@
 # Generic VNF Manager
 
-The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. It works as intermediate component between the NFVO and the VNFs, particularly the Virtual Machines on top of which the VNF software is installed. In order to complete the lifecycle of a VNF, it interoperates with the Open Baton Element Management System (EMS) which acts as an agent inside the VMs and executing scripts contained in a VNF package or defined via the `scripts-link` inside the VNFD.
+The Generic VNF Manager is an implementation following the [ETSI MANO][nfv-mano] specifications. It works as intermediate component between the NFVO and the VNFs, particularly the Virtual Machines on top of which the VNF software is installed. In order to complete the lifecycle of a VNF, it interoperates with the Open Baton Element Management System (EMS) which acts as an agent inside the VMs and executing scripts contained in a VNF package or defined via the `scripts-link` inside the VNFD. The Generic VNFManager is capable of handling errors caused while executing these scripts. Together with the NFVO, it allows update of failed scripts, and resume NSR from the failed lifecycle state. Currently, this is applicable only for scripts contained inside VNF Packages and not for scripts referred using scripts-link.
 This VNFM may be assigned to the management of a single VNF instance, or the management of multiple VNF instances of the same type or of different types.
 
 The Generic VNFM handles communication between the NFVO and the EMS. The communication NFVO ↔ VNFM ↔ EMS is done using the AMQP protocol over RabbitMQ.  
@@ -120,6 +120,10 @@ To learn more about the VNF parameters and how you can use them as environment v
 The STOP lifecycle event is meant to just stop the VNF service and afterward be able to start it again. The TERMINATE lifecycle event deletes the virtual resources from the PoP.
 As for VM's deployment, VM's termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
 
+##### Resume NetworkServiceRecord
+
+The EMS executes scripts in the VNFCInstance for each lifecycle event. If any failure occurs while executing an erroneous script, Generic VNFManager is capable of resuming the failed NetworkServiceRecord from the last executed script. The NFVO supports update of scripts contained in the vnfpackage. Once updated, the EMS copies the script to the VNFCInstance, and the Generic VNFManager can resume execution from the failed script in the event and continue to the remaining lifecycle events.
+![Sequence Diagram Generic - Resume][generic-resume-seq-dg]
 
 <!---
 References
