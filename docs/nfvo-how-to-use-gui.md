@@ -189,13 +189,32 @@ Like in this screenshot
 On this page you can see the details of a Network Service Record by clicking on the id
 
 ![Network Service Records Info][NSRinfo]
+You can also click button **Action** and pick function **Add VNF**. This way you can add a new VNF to already deployed 
+NSR via launching one of the available VNFDs. The created VNFR will be added to the corresponding NSR. You can adjust
+the same launch parameters as when launching an NSD for the VNFD after you have picked the one to add. 
+![Add VNF to NSR][AddVnf]
 
 On this page you can look at the JSON file of the NSR by clicking on the link **Show JSON** and also the **Graphical view**. 
 of Network Service Record by clicking on the link **Show Graph**. 
 In the table of VNF Records you can delete a VNFR by clicking on **Action** and then **Delete**. 
+If you have an newer version of the VNFD you can upgrade the VNF to it via picking **Upgrade** option in the menu. You
+will be prompted to choose a version to which you want to upgrade. 
+If you want to restart VNFR, you can press **Restart**, you will be prompted to choose an image with which to deploy
+the VNFR. 
+**Update** button will send a request to initiate an "Update" lifecycle event. For the event to take place it needs to be 
+present in the VNFD from which the VNFR was created.
+**Execute Script** allows to send a bash script to the NFVO in order for it to initiate its execution inside the VNF. 
+You can either type in the script manually or choose a file. 
+![Execute Script][ExecScript]
+
+
 To look at the details of a VNFR just click on the **id** of it.
 
+
 ![VNF Record Information][VNFRecordInformation]
+
+
+
 
 ## Event
 The Events are sent by the Orchestrator to the specific **EndPoint** where an external component is listening to be aware when the Orchestrator 
@@ -213,7 +232,8 @@ This are the information of the Event selected
 
 ![Event Info][EvenInfo]
 
-
+[ExecScript]:images/execute-script.png
+[AddVnf]:images/add-vnf.png
 [overview]:images/nfvo-how-to-use-gui-overview.png
 [vimpage]:images/nfvo-how-to-use-gui-vim-page.png
 [registeraNewVim]:images/vim-instance-register-new-pop.png
