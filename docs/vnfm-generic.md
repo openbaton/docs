@@ -120,9 +120,9 @@ To learn more about the VNF parameters and how you can use them as environment v
 The STOP lifecycle event is meant to just stop the VNF service and afterward be able to start it again. The TERMINATE lifecycle event deletes the virtual resources from the PoP.
 As for VM's deployment, VM's termination is done by the NFVO. Specific scripts can be run before termination by putting them under the TERMINATE lifecycle event.
 
-##### Resume NetworkServiceRecord
+#### Resume Virtual Network Functions
 
-The EMS executes scripts in the VNFCInstance for each lifecycle event. If any failure occurs while executing an erroneous script, Generic VNFManager is capable of resuming the failed NetworkServiceRecord from the last executed script. The NFVO supports update of scripts contained in the vnfpackage. Once updated, the EMS copies the script to the VNFCInstance, and the Generic VNFManager can resume execution from the failed script in the event and continue to the remaining lifecycle events.
+As discussed above, the EMS executes scripts in the VNFC for each lifecycle event. However, if a script is erroneous, the lifecycle execution of the VNF fails. Instead of re-deploying the VNF, you can update the erroneous script in the vnfpackage and resume the failed VNF. Once updated, the Generic VNFM can resume execution from the failed script and continue to the remaining lifecycle events. The following sequence diagram explains the process:
 ![Sequence Diagram Generic - Resume][generic-resume-seq-dg]
 
 <!---
@@ -138,6 +138,9 @@ References
 [ns-with-dependency]:images/generic-vnfm-ns-with-dependency.png
 [vnfpackage-tutorial-link]:vnf-package#tutorial
 [vnfpackage-doc-link]:vnf-package
+[generic-resume-seq-dg]:images/generic-resume-seq-dg.png
+
+
 
 <!---
 Script for open external links in a new tab
