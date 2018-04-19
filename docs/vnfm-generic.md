@@ -122,7 +122,7 @@ As for VM's deployment, VM's termination is done by the NFVO. Specific scripts c
 
 #### Resume Virtual Network Functions
 
-As discussed above, the EMS executes scripts in the VNFC for each lifecycle event. However, if a script is erroneous, the lifecycle execution of the VNF fails. Instead of re-deploying the VNF, you can update the erroneous script in the vnfpackage and resume the failed VNF. Once updated, the Generic VNFM can resume execution from the failed script and continue to the remaining lifecycle events. The following sequence diagram explains the process:
+As discussed above, the EMS executes scripts in the VNFC for each lifecycle event. However, if a script is erroneous, the lifecycle execution of the VNF fails. Instead of re-deploying the VNF, you can update the erroneous script in the vnfpackage (through the dashboard) and resume the failed VNF. Once updated, the Generic VNFM can resume execution from the failed script and continue to any remaining lifecycle event. The following sequence diagram explains the process:
 ![Sequence Diagram Generic - Resume][generic-resume-seq-dg]
 
 <!---
