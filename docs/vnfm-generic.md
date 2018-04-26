@@ -113,7 +113,7 @@ The available parameters are defined in the VirtualNetworkFunctionDescriptor fie
     2. Floating IP (if requested)
     3. Hostname  
 
-To learn more about the VNF parameters and how you can use them as environment variables inside you scripts, please refer to [this](vnf-parameters) page.
+**Note**: To learn more about the VNF parameters and how you can use them as environment variables inside you scripts, please refer to [this](vnf-parameters) page.
 
 ##### Termination of Virtual Machines
 

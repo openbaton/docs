@@ -67,7 +67,96 @@ The out-of-the-box parameters are a special case, since you did not specify a ke
 
 
 ### How to use parameters passed through a VNF dependency
-As described [here](vnf-dependencies), you can have VNF dependencies between VNFs and pass VNF parameters through these dependencies. If you want to use these parameters inside your scripts, you have to consider a few things. The VNF parameters passed through a VNF dependency are only available inside the CONFIGURE lifecycle event scripts and only if the script names start with the source VNF's type followed by an underscore. In other lifecycle events you will not be able to use them. Environment variables derived from VNF parameters passed through a VNF dependency have a special naming rule. If you have one VNF of type *server* and another VNF of type *client* and the server is the source and the client is the target of a VNF dependency passing some VNF parameters, then you have to prepend the type of the source VNF (in our case *server*) to the environment variables for referring to the VNF parameters. Here is an example:
+As described [here](vnf-dependencies), you can have VNF dependencies between VNFs and pass VNF parameters through these dependencies. If you want to use these parameters inside your scripts, you have to consider a few things. 
+Before version 6.0.0, the VNF parameters passed through a VNF dependency were only available inside the CONFIGURE lifecycle event scripts and only if the script names start with the source VNF's type followed by an underscore. In other lifecycle events you will not be able to use them. Environment variables derived from VNF parameters passed through a VNF dependency have a special naming rule. If you have one VNF of type *server* and another VNF of type *client* and the server is the source and the client is the target of a VNF dependency passing some VNF parameters, then you have to prepend the type of the source VNF (in our case *server*) to the environment variables for referring to the VNF parameters. Here is an example:
+From version 6.0.0, the VNF parameters passed through a VNF dependency are still passed during the CONFIGURE lifecycle event but, since they are saved in the file system of all the VNF "target", they are available also in subsequent lifecycle events. 
+Specifically, the parameters are saved in 3 files, of different formats, having the following names: “ob_parameters.json”, “ob_parameters.yaml” and “ob_parameters.sh”.
+
+Examples (from the deployment of a SIPp scenario) of such parameters files are shown in the following images.
+```json
+{
+  "target": "sipp-client",
+  "parameters": {
+    "server": {
+      "parameters": {
+        "private": ""
+      },
+      "id": "1155882c-0232-4474-97da-11375e1b7160",
+      "hbVersion": 3,
+      "shared": false,
+      "metadata": {}
+    }
+  },
+  "vnfcParameters": {
+    "server": {
+      "parameters": {
+        "02678d22-b4ee-4620-9629-90c7a8e6509a": {
+          "parameters": {
+            "private": "192.168.69.19"
+          },
+          "id": "f907f29f-5e19-4e5a-9b57-46b9695906c8",
+          "hbVersion": 1,
+          "shared": false,
+          "metadata": {}
+        }
+      },
+      "id": "1273a03c-d969-480d-bfa4-00d61e0fa25a",
+      "hbVersion": 2,
+      "shared": false,
+      "metadata": {}
+    }
+  },
+  "idType": {
+    "sipp-server": "server"
+  },
+  "id": "0145818c-d488-4b78-bc05-435e7728771f",
+  "hbVersion": 3,
+  "shared": false,
+  "metadata": {}
+}
+```
+
+```yaml
+hbVersion: 3
+id: 0145818c-d488-4b78-bc05-435e7728771f
+idType:
+  sipp-server: server
+metadata: {}
+parameters:
+  server:
+    hbVersion: 3
+    id: 1155882c-0232-4474-97da-11375e1b7160
+    metadata: {}
+    parameters:
+      private: ''
+    shared: false
+shared: false
+target: sipp-client
+vnfcParameters:
+  server:
+    hbVersion: 2
+    id: 1273a03c-d969-480d-bfa4-00d61e0fa25a
+    metadata: {}
+    parameters:
+      02678d22-b4ee-4620-9629-90c7a8e6509a:
+        hbVersion: 1
+        id: f907f29f-5e19-4e5a-9b57-46b9695906c8
+        metadata: {}
+        parameters:
+          private: 192.168.69.19
+        shared: false
+    shared: false
+```
+
+```sh
+# VNF Parameters
+export OB_server_VNF_private=
+
+# VNFC Parameters
+export OB_server_VNFC_private=192.168.69.19
+```
+
+
 
 Assume that we have the two VNFs described above, that means one of type *server* and one of type *client*. And we have a dependency between the two which passes the server's IP address and one of its configuration parameters to the client. Here is how such a dependency might look like:
 
