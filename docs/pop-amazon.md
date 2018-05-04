@@ -16,9 +16,7 @@ The table below provides an explaination about the different parameters used in 
 | location       | Code region (example for EU (Ireland) add eu-west-1, etc.)                  |        yes |
 
 
-## Examples
-
-Example:: 
+## Examples 
 
 ```javascript
 {
