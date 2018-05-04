@@ -18,7 +18,7 @@ The table below provides an explaination about the different parameters used in 
 
 ## Examples
 
-Example for Region eu-west-1: 
+Example:: 
 
 ```javascript
 {
