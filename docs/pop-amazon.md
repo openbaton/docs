@@ -22,22 +22,20 @@ Example for Region eu-west-1:
 
 ```javascript
 {
-   "name":"amazon-pop",
-   "authUrl":"http://127.0.0.1:5000/v3",
-   "tenant":"VPC1",
-   "username":"<key>",
-   "password":"<secret-key>",
-   "keyPair":"aws-key",
-   "securityGroups":[
-      "default"
-   ],
-   "type":"amazon",
-   "location":{
-      "name":"eu-west-1",
-      "latitude":"52.525876",
-      "longitude":"13.314400"
-   }
+  "name":"amazon-pop",
+  "authUrl":"http://amazon.com",
+  "vpcName":"<assigned-vpc-name>",
+  "accessKey":"<access-key>",
+  "secretKey":"<secret-key>",
+  "keyPair":"<key-pair-name>",
+  "securityGroups": [
+    "<security-group-name>"
+  ],
+  "type":"amazon",
+  "region": "<region-where-vpc-is-created>"
 }
+
+
 ```
 
 [amazon-driver]: amazon-driver.md
