@@ -17,17 +17,17 @@ This section covers the requirements that must be met by the environment in orde
 * Installed and configured OpenStack (>=Mitaka) (for Mitaka check [here][os-neutron-mitaka-conf] or Newton [here][os-neutron-newton-conf]) with QoS APIs enabled
 
 # How to install Network Slicing Engine
-If you have the bootstrap procedure and selected the installation of the NSE component, you could skip this section, and move to the [How to use Network Slicing Engine](#how-to) one. 
+If you have the bootstrap procedure and selected the installation of the NSE component, you could skip this section, and move to the [How to use Network Slicing Engine](#how-to) one.
 
 
 Otherwise, please continue with this section. Different options are available for the installation of the Network Slicing Engine. Either you use the fully automated bootstrap where all configurations are done automatically choosing between either the debian based installation or the source code one.
-In case you don't use the bootstrap procedure, you can still install the NSE component individually either via apt-get or gradle. 
+In case you don't use the bootstrap procedure, you can still install the NSE component individually either via apt-get or gradle.
 
 ## Installation via bootstrap
 
 Using the bootstrap gives a fully automated standalone installation of the NS including installation and configuration.
 
-The only thing to do is to execute the following command and follow the configuration process: 
+The only thing to do is to execute the following command and follow the configuration process:
 
 ```bash
 bash <(curl -fsSkl https://raw.githubusercontent.com/openbaton/network-slicing-engine/master/bootstrap)
@@ -38,7 +38,7 @@ Once you started the bootstrap you can choose between different options, such as
 ## Installation via debian package
 
 When using the debian package you need to add the apt-repository of Open Baton to your local environment with the following command if not yet done:
- 
+
 ```bash
 wget -O - http://get.openbaton.org/keys/public.gpg.key | apt-key add -
 echo "deb http://get.openbaton.org/repos/apt/debian/ stable main" >> /etc/apt/sources.list
@@ -140,7 +140,7 @@ For stopping you can use:
 **Note** Since the NSE subscribes to specific events towards the NFVO, you should take care about that the NFVO is already running when starting the NSE.
 
 # <a name="how-to"></a>How to use Network Slicing Engine
-The currently only supported driver is neutron, which will use the native QoS capabilities of Openstack Mitaka. To use it simply set ```nse.driver=neutron``` in the configuration file. To set QoS policies in your NSD specify the following QoS parameter in the virtual_link of your vnfd configuration. 
+The currently only supported driver is neutron, which will use the native QoS capabilities of Openstack Mitaka. To use it simply set ```nse.driver=neutron``` in the configuration file. To set QoS policies in your NSD specify the following QoS parameter in the virtual_link of your vnfd configuration.
 
 In JSON:
 
@@ -149,7 +149,7 @@ In JSON:
     {
       "name":"NAME_OF_THE_NETWORK",
       "qos":[
-        "minimum_bandwith:BRONZE"
+        "maximum_bandwith:BRONZE"
       ]
     }
   ]
