@@ -10,8 +10,8 @@ The NFVO supports two different formats for VNF Packages:
 
 This page provides more information about the first option, while more information about the second option are given in this [tutorial][csar-onboarding].
 
-**Important note-1:** in case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer them in the VNFD as part of the
-*vnfPackageLocation* parameter
+**Important note-1:** in case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer them in the Metadata.yaml as part of the
+*scripts_link* parameter. *VnfPackageLocation* in the VNFD must be null (not defined at all).
 
 **Important note-2:** in case you are using the Docker VIM Driver and Docker VNFM the script folder is not considered, as the docker approach relies on docker images ready to be launched.
 
@@ -78,12 +78,10 @@ In the following each property is explained in more detail. Please consider also
     * **Note** Scripts are executed during different lifecycle-events, and need to be referenced inside the VNF Descriptor
 * ***image***:
     * ***upload***: Here you can choose between different options (true, false, check).
-        * true: choosing this option means to upload the defined image on all the VimInstances. It does not matter if an image with the defined name exists or not.
+        * true: choosing this option means to upload the defined image on all the VimInstances already defined in the VNFD. It does not matter if an image with the defined name exists or not.
         * false: choosing this option means that you assume that the image is already present on the VimInstaces and should be re-uploaded.
         If the image does not exist, the VNF Package onboarding will throw an exception.
         In this case the image (if defined) will be ignored.
-        * check: this option means that the VNF PackageManagement checks first if the image is available (defined in ids or names).
-        If the image does not exist, a new one with the image defined in the VNF Package will be created.
         * **Note** Please use quotation marks for this option since the values are handled as strings internally.
         Otherwise true and false will be handled as a boolean that would lead to a faulty behavior when onboarding a new VNF Package.
     * ***ids***: The list of image IDs is used to fetch the image from the corresponding VimInstance.
@@ -162,17 +160,15 @@ Finally, it looks as shown below.
 name: iperf-server
 description: iPerf server
 provider: FOKUS
-scripts-link: https://script-link-to-git.git
-nfvo_version: 4.0.0
-vim_types:
- - openstack
+scripts-link: https://github.com/openbaton/vnf-scripts.git
+nfvo_version: 5.2.0
 image:
-    upload: "check"
+    upload: "false"
     names:
-        - iperf_server_image
+        - trusty-server-cloudimg-amd64-disk1
     link: "http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img"
 image-config:
-    name: iperf_server_image
+    name: trusty-server-cloudimg-amd64-disk1
     diskFormat: QCOW2
     containerFormat: BARE
     minCPU: 2
@@ -229,8 +225,7 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
     }
   ],
   "type":"server",
-  "endpoint":"generic",
-  "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
+  "endpoint":"generic"
 }
 ```
 #### Image
@@ -251,17 +246,15 @@ Finally, it looks as shown below.
 name: iperf-client
 description: iPerf client
 provider: FOKUS
-nfvo_version: 4.0.0
-vim_types:
- - openstack
-scripts-link: https://gitlab.fokus.fraunhofer.de/openbaton/scripts-test-public.git
+nfvo_version: 5.2.0
+scripts-link: https://github.com/openbaton/vnf-scripts.git
 image:
-    upload: "check"
+    upload: "false"
     names:
-        - iperf_client_image
+        - trusty-server-cloudimg-amd64-disk1
     link: "http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img"
 image-config:
-    name: iperf_client_image
+    name: trusty-server-cloudimg-amd64-disk1
     diskFormat: QCOW2
     containerFormat: BARE
     minCPU: 2
@@ -325,15 +318,14 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
     }
   ],
   "type":"client",
-  "endpoint":"generic",
-  "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
+  "endpoint":"generic"
 }
 ```
 
 #### Image
 
 The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
-We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link].
+We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link]. In this tutorial it is expected to have the image already present in OpenStack.
 
 
 [iperf-link]:https://iperf.fr/

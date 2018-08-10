@@ -54,17 +54,6 @@
   <script src="{{ path }}"></script>
   {%- endfor %}
 
-  {% if google_analytics %}
-  <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', '{{ google_analytics[0] }}', '{{ google_analytics[1] }}');
-      ga('send', 'pageview');
-  </script>
-  {% endif %}
-
 <style>
 
 .subnav_drop{
@@ -267,11 +256,11 @@ console.log('--------');
       <div class="col-md-11">
         <p class="footerparagraph">
           2017 &copy; All Rights Reserved. | The Open Baton project is available under <a
-                href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a> | <a
-                data-toggle="modal" data-target="#cookies" href="#">Cookies</a> & <a data-toggle="modal"
+                href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a> | <!--a
+                data-toggle="modal" data-target="#cookies" href="#">Cookies</a-->  <a data-toggle="modal"
                                                                                      data-target="#datapro"
-                                                                                     href="#datapro">Data
-          Protection</a> | <a href="../../imprint.html">Imprint</a>
+                                                                                     href="#datapro">Privacy
+          </a> | <a href="../../imprint.html">Imprint</a>
         </p>
 
       </div>
@@ -395,7 +384,7 @@ console.log('--------');
           Email: info@openbaton.org
         </p>
 
-        <div class="modal-footer">
+        <!--div class="modal-footer">
           <button data-dismiss="modal" class="btn-u  btn btn-default  backgroundimgNone btnstyled"
                   type="button">Close
           </button>
@@ -403,7 +392,7 @@ console.log('--------');
                   class="btn-u btn btn-default text-white backgroundorange backgroundimgNone btnstyled borderOrange"
                   type="button">Accepted
           </button>
-        </div>
+        </div-->
 
       </div>
     </div>
@@ -415,219 +404,201 @@ console.log('--------');
     <div class="modal-content">
       <div class="modal-header">
         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-        <h4 id="myLargeModalLabel2" class="modal-title">Statement of Data Protection Conditions for the
-          Internet</h4>
+        <h1 id="myLargeModalLabel2" class="modal-title">Datenschutzinformation Fraunhofer FOKUS</h1>
       </div>
       <div class="modal-body">
-        <p>
-          The Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V. (Fraunhofer-Gesellschaft)
-          takes the protection of your personal data very seriously. When we process the personal data that is
-          collected during your visits to our Web site, we always observe the rules laid down in the
-          applicable data protection laws. Your data will not be disclosed publicly by us, nor transferred to
-          any third parties without your consent.
-          <br>
-          <br>
-
-          <b>1. Recording and processing of data in connection with access over the Internet</b><br>
-          When you visit our Web site, our Web server makes a temporary record of each access and stores it in
-          a log file. The following data are recorded, and stored until an automatic deletion date:
-        <ul>
-          <li>IP address of the requesting processor</li>
-          <li>Date and time of access</li>
-          <li>Name and URL of the downloaded file</li>
-          <li>Volume of data transmitted</li>
-          <li>Indication whether download was successful</li>
-          <li>Data identifying the browser software and operating system</li>
-          <li>Web site from which our site was accessed</li>
-          <li>Name of your Internet service provider</li>
-        </ul>
-        The purpose of recording these data is to allow use of the Web site (connection setup), for system
-        security, for technical administration of the network infrastructure and in order to op-timize our
-        Internet service. The IP address is only evaluated in the event of fraudulent access to the network
-        infrastructure of the Fraunhofer-Gesellschaft.
-        <br>
-        Apart from the special cases cited above, we do not process personal data without first obtaining your
-        explicit consent to do so. Pseudonymous user profiles can be created as stated under web analysis (see
-        below).
-
-        <br>
-        <br>
-        <b>​2. Orders</b><br>
-        If you order information material or other goods via our website, we will use the address data provided
-        only for the purpose of processing your order.
-
-        <br>
-        <br>
-        <b>3. Use and transfer of personal data</b><br>
-        All use of your personal data is confined to the purposes stated above, and is only under-taken to the
-        extent necessary for these purposes. Your data is not disclosed to third parties.
-        <br>
-        Personal data will not be transferred to government bodies or public authorities except in order to
-        comply with mandatory national legislation or if the transfer of such data should be necessary in order
-        to take legal action in cases of fraudulent access to our network infrastructure. Personal data will not
-        be transferred for any other purpose.
-        <br>
-        <br>
-        <b>4. Consent to use data in other contexts</b><br>
-
-        The use of certain services on our website, such as newsletters or discussion forums, may re-quire prior
-        registration and involves a more substantial processing of personal data, such as longer-term storage of
-        e-mail addresses, user IDs and passwords. We use such data only insofar as it has been sent to us by you
-        in person and you have given us your express prior consent for this use. For example, we request your
-        consent separately in the following cases:
-        <br>
-        <br>
-        <b>4.1 Newsletters and press distribution</b><br>
-
-        In order to register for a newsletter service provided by the Fraunhofer-Gesellschaft, we need at least
-        your e-mail address so that we know where to send the newsletter. All other information you supply is on
-        a voluntary basis, and will be only if you give your consent, for example to contact you directly or
-        clear up questions concerning your e-mail address. If you request delivery by post, we need your postal
-        address. If you ask to be included on a press distribution list, we need to know which publication you
-        work for, to allow us to check whether specific publications are actually receiving our press material.
-        <br>
-        As a general rule, we employ the double opt-in method for the registration. In other words, after you
-        have registered for the service and informed us of your e-mail address, you will receive an e-mail in
-        return from us, containing a link that you must use to con-firm your registration. Your registration and
-        confirmation will be recorded. The newsletter will not be sent until this has been done. This procedure
-        is used to ensure that only you yourself can register with the newsletter service under the specified
-        e-mail address. You must confirm your registration as soon as possible after receiving our e-mail,
-        otherwise your registration and e-mail address will be erased from our database. Until we receive your
-        confirmation, our newsletter service will refuse to accept any other registration re-quests using this
-        e-mail address.
-        <br>
-        You can cancel subscriptions to our newsletters at any time. To do so, either send us an e-mail or
-        follow the link at the end of the newsletter.
-        <br>
-        <br>
-        <b>​4.2 Visitors’ books and forums</b><br>
-        If you wish to sign up for an Internet forum run by the Fraunhofer-Gesellschaft, we need at least a user
-        ID, a password, and your e-mail address. For your own protection, the reg-istration procedure for this
-        type of service, like that for the newsletters, involves you con-firming your request using the link
-        contained in the e-mail we send you and you giving your consent to the use of further personal data
-        where this is necessary to use the forum.
-        <br>
-        You can cancel your registration for this type of service at any time, by sending us an e-mail via the
-        Web page offering the service.
-        <br>
-        As a general rule, the content of visitors’ books and forums is not subject to any form of monitoring by
-        the Fraunhofer-Gesellschaft. Nevertheless, we reserve the right to delete posted contributions and to
-        prohibit users from further use of the service at our own dis-cretion, especially in cases where posted
-        content contravenes the law or is deemed in-compatible with the objectives of the
-        Fraunhofer-Gesellschaft.
-        <br>
-        <br>
-
-        <b>5. Cookies</b><br>
-        We don’t normally use cookies on our Web site, but in certain exceptional cases we may use cookies which
-        place technical session-control data in your browser’s memory. These data are automatically erased at
-        the latest when you close your browser.
-        <br>
-        If, exceptionally, one of our applications requires the storage of personal data in a cookie, for
-        instance a user ID, we will point out you to it.
-        <br>
-        Of course, it is perfectly possible to consult our Web site without the use of cookies. Please note,
-        however, that most browsers are programmed to accept cookies in their de-fault configuration. You can
-        prevent this by changing the appropriate setting in the browser options. If you set the browser to
-        refuse all cookies, this may restrict your use of certain functions on our Website
-        <br>
-        <br>
-
-        <b>6. Web analysis</b><br>
-        Personal user profiles are not created. However, Section 15 (3) of the Telemedia Act (TMG) permits the
-        use of user profiles under a pseudonym for the purpose of advertising, market research and the
-        structuring of offers in line with the user's needs provided that the user does not object to this:
-        <br>
-        We also use web analysis services on our web pages, for example from etracker or WiredMinds, which carry
-        out the web analysis on our behalf as contract processors (see the websites of www.wiredminds.de for
-        these providers). Their services have been checked by the supervisory authorities and/or experts and
-        meet all requirements under German and European data protection laws.
-        <br>
-        Using the technologies of these providers, data is collected and stored on our website. From this data,
-        user profiles are produced under a pseudonym for marketing and optimi-zation purposes, for which cookies
-        may be used. Cookies are small text files that are stored locally in the cache memory of the site
-        visitor's web browser. The cookies enable the web browser to be recognized. Furthermore, your user
-        behavior can be measured via a JavaScript code and data collected in this connection can be sent
-        directly to the provider's servers in Germany or the EU via an HTML connection. Without your express
-        consent, the data collected using the tracking technologies will not be used to personally identify you
-        and will not be combined with the personal data about the bearer of the pseudonym. No cross-website
-        analysis will be carried out either.
-        <br>
-        <br> If you wish to technically stop the tracking, you can deactivate JavaScript and cookies in your web
-        browser. Consent for the collection and storage of data can also be refused with effect for the future
-        at any time. Please follow this link to refuse the service provided by WiredMinds:
-        <a href="http://wm.wiredminds.de">http://wm.wiredminds.de.</a>
-        <br>
-        <br>
-
-        <b>7. Social plugins</b><br>
-        We also use social plugins in some cases on our webpages, e.g. from the Facebook, Twit-ter, YouTube or
-        Google+ social networks. These are often technically operated in the USA or in other countries outside
-        Germany and the EU and some are offered via national companies in the EU (see the websites
-        www.facebook.de, www.twitter.de, www.youtube.de or www.google.de for the providers). The plugins are
-        identified with the companies’ logo, comment fields or what are known as a “Like” or “+1” button.
-        <br>
-        If you open a page of our website in your web browser containing such a plugin, your web browser will
-        create a direct connection to the servers of the respective provider in the country concerned.
-        <br>
-        By incorporating the plugins the provider is given at the least the information that you have visited a
-        certain page on our website, and perhaps also other information that your web browser or the device you
-        use also discloses. The content of the plugin is loaded by your web browser directly from the provider
-        and incorporated into our website. If you are registered and have logged in with the provider concerned,
-        your visit can also be assigned to your user account.
-        <br>
-        If you interact with a plugin, e.g. if you click on the “Like” button or enter a comment in a form
-        field, your browser will also transmit this information directly to the provider where it will be saved
-        and, if applicable, continue to be used and published.
-        <br>
-        Above all, marketing measures of the provider and the Fraunhofer-Gesellschaft are the reason for the
-        collection and use of the data as described and determine the extent of this. You can find details on
-        this and on your rights and on ways in which you can pre-vent the collection and use of your data in
-        order to protect your private sphere directly in the data privacy policy of the respective provider.
-        <br>
-        If you do not wish a provider to collect data on you through our website you must deacti-vate the
-        plugins in your web browser. If you wish to avoid a link to any existing user account, you must log out
-        before your visit to our website. By visiting our website, you de-clare your consent to the above
-        provisions.
-        <br>
-        <br>
-        <b>8. Security </b><br>
-        The Fraunhofer-Gesellschaft implements technical and organizational security measures to safeguard
-        stored personal data against inadvertent or deliberate manipulation, loss or destruction and against
-        access by unauthorized persons. Our security measures are continuously im-proved in line with
-        technological progress.
-        <br><br>
-        <b>9. Links to Web sites operated by other providers</b><br>
-        Our Web pages may contain links to other providers’ Web pages. We would like to point out that this
-        statement of data protection conditions applies exclusively to the Web pages managed by the
-        Fraunhofer-Gesellschaft. We have no way of influencing the practices of other providers with respect to
-        data protection, nor do we carry out any checks to ensure that they conform with the relevant
-        legislation.
-        <br><br>
-        <b>10. Right to information and contact data</b><br>
-        You have a legal right to inspect any stored data concerning your person, and also the right to demand
-        their correction or deletion, and to withdraw your consent for their further use.
-        <br>
-        In some cases, if you are a registered user of certain services provided by the Fraunhofer-Gesellschaft,
-        we offer you the possibility of inspecting these data online, and even of deleting or modifying the data
-        yourself, via a user account.
-        <br>
-        If you wish to obtain information on your personal data, or want us to correct or erase such data, or if
-        you have any other questions concerning the use of personal data held by us, please contact: <a
-              href="mailto:data-protection@zv.fraunhofer.de">data-protection@zv.fraunhofer.de</a>
-        <br><br>
-        <b>11. Acceptance, validity and modification of data protection conditions</b><br>
-        By using our Web site, you implicitly agree to accept the use of your personal data as specified above.
-        This present statement of data protection conditions came into effect on October 1st, 2013. As our Web
-        site evolves, and new technologies come into use, it may become necessary to amend the statement of data
-        protection conditions. The Fraunhofer-Gesellschaft reserves the right to modify its data protection
-        conditions at any time, with effect as of a future date. We recommend that you reread the latest version
-        from time to time.
-
-
-        <br>
-        <br>
-        <div class="modal-footer">
+        <div class="modal-body">
+            <p><em>24.05.2018</em></p>
+            <p>Im Rahmen der Nutzung dieser Webseite werden personenbezogene Daten von Ihnen durch uns als den für die Datenverarbeitung Verantwortlichen verarbeitet und für die Dauer gespeichert, die zur Erfüllung der festgelegten Zwecke und gesetzlicher Verpflichtungen erforderlich ist. Im Folgenden informieren wir Sie darüber, um welche Daten es sich dabei handelt, auf welche Weise sie verarbeitet werden und welche Rechte Ihnen diesbezüglich zustehen.</p>
+            <p>Personenbezogene Daten sind gemäß Art. 4 Nr. 1 Datenschutzgrundverordnung (DSGVO) alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen.</p>
+            <p><em>Inhalt</em></p>
+            <ol>
+              <li>Name und Kontaktdaten des für die Verarbeitung Verantwortlichen sowie des betrieblichen Datenschutzbeauftragten</li>
+              <li>Verarbeitung personenbezogener Daten und Zwecke der Verarbeitung</li>
+              <li>Weitergabe von personenbezogenen Daten</li>
+              <li>Cookies</li>
+              <li>Webanalyse/Tracking</li>
+              <li>Social Plugins</li>
+              <li>Komponenten</li>
+              <li>Betroffenenrechte</li>
+              <li>Datensicherheit</li>
+              <li>Aktualität und Änderung dieser Datenschutzinformation</li>
+              <li>Salvatorische Klausel</li>
+            </ol>
+            <h3>1. Name und Kontaktdaten des für die Verarbeitung Verantwortlichen sowie des betrieblichen Datenschutzbeauftragten<a name="name-und-kontaktdaten-des-fr-die-verarbeitung-verantwortlichen-sowie-des-betrieblichen-datenschutzbeauftragten"></a></h3>
+            <p>Diese Datenschutzinformation gilt für die Datenverarbeitung auf unserer Institutswebseite https://www.fokus.fraunhofer.de durch den Verantwortlichen:</p>
+            <p>Fraunhofer-Gesellschaft</p>
+            <p>zur Förderung der angewandten Forschung e.V.</p>
+            <p>Hansastraße 27 c,</p>
+            <p>80686 München</p>
+            <p>für das Fraunhofer Institut für Offene Kommunikationssysteme</p>
+            <p>(im Folgenden „Fraunhofer- FOKUS“)</p>
+            <p>E-Mail: info@fokus.fraunhofer.de</p>
+            <p>Der Datenschutzbeauftragte von Fraunhofer ist unter der o.g. Anschrift, zu Hd. Datenschutzbeauftragter bzw. unter datenschutz@zv.fraunhofer.de erreichbar.</p>
+            <p>Sie können sich jederzeit bei Fragen zum Datenschutzrecht oder Ihren Betroffenenrechten direkt an unseren Datenschutzbeauftragten wenden.</p>
+            <h3>2. Verarbeitung personenbezogener Daten und Zwecke der Verarbeitung<a name="verarbeitung-personenbezogener-daten-und-zwecke-der-verarbeitung"></a></h3>
+            <p><strong>a) Beim Besuch der Webseite</strong></p>
+            <p>Wenn Sie unsere Webseiten besuchen, speichern die Webserver unserer Webseite temporär jeden Zugriff Ihres Endgerätes in einer Protokolldatei. Folgende Daten werden erfasst und bis zur automatisierten Löschung gespeichert:</p>
+            <ul>
+              <li>IP-Adresse des anfragenden Rechners</li>
+              <li>Datum und Uhrzeit des Zugriffs</li>
+              <li>Name und URL der abgerufenen Daten</li>
+              <li>Übertragene Datenmenge</li>
+            </ul>
+            <p>Meldung, ob der Abruf erfolgreich war</p>
+            <ul>
+              <li>Verwendeter Browser und Browser-Einstellungen</li>
+              <li>Betriebssystem</li>
+              <li>Name des Internet-Zugangs-Providers</li>
+              <li>Webseite, von der aus der Zugriff erfolgt (Referrer-URL)</li>
+            </ul>
+            <p>Die Verarbeitung dieser Daten erfolgt zu folgenden Zwecken:</p>
+            <ul>
+              <li>Ermöglichung der Nutzung der Webseite (Verbindungsaufbau)</li>
+              <li>Administration der Netzinfrastruktur</li>
+              <li>Angemessene technisch-organisatorische Maßnahmen zur IT-System und Informationssicherheit unter Berücksichtigung des Stands der Technik</li>
+              <li>Gewährleistung der Nutzerfreundlichkeit der Nutzung</li>
+              <li>Optimierung des Internetangebotes</li>
+            </ul>
+            <p>Rechtsgrundlagen für die vorstehenden Verarbeitungen sind</p>
+            <ul>
+              <li>für die Verarbeitung für den Besuch der Webseiten nach den Nummern 1-2 Art. 6 Abs. 1 S.1 lit. b DSGVO (Erforderlichkeit für die Erfüllung des Webseiten-Nutzungsvertragsverhältnisses),</li>
+              <li>für die Verarbeitungen nach Nummer 3 Art. 6 Abs. 1 S.1 lit. c DSGVO (rechtliche Verpflichtung zur Umsetzung technisch-organisatorischer Maßnahmen zur Sicherung der Datenverarbeitung nach Art. 32 DSGVO) und Art. 6 Abs. 1 S.1 lit. f DSGVO (berechtigte Interessen zur Datenverarbeitung für die Netz- und Informationssicherheit) sowie für</li>
+              <li>die Verarbeitungen nach den Nummern 4-5 Art. 6 Abs. 1 S.1 lit. f DSGVO (berechtigte Interessen). Die berechtigten Interessen unserer Datenverarbeitung bestehen darin, unser Angebot nutzerfreundlich zu gestalten und zu optimieren.</li>
+              <li>Die vorstehend genannten Daten werden nach einer definierten Zeit vom Webserver automatisiert gelöscht, die 30 Tage beträgt. Sofern Daten zu Zwecken nach Nummern 2-5 länger verarbeitet werden, erfolgt die Anonymisierung oder Löschung, wenn die Speicherung für den jeweiligen Zweck nicht mehr erforderlich ist.</li>
+            </ul>
+            <p>Darüber hinaus setzen wir beim Besuch unserer Website Cookies sowie Analysedienste ein. Nähere Erläuterungen dazu erhalten Sie unter den Ziffer 4 und 5 dieser Datenschutzinformation.</p>
+            <p><strong>b) Bei Anmeldung für Veranstaltungen</strong></p>
+            <p>Allgemeiner Hinweis:
+              Wir bieten regelmäßig Veranstaltungen verschiedenster Art über unsere Webseite an, für die Sie sich online anmelden können.</p>
+            <p>Eine Zusatz zu dieser Datenschutzerklärung für die jeweilige Veranstaltung finden Sie auf deren Homepage sowie auf den Seiten der Veranstaltung, die einen Link zur Anmeldung  enthalten.</p>
+            <p><strong>c) Bei Anmeldung zu unserem Newsletter</strong></p>
+            <p>Sofern Sie nach Art. 6 Abs. 1 S. 1 lit. a DSGVO ausdrücklich eingewilligt haben, verwenden wir Ihre E-Mail-Adresse dafür, Ihnen regelmäßig unseren Newsletter zu übersenden, der Sie über die Arbeit an unserem Institut und zu anderen Einrichtungen und Veranstaltungen des Fraunhofer e.V. informiert. Für den Empfang des Newsletters erheben wir folgende Pflichtangaben:</p>
+            <ul>
+              <li>E-Mail-Adresse</li>
+              <li>Anrede</li>
+              <li>Vorname</li>
+              <li>Nachname</li>
+            </ul>
+            <p>Ihren Namen und Ihre Anrede benötigen wir, um Sie persönlich mit unserem Newsletter anzusprechen.</p>
+            <p>Sie können freiwillig weitere Angaben zu Ihrer Person (z. B. Anschrift, Telefonnummer und Firma) tätigen. Wir verwenden diese Daten, um mit Ihnen telefonisch oder postalisch Kontakt aufzunehmen.</p>
+            <p>Nach Ihrer Anmeldung erhalten Sie per E-Mail eine Registrierungsbenachrichtigung, die Sie bestätigen müssen, um den Newsletter zu empfangen (sog. Double Opt-In).</p>
+            <p>Dies dient uns als Nachweis darüber, dass die Registrierung tatsächlich von Ihnen initiiert wurde.</p>
+            <p>Die Abmeldung ist jederzeit möglich, z.B. über einen Link am Ende eines jeden Newsletters. Alternativ können Sie Ihren Abmeldewunsch gerne auch jederzeit an newsletter@fokus.fraunhofer.de per E-Mail senden oder unter folgendem Link selbst erfüllen: www.fraunhofer.de/de/fraunhofer-newsletter-abmeldung.html.</p>
+            <p>Ihre E-Mail-Adresse wird nach Widerruf Ihrer Einwilligung zur Zusendung des Newsletters umgehend gelöscht.</p>
+            <p>Wir versenden unseren Newsletter mittels des Anbieters mailingwork GmbH, Hauptgeschäftssitz: Birkenweg 7, 09569 Oederan. Die E-Mail-Adressen unserer Newsletterempfänger werden in unserem Auftrag auf den Servern von mailingwork GmbH in Deutschland gespeichert.</p>
+            <p>mailingwork GmbH verwendet diese Informationen zum Versand und zur Auswertung der Newsletter in unserem Auftrag. Wir haben dazu mit mailingwork GmbH einen Auftragsverarbeitungsvertrag abgeschlossen. Durch diesen Vertrag versichert mailingwork GmbH, dass Sie die Daten im Einklang mit der Datenschutzgrundverordnung verarbeiten und den Schutz der Rechte der betroffenen Person gewährleisten.</p>
+            <p>mailingwork GmbH versichert, dass personenbezogene Daten umfassend vor unerlaubten Zugriffen geschützt sind. mailingwork GmbH selbst nutzt die Daten unserer Newsletterempfänger nicht, um diese selbst anzuschreiben oder gibt die Daten an Dritte weiter. Als seriöser E-Mail-Versender ist mailingwork GmbH zudem durch die Certified Senders Alliance zertifiziert.</p>
+            <p><strong>d) Bei Nutzung von Kontaktformularen</strong>
+              Wir bieten Ihnen an verschiedenen Stellen der Webseite die Möglichkeit, mit uns über ein auf den Seiten bereitgestelltes Formular Kontakt aufzunehmen. Dabei sind zumeist die folgenden Angaben als Pflichtangaben erforderlich:</p>
+            <ul>
+              <li>Anrede</li>
+              <li>Vor- und Nachname</li>
+              <li>E-Mail-Adresse</li>
+            </ul>
+            <p>Ihre Daten benötigen wir, um festzustellen von wem die Anfrage stammt und um diese beantworten und bearbeiten zu können.
+              Die Datenverarbeitung erfolgt auf Ihre Anfrage hin und ist im Rahmen der Beantwortung einer Kontaktanfrage auf unsere berechtigten Interessen gem. Art. 6 Abs. 1 S. 1 lit. f DSGVO gestützt.
+              Die für die Benutzung des Kontaktformulars von uns erhobenen personenbezogenen Daten werden nach Erledigung der von Ihnen gestellten Anfrage automatisch gelöscht.</p>
+            <p><strong>e) Bei Nutzung von Bestellformularen</strong></p>
+            <p>Sofern Sie Informationsmaterialien oder andere Waren über unsere Webseiten bestellen, verwenden wir die dabei angegebenen Adressdaten nur zum Zweck der Abwicklung der Bestellung. Dabei sind zumeist die folgenden Angaben als Pflichtangaben erforderlich:</p>
+            <ul>
+              <li>Anrede</li>
+              <li>Vor- und Nachname</li>
+              <li>E-Mail-Adresse</li>
+              <li>Straße</li>
+              <li>PLZ</li>
+              <li>Ort</li>
+              <li>Land</li>
+            </ul>
+            <p>Ihre Daten benötigen wir, um festzustellen von wem die Anfrage stammt und um die Bestellung beantworten und bearbeiten zu können.</p>
+            <p>Die Datenverarbeitung erfolgt auf Ihre Anfrage hin und ist im Rahmen der Beantwortung einer Kontaktanfrage auf unsere berechtigten Interessen gem. Art. 6 Abs. 1 S. 1 lit. f DSGVO gestützt.</p>
+            <p>Die für die Benutzung des Bestellformulars von uns erhobenen personenbezogenen Daten werden nach Erledigung der von Ihnen gestellten Anfrage automatisch gelöscht.</p>
+            <h3>3. Weitergabe von personenbezogenen Daten<a name="weitergabe-von-personenbezogenen-daten"></a></h3>
+            <p>Außer in den zuvor genannten Fällen einer Verarbeitung im Auftrag (Anmeldung für Veranstaltungen (Zusatz Datenschutzerklärung auf Veranstaltungsseite), Anmeldung zu einem Newsletter, Kontaktformular und Bestellformular) geben wir Ihre personenbezogenen Daten nur an Dritte, d.h. andere natürliche oder juristische Personen außer Ihnen (der betroffenen Person), dem Verantwortlichen oder dem Auftragsverarbeiter und deren zur Datenverarbeitung befugten Mitarbeiter weiter, wenn:</p>
+            <ul>
+              <li>Sie gem. Art. 6 Abs. 1 S. 1 lit. a DSGVO Ihre ausdrückliche Einwilligung dazu erteilt haben;</li>
+              <li>dies gem. Art. 6 Abs. 1 S. 1 lit. b DSGVO für die Erfüllung eines Vertrages mit Ihnen erforderlich ist,
+                <ul>
+                  <li>Weitergabe an Versandunternehmen zum Zwecke der Lieferung der von Ihnen bestellten Ware,</li>
+                  <li>Weitergabe von Zahlungsdaten an Zahlungsdienstleister bzw. Kreditinstitute, um einen Zahlungsvorgang durchzuführen;</li>
+                </ul></li>
+              <li>für den Fall, dass für die Weitergabe nach Art. 6 Abs. 1 S. 1 lit. c DSGVO eine gesetzliche Verpflichtung besteht, bspw. an Finanz- oder Strafverfolgungsbehörden;</li>
+              <li>die Weitergabe ist nach Art. 6 Abs. 1 S. 1 lit. f DSGVO zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen erforderlich und es besteht kein Grund zur Annahme, dass Sie ein überwiegendes schutzwürdiges Interesse an der Nichtweitergabe Ihrer Daten haben; eine solche Weitergabe kann bspw. im Falle von Angriffen auf unsere IT-Systeme an staatliche Einrichtungen und Strafverfolgungsbehörden erfolgen.</li>
+            </ul>
+            <p>Die weitergegebenen Daten dürfen von dem Dritten ausschließlich zu den genannten Zwecken verwendet werden.</p>
+            <p>Wenn Sie sich für eine Veranstaltung angemeldet haben, kann es im Rahmen der Vertragserfüllung erforderlich sein, dass Ihre personenbezogenen Daten an einen externen Veranstalter übermittelt werden müssen. Im Zusammenhang mit einer Veranstaltungsanmeldung werden Sie darüber informiert, wer Veranstalter ist und ob es sich dabei um einen externen Veranstalter handelt. Dieser wird personenbezogenen Daten im Rahmen der Veranstaltung und insbesondere zur Teilnehmerverwaltung verarbeiten.</p>
+            <p>Im Übrigen werden unsere Webseiten gemäß Art. 28 DSGVO von unserem Auftragsverarbeiter Infopark AG, Kitzingstraße 15, 12277 Berlin, Deutschland ausschließlich auf Servern in Deutschland gehostet.</p>
+            <p>Eine Übermittlung von personenbezogenen Daten an ein Drittland (außerhalb der EU) oder eine internationale Organisation ist ausgeschlossen.</p>
+            <h3>4. Cookies<a name="cookies"></a></h3>
+            <p>Wir setzen auf unserer Seite Cookies ein. Hierbei handelt es sich um kleine Dateien, die Ihr Browser automatisch erstellt und die auf Ihrem Endgerät (Laptop, Tablet, Smartphone o.ä.) gespeichert werden, wenn Sie unsere Seite besuchen. Cookies richten auf Ihrem Endgerät keinen Schaden an, enthalten keine Viren, Trojaner oder sonstige Schadsoftware.</p>
+            <p>In dem Cookie werden Informationen abgelegt, die sich jeweils im Zusammenhang mit dem spezifisch eingesetzten Endgerät ergeben. Dies bedeutet jedoch nicht, dass wir dadurch unmittelbar Kenntnis von Ihrer Identität erhalten.</p>
+            <p>Der Einsatz von Cookies dient einerseits dazu, die Nutzung unseres Angebots für Sie angenehmer zu gestalten. So setzen wir sogenannte Session-Cookies ein, um die Sitzungssteuerung zu ermöglichen, bspw. Formulareingaben oder Warenkörbe während der Sitzung zu speichern. Session-Cookies werden spätestens mit dem Schließen Ihres Webbrowsers gelöscht.</p>
+            <p>Darüber hinaus setzen wir ebenfalls zur Optimierung der Benutzerfreundlichkeit temporäre Cookies ein, die für einen bestimmten festgelegten Zeitraum auf Ihrem Endgerät gespeichert werden. Besuchen Sie unsere Seite erneut, um unsere Dienste in Anspruch zu nehmen, wird automatisch erkannt, dass Sie bereits bei uns waren und welche Eingaben und Einstellungen Sie getätigt haben, um diese nicht noch einmal eingeben zu müssen.</p>
+            <p>Zum anderen setzen wir Cookies ein, um die Nutzung unserer Website statistisch zu erfassen und zum Zwecke der Optimierung unseres Angebotes für Sie auszuwerten (siehe Ziffer 4). Diese Cookies ermöglichen es uns, bei einem erneuten Besuch unserer Seite automatisch zu erkennen, dass Sie bereits bei uns waren. Diese Cookies werden nach einer jeweils definierten Zeit automatisch gelöscht.</p>
+            <p>Die durch Cookies verarbeiteten Daten sind für die genannten Zwecke zur Wahrung unserer berechtigten Interessen sowie der Dritter nach Art. 6 Abs. 1 S. 1 lit. f DSGVO erforderlich.</p>
+            <p>Die meisten Browser akzeptieren Cookies automatisch. Sie können Ihren Browser jedoch so konfigurieren, dass keine Cookies auf Ihrem Computer gespeichert werden oder stets ein Hinweis erscheint, bevor ein neuer Cookie angelegt wird. Die vollständige Deaktivierung von Cookies kann jedoch dazu führen, dass Sie nicht alle Funktionen unserer Website nutzen können.</p>
+            <h3>5. Webanalyse/Tracking<a name="webanalysetracking"></a></h3>
+            <p><strong>a) LeadLab (wiredminds GmbH)</strong></p>
+            <p>Wir setzen auf unserer Webseite den Dienst Leadlab von der Wiredminds GmbH und deren Zählpixeltechnologie zur Analyse des Nutzungsverhaltens und zur darauf basierenden Optimierung unserer Seite ein. Insbesondere erlaubt uns der Dienst zu erkennen, welche Unternehmen unsere Seite besucht haben. Dabei erhalten wir keine Informationen, die Sie unmittelbar identifizieren.</p>
+            <p>Im Zusammenhang mit dem Einsatz von Leadlab werden Cookies und Zählpixel eingesetzt, die eine statistische Analyse der Nutzung dieser Website durch Ihre Besuche ermöglichen. In dem Cookie werden Informationen – einschließlich personenbezogener Informationen -zu Ihrem Besucherverhalten abgelegt und an Wiredminds übermittelt oder direkt von Wiredminds erhoben. Die Informationen werden von Wiredminds unter Verwendung eines Pseudonyms in einem Nutzungsprofil zum Zwecke der Analyse verarbeitet und möglichst anonymisiert.</p>
+            <p>Die dabei gewonnenen Daten werden ohne Ihre gesondert erteilte Zustimmung nicht benutzt, um Sie persönlich zu identifizieren und die Daten werden nicht mit personenbezogenen Daten über Sie als Träger des Pseudonyms zusammengeführt.</p>
+            <p>Soweit IP-Adressen erhoben werden, werden diese unverzüglich nach Erhebung durch Löschen des letzten Nummernblocks anonymisiert.</p>
+            <p>Informationen zum Datenschutz bei der Wireminds finden Sie auf deren Webseite.</p>
+            <p>Die Datenverarbeitung erfolgt auf Grund unseres berechtigten Interesses gemäß Art. 6 Abs.1 lit. f DSGVO an der Optimierung unseres Online-Angebotes und unseres Webauftritts. Wiredminds verarbeitet die Daten in unserem Auftrag und wir haben einen Auftragsverarbeitungsvertrag mit Wiredminds abgeschlossen. Dieser stellt sicher, dass die Datenverarbeitung in unserem Auftrag im Einklang mit der Datenschutzgrundverordnung erfolgt und den Schutz der Rechte der betroffenen Personen gewährleistet.</p>
+            <p>Sollten Sie die Erfassung und Analyse Ihres Benutzerverhaltens nicht wünschen, dann können Sie dem mittels eines Opt-Out-Cookies widersprechen. Es wird ein Opt-Out-Cookie gesetzt, das die zukünftige Erfassung Ihrer Daten beim Besuch dieser Webseite verhindert. Der Opt-Out-Cookie gilt nur in diesem Browser und nur für unsere Webseite und wird auf Ihrem Gerät abgelegt. Löschen Sie die Cookies in diesem Browser, müssen Sie das Opt-Out-Cookie erneut setzen.</p>
+            <p>Mit diesem Link können Sie dem Tracking widersprechen:</p>
+            <p>https://wm.wiredminds.de/track/cookie_mgr.php?mode=dont_track_ask&websitesel=b1fdb0667d2d0f0e&lang=de</p>
+            <h3>6. Social plugins<a name="social-plugins"></a></h3>
+            <p>Wir setzen auf unserer Webseite sog. Social-Media-Buttons (auch Social-Media-Plugins) ein. Hierbei handelt es sich um kleine Schaltflächen mittels derer Sie Inhalte unserer Webseite in sozialen Netzwerken unter Ihrem Profil veröffentlichen können.</p>
+            <p>Sofern Sie eine solche Schaltfläche aktivieren, wird eine Verbindung zwischen unserer Webseite und dem soziale Netzwerk hergestellt. Neben den betreffenden Inhalten, erhält der Betreiber des sozialen Netzwerkes weitere zum Teil personenbezogene Information. Dazu gehört etwa der Umstand, dass Sie gerade unsere Seite besuchen.</p>
+            <p>Die Einbindung der Social-Media-Buttons erfolgt unter Einsatz der sog. Shariff-Lösung. Diese Lösung verhindert, dass bereits eine Verbindung zu einem sozialen Netzwerk aufgebaut wird, nur weil Sie eine Seite mit einem Social-Media-Button aufrufen, ohne diesen zu aktivieren. Das bedeutet, dass erst dann Informationen an das soziale Netzwerk übermittelt werden, wenn Sie die Schaltfläche einsetzen.</p>
+            <p>Die folgenden Social-Media-Plugins setzen wir ein:</p>
+            <p><strong>a) Facebook Teilen der Facebook Ireland Limited</strong></p>
+            <p>Teilweise werden Informationen an die Muttergesellschaft Facebook Inc. mit Sitz in den USA übermittelt. Diese beachtet die Datenschutzbestimmungen des „US-Privacy-Shield“ und ist beim „US-Privacy Shield“-Programm des USHandelsministeriums registriert.</p>
+            <p>Zweck und Umfang der Datenerhebung und die weitere Verarbeitung und Nutzung der Daten durch Facebook sowie Ihre diesbezüglichen Rechte und Einstellungsmöglichkeiten zum Schutz Ihrer Privatsphäre entnehmen Sie bitte den Datenschutzhinweisen von Facebook.</p>
+            <p><strong>b) Twitter Teilen der Twitter International Company</strong></p>
+            <p>Teilweise werden Informationen an die Muttergesellschaft Twitter Inc. mit Sitz in den USA übermittelt. Diese beachtet die Datenschutzbestimmungen des „US-Privacy-Shield“ und ist beim „US-Privacy Shield“-Programm des US-Handelsministeriums registriert.</p>
+            <p>Weitere Informationen zum Datenschutz bei Twitter finden Sie in der Datenschutzerklärung von Twitter.</p>
+            <p><strong>c) Google+ teilen der Google LLC</strong></p>
+            <p>Google beachtet die Datenschutzbestimmungen des „US-Privacy-Shield“ und ist beim „US-Privacy Shield“-Programm des US-Handelsministeriums registriert.</p>
+            <p>Weitere Informationen zum Datenschutz bei Google finden Sie in der Datenschutzerklärung von Google.</p>
+            <h3>7. Komponenten<a name="komponenten"></a></h3>
+            <p><strong>a) YouTube</strong></p>
+            <p>Wir setzen auf unseren Internetseiten auf der Grundlage einer Einwilligung nach Art. 6 Abs. 1 S. 1 lit. f DSGVO Komponenten (Videos) des Unternehmens YouTube, LLC 901 Cherry Ave., 94066 San Bruno, CA, USA (Im Folgenden: „YouTube“), einem Unternehmen der Google Inc., Amphitheatre Parkway, Mountain View, CA 94043, USA (Im Folgenden: „Google“), ein.</p>
+            <p>Hierbei nutzen wir die von YouTube zur Verfügung gestellte Option des „erweiterten Datenschutzmodus".</p>
+            <p>Wenn Sie eine Seite aufrufen, die über ein eingebettetes Video verfügt, wird eine Verbindung zu den YouTube-Servern hergestellt und dabei der Inhalt durch Mitteilung an Ihren Browser auf der Internetseite dargestellt.</p>
+            <p>Laut den Angaben von YouTube werden im „erweiterten Datenschutzmodus“ nur dann Ihre Daten - insbesondere welche unserer Internetseiten Sie besucht haben sowie gerätespezifische Informationen inklusive der IP-Adresse - an den YouTube-Server in den USA übermittelt, wenn Sie das Video anschauen. Durch den Klick auf das Video willigen Sie in diese Übermittlung ein.</p>
+            <p>Sind Sie gleichzeitig bei YouTube eingeloggt, werden diese Informationen Ihrem Mitgliedskonto bei YouTube zugeordnet. Dies können Sie verhindern, indem Sie sich vor dem Besuch unserer Website von Ihrem Mitgliedskonto abmelden.</p>
+            <p>Google beachtet die Datenschutzbestimmungen des „US-Privacy-Shield“ und ist beim „US-Privacy Shield“-Programm des US-Handelsministeriums registriert.</p>
+            <p>Weitere Informationen zum Datenschutz im Zusammenhang mit YouTube finden Sie in den Datenschutzbestimmungen von Google.</p>
+            <p><strong>b) Google Maps</strong></p>
+            <p>Wir binden die Landkarten des Dienstes „Google Maps” des Anbieters Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA, ein. Zu den verarbeiteten Daten können insbesondere IP-Adressen und Standortdaten der Nutzer gehören, die jedoch nicht ohne deren Einwilligung (im Regelfall im Rahmen der Einstellungen ihrer Mobilgeräte vollzogen), erhoben werden. Die Daten können in den USA verarbeitet werden. Datenschutzerklärung: https://www.google.com/policies/privacy/, Opt-Out: https://adssettings.google.com/authenticated.</p>
+            <h3>8. Betroffenenrechte<a name="betroffenenrechte"></a></h3>
+            <p>Sie haben das Recht:</p>
+            <ul>
+              <li>gemäß Art. 7 Abs. 3 DSGVO Ihre einmal erteilte Einwilligung jederzeit gegenüber uns zu widerrufen. Dies hat zur Folge, dass wir die Datenverarbeitung, die auf dieser Einwilligung beruhte, für die Zukunft nicht mehr fortführen dürfen;</li>
+              <li>gemäß Art. 15 DSGVO Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten zu verlangen. Insbesondere können Sie Auskunft über die Verarbeitungszwecke, die Kategorie der personenbezogenen Daten, die Kategorien von Empfängern, gegenüber denen Ihre Daten offengelegt wurden oder werden, die geplante Speicherdauer, das Bestehen eines Rechts auf Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch, das Bestehen eines Beschwerderechts, die Herkunft ihrer Daten, sofern diese nicht bei uns erhoben wurden, sowie über das Bestehen einer automatisierten Entscheidungsfindung einschließlich Profiling und ggf. aussagekräftigen Informationen zu deren Einzelheiten verlangen;</li>
+              <li>gemäß Art. 16 DSGVO unverzüglich die Berichtigung unrichtiger oder Vervollständigung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen;</li>
+              <li>gemäß Art. 17 DSGVO die Löschung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen, soweit nicht die Verarbeitung zur Ausübung des Rechts auf freie Meinungsäußerung und Information, zur Erfüllung einer rechtlichen Verpflichtung, aus Gründen des öffentlichen Interesses oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen erforderlich ist;</li>
+              <li>gemäß Art. 18 DSGVO die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen, soweit die Richtigkeit der Daten von Ihnen bestritten wird, die Verarbeitung unrechtmäßig ist, Sie aber deren Löschung ablehnen und wir die Daten nicht mehr benötigen, Sie jedoch diese zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen benötigen oder Sie gemäß Art. 21 DSGVO Widerspruch gegen die Verarbeitung eingelegt haben;</li>
+              <li>gemäß Art. 20 DSGVO Ihre personenbezogenen Daten, die Sie uns bereitgestellt haben, in einem strukturierten, gängigen und maschinenlesebaren Format zu erhalten oder die Übermittlung an einen anderen Verantwortlichen zu verlangen und</li>
+              <li>gemäß Art. 77 DSGVO sich bei einer Aufsichtsbehörde zu beschweren. In der Regel können Sie sich hierfür an die Aufsichtsbehörde ihres üblichen Aufenthaltsortes oder Arbeitsplatzes oder unseres Unternehmenssitzes wenden.</li>
+            </ul>
+            <p><strong>Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO</strong></p>
+            <p>Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten, die aufgrund von Artikel 6 Absatz 1 Buchstabe e DSGVO (Datenverarbeitung im öffentlichen Interesse) und Artikel 6 Absatz 1 Buchstabe f DSGVO (Datenverarbeitung auf der Grundlage einer Interessenabwägung) erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmung gestütztes Profiling von Artikel 4 Nr. 4 DSGVO.</p>
+            <p>Legen Sie Widerspruch ein, werden wir Ihre personenbezogenen Daten nicht mehr verarbeiten, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
+            <p>Sofern sich Ihr Widerspruch gegen eine Verarbeitung von Daten zum Zwecke der Direktwerbung richtet, so werden wir die Verarbeitung umgehend einstellen. In diesem Fall ist die Angabe einer besonderen Situation nicht erforderlich. Dies gilt auch für das Profiling, soweit es mit solcher Direktwerbung in Verbindung steht.</p>
+            <p>Möchten Sie von Ihrem Widerspruchsrecht Gebrauch machen, genügt eine E-Mail an datenschutz@zv.fraunhofer.de.</p>
+            <h3>9. Datensicherheit<a name="datensicherheit"></a></h3>
+            <p>Alle von Ihnen persönlich übermittelten Daten werden mit dem allgemein üblichen und sicheren Standard TLS (Transport Layer Security) verschlüsselt übertragen. TLS ist ein sicherer und erprobter Standard, der z.B. auch beim Onlinebanking Verwendung findet. Sie erkennen eine sichere TLS-Verbindung unter anderem an dem angehängten s am http (also https://…) in der Adressleiste Ihres Browsers oder am Schloss-Symbol im unteren Bereich Ihres Browsers.</p>
+            <p>Wir bedienen uns im Übrigen geeigneter technischer und organisatorischer Sicherheitsmaßnahmen, um Ihre Daten gegen zufällige oder vorsätzliche Manipulationen, teilweisen oder vollständigen Verlust, Zerstörung oder gegen den unbefugten Zugriff Dritter zu schützen. Unsere Sicherheitsmaßnahmen werden entsprechend der technologischen Entwicklung fortlaufend verbessert.</p>
+            <h3>10. Aktualität und Änderung dieser Datenschutzinformation<a name="aktualitt-und-nderung-dieser-datenschutzinformation"></a></h3>
+            <p>Diese Datenschutzinformation ist aktuell gültig und hat den Stand [Mai 2018].</p>
+            <p>Durch die Weiterentwicklung unserer Webseite und Angebote darüber oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzinformation zu ändern. Die jeweils aktuelle Datenschutzinformation kann jederzeit auf der Webseite unter Link auf diese Seite: https://www.fokus.fraunhofer.de/datenschutz von Ihnen abgerufen und ausgedruckt werden.</p>
+            <h3>11. Salvatorische Klausel<a name="salvatorische-klausel"></a></h3>
+            <p>Sollten einzelne Bestimmungen dieser Datenschutzerklärung ganz oder in Teilen unwirksam oder undurchführbar sein oder werden, berührt dies nicht die Wirksamkeit der übrigen Bestimmungen. Entsprechendes gilt im Fall von Lücken.</p>
+          </div>
+        <!--div class="modal-footer">
           <button data-dismiss="modal" class="btn-u  btn btn-default  backgroundimgNone btnstyled"
                   type="button">Close
           </button>
@@ -635,7 +606,7 @@ console.log('--------');
                   class="btn-u btn btn-default text-white backgroundorange backgroundimgNone btnstyled borderOrange"
                   type="button">Accepted
           </button>
-        </div>
+        </div-->
 
       </div>
     </div>
