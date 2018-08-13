@@ -151,25 +151,15 @@ nfvo_version: 5.0.0
 vim_types:
 - docker
 image:
-  upload: "check"
+  upload: "false"
   names:
       - "mongo:latest"
-  link: "mongo:latest"
-image-config:
-  name: "mongo:latest"
-  diskFormat: QCOW2
-  containerFormat: BARE
-  minCPU: 0
-  minDisk: 0
-  minRam: 0
-  isPublic: false
 ```
 
-Here you can see some differences:  
+Please note:  
 
-* **vim_types** must have docker (pointing to the Docker VIM Driver)
-* **image upload** can be put to check in order to execute `docker pull` with the image link in case the image name is not available. _**NOTE: the image name must be the same as the link since in docker there is not distinction**_
-* **image-config** the name must be the same as the link. the Disk Format and container format are ignored so you can use "QCOW2" and "BARE", as well as for the limits, everything can be 0,
+* **vim_types**: must be _docker_ (pointing to the Docker VIM Driver)
+* **image upload** has to be _false_, please make sure that the images listed in **image names** are present in the VIM instances that you want to use
 
 ## Build the VNFPackage
 
