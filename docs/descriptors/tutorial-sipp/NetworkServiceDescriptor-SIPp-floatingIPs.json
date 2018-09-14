@@ -148,7 +148,12 @@
             ],
             "type":"client",
             "endpoint":"generic",
-            "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
+            "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git",
+            "requires": {
+                "sipp-server": {
+                    "parameters":["private","hostname"]
+                }
+            }
         },
         {
             "name":"sipp-server",
@@ -196,19 +201,6 @@
             "type":"server",
             "endpoint":"generic",
             "vnfPackageLocation":"https://github.com/openbaton/vnf-scripts.git"
-        }
-    ],
-    "vnf_dependency":[
-        {
-            "source":{
-                "name":"sipp-server"
-            },
-            "target":{
-                "name":"sipp-client"
-            },
-            "parameters":[
-                "private"
-            ]
         }
     ]
 }

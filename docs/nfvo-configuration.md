@@ -33,7 +33,7 @@ nfvo.rabbit.brokerIp = <the rabbitmq broker ip>
 
 Again, this property is very important to be set to the broker ip reachable from outside the machine were is running.
 
-#### Additional rabbitMQ paramters required by the NFVO
+#### Additional rabbitMQ parameters required by the NFVO
 
 ```parameters
 nfvo.rabbit.management.port=15672

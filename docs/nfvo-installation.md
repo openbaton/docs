@@ -1,24 +1,18 @@
 # Install Open Baton 
 
-Open Baton provides several installation mechanisms. Open Baton has two different flavors: 
+Open Baton provides several installation mechanisms: 
 
-* **minimal** containing only the Open Baton NFV Orchestrator, the Open Baton Generic VNF Manager and the RabbitMQ. This version is the most suitable for getting started immediately with some simple scenarios. 
-* **complete** containing most of the components (docker VNFMs and VIM driver, SFCO, and Amazon VIM driver are currently not included) as listed in the get started section. During the installation procedures users can decide specific configuraion options (i.e. passwords) and which components should be installed. This version is the most suitable for a production environment. 
+* **Docker**: Docker provides an easy way to containerize services and compose more complex service in a template-based way. More info [here][docker].
+<!--- * **development** Direct installation of a minimal or complete Open Baton environment on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version. -->  
 
-Please select the most suitable installation tool for your needs: 
-
-* **Linux OS**: Direct installation of a minimal or complete Open Baton environment on top of a Linux OS (ubuntu/debian) using either the [source-code][nfvo-installation-src] or [binary][nfvo-installation-deb] version. 
-* **Mac OS**: Install the NFVO and Generic VNFM on MacOS using the provided brew formula. More info [here][macos]
-* **Docker**: Launch a pre-configured docker image containing a minimal Open Baton environment. More info [here][docker]
-* **Vagrant**: Launching a vagrant box using the provided 'Vagrantfile' containing a minimal Open Baton environment. More info [here][vagrant]
-
-Once you have done with the installation, you can decide either to fine tune your environment configuring the different parameters as described in the [configuration guide][nfvo-configuration] or to move forward and start with your first [hello world tutorial][dummy-NSR].
-
+Once you have done with the installation, you can decide either to fine tune your environment configuring the different parameters as described in the [configuration guide][nfvo-configuration] or to move forward and start with your first [hello world tutorial][dummy-NSR]. 
+Configuration parameters can also be adjusted when using Docker containers and environement variables. Check [here][docker-env-usage] for further information.
 
 [spring]:https://spring.io
 [localhost:8080]:http://localhost:8080/
 [dummy-NSR]:dummy-NSR.md
 [docker]: nfvo-installation-docker.md
+[docker-env-usage]: https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file
 [macos]: nfvo-installation-mac.md
 [nfvo-configuration]: nfvo-configuration.md
 [nfvo-installation-deb]: nfvo-installation-deb.md

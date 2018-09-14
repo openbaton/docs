@@ -47,19 +47,6 @@ vim_types: list_of_vim_types
 description: description_of_VNF
 provider: provider_of_package
 nfvo_version: target_NFVO_version
-image:
-    upload: option
-    ids: list_of_ids
-    names: list_of_names
-    link: image_link
-image-config:
-    name: image_name
-    diskFormat: disk_format
-    containerFormat: container_format
-    minCPU: min_cpu
-    minDisk: min_disk
-    minRam: min_ram
-    isPublic: is_public
 ```
 
 In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than others and override them therefore.
@@ -76,6 +63,8 @@ In the following each property is explained in more detail. Please consider also
     * **Note** In most of the cases using script-link means that any component should be able to fetch files from that link.
         So you need to take care about ensuring that the URL defined is publicly available.
     * **Note** Scripts are executed during different lifecycle-events, and need to be referenced inside the VNF Descriptor
+<!--
+
 * ***image***:
     * ***upload***: Here you can choose between different options (true, false, check).
         * true: choosing this option means to upload the defined image on all the VimInstances already defined in the VNFD. It does not matter if an image with the defined name exists or not.
@@ -111,6 +100,8 @@ In the following each property is explained in more detail. Please consider also
     * ***minDisk***: The minDisk defines the minimum amount of disk space for using this image properly.
     * ***minRam***: The minRam defines the minimum amount of RAM for using this image properly.
     * ***isPublic***: The isPublic defines whether the image will be available publicly to all tenants on VIM or not.
+    
+-->
 
 ## <VNFD\>.json
 
@@ -161,20 +152,7 @@ name: iperf-server
 description: iPerf server
 provider: FOKUS
 scripts-link: https://github.com/openbaton/vnf-scripts.git
-nfvo_version: 5.2.0
-image:
-    upload: "false"
-    names:
-        - trusty-server-cloudimg-amd64-disk1
-    link: "http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img"
-image-config:
-    name: trusty-server-cloudimg-amd64-disk1
-    diskFormat: QCOW2
-    containerFormat: BARE
-    minCPU: 2
-    minDisk: 5
-    minRam: 2048
-    isPublic: false
+nfvo_version: 6.0.0
 vim_types:
     - openstack
 ```
@@ -246,21 +224,8 @@ Finally, it looks as shown below.
 name: iperf-client
 description: iPerf client
 provider: FOKUS
-nfvo_version: 5.2.0
+nfvo_version: 6.0.0
 scripts-link: https://github.com/openbaton/vnf-scripts.git
-image:
-    upload: "false"
-    names:
-        - trusty-server-cloudimg-amd64-disk1
-    link: "http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img"
-image-config:
-    name: trusty-server-cloudimg-amd64-disk1
-    diskFormat: QCOW2
-    containerFormat: BARE
-    minCPU: 2
-    minDisk: 5
-    minRam: 2048
-    isPublic: false
 vim_types:
     - openstack
 ```
@@ -317,6 +282,11 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
       "flavour_key":"m1.small"
     }
   ],
+  "requires": {
+      "iperf-server": {
+          "parameters":["private","hostname"]
+        }
+  },
   "type":"client",
   "endpoint":"generic"
 }

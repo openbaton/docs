@@ -92,34 +92,18 @@ Where:
 name: MongoDB
 description: MongoDB
 provider: TUB
-nfvo_version: 5.0.0
+nfvo_version: 6.0.0
 vim_types:
  - docker
-image:
-    upload: "check"
-    names:
-        - "mongo:latest"
-    link: "mongo:latest"
-image-config:
-    name: "mongo:latest"
-    diskFormat: QCOW2
-    containerFormat: BARE
-    minCPU: 0
-    minDisk: 0
-    minRam: 0
-    isPublic: false
 ```
 
 Where:
 
 * **vim_types** must have docker (pointing to the Docker VIM Driver)
-* **image upload** can be put to check in order to execute `docker pull` with the image link in case the image name is not available. _**NOTE: the image name must be the same as the link since in docker there is not distinction**_
-* **image-config** the name must be the same as the link. the Disk Format and container format are ignored so you can use "QCOW2" and "BARE", as well as for the limits, everything can be 0,
 
 You can then create and upload the tar file to the VNF Package page of the Dashboard and you should have a VNFD called in this case MongoDB that represent a MongoDB Container.
 
 Afterwards, from the NSD page, you can create a NSD using the form and selecting the MongoDB VNF.
-
 
 ## Iperf NSD
 
@@ -162,90 +146,87 @@ Afterwards, you need to create a NSD. From the NFVO dashboard, go to Catalogue&r
 
 ```json
 {
-  "name": "docker Iperf",
-  "vendor": "fokus",
-  "version": "0.1-ALPHA",
+  "name": "iperf",
+  "vendor": "FOKUS",
+  "version": "docker",
   "vld": [{
     "name": "new-network"
   }],
-  "vnfd": [{
-    "name": "server",
-    "vendor": "TUB",
-    "version": "0.2",
-    "lifecycle_event": [
-
-    ],
-    "configurations": {
-      "configurationParameters": [],
-      "name": "server-configuration"
-    },
-    "virtual_link": [{
-      "name": "new-network"
-    }],
-    "vdu": [{
-      "vm_image": [
-        "iperfserver:latest"
+  "vnfd": [
+    {
+      "name":"iperf-server",
+      "vendor":"FOKUS",
+      "version":"docker",
+      "deployment_flavour":[
+        {
+          "flavour_key":"m1.small"
+        }
       ],
-      "scale_in_out": 2,
-      "vnfc": [{
-        "connection_point": [{
-          "virtual_link_reference": "new-network"
-        }]
-      }]
-    }],
-    "deployment_flavour": [{
-      "flavour_key": "m1.small"
-    }],
-    "type": "server",
-    "endpoint": "docker"
-  }, {
-    "name": "client",
-    "vendor": "TUB",
-    "version": "0.2",
-    "lifecycle_event": [
-
-    ],
-    "configurations": {
-      "configurationParameters": [],
-      "name": "server-configuration"
-    },
-    "virtual_link": [{
-      "name": "new-network"
-    }],
-    "vdu": [{
-      "vm_image": [
-        "iperfclient:latest"
+      "vdu":[
+        {
+          "vm_image":["iperfserver:latest"],
+          "scale_in_out":3,
+          "vnfc":[
+        {
+          "connection_point":[
+            {
+              "virtual_link_reference":"new-network"
+            }
+          ]
+        }
+          ]
+        }
       ],
-      "scale_in_out": 2,
-      "vnfc": [{
-        "connection_point": [{
-          "virtual_link_reference": "new-network"
-        }]
-      }]
-    }],
-    "deployment_flavour": [{
-      "flavour_key": "m1.small"
-    }],
-    "type": "client",
-    "endpoint": "docker"
-  }],
-  "vnf_dependency": [{
-    "source": {
-      "name": "server"
+      "virtual_link":[
+        {
+           "name":"new-network"
+        }
+      ],
+      "type":"server",
+      "endpoint":"docker"
     },
-    "target": {
-      "name": "client"
-    },
-    "parameters": [
-      "hostname"
-    ]
-  }]
+    {
+      "name":"iperf-client",
+      "vendor":"FOKUS",
+      "version":"docker",
+      "vdu":[
+        {
+          "vm_image":["iperfclient:latest"],
+          "scale_in_out":3,
+          "vnfc":[
+        {
+          "connection_point":[
+            {
+              "virtual_link_reference":"new-network"
+            }
+          ]
+        }
+          ]
+        }
+      ],
+      "deployment_flavour":[
+        {
+          "flavour_key":"m1.small"
+        }
+      ],
+      "virtual_link":[
+        {
+           "name":"new-network"
+        }
+      ],
+      "requires": {
+        "iperf-server": {
+        "parameters":["hostname"]
+        }
+      },
+      "type":"client",
+      "endpoint":"docker"
+    }
+  ]
 }
 ```
 
 and launch the NSD.
-
-
 
 [docker-vnfm]: vnfm-docker
 [docker-driver]: docker-driver
