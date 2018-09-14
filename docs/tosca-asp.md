@@ -1,33 +1,35 @@
 #AutoScaling in TOSCA
-This is an example of how to create AutoScale policies with the yaml descriptor. The whole AutoScale policy goes in the **properties** of the Virtual Network Function node. 
+This is an example of how to create AutoScale policies with the yaml descriptor. The ```auto_scaling_policy``` section has to be placed inside the ```properties``` section of the Virtual Network Function node when the yaml file specifies an NSD. Alternatively, if you want to upload a VNFPackage and the yaml file describes only one VNF the ```auto_scaling_policy``` has to be part of the ```inputs``` section of the yaml file. The following example shows the former case.
 
 
 ```yaml
-example-vnf:
-  type: openbaton.type.VNF
-  properties:
-    # Other properties omitted for brevity
-    auto_scale_policy:
-      scale-out:                  # Policy name 
-        threshod: 100
-        comparisonOperator: ">="
-        period: 30
-        cooldown: 60
-        mode: REACTIVE
-        type: WEIGHTED
-        alarms:
-          alarm1:                 # Alarm name      
-            metric: "system.cpu.load[percpu,avg1]"
-            statistic: "avg"
-            comparisonOperator: ">"
-            threshold: 0.7
-            weight: 1
-        actions:
-          action1:                # Action name
-            type: SCALE_OUT
-            value: "2"
-            target: "<target>"
-
+...
+topology_template:
+  node_templates:
+    example-vnf:
+      type: openbaton.type.VNF
+      properties:
+        # Other properties omitted for brevity
+        auto_scale_policy:
+          scale-out:                  # Policy name 
+            threshold: 100
+            comparisonOperator: ">="
+            period: 30
+            cooldown: 60
+            mode: REACTIVE
+            type: WEIGHTED
+            alarms:
+              alarm1:                 # Alarm name      
+                metric: "system.cpu.load[percpu,avg1]"
+                statistic: "avg"
+                comparisonOperator: ">"
+                threshold: 0.7
+                weight: 1
+            actions:
+              action1:                # Action name
+                type: SCALE_OUT
+                value: "2"
+                target: "<target>"
 ```
 
 More about AutoScaling and how to set it up: [Autoscaling][as]
