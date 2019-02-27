@@ -10,10 +10,10 @@ The NFVO supports two different formats for VNF Packages:
 
 This page provides more information about the first option, while more information about the second option are given in this [tutorial][csar-onboarding].
 
-**Important note-1:** in case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer them in the Metadata.yaml as part of the
-*scripts_link* parameter. *VnfPackageLocation* in the VNFD must be null (not defined at all).
+> ***Note:*** In case your scripts are available publicly on GitHub, you may not need the creation of a specific VNF package, but you can just refer to them in the Metadata.yaml as part of the
+*scripts_link* parameter. In this case *VnfPackageLocation* in the VNFD must be null (not defined at all).
 
-**Important note-2:** in case you are using the Docker VIM Driver and Docker VNFM the script folder is not considered, as the docker approach relies on docker images ready to be launched.
+> ***Note:*** in case you are using the Docker VIM Driver and Docker VNFM the scripts folder is not considered, as the docker approach relies on docker images ready to be launched.
 
 # Overview
 
@@ -21,7 +21,7 @@ A VNF Package is a tar-archive containing all the information required for manag
 A typical VNF Package includes
 
 * VNF Descriptor: containing all the information required by the NFVO for deploying the VNF (more information available at the [VNF Descriptor page][vnfd-link]).
-* Image: passed using a link to an image file (typically QCOW) available for being dowloaded via HTTP. At the moment, passing an image file inside the VNF Package is not supported: there is some work in progress to allow it.
+* Images: You can define images that shall be uploaded to the NFVO's [image repository] when onboarding the VNF Package. Images can be included as files inside the package or you can point to a URL from where they can be downloaded.
 * Metadata file providing additional information to the NFVO for understanding what's the content of the package.
 * scripts: containing all the scripts which could be used for lifecycle management.
 
@@ -33,6 +33,9 @@ A typical VNF Package has the following structure:
 - scripts/
     - 1_script.sh
     - 2_script.sh
+- images/
+    - image_file1
+    - image_file2
 ```
 
 ## Metadata.yaml
@@ -42,11 +45,26 @@ The example of the Metadata file below shows a basic definition of a VNF Package
 
 ```yaml
 name: VNF_package_name
-scripts-link: scripts_link
-vim_types: list_of_vim_types
 description: description_of_VNF
 provider: provider_of_package
+vim_types: list_of_vim_types
 nfvo_version: target_NFVO_version
+scripts-link: scripts_link
+images:
+    xenial:
+        url: https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img
+        diskFormat: qcow2
+        containerFormat: bare
+        minCPU: 2
+        minDisk: 2
+        minRam: 2048
+        isPublic: true
+    bionic:
+        diskFormat: qcow2
+        containerFormat: bare
+        minCPU: 2
+        minDisk: 2
+        minRam: 2048
 ```
 
 In the following each property is explained in more detail. Please consider also the notes since some properties are optional (or even not implemented) and if they are defined, they may have more priority than others and override them therefore.
@@ -63,45 +81,15 @@ In the following each property is explained in more detail. Please consider also
     * **Note** In most of the cases using script-link means that any component should be able to fetch files from that link.
         So you need to take care about ensuring that the URL defined is publicly available.
     * **Note** Scripts are executed during different lifecycle-events, and need to be referenced inside the VNF Descriptor
-<!--
+* ***images***: A list of images that are defined inside the package. Each image will be uploaded to the NFVO's [image repository] if it does not yet contain an image with the given name. Currently the images can only be used for OpenStack. The image names in the given example are *xenial* and *bionic*. The xenial image is specified via a public URL from which the image can be downloaded while the bionic image lacks a URL. If there is no URL then you have to include the image file in the package's *images* directory. The file name has to be aligned with the image name, in this case for instance the file name has to be *bionic* (not *bionic.img* etc.). Do not create subdirectories in the *images* directory.
+    * ***url***: A URL from which the image file can be downloaded. If specified, possible matching image files inside the VNF Package are not considered anymore.
+    * ***diskFormat***: The format of the disk image (e.g. qcow2, iso, raw, etc.).
+    * ***containerFormat***: Indicates whether the file format contains metadata about the actual virtual machine (use *bare* if you are unsure about this).
+    * ***minCPU***: Defines the minimum amount of CPU cores required for using this image properly.
+    * ***minDisk***: Defines the minimum amount of disk space (in GB) required for using this image properly.
+    * ***minRam***: Defines the minimum amount of RAM (in MB) required for using this image properly.
+    * ***isPublic***: Defines whether the image will be available publicly to all tenants on the OpenStack VIM or not (default is false).
 
-* ***image***:
-    * ***upload***: Here you can choose between different options (true, false, check).
-        * true: choosing this option means to upload the defined image on all the VimInstances already defined in the VNFD. It does not matter if an image with the defined name exists or not.
-        * false: choosing this option means that you assume that the image is already present on the VimInstaces and should be re-uploaded.
-        If the image does not exist, the VNF Package onboarding will throw an exception.
-        In this case the image (if defined) will be ignored.
-        * **Note** Please use quotation marks for this option since the values are handled as strings internally.
-        Otherwise true and false will be handled as a boolean that would lead to a faulty behavior when onboarding a new VNF Package.
-    * ***ids***: The list of image IDs is used to fetch the image from the corresponding VimInstance.
-        To do it, the specific VIM driver iterates over all IDs and checks if an image with that ID exists on the VimInstance.
-        The defined IDs have a higher priority than the list of names.
-        We distinguish between the following cases:
-        * If it finds no image with these IDs, it continues with the list of image names.
-        * If it finds one image with these IDs, this image will be used.
-        * If it finds multiple images with the same ID (should never happen) or multiple IDs matching to multiple images, an exception will be thrown because it is not clear which image to use.
-    * ***names***: The list of image names is used to fetch the image from the corresponding VimInstance.
-        To do it, manager iterates over all names and checks if an image with that name exists on the VimInstance.
-        The list of names have a lower priority than the list of IDs.
-        We distinguish between the following cases:
-        * If it finds no image with that name, an exception will be thrown except you defined the upload option check.
-        Then it will create a new image defined in the VNF Package.
-        * If it finds one image, this image will be used.
-        * If it finds multiple images with the same name or multiple names matching to multiple images, an exception will be thrown because it is not clear which image to use.
-    * ***link***: This link points to a URL providing the image file available for being uploaded on the VIM.
-        * **Note** If you want to upload a new Image to the VIM you need to specify `true` or `check` in the `upload` option.
-            Otherwise a NotFoundException will be thrown and the VNF Package will not be onboarded.
-* ***image-config***: All the properties explained below are required to upload the image to the VIM properly.
-    In case of creating a new image this configuration will be used and is obviously mandatory.
-    * ***name***: This defines the name for the image to upload either located directly in the VNF Package or available via the URL defined in image-link.
-    * ***diskFormat***: The diskFormat defines the format in which disk type the image is stored.
-    * ***containerFormat***: The containerFormat defines the format in which container type the image is stored .
-    * ***minCPU***: The minCPU defines the minimum amount of CPU cores for using this image properly.
-    * ***minDisk***: The minDisk defines the minimum amount of disk space for using this image properly.
-    * ***minRam***: The minRam defines the minimum amount of RAM for using this image properly.
-    * ***isPublic***: The isPublic defines whether the image will be available publicly to all tenants on VIM or not.
-    
--->
 
 ## <VNFD\>.json
 
@@ -123,7 +111,13 @@ The execution order is defined by the lifecycle_events inside the VNFD. Please r
 
 **Note** At the moment the *scripts* folder cannot contain subfolder. All scripts must be under the _scripts_ folder.
 
-**Note** The scripts inside the *scripts* folder can be either shell scripts or python scripts. Runtime parameters could be passed to those scritps in different ways, depending on the VNF Manager used for managing your VNFs. We suggest you get familiar with the requirements of the VNF Manager you would like to use, before starting implementing any scripts for lifecycle management.  
+**Note** The scripts inside the *scripts* folder can be either shell scripts or python scripts. Runtime parameters could be passed to those scritps in different ways, depending on the VNF Manager used for managing your VNFs. We suggest you get familiar with the requirements of the VNF Manager you would like to use, before starting implementing any scripts for lifecycle management.
+
+## More on images
+As you have seen in the example Metadata.yaml file above, it is possible to define images in the metadata of a VNF Package. You can specify the image via a URL or you can provide the image file directly inside the VNF Package. The images are uploaded to the NFVO's [image repository] when the VNF Package is onboarded. The images inside this image repository can be uploaded to an OpenStack VIM automatically if the image is not yet present on the VIM while launching a Network Service that requires the image. This feature makes it more convenient to write VNF Packages because you do not have to take care that the images used by a VNF Package are available in OpenStack, instead you simply include them in the package itself. If an image with the specified name is already existing inside the NFVO's image repository, then this image is **not** overwritten if you upload the VNF Package.
+
+Of course you do not have to make use of this feature and you can upload VNF Packages without any image specified. But then you have to make sure that the image is present on the VIM when launching a Network Service that relies on that image.
+
 
 # Sample tutorial
 
@@ -138,28 +132,40 @@ For doing so, we need to create two VNF Packages and reference them in the NSD.
 So we need a VNF Package for the iperf server (called iperf-server) and for the iperf client (called iperf-client).
 First we will start with the creation of the iperf-server VNF Package and then we will create the iperf-client VNF Package.
 
-First of all we should create a directory for each VNF Package where we put all the files related to the VNF Package because in the end we need to pack them into a tar archive for onboarding it on the NFVO.
+First of all we should create a directory for each VNF Package where we put all the files related to the VNF Package because in the end we need to pack them into a tar archive for onboarding it on the NFVO. Each package will contain a *Metadata.yaml* and a *vnfd.json* file.
 
 ### VNF Package [iperf-server]
-This iperf-server VNF Package has to install the iperf server and needs to provide its ip to the iperf client.
+This iperf-server VNF Package has to install the iperf server and needs to provide its IP address to the iperf client.
+
 
 #### Metadata [iperf-server]
-In the Metadata.yaml we define the name of the VNF Package, the scripts location and also the properties for the image to use or upload.
-Since passing an image is not supported in the current release we will use the image link inside the `Metadata.yaml`.
+In the Metadata.yaml file we define the name of the VNF Package, the scripts location and also the images that we want to upload to the [image repository] when onboarding the VNF Package.
 Finally, it looks as shown below.
 ```yaml
 name: iperf-server
 description: iPerf server
 provider: FOKUS
 scripts-link: https://github.com/openbaton/vnf-scripts.git
-nfvo_version: 6.0.0
+nfvo_version: 6.1.0
 vim_types:
     - openstack
+images:
+    trusty:
+        url: http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
+        diskFormat: qcow2
+        containerFormat: bare
+        minCPU: 1
+        minDisk: 2
+        minRam: 2048
+        
 ```
+As you can see, the image that we want to upload to the NFVO image repository is called trusty and points to the URL from where it can be downloaded. If you want to use an image which is not publicly available for downloading, you might want to remove the *url* field, create a directory called *images* inside the VNF Package and add the desired image file to it. Make sure that the image file has exactly the same name as specified in the *Metadata.yaml* file (here this would be *trusty*).
+
+If you do not want to upload any image to the NFVO's image repository, then simply remove the *images* section from the *Metadata.yaml* file. But make sure that the image is present on the VIM before deploying your Network Service.
 
 #### VNFD [iperf-server]
 This is how the [VNFD](vnf-descriptor) looks like for the iperf-server VNF Package.
-Important to notice here is that the vm_image defined in the Metadata.yaml is filled automatically during the onboarding process of the VNF Package.
+> ***Note:*** If a VDU of the VNFD does **not** specify any images in the field *vm_image*, then this field is filled automatically with the images listed under the *images* section in Metadata.yaml when uploading the VNF Package. This way you do not have to alter both the VNFD file and the Metadata.yaml file if you want to change the used image.
 
 ```json
 {
@@ -182,8 +188,7 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
   ],
   "vdu":[
     {
-      "vm_image":[
-      ],
+      "vm_image":["trusty"],
       "scale_in_out":1,
       "vnfc":[
         {
@@ -206,34 +211,35 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
   "endpoint":"generic"
 }
 ```
-#### Image
-
-The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of image.
-We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link].
 
 ### VNF Package [iperf-client]
 
-This iperf-client VNF Package has to install the iPerf client and needs to be configured in order to know the iPerf servers' IP.
+This iperf-client VNF Package has to install the iPerf client and needs to be configured in order to know the iPerf servers' IP address.
 
 #### Metadata [iperf-client]
-In the Metadata.yaml we define the name of the VNF Package, the scripts location and also the properties for the image to upload.
-Since passing an image is not supported in the current release we will use the image link inside the `Metadata.yaml`.
-Finally, it looks as shown below.
+The *Metadata.yaml* file looks nearly identical to its iperf-server counterpart.
 
 ```yaml
 name: iperf-client
 description: iPerf client
 provider: FOKUS
-nfvo_version: 6.0.0
+nfvo_version: 6.1.0
 scripts-link: https://github.com/openbaton/vnf-scripts.git
 vim_types:
     - openstack
+images:
+    trusty:
+        url: http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
+        diskFormat: qcow2
+        containerFormat: bare
+        minCPU: 1
+        minDisk: 2
+        minRam: 2048
 ```
 
 #### VNFD [iperf-client]
 
 This is how the [VNFD](vnf-descriptor) looks like for the iperf-client VNF Package.
-Important to notice here is that the vm_image defined in the Metadata.yaml is filled automatically during the onboarding process of the VNF Package.
 
 ```json
 {
@@ -256,9 +262,7 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
   ],
   "vdu":[
     {
-      "vm_image":[
-        ""
-      ],
+      "vm_image":["trusty"],
       "scale_in_out":1,
       "vnfc":[
         {
@@ -292,10 +296,6 @@ Important to notice here is that the vm_image defined in the Metadata.yaml is fi
 }
 ```
 
-#### Image
-
-The image we have to choose must be a debian 64bit image (e.g. ubuntu amd64) for satisfying the EMS and scripts which are designed for that kind of architecture.
-We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link]. In this tutorial it is expected to have the image already present in OpenStack.
 
 
 [iperf-link]:https://iperf.fr/
@@ -307,6 +307,7 @@ We have chosen this one [trusty-server-cloudimg-amd64-disk1.img][image-link]. In
 [csar-onboarding]:tosca-CSAR-onboarding
 [cli]:nfvo-how-to-use-cli
 [vim-driver]:vim-driver
+[image repository]:image-repository
 
 <!---
 Script for open external links in a new tab
