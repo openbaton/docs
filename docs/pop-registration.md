@@ -1,6 +1,6 @@
 # Register a new Point of Presence (PoP)
 
-The *Virtualised Infrastructure Manager* (Vim) is the functional block, responsible for controlling and managing the
+The *Virtualised Infrastructure Manager* (VIM) is the functional block, responsible for controlling and managing the
  NFVI compute, storage and network resources within a Point of Presence (PoP).
 
 In order to instantiate resources on a PoP, the NFVO must be aware of it. 

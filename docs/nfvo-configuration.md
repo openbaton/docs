@@ -181,7 +181,7 @@ logging.level.org.openbaton=INFO
 logging.file=/var/log/openbaton.log
 ```
 
-### Modidy DB properties
+### Modify DB properties
 
 Depending on the installation mode you selected, it may be that you have an in-memory database. In order to reconfigure the NFVO to use a persistent database, like MySQL, you need to change the properties as shown below:
 
@@ -269,6 +269,14 @@ spring.rabbitmq.requested-heartbeat=60
 #spring.rabbitmq.ssl.trust-store-password=
 # Virtual host to use when connecting to the broker.
 #spring.rabbitmq.virtual-host=
+```
+
+### Modify image repository parameters
+
+You can change the location where the image files of the image repository are stored on the file system.
+
+```
+nfvo.nfvimagedir.path=/etc/openbaton/nfvImages/
 ```
 
 
